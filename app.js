@@ -2,6 +2,7 @@
 const SUPABASE_URL = "https://ifjkadoskbcgrqmcjvya.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_yXHovKCCYE04aUcybOc4KA_Fhdp5bTE";
 let supabaseClient = null;
+
 if (window.supabase && SUPABASE_ANON_KEY !== "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE") {
   supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 }
@@ -14,7 +15,9 @@ let state = {
   user: null
 };
 
-function L(path) { return path.split(".").reduce((obj, key) => obj && obj[key], I18N[state.lang]) || path; }
+function L(path) {
+  return path.split(".").reduce((obj, key) => obj && obj[key], I18N[state.lang]) || path;
+}
 
 function save() {
   localStorage.setItem("asb_lang", state.lang);
@@ -46,6 +49,26 @@ function toast(message) {
   setTimeout(() => element.remove(), 1800);
 }
 
+async function ensureProfile() {
+  if (!supabaseClient || !state.user) return;
+
+  const { error } = await supabaseClient
+    .from("profiles")
+    .upsert(
+      {
+        id: state.user.id,
+        email: state.user.email,
+        display_name: state.user.user_metadata?.full_name || state.user.email?.split("@")[0] || "",
+        plan: "free"
+      },
+      { onConflict: "id" }
+    );
+
+  if (error) {
+    console.error("Profile sync error:", error);
+  }
+}
+
 async function loadProgressFromSupabase() {
   if (!supabaseClient || !state.user) return;
 
@@ -55,7 +78,7 @@ async function loadProgressFromSupabase() {
     .eq("completed", true);
 
   if (error) {
-    console.error(error);
+    console.error("Progress load error:", error);
     return;
   }
 
@@ -83,7 +106,7 @@ async function saveProgressToSupabase(lessonId) {
     );
 
   if (error) {
-    console.error(error);
+    console.error("Progress save error:", error);
     toast(state.lang === "zh" ? "進度同步失敗，但已暫存在本機。" : "Cloud sync failed, saved locally.");
   }
 }
@@ -97,37 +120,22 @@ async function completeLesson(lessonId) {
 }
 
 async function initAuth() {
-  if (state.user) {
-
-  await supabaseClient
-    .from("profiles")
-    .upsert({
-      id: state.user.id,
-      email: state.user.email,
-      display_name: state.user.user_metadata?.full_name || ""
-    });
+  if (!supabaseClient) return;
 
   const { data } = await supabaseClient.auth.getSession();
   state.user = data.session?.user || null;
 
   if (state.user) {
+    await ensureProfile();
     await loadProgressFromSupabase();
   }
 
   supabaseClient.auth.onAuthStateChange(async (_event, session) => {
     state.user = session?.user || null;
     if (state.user) {
-
-  await supabaseClient
-    .from("profiles")
-    .upsert({
-      id: state.user.id,
-      email: state.user.email,
-      display_name: state.user.user_metadata?.full_name || ""
-    });
-
-  await loadProgressFromSupabase();
-}
+      await ensureProfile();
+      await loadProgressFromSupabase();
+    }
     render();
   });
 }
