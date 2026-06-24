@@ -612,6 +612,7 @@ function nav() {
     ["assessment", text("能力測驗", "Assessment")],
     ["map", text("學習地圖", "Learning Map")],
     ["center", text("我的學習中心", "My Center")],
+    ["tutor", text("AI 提問教練", "Prompt Tutor")],
     ["free", "nav.free"],
     ["premium", "nav.premium"],
     ["tools", "nav.tools"],
@@ -1059,6 +1060,47 @@ function copyPrompt(id) {
   toast(L("prompts.copied"));
 }
 
+
+function tutor() {
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <h1>${text("AI 提問教練", "Prompt Tutor")}</h1>
+        <p class="lead">
+          ${text(
+            "這裡不是幫你直接完成作業，而是教你怎麼把模糊問題改成清楚、可執行的 AI 指令。輸入你原本想問 AI 的問題，系統會幫你改寫成更好的 Prompt。",
+            "This does not complete work for you. It teaches you how to turn vague questions into clear, actionable AI prompts. Type the question you wanted to ask AI, and the system will rewrite it into a stronger prompt."
+          )}
+        </p>
+
+        <section class="panel">
+          <h2>${text("把你的問題改成好 Prompt", "Turn Your Question into a Better Prompt")}</h2>
+          <p>${text("範例：我想用 AI 幫我做報告 / 我不知道怎麼問 ChatGPT / 我想用 AI 幫我準備面試", "Examples: I want AI to help me plan a report / I do not know how to ask ChatGPT / I want AI to help me prepare for an interview")}</p>
+          <textarea id="tutor-input" placeholder="${text("輸入你想問 AI 的問題...", "Type the question you want to ask AI...")}"></textarea>
+          <div class="btnrow">
+            <button class="btn primary" onclick="tutorReply()">${text("幫我改成好 Prompt", "Improve My Prompt")}</button>
+            <button class="btn secondary" onclick="document.getElementById('tutor-input').value='我想用 AI 幫我做報告，但不知道怎麼問'; tutorReply();">${text("使用範例", "Use Example")}</button>
+          </div>
+          <div id="tutor-output"></div>
+        </section>
+
+        <section class="panel" style="margin-top:24px">
+          <h2>${text("好 Prompt 公式", "Good Prompt Formula")}</h2>
+          <div class="grid three">
+            <article class="card"><h3>1. ${text("角色", "Role")}</h3><p>${text("請 AI 扮演老師、助教、面試官、研究助理等。", "Ask AI to act as a teacher, assistant, interviewer, research assistant, etc.")}</p></article>
+            <article class="card"><h3>2. ${text("任務", "Task")}</h3><p>${text("清楚說明你要 AI 幫你完成什麼。", "Clearly state what you want AI to help complete.")}</p></article>
+            <article class="card"><h3>3. ${text("背景", "Context")}</h3><p>${text("提供課程、對象、目的、限制或目前狀況。", "Provide course, audience, purpose, constraints, or current situation.")}</p></article>
+            <article class="card"><h3>4. ${text("格式", "Format")}</h3><p>${text("要求表格、條列、步驟、範例或檢查清單。", "Request tables, bullets, steps, examples, or checklists.")}</p></article>
+            <article class="card"><h3>5. ${text("限制", "Constraints")}</h3><p>${text("說明不要捏造、不要直接完成作業、需要查證。", "Tell AI not to fabricate, not to complete assignments directly, and to verify.")}</p></article>
+            <article class="card"><h3>6. ${text("追問", "Follow-up")}</h3><p>${text("請 AI 先問你問題，讓需求更清楚。", "Ask AI to ask follow-up questions first to clarify your needs.")}</p></article>
+          </div>
+        </section>
+      </div>
+    </main>
+  `);
+}
+
+
 function community() {
   return shell(`
     <main class="page">
@@ -1073,11 +1115,9 @@ function community() {
           <div class="sticky-note">${L("community.note")}</div>
         </div>
         <section class="panel" style="margin-top:24px">
-          <h2>AI Tutor</h2>
-          <p>${text("這是 Prompt Tutor，專門教你怎麼把模糊問題改成清楚、可執行的 AI 指令。", "This is a Prompt Tutor designed to teach you how to turn vague questions into clear, actionable AI prompts.")}</p>
-          <textarea id="tutor-input" placeholder="${text("輸入你想問 AI 的問題，例如：我想用 AI 幫我做報告", "Type the question you want to ask AI, e.g. I want AI to help me plan a report")}"></textarea>
-          <button class="btn primary" onclick="tutorReply()">${text("幫我改成好 Prompt", "Improve My Prompt")}</button>
-          <div id="tutor-output"></div>
+          <h2>${text("需要 AI 提問協助？", "Need help asking AI?")}</h2>
+          <p>${text("AI 提問教練已經獨立成上方選單的小按鍵。", "Prompt Tutor is now available as a separate button in the top navigation.")}</p>
+          <button class="btn primary" onclick="setRoute('tutor')">${text("打開 AI 提問教練", "Open Prompt Tutor")}</button>
         </section>
       </div>
     </main>
@@ -1132,6 +1172,7 @@ function render() {
     tools,
     prompts,
     community,
+    tutor,
     thailand,
     impact
   };
