@@ -10,7 +10,6 @@ function isCreator() {
 
 function hasCourseAccess(courseId) {
   if (isCreator()) return true;
-  if (courseId === "all-access") return false;
   return false;
 }
 
@@ -19,6 +18,9 @@ let supabaseClient = null;
 if (window.supabase) {
   supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 }
+
+let currentCourseId = null;
+let currentLessonIndex = 0;
 
 let state = {
   lang: localStorage.getItem("asb_lang") || "zh",
@@ -618,6 +620,21 @@ First, do the following:
   `;
 }
 
+
+function openCourse(courseId) {
+  currentCourseId = courseId;
+  state.route = "course";
+  window.scrollTo(0, 0);
+  render();
+}
+
+function openLesson(index) {
+  currentLessonIndex = index;
+  state.route = "lesson";
+  window.scrollTo(0, 0);
+  render();
+}
+
 function nav() {
   const items = [
     ["home", "nav.home"],
@@ -981,12 +998,13 @@ function courses() {
 
 
 
+
 function premium() {
   const creatorBanner = isCreator()
     ? `<section class="panel" style="margin-bottom:24px">
         <span class="tag free">Creator Access</span>
         <h2>${text("創辦人帳號已全站開通", "Founder account has full access")}</h2>
-        <p>${text("你目前使用創辦人 Email 登入，因此 6 個付費課程與全站通行證都會顯示為已解鎖。", "You are signed in with the founder email, so all 6 premium courses and the all-access pass are unlocked.")}</p>
+        <p>${text("你目前使用創辦人 Email 登入，因此所有付費課程都可以直接進入。", "You are signed in with the founder email, so all premium courses can be opened directly.")}</p>
       </section>`
     : "";
 
@@ -997,6 +1015,7 @@ function premium() {
         <span class="tag ${unlocked ? "free" : "premiumtag"}">
           ${unlocked ? text("已開通", "Unlocked") : (course.id === "all-access" ? "All Access" : "Premium Course")}
         </span>
+
         <h2>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h2>
         <p>${state.lang === "zh" ? course.zhDesc : course.enDesc}</p>
         <p><b>${L("premium.suitableFor")}：</b>${state.lang === "zh" ? course.zhUser : course.enUser}</p>
@@ -1020,7 +1039,7 @@ function premium() {
 
         ${
           unlocked
-            ? `<button class="btn primary" onclick="toast('${state.lang === "zh" ? "你是創辦人帳號，已開通此課程" : "Founder account: this course is unlocked"}')">${text("進入已開通課程", "Enter Unlocked Course")}</button>`
+            ? `<button class="btn primary" onclick="openCourse('${course.id}')">${text("進入已開通課程", "Enter Unlocked Course")}</button>`
             : `<a class="btn primary" href="${course.paymentUrl}" target="_blank">${L("premium.goPay")}</a>`
         }
       </article>
@@ -1032,8 +1051,8 @@ function premium() {
       <div class="wrap">
         <h1>${L("premium.title")}</h1>
         <p class="lead">${text(
-          "付費區採用「一個完整課程一個價格」的方式，不是單堂課收費。每個課程包含 10 堂課、實作任務、Prompt 模板與最後成果。全站通行證可解鎖全部課程。",
-          "Premium courses are sold as complete courses, not by individual lessons. Each course includes 10 lessons, practical tasks, prompt templates, and a final product. The All-Access Pass unlocks everything."
+          "付費區採用「一個完整課程一個價格」的方式，不是單堂課收費。已開通的課程可以直接進入課程首頁。",
+          "Premium courses are sold as complete courses, not by individual lessons. Unlocked courses can be opened directly."
         )}</p>
 
         ${creatorBanner}
@@ -1046,6 +1065,7 @@ function premium() {
                 <span class="tag ${hasCourseAccess(course.id) ? "free" : "premiumtag"}">${hasCourseAccess(course.id) ? text("已開通", "Unlocked") : course.price}</span>
                 <h3>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h3>
                 <p>${state.lang === "zh" ? course.zhFinalProduct : course.enFinalProduct}</p>
+                ${hasCourseAccess(course.id) ? `<button class="btn secondary" onclick="openCourse('${course.id}')">${text("進入課程", "Open Course")}</button>` : ""}
               </article>
             `).join("")}
           </div>
@@ -1054,10 +1074,64 @@ function premium() {
         <div class="grid two">
           ${courseCards}
         </div>
+      </div>
+    </main>
+  `);
+}
+
+
+function course() {
+  const item = PREMIUM.find(p => p.id === currentCourseId);
+
+  if (!item) {
+    return shell(`
+      <main class="page">
+        <div class="wrap">
+          <h1>${text("找不到課程", "Course Not Found")}</h1>
+          <button class="btn primary" onclick="setRoute('premium')">${text("回到進階付費", "Back to Premium")}</button>
+        </div>
+      </main>
+    `);
+  }
+
+  if (!hasCourseAccess(item.id)) {
+    return shell(`
+      <main class="page">
+        <div class="wrap">
+          <h1>${text("尚未開通", "Not Unlocked")}</h1>
+          <p>${text("這個課程尚未開通，請先完成購買。", "This course is not unlocked yet. Please purchase access first.")}</p>
+          <button class="btn primary" onclick="setRoute('premium')">${text("回到進階付費", "Back to Premium")}</button>
+        </div>
+      </main>
+    `);
+  }
+
+  const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
+
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <button class="btn secondary" onclick="setRoute('premium')">← ${text("回到進階付費", "Back to Premium")}</button>
+
+        <section class="panel">
+          <span class="tag free">${text("已開通", "Unlocked")}</span>
+          <h1>${state.lang === "zh" ? item.zhTitle : item.enTitle}</h1>
+          <p class="lead">${state.lang === "zh" ? item.zhOutcome : item.enOutcome}</p>
+          <p><b>${text("完成作品", "Final Product")}：</b>${state.lang === "zh" ? item.zhFinalProduct : item.enFinalProduct}</p>
+        </section>
 
         <section class="panel" style="margin-top:24px">
-          <h2>${L("premium.noteTitle")}</h2>
-          <p>${L("premium.note")}</p>
+          <h2>${text("課程章節", "Course Lessons")}</h2>
+          <div class="grid two">
+            ${lessons.map((l, i) => `
+              <article class="card">
+                <span class="tag">Lesson ${i + 1}</span>
+                <h3>${l}</h3>
+                <p>${text("點擊進入本課內容、Prompt 模板、實作任務與小測驗。", "Open this lesson for content, prompt template, practice task, and quiz.")}</p>
+                <button class="btn primary" onclick="openLesson(${i})">${text("進入本課", "Open Lesson")}</button>
+              </article>
+            `).join("")}
+          </div>
         </section>
       </div>
     </main>
@@ -1065,53 +1139,61 @@ function premium() {
 }
 
 
-let currentLessonIndex = 0;
-
-function openLesson(index){
-  currentLessonIndex = index;
-  setRoute("lesson");
-}
-
-function lesson(){
+function lesson() {
   const item = PREMIUM.find(p => p.id === currentCourseId);
-  if(!item){
-    return shell(`<main class="page"><div class="wrap"><h1>Lesson Not Found</h1></div></main>`);
+  if (!item) {
+    return shell(`<main class="page"><div class="wrap"><h1>${text("找不到課程", "Course Not Found")}</h1></div></main>`);
   }
-  const lessons = state.lang==="zh" ? item.zhLessons : item.enLessons;
-  const title = lessons[currentLessonIndex] || "";
+
+  const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
+  const title = lessons[currentLessonIndex] || lessons[0];
+  const lessonNo = currentLessonIndex + 1;
+
   return shell(`
     <main class="page">
       <div class="wrap">
-        <button class="btn secondary" onclick="setRoute('course')">← Back</button>
-        <h1>${title}</h1>
+        <button class="btn secondary" onclick="setRoute('course')">← ${text("回到課程首頁", "Back to Course")}</button>
 
         <section class="panel">
-          <h2>${state.lang==="zh"?"本課重點":"Lesson Objectives"}</h2>
+          <span class="tag">Lesson ${lessonNo}</span>
+          <h1>${title}</h1>
+          <p class="lead">${text("這一課會帶你理解概念、使用 Prompt、完成實作，最後用小測驗確認自己是否真的學會。", "This lesson helps you understand the concept, use a prompt, complete practice, and check your learning with a short quiz.")}</p>
+        </section>
+
+        <section class="panel" style="margin-top:24px">
+          <h2>${text("本課重點", "Lesson Objectives")}</h2>
           <ul>
-            <li>${state.lang==="zh"?"理解本課核心概念":"Understand the core concept"}</li>
-            <li>${state.lang==="zh"?"學習 Prompt 使用方式":"Learn prompt usage"}</li>
-            <li>${state.lang==="zh"?"完成實作練習":"Complete a practical exercise"}</li>
+            <li>${text("理解本課的核心概念", "Understand the core concept of this lesson")}</li>
+            <li>${text("學會把任務拆成 AI 可以協助的步驟", "Break the task into AI-assisted steps")}</li>
+            <li>${text("產出一個可以保存的學習成果", "Create a saved learning output")}</li>
           </ul>
         </section>
 
-        <section class="panel">
+        <section class="panel" style="margin-top:24px">
           <h2>Prompt Template</h2>
-          <pre>請你當作我的教練，逐步教我：${title}，並提供範例、練習與回饋。</pre>
+          <div class="promptbox">${text(
+            `請你當作我的 AI 學習教練。我正在學習「${title}」。請用高中生或大學生能理解的方式，分成：核心概念、實作步驟、範例、常見錯誤、練習任務，逐步教我完成。`,
+            `Act as my AI learning coach. I am learning "${title}". Explain it in a way a high school or university student can understand. Use: core concept, practice steps, example, common mistakes, and practice task.`
+          )}</div>
         </section>
 
-        <section class="panel">
-          <h2>${state.lang==="zh"?"實作任務":"Practice Task"}</h2>
-          <p>${state.lang==="zh"?"完成本課後，請將成果整理成一頁筆記。":"Create a one-page summary after finishing this lesson."}</p>
+        <section class="panel" style="margin-top:24px">
+          <h2>${text("實作任務", "Practice Task")}</h2>
+          <p>${text(
+            "請用上面的 Prompt 到 ChatGPT、Claude 或 Gemini 實作一次，並把最後成果整理成一段 100 字筆記。",
+            "Use the prompt above in ChatGPT, Claude, or Gemini, then summarize your result in a 100-word note."
+          )}</p>
         </section>
 
-        <section class="panel">
-          <h2>${state.lang==="zh"?"小測驗":"Quiz"}</h2>
-          <p>${state.lang==="zh"?"請用自己的話解釋本課內容。":"Explain the lesson in your own words."}</p>
+        <section class="panel" style="margin-top:24px">
+          <h2>${text("小測驗", "Mini Quiz")}</h2>
+          <p>${text("請回答：這一課最重要的概念是什麼？你會怎麼把它用在自己的學習或工作上？", "Answer: What is the most important concept in this lesson? How will you apply it to your learning or work?")}</p>
         </section>
 
-        <button class="btn primary" onclick="openLesson(Math.min(currentLessonIndex+1, lessons.length-1))">
-          ${state.lang==="zh"?"下一課":"Next Lesson"}
-        </button>
+        <div class="btnrow" style="margin-top:24px">
+          <button class="btn secondary" onclick="openLesson(Math.max(currentLessonIndex - 1, 0))">${text("上一課", "Previous")}</button>
+          <button class="btn primary" onclick="openLesson(Math.min(currentLessonIndex + 1, lessons.length - 1))">${text("下一課", "Next")}</button>
+        </div>
       </div>
     </main>
   `);
@@ -1297,6 +1379,8 @@ function render() {
     prompts,
     community,
     tutor,
+    course,
+    lesson,
     thailand,
     impact
   };
