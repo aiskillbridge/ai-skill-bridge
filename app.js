@@ -1070,6 +1070,11 @@ function hasCourseAccess(courseId) {
   return isCreator();
 }
 
+
+
+
+
+
 function openCourse(courseId) {
   currentCourseId = courseId;
   currentLessonIndex = 0;
@@ -1079,7 +1084,26 @@ function openCourse(courseId) {
 }
 
 function openLesson(index) {
-  currentLessonIndex = index;
+  currentLessonIndex = Number(index);
+  state.route = "lesson";
+  window.scrollTo(0, 0);
+  render();
+}
+
+function openNextLesson() {
+  const item = (typeof PREMIUM !== "undefined" && currentCourseId)
+    ? PREMIUM.find(p => p.id === currentCourseId)
+    : null;
+  const lessons = item ? (state.lang === "zh" ? item.zhLessons : item.enLessons) : [];
+  const max = Math.max(lessons.length - 1, 0);
+  currentLessonIndex = Math.min(Number(currentLessonIndex || 0) + 1, max);
+  state.route = "lesson";
+  window.scrollTo(0, 0);
+  render();
+}
+
+function openPrevLesson() {
+  currentLessonIndex = Math.max(Number(currentLessonIndex || 0) - 1, 0);
   state.route = "lesson";
   window.scrollTo(0, 0);
   render();
@@ -1152,8 +1176,8 @@ function lesson() {
           <section class="panel" style="margin-top:24px"><h2>${text("小測驗", "Mini Quiz")}</h2><p>${state.lang === "zh" ? detail.zhQuiz : detail.enQuiz}</p></section>
           <section class="panel" style="margin-top:24px"><h2>${text("課後成果", "Final Output")}</h2><p><b>${state.lang === "zh" ? detail.zhOutcome : detail.enOutcome}</b></p></section>
           <div class="btnrow" style="margin-top:24px">
-            <button class="btn secondary" onclick="openLesson(Math.max(currentLessonIndex - 1, 0))">${text("上一課", "Previous")}</button>
-            <button class="btn primary" onclick="openLesson(Math.min(currentLessonIndex + 1, lessons.length - 1))">${text("下一課", "Next")}</button>
+            <button class="btn secondary" onclick="openPrevLesson()">${text("上一課", "Previous")}</button>
+            <button class="btn primary" onclick="openNextLesson()">${text("下一課", "Next")}</button>
           </div>
         </div>
       </main>
