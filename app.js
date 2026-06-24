@@ -1009,36 +1009,165 @@ function answerQuiz(id, index, button) {
   feedback.textContent = (option.correct ? L("misc.correct") : L("misc.wrong")) + " " + (state.lang === "zh" ? lesson.quiz.zhExplain : lesson.quiz.enExplain);
 }
 
+
+
+
+
+
+
+
+function freeBootcampKey(id) {
+  const userPart = state.user && state.user.email ? state.user.email : "guest";
+  return `asb-free-bootcamp-${userPart}-${id}`;
+}
+
+function getFreeOutput(index) {
+  return localStorage.getItem(freeBootcampKey(`output-${index}`)) || "";
+}
+
+function saveFreeOutput(index) {
+  const el = document.getElementById(`free-output-${index}`);
+  if (!el) return;
+  localStorage.setItem(freeBootcampKey(`output-${index}`), el.value);
+  toast(state.lang === "zh" ? "免費課成果已儲存" : "Free lesson output saved");
+}
+
+function isFreeLessonComplete(index) {
+  return localStorage.getItem(freeBootcampKey(`complete-${index}`)) === "true";
+}
+
+function toggleFreeLessonComplete(index) {
+  const next = !isFreeLessonComplete(index);
+  localStorage.setItem(freeBootcampKey(`complete-${index}`), next ? "true" : "false");
+  toast(next ? (state.lang === "zh" ? "已完成免費課" : "Free lesson completed") : (state.lang === "zh" ? "已取消完成" : "Completion removed"));
+  render();
+}
+
+function freeBootcampProgress() {
+  const total = FREE_BOOTCAMP.length;
+  const completed = FREE_BOOTCAMP.filter((_, i) => isFreeLessonComplete(i)).length;
+  return { completed, total, percent: total ? Math.round((completed / total) * 100) : 0 };
+}
+
 function courses() {
+  const progress = freeBootcampProgress();
+
   return shell(`
     <main class="page">
       <div class="wrap">
-        <h1>${L("courses.title")}</h1>
-        <p class="lead">${L("courses.lead")}</p>
+        <section class="panel">
+          <span class="tag free">${text("免費入門", "Free Intro")}</span>
+          <h1>${text("AI 新手訓練營", "AI Beginner Bootcamp")}</h1>
+          <p class="lead">${text(
+            "免費區不是只看內容，而是讓你完成 8 個 AI 實作成果。完成後，你會更適合進入付費的大學申請課程。",
+            "The free section is not just reading. You will complete 8 real AI outputs and be ready for the premium application course."
+          )}</p>
+          <h2>${text("完成度", "Progress")}：${progress.completed}/${progress.total}（${progress.percent}%）</h2>
+          <div class="package-progress-track">
+            <div class="package-progress-bar" style="width:${progress.percent}%"></div>
+          </div>
+        </section>
+
+        ${progress.percent === 100 ? `
+          <section class="panel">
+            <span class="tag free">🏆 Certificate</span>
+            <h2>${text("AI 新手訓練營結業證書", "AI Beginner Bootcamp Certificate")}</h2>
+            <p>${text("恭喜你完成 8 堂免費入門課程。下一步可以進入進階付費課程，開始建立你的大學申請包。", "Congratulations on completing all 8 free lessons. Next, enter the premium course to build your university application package.")}</p>
+            <button class="btn primary" onclick="setRoute('premium')">${text("前往進階付費課程", "Go to Premium Course")}</button>
+          </section>
+        ` : ""}
+
         <div class="grid two">
-          <article class="pricing">
-            <span class="tag free">Free</span>
-            <h2>${L("courses.freePath")}</h2>
-            <p>${L("courses.freePathDesc")}</p>
-            <p class="price">NT$0</p>
-            <button class="btn primary" onclick="setRoute('free')">${L("courses.enter")}</button>
-          </article>
-          <article class="pricing">
-            <span class="tag premiumtag">Premium</span>
-            <h2>${L("courses.premiumPath")}</h2>
-            <p>${L("courses.premiumPathDesc")}</p>
-            <p class="price">NT$499+</p>
-            <button class="btn secondary" onclick="setRoute('premium')">${L("courses.view")}</button>
-          </article>
+          ${FREE_BOOTCAMP.map((lesson, i) => `
+            <article class="card">
+              <span class="tag ${isFreeLessonComplete(i) ? "free" : "premiumtag"}">${isFreeLessonComplete(i) ? "✓ " + text("已完成", "Completed") : "Free " + (i + 1)}</span>
+              <h3>${lesson.title}</h3>
+              <p>${lesson.goal}</p>
+              <p><b>${text("本課成果", "Output")}：</b>${lesson.output}</p>
+              <button class="btn primary" onclick="openFreeLesson(${i})">${text("進入本課", "Open Lesson")}</button>
+            </article>
+          `).join("")}
         </div>
       </div>
     </main>
   `);
 }
 
+function openFreeLesson(index) {
+  state.route = "freeLesson";
+  state.freeLessonIndex = index;
+  window.scrollTo(0, 0);
+  render();
+}
 
+function freeLesson() {
+  const index = Number(state.freeLessonIndex || 0);
+  const lesson = FREE_BOOTCAMP[index] || FREE_BOOTCAMP[0];
+  const output = getFreeOutput(index);
 
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <button class="btn secondary" onclick="setRoute('courses')">← ${text("回到免費入門", "Back to Free Intro")}</button>
 
+        <section class="panel">
+          <span class="tag free">Free Lesson ${index + 1}</span>
+          <h1>${lesson.title}</h1>
+          <p class="lead">${lesson.goal}</p>
+          <p><b>${text("本課成果", "Output")}：</b>${lesson.output}</p>
+        </section>
+
+        <section class="panel">
+          <h2>${text("學習重點", "Core Concept")}</h2>
+          <p>${lesson.concept}</p>
+        </section>
+
+        <section class="panel">
+          <h2>${text("範例示範", "Example")}</h2>
+          <p>${lesson.example}</p>
+        </section>
+
+        <section class="panel">
+          <h2>Prompt Template</h2>
+          <div class="promptbox">${lesson.prompt}</div>
+        </section>
+
+        <section class="panel">
+          <h2>${text("實作任務", "Practice Task")}</h2>
+          <ol>
+            ${lesson.task.map(step => `<li>${step}</li>`).join("")}
+          </ol>
+        </section>
+
+        <section class="panel">
+          <h2>${text("AI 實作回饋 Prompt", "AI Feedback Prompt")}</h2>
+          <p>${text("完成成果後，把你的成果貼到 AI，使用下面這段 Prompt 請 AI 幫你修改。", "After completing your output, paste it into AI and use this prompt for feedback.")}</p>
+          <div class="promptbox">${lesson.feedback}</div>
+        </section>
+
+        <section class="panel">
+          <h2>${text("保存本課成果", "Save Lesson Output")}</h2>
+          <textarea id="free-output-${index}" placeholder="${lesson.output}">${output.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}</textarea>
+          <div class="btnrow">
+            <button class="btn primary" onclick="saveFreeOutput(${index})">${text("儲存成果", "Save Output")}</button>
+            <button class="${isFreeLessonComplete(index) ? "btn secondary" : "btn primary"}" onclick="toggleFreeLessonComplete(${index})">
+              ${isFreeLessonComplete(index) ? text("取消完成", "Undo Complete") : "✓ " + text("標記本課完成", "Mark Complete")}
+            </button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>${text("下一步", "Next Step")}</h2>
+          ${
+            index < FREE_BOOTCAMP.length - 1
+              ? `<button class="btn primary" onclick="openFreeLesson(${index + 1})">${text("前往下一堂免費課", "Next Free Lesson")}</button>`
+              : `<button class="btn primary" onclick="setRoute('premium')">${text("前往進階付費課程", "Go to Premium Course")}</button>`
+          }
+        </section>
+      </div>
+    </main>
+  `);
+}
 
 function learning() {
   const admissionsUnlocked = typeof hasCourseAccess === "function" && hasCourseAccess("admissions");
@@ -2005,6 +2134,7 @@ function impact() {
 function render() {
   const routes = {
     home,
+    freeLesson,
     learning,
     courses,
     assessment,

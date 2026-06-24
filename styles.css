@@ -609,3 +609,10 @@ textarea[id^="application-package-"] {
 button[onclick^="toggleLessonComplete"] {
   min-width: 180px;
 }
+
+
+
+/* V36 Free Bootcamp */
+.card .btn {
+  margin-top: 8px;
+}
