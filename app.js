@@ -659,6 +659,8 @@ function nav() {
   ];
 
   const moreLinks = [
+    { route: "freeDashboard", zh: "免費 Dashboard", en: "Free Dashboard" },
+    { route: "freePortfolio", zh: "我的免費成果包", en: "My Free Portfolio" },
     { action: "goApplicationPackage()", zh: "大學申請包", en: "Application Package" },
     { route: "tools", zh: "AI 工具", en: "AI Tools" },
     { route: "prompts", zh: "Prompt 範例", en: "Prompts" },
@@ -1066,6 +1068,10 @@ function courses() {
           <div class="package-progress-track">
             <div class="package-progress-bar" style="width:${progress.percent}%"></div>
           </div>
+          <div class="btnrow" style="margin-top:18px">
+            <button class="btn primary" onclick="setRoute('freeDashboard')">${text("免費 Dashboard", "Free Dashboard")}</button>
+            <button class="btn secondary" onclick="setRoute('freePortfolio')">${text("我的免費成果包", "My Free Portfolio")}</button>
+          </div>
         </section>
 
         ${progress.percent === 100 ? `
@@ -1145,6 +1151,30 @@ function freeLesson() {
           <div class="promptbox">${lesson.feedback}</div>
         </section>
 
+
+        <section class="panel">
+          <h2>${text("課後測驗", "Lesson Quiz")}</h2>
+          <p>${text("完成測驗可以累積 XP，也能確認你是否真的理解本課。", "Complete the quiz to earn XP and check your understanding.")}</p>
+          ${((lesson.quizItems || []).map((q, qIndex) => {
+            const selected = getFreeQuizAnswer(index, qIndex);
+            return `
+              <article class="card" style="margin:16px 0">
+                <h3>Q${qIndex + 1}. ${q.q}</h3>
+                ${q.options.map((opt, optIndex) => `
+                  <button class="quiz-option ${String(selected) === String(optIndex) ? (optIndex === q.answer ? "correct" : "wrong") : ""}" onclick="setFreeQuizAnswer(${index}, ${qIndex}, ${optIndex})">
+                    ${String.fromCharCode(65 + optIndex)}. ${opt}
+                  </button>
+                `).join("")}
+                ${selected !== null && selected !== undefined ? `
+                  <p><b>${Number(selected) === q.answer ? "✅ " + text("答對", "Correct") : "❌ " + text("再試一次", "Try again")}</b></p>
+                  <p>${q.explain}</p>
+                ` : ""}
+              </article>
+            `;
+          }).join(""))}
+          <p><b>${text("本課測驗分數", "Quiz score")}：</b>${freeQuizScore(index).correct}/${freeQuizScore(index).total}（${freeQuizScore(index).percent}%）</p>
+        </section>
+
         <section class="panel">
           <h2>${text("保存本課成果", "Save Lesson Output")}</h2>
           <textarea id="free-output-${index}" placeholder="${lesson.output}">${output.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}</textarea>
@@ -1163,6 +1193,151 @@ function freeLesson() {
               ? `<button class="btn primary" onclick="openFreeLesson(${index + 1})">${text("前往下一堂免費課", "Next Free Lesson")}</button>`
               : `<button class="btn primary" onclick="setRoute('premium')">${text("前往進階付費課程", "Go to Premium Course")}</button>`
           }
+        </section>
+      </div>
+    </main>
+  `);
+}
+
+
+
+function freePortfolioItems() {
+  return FREE_BOOTCAMP.map((lesson, index) => ({
+    id: String(index),
+    title: lesson.output || lesson.title,
+    lessonTitle: lesson.title,
+    value: getFreeOutput(index),
+    complete: getFreeOutput(index).trim().length > 0
+  }));
+}
+
+function freePortfolioProgress() {
+  const items = freePortfolioItems();
+  const completed = items.filter(item => item.complete).length;
+  const total = items.length;
+  return { completed, total, percent: total ? Math.round((completed / total) * 100) : 0 };
+}
+
+function freeQuizKey(index, qIndex) {
+  return freeBootcampKey(`quiz-${index}-${qIndex}`);
+}
+
+function getFreeQuizAnswer(index, qIndex) {
+  return localStorage.getItem(freeQuizKey(index, qIndex));
+}
+
+function setFreeQuizAnswer(index, qIndex, answerIndex) {
+  localStorage.setItem(freeQuizKey(index, qIndex), String(answerIndex));
+  render();
+}
+
+function freeQuizScore(index) {
+  const lesson = FREE_BOOTCAMP[index];
+  const quiz = lesson.quizItems || [];
+  const correct = quiz.filter((q, qIndex) => Number(getFreeQuizAnswer(index, qIndex)) === q.answer).length;
+  return { correct, total: quiz.length, percent: quiz.length ? Math.round((correct / quiz.length) * 100) : 0 };
+}
+
+function allFreeQuizProgress() {
+  const total = FREE_BOOTCAMP.reduce((sum, lesson) => sum + ((lesson.quizItems || []).length), 0);
+  let correct = 0;
+  FREE_BOOTCAMP.forEach((lesson, index) => {
+    (lesson.quizItems || []).forEach((q, qIndex) => {
+      if (Number(getFreeQuizAnswer(index, qIndex)) === q.answer) correct += 1;
+    });
+  });
+  return { correct, total, percent: total ? Math.round((correct / total) * 100) : 0 };
+}
+
+function freeCertificateUnlocked() {
+  const course = freeBootcampProgress();
+  const portfolio = freePortfolioProgress();
+  const quiz = allFreeQuizProgress();
+  return course.completed === course.total && portfolio.completed === portfolio.total && quiz.correct === quiz.total;
+}
+
+function freeDashboard() {
+  const course = freeBootcampProgress();
+  const portfolio = freePortfolioProgress();
+  const quiz = allFreeQuizProgress();
+  const unlocked = freeCertificateUnlocked();
+  const xp = course.completed * 50 + portfolio.completed * 20 + quiz.correct * 10;
+  const level = xp >= 800 ? "AI Builder" : xp >= 500 ? "AI Practitioner" : xp >= 200 ? "AI Explorer" : "AI Beginner";
+
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <section class="panel">
+          <span class="tag free">V37 Dashboard</span>
+          <h1>${text("我的免費學習 Dashboard", "My Free Learning Dashboard")}</h1>
+          <p class="lead">${text("這裡集中顯示免費課程、成果包、測驗、XP 與結業證書。", "This page tracks free lessons, portfolio outputs, quizzes, XP, and certificate.")}</p>
+        </section>
+
+        <section class="panel">
+          <h2>${text("學習總覽", "Overview")}</h2>
+          <div class="grid four">
+            <article class="card"><span class="tag">Lessons</span><h3>${course.completed}/${course.total}</h3><p>${course.percent}%</p></article>
+            <article class="card"><span class="tag">Portfolio</span><h3>${portfolio.completed}/${portfolio.total}</h3><p>${portfolio.percent}%</p></article>
+            <article class="card"><span class="tag">Quiz</span><h3>${quiz.correct}/${quiz.total}</h3><p>${quiz.percent}%</p></article>
+            <article class="card"><span class="tag">XP</span><h3>${xp}</h3><p>${level}</p></article>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>${text("免費成果包完成度", "Free portfolio progress")}</h2>
+          <div class="package-progress-track"><div class="package-progress-bar" style="width:${portfolio.percent}%"></div></div>
+          <button class="btn primary" onclick="setRoute('freePortfolio')">${text("打開我的免費成果包", "Open Free Portfolio")}</button>
+        </section>
+
+        <section class="panel">
+          <h2>${text("AI 新手訓練營證書", "AI Beginner Bootcamp Certificate")}</h2>
+          ${
+            unlocked
+              ? `<div class="certificate-card">
+                  <h2>AI Skill Bridge</h2>
+                  <h3>${text("AI 新手訓練營結業證書", "AI Beginner Bootcamp Certificate")}</h3>
+                  <p>${text("恭喜完成 8 堂課、8 項成果與全部課後測驗。", "Congratulations on completing 8 lessons, 8 outputs, and all quizzes.")}</p>
+                  <p>${state.user?.email || "AI Skill Bridge Learner"} · ${new Date().toLocaleDateString()}</p>
+                </div>`
+              : `<p>${text("完成 8 堂課、8 項成果與全部測驗後解鎖。", "Complete 8 lessons, 8 outputs, and all quizzes to unlock.")}</p>`
+          }
+        </section>
+      </div>
+    </main>
+  `);
+}
+
+function freePortfolio() {
+  const items = freePortfolioItems();
+  const progress = freePortfolioProgress();
+
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <section class="panel">
+          <span class="tag free">${text("免費成果包", "Free Portfolio")}</span>
+          <h1>${text("我的免費成果包", "My Free AI Portfolio")}</h1>
+          <p class="lead">${text("這裡集中保存你在 8 堂免費課完成的 AI 實作成果。", "This page collects the 8 outputs from the free bootcamp.")}</p>
+          <h2>${text("完成度", "Progress")}：${progress.completed}/${progress.total}（${progress.percent}%）</h2>
+          <div class="package-progress-track"><div class="package-progress-bar" style="width:${progress.percent}%"></div></div>
+        </section>
+
+        <div class="grid">
+          ${items.map((item, index) => `
+            <section class="panel">
+              <span class="tag ${item.complete ? "free" : "premiumtag"}">${item.complete ? text("已完成", "Completed") : text("尚未完成", "Not completed")}</span>
+              <h2>${index + 1}. ${item.title}</h2>
+              <p>${item.lessonTitle}</p>
+              <textarea id="free-portfolio-${index}" placeholder="${item.title}">${String(item.value || "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}</textarea>
+              <button class="btn secondary" onclick="document.getElementById('free-output-${index}') ? null : localStorage.setItem(freeBootcampKey('output-${index}'), document.getElementById('free-portfolio-${index}').value); toast('${state.lang === "zh" ? "成果已儲存" : "Output saved"}'); render();">${text("儲存成果", "Save Output")}</button>
+            </section>
+          `).join("")}
+        </div>
+
+        <section class="panel">
+          <h2>${text("下一步", "Next Step")}</h2>
+          <p>${text("完成免費成果包後，可以進入付費課程建立完整的大學申請包。", "After completing this portfolio, continue to the premium course to build your university application package.")}</p>
+          <button class="btn primary" onclick="setRoute('premium')">${text("查看進階付費課程", "View Premium Courses")}</button>
         </section>
       </div>
     </main>
@@ -2137,6 +2312,8 @@ function render() {
     freeLesson,
     learning,
     courses,
+    freePortfolio,
+    freeDashboard,
     assessment,
     map: learningMap,
     center,

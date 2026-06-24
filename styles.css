@@ -616,3 +616,31 @@ button[onclick^="toggleLessonComplete"] {
 .card .btn {
   margin-top: 8px;
 }
+
+
+
+/* V37 Free Portfolio + Quiz + Certificate */
+.certificate-card {
+  border: 2px solid #d7b56d;
+  border-radius: 24px;
+  padding: 36px;
+  background: linear-gradient(135deg, #fffaf0, #ffffff);
+  text-align: center;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+}
+
+.quiz-option.correct {
+  background: #e9fff3 !important;
+  color: #11864b !important;
+  border-color: #86efac !important;
+}
+
+.quiz-option.wrong {
+  background: #fff1f2 !important;
+  color: #be123c !important;
+  border-color: #fecdd3 !important;
+}
+
+textarea[id^="free-portfolio-"] {
+  min-height: 220px;
+}
