@@ -996,259 +996,253 @@ const PREMIUM_LESSON_DETAILS = {
     {
       "zhTitle": "第1課：認識大學申請流程與 AI 的角色",
       "enTitle": "Lesson 1: 認識大學申請流程與 AI 的角色",
-      "zhConcept": "大學申請不是只有填志願。你需要理解第一階段、第二階段、備審資料、面試與科系需求。AI 可以協助你整理資訊、建立準備清單、模擬面試與檢查資料完整度，但 AI 不能替你捏造經歷，也不能保證錄取。正確使用 AI 的方式，是讓它成為你的整理工具、練習工具與檢查工具。",
-      "enConcept": "大學申請不是只有填志願。你需要理解第一階段、第二階段、備審資料、面試與科系需求。AI 可以協助你整理資訊、建立準備清單、模擬面試與檢查資料完整度，但 AI 不能替你捏造經歷，也不能保證錄取。正確使用 AI 的方式，是讓它成為你的整理工具、練習工具與檢查工具。",
-      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「認識大學申請流程與 AI 的角色」。請依照高中三年級學生的程度，逐步協助我完成本課任務。回答時請分成：目標、步驟、範例、我需要補充的資料、下一步行動。",
-      "enPrompt": "Act as my university application coach. I am learning: 認識大學申請流程與 AI 的角色. Help me complete this lesson step by step. Use: goal, steps, example, information I need to provide, and next action.",
-      "zhExample": "範例方向：把你自己的真實經驗放進本課任務中，不要讓 AI 代替你捏造內容。AI 的角色是整理、追問、檢查與改善。",
-      "enExample": "Use your real experience. AI should organize, ask follow-up questions, check, and improve, not invent content.",
-      "zhPractice": "列出 3 個你想申請的科系。；查出每個科系第一階段與第二階段可能需要準備的資料。；請 AI 幫你整理 7 天準備清單，並刪掉不符合你現況的項目。",
-      "enPractice": "列出 3 個你想申請的科系。；查出每個科系第一階段與第二階段可能需要準備的資料。；請 AI 幫你整理 7 天準備清單，並刪掉不符合你現況的項目。",
-      "zhFeedbackPrompt": "請你擔任我的大學申請教練。以下是我完成的第1課實作任務：\n（貼上我的成果）\n請你依照以下標準給我建議：\n1. 是否具體\n2. 是否真實可信\n3. 是否和申請科系有連結\n4. 哪裡太空泛\n5. 下一步怎麼修改\n請用表格回覆，最後給我一版修改方向。",
-      "enFeedbackPrompt": "Act as my application coach. Here is my Lesson 1 practice output:\n(paste my work)\nGive feedback on specificity, credibility, major connection, vague parts, and next revision steps. Use a table.",
+      "zhConcept": "這一課要先建立正確觀念：大學申請不是只有填志願，而是一個從第一階段篩選、第二階段備審與面試，到最後確認自己是否適合科系的完整流程。AI 的角色不是幫你作弊，也不是幫你捏造經歷，而是幫你整理資料、拆解任務、檢查缺口、模擬練習。",
+      "enConcept": "這一課要先建立正確觀念：大學申請不是只有填志願，而是一個從第一階段篩選、第二階段備審與面試，到最後確認自己是否適合科系的完整流程。AI 的角色不是幫你作弊，也不是幫你捏造經歷，而是幫你整理資料、拆解任務、檢查缺口、模擬練習。",
+      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「認識大學申請流程與 AI 的角色」。請先問我需要補充的資料，再依照：目標、操作步驟、範例、我應該產出的成果，逐步帶我完成。",
+      "enPrompt": "Act as my university application coach. I am learning: 認識大學申請流程與 AI 的角色. Ask what information you need, then guide me with goal, steps, example, and final output.",
+      "zhExample": "範例：學生 A 想申請資訊管理系，但只知道自己學測成績和喜歡電腦。使用 AI 後，他整理出：第一階段要先確認篩選倍率與採計科目；第二階段要準備學習歷程、自我介紹、面試題；目前缺少的是專案作品說明與申請動機。這樣他就知道不是盲目準備，而是有順序地準備。",
+      "enExample": "範例：學生 A 想申請資訊管理系，但只知道自己學測成績和喜歡電腦。使用 AI 後，他整理出：第一階段要先確認篩選倍率與採計科目；第二階段要準備學習歷程、自我介紹、面試題；目前缺少的是專案作品說明與申請動機。這樣他就知道不是盲目準備，而是有順序地準備。",
+      "zhPractice": "寫下你目前最想申請的 3 個科系。；查詢這 3 個科系第一階段可能看的項目，例如採計科目、倍率、檢定標準。；請 AI 幫你整理第二階段可能需要的備審資料與面試準備。；把 AI 的回答整理成一張「我的申請準備地圖」。",
+      "enPractice": "寫下你目前最想申請的 3 個科系。；查詢這 3 個科系第一階段可能看的項目，例如採計科目、倍率、檢定標準。；請 AI 幫你整理第二階段可能需要的備審資料與面試準備。；把 AI 的回答整理成一張「我的申請準備地圖」。",
+      "zhFeedbackPrompt": "請你擔任我的升學顧問。以下是我的「申請準備地圖」：\n（貼上成果）\n請幫我檢查：\n1. 第一階段資訊是否清楚\n2. 第二階段準備是否完整\n3. 哪些資料太空泛\n4. 哪些地方需要我自己查證\n5. 請幫我排出接下來 7 天的準備順序。",
+      "enFeedbackPrompt": "請你擔任我的升學顧問。以下是我的「申請準備地圖」：\n（貼上成果）\n請幫我檢查：\n1. 第一階段資訊是否清楚\n2. 第二階段準備是否完整\n3. 哪些資料太空泛\n4. 哪些地方需要我自己查證\n5. 請幫我排出接下來 7 天的準備順序。",
       "zhQuizItems": [
-        {
-          "q": "第一階段通常主要看什麼？",
-          "options": [
-            "面試表現",
-            "學測成績與篩選條件",
-            "教授個人喜好"
-          ],
-          "answer": "學測成績與篩選條件"
-        },
         {
           "q": "AI 在申請準備中最適合扮演什麼角色？",
           "options": [
-            "替你捏造經歷",
-            "整理、練習與檢查工具",
-            "保證錄取工具"
+            "保證錄取",
+            "整理、檢查、練習工具",
+            "捏造經歷"
           ],
-          "answer": "整理、練習與檢查工具"
+          "answer": "整理、檢查、練習工具"
         },
         {
-          "q": "備審資料主要在第二階段扮演什麼功能？",
+          "q": "第一階段通常最先要確認什麼？",
           "options": [
-            "呈現你的經驗與適配度",
-            "取代所有成績",
-            "讓 AI 自動寫完"
+            "面試服裝",
+            "篩選條件與採計科目",
+            "自傳字體"
           ],
-          "answer": "呈現你的經驗與適配度"
+          "answer": "篩選條件與採計科目"
+        },
+        {
+          "q": "第二階段通常會重視什麼？",
+          "options": [
+            "備審資料與面試表現",
+            "只看朋友推薦",
+            "只看校名"
+          ],
+          "answer": "備審資料與面試表現"
         }
       ],
       "enQuizItems": [
         {
-          "q": "第一階段通常主要看什麼？",
-          "options": [
-            "面試表現",
-            "學測成績與篩選條件",
-            "教授個人喜好"
-          ],
-          "answer": "學測成績與篩選條件"
-        },
-        {
           "q": "AI 在申請準備中最適合扮演什麼角色？",
           "options": [
-            "替你捏造經歷",
-            "整理、練習與檢查工具",
-            "保證錄取工具"
+            "保證錄取",
+            "整理、檢查、練習工具",
+            "捏造經歷"
           ],
-          "answer": "整理、練習與檢查工具"
+          "answer": "整理、檢查、練習工具"
         },
         {
-          "q": "備審資料主要在第二階段扮演什麼功能？",
+          "q": "第一階段通常最先要確認什麼？",
           "options": [
-            "呈現你的經驗與適配度",
-            "取代所有成績",
-            "讓 AI 自動寫完"
+            "面試服裝",
+            "篩選條件與採計科目",
+            "自傳字體"
           ],
-          "answer": "呈現你的經驗與適配度"
+          "answer": "篩選條件與採計科目"
+        },
+        {
+          "q": "第二階段通常會重視什麼？",
+          "options": [
+            "備審資料與面試表現",
+            "只看朋友推薦",
+            "只看校名"
+          ],
+          "answer": "備審資料與面試表現"
         }
       ],
-      "zhQuiz": "本課小測驗共 3 題，請完成後對照答案。",
-      "enQuiz": "This lesson has 3 quiz questions. Complete them and check the answers.",
-      "zhOutcome": "大學申請流程理解表與 7 天準備清單",
-      "enOutcome": "大學申請流程理解表與 7 天準備清單",
-      "zhNotePrompt": "課程筆記：請用 5 句話整理第1課重點：1. 我學到什麼 2. 我完成什麼 3. 我哪裡還不懂 4. 我要怎麼修改 5. 下一步行動。",
-      "enNotePrompt": "Course notes: summarize Lesson 1 in 5 sentences: what I learned, what I completed, what I still do not understand, what I need to revise, and next action."
+      "zhOutcome": "一份可以執行的「大學申請準備地圖」。",
+      "enOutcome": "一份可以執行的「大學申請準備地圖」。",
+      "zhNotePrompt": "請在課程筆記中回答：我目前最清楚的是什麼？我最不清楚的是什麼？接下來 7 天我要完成哪 3 件事？",
+      "enNotePrompt": "請在課程筆記中回答：我目前最清楚的是什麼？我最不清楚的是什麼？接下來 7 天我要完成哪 3 件事？"
     },
     {
       "zhTitle": "第2課：用 AI 找出最適合自己的科系",
       "enTitle": "Lesson 2: 用 AI 找出最適合自己的科系",
-      "zhConcept": "選科系不能只看熱門、分數或朋友選什麼。你要把興趣、能力、學習經驗、個性與未來方向一起考慮。AI 可以幫你產生候選科系、建立比較表、提醒你要查證哪些資訊，但你不能只照 AI 的推薦決定人生方向。",
-      "enConcept": "選科系不能只看熱門、分數或朋友選什麼。你要把興趣、能力、學習經驗、個性與未來方向一起考慮。AI 可以幫你產生候選科系、建立比較表、提醒你要查證哪些資訊，但你不能只照 AI 的推薦決定人生方向。",
-      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「用 AI 找出最適合自己的科系」。請依照高中三年級學生的程度，逐步協助我完成本課任務。回答時請分成：目標、步驟、範例、我需要補充的資料、下一步行動。",
-      "enPrompt": "Act as my university application coach. I am learning: 用 AI 找出最適合自己的科系. Help me complete this lesson step by step. Use: goal, steps, example, information I need to provide, and next action.",
-      "zhExample": "範例方向：把你自己的真實經驗放進本課任務中，不要讓 AI 代替你捏造內容。AI 的角色是整理、追問、檢查與改善。",
-      "enExample": "Use your real experience. AI should organize, ask follow-up questions, check, and improve, not invent content.",
-      "zhPractice": "填寫興趣、強項、弱項、活動經驗與未來想像。；請 AI 推薦 5 個科系並做比較表。；從 5 個科系中選出 3 個優先查證的科系。",
-      "enPractice": "填寫興趣、強項、弱項、活動經驗與未來想像。；請 AI 推薦 5 個科系並做比較表。；從 5 個科系中選出 3 個優先查證的科系。",
-      "zhFeedbackPrompt": "請你擔任我的大學申請教練。以下是我完成的第2課實作任務：\n（貼上我的成果）\n請你依照以下標準給我建議：\n1. 是否具體\n2. 是否真實可信\n3. 是否和申請科系有連結\n4. 哪裡太空泛\n5. 下一步怎麼修改\n請用表格回覆，最後給我一版修改方向。",
-      "enFeedbackPrompt": "Act as my application coach. Here is my Lesson 2 practice output:\n(paste my work)\nGive feedback on specificity, credibility, major connection, vague parts, and next revision steps. Use a table.",
+      "zhConcept": "這一課要把科系選擇從『我覺得好像可以』變成『我有理由地選』。AI 可以幫你從興趣、能力、活動經驗與未來想像中找出可能科系，但你必須再查證課程內容、畢業出路與自己是否真的有興趣。",
+      "enConcept": "這一課要把科系選擇從『我覺得好像可以』變成『我有理由地選』。AI 可以幫你從興趣、能力、活動經驗與未來想像中找出可能科系，但你必須再查證課程內容、畢業出路與自己是否真的有興趣。",
+      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「用 AI 找出最適合自己的科系」。請先問我需要補充的資料，再依照：目標、操作步驟、範例、我應該產出的成果，逐步帶我完成。",
+      "enPrompt": "Act as my university application coach. I am learning: 用 AI 找出最適合自己的科系. Ask what information you need, then guide me with goal, steps, example, and final output.",
+      "zhExample": "範例：學生 B 喜歡心理學，也喜歡幫助同學，生物和國文成績不錯。AI 推薦心理、社工、教育、護理、職能治療。學生 B 不是直接照單全收，而是進一步查每個科系的必修課、實習方式與未來工作，最後選出心理、社工、教育三個優先科系。",
+      "enExample": "範例：學生 B 喜歡心理學，也喜歡幫助同學，生物和國文成績不錯。AI 推薦心理、社工、教育、護理、職能治療。學生 B 不是直接照單全收，而是進一步查每個科系的必修課、實習方式與未來工作，最後選出心理、社工、教育三個優先科系。",
+      "zhPractice": "填寫自己的興趣、強項科目、弱項科目、活動經驗與未來想像。；用 Prompt 請 AI 推薦 5 個可能適合的科系。；請 AI 做出比較表：適合原因、需要能力、未來發展、我目前缺少什麼。；從 5 個科系中選出 3 個優先查證的科系，並寫下原因。",
+      "enPractice": "填寫自己的興趣、強項科目、弱項科目、活動經驗與未來想像。；用 Prompt 請 AI 推薦 5 個可能適合的科系。；請 AI 做出比較表：適合原因、需要能力、未來發展、我目前缺少什麼。；從 5 個科系中選出 3 個優先查證的科系，並寫下原因。",
+      "zhFeedbackPrompt": "請你擔任升學輔導老師。以下是我的科系探索表：\n（貼上成果）\n請你檢查：\n1. 推薦科系是否和我的興趣與能力有連結\n2. 哪些理由太空泛\n3. 哪些科系我需要進一步查證\n4. 請幫我提出 5 個我應該問自己的問題\n5. 請幫我把 3 個優先科系排序並說明理由。",
+      "enFeedbackPrompt": "請你擔任升學輔導老師。以下是我的科系探索表：\n（貼上成果）\n請你檢查：\n1. 推薦科系是否和我的興趣與能力有連結\n2. 哪些理由太空泛\n3. 哪些科系我需要進一步查證\n4. 請幫我提出 5 個我應該問自己的問題\n5. 請幫我把 3 個優先科系排序並說明理由。",
       "zhQuizItems": [
         {
           "q": "選科系最不建議只依靠哪一項？",
           "options": [
-            "興趣",
-            "能力",
-            "熱門程度"
+            "興趣與能力",
+            "熱門程度",
+            "未來方向"
           ],
           "answer": "熱門程度"
         },
         {
-          "q": "AI 推薦科系後，下一步應該做什麼？",
+          "q": "AI 推薦科系後應該做什麼？",
           "options": [
             "直接照做",
-            "查證課程內容與出路",
-            "刪掉所有不熱門科系"
+            "查證課程與出路",
+            "刪掉冷門科系"
           ],
-          "answer": "查證課程內容與出路"
+          "answer": "查證課程與出路"
         },
         {
-          "q": "科系探索表至少應包含什麼？",
+          "q": "好的科系探索表應包含什麼？",
           "options": [
-            "適合原因、能力需求、未來職涯",
+            "適合原因、能力需求、未來發展",
             "只有校名",
             "只有排名"
           ],
-          "answer": "適合原因、能力需求、未來職涯"
+          "answer": "適合原因、能力需求、未來發展"
         }
       ],
       "enQuizItems": [
         {
           "q": "選科系最不建議只依靠哪一項？",
           "options": [
-            "興趣",
-            "能力",
-            "熱門程度"
+            "興趣與能力",
+            "熱門程度",
+            "未來方向"
           ],
           "answer": "熱門程度"
         },
         {
-          "q": "AI 推薦科系後，下一步應該做什麼？",
+          "q": "AI 推薦科系後應該做什麼？",
           "options": [
             "直接照做",
-            "查證課程內容與出路",
-            "刪掉所有不熱門科系"
+            "查證課程與出路",
+            "刪掉冷門科系"
           ],
-          "answer": "查證課程內容與出路"
+          "answer": "查證課程與出路"
         },
         {
-          "q": "科系探索表至少應包含什麼？",
+          "q": "好的科系探索表應包含什麼？",
           "options": [
-            "適合原因、能力需求、未來職涯",
+            "適合原因、能力需求、未來發展",
             "只有校名",
             "只有排名"
           ],
-          "answer": "適合原因、能力需求、未來職涯"
+          "answer": "適合原因、能力需求、未來發展"
         }
       ],
-      "zhQuiz": "本課小測驗共 3 題，請完成後對照答案。",
-      "enQuiz": "This lesson has 3 quiz questions. Complete them and check the answers.",
-      "zhOutcome": "科系探索表與 3 個優先申請科系清單",
-      "enOutcome": "科系探索表與 3 個優先申請科系清單",
-      "zhNotePrompt": "課程筆記：請用 5 句話整理第2課重點：1. 我學到什麼 2. 我完成什麼 3. 我哪裡還不懂 4. 我要怎麼修改 5. 下一步行動。",
-      "enNotePrompt": "Course notes: summarize Lesson 2 in 5 sentences: what I learned, what I completed, what I still do not understand, what I need to revise, and next action."
+      "zhOutcome": "一份「科系探索表」與 3 個優先申請科系清單。",
+      "enOutcome": "一份「科系探索表」與 3 個優先申請科系清單。",
+      "zhNotePrompt": "請在課程筆記中寫下：我最有興趣的 3 個科系、選擇理由、需要查證的資料。",
+      "enNotePrompt": "請在課程筆記中寫下：我最有興趣的 3 個科系、選擇理由、需要查證的資料。"
     },
     {
       "zhTitle": "第3課：用 AI 整理高中三年的學習歷程素材",
       "enTitle": "Lesson 3: 用 AI 整理高中三年的學習歷程素材",
-      "zhConcept": "很多學生不是沒有內容，而是不知道怎麼分類。學習歷程素材包含課程成果、社團活動、幹部經驗、競賽、服務、專題、作品與自主學習。你要先做素材盤點，再決定哪些最適合放進申請資料。",
-      "enConcept": "很多學生不是沒有內容，而是不知道怎麼分類。學習歷程素材包含課程成果、社團活動、幹部經驗、競賽、服務、專題、作品與自主學習。你要先做素材盤點，再決定哪些最適合放進申請資料。",
-      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「用 AI 整理高中三年的學習歷程素材」。請依照高中三年級學生的程度，逐步協助我完成本課任務。回答時請分成：目標、步驟、範例、我需要補充的資料、下一步行動。",
-      "enPrompt": "Act as my university application coach. I am learning: 用 AI 整理高中三年的學習歷程素材. Help me complete this lesson step by step. Use: goal, steps, example, information I need to provide, and next action.",
-      "zhExample": "範例方向：把你自己的真實經驗放進本課任務中，不要讓 AI 代替你捏造內容。AI 的角色是整理、追問、檢查與改善。",
-      "enExample": "Use your real experience. AI should organize, ask follow-up questions, check, and improve, not invent content.",
-      "zhPractice": "列出至少 10 個高中經驗或成果。；請 AI 幫你分類成課程成果、社團、競賽、服務、自主學習等。；為每個素材標註可展現的能力。",
-      "enPractice": "列出至少 10 個高中經驗或成果。；請 AI 幫你分類成課程成果、社團、競賽、服務、自主學習等。；為每個素材標註可展現的能力。",
-      "zhFeedbackPrompt": "請你擔任我的大學申請教練。以下是我完成的第3課實作任務：\n（貼上我的成果）\n請你依照以下標準給我建議：\n1. 是否具體\n2. 是否真實可信\n3. 是否和申請科系有連結\n4. 哪裡太空泛\n5. 下一步怎麼修改\n請用表格回覆，最後給我一版修改方向。",
-      "enFeedbackPrompt": "Act as my application coach. Here is my Lesson 3 practice output:\n(paste my work)\nGive feedback on specificity, credibility, major connection, vague parts, and next revision steps. Use a table.",
+      "zhConcept": "這一課要把零散的高中經驗整理成可以使用的素材庫。你不是沒有內容，而是需要把課程成果、社團、競賽、服務、幹部、自主學習分類，再標註每個素材能展現什麼能力。",
+      "enConcept": "這一課要把零散的高中經驗整理成可以使用的素材庫。你不是沒有內容，而是需要把課程成果、社團、競賽、服務、幹部、自主學習分類，再標註每個素材能展現什麼能力。",
+      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「用 AI 整理高中三年的學習歷程素材」。請先問我需要補充的資料，再依照：目標、操作步驟、範例、我應該產出的成果，逐步帶我完成。",
+      "enPrompt": "Act as my university application coach. I am learning: 用 AI 整理高中三年的學習歷程素材. Ask what information you need, then guide me with goal, steps, example, and final output.",
+      "zhExample": "範例：學生 C 有科展、社團幹部、志工服務、英文簡報、資訊課專題。原本看起來很雜，但用 AI 分類後發現：科展展現研究能力，社團幹部展現溝通協調，志工服務展現同理心，資訊課專題展現解決問題能力。",
+      "enExample": "範例：學生 C 有科展、社團幹部、志工服務、英文簡報、資訊課專題。原本看起來很雜，但用 AI 分類後發現：科展展現研究能力，社團幹部展現溝通協調，志工服務展現同理心，資訊課專題展現解決問題能力。",
+      "zhPractice": "列出至少 10 個高中三年內的經驗或作品。；請 AI 幫你分類成課程成果、社團、幹部、競賽、服務、自主學習、專題作品。；為每個素材標註可展現的能力。；選出最適合放入申請資料的 5 個素材。",
+      "enPractice": "列出至少 10 個高中三年內的經驗或作品。；請 AI 幫你分類成課程成果、社團、幹部、競賽、服務、自主學習、專題作品。；為每個素材標註可展現的能力。；選出最適合放入申請資料的 5 個素材。",
+      "zhFeedbackPrompt": "請你擔任備審資料顧問。以下是我的學習歷程素材庫：\n（貼上成果）\n請幫我檢查：\n1. 分類是否清楚\n2. 每個素材展現的能力是否具體\n3. 哪些素材最適合放進備審\n4. 哪些素材和目標科系連結較弱\n5. 請幫我選出前 5 個最有價值的素材。",
+      "enFeedbackPrompt": "請你擔任備審資料顧問。以下是我的學習歷程素材庫：\n（貼上成果）\n請幫我檢查：\n1. 分類是否清楚\n2. 每個素材展現的能力是否具體\n3. 哪些素材最適合放進備審\n4. 哪些素材和目標科系連結較弱\n5. 請幫我選出前 5 個最有價值的素材。",
       "zhQuizItems": [
         {
           "q": "學習歷程整理第一步是什麼？",
           "options": [
+            "先分類盤點",
             "直接寫自傳",
-            "先分類與盤點素材",
             "先做封面"
           ],
-          "answer": "先分類與盤點素材"
+          "answer": "先分類盤點"
         },
         {
-          "q": "以下哪個可以成為學習歷程素材？",
+          "q": "以下哪個可以是素材？",
           "options": [
-            "課程成果",
+            "課程作品",
             "社團經驗",
             "以上皆可"
           ],
           "answer": "以上皆可"
         },
         {
-          "q": "素材標註能力的目的為何？",
+          "q": "標註能力的目的？",
           "options": [
-            "讓經驗和科系需求連結",
+            "讓素材和申請科系連結",
             "增加字數",
             "讓資料看起來很多"
           ],
-          "answer": "讓經驗和科系需求連結"
+          "answer": "讓素材和申請科系連結"
         }
       ],
       "enQuizItems": [
         {
           "q": "學習歷程整理第一步是什麼？",
           "options": [
+            "先分類盤點",
             "直接寫自傳",
-            "先分類與盤點素材",
             "先做封面"
           ],
-          "answer": "先分類與盤點素材"
+          "answer": "先分類盤點"
         },
         {
-          "q": "以下哪個可以成為學習歷程素材？",
+          "q": "以下哪個可以是素材？",
           "options": [
-            "課程成果",
+            "課程作品",
             "社團經驗",
             "以上皆可"
           ],
           "answer": "以上皆可"
         },
         {
-          "q": "素材標註能力的目的為何？",
+          "q": "標註能力的目的？",
           "options": [
-            "讓經驗和科系需求連結",
+            "讓素材和申請科系連結",
             "增加字數",
             "讓資料看起來很多"
           ],
-          "answer": "讓經驗和科系需求連結"
+          "answer": "讓素材和申請科系連結"
         }
       ],
-      "zhQuiz": "本課小測驗共 3 題，請完成後對照答案。",
-      "enQuiz": "This lesson has 3 quiz questions. Complete them and check the answers.",
-      "zhOutcome": "高中學習歷程素材庫",
-      "enOutcome": "高中學習歷程素材庫",
-      "zhNotePrompt": "課程筆記：請用 5 句話整理第3課重點：1. 我學到什麼 2. 我完成什麼 3. 我哪裡還不懂 4. 我要怎麼修改 5. 下一步行動。",
-      "enNotePrompt": "Course notes: summarize Lesson 3 in 5 sentences: what I learned, what I completed, what I still do not understand, what I need to revise, and next action."
+      "zhOutcome": "一份高中學習歷程素材庫。",
+      "enOutcome": "一份高中學習歷程素材庫。",
+      "zhNotePrompt": "請在課程筆記中寫下：我最有價值的 5 個素材、每個素材代表的能力、可以用在哪個申請科系。",
+      "enNotePrompt": "請在課程筆記中寫下：我最有價值的 5 個素材、每個素材代表的能力、可以用在哪個申請科系。"
     },
     {
       "zhTitle": "第4課：用 STAR 架構寫出有說服力的多元表現",
       "enTitle": "Lesson 4: 用 STAR 架構寫出有說服力的多元表現",
-      "zhConcept": "多元表現不是列活動名稱，而是說清楚情境、任務、行動與結果。STAR 架構能讓你的經驗變得具體、有邏輯，也比較容易在面試中說明。重點是不要誇大，而是把真實經驗講清楚。",
-      "enConcept": "多元表現不是列活動名稱，而是說清楚情境、任務、行動與結果。STAR 架構能讓你的經驗變得具體、有邏輯，也比較容易在面試中說明。重點是不要誇大，而是把真實經驗講清楚。",
-      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「用 STAR 架構寫出有說服力的多元表現」。請依照高中三年級學生的程度，逐步協助我完成本課任務。回答時請分成：目標、步驟、範例、我需要補充的資料、下一步行動。",
-      "enPrompt": "Act as my university application coach. I am learning: 用 STAR 架構寫出有說服力的多元表現. Help me complete this lesson step by step. Use: goal, steps, example, information I need to provide, and next action.",
-      "zhExample": "範例方向：把你自己的真實經驗放進本課任務中，不要讓 AI 代替你捏造內容。AI 的角色是整理、追問、檢查與改善。",
-      "enExample": "Use your real experience. AI should organize, ask follow-up questions, check, and improve, not invent content.",
-      "zhPractice": "選 3 個活動經驗。；用 STAR 寫出每個活動的情境、任務、行動、結果。；請 AI 改寫成 300 字內的多元表現描述。",
-      "enPractice": "選 3 個活動經驗。；用 STAR 寫出每個活動的情境、任務、行動、結果。；請 AI 改寫成 300 字內的多元表現描述。",
-      "zhFeedbackPrompt": "請你擔任我的大學申請教練。以下是我完成的第4課實作任務：\n（貼上我的成果）\n請你依照以下標準給我建議：\n1. 是否具體\n2. 是否真實可信\n3. 是否和申請科系有連結\n4. 哪裡太空泛\n5. 下一步怎麼修改\n請用表格回覆，最後給我一版修改方向。",
-      "enFeedbackPrompt": "Act as my application coach. Here is my Lesson 4 practice output:\n(paste my work)\nGive feedback on specificity, credibility, major connection, vague parts, and next revision steps. Use a table.",
+      "zhConcept": "這一課要把活動經驗變成有說服力的描述。多元表現不是只列活動名稱，而是要寫出情境、任務、行動與結果。STAR 架構能讓教授看見你做了什麼、怎麼做、學到什麼。",
+      "enConcept": "這一課要把活動經驗變成有說服力的描述。多元表現不是只列活動名稱，而是要寫出情境、任務、行動與結果。STAR 架構能讓教授看見你做了什麼、怎麼做、學到什麼。",
+      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「用 STAR 架構寫出有說服力的多元表現」。請先問我需要補充的資料，再依照：目標、操作步驟、範例、我應該產出的成果，逐步帶我完成。",
+      "enPrompt": "Act as my university application coach. I am learning: 用 STAR 架構寫出有說服力的多元表現. Ask what information you need, then guide me with goal, steps, example, and final output.",
+      "zhExample": "範例：不要只寫『我擔任班長』。可以寫：班上分組合作常常拖延，我負責協調進度，建立共同表格提醒任務，最後讓專題準時完成。這樣教授看得出你的溝通、協調與負責。",
+      "enExample": "範例：不要只寫『我擔任班長』。可以寫：班上分組合作常常拖延，我負責協調進度，建立共同表格提醒任務，最後讓專題準時完成。這樣教授看得出你的溝通、協調與負責。",
+      "zhPractice": "選出 3 個你想放進備審的活動經驗。；每個活動都用 STAR 寫出 Situation、Task、Action、Result。；請 AI 幫你改寫成 300 字內的多元表現描述。；檢查文字是否真實、具體、沒有誇大。",
+      "enPractice": "選出 3 個你想放進備審的活動經驗。；每個活動都用 STAR 寫出 Situation、Task、Action、Result。；請 AI 幫你改寫成 300 字內的多元表現描述。；檢查文字是否真實、具體、沒有誇大。",
+      "zhFeedbackPrompt": "請你擔任大學備審資料修改老師。以下是我的多元表現描述：\n（貼上成果）\n請檢查：\n1. STAR 四個元素是否完整\n2. 哪些句子太空泛\n3. 是否有具體行動與結果\n4. 是否有誇大或不自然的地方\n5. 請給我一版修改建議。",
+      "enFeedbackPrompt": "請你擔任大學備審資料修改老師。以下是我的多元表現描述：\n（貼上成果）\n請檢查：\n1. STAR 四個元素是否完整\n2. 哪些句子太空泛\n3. 是否有具體行動與結果\n4. 是否有誇大或不自然的地方\n5. 請給我一版修改建議。",
       "zhQuizItems": [
         {
-          "q": "STAR 的 R 代表什麼？",
+          "q": "STAR 的 A 代表什麼？",
           "options": [
-            "Reason",
-            "Result",
-            "Research"
+            "Action",
+            "Answer",
+            "Ability"
           ],
-          "answer": "Result"
+          "answer": "Action"
         },
         {
           "q": "多元表現最應避免什麼？",
@@ -1260,24 +1254,24 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "只列活動名稱"
         },
         {
-          "q": "好的活動描述應該呈現什麼？",
+          "q": "好的活動描述要讓人看見什麼？",
           "options": [
-            "情境、任務、行動、結果",
-            "只有心得",
-            "只有獎項名稱"
+            "你採取的行動與成長",
+            "只有活動名稱",
+            "只有職稱"
           ],
-          "answer": "情境、任務、行動、結果"
+          "answer": "你採取的行動與成長"
         }
       ],
       "enQuizItems": [
         {
-          "q": "STAR 的 R 代表什麼？",
+          "q": "STAR 的 A 代表什麼？",
           "options": [
-            "Reason",
-            "Result",
-            "Research"
+            "Action",
+            "Answer",
+            "Ability"
           ],
-          "answer": "Result"
+          "answer": "Action"
         },
         {
           "q": "多元表現最應避免什麼？",
@@ -1289,35 +1283,33 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "只列活動名稱"
         },
         {
-          "q": "好的活動描述應該呈現什麼？",
+          "q": "好的活動描述要讓人看見什麼？",
           "options": [
-            "情境、任務、行動、結果",
-            "只有心得",
-            "只有獎項名稱"
+            "你採取的行動與成長",
+            "只有活動名稱",
+            "只有職稱"
           ],
-          "answer": "情境、任務、行動、結果"
+          "answer": "你採取的行動與成長"
         }
       ],
-      "zhQuiz": "本課小測驗共 3 題，請完成後對照答案。",
-      "enQuiz": "This lesson has 3 quiz questions. Complete them and check the answers.",
-      "zhOutcome": "3 則多元表現描述",
-      "enOutcome": "3 則多元表現描述",
-      "zhNotePrompt": "課程筆記：請用 5 句話整理第4課重點：1. 我學到什麼 2. 我完成什麼 3. 我哪裡還不懂 4. 我要怎麼修改 5. 下一步行動。",
-      "enNotePrompt": "Course notes: summarize Lesson 4 in 5 sentences: what I learned, what I completed, what I still do not understand, what I need to revise, and next action."
+      "zhOutcome": "3 則可放入備審的多元表現描述。",
+      "enOutcome": "3 則可放入備審的多元表現描述。",
+      "zhNotePrompt": "請在課程筆記中記錄：我選的 3 個活動、每個活動的 STAR 重點、最需要修改的地方。",
+      "enNotePrompt": "請在課程筆記中記錄：我選的 3 個活動、每個活動的 STAR 重點、最需要修改的地方。"
     },
     {
       "zhTitle": "第5課：用 AI 產出學習歷程自述初稿",
       "enTitle": "Lesson 5: 用 AI 產出學習歷程自述初稿",
-      "zhConcept": "學習歷程自述不是把人生全部寫完，而是把學習動機、重要經驗、能力成長與申請科系連起來。AI 可以幫你建立架構、檢查是否空泛，但你必須加入自己的真實細節。",
-      "enConcept": "學習歷程自述不是把人生全部寫完，而是把學習動機、重要經驗、能力成長與申請科系連起來。AI 可以幫你建立架構、檢查是否空泛，但你必須加入自己的真實細節。",
-      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「用 AI 產出學習歷程自述初稿」。請依照高中三年級學生的程度，逐步協助我完成本課任務。回答時請分成：目標、步驟、範例、我需要補充的資料、下一步行動。",
-      "enPrompt": "Act as my university application coach. I am learning: 用 AI 產出學習歷程自述初稿. Help me complete this lesson step by step. Use: goal, steps, example, information I need to provide, and next action.",
-      "zhExample": "範例方向：把你自己的真實經驗放進本課任務中，不要讓 AI 代替你捏造內容。AI 的角色是整理、追問、檢查與改善。",
-      "enExample": "Use your real experience. AI should organize, ask follow-up questions, check, and improve, not invent content.",
-      "zhPractice": "列出你最想呈現的 3 個學習主軸。；請 AI 幫你規劃自述架構。；自己補上真實細節後，請 AI 檢查是否空泛。",
-      "enPractice": "列出你最想呈現的 3 個學習主軸。；請 AI 幫你規劃自述架構。；自己補上真實細節後，請 AI 檢查是否空泛。",
-      "zhFeedbackPrompt": "請你擔任我的大學申請教練。以下是我完成的第5課實作任務：\n（貼上我的成果）\n請你依照以下標準給我建議：\n1. 是否具體\n2. 是否真實可信\n3. 是否和申請科系有連結\n4. 哪裡太空泛\n5. 下一步怎麼修改\n請用表格回覆，最後給我一版修改方向。",
-      "enFeedbackPrompt": "Act as my application coach. Here is my Lesson 5 practice output:\n(paste my work)\nGive feedback on specificity, credibility, major connection, vague parts, and next revision steps. Use a table.",
+      "zhConcept": "這一課要把素材整理成自述架構。自述不是人生流水帳，而是把你的學習動機、重要經驗、能力成長、申請動機與未來規劃連成一條故事線。",
+      "enConcept": "這一課要把素材整理成自述架構。自述不是人生流水帳，而是把你的學習動機、重要經驗、能力成長、申請動機與未來規劃連成一條故事線。",
+      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「用 AI 產出學習歷程自述初稿」。請先問我需要補充的資料，再依照：目標、操作步驟、範例、我應該產出的成果，逐步帶我完成。",
+      "enPrompt": "Act as my university application coach. I am learning: 用 AI 產出學習歷程自述初稿. Ask what information you need, then guide me with goal, steps, example, and final output.",
+      "zhExample": "範例：學生 D 申請設計系，他不是只寫『我喜歡設計』，而是寫從美術課作品開始，到社群海報設計，再到參加校內展覽，最後確認自己想學視覺傳達。這樣故事線更清楚。",
+      "enExample": "範例：學生 D 申請設計系，他不是只寫『我喜歡設計』，而是寫從美術課作品開始，到社群海報設計，再到參加校內展覽，最後確認自己想學視覺傳達。這樣故事線更清楚。",
+      "zhPractice": "選出你最想呈現的 3 個學習主軸。；把前面整理好的素材放進對應主軸。；請 AI 幫你規劃自述架構：開頭、學習歷程、能力成長、申請動機、未來規劃。；自己補上真實細節，刪除 AI 產生但不符合你的內容。",
+      "enPractice": "選出你最想呈現的 3 個學習主軸。；把前面整理好的素材放進對應主軸。；請 AI 幫你規劃自述架構：開頭、學習歷程、能力成長、申請動機、未來規劃。；自己補上真實細節，刪除 AI 產生但不符合你的內容。",
+      "zhFeedbackPrompt": "請你擔任學習歷程自述修改老師。以下是我的自述初稿或架構：\n（貼上成果）\n請檢查：\n1. 是否有清楚主軸\n2. 是否有具體經驗\n3. 是否有連結目標科系\n4. 哪些地方像空話\n5. 請給我修改順序。",
+      "enFeedbackPrompt": "請你擔任學習歷程自述修改老師。以下是我的自述初稿或架構：\n（貼上成果）\n請檢查：\n1. 是否有清楚主軸\n2. 是否有具體經驗\n3. 是否有連結目標科系\n4. 哪些地方像空話\n5. 請給我修改順序。",
       "zhQuizItems": [
         {
           "q": "自述最應避免什麼？",
@@ -1329,20 +1321,20 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "空泛與誇大"
         },
         {
-          "q": "學習歷程自述要連結什麼？",
+          "q": "自述應該連結什麼？",
           "options": [
-            "學習經驗與申請科系",
+            "學習經驗與目標科系",
             "朋友意見",
-            "熱門科系排名"
+            "熱門排名"
           ],
-          "answer": "學習經驗與申請科系"
+          "answer": "學習經驗與目標科系"
         },
         {
-          "q": "AI 產生初稿後你應該做什麼？",
+          "q": "AI 產出後你應該？",
           "options": [
-            "直接交出",
+            "直接使用",
             "加入真實細節並修改",
-            "刪掉所有個人經驗"
+            "刪掉所有個人內容"
           ],
           "answer": "加入真實細節並修改"
         }
@@ -1358,149 +1350,145 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "空泛與誇大"
         },
         {
-          "q": "學習歷程自述要連結什麼？",
+          "q": "自述應該連結什麼？",
           "options": [
-            "學習經驗與申請科系",
+            "學習經驗與目標科系",
             "朋友意見",
-            "熱門科系排名"
+            "熱門排名"
           ],
-          "answer": "學習經驗與申請科系"
+          "answer": "學習經驗與目標科系"
         },
         {
-          "q": "AI 產生初稿後你應該做什麼？",
+          "q": "AI 產出後你應該？",
           "options": [
-            "直接交出",
+            "直接使用",
             "加入真實細節並修改",
-            "刪掉所有個人經驗"
+            "刪掉所有個人內容"
           ],
           "answer": "加入真實細節並修改"
         }
       ],
-      "zhQuiz": "本課小測驗共 3 題，請完成後對照答案。",
-      "enQuiz": "This lesson has 3 quiz questions. Complete them and check the answers.",
-      "zhOutcome": "學習歷程自述初稿架構",
-      "enOutcome": "學習歷程自述初稿架構",
-      "zhNotePrompt": "課程筆記：請用 5 句話整理第5課重點：1. 我學到什麼 2. 我完成什麼 3. 我哪裡還不懂 4. 我要怎麼修改 5. 下一步行動。",
-      "enNotePrompt": "Course notes: summarize Lesson 5 in 5 sentences: what I learned, what I completed, what I still do not understand, what I need to revise, and next action."
+      "zhOutcome": "一份學習歷程自述初稿架構。",
+      "enOutcome": "一份學習歷程自述初稿架構。",
+      "zhNotePrompt": "請在課程筆記中寫下：我的自述主軸、3 個關鍵經驗、我想讓教授記住我的一句話。",
+      "enNotePrompt": "請在課程筆記中寫下：我的自述主軸、3 個關鍵經驗、我想讓教授記住我的一句話。"
     },
     {
       "zhTitle": "第6課：針對目標科系製作專屬備審資料",
       "enTitle": "Lesson 6: 針對目標科系製作專屬備審資料",
-      "zhConcept": "同一份備審資料不能丟給所有科系。不同科系重視的能力不同，AI 可以幫你分析科系需求並調整重點。你要讓教授看到你不是亂選，而是真的理解這個科系。",
-      "enConcept": "同一份備審資料不能丟給所有科系。不同科系重視的能力不同，AI 可以幫你分析科系需求並調整重點。你要讓教授看到你不是亂選，而是真的理解這個科系。",
-      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「針對目標科系製作專屬備審資料」。請依照高中三年級學生的程度，逐步協助我完成本課任務。回答時請分成：目標、步驟、範例、我需要補充的資料、下一步行動。",
-      "enPrompt": "Act as my university application coach. I am learning: 針對目標科系製作專屬備審資料. Help me complete this lesson step by step. Use: goal, steps, example, information I need to provide, and next action.",
-      "zhExample": "範例方向：把你自己的真實經驗放進本課任務中，不要讓 AI 代替你捏造內容。AI 的角色是整理、追問、檢查與改善。",
-      "enExample": "Use your real experience. AI should organize, ask follow-up questions, check, and improve, not invent content.",
-      "zhPractice": "選定一個目標科系。；請 AI 分析該科系可能重視的能力。；把你的素材和科系需求做成對照表。",
-      "enPractice": "選定一個目標科系。；請 AI 分析該科系可能重視的能力。；把你的素材和科系需求做成對照表。",
-      "zhFeedbackPrompt": "請你擔任我的大學申請教練。以下是我完成的第6課實作任務：\n（貼上我的成果）\n請你依照以下標準給我建議：\n1. 是否具體\n2. 是否真實可信\n3. 是否和申請科系有連結\n4. 哪裡太空泛\n5. 下一步怎麼修改\n請用表格回覆，最後給我一版修改方向。",
-      "enFeedbackPrompt": "Act as my application coach. Here is my Lesson 6 practice output:\n(paste my work)\nGive feedback on specificity, credibility, major connection, vague parts, and next revision steps. Use a table.",
+      "zhConcept": "這一課要讓備審資料不再是萬用版本。不同科系重視不同能力，你要先理解科系需求，再選擇最能證明你適合的素材。",
+      "enConcept": "這一課要讓備審資料不再是萬用版本。不同科系重視不同能力，你要先理解科系需求，再選擇最能證明你適合的素材。",
+      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「針對目標科系製作專屬備審資料」。請先問我需要補充的資料，再依照：目標、操作步驟、範例、我應該產出的成果，逐步帶我完成。",
+      "enPrompt": "Act as my university application coach. I am learning: 針對目標科系製作專屬備審資料. Ask what information you need, then guide me with goal, steps, example, and final output.",
+      "zhExample": "範例：申請心理系時，可以強調觀察、人際互動、服務經驗與閱讀反思；申請資訊相關科系時，可以強調專題作品、程式能力、資料分析與解決問題能力。",
+      "enExample": "範例：申請心理系時，可以強調觀察、人際互動、服務經驗與閱讀反思；申請資訊相關科系時，可以強調專題作品、程式能力、資料分析與解決問題能力。",
+      "zhPractice": "選定一個目標科系。；請 AI 分析這個科系可能重視的能力。；把你的素材和科系需求做成對照表。；決定哪些素材必放、哪些素材可放、哪些素材先不放。",
+      "enPractice": "選定一個目標科系。；請 AI 分析這個科系可能重視的能力。；把你的素材和科系需求做成對照表。；決定哪些素材必放、哪些素材可放、哪些素材先不放。",
+      "zhFeedbackPrompt": "請你擔任科系備審顧問。以下是我的科系需求與素材對照表：\n（貼上成果）\n請幫我檢查：\n1. 素材是否符合科系需求\n2. 哪些素材最有說服力\n3. 哪些素材連結太弱\n4. 是否缺少關鍵能力證據\n5. 請幫我排出備審資料呈現順序。",
+      "enFeedbackPrompt": "請你擔任科系備審顧問。以下是我的科系需求與素材對照表：\n（貼上成果）\n請幫我檢查：\n1. 素材是否符合科系需求\n2. 哪些素材最有說服力\n3. 哪些素材連結太弱\n4. 是否缺少關鍵能力證據\n5. 請幫我排出備審資料呈現順序。",
       "zhQuizItems": [
         {
           "q": "備審為什麼要依科系調整？",
           "options": [
-            "不同科系重視的能力不同",
+            "不同科系重視能力不同",
             "讓頁數變多",
-            "因為 AI 要求"
+            "因為 AI 說要"
           ],
-          "answer": "不同科系重視的能力不同"
+          "answer": "不同科系重視能力不同"
         },
         {
-          "q": "科系專屬備審資料應該先分析什麼？",
+          "q": "科系需求分析後下一步？",
           "options": [
-            "科系需求",
-            "封面顏色",
-            "字體大小"
+            "對照自己的素材",
+            "直接做封面",
+            "刪掉所有活動"
           ],
-          "answer": "科系需求"
+          "answer": "對照自己的素材"
         },
         {
-          "q": "不建議放的內容通常是什麼？",
+          "q": "不建議放的素材通常是？",
           "options": [
-            "和科系無關且無法說明能力的素材",
+            "和科系無關且無法說明能力",
             "具體作品",
             "能展現成長的反思"
           ],
-          "answer": "和科系無關且無法說明能力的素材"
+          "answer": "和科系無關且無法說明能力"
         }
       ],
       "enQuizItems": [
         {
           "q": "備審為什麼要依科系調整？",
           "options": [
-            "不同科系重視的能力不同",
+            "不同科系重視能力不同",
             "讓頁數變多",
-            "因為 AI 要求"
+            "因為 AI 說要"
           ],
-          "answer": "不同科系重視的能力不同"
+          "answer": "不同科系重視能力不同"
         },
         {
-          "q": "科系專屬備審資料應該先分析什麼？",
+          "q": "科系需求分析後下一步？",
           "options": [
-            "科系需求",
-            "封面顏色",
-            "字體大小"
+            "對照自己的素材",
+            "直接做封面",
+            "刪掉所有活動"
           ],
-          "answer": "科系需求"
+          "answer": "對照自己的素材"
         },
         {
-          "q": "不建議放的內容通常是什麼？",
+          "q": "不建議放的素材通常是？",
           "options": [
-            "和科系無關且無法說明能力的素材",
+            "和科系無關且無法說明能力",
             "具體作品",
             "能展現成長的反思"
           ],
-          "answer": "和科系無關且無法說明能力的素材"
+          "answer": "和科系無關且無法說明能力"
         }
       ],
-      "zhQuiz": "本課小測驗共 3 題，請完成後對照答案。",
-      "enQuiz": "This lesson has 3 quiz questions. Complete them and check the answers.",
-      "zhOutcome": "科系專屬備審資料規劃表",
-      "enOutcome": "科系專屬備審資料規劃表",
-      "zhNotePrompt": "課程筆記：請用 5 句話整理第6課重點：1. 我學到什麼 2. 我完成什麼 3. 我哪裡還不懂 4. 我要怎麼修改 5. 下一步行動。",
-      "enNotePrompt": "Course notes: summarize Lesson 6 in 5 sentences: what I learned, what I completed, what I still do not understand, what I need to revise, and next action."
+      "zhOutcome": "一份科系專屬備審資料規劃表。",
+      "enOutcome": "一份科系專屬備審資料規劃表。",
+      "zhNotePrompt": "請在課程筆記中寫下：我的目標科系、該科系重視的 3 個能力、我最能證明這些能力的素材。",
+      "enNotePrompt": "請在課程筆記中寫下：我的目標科系、該科系重視的 3 個能力、我最能證明這些能力的素材。"
     },
     {
       "zhTitle": "第7課：建立大學面試題庫與回答架構",
       "enTitle": "Lesson 7: 建立大學面試題庫與回答架構",
-      "zhConcept": "面試準備不是背答案，而是建立回答架構。AI 可以生成題庫，幫你練習自我介紹、申請動機、學習歷程、科系理解與未來規劃。你的任務是把答案變成自己的語言。",
-      "enConcept": "面試準備不是背答案，而是建立回答架構。AI 可以生成題庫，幫你練習自我介紹、申請動機、學習歷程、科系理解與未來規劃。你的任務是把答案變成自己的語言。",
-      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「建立大學面試題庫與回答架構」。請依照高中三年級學生的程度，逐步協助我完成本課任務。回答時請分成：目標、步驟、範例、我需要補充的資料、下一步行動。",
-      "enPrompt": "Act as my university application coach. I am learning: 建立大學面試題庫與回答架構. Help me complete this lesson step by step. Use: goal, steps, example, information I need to provide, and next action.",
-      "zhExample": "範例方向：把你自己的真實經驗放進本課任務中，不要讓 AI 代替你捏造內容。AI 的角色是整理、追問、檢查與改善。",
-      "enExample": "Use your real experience. AI should organize, ask follow-up questions, check, and improve, not invent content.",
-      "zhPractice": "請 AI 產生 20 題面試題。；挑出 5 題最難回答的題目。；為每題寫 3 個回答重點，不要背完整答案。",
-      "enPractice": "請 AI 產生 20 題面試題。；挑出 5 題最難回答的題目。；為每題寫 3 個回答重點，不要背完整答案。",
-      "zhFeedbackPrompt": "請你擔任我的大學申請教練。以下是我完成的第7課實作任務：\n（貼上我的成果）\n請你依照以下標準給我建議：\n1. 是否具體\n2. 是否真實可信\n3. 是否和申請科系有連結\n4. 哪裡太空泛\n5. 下一步怎麼修改\n請用表格回覆，最後給我一版修改方向。",
-      "enFeedbackPrompt": "Act as my application coach. Here is my Lesson 7 practice output:\n(paste my work)\nGive feedback on specificity, credibility, major connection, vague parts, and next revision steps. Use a table.",
+      "zhConcept": "這一課要讓你不是背答案，而是建立回答架構。AI 可以幫你產生題庫，但你要把答案改成自己的語言，並且用具體經驗支撐。",
+      "enConcept": "這一課要讓你不是背答案，而是建立回答架構。AI 可以幫你產生題庫，但你要把答案改成自己的語言，並且用具體經驗支撐。",
+      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「建立大學面試題庫與回答架構」。請先問我需要補充的資料，再依照：目標、操作步驟、範例、我應該產出的成果，逐步帶我完成。",
+      "enPrompt": "Act as my university application coach. I am learning: 建立大學面試題庫與回答架構. Ask what information you need, then guide me with goal, steps, example, and final output.",
+      "zhExample": "範例：題目『為什麼選本系？』不要只回答『我有興趣』。可以用：過去經驗 → 對科系理解 → 目前準備 → 未來目標，這樣回答會更完整。",
+      "enExample": "範例：題目『為什麼選本系？』不要只回答『我有興趣』。可以用：過去經驗 → 對科系理解 → 目前準備 → 未來目標，這樣回答會更完整。",
+      "zhPractice": "請 AI 針對你的目標科系產生 20 題面試題。；把題目分類成自我介紹、申請動機、學習歷程、科系理解、未來規劃、臨場反應。；挑出最難的 5 題。；每題寫下 3 個回答重點，不寫完整背稿。",
+      "enPractice": "請 AI 針對你的目標科系產生 20 題面試題。；把題目分類成自我介紹、申請動機、學習歷程、科系理解、未來規劃、臨場反應。；挑出最難的 5 題。；每題寫下 3 個回答重點，不寫完整背稿。",
+      "zhFeedbackPrompt": "請你擔任面試教練。以下是我的面試題庫與回答重點：\n（貼上成果）\n請檢查：\n1. 題目是否符合目標科系\n2. 回答重點是否具體\n3. 是否有真實經驗支撐\n4. 哪些回答太像背稿\n5. 請給我每題的改善建議。",
+      "enFeedbackPrompt": "請你擔任面試教練。以下是我的面試題庫與回答重點：\n（貼上成果）\n請檢查：\n1. 題目是否符合目標科系\n2. 回答重點是否具體\n3. 是否有真實經驗支撐\n4. 哪些回答太像背稿\n5. 請給我每題的改善建議。",
       "zhQuizItems": [
         {
           "q": "面試最不建議做什麼？",
           "options": [
             "建立架構",
-            "練習",
+            "練習表達",
             "背 AI 完整答案"
           ],
           "answer": "背 AI 完整答案"
         },
         {
-          "q": "回答『為什麼選本系』可以用什麼架構？",
+          "q": "回答申請動機可用什麼架構？",
           "options": [
-            "過去經驗→科系理解→目前準備→未來目標",
-            "只說有興趣",
-            "只說父母推薦"
+            "過去→現在→未來",
+            "只說喜歡",
+            "只說父母建議"
           ],
-          "answer": "過去經驗→科系理解→目前準備→未來目標"
+          "answer": "過去→現在→未來"
         },
         {
-          "q": "AI 題庫的用途是什麼？",
+          "q": "AI 題庫的用途是？",
           "options": [
-            "幫你練習不同題型",
-            "保證題目一模一樣",
+            "練習不同題型",
+            "保證題目完全一樣",
             "取代面試"
           ],
-          "answer": "幫你練習不同題型"
+          "answer": "練習不同題型"
         }
       ],
       "enQuizItems": [
@@ -1508,62 +1496,60 @@ const PREMIUM_LESSON_DETAILS = {
           "q": "面試最不建議做什麼？",
           "options": [
             "建立架構",
-            "練習",
+            "練習表達",
             "背 AI 完整答案"
           ],
           "answer": "背 AI 完整答案"
         },
         {
-          "q": "回答『為什麼選本系』可以用什麼架構？",
+          "q": "回答申請動機可用什麼架構？",
           "options": [
-            "過去經驗→科系理解→目前準備→未來目標",
-            "只說有興趣",
-            "只說父母推薦"
+            "過去→現在→未來",
+            "只說喜歡",
+            "只說父母建議"
           ],
-          "answer": "過去經驗→科系理解→目前準備→未來目標"
+          "answer": "過去→現在→未來"
         },
         {
-          "q": "AI 題庫的用途是什麼？",
+          "q": "AI 題庫的用途是？",
           "options": [
-            "幫你練習不同題型",
-            "保證題目一模一樣",
+            "練習不同題型",
+            "保證題目完全一樣",
             "取代面試"
           ],
-          "answer": "幫你練習不同題型"
+          "answer": "練習不同題型"
         }
       ],
-      "zhQuiz": "本課小測驗共 3 題，請完成後對照答案。",
-      "enQuiz": "This lesson has 3 quiz questions. Complete them and check the answers.",
-      "zhOutcome": "個人面試題庫與回答架構",
-      "enOutcome": "個人面試題庫與回答架構",
-      "zhNotePrompt": "課程筆記：請用 5 句話整理第7課重點：1. 我學到什麼 2. 我完成什麼 3. 我哪裡還不懂 4. 我要怎麼修改 5. 下一步行動。",
-      "enNotePrompt": "Course notes: summarize Lesson 7 in 5 sentences: what I learned, what I completed, what I still do not understand, what I need to revise, and next action."
+      "zhOutcome": "一份個人面試題庫與回答架構。",
+      "enOutcome": "一份個人面試題庫與回答架構。",
+      "zhNotePrompt": "請在課程筆記中寫下：我最怕的 5 題、每題的回答重點、我需要補強的例子。",
+      "enNotePrompt": "請在課程筆記中寫下：我最怕的 5 題、每題的回答重點、我需要補強的例子。"
     },
     {
       "zhTitle": "第8課：用 AI 進行模擬面試與回饋修正",
       "enTitle": "Lesson 8: 用 AI 進行模擬面試與回饋修正",
-      "zhConcept": "模擬面試的目的不是得到標準答案，而是練習臨場表達。AI 可以扮演教授並從清楚度、具體性、邏輯與說服力給回饋。你要把每次回饋整理成下一次改善的方向。",
-      "enConcept": "模擬面試的目的不是得到標準答案，而是練習臨場表達。AI 可以扮演教授並從清楚度、具體性、邏輯與說服力給回饋。你要把每次回饋整理成下一次改善的方向。",
-      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「用 AI 進行模擬面試與回饋修正」。請依照高中三年級學生的程度，逐步協助我完成本課任務。回答時請分成：目標、步驟、範例、我需要補充的資料、下一步行動。",
-      "enPrompt": "Act as my university application coach. I am learning: 用 AI 進行模擬面試與回饋修正. Help me complete this lesson step by step. Use: goal, steps, example, information I need to provide, and next action.",
-      "zhExample": "範例方向：把你自己的真實經驗放進本課任務中，不要讓 AI 代替你捏造內容。AI 的角色是整理、追問、檢查與改善。",
-      "enExample": "Use your real experience. AI should organize, ask follow-up questions, check, and improve, not invent content.",
-      "zhPractice": "用 AI 進行至少 5 題模擬面試。；把 AI 的評分與建議整理成表格。；選出 3 個最需要改善的回答習慣。",
-      "enPractice": "用 AI 進行至少 5 題模擬面試。；把 AI 的評分與建議整理成表格。；選出 3 個最需要改善的回答習慣。",
-      "zhFeedbackPrompt": "請你擔任我的大學申請教練。以下是我完成的第8課實作任務：\n（貼上我的成果）\n請你依照以下標準給我建議：\n1. 是否具體\n2. 是否真實可信\n3. 是否和申請科系有連結\n4. 哪裡太空泛\n5. 下一步怎麼修改\n請用表格回覆，最後給我一版修改方向。",
-      "enFeedbackPrompt": "Act as my application coach. Here is my Lesson 8 practice output:\n(paste my work)\nGive feedback on specificity, credibility, major connection, vague parts, and next revision steps. Use a table.",
+      "zhConcept": "這一課要把題庫變成真正的口語練習。模擬面試不是要 AI 給標準答案，而是訓練你在壓力下清楚表達，並用回饋修正自己的回答。",
+      "enConcept": "這一課要把題庫變成真正的口語練習。模擬面試不是要 AI 給標準答案，而是訓練你在壓力下清楚表達，並用回饋修正自己的回答。",
+      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「用 AI 進行模擬面試與回饋修正」。請先問我需要補充的資料，再依照：目標、操作步驟、範例、我應該產出的成果，逐步帶我完成。",
+      "enPrompt": "Act as my university application coach. I am learning: 用 AI 進行模擬面試與回饋修正. Ask what information you need, then guide me with goal, steps, example, and final output.",
+      "zhExample": "範例：你回答『我想讀心理系，因為我喜歡幫助人』，AI 可能回饋：太抽象，需要補上具體經驗，例如你曾在志工服務中觀察到什麼、如何理解人的需求。",
+      "enExample": "範例：你回答『我想讀心理系，因為我喜歡幫助人』，AI 可能回饋：太抽象，需要補上具體經驗，例如你曾在志工服務中觀察到什麼、如何理解人的需求。",
+      "zhPractice": "用 AI 進行至少 5 題模擬面試。；每題回答後請 AI 從清楚度、具體性、邏輯、說服力評分。；把 AI 回饋整理成改進清單。；選 2 題重新回答，確認是否有進步。",
+      "enPractice": "用 AI 進行至少 5 題模擬面試。；每題回答後請 AI 從清楚度、具體性、邏輯、說服力評分。；把 AI 回饋整理成改進清單。；選 2 題重新回答，確認是否有進步。",
+      "zhFeedbackPrompt": "請你擔任嚴格但友善的大學教授。以下是我的模擬面試回答：\n（貼上回答）\n請用清楚度、具體性、邏輯、說服力四項各給 1-5 分，並告訴我：\n1. 最好的地方\n2. 最大問題\n3. 可以加入的具體例子\n4. 更好的回答架構\n5. 下一次練習重點。",
+      "enFeedbackPrompt": "請你擔任嚴格但友善的大學教授。以下是我的模擬面試回答：\n（貼上回答）\n請用清楚度、具體性、邏輯、說服力四項各給 1-5 分，並告訴我：\n1. 最好的地方\n2. 最大問題\n3. 可以加入的具體例子\n4. 更好的回答架構\n5. 下一次練習重點。",
       "zhQuizItems": [
         {
           "q": "模擬面試最重要的是？",
           "options": [
             "根據回饋修正回答",
             "只看分數",
-            "每題都背稿"
+            "每題背稿"
           ],
           "answer": "根據回饋修正回答"
         },
         {
-          "q": "AI 回饋可以從哪些面向評分？",
+          "q": "AI 回饋可看哪些面向？",
           "options": [
             "清楚度、具體性、邏輯、說服力",
             "星座",
@@ -1572,7 +1558,7 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "清楚度、具體性、邏輯、說服力"
         },
         {
-          "q": "模擬面試後應該留下什麼？",
+          "q": "模擬後應留下什麼？",
           "options": [
             "改進清單",
             "只有截圖",
@@ -1587,12 +1573,12 @@ const PREMIUM_LESSON_DETAILS = {
           "options": [
             "根據回饋修正回答",
             "只看分數",
-            "每題都背稿"
+            "每題背稿"
           ],
           "answer": "根據回饋修正回答"
         },
         {
-          "q": "AI 回饋可以從哪些面向評分？",
+          "q": "AI 回饋可看哪些面向？",
           "options": [
             "清楚度、具體性、邏輯、說服力",
             "星座",
@@ -1601,7 +1587,7 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "清楚度、具體性、邏輯、說服力"
         },
         {
-          "q": "模擬面試後應該留下什麼？",
+          "q": "模擬後應留下什麼？",
           "options": [
             "改進清單",
             "只有截圖",
@@ -1610,116 +1596,112 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "改進清單"
         }
       ],
-      "zhQuiz": "本課小測驗共 3 題，請完成後對照答案。",
-      "enQuiz": "This lesson has 3 quiz questions. Complete them and check the answers.",
-      "zhOutcome": "模擬面試紀錄與改進清單",
-      "enOutcome": "模擬面試紀錄與改進清單",
-      "zhNotePrompt": "課程筆記：請用 5 句話整理第8課重點：1. 我學到什麼 2. 我完成什麼 3. 我哪裡還不懂 4. 我要怎麼修改 5. 下一步行動。",
-      "enNotePrompt": "Course notes: summarize Lesson 8 in 5 sentences: what I learned, what I completed, what I still do not understand, what I need to revise, and next action."
+      "zhOutcome": "一份模擬面試紀錄與改進清單。",
+      "enOutcome": "一份模擬面試紀錄與改進清單。",
+      "zhNotePrompt": "請在課程筆記中寫下：我最常出現的回答問題、AI 給我的 3 個建議、下一輪練習目標。",
+      "enNotePrompt": "請在課程筆記中寫下：我最常出現的回答問題、AI 給我的 3 個建議、下一輪練習目標。"
     },
     {
       "zhTitle": "第9課：建立你的個人 AI 升學顧問",
       "enTitle": "Lesson 9: 建立你的個人 AI 升學顧問",
-      "zhConcept": "每次問 AI 都重新說明背景很浪費時間。你可以建立固定背景 Prompt，讓 AI 長期根據你的目標科系、經驗與申請狀態回答。這會讓 AI 的建議更貼近你，而不是每次都給通用答案。",
-      "enConcept": "每次問 AI 都重新說明背景很浪費時間。你可以建立固定背景 Prompt，讓 AI 長期根據你的目標科系、經驗與申請狀態回答。這會讓 AI 的建議更貼近你，而不是每次都給通用答案。",
-      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「建立你的個人 AI 升學顧問」。請依照高中三年級學生的程度，逐步協助我完成本課任務。回答時請分成：目標、步驟、範例、我需要補充的資料、下一步行動。",
-      "enPrompt": "Act as my university application coach. I am learning: 建立你的個人 AI 升學顧問. Help me complete this lesson step by step. Use: goal, steps, example, information I need to provide, and next action.",
-      "zhExample": "範例方向：把你自己的真實經驗放進本課任務中，不要讓 AI 代替你捏造內容。AI 的角色是整理、追問、檢查與改善。",
-      "enExample": "Use your real experience. AI should organize, ask follow-up questions, check, and improve, not invent content.",
-      "zhPractice": "建立你的個人背景 Prompt。；請 AI 根據你的背景問 5 個補充問題。；把補充後的版本存成你的 AI 升學顧問 Prompt。",
-      "enPractice": "建立你的個人背景 Prompt。；請 AI 根據你的背景問 5 個補充問題。；把補充後的版本存成你的 AI 升學顧問 Prompt。",
-      "zhFeedbackPrompt": "請你擔任我的大學申請教練。以下是我完成的第9課實作任務：\n（貼上我的成果）\n請你依照以下標準給我建議：\n1. 是否具體\n2. 是否真實可信\n3. 是否和申請科系有連結\n4. 哪裡太空泛\n5. 下一步怎麼修改\n請用表格回覆，最後給我一版修改方向。",
-      "enFeedbackPrompt": "Act as my application coach. Here is my Lesson 9 practice output:\n(paste my work)\nGive feedback on specificity, credibility, major connection, vague parts, and next revision steps. Use a table.",
+      "zhConcept": "這一課要建立一個可以反覆使用的個人背景 Prompt。你不用每次重新說明自己是誰，而是讓 AI 根據你的目標科系、優勢、弱點、素材與進度給出更個人化的建議。",
+      "enConcept": "這一課要建立一個可以反覆使用的個人背景 Prompt。你不用每次重新說明自己是誰，而是讓 AI 根據你的目標科系、優勢、弱點、素材與進度給出更個人化的建議。",
+      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「建立你的個人 AI 升學顧問」。請先問我需要補充的資料，再依照：目標、操作步驟、範例、我應該產出的成果，逐步帶我完成。",
+      "enPrompt": "Act as my university application coach. I am learning: 建立你的個人 AI 升學顧問. Ask what information you need, then guide me with goal, steps, example, and final output.",
+      "zhExample": "範例：你可以把『我是高中三年級，目標是心理系，有志工服務、班級幹部和閱讀心得，目前缺少面試練習』放進固定 Prompt，AI 後續給的建議就會更貼近你。",
+      "enExample": "範例：你可以把『我是高中三年級，目標是心理系，有志工服務、班級幹部和閱讀心得，目前缺少面試練習』放進固定 Prompt，AI 後續給的建議就會更貼近你。",
+      "zhPractice": "整理自己的基本背景：年級、目標科系、優勢、弱點。；整理目前已有的素材與申請進度。；建立一段固定的 AI 升學顧問 Prompt。；請 AI 根據這段 Prompt 問你 5 個還需要補充的問題。",
+      "enPractice": "整理自己的基本背景：年級、目標科系、優勢、弱點。；整理目前已有的素材與申請進度。；建立一段固定的 AI 升學顧問 Prompt。；請 AI 根據這段 Prompt 問你 5 個還需要補充的問題。",
+      "zhFeedbackPrompt": "請你擔任 Prompt 教練。以下是我的個人 AI 升學顧問 Prompt：\n（貼上 Prompt）\n請幫我檢查：\n1. 背景是否足夠清楚\n2. 目標科系是否明確\n3. 是否有提供素材與進度\n4. 哪些資訊還缺少\n5. 請幫我改寫成更好用的版本。",
+      "enFeedbackPrompt": "請你擔任 Prompt 教練。以下是我的個人 AI 升學顧問 Prompt：\n（貼上 Prompt）\n請幫我檢查：\n1. 背景是否足夠清楚\n2. 目標科系是否明確\n3. 是否有提供素材與進度\n4. 哪些資訊還缺少\n5. 請幫我改寫成更好用的版本。",
       "zhQuizItems": [
         {
-          "q": "個人 AI 升學顧問最重要的輸入是？",
+          "q": "個人 AI 顧問最重要的輸入是？",
           "options": [
-            "真實背景、目標科系與目前進度",
-            "隨便一句話",
-            "只有姓名"
+            "真實背景與目標",
+            "只有姓名",
+            "隨便一句話"
           ],
-          "answer": "真實背景、目標科系與目前進度"
+          "answer": "真實背景與目標"
         },
         {
-          "q": "固定背景 Prompt 的好處是什麼？",
+          "q": "固定 Prompt 的好處？",
           "options": [
-            "讓 AI 建議更貼近你的情況",
-            "讓 AI 自動錄取你",
+            "建議更個人化",
+            "保證錄取",
             "不用再思考"
           ],
-          "answer": "讓 AI 建議更貼近你的情況"
+          "answer": "建議更個人化"
         },
         {
-          "q": "建立顧問 Prompt 後第一步應請 AI 做什麼？",
+          "q": "建立後應先請 AI 做什麼？",
           "options": [
-            "確認資料完整並追問",
+            "確認資料並追問",
             "直接寫完所有文件",
-            "忽略你的背景"
+            "忽略背景"
           ],
-          "answer": "確認資料完整並追問"
+          "answer": "確認資料並追問"
         }
       ],
       "enQuizItems": [
         {
-          "q": "個人 AI 升學顧問最重要的輸入是？",
+          "q": "個人 AI 顧問最重要的輸入是？",
           "options": [
-            "真實背景、目標科系與目前進度",
-            "隨便一句話",
-            "只有姓名"
+            "真實背景與目標",
+            "只有姓名",
+            "隨便一句話"
           ],
-          "answer": "真實背景、目標科系與目前進度"
+          "answer": "真實背景與目標"
         },
         {
-          "q": "固定背景 Prompt 的好處是什麼？",
+          "q": "固定 Prompt 的好處？",
           "options": [
-            "讓 AI 建議更貼近你的情況",
-            "讓 AI 自動錄取你",
+            "建議更個人化",
+            "保證錄取",
             "不用再思考"
           ],
-          "answer": "讓 AI 建議更貼近你的情況"
+          "answer": "建議更個人化"
         },
         {
-          "q": "建立顧問 Prompt 後第一步應請 AI 做什麼？",
+          "q": "建立後應先請 AI 做什麼？",
           "options": [
-            "確認資料完整並追問",
+            "確認資料並追問",
             "直接寫完所有文件",
-            "忽略你的背景"
+            "忽略背景"
           ],
-          "answer": "確認資料完整並追問"
+          "answer": "確認資料並追問"
         }
       ],
-      "zhQuiz": "本課小測驗共 3 題，請完成後對照答案。",
-      "enQuiz": "This lesson has 3 quiz questions. Complete them and check the answers.",
-      "zhOutcome": "個人 AI 升學顧問 Prompt",
-      "enOutcome": "個人 AI 升學顧問 Prompt",
-      "zhNotePrompt": "課程筆記：請用 5 句話整理第9課重點：1. 我學到什麼 2. 我完成什麼 3. 我哪裡還不懂 4. 我要怎麼修改 5. 下一步行動。",
-      "enNotePrompt": "Course notes: summarize Lesson 9 in 5 sentences: what I learned, what I completed, what I still do not understand, what I need to revise, and next action."
+      "zhOutcome": "一段可重複使用的個人 AI 升學顧問 Prompt。",
+      "enOutcome": "一段可重複使用的個人 AI 升學顧問 Prompt。",
+      "zhNotePrompt": "請在課程筆記中寫下：我的固定背景 Prompt、AI 追問我的問題、我補充後的新版本。",
+      "enNotePrompt": "請在課程筆記中寫下：我的固定背景 Prompt、AI 追問我的問題、我補充後的新版本。"
     },
     {
       "zhTitle": "第10課：完成完整大學申請包",
       "enTitle": "Lesson 10: 完成完整大學申請包",
-      "zhConcept": "最後一課把前面成果整合成可以實際使用的申請包。申請包應呈現清楚故事：我想申請什麼、我為什麼適合、我有哪些證據、我未來想怎麼學。你要做的是總檢查，而不是再新增一堆沒有主軸的資料。",
-      "enConcept": "最後一課把前面成果整合成可以實際使用的申請包。申請包應呈現清楚故事：我想申請什麼、我為什麼適合、我有哪些證據、我未來想怎麼學。你要做的是總檢查，而不是再新增一堆沒有主軸的資料。",
-      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「完成完整大學申請包」。請依照高中三年級學生的程度，逐步協助我完成本課任務。回答時請分成：目標、步驟、範例、我需要補充的資料、下一步行動。",
-      "enPrompt": "Act as my university application coach. I am learning: 完成完整大學申請包. Help me complete this lesson step by step. Use: goal, steps, example, information I need to provide, and next action.",
-      "zhExample": "範例方向：把你自己的真實經驗放進本課任務中，不要讓 AI 代替你捏造內容。AI 的角色是整理、追問、檢查與改善。",
-      "enExample": "Use your real experience. AI should organize, ask follow-up questions, check, and improve, not invent content.",
-      "zhPractice": "建立資料夾「我的大學申請包」。；放入前 9 課所有成果。；請 AI 做總檢查，列出已完成、需修改、缺少資料與下一步。",
-      "enPractice": "建立資料夾「我的大學申請包」。；放入前 9 課所有成果。；請 AI 做總檢查，列出已完成、需修改、缺少資料與下一步。",
-      "zhFeedbackPrompt": "請你擔任我的大學申請教練。以下是我完成的第10課實作任務：\n（貼上我的成果）\n請你依照以下標準給我建議：\n1. 是否具體\n2. 是否真實可信\n3. 是否和申請科系有連結\n4. 哪裡太空泛\n5. 下一步怎麼修改\n請用表格回覆，最後給我一版修改方向。",
-      "enFeedbackPrompt": "Act as my application coach. Here is my Lesson 10 practice output:\n(paste my work)\nGive feedback on specificity, credibility, major connection, vague parts, and next revision steps. Use a table.",
+      "zhConcept": "這一課要把前面所有成果整合起來。你不是要新增更多資料，而是確認所有資料都支持同一個申請主軸：我想申請什麼、我為什麼適合、我有哪些證據、我未來想怎麼學。",
+      "enConcept": "這一課要把前面所有成果整合起來。你不是要新增更多資料，而是確認所有資料都支持同一個申請主軸：我想申請什麼、我為什麼適合、我有哪些證據、我未來想怎麼學。",
+      "zhPrompt": "請你擔任我的大學申請教練。我正在學習「完成完整大學申請包」。請先問我需要補充的資料，再依照：目標、操作步驟、範例、我應該產出的成果，逐步帶我完成。",
+      "enPrompt": "Act as my university application coach. I am learning: 完成完整大學申請包. Ask what information you need, then guide me with goal, steps, example, and final output.",
+      "zhExample": "範例：如果你的目標是心理系，你的科系探索、學習歷程、自述、面試回答都應該共同支持『我理解心理系、我有相關經驗、我知道自己還要學什麼』這條主線。",
+      "enExample": "範例：如果你的目標是心理系，你的科系探索、學習歷程、自述、面試回答都應該共同支持『我理解心理系、我有相關經驗、我知道自己還要學什麼』這條主線。",
+      "zhPractice": "建立資料夾「我的大學申請包」。；放入前 9 課所有成果。；請 AI 幫你做總檢查：已完成、需修改、缺少資料、下一步。；根據 AI 建議修正最重要的 3 個缺口。",
+      "enPractice": "建立資料夾「我的大學申請包」。；放入前 9 課所有成果。；請 AI 幫你做總檢查：已完成、需修改、缺少資料、下一步。；根據 AI 建議修正最重要的 3 個缺口。",
+      "zhFeedbackPrompt": "請你擔任大學申請總顧問。以下是我的完整申請包內容：\n（貼上整理成果）\n請幫我總檢查：\n1. 申請主軸是否清楚\n2. 每份資料是否互相支持\n3. 哪些地方和目標科系連結不足\n4. 哪些內容需要補強具體例子\n5. 請列出最優先修改的 3 件事。",
+      "enFeedbackPrompt": "請你擔任大學申請總顧問。以下是我的完整申請包內容：\n（貼上整理成果）\n請幫我總檢查：\n1. 申請主軸是否清楚\n2. 每份資料是否互相支持\n3. 哪些地方和目標科系連結不足\n4. 哪些內容需要補強具體例子\n5. 請列出最優先修改的 3 件事。",
       "zhQuizItems": [
         {
           "q": "完整申請包最重要的是？",
           "options": [
-            "所有資料共同支持申請主軸",
+            "所有資料支持同一申請主軸",
             "資料越多越好",
             "全部用 AI 寫"
           ],
-          "answer": "所有資料共同支持申請主軸"
+          "answer": "所有資料支持同一申請主軸"
         },
         {
-          "q": "總檢查表應包含什麼？",
+          "q": "總檢查表應包含？",
           "options": [
             "已完成、需修改、缺少資料、下一步",
             "只有封面",
@@ -1741,14 +1723,14 @@ const PREMIUM_LESSON_DETAILS = {
         {
           "q": "完整申請包最重要的是？",
           "options": [
-            "所有資料共同支持申請主軸",
+            "所有資料支持同一申請主軸",
             "資料越多越好",
             "全部用 AI 寫"
           ],
-          "answer": "所有資料共同支持申請主軸"
+          "answer": "所有資料支持同一申請主軸"
         },
         {
-          "q": "總檢查表應包含什麼？",
+          "q": "總檢查表應包含？",
           "options": [
             "已完成、需修改、缺少資料、下一步",
             "只有封面",
@@ -1766,12 +1748,10 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "精準補強缺口"
         }
       ],
-      "zhQuiz": "本課小測驗共 3 題，請完成後對照答案。",
-      "enQuiz": "This lesson has 3 quiz questions. Complete them and check the answers.",
-      "zhOutcome": "完整大學申請包",
-      "enOutcome": "完整大學申請包",
-      "zhNotePrompt": "課程筆記：請用 5 句話整理第10課重點：1. 我學到什麼 2. 我完成什麼 3. 我哪裡還不懂 4. 我要怎麼修改 5. 下一步行動。",
-      "enNotePrompt": "Course notes: summarize Lesson 10 in 5 sentences: what I learned, what I completed, what I still do not understand, what I need to revise, and next action."
+      "zhOutcome": "一份完整大學申請包。",
+      "enOutcome": "一份完整大學申請包。",
+      "zhNotePrompt": "請在課程筆記中寫下：我的申請主軸、目前最完整的資料、最需要補強的 3 件事。",
+      "enNotePrompt": "請在課程筆記中寫下：我的申請主軸、目前最完整的資料、最需要補強的 3 件事。"
     }
   ]
 };
