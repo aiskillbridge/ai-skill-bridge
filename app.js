@@ -638,9 +638,20 @@ document.addEventListener("click", function(event) {
   }
 });
 
+
+function goApplicationPackage() {
+  if (typeof hasCourseAccess === "function" && hasCourseAccess("admissions")) {
+    setRoute("applicationPackage");
+  } else {
+    toast(state.lang === "zh" ? "請先開通「高中生申請大學 AI 實戰課」" : "Please unlock the University Application course first");
+    setRoute("premium");
+  }
+}
+
 function nav() {
   const mainLinks = [
     { route: "home", zh: "首頁", en: "Home" },
+    { route: "courses", zh: "免費入門", en: "Free Intro" },
     { route: "map", zh: "課程地圖", en: "Roadmap" },
     { route: "assessment", zh: "能力測驗", en: "Assessment" },
     { route: "learning", zh: "我的學習中心", en: "Learning" },
@@ -648,7 +659,7 @@ function nav() {
   ];
 
   const moreLinks = [
-    { route: "applicationPackage", zh: "大學申請包", en: "Application Package" },
+    { action: "goApplicationPackage()", zh: "大學申請包", en: "Application Package" },
     { route: "tools", zh: "AI 工具", en: "AI Tools" },
     { route: "prompts", zh: "Prompt 範例", en: "Prompts" },
     { route: "tutor", zh: "AI Tutor", en: "AI Tutor" },
@@ -662,7 +673,7 @@ function nav() {
   `).join("");
 
   const moreHtml = moreLinks.map(item => `
-    <button onclick="setRoute('${item.route}'); closeMoreMenu();">
+    <button onclick="${item.action ? item.action : `setRoute('${item.route}')`}; closeMoreMenu();">
       ${state.lang === "zh" ? item.zh : item.en}
     </button>
   `).join("");
@@ -1019,6 +1030,61 @@ function courses() {
 }
 
 
+
+
+function learning() {
+  const admissionsUnlocked = typeof hasCourseAccess === "function" && hasCourseAccess("admissions");
+  const progress = typeof applicationPackageProgress === "function" ? applicationPackageProgress() : { completed: 0, total: 10, percent: 0 };
+
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <section class="panel">
+          <span class="tag free">${text("學習中心", "Learning Center")}</span>
+          <h1>${text("我的學習中心", "My Learning Center")}</h1>
+          <p class="lead">${text(
+            "這裡不是首頁，而是你的課程入口、學習進度與成果管理中心。",
+            "This is not the homepage. It is your course entrance, progress dashboard, and output management center."
+          )}</p>
+        </section>
+
+        <section class="panel">
+          <h2>${text("目前學習狀態", "Current Status")}</h2>
+          <div class="grid two">
+            <article class="card">
+              <span class="tag ${admissionsUnlocked ? "free" : "premiumtag"}">${admissionsUnlocked ? text("已開通", "Unlocked") : text("尚未開通", "Locked")}</span>
+              <h3>${text("高中生申請大學 AI 實戰課", "University Application AI Lab")}</h3>
+              <p>${text("10 堂課，完成後產出完整大學申請包。", "10 lessons that produce a complete university application package.")}</p>
+              ${admissionsUnlocked
+                ? `<button class="btn primary" onclick="openCourse('admissions')">${text("繼續上課", "Continue Course")}</button>`
+                : `<button class="btn primary" onclick="setRoute('premium')">${text("前往開通", "Unlock Course")}</button>`
+              }
+            </article>
+
+            <article class="card">
+              <span class="tag">${progress.percent}%</span>
+              <h3>${text("大學申請包進度", "Application Package Progress")}</h3>
+              <p>${text("已完成", "Completed")}：${progress.completed}/${progress.total}</p>
+              <div style="height:12px;background:#e5ebf5;border-radius:999px;overflow:hidden;margin:14px 0">
+                <div style="height:100%;width:${progress.percent}%;background:linear-gradient(90deg,#2f5bea,#5b5ff4);border-radius:999px"></div>
+              </div>
+              ${admissionsUnlocked
+                ? `<button class="btn secondary" onclick="setRoute('applicationPackage')">${text("打開申請包", "Open Package")}</button>`
+                : `<button class="btn secondary" onclick="setRoute('premium')">${text("開通後可使用", "Unlock to Use")}</button>`
+              }
+            </article>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>${text("免費入門", "Free Intro")}</h2>
+          <p>${text("還沒開通付費課程前，可以先從免費入門開始學 AI 基礎。", "Before unlocking premium courses, start with free AI basics.")}</p>
+          <button class="btn secondary" onclick="setRoute('courses')">${text("前往免費入門", "Go to Free Intro")}</button>
+        </section>
+      </div>
+    </main>
+  `);
+}
 
 function premium() {
   const creatorBanner = isCreator()
@@ -1430,6 +1496,25 @@ function copyFinalReviewPrompt() {
 }
 
 function applicationPackage() {
+
+  if (!(typeof hasCourseAccess === "function" && hasCourseAccess("admissions"))) {
+    return shell(`
+      <main class="page">
+        <div class="wrap">
+          <section class="panel">
+            <span class="tag premiumtag">${text("付費功能", "Premium Feature")}</span>
+            <h1>${text("大學申請包尚未開通", "Application Package Locked")}</h1>
+            <p class="lead">${text(
+              "這個功能屬於「高中生申請大學 AI 實戰課」。開通後，你才能集中儲存 10 堂課成果並產出完整申請資料。",
+              "This feature belongs to the University Application premium course. Unlock it to store all 10 lesson outputs and generate a complete application package."
+            )}</p>
+            <button class="btn primary" onclick="setRoute('premium')">${text("前往進階付費", "Go to Premium")}</button>
+          </section>
+        </div>
+      </main>
+    `);
+  }
+
   const progress = applicationPackageProgress();
 
   return shell(`
@@ -1653,6 +1738,7 @@ function impact() {
 function render() {
   const routes = {
     home,
+    learning,
     courses,
     assessment,
     map: learningMap,
