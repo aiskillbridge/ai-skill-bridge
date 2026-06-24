@@ -1090,24 +1090,9 @@ function openLesson(index) {
   render();
 }
 
-function openNextLesson() {
-  const item = (typeof PREMIUM !== "undefined" && currentCourseId)
-    ? PREMIUM.find(p => p.id === currentCourseId)
-    : null;
-  const lessons = item ? (state.lang === "zh" ? item.zhLessons : item.enLessons) : [];
-  const max = Math.max(lessons.length - 1, 0);
-  currentLessonIndex = Math.min(Number(currentLessonIndex || 0) + 1, max);
-  state.route = "lesson";
-  window.scrollTo(0, 0);
-  render();
-}
 
-function openPrevLesson() {
-  currentLessonIndex = Math.max(Number(currentLessonIndex || 0) - 1, 0);
-  state.route = "lesson";
-  window.scrollTo(0, 0);
-  render();
-}
+
+
 
 function course() {
   const item = (typeof PREMIUM !== "undefined" && currentCourseId)
@@ -1146,6 +1131,27 @@ function course() {
   `);
 }
 
+
+
+function openNextLesson() {
+  const item = (typeof PREMIUM !== "undefined" && currentCourseId)
+    ? PREMIUM.find(p => p.id === currentCourseId)
+    : null;
+  const lessons = item ? (state.lang === "zh" ? item.zhLessons : item.enLessons) : [];
+  const max = Math.max(lessons.length - 1, 0);
+  currentLessonIndex = Math.min(Number(currentLessonIndex || 0) + 1, max);
+  state.route = "lesson";
+  window.scrollTo(0, 0);
+  render();
+}
+
+function openPrevLesson() {
+  currentLessonIndex = Math.max(Number(currentLessonIndex || 0) - 1, 0);
+  state.route = "lesson";
+  window.scrollTo(0, 0);
+  render();
+}
+
 function lesson() {
   const item = (typeof PREMIUM !== "undefined" && currentCourseId)
     ? PREMIUM.find(p => p.id === currentCourseId)
@@ -1164,17 +1170,79 @@ function lesson() {
   const lessonNo = currentLessonIndex + 1;
 
   if (detail) {
+    const quizItems = state.lang === "zh" ? (detail.zhQuizItems || []) : (detail.enQuizItems || []);
+    const practiceText = state.lang === "zh" ? detail.zhPractice : detail.enPractice;
+    const practiceSteps = practiceText.split("；").filter(Boolean);
+
     return shell(`
       <main class="page">
         <div class="wrap">
           <button class="btn secondary" onclick="setRoute('course')">← ${text("回到課程首頁", "Back to Course")}</button>
-          <section class="panel"><span class="tag">Lesson ${lessonNo}</span><h1>${state.lang === "zh" ? detail.zhTitle : detail.enTitle}</h1></section>
-          <section class="panel" style="margin-top:24px"><h2>${text("核心概念", "Core Concept")}</h2><p>${state.lang === "zh" ? detail.zhConcept : detail.enConcept}</p></section>
-          <section class="panel" style="margin-top:24px"><h2>Prompt Template</h2><div class="promptbox">${state.lang === "zh" ? detail.zhPrompt : detail.enPrompt}</div></section>
-          <section class="panel" style="margin-top:24px"><h2>${text("範例", "Example")}</h2><p>${state.lang === "zh" ? (detail.zhExample || "") : (detail.enExample || "")}</p></section>
-          <section class="panel" style="margin-top:24px"><h2>${text("實作任務", "Practice Task")}</h2><p>${state.lang === "zh" ? detail.zhPractice : detail.enPractice}</p></section>
-          <section class="panel" style="margin-top:24px"><h2>${text("小測驗", "Mini Quiz")}</h2><p>${state.lang === "zh" ? detail.zhQuiz : detail.enQuiz}</p></section>
-          <section class="panel" style="margin-top:24px"><h2>${text("課後成果", "Final Output")}</h2><p><b>${state.lang === "zh" ? detail.zhOutcome : detail.enOutcome}</b></p></section>
+
+          <section class="panel">
+            <span class="tag">Lesson ${lessonNo}</span>
+            <h1>${state.lang === "zh" ? detail.zhTitle : detail.enTitle}</h1>
+            <p class="lead">${text("完整付費教材：核心概念、Prompt、範例、實作任務、AI 回饋、小測驗、課程筆記與課後成果。", "Complete premium lesson: concept, prompt, example, practice, AI feedback, quiz, notes, and final output.")}</p>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("核心概念", "Core Concept")}</h2>
+            <p>${state.lang === "zh" ? detail.zhConcept : detail.enConcept}</p>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>Prompt Template</h2>
+            <div class="promptbox">${state.lang === "zh" ? detail.zhPrompt : detail.enPrompt}</div>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("範例", "Example")}</h2>
+            <p>${state.lang === "zh" ? detail.zhExample : detail.enExample}</p>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("實作任務", "Practice Task")}</h2>
+            <ol>
+              ${practiceSteps.map(step => `<li>${step}</li>`).join("")}
+            </ol>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("AI 實作回饋 Prompt", "AI Practice Feedback Prompt")}</h2>
+            <p>${text("完成實作後，把你的成果貼到 AI，使用下面的 Prompt 請 AI 給你修改建議。", "After completing the practice task, paste your work into AI and use this prompt to get feedback.")}</p>
+            <div class="promptbox">${state.lang === "zh" ? detail.zhFeedbackPrompt : detail.enFeedbackPrompt}</div>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("小測驗", "Mini Quiz")}</h2>
+            <div class="grid">
+              ${quizItems.map((q, idx) => `
+                <article class="card">
+                  <h3>Q${idx + 1}. ${q.q}</h3>
+                  <ol type="A">
+                    ${q.options.map(opt => `<li>${opt}</li>`).join("")}
+                  </ol>
+                  <details>
+                    <summary>${text("看答案", "Show Answer")}</summary>
+                    <p><b>${q.answer}</b></p>
+                  </details>
+                </article>
+              `).join("")}
+            </div>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("課程筆記", "Course Notes")}</h2>
+            <p>${state.lang === "zh" ? detail.zhNotePrompt : detail.enNotePrompt}</p>
+            <textarea id="premium-note-${item.id}-${lessonNo}" placeholder="${text("在這裡寫下你的課程筆記...", "Write your course notes here...")}"></textarea>
+            <button class="btn secondary" onclick="localStorage.setItem('premium-note-${item.id}-${lessonNo}', document.getElementById('premium-note-${item.id}-${lessonNo}').value); toast('${state.lang === "zh" ? "課程筆記已儲存" : "Course note saved"}')">${text("儲存課程筆記", "Save Course Notes")}</button>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("課後成果", "Final Output")}</h2>
+            <p><b>${state.lang === "zh" ? detail.zhOutcome : detail.enOutcome}</b></p>
+          </section>
+
           <div class="btnrow" style="margin-top:24px">
             <button class="btn secondary" onclick="openPrevLesson()">${text("上一課", "Previous")}</button>
             <button class="btn primary" onclick="openNextLesson()">${text("下一課", "Next")}</button>
