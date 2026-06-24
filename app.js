@@ -615,44 +615,86 @@ First, do the following:
   `;
 }
 
+
+
+function toggleMoreMenu(event) {
+  if (event) event.stopPropagation();
+  const menu = document.getElementById("moreMenu");
+  if (!menu) return;
+  menu.classList.toggle("open");
+}
+
+function closeMoreMenu() {
+  const menu = document.getElementById("moreMenu");
+  if (menu) menu.classList.remove("open");
+}
+
+document.addEventListener("click", function(event) {
+  const menu = document.getElementById("moreMenu");
+  if (!menu) return;
+  const wrap = menu.closest(".more-wrap");
+  if (wrap && !wrap.contains(event.target)) {
+    menu.classList.remove("open");
+  }
+});
+
 function nav() {
-  const items = [
-    ["home", "nav.home"],
-    ["courses", "nav.courses"],
-    ["assessment", text("能力測驗", "Assessment")],
-    ["map", text("學習地圖", "Learning Map")],
-    ["center", text("我的學習中心", "My Center")],
-    ["tutor", text("AI 提問教練", "Prompt Tutor")],
-    ["free", "nav.free"],
-    ["premium", "nav.premium"],
-    ["tools", "nav.tools"],
-    ["prompts", "nav.prompts"],
-    ["community", "nav.community"],
-    ["thailand", "nav.thailand"],
-    ["impact", "nav.impact"]
+  const mainLinks = [
+    { route: "home", zh: "首頁", en: "Home" },
+    { route: "map", zh: "課程地圖", en: "Roadmap" },
+    { route: "assessment", zh: "能力測驗", en: "Assessment" },
+    { route: "learning", zh: "我的學習中心", en: "Learning" },
+    { route: "premium", zh: "進階付費", en: "Premium" }
   ];
 
+  const moreLinks = [
+    { route: "applicationPackage", zh: "大學申請包", en: "Application Package" },
+    { route: "tools", zh: "AI 工具", en: "AI Tools" },
+    { route: "prompts", zh: "Prompt 範例", en: "Prompts" },
+    { route: "tutor", zh: "AI Tutor", en: "AI Tutor" },
+    { route: "impact", zh: "影響力", en: "Impact" }
+  ];
+
+  const mainHtml = mainLinks.map(item => `
+    <button class="${state.route === item.route ? "active" : ""}" onclick="setRoute('${item.route}')">
+      ${state.lang === "zh" ? item.zh : item.en}
+    </button>
+  `).join("");
+
+  const moreHtml = moreLinks.map(item => `
+    <button onclick="setRoute('${item.route}'); closeMoreMenu();">
+      ${state.lang === "zh" ? item.zh : item.en}
+    </button>
+  `).join("");
+
   const authHtml = state.user
-    ? `<button class="lang" title="${state.user.email}">${isCreator() ? "👑 " : ""}${state.user.email.split("@")[0]}</button>
-       ${isCreator() ? `<button class="lang">Creator</button>` : ""}
+    ? `<button class="lang" title="${state.user.email}">${typeof isCreator === "function" && isCreator() ? "👑 " : ""}${state.user.email.split("@")[0]}</button>
+       ${typeof isCreator === "function" && isCreator() ? `<button class="lang">Creator</button>` : ""}
        <button class="lang" onclick="signOut()">${state.lang === "zh" ? "登出" : "Logout"}</button>`
     : `<button class="lang" onclick="signInWithGoogle()">${state.lang === "zh" ? "Google 登入" : "Google Login"}</button>`;
 
   return `
-    <header class="topbar">
-      <div class="wrap nav">
-        <button class="brand" onclick="setRoute('home')">
-          <span class="logo">AI</span>
-          <span>Skill <span style="color:var(--blue)">Bridge</span></span>
-        </button>
-        <nav class="navlinks">
-          ${items.map(([route, key]) => {
-            const label = key.includes(".") ? L(key) : key;
-            return `<button class="${state.route === route ? "active" : ""}" onclick="setRoute('${route}')">${label}</button>`;
-          }).join("")}
+    <header>
+      <div class="nav compact-nav">
+        <div class="brand" onclick="setRoute('home')" style="cursor:pointer">
+          <span class="logo-badge">AI</span>
+          <span>AI Skill Bridge</span>
+        </div>
+
+        <div class="nav-main">
+          ${mainHtml}
+          <div class="more-wrap">
+            <button class="lang" onclick="toggleMoreMenu(event)">☰ ${state.lang === "zh" ? "更多" : "More"}</button>
+            <div id="moreMenu" class="more-menu">
+              ${moreHtml}
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-actions">
           ${authHtml}
           <button class="lang" onclick="toggleLang()">${state.lang === "zh" ? "EN" : "中文"}</button>
-        </nav>
+        </div>
       </div>
     </header>
   `;

@@ -416,3 +416,102 @@ main,
 textarea[id^="application-package-"] {
   min-height: 220px;
 }
+
+
+
+/* V29 Compact Navigation */
+.compact-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: nowrap !important;
+}
+
+.compact-nav .brand {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.nav-main {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.nav-actions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.more-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.more-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 210px;
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--line, #e5ebf5);
+  border-radius: 18px;
+  background: rgba(255,255,255,0.98);
+  box-shadow: 0 18px 50px rgba(15,23,42,0.14);
+  z-index: 10000;
+}
+
+.more-menu.open {
+  display: flex;
+}
+
+.more-menu button {
+  width: 100%;
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.compact-nav button.active {
+  background: var(--primary, #2f5bea);
+  color: #fff;
+  border-color: var(--primary, #2f5bea);
+}
+
+@media (max-width: 1050px) {
+  .compact-nav {
+    align-items: flex-start;
+    flex-wrap: wrap !important;
+  }
+
+  .nav-main {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .nav-actions {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .compact-nav .brand span:last-child {
+    display: none;
+  }
+
+  .nav-main button {
+    font-size: 13px !important;
+    padding: 7px 10px !important;
+  }
+}
