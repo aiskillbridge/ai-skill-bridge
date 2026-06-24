@@ -672,7 +672,14 @@ function nav() {
     </button>
   `).join("");
 
-  const moreHtml = moreLinks.map(item => `
+  const filteredMoreLinks = moreLinks.filter(item => {
+    if (item.zh === "大學申請包") {
+      return typeof hasCourseAccess === "function" && hasCourseAccess("admissions");
+    }
+    return true;
+  });
+
+  const moreHtml = filteredMoreLinks.map(item => `
     <button onclick="${item.action ? item.action : `setRoute('${item.route}')`}; closeMoreMenu();">
       ${state.lang === "zh" ? item.zh : item.en}
     </button>
@@ -1032,9 +1039,14 @@ function courses() {
 
 
 
+
 function learning() {
   const admissionsUnlocked = typeof hasCourseAccess === "function" && hasCourseAccess("admissions");
-  const progress = typeof applicationPackageProgress === "function" ? applicationPackageProgress() : { completed: 0, total: 10, percent: 0 };
+  const item = typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === "admissions") : null;
+  const lessons = item ? (state.lang === "zh" ? item.zhLessons : item.enLessons) : [];
+  const progress = courseProgress("admissions");
+  const packageProgress = typeof applicationPackageProgress === "function" ? applicationPackageProgress(false) : { completed: 0, total: 10, percent: 0 };
+  const nextIndex = lessons.findIndex((_, i) => !isLessonComplete("admissions", i));
 
   return shell(`
     <main class="page">
@@ -1042,44 +1054,56 @@ function learning() {
         <section class="panel">
           <span class="tag free">${text("學習中心", "Learning Center")}</span>
           <h1>${text("我的學習中心", "My Learning Center")}</h1>
-          <p class="lead">${text(
-            "這裡不是首頁，而是你的課程入口、學習進度與成果管理中心。",
-            "This is not the homepage. It is your course entrance, progress dashboard, and output management center."
-          )}</p>
+          <p class="lead">${text("這裡是你的課程進度、完成狀態與成果管理中心。", "This is your course progress, completion status, and output center.")}</p>
         </section>
 
         <section class="panel">
-          <h2>${text("目前學習狀態", "Current Status")}</h2>
-          <div class="grid two">
+          <h2>${text("高中生申請大學 AI 實戰課", "University Application AI Lab")}</h2>
+          <span class="tag ${admissionsUnlocked ? "free" : "premiumtag"}">${admissionsUnlocked ? text("已開通", "Unlocked") : text("尚未開通", "Locked")}</span>
+          <p>${text("課程完成度", "Course progress")}：${progress.completed}/${progress.total}（${progress.percent}%）</p>
+          <div class="package-progress-track">
+            <div class="package-progress-bar" style="width:${progress.percent}%"></div>
+          </div>
+
+          <div class="grid two" style="margin-top:24px">
             <article class="card">
-              <span class="tag ${admissionsUnlocked ? "free" : "premiumtag"}">${admissionsUnlocked ? text("已開通", "Unlocked") : text("尚未開通", "Locked")}</span>
-              <h3>${text("高中生申請大學 AI 實戰課", "University Application AI Lab")}</h3>
-              <p>${text("10 堂課，完成後產出完整大學申請包。", "10 lessons that produce a complete university application package.")}</p>
-              ${admissionsUnlocked
-                ? `<button class="btn primary" onclick="openCourse('admissions')">${text("繼續上課", "Continue Course")}</button>`
-                : `<button class="btn primary" onclick="setRoute('premium')">${text("前往開通", "Unlock Course")}</button>`
+              <h3>${text("下一步", "Next Step")}</h3>
+              ${
+                admissionsUnlocked
+                  ? (nextIndex >= 0
+                      ? `<p>${text("建議繼續：", "Continue with:")} Lesson ${nextIndex + 1}：${lessons[nextIndex]}</p><button class="btn primary" onclick="openCourse('admissions'); setTimeout(()=>openLesson(${nextIndex}), 50);">${text("繼續上課", "Continue")}</button>`
+                      : `<p>${text("你已完成全部課程。", "You have completed all lessons.")}</p><button class="btn primary" onclick="setRoute('applicationPackage')">${text("前往大學申請包", "Open Application Package")}</button>`)
+                  : `<p>${text("開通後即可追蹤 10 堂課進度。", "Unlock to track all 10 lessons.")}</p><button class="btn primary" onclick="setRoute('premium')">${text("前往開通", "Unlock Course")}</button>`
               }
             </article>
 
             <article class="card">
-              <span class="tag">${progress.percent}%</span>
-              <h3>${text("大學申請包進度", "Application Package Progress")}</h3>
-              <p>${text("已完成", "Completed")}：${progress.completed}/${progress.total}</p>
-              <div style="height:12px;background:#e5ebf5;border-radius:999px;overflow:hidden;margin:14px 0">
-                <div style="height:100%;width:${progress.percent}%;background:linear-gradient(90deg,#2f5bea,#5b5ff4);border-radius:999px"></div>
+              <h3>${text("大學申請包", "Application Package")}</h3>
+              <p>${text("完成度", "Progress")}：${packageProgress.completed}/${packageProgress.total}（${packageProgress.percent}%）</p>
+              <div class="package-progress-track">
+                <div class="package-progress-bar" style="width:${packageProgress.percent}%"></div>
               </div>
-              ${admissionsUnlocked
-                ? `<button class="btn secondary" onclick="setRoute('applicationPackage')">${text("打開申請包", "Open Package")}</button>`
-                : `<button class="btn secondary" onclick="setRoute('premium')">${text("開通後可使用", "Unlock to Use")}</button>`
+              ${
+                admissionsUnlocked
+                  ? `<button class="btn secondary" onclick="setRoute('applicationPackage')">${text("打開申請包", "Open Package")}</button>`
+                  : `<button class="btn secondary" onclick="setRoute('premium')">${text("開通後可使用", "Unlock to Use")}</button>`
               }
             </article>
           </div>
         </section>
 
         <section class="panel">
-          <h2>${text("免費入門", "Free Intro")}</h2>
-          <p>${text("還沒開通付費課程前，可以先從免費入門開始學 AI 基礎。", "Before unlocking premium courses, start with free AI basics.")}</p>
-          <button class="btn secondary" onclick="setRoute('courses')">${text("前往免費入門", "Go to Free Intro")}</button>
+          <h2>${text("課程完成清單", "Lesson Checklist")}</h2>
+          <div class="grid two">
+            ${lessons.map((l, i) => `
+              <article class="card">
+                <span class="tag ${isLessonComplete("admissions", i) ? "free" : "premiumtag"}">${isLessonComplete("admissions", i) ? "✓ " + text("已完成", "Completed") : "□ " + text("未完成", "Not completed")}</span>
+                <h3>Lesson ${i + 1}</h3>
+                <p>${l}</p>
+                ${admissionsUnlocked ? `<button class="btn secondary" onclick="openCourse('admissions'); setTimeout(()=>openLesson(${i}), 50);">${text("進入本課", "Open Lesson")}</button>` : ""}
+              </article>
+            `).join("")}
+          </div>
         </section>
       </div>
     </main>
@@ -1261,6 +1285,76 @@ function openPrevLesson() {
 }
 
 
+
+function progressUserKey() {
+  return state.user && state.user.email ? state.user.email : "guest";
+}
+
+function lessonProgressKey(courseId, lessonIndex) {
+  return `asb-lesson-complete-${progressUserKey()}-${courseId}-${lessonIndex}`;
+}
+
+function scoreKey(courseId, lessonIndex, metric) {
+  return `asb-score-${progressUserKey()}-${courseId}-${lessonIndex}-${metric}`;
+}
+
+function isLessonComplete(courseId, lessonIndex) {
+  return localStorage.getItem(lessonProgressKey(courseId, lessonIndex)) === "true";
+}
+
+function setLessonComplete(courseId, lessonIndex, value = true) {
+  localStorage.setItem(lessonProgressKey(courseId, lessonIndex), value ? "true" : "false");
+  toast(state.lang === "zh" ? "本課完成狀態已更新" : "Lesson status updated");
+  render();
+}
+
+function courseProgress(courseId) {
+  const item = typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === courseId) : null;
+  if (!item) return { completed: 0, total: 0, percent: 0 };
+  const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
+  const completed = lessons.filter((_, i) => isLessonComplete(courseId, i)).length;
+  const total = lessons.length;
+  return { completed, total, percent: total ? Math.round((completed / total) * 100) : 0 };
+}
+
+function getLessonScore(courseId, lessonIndex, metric) {
+  return Number(localStorage.getItem(scoreKey(courseId, lessonIndex, metric)) || 0);
+}
+
+function setLessonScore(courseId, lessonIndex, metric, value) {
+  localStorage.setItem(scoreKey(courseId, lessonIndex, metric), String(value));
+  updateLessonScoreUI(courseId, lessonIndex);
+}
+
+function lessonScoreAverage(courseId, lessonIndex, metrics) {
+  const values = metrics.map(m => getLessonScore(courseId, lessonIndex, m)).filter(v => v > 0);
+  if (!values.length) return { avg: 0, total: 0, count: 0 };
+  const avg = values.reduce((a, b) => a + b, 0) / values.length;
+  return { avg, total: Math.round(avg * 10), count: values.length };
+}
+
+function updateLessonScoreUI(courseId, lessonIndex) {
+  const detail = (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[courseId])
+    ? PREMIUM_LESSON_DETAILS[courseId][lessonIndex]
+    : null;
+  const metrics = detail ? (state.lang === "zh" ? (detail.zhScorecard || []) : (detail.enScorecard || [])) : [];
+  const score = lessonScoreAverage(courseId, lessonIndex, metrics);
+  const el = document.getElementById("lesson-score-summary");
+  if (el) {
+    el.textContent = score.count
+      ? `${state.lang === "zh" ? "自我評分" : "Self-score"}：${score.total}/100（${score.avg.toFixed(1)}/10）`
+      : `${state.lang === "zh" ? "尚未評分" : "Not scored yet"}`;
+  }
+
+  metrics.forEach(metric => {
+    const value = getLessonScore(courseId, lessonIndex, metric);
+    for (let i = 1; i <= 10; i++) {
+      const btn = document.getElementById(`score-${lessonIndex}-${metric}-${i}`);
+      if (btn) btn.classList.toggle("selected", i === value);
+    }
+  });
+}
+
 function lesson() {
   const item = (typeof PREMIUM !== "undefined" && currentCourseId)
     ? PREMIUM.find(p => p.id === currentCourseId)
@@ -1339,10 +1433,23 @@ function lesson() {
 
           <section class="panel" style="margin-top:24px">
             <h2>${text("自我評分表", "Self-Scorecard")}</h2>
-            <p>${text("使用 AI 回饋前，先自己用 1-10 分評估。", "Before using AI feedback, score yourself from 1-10.")}</p>
-            <ul>
-              ${scorecard.map(x => `<li>${x}：____ / 10</li>`).join("")}
-            </ul>
+            <p id="lesson-score-summary">${text("尚未評分", "Not scored yet")}</p>
+            <div class="scorecard-list">
+              ${scorecard.map(metric => `
+                <div class="score-row">
+                  <strong>${metric}</strong>
+                  <div class="score-buttons">
+                    ${[1,2,3,4,5,6,7,8,9,10].map(n => `
+                      <button
+                        id="score-${lessonNo - 1}-${metric}-${n}"
+                        class="score-btn ${getLessonScore(item.id, lessonNo - 1, metric) === n ? "selected" : ""}"
+                        onclick="setLessonScore('${item.id}', ${lessonNo - 1}, '${metric.replaceAll("'", "\'")}', ${n})"
+                      >${n}</button>
+                    `).join("")}
+                  </div>
+                </div>
+              `).join("")}
+            </div>
           </section>
 
           <section class="panel" style="margin-top:24px">
@@ -1374,6 +1481,13 @@ function lesson() {
             <h2>${text("課後成果", "Final Output")}</h2>
             <p><b>${state.lang === "zh" ? detail.zhOutcome : detail.enOutcome}</b></p>
             <p>${text("完成這個成果後，請放入你的「大學申請包」。10 課完成後，你會得到一份完整申請資料。", "After completing this output, add it to your application package. After 10 lessons, you will have a complete application package.")}</p><button class="btn secondary" onclick="setRoute('applicationPackage')">${text("打開我的大學申請包", "Open My Application Package")}</button>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("完成本課", "Complete Lesson")}</h2>
+            <p>${isLessonComplete(item.id, lessonNo - 1) ? text("你已標記完成這一課。", "You marked this lesson as complete.") : text("完成實作任務、AI 回饋、自我評分與課程筆記後，請標記本課完成。", "After finishing the practice task, AI feedback, self-score, and notes, mark this lesson complete.")}</p>
+            <button class="btn primary" onclick="setLessonComplete(item.id, lessonNo - 1, true)">✓ ${text("標記本課完成", "Mark Complete")}</button>
+            <button class="btn secondary" onclick="setLessonComplete(item.id, lessonNo - 1, false)">${text("取消完成", "Undo Complete")}</button>
           </section>
 
           <div class="btnrow" style="margin-top:24px">
