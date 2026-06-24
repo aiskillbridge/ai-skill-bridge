@@ -261,8 +261,7 @@ function impact() {
 }
 
 function render() {
-const routes = { home, dashboard, courses, free, premium, tools, prompts, community, thailand, impact }  document.getElementById("app").innerHTML = (routes[state.route] || home)();
-  save();
+const routes = { home, courses, free, premium, tools, prompts, community, thailand, impact }  save();
 }
 
 async function startApp() {
