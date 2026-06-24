@@ -97,7 +97,15 @@ async function completeLesson(lessonId) {
 }
 
 async function initAuth() {
-  if (!supabaseClient) return;
+  if (state.user) {
+
+  await supabaseClient
+    .from("profiles")
+    .upsert({
+      id: state.user.id,
+      email: state.user.email,
+      display_name: state.user.user_metadata?.full_name || ""
+    });
 
   const { data } = await supabaseClient.auth.getSession();
   state.user = data.session?.user || null;
@@ -109,8 +117,17 @@ async function initAuth() {
   supabaseClient.auth.onAuthStateChange(async (_event, session) => {
     state.user = session?.user || null;
     if (state.user) {
-      await loadProgressFromSupabase();
-    }
+
+  await supabaseClient
+    .from("profiles")
+    .upsert({
+      id: state.user.id,
+      email: state.user.email,
+      display_name: state.user.user_metadata?.full_name || ""
+    });
+
+  await loadProgressFromSupabase();
+}
     render();
   });
 }
