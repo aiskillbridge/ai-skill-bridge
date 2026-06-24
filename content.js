@@ -991,6 +991,152 @@ const PREMIUM = [
   }
 ];
 
+const PREMIUM_LESSON_DETAILS = {
+  "admissions": [
+    {
+      "zhTitle": "第1課：用 AI 找出適合自己的科系",
+      "enTitle": "Lesson 1: Use AI to Explore Suitable University Majors",
+      "zhConcept": "選科系不能只看分數、校名或別人的建議。你要把自己的興趣、能力、價值觀與未來方向放在一起思考。AI 可以幫你整理資訊、比較科系、產生問題，但最後的判斷仍然要由你自己做出。",
+      "enConcept": "Choosing a major should not depend only on scores, school reputation, or other people's opinions. You need to consider interests, abilities, values, and future direction together. AI can help organize information, compare majors, and generate questions, but final decisions should still be yours.",
+      "zhPrompt": "請你擔任升學輔導老師。根據以下資訊幫我推薦 5 個適合的科系：\\n興趣：\\n擅長科目：\\n參加過的活動：\\n未來想做的事情：\\n請分析：1. 為什麼適合 2. 未來發展方向 3. 我目前需要加強什麼 4. 我可以如何確認這個科系真的適合我。",
+      "enPrompt": "Act as a university admissions counselor. Based on the following information, recommend 5 suitable majors:\\nInterests:\\nStrong subjects:\\nActivities:\\nFuture goals:\\nAnalyze: 1. Why each major fits 2. Future paths 3. What I need to improve 4. How I can verify whether this major truly fits me.",
+      "zhPractice": "填寫你的興趣、強項、弱項、喜歡做的事與未來想像，使用 Prompt 產生科系建議，最後選出 3 個最想深入了解的科系。",
+      "enPractice": "Fill in your interests, strengths, weaknesses, favorite activities, and future imagination. Use the prompt to generate major suggestions, then choose 3 majors to explore further.",
+      "zhQuiz": "選科系最重要的是什麼？A. 只看分數 B. 只看校名 C. 綜合興趣、能力與未來方向。答案：C。",
+      "enQuiz": "What matters most when choosing a major? A. Only scores B. Only school name C. Interests, abilities, and future direction together. Answer: C.",
+      "zhOutcome": "完成一份科系探索報告。",
+      "enOutcome": "Complete a major exploration report."
+    },
+    {
+      "zhTitle": "第2課：用 AI 分析個人特質與學習優勢",
+      "enTitle": "Lesson 2: Use AI to Analyze Personal Strengths",
+      "zhConcept": "備審與面試不是要把自己包裝成完美的人，而是要清楚說出你是誰、你做過什麼、你怎麼成長。AI 可以幫你把零散經驗整理成優勢與成長方向。",
+      "enConcept": "Applications and interviews are not about pretending to be perfect. They are about clearly explaining who you are, what you have done, and how you have grown. AI can help turn scattered experiences into strengths and growth directions.",
+      "zhPrompt": "請你擔任高中升學輔導老師。根據以下資料幫我做個人 SWOT 分析：\\n我的經歷：\\n我的興趣：\\n我的學習表現：\\n我的活動經驗：\\n請整理 Strengths、Weaknesses、Opportunities、Threats，並給我 3 個申請大學時可以強調的個人特質。",
+      "enPrompt": "Act as a high school admissions counselor. Based on the following information, create a personal SWOT analysis:\\nExperience:\\nInterests:\\nAcademic performance:\\nActivities:\\nOrganize Strengths, Weaknesses, Opportunities, and Threats, then give me 3 personal traits I can emphasize in university applications.",
+      "zhPractice": "列出 5 個你做過的活動或學習成果，請 AI 幫你分析背後代表的能力，例如溝通、領導、研究、創意、責任感。",
+      "enPractice": "List 5 activities or learning outputs you have completed. Ask AI to identify the abilities behind them, such as communication, leadership, research, creativity, or responsibility.",
+      "zhQuiz": "SWOT 中的 S 代表什麼？答案：Strengths，個人優勢。",
+      "enQuiz": "What does S mean in SWOT? Answer: Strengths.",
+      "zhOutcome": "完成個人能力分析報告。",
+      "enOutcome": "Complete a personal strengths analysis report."
+    },
+    {
+      "zhTitle": "第3課：用 AI 整理高中學習歷程",
+      "enTitle": "Lesson 3: Use AI to Organize Learning Portfolios",
+      "zhConcept": "很多學生不是沒有經驗，而是不知道怎麼整理。學習歷程要呈現的是你的學習軌跡、投入過程與成長證據。AI 可以幫你分類、排序與補足反思方向。",
+      "enConcept": "Many students do have experience but do not know how to organize it. A learning portfolio should show your learning journey, effort, and growth evidence. AI can help classify, prioritize, and suggest reflection directions.",
+      "zhPrompt": "請協助我整理以下學習歷程內容。請分成：課程成果、活動經驗、領導經驗、服務經驗、競賽成果。每一項請幫我整理：做了什麼、學到什麼、遇到什麼困難、可以放進備審的亮點。",
+      "enPrompt": "Help me organize the following learning portfolio content. Categorize it into course outputs, activities, leadership experience, service experience, and competition results. For each item, summarize what I did, what I learned, challenges, and application highlights.",
+      "zhPractice": "建立五大資料夾：課程成果、社團活動、競賽經驗、志工服務、幹部經驗。每類至少放入 2 個素材。",
+      "enPractice": "Create five folders: course outputs, clubs, competitions, service, and leadership. Put at least 2 items into each category.",
+      "zhQuiz": "學習歷程最重要的是什麼？A. 堆很多資料 B. 呈現成長與反思 C. 全部交給 AI 寫。答案：B。",
+      "enQuiz": "What matters most in a learning portfolio? A. Piling up materials B. Showing growth and reflection C. Letting AI write everything. Answer: B.",
+      "zhOutcome": "完成學習歷程素材庫。",
+      "enOutcome": "Complete a learning portfolio material database."
+    },
+    {
+      "zhTitle": "第4課：用 AI 撰寫學習歷程反思",
+      "enTitle": "Lesson 4: Use AI to Write Learning Reflections",
+      "zhConcept": "反思不是心得作文，而是說明你從經驗中發現什麼問題、採取什麼行動、得到什麼結果，以及這件事如何影響你的未來選擇。",
+      "enConcept": "Reflection is not just a personal feeling essay. It explains what problem you discovered, what action you took, what result you achieved, and how the experience influenced your future choices.",
+      "zhPrompt": "請根據 STAR 架構協助我整理以下活動經驗：\\nSituation 情境：\\nTask 任務：\\nAction 行動：\\nResult 結果：\\n請幫我改寫成一段適合放入學習歷程反思的文字，語氣真誠，不要誇大，不要捏造。",
+      "enPrompt": "Use the STAR structure to organize this experience:\\nSituation:\\nTask:\\nAction:\\nResult:\\nRewrite it into a reflection suitable for a learning portfolio. Keep the tone sincere, do not exaggerate, and do not invent facts.",
+      "zhPractice": "選一個高中活動或課程成果，用 STAR 架構填寫，再請 AI 幫你改寫成反思初稿。",
+      "enPractice": "Choose one high school activity or course output, fill in the STAR structure, then ask AI to turn it into a reflection draft.",
+      "zhQuiz": "STAR 的 A 代表什麼？答案：Action，你採取的行動。",
+      "enQuiz": "What does A mean in STAR? Answer: Action.",
+      "zhOutcome": "完成一篇學習歷程反思初稿。",
+      "enOutcome": "Complete a learning reflection draft."
+    },
+    {
+      "zhTitle": "第5課：用 AI 建立備審資料架構",
+      "enTitle": "Lesson 5: Use AI to Structure Application Materials",
+      "zhConcept": "備審資料不是把所有資料塞進去，而是要有清楚主軸。你要讓教授快速看懂：你是誰、為什麼適合、你做過什麼、未來想怎麼學。",
+      "enConcept": "Application materials should not include everything you have. They need a clear storyline. Professors should quickly understand who you are, why you fit, what you have done, and how you plan to learn.",
+      "zhPrompt": "請你擔任大學備審資料顧問。我申請的科系是：____。我的主要經驗有：____。請幫我規劃備審資料架構，包含封面、自我介紹、學習歷程、成果展示、申請動機、未來規劃，每一部分請告訴我應該放什麼。",
+      "enPrompt": "Act as a university application portfolio consultant. My target major is: ____. My main experiences are: ____. Help me plan the application material structure, including cover, self-introduction, learning portfolio, work showcase, motivation, and future plan. Tell me what to include in each part.",
+      "zhPractice": "使用 AI 產生備審架構後，刪掉不真實或不重要的內容，留下最能代表你的 3 個主軸。",
+      "enPractice": "After AI generates the structure, remove anything untrue or unimportant. Keep the 3 themes that best represent you.",
+      "zhQuiz": "備審資料最需要避免什麼？答案：沒有主軸、只堆資料、誇大不實。",
+      "enQuiz": "What should application materials avoid? Answer: no clear theme, material dumping, and exaggeration.",
+      "zhOutcome": "完成備審資料架構圖。",
+      "enOutcome": "Complete an application material structure map."
+    },
+    {
+      "zhTitle": "第6課：用 AI 修改自我介紹",
+      "enTitle": "Lesson 6: Use AI to Improve Self-Introduction",
+      "zhConcept": "自我介紹不是背履歷，而是用 60 到 90 秒讓教授記住你。好的自我介紹包含：我是誰、我的重要經驗、為什麼申請這個科系、未來想學什麼。",
+      "enConcept": "A self-introduction is not a resume recitation. It should help professors remember you in 60 to 90 seconds. A good introduction includes who you are, key experiences, why you apply, and what you want to learn.",
+      "zhPrompt": "請幫我設計 90 秒大學面試自我介紹。內容要包含：我是誰、我最重要的高中經驗、我為什麼申請這個科系、我未來想學什麼。語氣要自然、真誠，不要太浮誇。",
+      "enPrompt": "Help me design a 90-second university interview self-introduction. Include who I am, my most important high school experience, why I apply to this major, and what I want to learn. Keep it natural, sincere, and not exaggerated.",
+      "zhPractice": "寫出第一版 90 秒自我介紹，請 AI 幫你刪掉空話，保留具體經驗與動機。",
+      "enPractice": "Write your first 90-second self-introduction, then ask AI to remove vague statements and keep concrete experience and motivation.",
+      "zhQuiz": "自我介紹最重要的功能是什麼？答案：讓教授快速理解你的特色與申請動機。",
+      "enQuiz": "What is the main function of self-introduction? Answer: helping professors quickly understand your traits and motivation.",
+      "zhOutcome": "完成 90 秒自我介紹稿。",
+      "enOutcome": "Complete a 90-second self-introduction script."
+    },
+    {
+      "zhTitle": "第7課：用 AI 準備大學面試常見題",
+      "enTitle": "Lesson 7: Use AI to Prepare Interview Questions",
+      "zhConcept": "面試不是猜題，而是練習把自己的經驗講清楚。AI 可以幫你生成題庫，讓你提前準備科系動機、個人優勢、學習歷程與未來規劃。",
+      "enConcept": "Interviews are not about guessing questions. They are about practicing how to explain your experience clearly. AI can generate question banks to help you prepare motivation, strengths, portfolio, and future plans.",
+      "zhPrompt": "請你擔任大學教授。我申請的科系是：____。請根據這個科系設計 20 題面試問題，分成：自我介紹、科系動機、學習歷程、未來規劃、臨場反應。每題請附上回答方向。",
+      "enPrompt": "Act as a university professor. My target major is: ____. Create 20 interview questions divided into self-introduction, major motivation, learning portfolio, future plan, and situational response. Include answer direction for each question.",
+      "zhPractice": "請 AI 生成 20 題後，挑出最難回答的 5 題，先寫出自己的回答大綱。",
+      "enPractice": "After AI generates 20 questions, choose the 5 hardest ones and write your answer outlines.",
+      "zhQuiz": "面試準備最好的方式是什麼？答案：建立題庫、寫大綱、反覆練習。",
+      "enQuiz": "What is the best way to prepare for interviews? Answer: build a question bank, write outlines, and practice repeatedly.",
+      "zhOutcome": "完成個人面試題庫。",
+      "enOutcome": "Complete a personal interview question bank."
+    },
+    {
+      "zhTitle": "第8課：用 AI 模擬教授面試",
+      "enTitle": "Lesson 8: Use AI to Simulate Professor Interviews",
+      "zhConcept": "模擬面試可以降低緊張感。重點不是讓 AI 給你標準答案，而是讓 AI 扮演教授，訓練你回答得更清楚、更有邏輯。",
+      "enConcept": "Mock interviews reduce nervousness. The goal is not to get standard answers from AI, but to let AI act as a professor and train you to answer more clearly and logically.",
+      "zhPrompt": "請你擔任大學教授，針對我申請的科系進行模擬面試。請一次只問一題。我回答後，請從清楚度、邏輯、具體性、說服力四個面向給我評分與改進建議。",
+      "enPrompt": "Act as a university professor and conduct a mock interview for my target major. Ask only one question at a time. After my answer, rate clarity, logic, specificity, and persuasiveness, then give improvement suggestions.",
+      "zhPractice": "完成至少 5 題模擬面試，把 AI 給你的建議整理成改進清單。",
+      "enPractice": "Complete at least 5 mock interview questions and organize AI feedback into an improvement checklist.",
+      "zhQuiz": "模擬面試後最重要的是什麼？答案：根據回饋修改回答，而不是只看分數。",
+      "enQuiz": "What matters most after mock interviews? Answer: revise answers based on feedback, not just look at scores.",
+      "zhOutcome": "完成模擬面試紀錄與改進清單。",
+      "enOutcome": "Complete mock interview records and an improvement checklist."
+    },
+    {
+      "zhTitle": "第9課：用 AI 回答科系動機與未來規劃",
+      "enTitle": "Lesson 9: Use AI to Answer Motivation and Future Plans",
+      "zhConcept": "教授常問你為什麼想讀這個科系。好的回答不是說『我有興趣』而已，而是要連結過去經驗、現在準備與未來目標。",
+      "enConcept": "Professors often ask why you want to study a major. A good answer should not just say 'I am interested'. It should connect past experience, current preparation, and future goals.",
+      "zhPrompt": "請幫我把以下內容整理成申請動機回答：\\n過去相關經驗：\\n我現在做的準備：\\n我對這個科系的理解：\\n未來想發展的方向：\\n請用「過去、現在、未來」三段式回答，語氣自然真誠。",
+      "enPrompt": "Help me organize the following into an application motivation answer:\\nPast related experience:\\nCurrent preparation:\\nUnderstanding of this major:\\nFuture direction:\\nUse a past-present-future structure with a natural and sincere tone.",
+      "zhPractice": "用三段式寫出你的科系動機，請 AI 幫你檢查是否太空泛、是否有具體經驗。",
+      "enPractice": "Write your motivation using the past-present-future structure, then ask AI to check if it is too vague or lacks concrete experience.",
+      "zhQuiz": "好的科系動機要包含哪三個時間？答案：過去、現在、未來。",
+      "enQuiz": "What three time frames should strong motivation include? Answer: past, present, and future.",
+      "zhOutcome": "完成科系動機與未來規劃回答稿。",
+      "enOutcome": "Complete a motivation and future plan answer script."
+    },
+    {
+      "zhTitle": "第10課：完成你的大學申請包",
+      "enTitle": "Lesson 10: Complete Your University Application Package",
+      "zhConcept": "最後一課要把前面所有成果整合起來。你的申請包不是一堆文件，而是一個完整故事：我是誰、我做過什麼、我為什麼適合、我未來想成為什麼樣的人。",
+      "enConcept": "The final lesson integrates all previous outputs. Your application package is not just a set of documents; it is a complete story: who you are, what you have done, why you fit, and who you want to become.",
+      "zhPrompt": "請你擔任大學申請顧問。請根據我目前完成的資料，幫我檢查整份大學申請包是否完整。請檢查：科系探索、個人特質、學習歷程、反思、自我介紹、面試題庫、科系動機。最後請列出我還需要補強的 5 件事。",
+      "enPrompt": "Act as a university application consultant. Based on my completed materials, check whether my application package is complete. Review major exploration, personal traits, learning portfolio, reflection, self-introduction, interview question bank, and motivation. List 5 things I still need to improve.",
+      "zhPractice": "整理前 9 課成果成一份資料夾，命名為「我的大學申請包」，並請 AI 進行總檢查。",
+      "enPractice": "Organize outputs from the previous 9 lessons into a folder named 'My University Application Package' and ask AI to run a final review.",
+      "zhQuiz": "完整申請包的核心是什麼？答案：把自己的經驗與申請科系連成一個清楚故事。",
+      "enQuiz": "What is the core of a complete application package? Answer: connecting your experience and target major into a clear story.",
+      "zhOutcome": "完成完整大學申請包。",
+      "enOutcome": "Complete a full university application package."
+    }
+  ]
+};
+
+
 const TOOLS = [
   { name: "ChatGPT", url: "https://chatgpt.com", zh: "通用學習、寫作、整理、規劃、腦力激盪。", en: "General learning, writing, organization, planning, and brainstorming." },
   { name: "Claude", url: "https://claude.ai", zh: "長文件閱讀、寫作潤飾、報告架構與推理。", en: "Long document reading, writing refinement, report structure, and reasoning." },
