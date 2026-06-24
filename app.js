@@ -261,7 +261,23 @@ function impact() {
 }
 
 function render() {
-const routes = { home, courses, free, premium, tools, prompts, community, thailand, impact }
+  const routes = {
+    home,
+    courses,
+    free,
+    premium,
+    tools,
+    prompts,
+    community,
+    thailand,
+    impact
+  };
+
+  document.getElementById("app").innerHTML =
+    (routes[state.route] || home)();
+
+  save();
+}
 async function startApp() {
   await initAuth();
   render();
