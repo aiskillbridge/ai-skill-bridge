@@ -1393,6 +1393,12 @@ function updateLessonScoreUI(courseId, lessonIndex) {
   });
 }
 
+
+function toggleLessonComplete(courseId, lessonIndex) {
+  const currentlyComplete = isLessonComplete(courseId, lessonIndex);
+  setLessonComplete(courseId, lessonIndex, !currentlyComplete);
+}
+
 function lesson() {
   const item = (typeof PREMIUM !== "undefined" && currentCourseId)
     ? PREMIUM.find(p => p.id === currentCourseId)
@@ -1524,8 +1530,9 @@ function lesson() {
           <section class="panel" style="margin-top:24px">
             <h2>${text("完成本課", "Complete Lesson")}</h2>
             <p>${isLessonComplete(item.id, lessonNo - 1) ? text("你已標記完成這一課。課程完成度已更新。", "You marked this lesson as complete. Course progress has been updated.") : text("完成實作任務、AI 回饋、自我評分與課程筆記後，請標記本課完成。", "After finishing the practice task, AI feedback, self-score, and notes, mark this lesson complete.")}</p>
-            <button class="btn primary" onclick="setLessonComplete('${item.id}', ${lessonNo - 1}, true)">✓ ${text("標記本課完成", "Mark Complete")}</button>
-            <button class="btn secondary" onclick="setLessonComplete('${item.id}', ${lessonNo - 1}, false)">${text("取消完成", "Undo Complete")}</button>
+            <button class="${isLessonComplete(item.id, lessonNo - 1) ? "btn secondary" : "btn primary"}" onclick="toggleLessonComplete('${item.id}', ${lessonNo - 1})">
+              ${isLessonComplete(item.id, lessonNo - 1) ? text("取消完成", "Undo Complete") : "✓ " + text("標記本課完成", "Mark Complete")}
+            </button>
           </section>
 
           <div class="btnrow" style="margin-top:24px">

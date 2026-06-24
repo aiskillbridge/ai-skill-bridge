@@ -602,3 +602,10 @@ textarea[id^="application-package-"] {
   color: #fff !important;
   border-color: var(--primary, #2f5bea) !important;
 }
+
+
+
+/* V35 Completion Toggle Button */
+button[onclick^="toggleLessonComplete"] {
+  min-width: 180px;
+}
