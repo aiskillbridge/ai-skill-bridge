@@ -1,69 +1,76 @@
 
 
 
-/* V23 Sticky Shrinking Header */
-:root {
-  --asb-header-full-height: 112px;
-  --asb-header-compact-height: 70px;
-}
-
-body {
-  scroll-padding-top: var(--asb-header-compact-height);
-}
-
-.asb-sticky-header {
+/* V23 SAFE Header Layout Fix - CSS only, no JavaScript */
+header,
+.site-header,
+.topbar,
+.navbar {
   position: sticky !important;
-  top: 0;
-  z-index: 9999;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition: padding 0.22s ease, min-height 0.22s ease, height 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+  top: 0 !important;
+  z-index: 9999 !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  min-height: 72px !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
 }
 
-.asb-sticky-header.asb-header-shrink {
-  min-height: var(--asb-header-compact-height) !important;
-  padding-top: 6px !important;
-  padding-bottom: 6px !important;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-}
-
-.asb-sticky-header.asb-header-shrink * {
-  transition: font-size 0.22s ease, padding 0.22s ease, margin 0.22s ease, transform 0.22s ease, width 0.22s ease, height 0.22s ease;
-}
-
-.asb-sticky-header.asb-header-shrink a,
-.asb-sticky-header.asb-header-shrink button {
+/* Make navigation more compact */
+header a,
+header button,
+.site-header a,
+.site-header button,
+.topbar a,
+.topbar button,
+.navbar a,
+.navbar button {
   font-size: 14px !important;
   padding-top: 8px !important;
   padding-bottom: 8px !important;
 }
 
-.asb-sticky-header.asb-header-shrink .logo,
-.asb-sticky-header.asb-header-shrink .brand,
-.asb-sticky-header.asb-header-shrink [class*="logo"],
-.asb-sticky-header.asb-header-shrink [class*="brand"] {
-  transform: scale(0.86);
+/* Keep logo compact */
+header .logo,
+header .brand,
+header [class*="logo"],
+header [class*="brand"],
+.site-header .logo,
+.site-header .brand,
+.site-header [class*="logo"],
+.site-header [class*="brand"] {
+  transform: scale(0.88);
   transform-origin: left center;
 }
 
-.asb-sticky-header.asb-header-shrink img,
-.asb-sticky-header.asb-header-shrink svg {
-  max-height: 34px;
+/* Prevent lesson content from hiding behind sticky header */
+html {
+  scroll-padding-top: 90px;
 }
 
-.asb-scrolled .page,
-.asb-scrolled main {
-  scroll-margin-top: var(--asb-header-compact-height);
+main,
+.page {
+  scroll-margin-top: 90px;
 }
 
 @media (max-width: 900px) {
-  .asb-sticky-header.asb-header-shrink {
-    min-height: 60px !important;
+  header,
+  .site-header,
+  .topbar,
+  .navbar {
+    min-height: 64px !important;
   }
 
-  .asb-sticky-header.asb-header-shrink a,
-  .asb-sticky-header.asb-header-shrink button {
+  header a,
+  header button,
+  .site-header a,
+  .site-header button,
+  .topbar a,
+  .topbar button,
+  .navbar a,
+  .navbar button {
     font-size: 13px !important;
     padding: 6px 8px !important;
   }

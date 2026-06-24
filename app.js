@@ -1453,48 +1453,9 @@ function render() {
   };
   document.getElementById("app").innerHTML = (routes[state.route] || home)();
   save();
-
-  setupHeaderShrink();
 }
 
-async 
-
-function injectV23HeaderStyles() {
-  if (document.getElementById("asb-v23-header-style")) return;
-  const style = document.createElement("style");
-  style.id = "asb-v23-header-style";
-  style.textContent = `
-    body{scroll-padding-top:70px}
-    .asb-sticky-header{position:sticky!important;top:0;z-index:9999;background:rgba(255,255,255,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:all .22s ease}
-    .asb-sticky-header.asb-header-shrink{min-height:70px!important;padding-top:6px!important;padding-bottom:6px!important;box-shadow:0 10px 30px rgba(15,23,42,.08)}
-    .asb-sticky-header.asb-header-shrink a,.asb-sticky-header.asb-header-shrink button{font-size:14px!important;padding-top:8px!important;padding-bottom:8px!important}
-    .asb-sticky-header.asb-header-shrink .logo,.asb-sticky-header.asb-header-shrink .brand,.asb-sticky-header.asb-header-shrink [class*="logo"],.asb-sticky-header.asb-header-shrink [class*="brand"]{transform:scale(.86);transform-origin:left center}
-  `;
-  document.head.appendChild(style);
-}
-
-function setupHeaderShrink() {
-  const updateHeader = () => {
-    const header = document.querySelector("header, .site-header, .topbar, .navbar, nav");
-    if (!header) return;
-    header.classList.add("asb-sticky-header");
-    if (window.scrollY > 80) {
-      header.classList.add("asb-header-shrink");
-      document.body.classList.add("asb-scrolled");
-    } else {
-      header.classList.remove("asb-header-shrink");
-      document.body.classList.remove("asb-scrolled");
-    }
-  };
-
-  window.removeEventListener("scroll", window.__asbHeaderShrinkHandler || (() => {}));
-  window.__asbHeaderShrinkHandler = updateHeader;
-  window.addEventListener("scroll", updateHeader, { passive: true });
-  injectV23HeaderStyles();
-  setTimeout(updateHeader, 0);
-}
-
-function startApp() {
+async function startApp() {
   await initAuth();
   render();
 }
