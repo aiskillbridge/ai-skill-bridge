@@ -448,6 +448,7 @@ function submitAssessment() {
 }
 
 
+
 function tutorReply() {
   const input = document.getElementById("tutor-input");
   const output = document.getElementById("tutor-output");
@@ -455,232 +456,151 @@ function tutorReply() {
   const value = raw.toLowerCase();
 
   if (!raw) {
-    toast(text("請先輸入問題", "Please type a question first"));
+    toast(text("請先輸入你想問 AI 的問題", "Please type the question you want to ask AI"));
     return;
   }
 
-  const responses = [
-    {
-      keys: ["prompt", "提示", "指令", "怎麼問", "提問"],
-      zh: `
-        <h3>Prompt 入門解法</h3>
-        <p>Prompt 就是你給 AI 的指令。新手可以用這個公式：</p>
-        <div class="promptbox">角色 + 任務 + 背景 + 輸出格式 + 限制</div>
-        <p><b>範例：</b></p>
-        <div class="promptbox">請你當作我的大學助教，幫我整理這份筆記。請用表格呈現，包含重點、例子、可能考題。不要直接幫我寫作業答案。</div>
-        <p><b>下一步：</b>請你把自己的問題改寫成上面這個格式。</p>
-      `,
-      en: `
-        <h3>Prompt Basics</h3>
-        <p>A prompt is the instruction you give to AI. Beginners can use this formula:</p>
-        <div class="promptbox">Role + Task + Context + Output Format + Constraints</div>
-        <p><b>Example:</b></p>
-        <div class="promptbox">Act as my university teaching assistant. Help me organize these notes in a table with key points, examples, and possible exam questions. Do not write the assignment for me.</div>
-        <p><b>Next step:</b> Rewrite your own question using this structure.</p>
-      `
-    },
-    {
-      keys: ["報告", "report", "essay", "論文", "作業"],
-      zh: `
-        <h3>AI 報告使用方式</h3>
-        <p>不要叫 AI 直接寫完整報告。比較好的方式是讓 AI 幫你做前期規劃。</p>
-        <div class="promptbox">請幫我規劃一份報告大綱，主題是：[你的主題]。請提供：研究問題、三個論點、需要查證的資料、反方觀點、簡報架構。不要直接替我完成全文。</div>
-        <p><b>學習提醒：</b>AI 可以幫你整理思路，但你的觀點、資料查證和最後判斷仍然要自己完成。</p>
-      `,
-      en: `
-        <h3>Using AI for Reports</h3>
-        <p>Do not ask AI to write the full report. Use it for early-stage planning instead.</p>
-        <div class="promptbox">Help me plan a report outline on: [your topic]. Provide research question, three arguments, sources to verify, counterarguments, and slide structure. Do not write the full essay.</div>
-        <p><b>Reminder:</b> AI can organize your thinking, but you still need to verify sources and make final judgments.</p>
-      `
-    },
-    {
-      keys: ["簡報", "ppt", "slides", "presentation", "gamma", "canva"],
-      zh: `
-        <h3>AI 簡報流程</h3>
-        <p>簡報不是先做漂亮，而是先把邏輯做清楚。</p>
-        <ol>
-          <li>先請 AI 釐清簡報目的與聽眾。</li>
-          <li>請 AI 產生 6～10 頁簡報架構。</li>
-          <li>每頁只放一個核心訊息。</li>
-          <li>再用 Canva 或 Gamma 做視覺。</li>
-        </ol>
-        <div class="promptbox">請把主題「[主題]」規劃成 8 頁簡報。每頁包含：標題、一句核心訊息、三個重點、建議圖片或圖表。</div>
-      `,
-      en: `
-        <h3>AI Slide Workflow</h3>
-        <p>Slides should be clear before they are beautiful.</p>
-        <ol>
-          <li>Ask AI to clarify purpose and audience.</li>
-          <li>Ask AI to create a 6–10 slide structure.</li>
-          <li>Use one key message per slide.</li>
-          <li>Then use Canva or Gamma for visuals.</li>
-        </ol>
-        <div class="promptbox">Turn the topic "[topic]" into an 8-slide deck. Each slide should include a title, one key message, three bullet points, and suggested visuals.</div>
-      `
-    },
-    {
-      keys: ["履歷", "resume", "cv", "面試", "interview", "求職", "工作", "實習"],
-      zh: `
-        <h3>AI 求職使用方式</h3>
-        <p>AI 可以幫你把經驗寫得更清楚，但不能捏造經歷。</p>
-        <div class="promptbox">請你當作科技業 HR，幫我修改以下履歷段落。請強調行動、成果、能力與證據，但不要捏造經驗或誇大數字。</div>
-        <p><b>面試練習 Prompt：</b></p>
-        <div class="promptbox">請你當作面試官，針對 [職位/計畫] 一次問我一題。每次我回答後，請給我結構、說服力與清楚度的回饋。</div>
-      `,
-      en: `
-        <h3>Using AI for Career Preparation</h3>
-        <p>AI can make your experience clearer, but it should not invent experience.</p>
-        <div class="promptbox">Act as a tech HR specialist and improve the following resume section. Emphasize action, results, skills, and evidence, but do not invent experience or exaggerate numbers.</div>
-        <p><b>Interview practice prompt:</b></p>
-        <div class="promptbox">Act as an interviewer for [role/program]. Ask me one question at a time. After each answer, give feedback on structure, persuasiveness, and clarity.</div>
-      `
-    },
-    {
-      keys: ["研究", "文獻", "paper", "literature", "notebooklm", "perplexity", "資料"],
-      zh: `
-        <h3>AI 研究與文獻整理</h3>
-        <p>研究任務建議不要只用一個工具。</p>
-        <ul>
-          <li><b>Perplexity：</b>找資料與來源。</li>
-          <li><b>NotebookLM：</b>針對你上傳的 PDF 問答。</li>
-          <li><b>Claude：</b>整理長文件與大綱。</li>
-          <li><b>ChatGPT：</b>規劃研究問題與簡報。</li>
-        </ul>
-        <div class="promptbox">請比較以下文獻，整理成表格。欄位包含：主題、研究方法、核心發現、限制、與我的研究問題的關聯。</div>
-      `,
-      en: `
-        <h3>AI for Research and Literature Review</h3>
-        <p>For research, do not rely on only one tool.</p>
-        <ul>
-          <li><b>Perplexity:</b> finding sources.</li>
-          <li><b>NotebookLM:</b> asking questions about uploaded PDFs.</li>
-          <li><b>Claude:</b> organizing long documents.</li>
-          <li><b>ChatGPT:</b> planning questions and presentations.</li>
-        </ul>
-        <div class="promptbox">Compare the following papers in a table with columns: topic, method, key findings, limitations, and relevance to my research question.</div>
-      `
-    },
-    {
-      keys: ["英文", "翻譯", "translation", "email", "信", "郵件"],
-      zh: `
-        <h3>AI 英文與信件協助</h3>
-        <p>AI 很適合幫你把中文想法轉成禮貌、清楚的英文信。</p>
-        <div class="promptbox">請幫我把以下中文內容改寫成正式但禮貌的英文信。收件人是：[對象]。目的：[目的]。語氣要誠懇、清楚、不要太強硬。</div>
-        <p><b>提醒：</b>寄出前要自己確認姓名、日期、附件與事實正確。</p>
-      `,
-      en: `
-        <h3>AI for English and Emails</h3>
-        <p>AI is useful for turning your ideas into polite and clear English emails.</p>
-        <div class="promptbox">Rewrite the following Chinese content into a formal but polite English email. Recipient: [recipient]. Purpose: [purpose]. Tone: sincere, clear, and not too forceful.</div>
-        <p><b>Reminder:</b> Before sending, verify names, dates, attachments, and facts.</p>
-      `
-    },
-    {
-      keys: ["工具", "tool", "哪個", "chatgpt", "claude", "gemini", "canva", "gamma"],
-      zh: `
-        <h3>AI 工具選擇建議</h3>
-        <ul>
-          <li><b>ChatGPT：</b>通用學習、寫作、企劃。</li>
-          <li><b>Claude：</b>長文件、報告、邏輯整理。</li>
-          <li><b>Gemini：</b>Google 生態系與日常協作。</li>
-          <li><b>Perplexity：</b>搜尋資料與來源。</li>
-          <li><b>NotebookLM：</b>PDF 與資料問答。</li>
-          <li><b>Canva / Gamma：</b>簡報與視覺設計。</li>
-        </ul>
-        <p><b>判斷方式：</b>先問自己「我要完成什麼任務？」再選工具，不要每件事都只用同一個 AI。</p>
-      `,
-      en: `
-        <h3>AI Tool Recommendation</h3>
-        <ul>
-          <li><b>ChatGPT:</b> general learning, writing, planning.</li>
-          <li><b>Claude:</b> long documents, reports, logic.</li>
-          <li><b>Gemini:</b> Google ecosystem and daily collaboration.</li>
-          <li><b>Perplexity:</b> web research and sources.</li>
-          <li><b>NotebookLM:</b> PDF and source-based Q&A.</li>
-          <li><b>Canva / Gamma:</b> slides and visual design.</li>
-        </ul>
-        <p><b>Decision rule:</b> Ask "what task do I need to complete?" before choosing a tool.</p>
-      `
-    },
-    {
-      keys: ["自動化", "automation", "agent", "zapier", "make", "n8n", "流程"],
-      zh: `
-        <h3>AI 自動化入門</h3>
-        <p>自動化不是一開始就做很複雜的系統，而是把重複任務拆成固定流程。</p>
-        <ol>
-          <li>找出重複任務。</li>
-          <li>定義輸入資料。</li>
-          <li>定義 AI 要產出的內容。</li>
-          <li>決定輸出到哪裡，例如 Email、Notion、Google Sheet。</li>
-        </ol>
-        <div class="promptbox">請幫我把以下重複任務拆成自動化流程：輸入、處理步驟、AI 可以協助的地方、輸出結果、需要人工檢查的地方。</div>
-      `,
-      en: `
-        <h3>AI Automation Basics</h3>
-        <p>Automation does not have to start as a complex system. Start by breaking repeated tasks into fixed workflows.</p>
-        <ol>
-          <li>Identify repeated tasks.</li>
-          <li>Define input data.</li>
-          <li>Define what AI should produce.</li>
-          <li>Decide where the output goes, such as email, Notion, or Google Sheets.</li>
-        </ol>
-        <div class="promptbox">Help me break the following repeated task into an automation workflow: input, processing steps, AI support, output, and human review points.</div>
-      `
-    },
-    {
-      keys: ["創業", "startup", "商業", "business", "社會創新", "social innovation", "提案"],
-      zh: `
-        <h3>AI 創業與社會創新提案</h3>
-        <p>AI 可以幫你把想法整理成提案，但你需要自己確認問題是否真實存在。</p>
-        <div class="promptbox">請幫我把以下想法整理成社會創新提案。請包含：問題定義、目標使用者、痛點、解決方案、商業模式、影響力指標、風險與下一步驗證方法。</div>
-        <p><b>提醒：</b>好的提案不是只有想法，而是要能證明真的有人需要。</p>
-      `,
-      en: `
-        <h3>AI for Startup and Social Innovation Proposals</h3>
-        <p>AI can help structure ideas into proposals, but you still need to verify whether the problem is real.</p>
-        <div class="promptbox">Help me turn the following idea into a social innovation proposal. Include problem definition, target users, pain points, solution, business model, impact metrics, risks, and next validation steps.</div>
-        <p><b>Reminder:</b> A good proposal is not only an idea. It must show that people actually need it.</p>
-      `
+  function buildPromptCoachResponse(userQuestion) {
+    const question = userQuestion.trim();
+
+    let likelyTaskZh = "一般問題";
+    let likelyTaskEn = "general question";
+    let suggestedRoleZh = "AI 學習教練";
+    let suggestedRoleEn = "AI learning coach";
+    let outputFormatZh = "步驟清單";
+    let outputFormatEn = "step-by-step list";
+
+    if (value.includes("報告") || value.includes("作業") || value.includes("essay") || value.includes("report")) {
+      likelyTaskZh = "報告或作業規劃";
+      likelyTaskEn = "report or assignment planning";
+      suggestedRoleZh = "大學課程助教";
+      suggestedRoleEn = "university teaching assistant";
+      outputFormatZh = "大綱 + 重點 + 待查資料";
+      outputFormatEn = "outline + key points + sources to verify";
+    } else if (value.includes("簡報") || value.includes("ppt") || value.includes("slide")) {
+      likelyTaskZh = "簡報規劃";
+      likelyTaskEn = "slide planning";
+      suggestedRoleZh = "簡報顧問";
+      suggestedRoleEn = "presentation consultant";
+      outputFormatZh = "每頁標題、核心訊息、三個重點";
+      outputFormatEn = "slide title, key message, three bullet points";
+    } else if (value.includes("讀書") || value.includes("考試") || value.includes("study") || value.includes("exam")) {
+      likelyTaskZh = "讀書與考試準備";
+      likelyTaskEn = "study and exam preparation";
+      suggestedRoleZh = "考試教練";
+      suggestedRoleEn = "exam coach";
+      outputFormatZh = "重點整理 + 練習題 + 複習計畫";
+      outputFormatEn = "key points + practice questions + review plan";
+    } else if (value.includes("履歷") || value.includes("面試") || value.includes("resume") || value.includes("interview")) {
+      likelyTaskZh = "履歷或面試準備";
+      likelyTaskEn = "resume or interview preparation";
+      suggestedRoleZh = "職涯教練";
+      suggestedRoleEn = "career coach";
+      outputFormatZh = "修改建議 + 範例 + 注意事項";
+      outputFormatEn = "revision suggestions + examples + cautions";
+    } else if (value.includes("工具") || value.includes("哪個") || value.includes("tool") || value.includes("chatgpt") || value.includes("claude") || value.includes("gemini")) {
+      likelyTaskZh = "AI 工具選擇";
+      likelyTaskEn = "AI tool selection";
+      suggestedRoleZh = "AI 工具顧問";
+      suggestedRoleEn = "AI tool advisor";
+      outputFormatZh = "工具比較表 + 使用建議";
+      outputFormatEn = "tool comparison table + usage recommendation";
     }
-  ];
 
-  const matched = responses.find(item => item.keys.some(key => value.includes(key)));
+    const zh = `
+      <h3>我會這樣幫你把問題改成好 Prompt</h3>
 
-  const fallbackZh = `
-    <h3>AI Tutor 建議</h3>
-    <p>我會建議你先把問題整理成這 5 個部分：</p>
-    <ol>
-      <li><b>目標：</b>你想完成什麼？</li>
-      <li><b>背景：</b>現在的情況是什麼？</li>
-      <li><b>困難：</b>你卡在哪裡？</li>
-      <li><b>格式：</b>你希望答案用表格、清單還是步驟？</li>
-      <li><b>限制：</b>有哪些不能做或要注意的地方？</li>
-    </ol>
-    <div class="promptbox">請你當作我的 AI 學習導師。我目前想完成：[目標]，背景是：[背景]，我卡在：[困難]。請用步驟方式教我，並給我一個可以直接使用的 Prompt。</div>
-  `;
+      <p><b>你原本想問：</b>${question}</p>
 
-  const fallbackEn = `
-    <h3>AI Tutor Suggestion</h3>
-    <p>I suggest organizing your question into five parts:</p>
-    <ol>
-      <li><b>Goal:</b> What do you want to complete?</li>
-      <li><b>Context:</b> What is the situation?</li>
-      <li><b>Difficulty:</b> Where are you stuck?</li>
-      <li><b>Format:</b> Table, list, or steps?</li>
-      <li><b>Constraints:</b> What should be avoided or considered?</li>
-    </ol>
-    <div class="promptbox">Act as my AI learning tutor. I want to complete: [goal]. Context: [context]. I am stuck at: [difficulty]. Teach me step by step and give me a prompt I can use directly.</div>
-  `;
+      <p><b>我判斷你的任務類型：</b>${likelyTaskZh}</p>
 
-  const html = matched ? text(matched.zh, matched.en) : text(fallbackZh, fallbackEn);
+      <h3>好的 Prompt 公式</h3>
+      <div class="promptbox">角色 + 任務 + 背景 + 輸出格式 + 限制 + 追問要求</div>
+
+      <h3>可以直接複製的 Prompt</h3>
+      <div class="promptbox">請你當作我的${suggestedRoleZh}。
+
+我現在的問題是：
+「${question}」
+
+請你先不要直接給我最終答案。
+請先幫我做以下事情：
+
+1. 判斷我的問題真正想完成什麼任務
+2. 告訴我這個問題還缺少哪些背景資訊
+3. 幫我把問題改寫成一個更清楚的 Prompt
+4. 用「${outputFormatZh}」的格式回答
+5. 如果有不確定的地方，請標示「需要查證」
+6. 最後請問我 3 個追問問題，幫我把需求講得更清楚</div>
+
+      <h3>為什麼這樣問比較好？</h3>
+      <ul>
+        <li><b>有角色：</b>AI 知道要用什麼角度回答。</li>
+        <li><b>有任務：</b>AI 不會亂發散。</li>
+        <li><b>有格式：</b>答案會比較好讀。</li>
+        <li><b>有查證要求：</b>可以降低錯誤資訊風險。</li>
+        <li><b>有追問：</b>AI 會幫你把模糊需求變清楚。</li>
+      </ul>
+
+      <h3>下一步</h3>
+      <p>把上面的 Prompt 複製到 ChatGPT、Claude 或 Gemini，再把 AI 問你的 3 個追問回答完，通常答案會比直接問原問題好很多。</p>
+    `;
+
+    const en = `
+      <h3>I would turn your question into a stronger prompt like this</h3>
+
+      <p><b>Your original question:</b> ${question}</p>
+
+      <p><b>Task type:</b> ${likelyTaskEn}</p>
+
+      <h3>Good Prompt Formula</h3>
+      <div class="promptbox">Role + Task + Context + Output Format + Constraints + Follow-up Questions</div>
+
+      <h3>Copy-ready Prompt</h3>
+      <div class="promptbox">Act as my ${suggestedRoleEn}.
+
+My current question is:
+"${question}"
+
+Please do not give me the final answer immediately.
+First, do the following:
+
+1. Identify what task I am actually trying to complete
+2. Tell me what background information is missing
+3. Rewrite my question into a clearer prompt
+4. Answer using this format: ${outputFormatEn}
+5. If anything is uncertain, mark it as "needs verification"
+6. Ask me 3 follow-up questions to make my request clearer</div>
+
+      <h3>Why this works better</h3>
+      <ul>
+        <li><b>Role:</b> AI knows what perspective to use.</li>
+        <li><b>Task:</b> AI stays focused.</li>
+        <li><b>Format:</b> The answer is easier to read.</li>
+        <li><b>Verification:</b> It reduces the risk of false information.</li>
+        <li><b>Follow-up:</b> AI helps clarify vague needs.</li>
+      </ul>
+
+      <h3>Next step</h3>
+      <p>Copy the prompt above into ChatGPT, Claude, or Gemini, then answer the 3 follow-up questions. The result will usually be much better than asking the original question directly.</p>
+    `;
+
+    return text(zh, en);
+  }
 
   output.innerHTML = `
     <div class="answer show">
-      ${html}
+      ${buildPromptCoachResponse(raw)}
       <hr>
-      <p><b>${text("你問的問題：", "Your question:")}</b>${raw}</p>
-      <p class="small">${text("提醒：這是站內 AI Tutor 原型，適合學習引導與 Prompt 建議；重要資訊仍需查證。", "Reminder: This is a site-based AI Tutor prototype for learning guidance and prompt suggestions. Important information still needs verification.")}</p>
+      <h3>${text("快速檢查：你的問題是不是好 Prompt？", "Quick Check: Is your question a good prompt?")}</h3>
+      <ul>
+        <li>${text("有沒有說明 AI 要扮演什麼角色？", "Did you specify what role AI should play?")}</li>
+        <li>${text("有沒有說明你真正要完成的任務？", "Did you explain the actual task?")}</li>
+        <li>${text("有沒有提供背景資訊？", "Did you provide context?")}</li>
+        <li>${text("有沒有要求輸出格式？", "Did you request an output format?")}</li>
+        <li>${text("有沒有提醒 AI 不確定時要標示？", "Did you ask AI to mark uncertainty?")}</li>
+      </ul>
+      <p class="small">${text("這個 AI Tutor 的定位是 Prompt 教練，不是代替你完成作業，而是教你怎麼把問題問清楚。", "This AI Tutor is a prompt coach. It does not complete work for you; it teaches you how to ask clearer questions.")}</p>
     </div>
   `;
 }
@@ -1154,9 +1074,9 @@ function community() {
         </div>
         <section class="panel" style="margin-top:24px">
           <h2>AI Tutor</h2>
-          <p>${text("這是本地 AI 導師原型，可以回答 Prompt、報告、履歷、工具選擇等基礎問題。", "This is a local AI Tutor prototype for basic questions about prompts, reports, resumes, and tool choices.")}</p>
-          <textarea id="tutor-input" placeholder="${text("輸入你的問題...", "Type your question...")}"></textarea>
-          <button class="btn primary" onclick="tutorReply()">${text("詢問 AI Tutor", "Ask AI Tutor")}</button>
+          <p>${text("這是 Prompt Tutor，專門教你怎麼把模糊問題改成清楚、可執行的 AI 指令。", "This is a Prompt Tutor designed to teach you how to turn vague questions into clear, actionable AI prompts.")}</p>
+          <textarea id="tutor-input" placeholder="${text("輸入你想問 AI 的問題，例如：我想用 AI 幫我做報告", "Type the question you want to ask AI, e.g. I want AI to help me plan a report")}"></textarea>
+          <button class="btn primary" onclick="tutorReply()">${text("幫我改成好 Prompt", "Improve My Prompt")}</button>
           <div id="tutor-output"></div>
         </section>
       </div>
