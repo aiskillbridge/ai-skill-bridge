@@ -4,9 +4,15 @@ const SUPABASE_ANON_KEY = "sb_publishable_yXHovKCCYE04aUcybOc4KA_Fhdp5bTE";
 
 const CREATOR_EMAIL = "li19840610@gmail.com";
 
+function isCreator() {
+  return Boolean(state.user && state.user.email === CREATOR_EMAIL);
+}
 
-
-
+function hasCourseAccess(courseId) {
+  if (isCreator()) return true;
+  if (courseId === "all-access") return false;
+  return false;
+}
 
 
 let supabaseClient = null;
@@ -615,6 +621,22 @@ First, do the following:
   `;
 }
 
+
+function openCourse(courseId) {
+  currentCourseId = courseId;
+  currentLessonIndex = 0;
+  state.route = "course";
+  window.scrollTo(0, 0);
+  render();
+}
+
+function openLesson(index) {
+  currentLessonIndex = index;
+  state.route = "lesson";
+  window.scrollTo(0, 0);
+  render();
+}
+
 function nav() {
   const items = [
     ["home", "nav.home"],
@@ -1017,7 +1039,7 @@ function premium() {
 
         ${
           unlocked
-            ? `<button type="button" class="btn primary" onclick="openCourse('${course.id}')">${text("進入已開通課程", "Enter Unlocked Course")}</button>`
+            ? `<button class="btn primary" onclick="toast('${state.lang === "zh" ? "你是創辦人帳號，已開通此課程" : "Founder account: this course is unlocked"}')">${text("進入已開通課程", "Enter Unlocked Course")}</button>`
             : `<a class="btn primary" href="${course.paymentUrl}" target="_blank">${L("premium.goPay")}</a>`
         }
       </article>
@@ -1062,66 +1084,6 @@ function premium() {
 }
 
 
-function isCreator() {
-  return Boolean(state.user && state.user.email === CREATOR_EMAIL);
-}
-
-function hasCourseAccess(courseId) {
-  return isCreator();
-}
-
-function openCourse(courseId) {
-  currentCourseId = courseId;
-  currentLessonIndex = 0;
-  state.route = "course";
-  window.scrollTo(0, 0);
-  render();
-}
-
-function openLesson(index) {
-  currentLessonIndex = index;
-  state.route = "lesson";
-  window.scrollTo(0, 0);
-  render();
-}
-
-function course() {
-  const item = (typeof PREMIUM !== "undefined" && currentCourseId)
-    ? PREMIUM.find(p => p.id === currentCourseId)
-    : null;
-
-  if (!item) {
-    return shell(`<main class="page"><div class="wrap"><h1>${text("找不到課程", "Course Not Found")}</h1><button class="btn primary" onclick="setRoute('premium')">${text("回到進階付費", "Back to Premium")}</button></div></main>`);
-  }
-
-  const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
-
-  return shell(`
-    <main class="page">
-      <div class="wrap">
-        <button class="btn secondary" onclick="setRoute('premium')">← ${text("回到進階付費", "Back to Premium")}</button>
-        <section class="panel">
-          <span class="tag free">${text("已開通", "Unlocked")}</span>
-          <h1>${state.lang === "zh" ? item.zhTitle : item.enTitle}</h1>
-          <p class="lead">${state.lang === "zh" ? item.zhOutcome : item.enOutcome}</p>
-        </section>
-        <section class="panel" style="margin-top:24px">
-          <h2>${text("課程章節", "Course Lessons")}</h2>
-          <div class="grid two">
-            ${lessons.map((l, i) => `
-              <article class="card">
-                <span class="tag">Lesson ${i + 1}</span>
-                <h3>${l}</h3>
-                <button type="button" class="btn primary" onclick="openLesson(${i})">${text("進入本課", "Open Lesson")}</button>
-              </article>
-            `).join("")}
-          </div>
-        </section>
-      </div>
-    </main>
-  `);
-}
-
 function lesson() {
   const item = (typeof PREMIUM !== "undefined" && currentCourseId)
     ? PREMIUM.find(p => p.id === currentCourseId)
@@ -1144,12 +1106,43 @@ function lesson() {
       <main class="page">
         <div class="wrap">
           <button class="btn secondary" onclick="setRoute('course')">← ${text("回到課程首頁", "Back to Course")}</button>
-          <section class="panel"><span class="tag">Lesson ${lessonNo}</span><h1>${state.lang === "zh" ? detail.zhTitle : detail.enTitle}</h1></section>
-          <section class="panel" style="margin-top:24px"><h2>${text("核心概念", "Core Concept")}</h2><p>${state.lang === "zh" ? detail.zhConcept : detail.enConcept}</p></section>
-          <section class="panel" style="margin-top:24px"><h2>Prompt Template</h2><div class="promptbox">${state.lang === "zh" ? detail.zhPrompt : detail.enPrompt}</div></section>
-          <section class="panel" style="margin-top:24px"><h2>${text("實作任務", "Practice Task")}</h2><p>${state.lang === "zh" ? detail.zhPractice : detail.enPractice}</p></section>
-          <section class="panel" style="margin-top:24px"><h2>${text("小測驗", "Mini Quiz")}</h2><p>${state.lang === "zh" ? detail.zhQuiz : detail.enQuiz}</p></section>
-          <section class="panel" style="margin-top:24px"><h2>${text("課後成果", "Final Output")}</h2><p><b>${state.lang === "zh" ? detail.zhOutcome : detail.enOutcome}</b></p></section>
+
+          <section class="panel">
+            <span class="tag">Lesson ${lessonNo}</span>
+            <h1>${state.lang === "zh" ? detail.zhTitle : detail.enTitle}</h1>
+            <p class="lead">${text("完整付費教材：核心概念、Prompt、案例、實作、小測驗與課後成果。", "Complete premium lesson: concept, prompt, example, practice, quiz, and final output.")}</p>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("核心概念", "Core Concept")}</h2>
+            <p>${state.lang === "zh" ? detail.zhConcept : detail.enConcept}</p>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>Prompt Template</h2>
+            <div class="promptbox">${state.lang === "zh" ? detail.zhPrompt : detail.enPrompt}</div>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("範例", "Example")}</h2>
+            <p>${state.lang === "zh" ? detail.zhExample : detail.enExample}</p>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("實作任務", "Practice Task")}</h2>
+            <p>${state.lang === "zh" ? detail.zhPractice : detail.enPractice}</p>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("小測驗", "Mini Quiz")}</h2>
+            <p>${state.lang === "zh" ? detail.zhQuiz : detail.enQuiz}</p>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("課後成果", "Final Output")}</h2>
+            <p><b>${state.lang === "zh" ? detail.zhOutcome : detail.enOutcome}</b></p>
+          </section>
+
           <div class="btnrow" style="margin-top:24px">
             <button class="btn secondary" onclick="openLesson(Math.max(currentLessonIndex - 1, 0))">${text("上一課", "Previous")}</button>
             <button class="btn primary" onclick="openLesson(Math.min(currentLessonIndex + 1, lessons.length - 1))">${text("下一課", "Next")}</button>
@@ -1353,8 +1346,6 @@ function render() {
     prompts,
     community,
     tutor,
-    course,
-    lesson,
     thailand,
     impact
   };
