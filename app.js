@@ -1071,7 +1071,7 @@ function learning() {
               ${
                 admissionsUnlocked
                   ? (nextIndex >= 0
-                      ? `<p>${text("建議繼續：", "Continue with:")} Lesson ${nextIndex + 1}：${lessons[nextIndex]}</p><button class="btn primary" onclick="openCourse('admissions'); setTimeout(()=>openLesson(${nextIndex}), 50);">${text("繼續上課", "Continue")}</button>`
+                      ? `<p>${text("建議繼續：", "Continue with:")} Lesson ${nextIndex + 1}：${lessons[nextIndex]}</p><button class="btn primary" onclick="currentCourseId='admissions'; setTimeout(()=>openLesson(${nextIndex}), 50);">${text("繼續上課", "Continue")}</button>`
                       : `<p>${text("你已完成全部課程。", "You have completed all lessons.")}</p><button class="btn primary" onclick="setRoute('applicationPackage')">${text("前往大學申請包", "Open Application Package")}</button>`)
                   : `<p>${text("開通後即可追蹤 10 堂課進度。", "Unlock to track all 10 lessons.")}</p><button class="btn primary" onclick="setRoute('premium')">${text("前往開通", "Unlock Course")}</button>`
               }
@@ -1100,7 +1100,7 @@ function learning() {
                 <span class="tag ${isLessonComplete("admissions", i) ? "free" : "premiumtag"}">${isLessonComplete("admissions", i) ? "✓ " + text("已完成", "Completed") : "□ " + text("未完成", "Not completed")}</span>
                 <h3>Lesson ${i + 1}</h3>
                 <p>${l}</p>
-                ${admissionsUnlocked ? `<button class="btn secondary" onclick="openCourse('admissions'); setTimeout(()=>openLesson(${i}), 50);">${text("進入本課", "Open Lesson")}</button>` : ""}
+                ${admissionsUnlocked ? `<button class="btn secondary" onclick="currentCourseId='admissions'; setTimeout(()=>openLesson(${i}), 50);">${text("進入本課", "Open Lesson")}</button>` : ""}
               </article>
             `).join("")}
           </div>
@@ -1244,7 +1244,7 @@ function course() {
         <section class="panel">
           <span class="tag free">${text("已開通", "Unlocked")}</span>
           <h1>${state.lang === "zh" ? item.zhTitle : item.enTitle}</h1>
-          <p class="lead">${state.lang === "zh" ? item.zhOutcome : item.enOutcome}</p><button class="btn secondary" onclick="setRoute('applicationPackage')">${text("我的大學申請包", "My Application Package")}</button>
+          <p class="lead">${state.lang === "zh" ? item.zhOutcome : item.enOutcome}</p><p><b>${text("課程完成度", "Course Progress")}：</b>${courseProgress(item.id).completed}/${courseProgress(item.id).total}（${courseProgress(item.id).percent}%）</p><button class="btn secondary" onclick="setRoute('applicationPackage')">${text("我的大學申請包", "My Application Package")}</button>
         </section>
         <section class="panel" style="margin-top:24px">
           <h2>${text("課程章節", "Course Lessons")}</h2>
@@ -1286,44 +1286,81 @@ function openPrevLesson() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function progressUserKey() {
   return state.user && state.user.email ? state.user.email : "guest";
 }
 
 function lessonProgressKey(courseId, lessonIndex) {
-  return `asb-lesson-complete-${progressUserKey()}-${courseId}-${lessonIndex}`;
+  return `asb-lesson-complete-${progressUserKey()}-${courseId}-${Number(lessonIndex)}`;
 }
 
 function scoreKey(courseId, lessonIndex, metric) {
-  return `asb-score-${progressUserKey()}-${courseId}-${lessonIndex}-${metric}`;
+  return `asb-score-${progressUserKey()}-${courseId}-${Number(lessonIndex)}-${metric}`;
 }
 
 function isLessonComplete(courseId, lessonIndex) {
-  return localStorage.getItem(lessonProgressKey(courseId, lessonIndex)) === "true";
+  try {
+    return localStorage.getItem(lessonProgressKey(courseId, lessonIndex)) === "true";
+  } catch (error) {
+    return false;
+  }
 }
 
 function setLessonComplete(courseId, lessonIndex, value = true) {
-  localStorage.setItem(lessonProgressKey(courseId, lessonIndex), value ? "true" : "false");
-  toast(state.lang === "zh" ? "本課完成狀態已更新" : "Lesson status updated");
-  render();
+  try {
+    localStorage.setItem(lessonProgressKey(courseId, lessonIndex), value ? "true" : "false");
+    currentCourseId = courseId;
+    currentLessonIndex = Number(lessonIndex);
+    toast(value ? (state.lang === "zh" ? "已標記本課完成" : "Lesson marked complete") : (state.lang === "zh" ? "已取消完成" : "Completion removed"));
+    render();
+  } catch (error) {
+    toast(state.lang === "zh" ? "更新失敗，請確認瀏覽器允許本機儲存" : "Update failed. Please allow local storage.");
+  }
 }
 
 function courseProgress(courseId) {
   const item = typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === courseId) : null;
   if (!item) return { completed: 0, total: 0, percent: 0 };
-  const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
+  const lessons = item.zhLessons || item.enLessons || [];
   const completed = lessons.filter((_, i) => isLessonComplete(courseId, i)).length;
   const total = lessons.length;
   return { completed, total, percent: total ? Math.round((completed / total) * 100) : 0 };
 }
 
 function getLessonScore(courseId, lessonIndex, metric) {
-  return Number(localStorage.getItem(scoreKey(courseId, lessonIndex, metric)) || 0);
+  try {
+    return Number(localStorage.getItem(scoreKey(courseId, lessonIndex, metric)) || 0);
+  } catch (error) {
+    return 0;
+  }
 }
 
 function setLessonScore(courseId, lessonIndex, metric, value) {
-  localStorage.setItem(scoreKey(courseId, lessonIndex, metric), String(value));
-  updateLessonScoreUI(courseId, lessonIndex);
+  try {
+    localStorage.setItem(scoreKey(courseId, lessonIndex, metric), String(value));
+    updateLessonScoreUI(courseId, lessonIndex);
+  } catch (error) {}
 }
 
 function lessonScoreAverage(courseId, lessonIndex, metrics) {
@@ -1349,7 +1386,8 @@ function updateLessonScoreUI(courseId, lessonIndex) {
   metrics.forEach(metric => {
     const value = getLessonScore(courseId, lessonIndex, metric);
     for (let i = 1; i <= 10; i++) {
-      const btn = document.getElementById(`score-${lessonIndex}-${metric}-${i}`);
+      const safeId = `score-${lessonIndex}-${metric}-${i}`;
+      const btn = document.getElementById(safeId);
       if (btn) btn.classList.toggle("selected", i === value);
     }
   });
@@ -1485,9 +1523,9 @@ function lesson() {
 
           <section class="panel" style="margin-top:24px">
             <h2>${text("完成本課", "Complete Lesson")}</h2>
-            <p>${isLessonComplete(item.id, lessonNo - 1) ? text("你已標記完成這一課。", "You marked this lesson as complete.") : text("完成實作任務、AI 回饋、自我評分與課程筆記後，請標記本課完成。", "After finishing the practice task, AI feedback, self-score, and notes, mark this lesson complete.")}</p>
-            <button class="btn primary" onclick="setLessonComplete(item.id, lessonNo - 1, true)">✓ ${text("標記本課完成", "Mark Complete")}</button>
-            <button class="btn secondary" onclick="setLessonComplete(item.id, lessonNo - 1, false)">${text("取消完成", "Undo Complete")}</button>
+            <p>${isLessonComplete(item.id, lessonNo - 1) ? text("你已標記完成這一課。課程完成度已更新。", "You marked this lesson as complete. Course progress has been updated.") : text("完成實作任務、AI 回饋、自我評分與課程筆記後，請標記本課完成。", "After finishing the practice task, AI feedback, self-score, and notes, mark this lesson complete.")}</p>
+            <button class="btn primary" onclick="setLessonComplete('${item.id}', ${lessonNo - 1}, true)">✓ ${text("標記本課完成", "Mark Complete")}</button>
+            <button class="btn secondary" onclick="setLessonComplete('${item.id}', ${lessonNo - 1}, false)">${text("取消完成", "Undo Complete")}</button>
           </section>
 
           <div class="btnrow" style="margin-top:24px">
