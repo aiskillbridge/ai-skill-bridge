@@ -1020,7 +1020,7 @@ function premium() {
 
         ${
           unlocked
-            ? `<button class="btn primary" onclick="openCourse(course.id)">${text("進入已開通課程", "Enter Unlocked Course")}</button>`
+            ? `<button class="btn primary" onclick="toast('${state.lang === "zh" ? "你是創辦人帳號，已開通此課程" : "Founder account: this course is unlocked"}')">${text("進入已開通課程", "Enter Unlocked Course")}</button>`
             : `<a class="btn primary" href="${course.paymentUrl}" target="_blank">${L("premium.goPay")}</a>`
         }
       </article>
@@ -1065,34 +1065,53 @@ function premium() {
 }
 
 
-let currentCourseId = null;
+let currentLessonIndex = 0;
 
-function openCourse(courseId){
-  currentCourseId = courseId;
-  setRoute("course");
+function openLesson(index){
+  currentLessonIndex = index;
+  setRoute("lesson");
 }
 
-function course(){
-  const item = (typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === currentCourseId) : null);
+function lesson(){
+  const item = PREMIUM.find(p => p.id === currentCourseId);
   if(!item){
-    return shell(`<main class="page"><div class="wrap"><h1>Course Not Found</h1></div></main>`);
+    return shell(`<main class="page"><div class="wrap"><h1>Lesson Not Found</h1></div></main>`);
   }
-
-  const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
-
+  const lessons = state.lang==="zh" ? item.zhLessons : item.enLessons;
+  const title = lessons[currentLessonIndex] || "";
   return shell(`
     <main class="page">
       <div class="wrap">
-        <button class="btn secondary" onclick="setRoute('premium')">← Back</button>
-        <h1>${state.lang === "zh" ? item.zhTitle : item.enTitle}</h1>
-        <p>${state.lang === "zh" ? item.zhOutcome : item.enOutcome}</p>
+        <button class="btn secondary" onclick="setRoute('course')">← Back</button>
+        <h1>${title}</h1>
 
         <section class="panel">
-          <h2>${state.lang === "zh" ? "課程章節" : "Lessons"}</h2>
-          <ol>
-            ${lessons.map((l,i)=>`<li><strong>${l}</strong><br><small>${state.lang==="zh"?"課程內容即將逐步加入":"Content will be expanded step by step"}</small></li>`).join("")}
-          </ol>
+          <h2>${state.lang==="zh"?"本課重點":"Lesson Objectives"}</h2>
+          <ul>
+            <li>${state.lang==="zh"?"理解本課核心概念":"Understand the core concept"}</li>
+            <li>${state.lang==="zh"?"學習 Prompt 使用方式":"Learn prompt usage"}</li>
+            <li>${state.lang==="zh"?"完成實作練習":"Complete a practical exercise"}</li>
+          </ul>
         </section>
+
+        <section class="panel">
+          <h2>Prompt Template</h2>
+          <pre>請你當作我的教練，逐步教我：${title}，並提供範例、練習與回饋。</pre>
+        </section>
+
+        <section class="panel">
+          <h2>${state.lang==="zh"?"實作任務":"Practice Task"}</h2>
+          <p>${state.lang==="zh"?"完成本課後，請將成果整理成一頁筆記。":"Create a one-page summary after finishing this lesson."}</p>
+        </section>
+
+        <section class="panel">
+          <h2>${state.lang==="zh"?"小測驗":"Quiz"}</h2>
+          <p>${state.lang==="zh"?"請用自己的話解釋本課內容。":"Explain the lesson in your own words."}</p>
+        </section>
+
+        <button class="btn primary" onclick="openLesson(Math.min(currentLessonIndex+1, lessons.length-1))">
+          ${state.lang==="zh"?"下一課":"Next Lesson"}
+        </button>
       </div>
     </main>
   `);
@@ -1278,7 +1297,6 @@ function render() {
     prompts,
     community,
     tutor,
-    course,
     thailand,
     impact
   };
