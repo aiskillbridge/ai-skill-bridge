@@ -1020,7 +1020,7 @@ function premium() {
 
         ${
           unlocked
-            ? `<button class="btn primary" onclick="toast('${state.lang === "zh" ? "你是創辦人帳號，已開通此課程" : "Founder account: this course is unlocked"}')">${text("進入已開通課程", "Enter Unlocked Course")}</button>`
+            ? `<button class="btn primary" onclick="openCourse(course.id)">${text("進入已開通課程", "Enter Unlocked Course")}</button>`
             : `<a class="btn primary" href="${course.paymentUrl}" target="_blank">${L("premium.goPay")}</a>`
         }
       </article>
@@ -1058,6 +1058,40 @@ function premium() {
         <section class="panel" style="margin-top:24px">
           <h2>${L("premium.noteTitle")}</h2>
           <p>${L("premium.note")}</p>
+        </section>
+      </div>
+    </main>
+  `);
+}
+
+
+let currentCourseId = null;
+
+function openCourse(courseId){
+  currentCourseId = courseId;
+  setRoute("course");
+}
+
+function course(){
+  const item = (typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === currentCourseId) : null);
+  if(!item){
+    return shell(`<main class="page"><div class="wrap"><h1>Course Not Found</h1></div></main>`);
+  }
+
+  const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
+
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <button class="btn secondary" onclick="setRoute('premium')">← Back</button>
+        <h1>${state.lang === "zh" ? item.zhTitle : item.enTitle}</h1>
+        <p>${state.lang === "zh" ? item.zhOutcome : item.enOutcome}</p>
+
+        <section class="panel">
+          <h2>${state.lang === "zh" ? "課程章節" : "Lessons"}</h2>
+          <ol>
+            ${lessons.map((l,i)=>`<li><strong>${l}</strong><br><small>${state.lang==="zh"?"課程內容即將逐步加入":"Content will be expanded step by step"}</small></li>`).join("")}
+          </ol>
         </section>
       </div>
     </main>
@@ -1244,6 +1278,7 @@ function render() {
     prompts,
     community,
     tutor,
+    course,
     thailand,
     impact
   };
