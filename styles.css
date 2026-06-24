@@ -409,3 +409,10 @@ main,
 .panel ul li {
   line-height: 1.8;
 }
+
+
+
+/* V28 Application Package */
+textarea[id^="application-package-"] {
+  min-height: 220px;
+}

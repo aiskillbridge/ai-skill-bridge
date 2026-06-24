@@ -1112,7 +1112,7 @@ function course() {
         <section class="panel">
           <span class="tag free">${text("已開通", "Unlocked")}</span>
           <h1>${state.lang === "zh" ? item.zhTitle : item.enTitle}</h1>
-          <p class="lead">${state.lang === "zh" ? item.zhOutcome : item.enOutcome}</p>
+          <p class="lead">${state.lang === "zh" ? item.zhOutcome : item.enOutcome}</p><button class="btn secondary" onclick="setRoute('applicationPackage')">${text("我的大學申請包", "My Application Package")}</button>
         </section>
         <section class="panel" style="margin-top:24px">
           <h2>${text("課程章節", "Course Lessons")}</h2>
@@ -1265,7 +1265,7 @@ function lesson() {
           <section class="panel" style="margin-top:24px">
             <h2>${text("課後成果", "Final Output")}</h2>
             <p><b>${state.lang === "zh" ? detail.zhOutcome : detail.enOutcome}</b></p>
-            <p>${text("完成這個成果後，請放入你的「大學申請包」。10 課完成後，你會得到一份完整申請資料。", "After completing this output, add it to your application package. After 10 lessons, you will have a complete application package.")}</p>
+            <p>${text("完成這個成果後，請放入你的「大學申請包」。10 課完成後，你會得到一份完整申請資料。", "After completing this output, add it to your application package. After 10 lessons, you will have a complete application package.")}</p><button class="btn secondary" onclick="setRoute('applicationPackage')">${text("打開我的大學申請包", "Open My Application Package")}</button>
           </section>
 
           <div class="btnrow" style="margin-top:24px">
@@ -1285,6 +1285,156 @@ function lesson() {
           <span class="tag">Lesson ${lessonNo}</span>
           <h1>${fallbackTitle}</h1>
           <p class="lead">${text("這堂課的完整教材會在後續版本補上。", "Full lesson content will be added later.")}</p>
+        </section>
+      </div>
+    </main>
+  `);
+}
+
+
+const APPLICATION_PACKAGE_ITEMS = [
+  {
+    id: "map",
+    title: "1. 大學申請準備地圖",
+    desc: "整理第一階段、第二階段、備審與面試準備方向。",
+    placeholder: "貼上你第1課完成的大學申請準備地圖..."
+  },
+  {
+    id: "majors",
+    title: "2. 科系探索表",
+    desc: "整理 5 個可能科系與 3 個優先申請科系。",
+    placeholder: "貼上你第2課完成的科系探索表..."
+  },
+  {
+    id: "portfolio",
+    title: "3. 學習歷程素材庫",
+    desc: "整理高中三年的課程成果、活動、競賽、服務與專題。",
+    placeholder: "貼上你第3課完成的學習歷程素材庫..."
+  },
+  {
+    id: "activities",
+    title: "4. 多元表現描述",
+    desc: "放入 3 則用 STAR 架構完成的多元表現。",
+    placeholder: "貼上你第4課完成的多元表現描述..."
+  },
+  {
+    id: "autobiography",
+    title: "5. 學習歷程自述初稿",
+    desc: "整理你的學習主軸、能力成長、申請動機與未來規劃。",
+    placeholder: "貼上你第5課完成的學習歷程自述..."
+  },
+  {
+    id: "majorSpecific",
+    title: "6. 科系專屬備審規劃",
+    desc: "整理目標科系需求與你的素材對照。",
+    placeholder: "貼上你第6課完成的科系專屬備審規劃..."
+  },
+  {
+    id: "interviewBank",
+    title: "7. 面試題庫與回答架構",
+    desc: "整理 20 題面試題與最重要的回答重點。",
+    placeholder: "貼上你第7課完成的面試題庫..."
+  },
+  {
+    id: "mockInterview",
+    title: "8. 模擬面試紀錄",
+    desc: "整理 AI 模擬面試評分與改進清單。",
+    placeholder: "貼上你第8課完成的模擬面試紀錄..."
+  },
+  {
+    id: "advisorPrompt",
+    title: "9. 個人 AI 升學顧問 Prompt",
+    desc: "保存你可以重複使用的個人升學顧問 Prompt。",
+    placeholder: "貼上你第9課完成的個人 AI 升學顧問 Prompt..."
+  },
+  {
+    id: "finalReview",
+    title: "10. 最終總檢查",
+    desc: "整理 AI 對整份申請包的總檢查與最後修改清單。",
+    placeholder: "貼上你第10課完成的總檢查結果..."
+  }
+];
+
+function saveApplicationPackageItem(id) {
+  const el = document.getElementById(`application-package-${id}`);
+  if (!el) return;
+  localStorage.setItem(`application-package-${id}`, el.value);
+  toast(state.lang === "zh" ? "已儲存到大學申請包" : "Saved to application package");
+}
+
+function loadApplicationPackageValue(id) {
+  return localStorage.getItem(`application-package-${id}`) || "";
+}
+
+function applicationPackageProgress() {
+  const completed = APPLICATION_PACKAGE_ITEMS.filter(item => loadApplicationPackageValue(item.id).trim().length > 0).length;
+  return {
+    completed,
+    total: APPLICATION_PACKAGE_ITEMS.length,
+    percent: Math.round((completed / APPLICATION_PACKAGE_ITEMS.length) * 100)
+  };
+}
+
+function copyFinalReviewPrompt() {
+  const data = APPLICATION_PACKAGE_ITEMS.map(item => {
+    return `${item.title}\n${loadApplicationPackageValue(item.id) || "尚未填寫"}`;
+  }).join("\n\n---\n\n");
+
+  const prompt = `請你擔任大學申請總顧問。以下是我的完整大學申請包：\n\n${data}\n\n請幫我做最終總檢查：\n1. 申請主軸是否清楚\n2. 每份資料是否互相支持\n3. 哪些內容太空泛\n4. 哪些地方和目標科系連結不足\n5. 哪些內容需要補強具體例子\n6. 請列出最優先修改的 5 件事\n7. 請給我一份最後 7 天修改計畫\n\n請不要捏造我的經歷，只根據我提供的內容給建議。`;
+
+  navigator.clipboard.writeText(prompt).then(() => {
+    toast(state.lang === "zh" ? "總檢查 Prompt 已複製" : "Final review prompt copied");
+  });
+}
+
+function applicationPackage() {
+  const progress = applicationPackageProgress();
+
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <section class="panel">
+          <span class="tag free">${text("付費課程成果區", "Premium Course Output")}</span>
+          <h1>${text("我的大學申請包", "My University Application Package")}</h1>
+          <p class="lead">${text(
+            "這裡是你完成 10 堂課後集中存放成果的地方。每一課完成後，把成果貼到對應欄位並儲存。完成 10 個欄位後，你就會得到一份完整的大學申請資料。",
+            "This is where you store the outputs from all 10 lessons. After each lesson, paste your result into the matching section and save it. When all 10 sections are complete, you will have a full university application package."
+          )}</p>
+          <h2>${text("完成進度", "Progress")}：${progress.completed}/${progress.total}（${progress.percent}%）</h2>
+          <div style="height:14px;background:#e5ebf5;border-radius:999px;overflow:hidden;margin:18px 0 8px">
+            <div style="height:100%;width:${progress.percent}%;background:linear-gradient(90deg,#2f5bea,#5b5ff4);border-radius:999px"></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>${text("怎麼使用", "How to Use")}</h2>
+          <ol>
+            <li>${text("上完一課後，複製該課成果。", "After finishing a lesson, copy that lesson's output.")}</li>
+            <li>${text("貼到下面對應欄位。", "Paste it into the matching section below.")}</li>
+            <li>${text("按下儲存。", "Click save.")}</li>
+            <li>${text("10 個欄位完成後，按「複製最終總檢查 Prompt」。", "After all 10 sections are complete, click 'Copy Final Review Prompt'.")}</li>
+            <li>${text("把 Prompt 貼到 AI，取得最後修改清單。", "Paste the prompt into AI to get the final revision checklist.")}</li>
+          </ol>
+        </section>
+
+        <div class="grid">
+          ${APPLICATION_PACKAGE_ITEMS.map(item => `
+            <section class="panel">
+              <h2>${item.title}</h2>
+              <p>${item.desc}</p>
+              <textarea id="application-package-${item.id}" placeholder="${item.placeholder}">${loadApplicationPackageValue(item.id)}</textarea>
+              <button class="btn secondary" onclick="saveApplicationPackageItem('${item.id}')">${text("儲存這一項", "Save This Section")}</button>
+            </section>
+          `).join("")}
+        </div>
+
+        <section class="panel" style="margin-top:24px">
+          <h2>${text("最終總檢查", "Final Review")}</h2>
+          <p>${text(
+            "完成 10 個欄位後，按下面按鈕複製總檢查 Prompt，貼到 AI，讓 AI 幫你檢查整份申請包。",
+            "After completing all 10 sections, copy the final review prompt and paste it into AI to review the full package."
+          )}</p>
+          <button class="btn primary" onclick="copyFinalReviewPrompt()">${text("複製最終總檢查 Prompt", "Copy Final Review Prompt")}</button>
         </section>
       </div>
     </main>
@@ -1467,6 +1617,7 @@ function render() {
     center,
     free,
     premium,
+    applicationPackage,
     tools,
     prompts,
     community,
