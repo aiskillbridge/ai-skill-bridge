@@ -23,10 +23,10 @@ const I18N = {
       missionTitle: "從看得懂、做得到，到真的用得上。",
       missionText: "這個網站的初衷不是讓已經懂 AI 的人更厲害，而是讓完全不懂 AI 的人也能透過簡單教學、互動練習與工具導航開始使用 AI。",
       freeTitle: "免費入門",
-      freeText: "讓 AI 小白從零開始，先學會什麼是 AI、什麼是 Prompt，以及如何用 AI 完成讀書與報告任務。",
+      freeText: "讓 AI 小白從零開始，先學會什麼是 AI、什麼是 Prompt，以及如何用 AI 完成讀書、報告、簡報、履歷與日常任務。",
       premiumTitle: "進階付費",
-      premiumText: "提供研究、求職、工作效率、社會創新與創業提案等分級進階課程。",
-      communityTitle: "討論社群",
+      premiumText: "提供研究、求職、工作效率、社會創新、創業提案與 AI 自動化等分級進階課程。",
+      communityTitle: "學習社群",
       communityText: "讓使用者可以提問、分享 Prompt、討論工具、展示成果，形成互助學習社群。",
       freeLessons: "免費課程",
       aiTools: "AI 工具",
@@ -35,11 +35,11 @@ const I18N = {
     },
     courses: {
       title: "課程地圖",
-      lead: "課程依照能力分級，從完全不懂 AI 的 Level 0，到學生應用、求職應用、研究應用與社會創新應用。",
+      lead: "課程依照能力分級，從完全不懂 AI 的 Level 0，到學生應用、求職應用、研究應用、創業應用與自動化應用。",
       freePath: "免費入門路徑",
-      freePathDesc: "適合完全沒有 AI 基礎的人。從 AI 是什麼、Prompt 是什麼，到如何用 AI 做報告、簡報與履歷。",
+      freePathDesc: "適合完全沒有 AI 基礎的人。從 AI 是什麼、Prompt 是什麼，到如何用 AI 做報告、簡報、筆記與履歷。",
       premiumPath: "進階付費路徑",
-      premiumPathDesc: "適合已完成免費課程、想把 AI 用在研究、求職、工作效率或創業提案的人。",
+      premiumPathDesc: "適合已完成免費課程，想把 AI 用在研究、求職、工作效率、社會創新或創業提案的人。",
       enter: "進入",
       view: "查看",
       levelTitle: "能力分級",
@@ -64,12 +64,12 @@ const I18N = {
     },
     premium: {
       title: "進階付費課程",
-      lead: "進階課程依照使用者能力與需求分級。這些課程未來可以接 Gumroad、綠界、藍新、Line Pay 或 Stripe 進行收費。",
+      lead: "進階課程依照使用者能力與需求分級，從學生、求職者、研究者、工作者到創業與社會創新使用者。這些課程未來可以接 Gumroad、綠界、藍新、Line Pay 或 Stripe 收費。",
       goPay: "前往付款",
       suitableFor: "適合對象",
       outcome: "完成後你會得到",
       noteTitle: "付款連結提醒",
-      note: "目前所有付款按鈕先連到 Gumroad 範例網址。正式上線前，你只要把 content.js 裡的 paymentUrl 換成自己的收款連結即可。"
+      note: "目前所有付款按鈕先連到 Gumroad 範例網址。正式上線前，只要把 content.js 裡的 paymentUrl 換成自己的收款連結即可。"
     },
     tools: {
       title: "AI 工具導航",
@@ -152,9 +152,9 @@ const I18N = {
       missionTitle: "From understanding to practice to real-world use.",
       missionText: "This website is not designed only for people who already understand AI. It is built to help complete beginners start using AI through simple explanations, interactive practice, and tool navigation.",
       freeTitle: "Free Beginner Track",
-      freeText: "Help AI beginners start from zero by learning what AI is, what prompts are, and how to use AI for study and reports.",
+      freeText: "Help AI beginners start from zero by learning what AI is, what prompts are, and how to use AI for study, reports, slides, resumes, and daily tasks.",
       premiumTitle: "Premium Advanced Track",
-      premiumText: "Provide advanced courses for research, career development, productivity, social innovation, and startup proposals.",
+      premiumText: "Provide advanced courses for research, career development, productivity, social innovation, startup proposals, and AI automation.",
       communityTitle: "Learning Community",
       communityText: "Let users ask questions, share prompts, discuss tools, and showcase results through peer learning.",
       freeLessons: "Free Lessons",
@@ -164,11 +164,11 @@ const I18N = {
     },
     courses: {
       title: "Course Roadmap",
-      lead: "Courses are divided by ability level, from Level 0 for people who do not understand AI to student, career, research, and social innovation applications.",
+      lead: "Courses are divided by ability level, from Level 0 for people who do not understand AI to student, career, research, startup, and automation applications.",
       freePath: "Free Beginner Path",
-      freePathDesc: "For people with no AI background. Learn what AI is, what prompts are, and how to use AI for reports, slides, and resumes.",
+      freePathDesc: "For people with no AI background. Learn what AI is, what prompts are, and how to use AI for reports, slides, notes, and resumes.",
       premiumPath: "Premium Advanced Path",
-      premiumPathDesc: "For learners who finished the free course and want to use AI for research, career development, productivity, or startup proposals.",
+      premiumPathDesc: "For learners who finished the free course and want to use AI for research, career development, productivity, social innovation, or startup proposals.",
       enter: "Enter",
       view: "View",
       levelTitle: "Skill Levels",
@@ -193,7 +193,7 @@ const I18N = {
     },
     premium: {
       title: "Premium Advanced Courses",
-      lead: "Premium courses are divided by user ability and needs. These courses can later connect to Gumroad, ECPay, NewebPay, Line Pay, or Stripe for payment.",
+      lead: "Premium courses are divided by user ability and needs, from students, job seekers, researchers, workers, to startup and social innovation users. These courses can later connect to Gumroad, ECPay, NewebPay, Line Pay, or Stripe for payment.",
       goPay: "Go to Payment",
       suitableFor: "Suitable For",
       outcome: "Outcome",
@@ -293,6 +293,68 @@ const LESSONS = [
     enAnswer: "Act as my university teaching assistant. Help me review macroeconomics. My exam covers inflation, unemployment, and the Phillips Curve. Use bullet points and create 5 practice questions at the end."
   },
   {
+    id: "role",
+    level: "Level 0",
+    zhTitle: "給 AI 一個角色，答案會更精準",
+    enTitle: "Give AI a role to get better answers.",
+    zhText: "角色設定可以讓 AI 用更適合的語氣與專業角度回答。你可以請 AI 當老師、面試官、編輯、研究助理、簡報顧問或職涯教練。",
+    enText: "Role setting helps AI answer with a suitable tone and professional perspective. You can ask AI to act as a teacher, interviewer, editor, research assistant, slide consultant, or career coach.",
+    quiz: {
+      zhQ: "哪一個 Prompt 比較好？",
+      enQ: "Which prompt is better?",
+      options: [
+        { zh: "幫我改履歷", en: "Improve my resume", correct: false },
+        { zh: "請你當作科技業 HR，幫我把履歷改得更適合實習申請", en: "Act as a tech HR specialist and improve my resume for an internship application", correct: true },
+        { zh: "你知道履歷嗎", en: "Do you know resumes?", correct: false }
+      ],
+      zhExplain: "好的 Prompt 會加入角色與目的，讓 AI 知道要從哪個角度幫你。",
+      enExplain: "A good prompt includes role and purpose so AI knows how to help."
+    }
+  },
+  {
+    id: "format",
+    level: "Level 0",
+    zhTitle: "指定輸出格式：表格、清單、步驟、範例",
+    enTitle: "Specify output format: table, list, steps, examples.",
+    zhText: "如果你沒有指定格式，AI 可能會給你一大段文字。你可以要求它用表格、條列、三步驟、比較表、範例或檢查清單回答。",
+    enText: "If you do not specify a format, AI may give you a long paragraph. You can ask for a table, bullet points, steps, comparison chart, examples, or checklist.",
+    zhTask: "把「解釋通膨」改寫成要求 AI 用表格回答的 Prompt。",
+    enTask: "Rewrite 'Explain inflation' into a prompt that asks AI to answer in a table.",
+    zhAnswer: "請用表格解釋通膨，欄位包含：概念、簡單說明、生活例子、可能影響、我需要注意的重點。",
+    enAnswer: "Explain inflation in a table with these columns: concept, simple explanation, everyday example, possible impact, and key point to remember."
+  },
+  {
+    id: "verify",
+    level: "Level 0",
+    zhTitle: "AI 會出錯：你一定要學會查證",
+    enTitle: "AI can be wrong: learn to verify.",
+    zhText: "AI 可能會產生錯誤資訊、過時資料或看似合理但其實不存在的引用。重要任務一定要要求 AI 標明不確定處，並自己查證來源。",
+    enText: "AI may produce incorrect information, outdated data, or plausible but nonexistent citations. For important tasks, ask AI to identify uncertainty and verify sources yourself.",
+    quiz: {
+      zhQ: "哪一種使用 AI 的方式最安全？",
+      enQ: "Which way of using AI is safest?",
+      options: [
+        { zh: "AI 說什麼都直接相信", en: "Believe everything AI says", correct: false },
+        { zh: "重要資訊要求來源並自行查證", en: "Ask for sources and verify important information", correct: true },
+        { zh: "只看答案，不看推理", en: "Only read answers and ignore reasoning", correct: false }
+      ],
+      zhExplain: "AI 很好用，但不能取代查證與判斷。",
+      enExplain: "AI is useful, but it does not replace verification and judgment."
+    }
+  },
+  {
+    id: "study",
+    level: "Level 1",
+    zhTitle: "用 AI 讀書：整理重點與練習題",
+    enTitle: "Use AI for studying: summaries and practice questions.",
+    zhText: "AI 可以把課本或筆記整理成重點、幫你出題、用不同難度解釋觀念。最好的方法是讓 AI 幫你練習，而不是只叫它給答案。",
+    enText: "AI can summarize notes, generate practice questions, and explain concepts at different difficulty levels. The best approach is to use AI for practice, not just answers.",
+    zhTask: "設計一個 Prompt，讓 AI 幫你準備期末考。",
+    enTask: "Design a prompt asking AI to help you prepare for a final exam.",
+    zhAnswer: "請你當作我的考試教練。以下是我的課程範圍：[貼上範圍]。請幫我整理 10 個必考重點、5 個容易混淆的概念，並出 10 題選擇題和 3 題申論題讓我練習。",
+    enAnswer: "Act as my exam coach. Here is my exam scope: [paste scope]. Please organize 10 key points, 5 confusing concepts, 10 multiple-choice questions, and 3 essay questions for practice."
+  },
+  {
     id: "report",
     level: "Level 1",
     zhTitle: "學生怎麼用 AI 做報告，而不是被 AI 取代？",
@@ -303,20 +365,77 @@ const LESSONS = [
     enTask: "Design a prompt asking AI to create a report outline without writing the full report.",
     zhAnswer: "請你協助我規劃一份大學報告大綱，主題是生成式 AI 對薪資不平等的影響。請只提供架構、可能論點、需要查證的資料方向與反方觀點，不要直接替我完成全文。",
     enAnswer: "Help me plan a university report outline on how generative AI affects wage inequality. Only provide structure, possible arguments, sources to verify, and counterarguments. Do not write the full essay for me."
+  },
+  {
+    id: "slides",
+    level: "Level 1",
+    zhTitle: "用 AI 做簡報：不是變漂亮，而是先變清楚",
+    enTitle: "Use AI for slides: clarity before design.",
+    zhText: "簡報最重要的是邏輯。你可以先請 AI 幫你規劃簡報架構，再用 Canva、Gamma 或 PowerPoint 製作視覺。",
+    enText: "The most important part of a presentation is logic. You can ask AI to plan the slide structure first, then use Canva, Gamma, or PowerPoint for visuals.",
+    zhTask: "請 AI 幫你把一個報告主題改成 8 頁簡報架構。",
+    enTask: "Ask AI to turn a report topic into an 8-slide structure.",
+    zhAnswer: "請你把主題「AI 對大學生學習方式的影響」規劃成 8 頁簡報。每頁包含：標題、一句核心訊息、三個重點、建議圖片或圖表。",
+    enAnswer: "Turn the topic 'The impact of AI on university students' learning methods' into an 8-slide deck. Each slide should include a title, one key message, three bullet points, and suggested visual."
+  },
+  {
+    id: "email",
+    level: "Level 1",
+    zhTitle: "用 AI 寫信：禮貌、清楚、有目的",
+    enTitle: "Use AI for emails: polite, clear, and purposeful.",
+    zhText: "寫 Email 時，AI 可以幫你調整語氣、整理重點、避免太情緒化。你要提供收件人、目的、背景、希望對方採取的行動。",
+    enText: "AI can help adjust tone, organize key points, and avoid emotional wording in emails. Provide recipient, purpose, context, and desired action.",
+    zhTask: "寫一個 Prompt，請 AI 幫你寄信詢問實習證明。",
+    enTask: "Write a prompt asking AI to draft an email requesting internship confirmation.",
+    zhAnswer: "請幫我寫一封正式但禮貌的英文信給主辦單位。背景：我已錄取教育部海外計畫，學校申請補助需要接待單位提供確認文件。目的：請對方協助開立我將前往見習或實習的證明。語氣要誠懇、清楚、不要太強硬。",
+    enAnswer: "Write a formal but polite English email to the organizer. Context: I have been accepted into a Ministry of Education overseas program, and my university scholarship application requires confirmation from the host unit. Purpose: request a document confirming my visit or internship. Tone: sincere, clear, and not too forceful."
+  },
+  {
+    id: "career",
+    level: "Level 2",
+    zhTitle: "用 AI 做履歷與面試準備",
+    enTitle: "Use AI for resumes and interview preparation.",
+    zhText: "AI 可以幫你把經驗改寫得更具體，但不能捏造經歷。好的履歷要強調行動、成果、能力與證據。",
+    enText: "AI can make your experience more specific, but it should not invent experience. A good resume emphasizes action, results, skills, and evidence.",
+    zhTask: "把「我參加社團活動」改寫成比較適合履歷的句子。",
+    enTask: "Rewrite 'I joined club activities' into a resume-ready bullet.",
+    zhAnswer: "參與校內社團專案規劃與活動執行，協助完成活動流程設計、現場協調與成效回饋整理，提升團隊溝通與專案管理能力。",
+    enAnswer: "Participated in student club project planning and event execution, supporting agenda design, on-site coordination, and feedback analysis while strengthening teamwork and project management skills."
+  },
+  {
+    id: "tool-choice",
+    level: "Level 2",
+    zhTitle: "不同任務要用不同 AI 工具",
+    enTitle: "Different tasks need different AI tools.",
+    zhText: "不是每個問題都只用 ChatGPT。寫作可以用 ChatGPT 或 Claude；研究可以用 Perplexity 或 NotebookLM；簡報可以用 Gamma 或 Canva；圖像可以用 Canva 或影像生成工具。",
+    enText: "Not every task should use only ChatGPT. Writing can use ChatGPT or Claude; research can use Perplexity or NotebookLM; slides can use Gamma or Canva; visuals can use Canva or image tools.",
+    quiz: {
+      zhQ: "如果你有很多 PDF 想要問問題，最適合先試哪個工具？",
+      enQ: "If you have many PDFs and want to ask questions about them, which tool is best to try first?",
+      options: [
+        { zh: "NotebookLM", en: "NotebookLM", correct: true },
+        { zh: "只用 Instagram", en: "Only Instagram", correct: false },
+        { zh: "只用計算機", en: "Only calculator", correct: false }
+      ],
+      zhExplain: "NotebookLM 適合針對你上傳的資料進行來源導向問答。",
+      enExplain: "NotebookLM is useful for source-grounded Q&A based on uploaded materials."
+    }
   }
 ];
 
 const PREMIUM = [
   {
-    id: "research",
-    price: "NT$699",
+    id: "student",
+    price: "NT$399",
     paymentUrl: "https://gumroad.com/",
-    zhTitle: "AI 研究與文獻回顧加速班",
-    enTitle: "AI Research and Literature Review Accelerator",
-    zhUser: "大學生、研究生、需要做專題或論文的人",
-    enUser: "University students, graduate students, and people working on projects or papers",
-    zhOutcome: "你會學會用 AI 規劃研究問題、整理文獻、建立筆記系統與製作學術簡報。",
-    enOutcome: "You will learn to use AI to plan research questions, organize literature, build note systems, and create academic presentations."
+    zhTitle: "AI 學生效率實戰班",
+    enTitle: "AI Student Productivity Lab",
+    zhUser: "大學生、高中生、剛開始用 AI 做報告與讀書的人",
+    enUser: "University students, high school students, and beginners using AI for study and reports",
+    zhOutcome: "完成後你會擁有一套可重複使用的讀書、報告、簡報與考試準備流程。",
+    enOutcome: "You will build a repeatable workflow for studying, reports, slides, and exam preparation.",
+    zhDesc: "模組包含：AI 讀書法、報告大綱、資料查證、簡報架構、考前複習、學術誠信。",
+    enDesc: "Modules: AI study workflow, report outlines, source verification, slide structure, exam review, and academic integrity."
   },
   {
     id: "career",
@@ -324,10 +443,38 @@ const PREMIUM = [
     paymentUrl: "https://gumroad.com/",
     zhTitle: "AI 求職與個人品牌實戰班",
     enTitle: "AI Career and Personal Branding Lab",
-    zhUser: "想找實習、工作、交換或獎學金的學生",
-    enUser: "Students applying for internships, jobs, exchange programs, or scholarships",
-    zhOutcome: "你會完成履歷、LinkedIn、自我介紹、面試回答與作品集架構。",
-    enOutcome: "You will create a resume, LinkedIn profile, self-introduction, interview answers, and portfolio structure."
+    zhUser: "想找實習、工作、交換、獎學金或海外計畫的學生",
+    enUser: "Students applying for internships, jobs, exchange programs, scholarships, or overseas programs",
+    zhOutcome: "完成後你會完成履歷、自我介紹、面試回答、LinkedIn 內容與申請信模板。",
+    enOutcome: "You will complete a resume, self-introduction, interview answers, LinkedIn content, and application email templates.",
+    zhDesc: "模組包含：履歷優化、STAR 面試法、英文自我介紹、申請信、作品集與 LinkedIn 個人品牌。",
+    enDesc: "Modules: resume optimization, STAR interviews, English self-introduction, application emails, portfolio, and LinkedIn personal branding."
+  },
+  {
+    id: "research",
+    price: "NT$699",
+    paymentUrl: "https://gumroad.com/",
+    zhTitle: "AI 研究與文獻回顧加速班",
+    enTitle: "AI Research and Literature Review Accelerator",
+    zhUser: "大學生、研究生、需要做專題、論文或競賽研究的人",
+    enUser: "University students, graduate students, and learners working on projects, papers, or research competitions",
+    zhOutcome: "完成後你會學會用 AI 規劃研究問題、整理文獻、建立筆記系統與製作學術簡報。",
+    enOutcome: "You will learn to use AI to plan research questions, organize literature, build note systems, and create academic presentations.",
+    zhDesc: "模組包含：研究問題設計、文獻搜尋、摘要比較表、研究缺口、引用風險、簡報與口頭報告。",
+    enDesc: "Modules: research question design, literature search, summary comparison tables, research gaps, citation risks, academic slides and presentation."
+  },
+  {
+    id: "workplace",
+    price: "NT$799",
+    paymentUrl: "https://gumroad.com/",
+    zhTitle: "AI 工作效率與自動化入門班",
+    enTitle: "AI Workplace Productivity and Automation Starter",
+    zhUser: "想用 AI 處理 Email、會議紀錄、企劃、資料整理與工作流程的人",
+    enUser: "People who want to use AI for email, meeting notes, proposals, data organization, and workflows",
+    zhOutcome: "完成後你會建立個人的 AI 工作流程，能更快完成日常行政與企劃任務。",
+    enOutcome: "You will build a personal AI workflow for daily administration and planning tasks.",
+    zhDesc: "模組包含：Email 模板、會議紀錄、週報、企劃書、SOP、Notion/Google 文件工作流。",
+    enDesc: "Modules: email templates, meeting notes, weekly reports, proposals, SOPs, and Notion/Google Docs workflows."
   },
   {
     id: "social",
@@ -335,10 +482,25 @@ const PREMIUM = [
     paymentUrl: "https://gumroad.com/",
     zhTitle: "AI 社會創新與創業提案班",
     enTitle: "AI Social Innovation and Startup Proposal Lab",
-    zhUser: "想做社會創新、創業競賽、提案簡報的人",
-    enUser: "Learners interested in social innovation, startup competitions, and pitch decks",
-    zhOutcome: "你會完成問題定義、使用者分析、商業模式、影響力指標與提案簡報。",
-    enOutcome: "You will complete problem definition, user analysis, business model, impact indicators, and a pitch deck."
+    zhUser: "想做社會創新、創業競賽、公益專案、海外計畫成果轉化的人",
+    enUser: "Learners interested in social innovation, startup competitions, nonprofit projects, and overseas program impact conversion",
+    zhOutcome: "完成後你會完成問題定義、使用者分析、商業模式、影響力指標與提案簡報。",
+    enOutcome: "You will complete problem definition, user analysis, business model, impact indicators, and a pitch deck.",
+    zhDesc: "模組包含：問題樹、利害關係人、使用者訪談、商業模式、影響力衡量、Pitch Deck。",
+    enDesc: "Modules: problem tree, stakeholders, user interviews, business model, impact measurement, and pitch deck."
+  },
+  {
+    id: "advanced-ai",
+    price: "NT$1299",
+    paymentUrl: "https://gumroad.com/",
+    zhTitle: "AI 進階使用者與 Agent 入門班",
+    enTitle: "Advanced AI User and Agent Starter",
+    zhUser: "已經會用 ChatGPT，想學會多工具工作流、AI Agent 與自動化概念的人",
+    enUser: "Users who already use ChatGPT and want to learn multi-tool workflows, AI agents, and automation concepts",
+    zhOutcome: "完成後你會理解 AI Agent 的基本概念，並能設計自己的多步驟 AI 工作流程。",
+    enOutcome: "You will understand the basics of AI agents and design your own multi-step AI workflow.",
+    zhDesc: "模組包含：多工具組合、任務拆解、Agent 概念、資料輸入輸出、風險控管、低程式碼自動化。",
+    enDesc: "Modules: multi-tool workflows, task decomposition, agent concepts, data input/output, risk control, and low-code automation."
   }
 ];
 
@@ -356,5 +518,7 @@ const TOOLS = [
 const PROMPTS = [
   { cat: "Study", text: "Explain [concept] in three levels: for a 10-year-old, for a high school student, and for a university student. Give one example for each level." },
   { cat: "Report", text: "Help me create a report outline on [topic]. Include introduction, three main arguments, evidence to verify, counterarguments, and conclusion. Do not write the full essay." },
-  { cat: "Resume", text: "Improve the following resume bullet points to emphasize action, results, and skills. Keep everything truthful and do not invent experience." }
+  { cat: "Resume", text: "Improve the following resume bullet points to emphasize action, results, and skills. Keep everything truthful and do not invent experience." },
+  { cat: "Slides", text: "Turn [topic] into an 8-slide presentation. For each slide, provide a title, one key message, three bullet points, and a suggested visual." },
+  { cat: "Email", text: "Write a polite and professional email to [recipient]. Context: [context]. Goal: [goal]. Tone: sincere, clear, and not too forceful." }
 ];
