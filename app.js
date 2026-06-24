@@ -11,7 +11,8 @@ let state = {
   route: "home",
   activeLesson: localStorage.getItem("asb_lesson") || "ai",
   progress: JSON.parse(localStorage.getItem("asb_progress") || "{}"),
-  user: null
+  user: null,
+  profile: null
 };
 
 function L(path) {
@@ -24,8 +25,19 @@ function save() {
   localStorage.setItem("asb_progress", JSON.stringify(state.progress));
 }
 
+function completedCount() {
+  return Object.values(state.progress).filter(Boolean).length;
+}
+
 function progressPercent() {
-  return Math.round((Object.values(state.progress).filter(Boolean).length / LESSONS.length) * 100);
+  return Math.round((completedCount() / LESSONS.length) * 100);
+}
+
+function currentLevel() {
+  const done = completedCount();
+  if (done === 0) return "Level 0";
+  if (done < LESSONS.length) return "Level 0";
+  return "Level 1 Ready";
 }
 
 function setRoute(route) {
@@ -67,6 +79,21 @@ async function ensureProfile() {
     console.error("Profile sync error:", error);
   }
 }
+
+async function loadProfile() {
+  if (!supabaseClient || !state.user) return;
+
+  const { data, error } = await supabaseClient
+    .from("profiles")
+    .select("id,email,display_name,plan,created_at")
+    .eq("id", state.user.id)
+    .single();
+
+  if (!error && data) {
+    state.profile = data;
+  }
+}
+
 
 async function loadProgressFromSupabase() {
   if (!supabaseClient || !state.user) return;
@@ -126,6 +153,7 @@ async function initAuth() {
 
   if (state.user) {
     await ensureProfile();
+    await loadProfile();
     await loadProgressFromSupabase();
   }
 
@@ -133,13 +161,23 @@ async function initAuth() {
     state.user = session?.user || null;
     if (state.user) {
       await ensureProfile();
+      await loadProfile();
       await loadProgressFromSupabase();
+    } else {
+      state.profile = null;
     }
     render();
   });
 }
 
 async function signInWithGoogle() {
+  if (/FBAN|FBAV|Instagram|Line|MicroMessenger|Messenger/i.test(navigator.userAgent)) {
+    alert(state.lang === "zh"
+      ? "請使用 Safari 或 Chrome 開啟網站後再登入 Google。LINE/IG/FB 內建瀏覽器會被 Google 擋住。"
+      : "Please open this website in Safari or Chrome before Google login. In-app browsers may be blocked by Google.");
+    return;
+  }
+
   if (!supabaseClient) {
     alert(state.lang === "zh"
       ? "尚未設定 Supabase Publishable Key。"
@@ -159,12 +197,14 @@ async function signOut() {
   if (!supabaseClient) return;
   await supabaseClient.auth.signOut();
   state.user = null;
+  state.profile = null;
   render();
 }
 
 function nav() {
   const items = [
     ["home", "nav.home"],
+    ["progress", state.lang === "zh" ? "我的進度" : "My Progress"],
     ["courses", "nav.courses"],
     ["free", "nav.free"],
     ["premium", "nav.premium"],
@@ -176,10 +216,10 @@ function nav() {
   ];
 
   const authHtml = state.user
-    ? `<button class="lang" title="${state.user.email}">${state.user.email.split("@")[0]}</button><button class="lang" onclick="signOut()">${state.lang === "zh" ? "登出" : "Logout"}</button>`
+    ? `<button class="lang" onclick="setRoute('progress')" title="${state.user.email}">${state.profile?.display_name || state.user.email.split("@")[0]}</button><button class="lang" onclick="signOut()">${state.lang === "zh" ? "登出" : "Logout"}</button>`
     : `<button class="lang" onclick="signInWithGoogle()">${state.lang === "zh" ? "Google 登入" : "Google Login"}</button>`;
 
-  return `<header class="topbar"><div class="wrap nav"><button class="brand" onclick="setRoute('home')"><span class="logo">AI</span><span>Skill <span style="color:var(--blue)">Bridge</span></span></button><nav class="navlinks">${items.map(([route, key]) => `<button class="${state.route === route ? "active" : ""}" onclick="setRoute('${route}')">${L(key)}</button>`).join("")}${authHtml}<button class="lang" onclick="toggleLang()">${state.lang === "zh" ? "EN" : "中文"}</button></nav></div></header>`;
+  return `<header class="topbar"><div class="wrap nav"><button class="brand" onclick="setRoute('home')"><span class="logo">AI</span><span>Skill <span style="color:var(--blue)">Bridge</span></span></button><nav class="navlinks">${items.map(([route, label]) => `<button class="${state.route === route ? "active" : ""}" onclick="setRoute('${route}')">${String(label).startsWith("nav.") ? L(label) : label}</button>`).join("")}${authHtml}<button class="lang" onclick="toggleLang()">${state.lang === "zh" ? "EN" : "中文"}</button></nav></div></header>`;
 }
 
 function shell(content) {
@@ -260,9 +300,65 @@ function impact() {
   return shell(`<main class="page"><div class="wrap"><h1>${L("impact.title")}</h1><p class="lead">${L("impact.lead")}</p><div class="grid three"><article class="card"><span class="tag free">Access</span><h3>${L("impact.access")}</h3><p>${L("impact.accessText")}</p></article><article class="card"><span class="tag premiumtag">Sustainability</span><h3>${L("impact.sustainability")}</h3><p>${L("impact.sustainabilityText")}</p></article><article class="card"><span class="tag communitytag">Community</span><h3>${L("impact.community")}</h3><p>${L("impact.communityText")}</p></article></div></div></main>`);
 }
 
+
+function progressPage() {
+  if (!state.user) {
+    return shell(`<main class="page"><div class="wrap">
+      <h1>${state.lang === "zh" ? "我的進度" : "My Progress"}</h1>
+      <p class="lead">${state.lang === "zh" ? "請先登入 Google 帳號，才能查看個人學習進度。" : "Please login with Google to view your learning progress."}</p>
+      <button class="btn primary" onclick="signInWithGoogle()">${state.lang === "zh" ? "Google 登入" : "Google Login"}</button>
+    </div></main>`);
+  }
+
+  return shell(`<main class="page"><div class="wrap">
+    <h1>${state.lang === "zh" ? "我的學習進度" : "My Learning Progress"}</h1>
+    <p class="lead">${state.lang === "zh" ? "這裡會顯示你的會員資料、學習進度和目前等級。" : "Your member profile, course progress, and current level."}</p>
+
+    <div class="grid three">
+      <article class="card">
+        <h3>${state.lang === "zh" ? "會員資料" : "Profile"}</h3>
+        <p><b>${state.lang === "zh" ? "名稱" : "Name"}：</b>${state.profile?.display_name || state.user.email}</p>
+        <p><b>Email：</b>${state.profile?.email || state.user.email}</p>
+        <p><b>${state.lang === "zh" ? "方案" : "Plan"}：</b>${state.profile?.plan || "free"}</p>
+      </article>
+
+      <article class="card">
+        <h3>${state.lang === "zh" ? "學習進度" : "Progress"}</h3>
+        <div class="progressbar"><div class="progressfill" style="width:${progressPercent()}%"></div></div>
+        <p><b>${completedCount()} / ${LESSONS.length}</b> ${state.lang === "zh" ? "課已完成" : "lessons completed"}</p>
+        <p>${progressPercent()}% completed</p>
+      </article>
+
+      <article class="card">
+        <h3>${state.lang === "zh" ? "目前等級" : "Current Level"}</h3>
+        <p class="price">${currentLevel()}</p>
+        <p>${state.lang === "zh" ? "完成免費入門課程後，即可進入 Level 1 應用課程。" : "Complete all free lessons to become Level 1 ready."}</p>
+      </article>
+    </div>
+
+    <section class="panel" style="margin-top:24px">
+      <h2>${state.lang === "zh" ? "課程完成狀態" : "Lesson Status"}</h2>
+      <div class="grid three">
+        ${LESSONS.map(lesson => `
+          <article class="card">
+            <span class="tag ${state.progress[lesson.id] ? "free" : ""}">
+              ${state.progress[lesson.id] ? "✓ Completed" : (state.lang === "zh" ? "尚未完成" : "Not yet")}
+            </span>
+            <h3>${state.lang === "zh" ? lesson.zhTitle : lesson.enTitle}</h3>
+            <p>${lesson.level}</p>
+            <button class="btn secondary" onclick="state.activeLesson='${lesson.id}';setRoute('free')">${state.lang === "zh" ? "前往課程" : "Open lesson"}</button>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  </div></main>`);
+}
+
+
 function render() {
   const routes = {
     home,
+    progress: progressPage,
     courses,
     free,
     premium,
