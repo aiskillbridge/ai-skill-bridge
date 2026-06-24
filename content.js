@@ -281,6 +281,68 @@ const LESSONS = [
     }
   },
   {
+    id: "ai-can-do",
+    level: "Level 0",
+    zhTitle: "AI 可以幫你做什麼？",
+    enTitle: "What can AI help you do?",
+    zhText: "AI 可以協助你整理資料、產生初稿、規劃行程、練習語言、模擬面試、整理簡報與產生想法。它最適合當成輔助工具，而不是替你做所有判斷的人。",
+    enText: "AI can help organize information, draft content, plan schedules, practice languages, simulate interviews, structure slides, and generate ideas. It is best used as an assistant, not as a replacement for your judgment.",
+    zhTask: "列出三件你希望 AI 幫你完成的日常任務。",
+    enTask: "List three daily tasks you want AI to help you complete.",
+    zhAnswer: "例：幫我整理上課筆記、幫我規劃讀書計畫、幫我修改英文 Email。",
+    enAnswer: "Examples: summarize class notes, plan a study schedule, improve an English email."
+  },
+  {
+    id: "chatgpt-intro",
+    level: "Level 0",
+    zhTitle: "ChatGPT 是什麼？",
+    enTitle: "What is ChatGPT?",
+    zhText: "ChatGPT 是一個可以對話、整理、產生文字與協助思考的 AI 工具。你可以把它當作讀書助教、寫作教練、簡報顧問或腦力激盪夥伴。",
+    enText: "ChatGPT is an AI tool for conversation, organization, writing, and thinking support. You can use it as a study assistant, writing coach, slide consultant, or brainstorming partner.",
+    quiz: {
+      zhQ: "使用 ChatGPT 最重要的是什麼？",
+      enQ: "What is most important when using ChatGPT?",
+      options: [
+        { zh: "只打一個很短的問題", en: "Only type a very short question", correct: false },
+        { zh: "提供清楚背景、目標和格式", en: "Provide clear context, goals, and format", correct: true },
+        { zh: "完全不檢查答案", en: "Never check the answer", correct: false }
+      ],
+      zhExplain: "背景越清楚，AI 的回答越接近你真正需要的內容。",
+      enExplain: "Clearer context helps AI give answers closer to what you actually need."
+    }
+  },
+  {
+    id: "claude-intro",
+    level: "Level 0",
+    zhTitle: "Claude 是什麼？",
+    enTitle: "What is Claude?",
+    zhText: "Claude 適合處理長文件、寫作潤飾、摘要與邏輯整理。當你需要閱讀長篇文章、報告或資料時，它可以幫助你快速整理結構。",
+    enText: "Claude is useful for long documents, writing refinement, summarization, and logical organization. When reading long articles, reports, or materials, it can help you structure the content quickly.",
+    zhTask: "請設計一個 Prompt，讓 Claude 幫你整理一篇長文章。",
+    enTask: "Design a prompt asking Claude to summarize a long article.",
+    zhAnswer: "請幫我整理以下文章，分成：核心主旨、三個重點、重要概念、我需要查證的地方，以及 5 句摘要。",
+    enAnswer: "Please organize the following article into: main idea, three key points, important concepts, things I should verify, and a five-sentence summary."
+  },
+  {
+    id: "gemini-intro",
+    level: "Level 0",
+    zhTitle: "Gemini 是什麼？",
+    enTitle: "What is Gemini?",
+    zhText: "Gemini 是 Google 的 AI 工具，適合和 Google 生態系一起使用，例如搜尋、文件、圖片理解與日常協作。",
+    enText: "Gemini is Google's AI tool. It works well with the Google ecosystem, including search, documents, image understanding, and daily collaboration.",
+    quiz: {
+      zhQ: "Gemini 最適合搭配哪一類工具使用？",
+      enQ: "Which ecosystem does Gemini work especially well with?",
+      options: [
+        { zh: "Google 生態系", en: "Google ecosystem", correct: true },
+        { zh: "只能搭配遊戲平台", en: "Only gaming platforms", correct: false },
+        { zh: "只能離線使用", en: "Offline-only tools", correct: false }
+      ],
+      zhExplain: "Gemini 與 Google 服務整合度高，適合日常學習與工作協作。",
+      enExplain: "Gemini integrates well with Google services for everyday learning and work."
+    }
+  },
+  {
     id: "prompt",
     level: "Level 0",
     zhTitle: "Prompt 是什麼？你問得越清楚，AI 越好用",
@@ -291,6 +353,25 @@ const LESSONS = [
     enTask: "Rewrite 'Help me study' into a clearer prompt.",
     zhAnswer: "請你當作我的大學課程助教，幫我整理今天的總體經濟學重點。我的考試範圍是通膨、失業與菲利普曲線。請用條列式整理，並最後出 5 題練習題。",
     enAnswer: "Act as my university teaching assistant. Help me review macroeconomics. My exam covers inflation, unemployment, and the Phillips Curve. Use bullet points and create 5 practice questions at the end."
+  },
+  {
+    id: "good-bad-prompt",
+    level: "Level 0",
+    zhTitle: "好 Prompt 與壞 Prompt 的差別",
+    enTitle: "Good prompts vs. bad prompts.",
+    zhText: "壞 Prompt 通常太短、沒有背景、沒有格式要求。好 Prompt 會說明角色、任務、背景、限制與輸出格式。",
+    enText: "Bad prompts are usually too short and lack context or output format. Good prompts include role, task, context, constraints, and expected format.",
+    quiz: {
+      zhQ: "哪一個比較像好 Prompt？",
+      enQ: "Which one is closer to a good prompt?",
+      options: [
+        { zh: "幫我寫", en: "Write it for me", correct: false },
+        { zh: "請你當作老師，用表格整理這個主題，並附上三個例子", en: "Act as a teacher, organize this topic in a table, and include three examples", correct: true },
+        { zh: "快一點", en: "Be quick", correct: false }
+      ],
+      zhExplain: "好 Prompt 會讓 AI 明確知道要扮演誰、做什麼、怎麼輸出。",
+      enExplain: "A good prompt tells AI who to act as, what to do, and how to format the output."
+    }
   },
   {
     id: "role",
@@ -343,6 +424,37 @@ const LESSONS = [
     }
   },
   {
+    id: "ai-mistakes",
+    level: "Level 0",
+    zhTitle: "AI 常見錯誤：幻覺、偏誤與過時資訊",
+    enTitle: "Common AI mistakes: hallucination, bias, and outdated information.",
+    zhText: "AI 有時候會把錯誤內容講得很像真的，這叫做幻覺。AI 也可能受到資料偏誤影響，或使用過時資訊。越重要的內容，越需要查證。",
+    enText: "AI can sometimes present false information confidently. This is called hallucination. AI can also reflect data bias or outdated information. The more important the content, the more you need to verify it.",
+    zhTask: "寫一個 Prompt，要求 AI 在回答時標示不確定的地方。",
+    enTask: "Write a prompt asking AI to mark uncertain parts in its answer.",
+    zhAnswer: "請回答我的問題，並把你不確定或需要查證的地方用「需要查證」標示出來，不要把不確定的內容講成事實。",
+    enAnswer: "Answer my question and mark any uncertain or unverifiable parts as 'needs verification'. Do not present uncertain information as fact."
+  },
+  {
+    id: "follow-up",
+    level: "Level 0",
+    zhTitle: "怎麼跟 AI 對話：追問比第一次提問更重要",
+    enTitle: "How to talk to AI: follow-up questions matter.",
+    zhText: "很多人只問一次就停下來，但 AI 最好用的方式是持續追問。你可以要求它更簡單、更具體、更像學生能懂，或請它舉例、比較、改寫。",
+    enText: "Many users ask once and stop, but AI is most useful when you ask follow-up questions. You can ask it to simplify, be more specific, explain like a student, give examples, compare, or rewrite.",
+    quiz: {
+      zhQ: "如果 AI 回答太難懂，你應該怎麼做？",
+      enQ: "If AI's answer is too difficult, what should you do?",
+      options: [
+        { zh: "直接放棄", en: "Give up", correct: false },
+        { zh: "要求它用更簡單的方式解釋並舉例", en: "Ask it to explain more simply and give examples", correct: true },
+        { zh: "把答案全部複製貼上", en: "Copy and paste everything", correct: false }
+      ],
+      zhExplain: "追問可以讓 AI 的答案更符合你的程度與需求。",
+      enExplain: "Follow-up questions help AI adjust to your level and needs."
+    }
+  },
+  {
     id: "study",
     level: "Level 1",
     zhTitle: "用 AI 讀書：整理重點與練習題",
@@ -355,6 +467,37 @@ const LESSONS = [
     enAnswer: "Act as my exam coach. Here is my exam scope: [paste scope]. Please organize 10 key points, 5 confusing concepts, 10 multiple-choice questions, and 3 essay questions for practice."
   },
   {
+    id: "notes",
+    level: "Level 1",
+    zhTitle: "AI 筆記法：把雜亂資料變成可讀重點",
+    enTitle: "AI note-taking: turn messy information into clear notes.",
+    zhText: "你可以把課堂筆記、文章或會議內容交給 AI，請它整理成重點、問題、待查資料和行動清單。這能幫你快速進入複習狀態。",
+    enText: "You can give AI class notes, articles, or meeting content and ask it to organize key points, questions, items to verify, and action steps. This helps you review faster.",
+    zhTask: "設計一個 Prompt，讓 AI 幫你整理上課筆記。",
+    enTask: "Design a prompt asking AI to organize class notes.",
+    zhAnswer: "請幫我整理以下課堂筆記，分成：本堂重點、重要名詞、我還不懂的地方、可能考題、下一步複習計畫。",
+    enAnswer: "Organize the following class notes into: key points, important terms, unclear parts, possible exam questions, and next review plan."
+  },
+  {
+    id: "exam-prep",
+    level: "Level 1",
+    zhTitle: "AI 考試準備：從範圍到練習題",
+    enTitle: "AI exam preparation: from scope to practice.",
+    zhText: "準備考試時，AI 可以把範圍拆成讀書計畫，也可以幫你生成題目。重點是要讓 AI 先問你目前程度，再安排練習。",
+    enText: "When preparing for exams, AI can break the scope into a study plan and generate practice questions. The key is to let AI first ask about your current level, then plan practice.",
+    quiz: {
+      zhQ: "考試準備時，AI 最適合先幫你做什麼？",
+      enQ: "When preparing for exams, what should AI help with first?",
+      options: [
+        { zh: "直接猜考題", en: "Directly guess exam questions", correct: false },
+        { zh: "拆解範圍並規劃讀書順序", en: "Break down the scope and plan study order", correct: true },
+        { zh: "叫你不要讀書", en: "Tell you not to study", correct: false }
+      ],
+      zhExplain: "先拆解範圍與安排順序，才能更有效率地複習。",
+      enExplain: "Breaking down scope and order makes review more efficient."
+    }
+  },
+  {
     id: "report",
     level: "Level 1",
     zhTitle: "學生怎麼用 AI 做報告，而不是被 AI 取代？",
@@ -365,6 +508,18 @@ const LESSONS = [
     enTask: "Design a prompt asking AI to create a report outline without writing the full report.",
     zhAnswer: "請你協助我規劃一份大學報告大綱，主題是生成式 AI 對薪資不平等的影響。請只提供架構、可能論點、需要查證的資料方向與反方觀點，不要直接替我完成全文。",
     enAnswer: "Help me plan a university report outline on how generative AI affects wage inequality. Only provide structure, possible arguments, sources to verify, and counterarguments. Do not write the full essay for me."
+  },
+  {
+    id: "research-organize",
+    level: "Level 1",
+    zhTitle: "AI 研究資料整理：從資料夾到文獻表",
+    enTitle: "AI research organization: from folders to literature tables.",
+    zhText: "當你有很多文章、PDF 或網頁資料時，可以用 AI 幫你做比較表。欄位可以包含作者、主題、研究方法、重點、限制與可引用方向。",
+    enText: "When you have many articles, PDFs, or web sources, AI can help build comparison tables. Columns can include author, topic, method, key findings, limitations, and possible use.",
+    zhTask: "設計一個 Prompt，讓 AI 幫你整理三篇文章的比較表。",
+    enTask: "Design a prompt asking AI to compare three articles in a table.",
+    zhAnswer: "請幫我比較以下三篇文章，整理成表格。欄位包含：文章主題、核心觀點、研究方法、可引用句子、限制、與我的報告主題的關聯。",
+    enAnswer: "Compare the following three articles in a table with columns: topic, core argument, method, quotable idea, limitation, and relevance to my report topic."
   },
   {
     id: "slides",
@@ -391,6 +546,18 @@ const LESSONS = [
     enAnswer: "Write a formal but polite English email to the organizer. Context: I have been accepted into a Ministry of Education overseas program, and my university scholarship application requires confirmation from the host unit. Purpose: request a document confirming my visit or internship. Tone: sincere, clear, and not too forceful."
   },
   {
+    id: "time-management",
+    level: "Level 1",
+    zhTitle: "AI 時間管理：把壓力變成可執行清單",
+    enTitle: "AI time management: turn pressure into action steps.",
+    zhText: "當你有很多任務時，可以請 AI 幫你依照期限、重要性與所需時間重新排序，並切成今天可以完成的行動清單。",
+    enText: "When you have many tasks, ask AI to sort them by deadline, importance, and required time, then break them into actions you can complete today.",
+    zhTask: "設計一個 Prompt，讓 AI 幫你規劃期末考週。",
+    enTask: "Design a prompt asking AI to plan your final exam week.",
+    zhAnswer: "以下是我這週的任務與期限：[列出任務]。請幫我依重要性與時間排序，安排每天可執行的計畫，並提醒我哪些任務要先完成。",
+    enAnswer: "Here are my tasks and deadlines this week: [list tasks]. Sort them by importance and time, create a daily action plan, and remind me which tasks to complete first."
+  },
+  {
     id: "career",
     level: "Level 2",
     zhTitle: "用 AI 做履歷與面試準備",
@@ -401,6 +568,61 @@ const LESSONS = [
     enTask: "Rewrite 'I joined club activities' into a resume-ready bullet.",
     zhAnswer: "參與校內社團專案規劃與活動執行，協助完成活動流程設計、現場協調與成效回饋整理，提升團隊溝通與專案管理能力。",
     enAnswer: "Participated in student club project planning and event execution, supporting agenda design, on-site coordination, and feedback analysis while strengthening teamwork and project management skills."
+  },
+  {
+    id: "linkedin",
+    level: "Level 2",
+    zhTitle: "用 AI 建立 LinkedIn 與個人品牌",
+    enTitle: "Use AI to build LinkedIn and personal branding.",
+    zhText: "LinkedIn 不只是求職網站，也是展示學習歷程、專案成果和職涯方向的地方。AI 可以幫你把經驗整理成清楚的個人介紹。",
+    enText: "LinkedIn is not only a job platform; it is a place to show your learning journey, projects, and career direction. AI can help turn experience into a clear personal profile.",
+    zhTask: "寫一個 Prompt，請 AI 幫你產生 LinkedIn About 區塊。",
+    enTask: "Write a prompt asking AI to create a LinkedIn About section.",
+    zhAnswer: "請根據以下背景，幫我寫一段 LinkedIn About。語氣要專業但不誇張，強調我的學習方向、專案經驗、AI 與社會創新興趣。",
+    enAnswer: "Based on the following background, write a LinkedIn About section. Keep the tone professional but not exaggerated, emphasizing my learning direction, project experience, and interests in AI and social innovation."
+  },
+  {
+    id: "cover-letter",
+    level: "Level 2",
+    zhTitle: "AI 求職信與申請信",
+    enTitle: "AI cover letters and application emails.",
+    zhText: "求職信或申請信要清楚說明你是誰、為什麼申請、你能帶來什麼，以及你希望對方採取什麼行動。AI 可以幫你把內容變得更有邏輯。",
+    enText: "A cover letter or application email should explain who you are, why you are applying, what you can contribute, and what action you hope the recipient will take. AI can help make the message more logical.",
+    zhTask: "設計一個 Prompt，讓 AI 幫你寫申請信初稿。",
+    enTask: "Design a prompt asking AI to draft an application email.",
+    zhAnswer: "請根據以下資訊幫我寫一封申請信：申請對象、我的背景、申請原因、相關經驗、希望對方提供的協助。語氣要正式、清楚、有禮貌。",
+    enAnswer: "Write an application email based on: recipient, my background, reason for applying, relevant experience, and requested support. Tone should be formal, clear, and polite."
+  },
+  {
+    id: "meeting-notes",
+    level: "Level 2",
+    zhTitle: "AI 會議紀錄：從對話到行動",
+    enTitle: "AI meeting notes: from conversation to action.",
+    zhText: "AI 可以把會議內容整理成決議、待辦、負責人和期限。這能幫助團隊避免開完會卻沒有人知道下一步。",
+    enText: "AI can organize meeting content into decisions, tasks, owners, and deadlines. This prevents teams from leaving meetings without clear next steps.",
+    quiz: {
+      zhQ: "好的會議紀錄最應該包含什麼？",
+      enQ: "What should good meeting notes include?",
+      options: [
+        { zh: "只有一大段逐字稿", en: "Only a long transcript", correct: false },
+        { zh: "決議、待辦、負責人與期限", en: "Decisions, tasks, owners, and deadlines", correct: true },
+        { zh: "只寫誰遲到", en: "Only who was late", correct: false }
+      ],
+      zhExplain: "會議紀錄的核心是讓下一步變清楚。",
+      enExplain: "The purpose of meeting notes is to make next steps clear."
+    }
+  },
+  {
+    id: "workflow",
+    level: "Level 2",
+    zhTitle: "AI 工作流程：把任務拆成步驟",
+    enTitle: "AI workflow: break tasks into steps.",
+    zhText: "進階使用 AI 的關鍵不是單次提問，而是工作流程。你可以把一個任務拆成：蒐集資料、整理、產出、檢查、修改。",
+    enText: "Advanced AI use is not about one prompt, but about workflow. You can break a task into collecting information, organizing, producing, checking, and revising.",
+    zhTask: "把「我要完成一份簡報」拆成 AI 工作流程。",
+    enTask: "Break 'I need to finish a presentation' into an AI workflow.",
+    zhAnswer: "流程：1. 請 AI 釐清簡報目的。2. 產生大綱。3. 每頁整理重點。4. 產生講稿。5. 檢查邏輯。6. 用 Canva 或 Gamma 做視覺。",
+    enAnswer: "Workflow: 1. Ask AI to clarify the presentation purpose. 2. Generate an outline. 3. Organize key points for each slide. 4. Create speaker notes. 5. Check logic. 6. Use Canva or Gamma for visuals."
   },
   {
     id: "tool-choice",
@@ -430,8 +652,8 @@ const PREMIUM = [
     paymentUrl: "https://gumroad.com/",
     zhTitle: "AI 學生效率實戰班",
     enTitle: "AI Student Productivity Lab",
-    zhUser: "大學生、高中生、剛開始用 AI 做報告與讀書的人",
-    enUser: "University students, high school students, and beginners using AI for study and reports",
+    zhUser: "高中生、大學生、剛開始用 AI 做報告與讀書的人",
+    enUser: "High school students, university students, and beginners using AI for study and reports",
     zhOutcome: "完成後你會擁有一套可重複使用的讀書、報告、簡報與考試準備流程。",
     enOutcome: "You will build a repeatable workflow for studying, reports, slides, and exam preparation.",
     zhDesc: "模組包含：AI 讀書法、報告大綱、資料查證、簡報架構、考前複習、學術誠信。",
@@ -464,11 +686,11 @@ const PREMIUM = [
     enDesc: "Modules: research question design, literature search, summary comparison tables, research gaps, citation risks, academic slides and presentation."
   },
   {
-    id: "workplace",
-    price: "NT$799",
+    id: "productivity",
+    price: "NT$699",
     paymentUrl: "https://gumroad.com/",
-    zhTitle: "AI 工作效率與自動化入門班",
-    enTitle: "AI Workplace Productivity and Automation Starter",
+    zhTitle: "AI 工作效率與工作流實戰班",
+    enTitle: "AI Productivity and Workflow Lab",
     zhUser: "想用 AI 處理 Email、會議紀錄、企劃、資料整理與工作流程的人",
     enUser: "People who want to use AI for email, meeting notes, proposals, data organization, and workflows",
     zhOutcome: "完成後你會建立個人的 AI 工作流程，能更快完成日常行政與企劃任務。",
@@ -477,30 +699,30 @@ const PREMIUM = [
     enDesc: "Modules: email templates, meeting notes, weekly reports, proposals, SOPs, and Notion/Google Docs workflows."
   },
   {
-    id: "social",
+    id: "automation",
     price: "NT$999",
     paymentUrl: "https://gumroad.com/",
-    zhTitle: "AI 社會創新與創業提案班",
-    enTitle: "AI Social Innovation and Startup Proposal Lab",
-    zhUser: "想做社會創新、創業競賽、公益專案、海外計畫成果轉化的人",
-    enUser: "Learners interested in social innovation, startup competitions, nonprofit projects, and overseas program impact conversion",
-    zhOutcome: "完成後你會完成問題定義、使用者分析、商業模式、影響力指標與提案簡報。",
-    enOutcome: "You will complete problem definition, user analysis, business model, impact indicators, and a pitch deck.",
-    zhDesc: "模組包含：問題樹、利害關係人、使用者訪談、商業模式、影響力衡量、Pitch Deck。",
-    enDesc: "Modules: problem tree, stakeholders, user interviews, business model, impact measurement, and pitch deck."
-  },
-  {
-    id: "advanced-ai",
-    price: "NT$1299",
-    paymentUrl: "https://gumroad.com/",
-    zhTitle: "AI 進階使用者與 Agent 入門班",
-    enTitle: "Advanced AI User and Agent Starter",
+    zhTitle: "AI 自動化與 Agent 入門班",
+    enTitle: "AI Automation and Agent Starter",
     zhUser: "已經會用 ChatGPT，想學會多工具工作流、AI Agent 與自動化概念的人",
     enUser: "Users who already use ChatGPT and want to learn multi-tool workflows, AI agents, and automation concepts",
     zhOutcome: "完成後你會理解 AI Agent 的基本概念，並能設計自己的多步驟 AI 工作流程。",
     enOutcome: "You will understand the basics of AI agents and design your own multi-step AI workflow.",
     zhDesc: "模組包含：多工具組合、任務拆解、Agent 概念、資料輸入輸出、風險控管、低程式碼自動化。",
     enDesc: "Modules: multi-tool workflows, task decomposition, agent concepts, data input/output, risk control, and low-code automation."
+  },
+  {
+    id: "startup",
+    price: "NT$1499",
+    paymentUrl: "https://gumroad.com/",
+    zhTitle: "AI 創業與社會創新提案班",
+    enTitle: "AI Startup and Social Innovation Lab",
+    zhUser: "想做社會創新、創業競賽、公益專案、海外計畫成果轉化的人",
+    enUser: "Learners interested in social innovation, startup competitions, nonprofit projects, and overseas program impact conversion",
+    zhOutcome: "完成後你會完成問題定義、使用者分析、商業模式、影響力指標與提案簡報。",
+    enOutcome: "You will complete problem definition, user analysis, business model, impact indicators, and a pitch deck.",
+    zhDesc: "模組包含：問題樹、利害關係人、使用者訪談、商業模式、影響力衡量、Pitch Deck。",
+    enDesc: "Modules: problem tree, stakeholders, user interviews, business model, impact measurement, and pitch deck."
   }
 ];
 
@@ -510,9 +732,15 @@ const TOOLS = [
   { name: "Gemini", url: "https://gemini.google.com", zh: "Google 生態系、多模態任務與日常協作。", en: "Google ecosystem, multimodal tasks, and daily collaboration." },
   { name: "NotebookLM", url: "https://notebooklm.google.com", zh: "上傳資料後問答、筆記整理、來源導向學習。", en: "Source-grounded Q&A, note organization, and document-based learning." },
   { name: "Perplexity", url: "https://www.perplexity.ai", zh: "網路研究、資料搜尋與來源探索。", en: "Web research, information search, and source discovery." },
+  { name: "Elicit", url: "https://elicit.com", zh: "協助搜尋與整理研究文獻。", en: "Helps search and organize academic literature." },
   { name: "Canva", url: "https://www.canva.com", zh: "簡報、海報、社群圖片與視覺設計。", en: "Presentations, posters, social media visuals, and design." },
   { name: "Gamma", url: "https://gamma.app", zh: "快速生成簡報、提案與視覺化頁面。", en: "Quickly generate slides, proposals, and visual pages." },
-  { name: "LinkedIn", url: "https://www.linkedin.com", zh: "個人品牌、職涯網絡與求職。", en: "Personal branding, career network, and job search." }
+  { name: "Runway", url: "https://runwayml.com", zh: "AI 影片生成與影像創作工具。", en: "AI video generation and creative media tools." },
+  { name: "Pika", url: "https://pika.art", zh: "AI 影片生成與創意短片工具。", en: "AI video generation and creative short-video tools." },
+  { name: "Leonardo AI", url: "https://leonardo.ai", zh: "AI 圖像生成與視覺素材製作。", en: "AI image generation and visual asset creation." },
+  { name: "LinkedIn", url: "https://www.linkedin.com", zh: "個人品牌、職涯網絡與求職。", en: "Personal branding, career network, and job search." },
+  { name: "Zapier", url: "https://zapier.com", zh: "低程式碼自動化工具，串接不同服務。", en: "Low-code automation tool for connecting different services." },
+  { name: "Make", url: "https://www.make.com", zh: "視覺化自動化流程設計工具。", en: "Visual automation workflow design tool." }
 ];
 
 const PROMPTS = [
@@ -520,5 +748,8 @@ const PROMPTS = [
   { cat: "Report", text: "Help me create a report outline on [topic]. Include introduction, three main arguments, evidence to verify, counterarguments, and conclusion. Do not write the full essay." },
   { cat: "Resume", text: "Improve the following resume bullet points to emphasize action, results, and skills. Keep everything truthful and do not invent experience." },
   { cat: "Slides", text: "Turn [topic] into an 8-slide presentation. For each slide, provide a title, one key message, three bullet points, and a suggested visual." },
-  { cat: "Email", text: "Write a polite and professional email to [recipient]. Context: [context]. Goal: [goal]. Tone: sincere, clear, and not too forceful." }
+  { cat: "Email", text: "Write a polite and professional email to [recipient]. Context: [context]. Goal: [goal]. Tone: sincere, clear, and not too forceful." },
+  { cat: "Research", text: "Compare the following sources in a table with columns: source, main argument, method, evidence, limitation, and relevance to my topic." },
+  { cat: "Interview", text: "Act as an interviewer for [role/program]. Ask me one question at a time. After each answer, give feedback on clarity, structure, and persuasiveness." },
+  { cat: "Planning", text: "Break this goal into a 7-day action plan. For each day, include task, estimated time, output, and success criteria." }
 ];
