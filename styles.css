@@ -402,3 +402,10 @@ main,
     padding: 4px 7px !important;
   }
 }
+
+
+
+/* V27 Value Sections */
+.panel ul li {
+  line-height: 1.8;
+}

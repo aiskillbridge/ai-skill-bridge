@@ -1152,6 +1152,7 @@ function openPrevLesson() {
   render();
 }
 
+
 function lesson() {
   const item = (typeof PREMIUM !== "undefined" && currentCourseId)
     ? PREMIUM.find(p => p.id === currentCourseId)
@@ -1173,6 +1174,8 @@ function lesson() {
     const quizItems = state.lang === "zh" ? (detail.zhQuizItems || []) : (detail.enQuizItems || []);
     const practiceText = state.lang === "zh" ? detail.zhPractice : detail.enPractice;
     const practiceSteps = practiceText.split("；").filter(Boolean);
+    const checklist = state.lang === "zh" ? (detail.zhDeliverableChecklist || []) : (detail.enDeliverableChecklist || []);
+    const scorecard = state.lang === "zh" ? (detail.zhScorecard || []) : (detail.enScorecard || []);
 
     return shell(`
       <main class="page">
@@ -1182,7 +1185,20 @@ function lesson() {
           <section class="panel">
             <span class="tag">Lesson ${lessonNo}</span>
             <h1>${state.lang === "zh" ? detail.zhTitle : detail.enTitle}</h1>
-            <p class="lead">${text("完整付費教材：核心概念、Prompt、範例、實作任務、AI 回饋、小測驗、課程筆記與課後成果。", "Complete premium lesson: concept, prompt, example, practice, AI feedback, quiz, notes, and final output.")}</p>
+            <p class="lead">${text("這一課不只看內容，而是要完成一個可以放進大學申請包的實際成果。", "This lesson is not just reading content; it helps you create a real output for your application package.")}</p>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("本課會完成什麼", "What You Will Complete")}</h2>
+            <p><b>${state.lang === "zh" ? detail.zhOutcome : detail.enOutcome}</b></p>
+            <p>${state.lang === "zh" ? (detail.zhValueTip || "") : (detail.enValueTip || "")}</p>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("成果完成檢查表", "Deliverable Checklist")}</h2>
+            <ul>
+              ${checklist.map(x => `<li>□ ${x}</li>`).join("")}
+            </ul>
           </section>
 
           <section class="panel" style="margin-top:24px">
@@ -1208,9 +1224,17 @@ function lesson() {
           </section>
 
           <section class="panel" style="margin-top:24px">
-            <h2>${text("AI 實作回饋 Prompt", "AI Practice Feedback Prompt")}</h2>
-            <p>${text("完成實作後，把你的成果貼到 AI，使用下面的 Prompt 請 AI 給你修改建議。", "After completing the practice task, paste your work into AI and use this prompt to get feedback.")}</p>
+            <h2>${text("AI 專家實作回饋 Prompt", "AI Expert Practice Feedback Prompt")}</h2>
+            <p>${text("完成實作後，把成果貼到 AI，使用這段 Prompt 取得評分、診斷、修改建議與下一步行動。", "After completing the task, paste your work into AI and use this prompt to get scoring, diagnosis, revision advice, and next actions.")}</p>
             <div class="promptbox">${state.lang === "zh" ? detail.zhFeedbackPrompt : detail.enFeedbackPrompt}</div>
+          </section>
+
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("自我評分表", "Self-Scorecard")}</h2>
+            <p>${text("使用 AI 回饋前，先自己用 1-10 分評估。", "Before using AI feedback, score yourself from 1-10.")}</p>
+            <ul>
+              ${scorecard.map(x => `<li>${x}：____ / 10</li>`).join("")}
+            </ul>
           </section>
 
           <section class="panel" style="margin-top:24px">
@@ -1241,6 +1265,7 @@ function lesson() {
           <section class="panel" style="margin-top:24px">
             <h2>${text("課後成果", "Final Output")}</h2>
             <p><b>${state.lang === "zh" ? detail.zhOutcome : detail.enOutcome}</b></p>
+            <p>${text("完成這個成果後，請放入你的「大學申請包」。10 課完成後，你會得到一份完整申請資料。", "After completing this output, add it to your application package. After 10 lessons, you will have a complete application package.")}</p>
           </section>
 
           <div class="btnrow" style="margin-top:24px">

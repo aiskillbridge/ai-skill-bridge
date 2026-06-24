@@ -1004,8 +1004,8 @@ const PREMIUM_LESSON_DETAILS = {
       "enExample": "範例：學生 A 想申請資訊管理系，但只知道自己學測成績和喜歡電腦。使用 AI 後，他整理出：第一階段要先確認篩選倍率與採計科目；第二階段要準備學習歷程、自我介紹、面試題；目前缺少的是專案作品說明與申請動機。這樣他就知道不是盲目準備，而是有順序地準備。",
       "zhPractice": "寫下你目前最想申請的 3 個科系。；查詢這 3 個科系第一階段可能看的項目，例如採計科目、倍率、檢定標準。；請 AI 幫你整理第二階段可能需要的備審資料與面試準備。；把 AI 的回答整理成一張「我的申請準備地圖」。",
       "enPractice": "寫下你目前最想申請的 3 個科系。；查詢這 3 個科系第一階段可能看的項目，例如採計科目、倍率、檢定標準。；請 AI 幫你整理第二階段可能需要的備審資料與面試準備。；把 AI 的回答整理成一張「我的申請準備地圖」。",
-      "zhFeedbackPrompt": "請你擔任我的升學顧問。以下是我的「申請準備地圖」：\n（貼上成果）\n請幫我檢查：\n1. 第一階段資訊是否清楚\n2. 第二階段準備是否完整\n3. 哪些資料太空泛\n4. 哪些地方需要我自己查證\n5. 請幫我排出接下來 7 天的準備順序。",
-      "enFeedbackPrompt": "請你擔任我的升學顧問。以下是我的「申請準備地圖」：\n（貼上成果）\n請幫我檢查：\n1. 第一階段資訊是否清楚\n2. 第二階段準備是否完整\n3. 哪些資料太空泛\n4. 哪些地方需要我自己查證\n5. 請幫我排出接下來 7 天的準備順序。",
+      "zhFeedbackPrompt": "你是一位具有 15 年經驗的大學申請顧問。\n\n以下是我完成的「申請準備地圖」：\n（請把我的實作成果貼在這裡）\n\n請你不要只說「很好」或「可以更具體」，請用專業標準幫我做深度回饋。\n\n第一部分：整體評分\n請從以下面向各給 1-10 分，並說明原因：\n- 流程理解度：1-10 分，並說明扣分原因\n- 第一階段準備完整度：1-10 分，並說明扣分原因\n- 第二階段準備完整度：1-10 分，並說明扣分原因\n- 可執行性：1-10 分，並說明扣分原因\n- 時間安排：1-10 分，並說明扣分原因\n- 資訊查證程度：1-10 分，並說明扣分原因\n- 風險意識：1-10 分，並說明扣分原因\n- 整體競爭力：1-10 分，並說明扣分原因\n\n第二部分：優點分析\n請列出我做得最好的 3 個地方，並說明為什麼這些地方有助於大學申請。\n\n第三部分：問題診斷\n請列出最需要改善的 3 個問題。每個問題都要包含：\n- 問題在哪裡\n- 為什麼會影響申請\n- 應該怎麼修改\n\n第四部分：教授視角\n請用大學教授或審查委員的角度，回答：\n1. 哪些地方會讓學生誤以為自己準備好了，但其實還沒有？\n2. 請幫我排出未來 7 天最重要的行動順序。\n3. 如果只能先做 3 件事，請告訴我是哪 3 件。\n\n第五部分：直接修改建議\n請提供：\n1. 一版更好的修改方向\n2. 可以直接加入的句子範例\n3. 我不應該使用的空泛句子\n4. 下一次修改前要補充的資料\n\n第六部分：下一步行動\n請幫我列出 3 個最優先的修改任務，格式如下：\n- 今天先改：\n- 明天補強：\n- 最後檢查：\n\n請記住：不要捏造我的經歷，不要替我編不存在的活動，只能根據我提供的內容提出修改建議。",
+      "enFeedbackPrompt": "Act as a 具有 15 年經驗的大學申請顧問.\n\nHere is my completed work for: 申請準備地圖\n(paste my work here)\n\nDo not only say \"good\" or \"be more specific.\" Give me detailed professional feedback.\n\nPart 1: Overall scoring\nRate each item from 1-10 and explain the reason:\n- 流程理解度：1-10 分，並說明扣分原因\n- 第一階段準備完整度：1-10 分，並說明扣分原因\n- 第二階段準備完整度：1-10 分，並說明扣分原因\n- 可執行性：1-10 分，並說明扣分原因\n- 時間安排：1-10 分，並說明扣分原因\n- 資訊查證程度：1-10 分，並說明扣分原因\n- 風險意識：1-10 分，並說明扣分原因\n- 整體競爭力：1-10 分，並說明扣分原因\n\nPart 2: Strengths\nList the 3 strongest parts and explain why they help my university application.\n\nPart 3: Diagnosis\nList the 3 most important problems. For each problem, include:\n- What the issue is\n- Why it hurts the application\n- How to revise it\n\nPart 4: Reviewer perspective\nAnswer these:\n1. 哪些地方會讓學生誤以為自己準備好了，但其實還沒有？\n2. 請幫我排出未來 7 天最重要的行動順序。\n3. 如果只能先做 3 件事，請告訴我是哪 3 件。\n\nPart 5: Direct revision guidance\nProvide:\n1. A better revision direction\n2. Example sentences I can adapt\n3. Vague sentences I should avoid\n4. Information I need to add before revising\n\nPart 6: Next actions\nGive me 3 priorities:\n- Fix today:\n- Improve tomorrow:\n- Final check:\n\nDo not invent my experience. Only give suggestions based on what I provide.",
       "zhQuizItems": [
         {
           "q": "AI 在申請準備中最適合扮演什麼角色？",
@@ -1064,10 +1064,40 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "備審資料與面試表現"
         }
       ],
-      "zhOutcome": "一份可以執行的「大學申請準備地圖」。",
-      "enOutcome": "一份可以執行的「大學申請準備地圖」。",
+      "zhOutcome": "大學申請準備地圖",
+      "enOutcome": "大學申請準備地圖",
       "zhNotePrompt": "請在課程筆記中回答：我目前最清楚的是什麼？我最不清楚的是什麼？接下來 7 天我要完成哪 3 件事？",
-      "enNotePrompt": "請在課程筆記中回答：我目前最清楚的是什麼？我最不清楚的是什麼？接下來 7 天我要完成哪 3 件事？"
+      "enNotePrompt": "請在課程筆記中回答：我目前最清楚的是什麼？我最不清楚的是什麼？接下來 7 天我要完成哪 3 件事？",
+      "zhDeliverableChecklist": [
+        "我已列出 3 個目標科系",
+        "我已確認第一階段篩選條件",
+        "我已列出第二階段需要準備的資料",
+        "我已排出 7 天準備清單",
+        "我知道哪些資訊需要自己查證"
+      ],
+      "enDeliverableChecklist": [
+        "我已列出 3 個目標科系",
+        "我已確認第一階段篩選條件",
+        "我已列出第二階段需要準備的資料",
+        "我已排出 7 天準備清單",
+        "我知道哪些資訊需要自己查證"
+      ],
+      "zhScorecard": [
+        "流程理解",
+        "資料完整",
+        "可執行性",
+        "查證程度",
+        "時間規劃"
+      ],
+      "enScorecard": [
+        "流程理解",
+        "資料完整",
+        "可執行性",
+        "查證程度",
+        "時間規劃"
+      ],
+      "zhValueTip": "把這份準備地圖拿給老師、家長或同學看，確認他們是否能在 1 分鐘內理解你的申請方向。",
+      "enValueTip": "把這份準備地圖拿給老師、家長或同學看，確認他們是否能在 1 分鐘內理解你的申請方向。"
     },
     {
       "zhTitle": "第2課：用 AI 找出最適合自己的科系",
@@ -1080,8 +1110,8 @@ const PREMIUM_LESSON_DETAILS = {
       "enExample": "範例：學生 B 喜歡心理學，也喜歡幫助同學，生物和國文成績不錯。AI 推薦心理、社工、教育、護理、職能治療。學生 B 不是直接照單全收，而是進一步查每個科系的必修課、實習方式與未來工作，最後選出心理、社工、教育三個優先科系。",
       "zhPractice": "填寫自己的興趣、強項科目、弱項科目、活動經驗與未來想像。；用 Prompt 請 AI 推薦 5 個可能適合的科系。；請 AI 做出比較表：適合原因、需要能力、未來發展、我目前缺少什麼。；從 5 個科系中選出 3 個優先查證的科系，並寫下原因。",
       "enPractice": "填寫自己的興趣、強項科目、弱項科目、活動經驗與未來想像。；用 Prompt 請 AI 推薦 5 個可能適合的科系。；請 AI 做出比較表：適合原因、需要能力、未來發展、我目前缺少什麼。；從 5 個科系中選出 3 個優先查證的科系，並寫下原因。",
-      "zhFeedbackPrompt": "請你擔任升學輔導老師。以下是我的科系探索表：\n（貼上成果）\n請你檢查：\n1. 推薦科系是否和我的興趣與能力有連結\n2. 哪些理由太空泛\n3. 哪些科系我需要進一步查證\n4. 請幫我提出 5 個我應該問自己的問題\n5. 請幫我把 3 個優先科系排序並說明理由。",
-      "enFeedbackPrompt": "請你擔任升學輔導老師。以下是我的科系探索表：\n（貼上成果）\n請你檢查：\n1. 推薦科系是否和我的興趣與能力有連結\n2. 哪些理由太空泛\n3. 哪些科系我需要進一步查證\n4. 請幫我提出 5 個我應該問自己的問題\n5. 請幫我把 3 個優先科系排序並說明理由。",
+      "zhFeedbackPrompt": "你是一位高中升學輔導老師與生涯探索顧問。\n\n以下是我完成的「科系探索表」：\n（請把我的實作成果貼在這裡）\n\n請你不要只說「很好」或「可以更具體」，請用專業標準幫我做深度回饋。\n\n第一部分：整體評分\n請從以下面向各給 1-10 分，並說明原因：\n- 興趣連結度：1-10 分，並說明扣分原因\n- 能力匹配度：1-10 分，並說明扣分原因\n- 科系理解度：1-10 分，並說明扣分原因\n- 未來發展清楚度：1-10 分，並說明扣分原因\n- 查證完整度：1-10 分，並說明扣分原因\n- 選擇理由具體度：1-10 分，並說明扣分原因\n- 風險評估：1-10 分，並說明扣分原因\n- 決策成熟度：1-10 分，並說明扣分原因\n\n第二部分：優點分析\n請列出我做得最好的 3 個地方，並說明為什麼這些地方有助於大學申請。\n\n第三部分：問題診斷\n請列出最需要改善的 3 個問題。每個問題都要包含：\n- 問題在哪裡\n- 為什麼會影響申請\n- 應該怎麼修改\n\n第四部分：教授視角\n請用大學教授或審查委員的角度，回答：\n1. 哪個科系看起來最適合我？哪個可能只是表面有興趣？\n2. 請指出我還需要查哪些課程、出路或能力要求。\n3. 請幫我把 3 個優先科系重新排序。\n\n第五部分：直接修改建議\n請提供：\n1. 一版更好的修改方向\n2. 可以直接加入的句子範例\n3. 我不應該使用的空泛句子\n4. 下一次修改前要補充的資料\n\n第六部分：下一步行動\n請幫我列出 3 個最優先的修改任務，格式如下：\n- 今天先改：\n- 明天補強：\n- 最後檢查：\n\n請記住：不要捏造我的經歷，不要替我編不存在的活動，只能根據我提供的內容提出修改建議。",
+      "enFeedbackPrompt": "Act as a 高中升學輔導老師與生涯探索顧問.\n\nHere is my completed work for: 科系探索表\n(paste my work here)\n\nDo not only say \"good\" or \"be more specific.\" Give me detailed professional feedback.\n\nPart 1: Overall scoring\nRate each item from 1-10 and explain the reason:\n- 興趣連結度：1-10 分，並說明扣分原因\n- 能力匹配度：1-10 分，並說明扣分原因\n- 科系理解度：1-10 分，並說明扣分原因\n- 未來發展清楚度：1-10 分，並說明扣分原因\n- 查證完整度：1-10 分，並說明扣分原因\n- 選擇理由具體度：1-10 分，並說明扣分原因\n- 風險評估：1-10 分，並說明扣分原因\n- 決策成熟度：1-10 分，並說明扣分原因\n\nPart 2: Strengths\nList the 3 strongest parts and explain why they help my university application.\n\nPart 3: Diagnosis\nList the 3 most important problems. For each problem, include:\n- What the issue is\n- Why it hurts the application\n- How to revise it\n\nPart 4: Reviewer perspective\nAnswer these:\n1. 哪個科系看起來最適合我？哪個可能只是表面有興趣？\n2. 請指出我還需要查哪些課程、出路或能力要求。\n3. 請幫我把 3 個優先科系重新排序。\n\nPart 5: Direct revision guidance\nProvide:\n1. A better revision direction\n2. Example sentences I can adapt\n3. Vague sentences I should avoid\n4. Information I need to add before revising\n\nPart 6: Next actions\nGive me 3 priorities:\n- Fix today:\n- Improve tomorrow:\n- Final check:\n\nDo not invent my experience. Only give suggestions based on what I provide.",
       "zhQuizItems": [
         {
           "q": "選科系最不建議只依靠哪一項？",
@@ -1140,10 +1170,40 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "適合原因、能力需求、未來發展"
         }
       ],
-      "zhOutcome": "一份「科系探索表」與 3 個優先申請科系清單。",
-      "enOutcome": "一份「科系探索表」與 3 個優先申請科系清單。",
+      "zhOutcome": "科系探索表",
+      "enOutcome": "科系探索表",
       "zhNotePrompt": "請在課程筆記中寫下：我最有興趣的 3 個科系、選擇理由、需要查證的資料。",
-      "enNotePrompt": "請在課程筆記中寫下：我最有興趣的 3 個科系、選擇理由、需要查證的資料。"
+      "enNotePrompt": "請在課程筆記中寫下：我最有興趣的 3 個科系、選擇理由、需要查證的資料。",
+      "zhDeliverableChecklist": [
+        "我已列出 5 個可能科系",
+        "每個科系都有適合原因",
+        "每個科系都有需要能力",
+        "每個科系都有未來發展",
+        "我已選出 3 個優先科系"
+      ],
+      "enDeliverableChecklist": [
+        "我已列出 5 個可能科系",
+        "每個科系都有適合原因",
+        "每個科系都有需要能力",
+        "每個科系都有未來發展",
+        "我已選出 3 個優先科系"
+      ],
+      "zhScorecard": [
+        "興趣連結",
+        "能力匹配",
+        "科系理解",
+        "未來發展",
+        "查證完整"
+      ],
+      "enScorecard": [
+        "興趣連結",
+        "能力匹配",
+        "科系理解",
+        "未來發展",
+        "查證完整"
+      ],
+      "zhValueTip": "不要只看科系名稱，請至少查 3 門必修課，確認你是否真的想學。",
+      "enValueTip": "不要只看科系名稱，請至少查 3 門必修課，確認你是否真的想學。"
     },
     {
       "zhTitle": "第3課：用 AI 整理高中三年的學習歷程素材",
@@ -1156,8 +1216,8 @@ const PREMIUM_LESSON_DETAILS = {
       "enExample": "範例：學生 C 有科展、社團幹部、志工服務、英文簡報、資訊課專題。原本看起來很雜，但用 AI 分類後發現：科展展現研究能力，社團幹部展現溝通協調，志工服務展現同理心，資訊課專題展現解決問題能力。",
       "zhPractice": "列出至少 10 個高中三年內的經驗或作品。；請 AI 幫你分類成課程成果、社團、幹部、競賽、服務、自主學習、專題作品。；為每個素材標註可展現的能力。；選出最適合放入申請資料的 5 個素材。",
       "enPractice": "列出至少 10 個高中三年內的經驗或作品。；請 AI 幫你分類成課程成果、社團、幹部、競賽、服務、自主學習、專題作品。；為每個素材標註可展現的能力。；選出最適合放入申請資料的 5 個素材。",
-      "zhFeedbackPrompt": "請你擔任備審資料顧問。以下是我的學習歷程素材庫：\n（貼上成果）\n請幫我檢查：\n1. 分類是否清楚\n2. 每個素材展現的能力是否具體\n3. 哪些素材最適合放進備審\n4. 哪些素材和目標科系連結較弱\n5. 請幫我選出前 5 個最有價值的素材。",
-      "enFeedbackPrompt": "請你擔任備審資料顧問。以下是我的學習歷程素材庫：\n（貼上成果）\n請幫我檢查：\n1. 分類是否清楚\n2. 每個素材展現的能力是否具體\n3. 哪些素材最適合放進備審\n4. 哪些素材和目標科系連結較弱\n5. 請幫我選出前 5 個最有價值的素材。",
+      "zhFeedbackPrompt": "你是一位大學備審資料審查教授。\n\n以下是我完成的「學習歷程素材庫」：\n（請把我的實作成果貼在這裡）\n\n請你不要只說「很好」或「可以更具體」，請用專業標準幫我做深度回饋。\n\n第一部分：整體評分\n請從以下面向各給 1-10 分，並說明原因：\n- 素材完整度：1-10 分，並說明扣分原因\n- 分類清楚度：1-10 分，並說明扣分原因\n- 能力證據強度：1-10 分，並說明扣分原因\n- 科系連結度：1-10 分，並說明扣分原因\n- 故事線潛力：1-10 分，並說明扣分原因\n- 重複性：1-10 分，並說明扣分原因\n- 可用性：1-10 分，並說明扣分原因\n- 教授印象分數：1-10 分，並說明扣分原因\n\n第二部分：優點分析\n請列出我做得最好的 3 個地方，並說明為什麼這些地方有助於大學申請。\n\n第三部分：問題診斷\n請列出最需要改善的 3 個問題。每個問題都要包含：\n- 問題在哪裡\n- 為什麼會影響申請\n- 應該怎麼修改\n\n第四部分：教授視角\n請用大學教授或審查委員的角度，回答：\n1. 如果你是教授，你會對我留下什麼印象？\n2. 請把素材分成 S 級、A 級、B 級、C 級。\n3. 如果只能留下 5 個素材，請選出最值得保留的 5 個。\n\n第五部分：直接修改建議\n請提供：\n1. 一版更好的修改方向\n2. 可以直接加入的句子範例\n3. 我不應該使用的空泛句子\n4. 下一次修改前要補充的資料\n\n第六部分：下一步行動\n請幫我列出 3 個最優先的修改任務，格式如下：\n- 今天先改：\n- 明天補強：\n- 最後檢查：\n\n請記住：不要捏造我的經歷，不要替我編不存在的活動，只能根據我提供的內容提出修改建議。",
+      "enFeedbackPrompt": "Act as a 大學備審資料審查教授.\n\nHere is my completed work for: 學習歷程素材庫\n(paste my work here)\n\nDo not only say \"good\" or \"be more specific.\" Give me detailed professional feedback.\n\nPart 1: Overall scoring\nRate each item from 1-10 and explain the reason:\n- 素材完整度：1-10 分，並說明扣分原因\n- 分類清楚度：1-10 分，並說明扣分原因\n- 能力證據強度：1-10 分，並說明扣分原因\n- 科系連結度：1-10 分，並說明扣分原因\n- 故事線潛力：1-10 分，並說明扣分原因\n- 重複性：1-10 分，並說明扣分原因\n- 可用性：1-10 分，並說明扣分原因\n- 教授印象分數：1-10 分，並說明扣分原因\n\nPart 2: Strengths\nList the 3 strongest parts and explain why they help my university application.\n\nPart 3: Diagnosis\nList the 3 most important problems. For each problem, include:\n- What the issue is\n- Why it hurts the application\n- How to revise it\n\nPart 4: Reviewer perspective\nAnswer these:\n1. 如果你是教授，你會對我留下什麼印象？\n2. 請把素材分成 S 級、A 級、B 級、C 級。\n3. 如果只能留下 5 個素材，請選出最值得保留的 5 個。\n\nPart 5: Direct revision guidance\nProvide:\n1. A better revision direction\n2. Example sentences I can adapt\n3. Vague sentences I should avoid\n4. Information I need to add before revising\n\nPart 6: Next actions\nGive me 3 priorities:\n- Fix today:\n- Improve tomorrow:\n- Final check:\n\nDo not invent my experience. Only give suggestions based on what I provide.",
       "zhQuizItems": [
         {
           "q": "學習歷程整理第一步是什麼？",
@@ -1216,10 +1276,40 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "讓素材和申請科系連結"
         }
       ],
-      "zhOutcome": "一份高中學習歷程素材庫。",
-      "enOutcome": "一份高中學習歷程素材庫。",
+      "zhOutcome": "學習歷程素材庫",
+      "enOutcome": "學習歷程素材庫",
       "zhNotePrompt": "請在課程筆記中寫下：我最有價值的 5 個素材、每個素材代表的能力、可以用在哪個申請科系。",
-      "enNotePrompt": "請在課程筆記中寫下：我最有價值的 5 個素材、每個素材代表的能力、可以用在哪個申請科系。"
+      "enNotePrompt": "請在課程筆記中寫下：我最有價值的 5 個素材、每個素材代表的能力、可以用在哪個申請科系。",
+      "zhDeliverableChecklist": [
+        "我已整理至少 10 個高中素材",
+        "每個素材都有分類",
+        "每個素材都有對應能力",
+        "我已挑出最有價值的 5 個素材",
+        "我知道哪些素材不適合放進備審"
+      ],
+      "enDeliverableChecklist": [
+        "我已整理至少 10 個高中素材",
+        "每個素材都有分類",
+        "每個素材都有對應能力",
+        "我已挑出最有價值的 5 個素材",
+        "我知道哪些素材不適合放進備審"
+      ],
+      "zhScorecard": [
+        "素材完整",
+        "分類清楚",
+        "能力證據",
+        "科系連結",
+        "取捨能力"
+      ],
+      "enScorecard": [
+        "素材完整",
+        "分類清楚",
+        "能力證據",
+        "科系連結",
+        "取捨能力"
+      ],
+      "zhValueTip": "如果一個素材不能說明你的能力或成長，就算看起來很厲害，也不一定要放。",
+      "enValueTip": "如果一個素材不能說明你的能力或成長，就算看起來很厲害，也不一定要放。"
     },
     {
       "zhTitle": "第4課：用 STAR 架構寫出有說服力的多元表現",
@@ -1232,8 +1322,8 @@ const PREMIUM_LESSON_DETAILS = {
       "enExample": "範例：不要只寫『我擔任班長』。可以寫：班上分組合作常常拖延，我負責協調進度，建立共同表格提醒任務，最後讓專題準時完成。這樣教授看得出你的溝通、協調與負責。",
       "zhPractice": "選出 3 個你想放進備審的活動經驗。；每個活動都用 STAR 寫出 Situation、Task、Action、Result。；請 AI 幫你改寫成 300 字內的多元表現描述。；檢查文字是否真實、具體、沒有誇大。",
       "enPractice": "選出 3 個你想放進備審的活動經驗。；每個活動都用 STAR 寫出 Situation、Task、Action、Result。；請 AI 幫你改寫成 300 字內的多元表現描述。；檢查文字是否真實、具體、沒有誇大。",
-      "zhFeedbackPrompt": "請你擔任大學備審資料修改老師。以下是我的多元表現描述：\n（貼上成果）\n請檢查：\n1. STAR 四個元素是否完整\n2. 哪些句子太空泛\n3. 是否有具體行動與結果\n4. 是否有誇大或不自然的地方\n5. 請給我一版修改建議。",
-      "enFeedbackPrompt": "請你擔任大學備審資料修改老師。以下是我的多元表現描述：\n（貼上成果）\n請檢查：\n1. STAR 四個元素是否完整\n2. 哪些句子太空泛\n3. 是否有具體行動與結果\n4. 是否有誇大或不自然的地方\n5. 請給我一版修改建議。",
+      "zhFeedbackPrompt": "你是一位大學備審寫作教練。\n\n以下是我完成的「多元表現描述」：\n（請把我的實作成果貼在這裡）\n\n請你不要只說「很好」或「可以更具體」，請用專業標準幫我做深度回饋。\n\n第一部分：整體評分\n請從以下面向各給 1-10 分，並說明原因：\n- STAR 完整度：1-10 分，並說明扣分原因\n- 具體行動：1-10 分，並說明扣分原因\n- 結果清楚度：1-10 分，並說明扣分原因\n- 反思深度：1-10 分，並說明扣分原因\n- 真實感：1-10 分，並說明扣分原因\n- 文字精準度：1-10 分，並說明扣分原因\n- 科系連結：1-10 分，並說明扣分原因\n- 說服力：1-10 分，並說明扣分原因\n\n第二部分：優點分析\n請列出我做得最好的 3 個地方，並說明為什麼這些地方有助於大學申請。\n\n第三部分：問題診斷\n請列出最需要改善的 3 個問題。每個問題都要包含：\n- 問題在哪裡\n- 為什麼會影響申請\n- 應該怎麼修改\n\n第四部分：教授視角\n請用大學教授或審查委員的角度，回答：\n1. 哪一句最加分？哪一句最扣分？\n2. 請指出哪裡像流水帳或口號。\n3. 請示範一版 300 字內的修改方向。\n\n第五部分：直接修改建議\n請提供：\n1. 一版更好的修改方向\n2. 可以直接加入的句子範例\n3. 我不應該使用的空泛句子\n4. 下一次修改前要補充的資料\n\n第六部分：下一步行動\n請幫我列出 3 個最優先的修改任務，格式如下：\n- 今天先改：\n- 明天補強：\n- 最後檢查：\n\n請記住：不要捏造我的經歷，不要替我編不存在的活動，只能根據我提供的內容提出修改建議。",
+      "enFeedbackPrompt": "Act as a 大學備審寫作教練.\n\nHere is my completed work for: 多元表現描述\n(paste my work here)\n\nDo not only say \"good\" or \"be more specific.\" Give me detailed professional feedback.\n\nPart 1: Overall scoring\nRate each item from 1-10 and explain the reason:\n- STAR 完整度：1-10 分，並說明扣分原因\n- 具體行動：1-10 分，並說明扣分原因\n- 結果清楚度：1-10 分，並說明扣分原因\n- 反思深度：1-10 分，並說明扣分原因\n- 真實感：1-10 分，並說明扣分原因\n- 文字精準度：1-10 分，並說明扣分原因\n- 科系連結：1-10 分，並說明扣分原因\n- 說服力：1-10 分，並說明扣分原因\n\nPart 2: Strengths\nList the 3 strongest parts and explain why they help my university application.\n\nPart 3: Diagnosis\nList the 3 most important problems. For each problem, include:\n- What the issue is\n- Why it hurts the application\n- How to revise it\n\nPart 4: Reviewer perspective\nAnswer these:\n1. 哪一句最加分？哪一句最扣分？\n2. 請指出哪裡像流水帳或口號。\n3. 請示範一版 300 字內的修改方向。\n\nPart 5: Direct revision guidance\nProvide:\n1. A better revision direction\n2. Example sentences I can adapt\n3. Vague sentences I should avoid\n4. Information I need to add before revising\n\nPart 6: Next actions\nGive me 3 priorities:\n- Fix today:\n- Improve tomorrow:\n- Final check:\n\nDo not invent my experience. Only give suggestions based on what I provide.",
       "zhQuizItems": [
         {
           "q": "STAR 的 A 代表什麼？",
@@ -1292,10 +1382,40 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "你採取的行動與成長"
         }
       ],
-      "zhOutcome": "3 則可放入備審的多元表現描述。",
-      "enOutcome": "3 則可放入備審的多元表現描述。",
+      "zhOutcome": "3 則多元表現描述",
+      "enOutcome": "3 則多元表現描述",
       "zhNotePrompt": "請在課程筆記中記錄：我選的 3 個活動、每個活動的 STAR 重點、最需要修改的地方。",
-      "enNotePrompt": "請在課程筆記中記錄：我選的 3 個活動、每個活動的 STAR 重點、最需要修改的地方。"
+      "enNotePrompt": "請在課程筆記中記錄：我選的 3 個活動、每個活動的 STAR 重點、最需要修改的地方。",
+      "zhDeliverableChecklist": [
+        "每則描述都有情境",
+        "每則描述都有我的任務",
+        "每則描述都有我的行動",
+        "每則描述都有結果",
+        "文字沒有誇大或捏造"
+      ],
+      "enDeliverableChecklist": [
+        "每則描述都有情境",
+        "每則描述都有我的任務",
+        "每則描述都有我的行動",
+        "每則描述都有結果",
+        "文字沒有誇大或捏造"
+      ],
+      "zhScorecard": [
+        "STAR 完整",
+        "行動具體",
+        "結果清楚",
+        "反思深度",
+        "說服力"
+      ],
+      "enScorecard": [
+        "STAR 完整",
+        "行動具體",
+        "結果清楚",
+        "反思深度",
+        "說服力"
+      ],
+      "zhValueTip": "教授看的是你做了什麼、怎麼做、學到什麼，不是活動名稱有多漂亮。",
+      "enValueTip": "教授看的是你做了什麼、怎麼做、學到什麼，不是活動名稱有多漂亮。"
     },
     {
       "zhTitle": "第5課：用 AI 產出學習歷程自述初稿",
@@ -1308,8 +1428,8 @@ const PREMIUM_LESSON_DETAILS = {
       "enExample": "範例：學生 D 申請設計系，他不是只寫『我喜歡設計』，而是寫從美術課作品開始，到社群海報設計，再到參加校內展覽，最後確認自己想學視覺傳達。這樣故事線更清楚。",
       "zhPractice": "選出你最想呈現的 3 個學習主軸。；把前面整理好的素材放進對應主軸。；請 AI 幫你規劃自述架構：開頭、學習歷程、能力成長、申請動機、未來規劃。；自己補上真實細節，刪除 AI 產生但不符合你的內容。",
       "enPractice": "選出你最想呈現的 3 個學習主軸。；把前面整理好的素材放進對應主軸。；請 AI 幫你規劃自述架構：開頭、學習歷程、能力成長、申請動機、未來規劃。；自己補上真實細節，刪除 AI 產生但不符合你的內容。",
-      "zhFeedbackPrompt": "請你擔任學習歷程自述修改老師。以下是我的自述初稿或架構：\n（貼上成果）\n請檢查：\n1. 是否有清楚主軸\n2. 是否有具體經驗\n3. 是否有連結目標科系\n4. 哪些地方像空話\n5. 請給我修改順序。",
-      "enFeedbackPrompt": "請你擔任學習歷程自述修改老師。以下是我的自述初稿或架構：\n（貼上成果）\n請檢查：\n1. 是否有清楚主軸\n2. 是否有具體經驗\n3. 是否有連結目標科系\n4. 哪些地方像空話\n5. 請給我修改順序。",
+      "zhFeedbackPrompt": "你是一位學習歷程自述修改老師。\n\n以下是我完成的「學習歷程自述初稿」：\n（請把我的實作成果貼在這裡）\n\n請你不要只說「很好」或「可以更具體」，請用專業標準幫我做深度回饋。\n\n第一部分：整體評分\n請從以下面向各給 1-10 分，並說明原因：\n- 主軸清楚度：1-10 分，並說明扣分原因\n- 經驗具體度：1-10 分，並說明扣分原因\n- 成長脈絡：1-10 分，並說明扣分原因\n- 科系連結：1-10 分，並說明扣分原因\n- 未來規劃：1-10 分，並說明扣分原因\n- 真實感：1-10 分，並說明扣分原因\n- 文字流暢度：1-10 分，並說明扣分原因\n- 教授記憶點：1-10 分，並說明扣分原因\n\n第二部分：優點分析\n請列出我做得最好的 3 個地方，並說明為什麼這些地方有助於大學申請。\n\n第三部分：問題診斷\n請列出最需要改善的 3 個問題。每個問題都要包含：\n- 問題在哪裡\n- 為什麼會影響申請\n- 應該怎麼修改\n\n第四部分：教授視角\n請用大學教授或審查委員的角度，回答：\n1. 這份自述最想讓教授記住什麼？目前有做到嗎？\n2. 哪一段最弱？為什麼？\n3. 請給我一個更清楚的段落順序。\n\n第五部分：直接修改建議\n請提供：\n1. 一版更好的修改方向\n2. 可以直接加入的句子範例\n3. 我不應該使用的空泛句子\n4. 下一次修改前要補充的資料\n\n第六部分：下一步行動\n請幫我列出 3 個最優先的修改任務，格式如下：\n- 今天先改：\n- 明天補強：\n- 最後檢查：\n\n請記住：不要捏造我的經歷，不要替我編不存在的活動，只能根據我提供的內容提出修改建議。",
+      "enFeedbackPrompt": "Act as a 學習歷程自述修改老師.\n\nHere is my completed work for: 學習歷程自述初稿\n(paste my work here)\n\nDo not only say \"good\" or \"be more specific.\" Give me detailed professional feedback.\n\nPart 1: Overall scoring\nRate each item from 1-10 and explain the reason:\n- 主軸清楚度：1-10 分，並說明扣分原因\n- 經驗具體度：1-10 分，並說明扣分原因\n- 成長脈絡：1-10 分，並說明扣分原因\n- 科系連結：1-10 分，並說明扣分原因\n- 未來規劃：1-10 分，並說明扣分原因\n- 真實感：1-10 分，並說明扣分原因\n- 文字流暢度：1-10 分，並說明扣分原因\n- 教授記憶點：1-10 分，並說明扣分原因\n\nPart 2: Strengths\nList the 3 strongest parts and explain why they help my university application.\n\nPart 3: Diagnosis\nList the 3 most important problems. For each problem, include:\n- What the issue is\n- Why it hurts the application\n- How to revise it\n\nPart 4: Reviewer perspective\nAnswer these:\n1. 這份自述最想讓教授記住什麼？目前有做到嗎？\n2. 哪一段最弱？為什麼？\n3. 請給我一個更清楚的段落順序。\n\nPart 5: Direct revision guidance\nProvide:\n1. A better revision direction\n2. Example sentences I can adapt\n3. Vague sentences I should avoid\n4. Information I need to add before revising\n\nPart 6: Next actions\nGive me 3 priorities:\n- Fix today:\n- Improve tomorrow:\n- Final check:\n\nDo not invent my experience. Only give suggestions based on what I provide.",
       "zhQuizItems": [
         {
           "q": "自述最應避免什麼？",
@@ -1368,10 +1488,40 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "加入真實細節並修改"
         }
       ],
-      "zhOutcome": "一份學習歷程自述初稿架構。",
-      "enOutcome": "一份學習歷程自述初稿架構。",
+      "zhOutcome": "學習歷程自述初稿",
+      "enOutcome": "學習歷程自述初稿",
       "zhNotePrompt": "請在課程筆記中寫下：我的自述主軸、3 個關鍵經驗、我想讓教授記住我的一句話。",
-      "enNotePrompt": "請在課程筆記中寫下：我的自述主軸、3 個關鍵經驗、我想讓教授記住我的一句話。"
+      "enNotePrompt": "請在課程筆記中寫下：我的自述主軸、3 個關鍵經驗、我想讓教授記住我的一句話。",
+      "zhDeliverableChecklist": [
+        "自述有清楚主軸",
+        "有至少 3 個具體經驗",
+        "有連結目標科系",
+        "有能力成長過程",
+        "有未來學習規劃"
+      ],
+      "enDeliverableChecklist": [
+        "自述有清楚主軸",
+        "有至少 3 個具體經驗",
+        "有連結目標科系",
+        "有能力成長過程",
+        "有未來學習規劃"
+      ],
+      "zhScorecard": [
+        "主軸清楚",
+        "經驗具體",
+        "科系連結",
+        "成長脈絡",
+        "記憶點"
+      ],
+      "enScorecard": [
+        "主軸清楚",
+        "經驗具體",
+        "科系連結",
+        "成長脈絡",
+        "記憶點"
+      ],
+      "zhValueTip": "請刪掉『我從小就很喜歡』這類空泛開頭，改用一個真實經驗開場。",
+      "enValueTip": "請刪掉『我從小就很喜歡』這類空泛開頭，改用一個真實經驗開場。"
     },
     {
       "zhTitle": "第6課：針對目標科系製作專屬備審資料",
@@ -1384,8 +1534,8 @@ const PREMIUM_LESSON_DETAILS = {
       "enExample": "範例：申請心理系時，可以強調觀察、人際互動、服務經驗與閱讀反思；申請資訊相關科系時，可以強調專題作品、程式能力、資料分析與解決問題能力。",
       "zhPractice": "選定一個目標科系。；請 AI 分析這個科系可能重視的能力。；把你的素材和科系需求做成對照表。；決定哪些素材必放、哪些素材可放、哪些素材先不放。",
       "enPractice": "選定一個目標科系。；請 AI 分析這個科系可能重視的能力。；把你的素材和科系需求做成對照表。；決定哪些素材必放、哪些素材可放、哪些素材先不放。",
-      "zhFeedbackPrompt": "請你擔任科系備審顧問。以下是我的科系需求與素材對照表：\n（貼上成果）\n請幫我檢查：\n1. 素材是否符合科系需求\n2. 哪些素材最有說服力\n3. 哪些素材連結太弱\n4. 是否缺少關鍵能力證據\n5. 請幫我排出備審資料呈現順序。",
-      "enFeedbackPrompt": "請你擔任科系備審顧問。以下是我的科系需求與素材對照表：\n（貼上成果）\n請幫我檢查：\n1. 素材是否符合科系需求\n2. 哪些素材最有說服力\n3. 哪些素材連結太弱\n4. 是否缺少關鍵能力證據\n5. 請幫我排出備審資料呈現順序。",
+      "zhFeedbackPrompt": "你是一位科系備審策略顧問。\n\n以下是我完成的「科系專屬備審資料規劃表」：\n（請把我的實作成果貼在這裡）\n\n請你不要只說「很好」或「可以更具體」，請用專業標準幫我做深度回饋。\n\n第一部分：整體評分\n請從以下面向各給 1-10 分，並說明原因：\n- 科系需求理解：1-10 分，並說明扣分原因\n- 素材匹配度：1-10 分，並說明扣分原因\n- 能力證據強度：1-10 分，並說明扣分原因\n- 差異化：1-10 分，並說明扣分原因\n- 資料取捨：1-10 分，並說明扣分原因\n- 呈現順序：1-10 分，並說明扣分原因\n- 補強方向：1-10 分，並說明扣分原因\n- 整體策略：1-10 分，並說明扣分原因\n\n第二部分：優點分析\n請列出我做得最好的 3 個地方，並說明為什麼這些地方有助於大學申請。\n\n第三部分：問題診斷\n請列出最需要改善的 3 個問題。每個問題都要包含：\n- 問題在哪裡\n- 為什麼會影響申請\n- 應該怎麼修改\n\n第四部分：教授視角\n請用大學教授或審查委員的角度，回答：\n1. 哪些素材必放？哪些素材應該刪除？\n2. 我目前最缺少哪一種能力證據？\n3. 請幫我安排備審資料呈現順序。\n\n第五部分：直接修改建議\n請提供：\n1. 一版更好的修改方向\n2. 可以直接加入的句子範例\n3. 我不應該使用的空泛句子\n4. 下一次修改前要補充的資料\n\n第六部分：下一步行動\n請幫我列出 3 個最優先的修改任務，格式如下：\n- 今天先改：\n- 明天補強：\n- 最後檢查：\n\n請記住：不要捏造我的經歷，不要替我編不存在的活動，只能根據我提供的內容提出修改建議。",
+      "enFeedbackPrompt": "Act as a 科系備審策略顧問.\n\nHere is my completed work for: 科系專屬備審資料規劃表\n(paste my work here)\n\nDo not only say \"good\" or \"be more specific.\" Give me detailed professional feedback.\n\nPart 1: Overall scoring\nRate each item from 1-10 and explain the reason:\n- 科系需求理解：1-10 分，並說明扣分原因\n- 素材匹配度：1-10 分，並說明扣分原因\n- 能力證據強度：1-10 分，並說明扣分原因\n- 差異化：1-10 分，並說明扣分原因\n- 資料取捨：1-10 分，並說明扣分原因\n- 呈現順序：1-10 分，並說明扣分原因\n- 補強方向：1-10 分，並說明扣分原因\n- 整體策略：1-10 分，並說明扣分原因\n\nPart 2: Strengths\nList the 3 strongest parts and explain why they help my university application.\n\nPart 3: Diagnosis\nList the 3 most important problems. For each problem, include:\n- What the issue is\n- Why it hurts the application\n- How to revise it\n\nPart 4: Reviewer perspective\nAnswer these:\n1. 哪些素材必放？哪些素材應該刪除？\n2. 我目前最缺少哪一種能力證據？\n3. 請幫我安排備審資料呈現順序。\n\nPart 5: Direct revision guidance\nProvide:\n1. A better revision direction\n2. Example sentences I can adapt\n3. Vague sentences I should avoid\n4. Information I need to add before revising\n\nPart 6: Next actions\nGive me 3 priorities:\n- Fix today:\n- Improve tomorrow:\n- Final check:\n\nDo not invent my experience. Only give suggestions based on what I provide.",
       "zhQuizItems": [
         {
           "q": "備審為什麼要依科系調整？",
@@ -1444,10 +1594,40 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "和科系無關且無法說明能力"
         }
       ],
-      "zhOutcome": "一份科系專屬備審資料規劃表。",
-      "enOutcome": "一份科系專屬備審資料規劃表。",
+      "zhOutcome": "科系專屬備審規劃表",
+      "enOutcome": "科系專屬備審規劃表",
       "zhNotePrompt": "請在課程筆記中寫下：我的目標科系、該科系重視的 3 個能力、我最能證明這些能力的素材。",
-      "enNotePrompt": "請在課程筆記中寫下：我的目標科系、該科系重視的 3 個能力、我最能證明這些能力的素材。"
+      "enNotePrompt": "請在課程筆記中寫下：我的目標科系、該科系重視的 3 個能力、我最能證明這些能力的素材。",
+      "zhDeliverableChecklist": [
+        "我已分析目標科系重視的能力",
+        "我已把素材對應到科系需求",
+        "我知道必放素材",
+        "我知道可刪除素材",
+        "我知道還缺哪種能力證據"
+      ],
+      "enDeliverableChecklist": [
+        "我已分析目標科系重視的能力",
+        "我已把素材對應到科系需求",
+        "我知道必放素材",
+        "我知道可刪除素材",
+        "我知道還缺哪種能力證據"
+      ],
+      "zhScorecard": [
+        "科系理解",
+        "素材匹配",
+        "證據強度",
+        "資料取捨",
+        "策略清楚"
+      ],
+      "enScorecard": [
+        "科系理解",
+        "素材匹配",
+        "證據強度",
+        "資料取捨",
+        "策略清楚"
+      ],
+      "zhValueTip": "同一份備審不要丟給所有科系。每個科系至少要有自己的重點版本。",
+      "enValueTip": "同一份備審不要丟給所有科系。每個科系至少要有自己的重點版本。"
     },
     {
       "zhTitle": "第7課：建立大學面試題庫與回答架構",
@@ -1460,8 +1640,8 @@ const PREMIUM_LESSON_DETAILS = {
       "enExample": "範例：題目『為什麼選本系？』不要只回答『我有興趣』。可以用：過去經驗 → 對科系理解 → 目前準備 → 未來目標，這樣回答會更完整。",
       "zhPractice": "請 AI 針對你的目標科系產生 20 題面試題。；把題目分類成自我介紹、申請動機、學習歷程、科系理解、未來規劃、臨場反應。；挑出最難的 5 題。；每題寫下 3 個回答重點，不寫完整背稿。",
       "enPractice": "請 AI 針對你的目標科系產生 20 題面試題。；把題目分類成自我介紹、申請動機、學習歷程、科系理解、未來規劃、臨場反應。；挑出最難的 5 題。；每題寫下 3 個回答重點，不寫完整背稿。",
-      "zhFeedbackPrompt": "請你擔任面試教練。以下是我的面試題庫與回答重點：\n（貼上成果）\n請檢查：\n1. 題目是否符合目標科系\n2. 回答重點是否具體\n3. 是否有真實經驗支撐\n4. 哪些回答太像背稿\n5. 請給我每題的改善建議。",
-      "enFeedbackPrompt": "請你擔任面試教練。以下是我的面試題庫與回答重點：\n（貼上成果）\n請檢查：\n1. 題目是否符合目標科系\n2. 回答重點是否具體\n3. 是否有真實經驗支撐\n4. 哪些回答太像背稿\n5. 請給我每題的改善建議。",
+      "zhFeedbackPrompt": "你是一位大學面試教練。\n\n以下是我完成的「面試題庫與回答架構」：\n（請把我的實作成果貼在這裡）\n\n請你不要只說「很好」或「可以更具體」，請用專業標準幫我做深度回饋。\n\n第一部分：整體評分\n請從以下面向各給 1-10 分，並說明原因：\n- 題庫完整度：1-10 分，並說明扣分原因\n- 題型多樣性：1-10 分，並說明扣分原因\n- 回答具體度：1-10 分，並說明扣分原因\n- 個人經驗連結：1-10 分，並說明扣分原因\n- 科系理解：1-10 分，並說明扣分原因\n- 邏輯架構：1-10 分，並說明扣分原因\n- 臨場可用性：1-10 分，並說明扣分原因\n- 說服力：1-10 分，並說明扣分原因\n\n第二部分：優點分析\n請列出我做得最好的 3 個地方，並說明為什麼這些地方有助於大學申請。\n\n第三部分：問題診斷\n請列出最需要改善的 3 個問題。每個問題都要包含：\n- 問題在哪裡\n- 為什麼會影響申請\n- 應該怎麼修改\n\n第四部分：教授視角\n請用大學教授或審查委員的角度，回答：\n1. 哪 5 題最可能在真實面試出現？\n2. 哪一題我的回答最弱？\n3. 請告訴我教授真正想聽的是什麼。\n\n第五部分：直接修改建議\n請提供：\n1. 一版更好的修改方向\n2. 可以直接加入的句子範例\n3. 我不應該使用的空泛句子\n4. 下一次修改前要補充的資料\n\n第六部分：下一步行動\n請幫我列出 3 個最優先的修改任務，格式如下：\n- 今天先改：\n- 明天補強：\n- 最後檢查：\n\n請記住：不要捏造我的經歷，不要替我編不存在的活動，只能根據我提供的內容提出修改建議。",
+      "enFeedbackPrompt": "Act as a 大學面試教練.\n\nHere is my completed work for: 面試題庫與回答架構\n(paste my work here)\n\nDo not only say \"good\" or \"be more specific.\" Give me detailed professional feedback.\n\nPart 1: Overall scoring\nRate each item from 1-10 and explain the reason:\n- 題庫完整度：1-10 分，並說明扣分原因\n- 題型多樣性：1-10 分，並說明扣分原因\n- 回答具體度：1-10 分，並說明扣分原因\n- 個人經驗連結：1-10 分，並說明扣分原因\n- 科系理解：1-10 分，並說明扣分原因\n- 邏輯架構：1-10 分，並說明扣分原因\n- 臨場可用性：1-10 分，並說明扣分原因\n- 說服力：1-10 分，並說明扣分原因\n\nPart 2: Strengths\nList the 3 strongest parts and explain why they help my university application.\n\nPart 3: Diagnosis\nList the 3 most important problems. For each problem, include:\n- What the issue is\n- Why it hurts the application\n- How to revise it\n\nPart 4: Reviewer perspective\nAnswer these:\n1. 哪 5 題最可能在真實面試出現？\n2. 哪一題我的回答最弱？\n3. 請告訴我教授真正想聽的是什麼。\n\nPart 5: Direct revision guidance\nProvide:\n1. A better revision direction\n2. Example sentences I can adapt\n3. Vague sentences I should avoid\n4. Information I need to add before revising\n\nPart 6: Next actions\nGive me 3 priorities:\n- Fix today:\n- Improve tomorrow:\n- Final check:\n\nDo not invent my experience. Only give suggestions based on what I provide.",
       "zhQuizItems": [
         {
           "q": "面試最不建議做什麼？",
@@ -1520,10 +1700,40 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "練習不同題型"
         }
       ],
-      "zhOutcome": "一份個人面試題庫與回答架構。",
-      "enOutcome": "一份個人面試題庫與回答架構。",
+      "zhOutcome": "個人面試題庫與回答架構",
+      "enOutcome": "個人面試題庫與回答架構",
       "zhNotePrompt": "請在課程筆記中寫下：我最怕的 5 題、每題的回答重點、我需要補強的例子。",
-      "enNotePrompt": "請在課程筆記中寫下：我最怕的 5 題、每題的回答重點、我需要補強的例子。"
+      "enNotePrompt": "請在課程筆記中寫下：我最怕的 5 題、每題的回答重點、我需要補強的例子。",
+      "zhDeliverableChecklist": [
+        "我已產生 20 題面試題",
+        "題目有分類",
+        "我已挑出最難的 5 題",
+        "每題有 3 個回答重點",
+        "回答不是 AI 背稿"
+      ],
+      "enDeliverableChecklist": [
+        "我已產生 20 題面試題",
+        "題目有分類",
+        "我已挑出最難的 5 題",
+        "每題有 3 個回答重點",
+        "回答不是 AI 背稿"
+      ],
+      "zhScorecard": [
+        "題庫完整",
+        "回答具體",
+        "邏輯清楚",
+        "個人經驗",
+        "科系理解"
+      ],
+      "enScorecard": [
+        "題庫完整",
+        "回答具體",
+        "邏輯清楚",
+        "個人經驗",
+        "科系理解"
+      ],
+      "zhValueTip": "不要背完整答案，只要記住回答架構與關鍵例子，面試時會自然很多。",
+      "enValueTip": "不要背完整答案，只要記住回答架構與關鍵例子，面試時會自然很多。"
     },
     {
       "zhTitle": "第8課：用 AI 進行模擬面試與回饋修正",
@@ -1536,8 +1746,8 @@ const PREMIUM_LESSON_DETAILS = {
       "enExample": "範例：你回答『我想讀心理系，因為我喜歡幫助人』，AI 可能回饋：太抽象，需要補上具體經驗，例如你曾在志工服務中觀察到什麼、如何理解人的需求。",
       "zhPractice": "用 AI 進行至少 5 題模擬面試。；每題回答後請 AI 從清楚度、具體性、邏輯、說服力評分。；把 AI 回饋整理成改進清單。；選 2 題重新回答，確認是否有進步。",
       "enPractice": "用 AI 進行至少 5 題模擬面試。；每題回答後請 AI 從清楚度、具體性、邏輯、說服力評分。；把 AI 回饋整理成改進清單。；選 2 題重新回答，確認是否有進步。",
-      "zhFeedbackPrompt": "請你擔任嚴格但友善的大學教授。以下是我的模擬面試回答：\n（貼上回答）\n請用清楚度、具體性、邏輯、說服力四項各給 1-5 分，並告訴我：\n1. 最好的地方\n2. 最大問題\n3. 可以加入的具體例子\n4. 更好的回答架構\n5. 下一次練習重點。",
-      "enFeedbackPrompt": "請你擔任嚴格但友善的大學教授。以下是我的模擬面試回答：\n（貼上回答）\n請用清楚度、具體性、邏輯、說服力四項各給 1-5 分，並告訴我：\n1. 最好的地方\n2. 最大問題\n3. 可以加入的具體例子\n4. 更好的回答架構\n5. 下一次練習重點。",
+      "zhFeedbackPrompt": "你是一位嚴格但友善的大學面試教授。\n\n以下是我完成的「模擬面試回答」：\n（請把我的實作成果貼在這裡）\n\n請你不要只說「很好」或「可以更具體」，請用專業標準幫我做深度回饋。\n\n第一部分：整體評分\n請從以下面向各給 1-10 分，並說明原因：\n- 表達清楚度：1-10 分，並說明扣分原因\n- 具體性：1-10 分，並說明扣分原因\n- 邏輯性：1-10 分，並說明扣分原因\n- 真實性：1-10 分，並說明扣分原因\n- 臨場反應：1-10 分，並說明扣分原因\n- 科系理解度：1-10 分，並說明扣分原因\n- 說服力：1-10 分，並說明扣分原因\n- 錄取印象：1-10 分，並說明扣分原因\n\n第二部分：優點分析\n請列出我做得最好的 3 個地方，並說明為什麼這些地方有助於大學申請。\n\n第三部分：問題診斷\n請列出最需要改善的 3 個問題。每個問題都要包含：\n- 問題在哪裡\n- 為什麼會影響申請\n- 應該怎麼修改\n\n第四部分：教授視角\n請用大學教授或審查委員的角度，回答：\n1. 哪一句最加分？哪一句最扣分？\n2. 如何從 60 分回答提升到 90 分？\n3. 請示範一版更好的回答，但不要捏造我的經歷。\n\n第五部分：直接修改建議\n請提供：\n1. 一版更好的修改方向\n2. 可以直接加入的句子範例\n3. 我不應該使用的空泛句子\n4. 下一次修改前要補充的資料\n\n第六部分：下一步行動\n請幫我列出 3 個最優先的修改任務，格式如下：\n- 今天先改：\n- 明天補強：\n- 最後檢查：\n\n請記住：不要捏造我的經歷，不要替我編不存在的活動，只能根據我提供的內容提出修改建議。",
+      "enFeedbackPrompt": "Act as a 嚴格但友善的大學面試教授.\n\nHere is my completed work for: 模擬面試回答\n(paste my work here)\n\nDo not only say \"good\" or \"be more specific.\" Give me detailed professional feedback.\n\nPart 1: Overall scoring\nRate each item from 1-10 and explain the reason:\n- 表達清楚度：1-10 分，並說明扣分原因\n- 具體性：1-10 分，並說明扣分原因\n- 邏輯性：1-10 分，並說明扣分原因\n- 真實性：1-10 分，並說明扣分原因\n- 臨場反應：1-10 分，並說明扣分原因\n- 科系理解度：1-10 分，並說明扣分原因\n- 說服力：1-10 分，並說明扣分原因\n- 錄取印象：1-10 分，並說明扣分原因\n\nPart 2: Strengths\nList the 3 strongest parts and explain why they help my university application.\n\nPart 3: Diagnosis\nList the 3 most important problems. For each problem, include:\n- What the issue is\n- Why it hurts the application\n- How to revise it\n\nPart 4: Reviewer perspective\nAnswer these:\n1. 哪一句最加分？哪一句最扣分？\n2. 如何從 60 分回答提升到 90 分？\n3. 請示範一版更好的回答，但不要捏造我的經歷。\n\nPart 5: Direct revision guidance\nProvide:\n1. A better revision direction\n2. Example sentences I can adapt\n3. Vague sentences I should avoid\n4. Information I need to add before revising\n\nPart 6: Next actions\nGive me 3 priorities:\n- Fix today:\n- Improve tomorrow:\n- Final check:\n\nDo not invent my experience. Only give suggestions based on what I provide.",
       "zhQuizItems": [
         {
           "q": "模擬面試最重要的是？",
@@ -1596,10 +1806,40 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "改進清單"
         }
       ],
-      "zhOutcome": "一份模擬面試紀錄與改進清單。",
-      "enOutcome": "一份模擬面試紀錄與改進清單。",
+      "zhOutcome": "模擬面試紀錄與改進清單",
+      "enOutcome": "模擬面試紀錄與改進清單",
       "zhNotePrompt": "請在課程筆記中寫下：我最常出現的回答問題、AI 給我的 3 個建議、下一輪練習目標。",
-      "enNotePrompt": "請在課程筆記中寫下：我最常出現的回答問題、AI 給我的 3 個建議、下一輪練習目標。"
+      "enNotePrompt": "請在課程筆記中寫下：我最常出現的回答問題、AI 給我的 3 個建議、下一輪練習目標。",
+      "zhDeliverableChecklist": [
+        "我已完成至少 5 題模擬面試",
+        "每題都有 AI 評分",
+        "我已整理常見問題",
+        "我已重練最弱的 2 題",
+        "我知道下一輪要改善什麼"
+      ],
+      "enDeliverableChecklist": [
+        "我已完成至少 5 題模擬面試",
+        "每題都有 AI 評分",
+        "我已整理常見問題",
+        "我已重練最弱的 2 題",
+        "我知道下一輪要改善什麼"
+      ],
+      "zhScorecard": [
+        "表達清楚",
+        "具體性",
+        "邏輯性",
+        "臨場反應",
+        "說服力"
+      ],
+      "enScorecard": [
+        "表達清楚",
+        "具體性",
+        "邏輯性",
+        "臨場反應",
+        "說服力"
+      ],
+      "zhValueTip": "模擬面試不是看分數，是看你下一次有沒有改得更清楚。",
+      "enValueTip": "模擬面試不是看分數，是看你下一次有沒有改得更清楚。"
     },
     {
       "zhTitle": "第9課：建立你的個人 AI 升學顧問",
@@ -1612,8 +1852,8 @@ const PREMIUM_LESSON_DETAILS = {
       "enExample": "範例：你可以把『我是高中三年級，目標是心理系，有志工服務、班級幹部和閱讀心得，目前缺少面試練習』放進固定 Prompt，AI 後續給的建議就會更貼近你。",
       "zhPractice": "整理自己的基本背景：年級、目標科系、優勢、弱點。；整理目前已有的素材與申請進度。；建立一段固定的 AI 升學顧問 Prompt。；請 AI 根據這段 Prompt 問你 5 個還需要補充的問題。",
       "enPractice": "整理自己的基本背景：年級、目標科系、優勢、弱點。；整理目前已有的素材與申請進度。；建立一段固定的 AI 升學顧問 Prompt。；請 AI 根據這段 Prompt 問你 5 個還需要補充的問題。",
-      "zhFeedbackPrompt": "請你擔任 Prompt 教練。以下是我的個人 AI 升學顧問 Prompt：\n（貼上 Prompt）\n請幫我檢查：\n1. 背景是否足夠清楚\n2. 目標科系是否明確\n3. 是否有提供素材與進度\n4. 哪些資訊還缺少\n5. 請幫我改寫成更好用的版本。",
-      "enFeedbackPrompt": "請你擔任 Prompt 教練。以下是我的個人 AI 升學顧問 Prompt：\n（貼上 Prompt）\n請幫我檢查：\n1. 背景是否足夠清楚\n2. 目標科系是否明確\n3. 是否有提供素材與進度\n4. 哪些資訊還缺少\n5. 請幫我改寫成更好用的版本。",
+      "zhFeedbackPrompt": "你是一位Prompt 教練與升學顧問。\n\n以下是我完成的「個人 AI 升學顧問 Prompt」：\n（請把我的實作成果貼在這裡）\n\n請你不要只說「很好」或「可以更具體」，請用專業標準幫我做深度回饋。\n\n第一部分：整體評分\n請從以下面向各給 1-10 分，並說明原因：\n- 背景完整度：1-10 分，並說明扣分原因\n- 目標明確度：1-10 分，並說明扣分原因\n- 限制條件：1-10 分，並說明扣分原因\n- 任務清楚度：1-10 分，並說明扣分原因\n- 可重複使用性：1-10 分，並說明扣分原因\n- 個人化程度：1-10 分，並說明扣分原因\n- 追問品質：1-10 分，並說明扣分原因\n- 實用性：1-10 分，並說明扣分原因\n\n第二部分：優點分析\n請列出我做得最好的 3 個地方，並說明為什麼這些地方有助於大學申請。\n\n第三部分：問題診斷\n請列出最需要改善的 3 個問題。每個問題都要包含：\n- 問題在哪裡\n- 為什麼會影響申請\n- 應該怎麼修改\n\n第四部分：教授視角\n請用大學教授或審查委員的角度，回答：\n1. 這個 Prompt 會不會讓 AI 給出太通用的答案？\n2. 還缺少哪些背景資訊？\n3. 請幫我改寫成更穩定、更個人化的版本。\n\n第五部分：直接修改建議\n請提供：\n1. 一版更好的修改方向\n2. 可以直接加入的句子範例\n3. 我不應該使用的空泛句子\n4. 下一次修改前要補充的資料\n\n第六部分：下一步行動\n請幫我列出 3 個最優先的修改任務，格式如下：\n- 今天先改：\n- 明天補強：\n- 最後檢查：\n\n請記住：不要捏造我的經歷，不要替我編不存在的活動，只能根據我提供的內容提出修改建議。",
+      "enFeedbackPrompt": "Act as a Prompt 教練與升學顧問.\n\nHere is my completed work for: 個人 AI 升學顧問 Prompt\n(paste my work here)\n\nDo not only say \"good\" or \"be more specific.\" Give me detailed professional feedback.\n\nPart 1: Overall scoring\nRate each item from 1-10 and explain the reason:\n- 背景完整度：1-10 分，並說明扣分原因\n- 目標明確度：1-10 分，並說明扣分原因\n- 限制條件：1-10 分，並說明扣分原因\n- 任務清楚度：1-10 分，並說明扣分原因\n- 可重複使用性：1-10 分，並說明扣分原因\n- 個人化程度：1-10 分，並說明扣分原因\n- 追問品質：1-10 分，並說明扣分原因\n- 實用性：1-10 分，並說明扣分原因\n\nPart 2: Strengths\nList the 3 strongest parts and explain why they help my university application.\n\nPart 3: Diagnosis\nList the 3 most important problems. For each problem, include:\n- What the issue is\n- Why it hurts the application\n- How to revise it\n\nPart 4: Reviewer perspective\nAnswer these:\n1. 這個 Prompt 會不會讓 AI 給出太通用的答案？\n2. 還缺少哪些背景資訊？\n3. 請幫我改寫成更穩定、更個人化的版本。\n\nPart 5: Direct revision guidance\nProvide:\n1. A better revision direction\n2. Example sentences I can adapt\n3. Vague sentences I should avoid\n4. Information I need to add before revising\n\nPart 6: Next actions\nGive me 3 priorities:\n- Fix today:\n- Improve tomorrow:\n- Final check:\n\nDo not invent my experience. Only give suggestions based on what I provide.",
       "zhQuizItems": [
         {
           "q": "個人 AI 顧問最重要的輸入是？",
@@ -1672,10 +1912,40 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "確認資料並追問"
         }
       ],
-      "zhOutcome": "一段可重複使用的個人 AI 升學顧問 Prompt。",
-      "enOutcome": "一段可重複使用的個人 AI 升學顧問 Prompt。",
+      "zhOutcome": "個人 AI 升學顧問 Prompt",
+      "enOutcome": "個人 AI 升學顧問 Prompt",
       "zhNotePrompt": "請在課程筆記中寫下：我的固定背景 Prompt、AI 追問我的問題、我補充後的新版本。",
-      "enNotePrompt": "請在課程筆記中寫下：我的固定背景 Prompt、AI 追問我的問題、我補充後的新版本。"
+      "enNotePrompt": "請在課程筆記中寫下：我的固定背景 Prompt、AI 追問我的問題、我補充後的新版本。",
+      "zhDeliverableChecklist": [
+        "Prompt 有我的年級",
+        "Prompt 有目標科系",
+        "Prompt 有我的優勢與弱點",
+        "Prompt 有目前申請進度",
+        "Prompt 會要求 AI 先追問"
+      ],
+      "enDeliverableChecklist": [
+        "Prompt 有我的年級",
+        "Prompt 有目標科系",
+        "Prompt 有我的優勢與弱點",
+        "Prompt 有目前申請進度",
+        "Prompt 會要求 AI 先追問"
+      ],
+      "zhScorecard": [
+        "背景完整",
+        "目標清楚",
+        "任務明確",
+        "可重複使用",
+        "個人化程度"
+      ],
+      "enScorecard": [
+        "背景完整",
+        "目標清楚",
+        "任務明確",
+        "可重複使用",
+        "個人化程度"
+      ],
+      "zhValueTip": "這段 Prompt 可以長期使用，之後準備備審、面試、修改自述都能沿用。",
+      "enValueTip": "這段 Prompt 可以長期使用，之後準備備審、面試、修改自述都能沿用。"
     },
     {
       "zhTitle": "第10課：完成完整大學申請包",
@@ -1688,8 +1958,8 @@ const PREMIUM_LESSON_DETAILS = {
       "enExample": "範例：如果你的目標是心理系，你的科系探索、學習歷程、自述、面試回答都應該共同支持『我理解心理系、我有相關經驗、我知道自己還要學什麼』這條主線。",
       "zhPractice": "建立資料夾「我的大學申請包」。；放入前 9 課所有成果。；請 AI 幫你做總檢查：已完成、需修改、缺少資料、下一步。；根據 AI 建議修正最重要的 3 個缺口。",
       "enPractice": "建立資料夾「我的大學申請包」。；放入前 9 課所有成果。；請 AI 幫你做總檢查：已完成、需修改、缺少資料、下一步。；根據 AI 建議修正最重要的 3 個缺口。",
-      "zhFeedbackPrompt": "請你擔任大學申請總顧問。以下是我的完整申請包內容：\n（貼上整理成果）\n請幫我總檢查：\n1. 申請主軸是否清楚\n2. 每份資料是否互相支持\n3. 哪些地方和目標科系連結不足\n4. 哪些內容需要補強具體例子\n5. 請列出最優先修改的 3 件事。",
-      "enFeedbackPrompt": "請你擔任大學申請總顧問。以下是我的完整申請包內容：\n（貼上整理成果）\n請幫我總檢查：\n1. 申請主軸是否清楚\n2. 每份資料是否互相支持\n3. 哪些地方和目標科系連結不足\n4. 哪些內容需要補強具體例子\n5. 請列出最優先修改的 3 件事。",
+      "zhFeedbackPrompt": "你是一位大學申請總顧問。\n\n以下是我完成的「完整大學申請包」：\n（請把我的實作成果貼在這裡）\n\n請你不要只說「很好」或「可以更具體」，請用專業標準幫我做深度回饋。\n\n第一部分：整體評分\n請從以下面向各給 1-10 分，並說明原因：\n- 申請主軸：1-10 分，並說明扣分原因\n- 資料完整度：1-10 分，並說明扣分原因\n- 各文件一致性：1-10 分，並說明扣分原因\n- 科系連結：1-10 分，並說明扣分原因\n- 具體證據：1-10 分，並說明扣分原因\n- 面試準備：1-10 分，並說明扣分原因\n- 缺口風險：1-10 分，並說明扣分原因\n- 整體競爭力：1-10 分，並說明扣分原因\n\n第二部分：優點分析\n請列出我做得最好的 3 個地方，並說明為什麼這些地方有助於大學申請。\n\n第三部分：問題診斷\n請列出最需要改善的 3 個問題。每個問題都要包含：\n- 問題在哪裡\n- 為什麼會影響申請\n- 應該怎麼修改\n\n第四部分：教授視角\n請用大學教授或審查委員的角度，回答：\n1. 整份申請包最強的地方是什麼？最弱的是什麼？\n2. 哪些資料彼此沒有連起來？\n3. 請列出最優先修改的 3 件事與修改順序。\n\n第五部分：直接修改建議\n請提供：\n1. 一版更好的修改方向\n2. 可以直接加入的句子範例\n3. 我不應該使用的空泛句子\n4. 下一次修改前要補充的資料\n\n第六部分：下一步行動\n請幫我列出 3 個最優先的修改任務，格式如下：\n- 今天先改：\n- 明天補強：\n- 最後檢查：\n\n請記住：不要捏造我的經歷，不要替我編不存在的活動，只能根據我提供的內容提出修改建議。",
+      "enFeedbackPrompt": "Act as a 大學申請總顧問.\n\nHere is my completed work for: 完整大學申請包\n(paste my work here)\n\nDo not only say \"good\" or \"be more specific.\" Give me detailed professional feedback.\n\nPart 1: Overall scoring\nRate each item from 1-10 and explain the reason:\n- 申請主軸：1-10 分，並說明扣分原因\n- 資料完整度：1-10 分，並說明扣分原因\n- 各文件一致性：1-10 分，並說明扣分原因\n- 科系連結：1-10 分，並說明扣分原因\n- 具體證據：1-10 分，並說明扣分原因\n- 面試準備：1-10 分，並說明扣分原因\n- 缺口風險：1-10 分，並說明扣分原因\n- 整體競爭力：1-10 分，並說明扣分原因\n\nPart 2: Strengths\nList the 3 strongest parts and explain why they help my university application.\n\nPart 3: Diagnosis\nList the 3 most important problems. For each problem, include:\n- What the issue is\n- Why it hurts the application\n- How to revise it\n\nPart 4: Reviewer perspective\nAnswer these:\n1. 整份申請包最強的地方是什麼？最弱的是什麼？\n2. 哪些資料彼此沒有連起來？\n3. 請列出最優先修改的 3 件事與修改順序。\n\nPart 5: Direct revision guidance\nProvide:\n1. A better revision direction\n2. Example sentences I can adapt\n3. Vague sentences I should avoid\n4. Information I need to add before revising\n\nPart 6: Next actions\nGive me 3 priorities:\n- Fix today:\n- Improve tomorrow:\n- Final check:\n\nDo not invent my experience. Only give suggestions based on what I provide.",
       "zhQuizItems": [
         {
           "q": "完整申請包最重要的是？",
@@ -1748,10 +2018,40 @@ const PREMIUM_LESSON_DETAILS = {
           "answer": "精準補強缺口"
         }
       ],
-      "zhOutcome": "一份完整大學申請包。",
-      "enOutcome": "一份完整大學申請包。",
+      "zhOutcome": "完整大學申請包",
+      "enOutcome": "完整大學申請包",
       "zhNotePrompt": "請在課程筆記中寫下：我的申請主軸、目前最完整的資料、最需要補強的 3 件事。",
-      "enNotePrompt": "請在課程筆記中寫下：我的申請主軸、目前最完整的資料、最需要補強的 3 件事。"
+      "enNotePrompt": "請在課程筆記中寫下：我的申請主軸、目前最完整的資料、最需要補強的 3 件事。",
+      "zhDeliverableChecklist": [
+        "我已整理前 9 課成果",
+        "所有資料都有共同主軸",
+        "備審與面試方向一致",
+        "我已列出最重要的 3 個修改項目",
+        "我知道最後送出前要檢查什麼"
+      ],
+      "enDeliverableChecklist": [
+        "我已整理前 9 課成果",
+        "所有資料都有共同主軸",
+        "備審與面試方向一致",
+        "我已列出最重要的 3 個修改項目",
+        "我知道最後送出前要檢查什麼"
+      ],
+      "zhScorecard": [
+        "申請主軸",
+        "資料完整",
+        "文件一致",
+        "科系連結",
+        "整體競爭力"
+      ],
+      "enScorecard": [
+        "申請主軸",
+        "資料完整",
+        "文件一致",
+        "科系連結",
+        "整體競爭力"
+      ],
+      "zhValueTip": "最後不要再一直新增資料，應該把最重要的資料整理得更清楚、更有說服力。",
+      "enValueTip": "最後不要再一直新增資料，應該把最重要的資料整理得更清楚、更有說服力。"
     }
   ]
 };
