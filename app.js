@@ -261,9 +261,7 @@ function impact() {
 }
 
 function render() {
-const routes = { home, courses, free, premium, tools, prompts, community, thailand, impact }  save();
-}
-
+const routes = { home, courses, free, premium, tools, prompts, community, thailand, impact }
 async function startApp() {
   await initAuth();
   render();
