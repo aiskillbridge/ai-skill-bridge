@@ -1,24 +1,300 @@
 
+:root {
+  --bg: #f5f8ff;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #5f6f86;
+  --primary: #2f5bea;
+  --primary-dark: #2244c7;
+  --line: #e5ebf5;
+  --soft: #eef4ff;
+  --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+  --radius: 24px;
+}
 
+* {
+  box-sizing: border-box;
+}
 
-/* V23 SAFE Header Layout Fix - CSS only, no JavaScript */
+html {
+  scroll-padding-top: 96px;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 header,
 .site-header,
 .topbar,
 .navbar {
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 9999 !important;
-  background: rgba(255, 255, 255, 0.96) !important;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  min-height: 72px !important;
-  padding-top: 8px !important;
-  padding-bottom: 8px !important;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.05);
 }
 
-/* Make navigation more compact */
+.nav,
+header > div,
+.site-header > div,
+.topbar > div,
+.navbar > div {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.logo,
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--text);
+}
+
+.logo-badge,
+.brand-badge {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #5b5ff4, #2456e8);
+  color: white;
+  font-weight: 900;
+}
+
+nav,
+.navlinks,
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+nav button,
+nav a,
+.lang,
+.btn,
+button {
+  border: 1px solid #c8d5ff;
+  background: white;
+  color: var(--primary);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+}
+
+nav button:hover,
+nav a:hover,
+.lang:hover,
+.btn:hover,
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(47, 91, 234, 0.14);
+}
+
+.btn.primary,
+button.primary,
+.primary {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.btn.secondary,
+.secondary {
+  background: white;
+  color: var(--primary);
+  border-color: #c8d5ff;
+}
+
+.page {
+  padding: 48px 24px 80px;
+}
+
+.wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.hero {
+  background: linear-gradient(135deg, #edf5ff, #f7fbff);
+  padding: 70px 0;
+}
+
+h1 {
+  font-size: clamp(42px, 7vw, 86px);
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+  margin: 18px 0 20px;
+  color: var(--text);
+}
+
+h2 {
+  font-size: clamp(28px, 3vw, 46px);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0 0 20px;
+}
+
+h3 {
+  font-size: 22px;
+  margin: 0 0 12px;
+}
+
+p {
+  font-size: 18px;
+  color: var(--muted);
+  margin: 0 0 16px;
+}
+
+.lead {
+  font-size: 20px;
+  color: var(--muted);
+}
+
+.panel,
+.card,
+.pricing,
+.practice {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px;
+}
+
+.panel {
+  margin-bottom: 24px;
+}
+
+.card {
+  min-height: 150px;
+}
+
+.grid {
+  display: grid;
+  gap: 22px;
+}
+
+.grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 7px 12px;
+  background: var(--soft);
+  color: var(--primary);
+  font-weight: 900;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.tag.free {
+  background: #e9fff3;
+  color: #11864b;
+}
+
+.premiumtag {
+  background: #fff4da;
+  color: #9a6500;
+}
+
+.price {
+  font-size: 28px;
+  color: var(--text);
+  font-weight: 900;
+}
+
+.promptbox,
+pre {
+  white-space: pre-wrap;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 18px;
+  padding: 22px;
+  overflow-x: auto;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+textarea {
+  width: 100%;
+  min-height: 160px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  font: inherit;
+  resize: vertical;
+  background: #fbfdff;
+  margin: 12px 0;
+}
+
+details {
+  margin-top: 12px;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 900;
+  color: var(--primary);
+}
+
+.btnrow {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+ol,
+ul {
+  font-size: 17px;
+  color: var(--muted);
+}
+
+li {
+  margin: 8px 0;
+}
+
+/* V23 safe compact sticky header */
+header,
+.site-header,
+.topbar,
+.navbar {
+  min-height: 72px;
+}
+
 header a,
 header button,
 .site-header a,
@@ -27,51 +303,38 @@ header button,
 .topbar button,
 .navbar a,
 .navbar button {
-  font-size: 14px !important;
-  padding-top: 8px !important;
-  padding-bottom: 8px !important;
-}
-
-/* Keep logo compact */
-header .logo,
-header .brand,
-header [class*="logo"],
-header [class*="brand"],
-.site-header .logo,
-.site-header .brand,
-.site-header [class*="logo"],
-.site-header [class*="brand"] {
-  transform: scale(0.88);
-  transform-origin: left center;
-}
-
-/* Prevent lesson content from hiding behind sticky header */
-html {
-  scroll-padding-top: 90px;
+  font-size: 14px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 main,
 .page {
-  scroll-margin-top: 90px;
+  scroll-margin-top: 96px;
 }
 
 @media (max-width: 900px) {
-  header,
-  .site-header,
-  .topbar,
-  .navbar {
-    min-height: 64px !important;
+  .grid.two,
+  .grid.three {
+    grid-template-columns: 1fr;
   }
 
-  header a,
-  header button,
-  .site-header a,
-  .site-header button,
-  .topbar a,
-  .topbar button,
-  .navbar a,
-  .navbar button {
-    font-size: 13px !important;
-    padding: 6px 8px !important;
+  .nav,
+  header > div,
+  .site-header > div,
+  .topbar > div,
+  .navbar > div {
+    padding: 10px 14px;
+  }
+
+  h1 {
+    font-size: 44px;
+  }
+
+  .panel,
+  .card,
+  .pricing,
+  .practice {
+    padding: 22px;
   }
 }
