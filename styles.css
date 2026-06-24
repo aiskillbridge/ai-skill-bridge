@@ -537,3 +537,29 @@ textarea[id^="application-package-"] {
 .application-package-item textarea {
   min-height: 240px;
 }
+
+
+
+/* V32 Instant Progress + Clipboard Fallback */
+.package-progress-track {
+  height: 16px;
+  background: #e5ebf5;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 18px 0 8px;
+}
+
+.package-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #2f5bea, #5b5ff4);
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
+
+.application-package-item textarea {
+  min-height: 240px;
+}
+
+#final-review-prompt-box {
+  width: 100%;
+}

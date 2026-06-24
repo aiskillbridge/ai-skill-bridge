@@ -1400,103 +1400,191 @@ function lesson() {
 }
 
 
+
+
 const APPLICATION_PACKAGE_ITEMS = [
-  {
-    id: "map",
-    title: "1. 大學申請準備地圖",
-    desc: "整理第一階段、第二階段、備審與面試準備方向。",
-    placeholder: "貼上你第1課完成的大學申請準備地圖..."
-  },
-  {
-    id: "majors",
-    title: "2. 科系探索表",
-    desc: "整理 5 個可能科系與 3 個優先申請科系。",
-    placeholder: "貼上你第2課完成的科系探索表..."
-  },
-  {
-    id: "portfolio",
-    title: "3. 學習歷程素材庫",
-    desc: "整理高中三年的課程成果、活動、競賽、服務與專題。",
-    placeholder: "貼上你第3課完成的學習歷程素材庫..."
-  },
-  {
-    id: "activities",
-    title: "4. 多元表現描述",
-    desc: "放入 3 則用 STAR 架構完成的多元表現。",
-    placeholder: "貼上你第4課完成的多元表現描述..."
-  },
-  {
-    id: "autobiography",
-    title: "5. 學習歷程自述初稿",
-    desc: "整理你的學習主軸、能力成長、申請動機與未來規劃。",
-    placeholder: "貼上你第5課完成的學習歷程自述..."
-  },
-  {
-    id: "majorSpecific",
-    title: "6. 科系專屬備審規劃",
-    desc: "整理目標科系需求與你的素材對照。",
-    placeholder: "貼上你第6課完成的科系專屬備審規劃..."
-  },
-  {
-    id: "interviewBank",
-    title: "7. 面試題庫與回答架構",
-    desc: "整理 20 題面試題與最重要的回答重點。",
-    placeholder: "貼上你第7課完成的面試題庫..."
-  },
-  {
-    id: "mockInterview",
-    title: "8. 模擬面試紀錄",
-    desc: "整理 AI 模擬面試評分與改進清單。",
-    placeholder: "貼上你第8課完成的模擬面試紀錄..."
-  },
-  {
-    id: "advisorPrompt",
-    title: "9. 個人 AI 升學顧問 Prompt",
-    desc: "保存你可以重複使用的個人升學顧問 Prompt。",
-    placeholder: "貼上你第9課完成的個人 AI 升學顧問 Prompt..."
-  },
-  {
-    id: "finalReview",
-    title: "10. 最終總檢查",
-    desc: "整理 AI 對整份申請包的總檢查與最後修改清單。",
-    placeholder: "貼上你第10課完成的總檢查結果..."
-  }
+  { id: "map", title: "1. 大學申請準備地圖", desc: "整理第一階段、第二階段、備審與面試準備方向。", placeholder: "貼上你第1課完成的大學申請準備地圖..." },
+  { id: "majors", title: "2. 科系探索表", desc: "整理 5 個可能科系與 3 個優先申請科系。", placeholder: "貼上你第2課完成的科系探索表..." },
+  { id: "portfolio", title: "3. 學習歷程素材庫", desc: "整理高中三年的課程成果、活動、競賽、服務與專題。", placeholder: "貼上你第3課完成的學習歷程素材庫..." },
+  { id: "activities", title: "4. 多元表現描述", desc: "放入 3 則用 STAR 架構完成的多元表現。", placeholder: "貼上你第4課完成的多元表現描述..." },
+  { id: "autobiography", title: "5. 學習歷程自述初稿", desc: "整理你的學習主軸、能力成長、申請動機與未來規劃。", placeholder: "貼上你第5課完成的學習歷程自述..." },
+  { id: "majorSpecific", title: "6. 科系專屬備審規劃", desc: "整理目標科系需求與你的素材對照。", placeholder: "貼上你第6課完成的科系專屬備審規劃..." },
+  { id: "interviewBank", title: "7. 面試題庫與回答架構", desc: "整理 20 題面試題與最重要的回答重點。", placeholder: "貼上你第7課完成的面試題庫..." },
+  { id: "mockInterview", title: "8. 模擬面試紀錄", desc: "整理 AI 模擬面試評分與改進清單。", placeholder: "貼上你第8課完成的模擬面試紀錄..." },
+  { id: "advisorPrompt", title: "9. 個人 AI 升學顧問 Prompt", desc: "保存你可以重複使用的個人升學顧問 Prompt。", placeholder: "貼上你第9課完成的個人 AI 升學顧問 Prompt..." },
+  { id: "finalReview", title: "10. 最終總檢查", desc: "整理 AI 對整份申請包的總檢查與最後修改清單。", placeholder: "貼上你第10課完成的總檢查結果..." }
 ];
 
-function saveApplicationPackageItem(id) {
-  const el = document.getElementById(`application-package-${id}`);
-  if (!el) return;
-  localStorage.setItem(`application-package-${id}`, el.value);
-  toast(state.lang === "zh" ? "已儲存到大學申請包" : "Saved to application package");
+function applicationPackageKey(id) {
+  const userPart = state.user && state.user.email ? state.user.email : "guest";
+  return `asb-application-package-${userPart}-${id}`;
+}
+
+function escapeTextareaValue(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
 }
 
 function loadApplicationPackageValue(id) {
-  return localStorage.getItem(`application-package-${id}`) || "";
+  try {
+    return localStorage.getItem(applicationPackageKey(id)) || "";
+  } catch (error) {
+    return "";
+  }
 }
 
-function applicationPackageProgress() {
-  const completed = APPLICATION_PACKAGE_ITEMS.filter(item => loadApplicationPackageValue(item.id).trim().length > 0).length;
+function getApplicationPackageCurrentValue(id) {
+  const el = document.getElementById(`application-package-${id}`);
+  if (el) return el.value || "";
+  return loadApplicationPackageValue(id);
+}
+
+function applicationPackageProgress(useDom = true) {
+  const completed = APPLICATION_PACKAGE_ITEMS.filter(item => {
+    const value = useDom ? getApplicationPackageCurrentValue(item.id) : loadApplicationPackageValue(item.id);
+    return value.trim().length > 0;
+  }).length;
+
+  const total = APPLICATION_PACKAGE_ITEMS.length;
   return {
     completed,
-    total: APPLICATION_PACKAGE_ITEMS.length,
-    percent: Math.round((completed / APPLICATION_PACKAGE_ITEMS.length) * 100)
+    total,
+    percent: Math.round((completed / total) * 100)
   };
 }
 
-function copyFinalReviewPrompt() {
-  const data = APPLICATION_PACKAGE_ITEMS.map(item => {
-    return `${item.title}\n${loadApplicationPackageValue(item.id) || "尚未填寫"}`;
-  }).join("\n\n---\n\n");
+function updateApplicationPackageProgressUI() {
+  const progress = applicationPackageProgress(true);
+  const label = document.getElementById("application-package-progress-label");
+  const bar = document.getElementById("application-package-progress-bar");
+  const status = document.getElementById("application-package-live-status");
 
-  const prompt = `請你擔任大學申請總顧問。以下是我的完整大學申請包：\n\n${data}\n\n請幫我做最終總檢查：\n1. 申請主軸是否清楚\n2. 每份資料是否互相支持\n3. 哪些內容太空泛\n4. 哪些地方和目標科系連結不足\n5. 哪些內容需要補強具體例子\n6. 請列出最優先修改的 5 件事\n7. 請給我一份最後 7 天修改計畫\n\n請不要捏造我的經歷，只根據我提供的內容給建議。`;
+  if (label) label.textContent = `${progress.completed}/${progress.total}（${progress.percent}%）`;
+  if (bar) bar.style.width = `${progress.percent}%`;
+  if (status) {
+    status.textContent = progress.percent === 100
+      ? (state.lang === "zh" ? "已完成全部 10 項，可以進行最終總檢查。" : "All 10 sections are complete. You can run the final review.")
+      : (state.lang === "zh" ? `還差 ${progress.total - progress.completed} 項完成。` : `${progress.total - progress.completed} sections remaining.`);
+  }
 
-  navigator.clipboard.writeText(prompt).then(() => {
-    toast(state.lang === "zh" ? "總檢查 Prompt 已複製" : "Final review prompt copied");
+  APPLICATION_PACKAGE_ITEMS.forEach(item => {
+    const badge = document.getElementById(`application-package-status-${item.id}`);
+    const value = getApplicationPackageCurrentValue(item.id);
+    if (badge) {
+      const done = value.trim().length > 0;
+      badge.textContent = done ? (state.lang === "zh" ? "已完成" : "Completed") : (state.lang === "zh" ? "尚未填寫" : "Empty");
+      badge.className = `tag ${done ? "free" : "premiumtag"}`;
+    }
   });
 }
 
-function applicationPackage() {
+function saveApplicationPackageItem(id, shouldRender = false) {
+  const el = document.getElementById(`application-package-${id}`);
+  if (!el) return;
 
+  try {
+    localStorage.setItem(applicationPackageKey(id), el.value);
+    updateApplicationPackageProgressUI();
+    toast(state.lang === "zh" ? "已儲存到大學申請包" : "Saved to application package");
+
+    if (shouldRender) {
+      setTimeout(() => render(), 120);
+    }
+  } catch (error) {
+    toast(state.lang === "zh" ? "儲存失敗，請確認瀏覽器允許本機儲存" : "Save failed. Please allow local browser storage.");
+  }
+}
+
+function saveAllApplicationPackageItems() {
+  APPLICATION_PACKAGE_ITEMS.forEach(item => {
+    const el = document.getElementById(`application-package-${item.id}`);
+    if (el) {
+      localStorage.setItem(applicationPackageKey(item.id), el.value);
+    }
+  });
+  updateApplicationPackageProgressUI();
+  toast(state.lang === "zh" ? "全部已儲存" : "All sections saved");
+}
+
+function clearApplicationPackageItem(id) {
+  try {
+    localStorage.removeItem(applicationPackageKey(id));
+    const el = document.getElementById(`application-package-${id}`);
+    if (el) el.value = "";
+    updateApplicationPackageProgressUI();
+    toast(state.lang === "zh" ? "已清除這一項" : "Section cleared");
+  } catch (error) {}
+}
+
+function buildFinalReviewPrompt() {
+  const data = APPLICATION_PACKAGE_ITEMS.map(item => {
+    return `${item.title}\n${getApplicationPackageCurrentValue(item.id) || loadApplicationPackageValue(item.id) || "尚未填寫"}`;
+  }).join("\n\n---\n\n");
+
+  return `請你擔任大學申請總顧問。以下是我的完整大學申請包：\n\n${data}\n\n請幫我做最終總檢查：\n1. 申請主軸是否清楚\n2. 每份資料是否互相支持\n3. 哪些內容太空泛\n4. 哪些地方和目標科系連結不足\n5. 哪些內容需要補強具體例子\n6. 請列出最優先修改的 5 件事\n7. 請給我一份最後 7 天修改計畫\n\n請不要捏造我的經歷，只根據我提供的內容給建議。`;
+}
+
+function fallbackCopyText(textToCopy) {
+  const temp = document.createElement("textarea");
+  temp.value = textToCopy;
+  temp.setAttribute("readonly", "");
+  temp.style.position = "fixed";
+  temp.style.left = "-9999px";
+  temp.style.top = "0";
+  document.body.appendChild(temp);
+  temp.focus();
+  temp.select();
+
+  let ok = false;
+  try {
+    ok = document.execCommand("copy");
+  } catch (error) {
+    ok = false;
+  }
+
+  document.body.removeChild(temp);
+  return ok;
+}
+
+function showFinalReviewPrompt() {
+  const box = document.getElementById("final-review-prompt-box");
+  if (!box) return;
+  box.value = buildFinalReviewPrompt();
+  box.style.display = "block";
+  box.focus();
+  box.select();
+}
+
+function copyFinalReviewPrompt() {
+  saveAllApplicationPackageItems();
+  const prompt = buildFinalReviewPrompt();
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(prompt).then(() => {
+      toast(state.lang === "zh" ? "總檢查 Prompt 已複製" : "Final review prompt copied");
+    }).catch(() => {
+      const ok = fallbackCopyText(prompt);
+      if (ok) {
+        toast(state.lang === "zh" ? "總檢查 Prompt 已複製" : "Final review prompt copied");
+      } else {
+        showFinalReviewPrompt();
+        toast(state.lang === "zh" ? "已顯示 Prompt，請手動複製" : "Prompt shown. Please copy manually.");
+      }
+    });
+  } else {
+    const ok = fallbackCopyText(prompt);
+    if (ok) {
+      toast(state.lang === "zh" ? "總檢查 Prompt 已複製" : "Final review prompt copied");
+    } else {
+      showFinalReviewPrompt();
+      toast(state.lang === "zh" ? "已顯示 Prompt，請手動複製" : "Prompt shown. Please copy manually.");
+    }
+  }
+}
+
+function applicationPackage() {
   if (!(typeof hasCourseAccess === "function" && hasCourseAccess("admissions"))) {
     return shell(`
       <main class="page">
@@ -1515,7 +1603,9 @@ function applicationPackage() {
     `);
   }
 
-  const progress = applicationPackageProgress();
+  const progress = applicationPackageProgress(false);
+
+  setTimeout(updateApplicationPackageProgressUI, 0);
 
   return shell(`
     <main class="page">
@@ -1524,12 +1614,20 @@ function applicationPackage() {
           <span class="tag free">${text("付費課程成果區", "Premium Course Output")}</span>
           <h1>${text("我的大學申請包", "My University Application Package")}</h1>
           <p class="lead">${text(
-            "這裡是你完成 10 堂課後集中存放成果的地方。每一課完成後，把成果貼到對應欄位並儲存。完成 10 個欄位後，你就會得到一份完整的大學申請資料。",
-            "This is where you store the outputs from all 10 lessons. After each lesson, paste your result into the matching section and save it. When all 10 sections are complete, you will have a full university application package."
+            "每一課完成後，把成果貼到對應欄位並儲存。完成 10 個欄位後，你就會得到一份完整的大學申請資料。",
+            "After each lesson, paste your result into the matching section and save it. When all 10 sections are complete, you will have a full university application package."
           )}</p>
-          <h2>${text("完成進度", "Progress")}：${progress.completed}/${progress.total}（${progress.percent}%）</h2>
-          <div style="height:14px;background:#e5ebf5;border-radius:999px;overflow:hidden;margin:18px 0 8px">
-            <div style="height:100%;width:${progress.percent}%;background:linear-gradient(90deg,#2f5bea,#5b5ff4);border-radius:999px"></div>
+
+          <h2>${text("完成進度", "Progress")}：<span id="application-package-progress-label">${progress.completed}/${progress.total}（${progress.percent}%）</span></h2>
+          <div class="package-progress-track">
+            <div id="application-package-progress-bar" class="package-progress-bar" style="width:${progress.percent}%"></div>
+          </div>
+          <p id="application-package-live-status">${progress.percent === 100 ? text("已完成全部 10 項，可以進行最終總檢查。", "All 10 sections are complete. You can run the final review.") : text(`還差 ${progress.total - progress.completed} 項完成。`, `${progress.total - progress.completed} sections remaining.`)}</p>
+
+          <div class="btnrow" style="margin-top:20px">
+            <button class="btn primary" onclick="saveAllApplicationPackageItems()">${text("全部儲存", "Save All")}</button>
+            <button class="btn secondary" onclick="copyFinalReviewPrompt()">${text("複製最終總檢查 Prompt", "Copy Final Review Prompt")}</button>
+            <button class="btn secondary" onclick="showFinalReviewPrompt()">${text("顯示 Prompt 手動複製", "Show Prompt")}</button>
           </div>
         </section>
 
@@ -1537,22 +1635,29 @@ function applicationPackage() {
           <h2>${text("怎麼使用", "How to Use")}</h2>
           <ol>
             <li>${text("上完一課後，複製該課成果。", "After finishing a lesson, copy that lesson's output.")}</li>
-            <li>${text("貼到下面對應欄位。", "Paste it into the matching section below.")}</li>
-            <li>${text("按下儲存。", "Click save.")}</li>
-            <li>${text("10 個欄位完成後，按「複製最終總檢查 Prompt」。", "After all 10 sections are complete, click 'Copy Final Review Prompt'.")}</li>
-            <li>${text("把 Prompt 貼到 AI，取得最後修改清單。", "Paste the prompt into AI to get the final revision checklist.")}</li>
+            <li>${text("貼到下面對應欄位，進度會馬上更新。", "Paste it below; progress updates immediately.")}</li>
+            <li>${text("按下「儲存這一項」或「全部儲存」。", "Click 'Save This Section' or 'Save All'.")}</li>
+            <li>${text("10 個欄位完成後，複製總檢查 Prompt 到 AI 做最後修改。", "After all 10 sections are complete, copy the final review prompt to AI for final revision.")}</li>
           </ol>
         </section>
 
         <div class="grid">
-          ${APPLICATION_PACKAGE_ITEMS.map(item => `
-            <section class="panel">
-              <h2>${item.title}</h2>
-              <p>${item.desc}</p>
-              <textarea id="application-package-${item.id}" placeholder="${item.placeholder}">${loadApplicationPackageValue(item.id)}</textarea>
-              <button class="btn secondary" onclick="saveApplicationPackageItem('${item.id}')">${text("儲存這一項", "Save This Section")}</button>
-            </section>
-          `).join("")}
+          ${APPLICATION_PACKAGE_ITEMS.map(item => {
+            const value = loadApplicationPackageValue(item.id);
+            const done = value.trim().length > 0;
+            return `
+              <section class="panel application-package-item">
+                <span id="application-package-status-${item.id}" class="tag ${done ? "free" : "premiumtag"}">${done ? text("已完成", "Completed") : text("尚未填寫", "Empty")}</span>
+                <h2>${item.title}</h2>
+                <p>${item.desc}</p>
+                <textarea id="application-package-${item.id}" placeholder="${item.placeholder}" oninput="updateApplicationPackageProgressUI()">${escapeTextareaValue(value)}</textarea>
+                <div class="btnrow">
+                  <button class="btn secondary" onclick="saveApplicationPackageItem('${item.id}')">${text("儲存這一項", "Save This Section")}</button>
+                  <button class="btn secondary" onclick="clearApplicationPackageItem('${item.id}')">${text("清除", "Clear")}</button>
+                </div>
+              </section>
+            `;
+          }).join("")}
         </div>
 
         <section class="panel" style="margin-top:24px">
@@ -1562,11 +1667,14 @@ function applicationPackage() {
             "After completing all 10 sections, copy the final review prompt and paste it into AI to review the full package."
           )}</p>
           <button class="btn primary" onclick="copyFinalReviewPrompt()">${text("複製最終總檢查 Prompt", "Copy Final Review Prompt")}</button>
+          <button class="btn secondary" onclick="showFinalReviewPrompt()">${text("顯示 Prompt 手動複製", "Show Prompt")}</button>
+          <textarea id="final-review-prompt-box" style="display:none;min-height:320px;margin-top:18px" readonly></textarea>
         </section>
       </div>
     </main>
   `);
 }
+
 
 function tools() {
   const scenarios = [
