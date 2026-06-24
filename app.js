@@ -2,6 +2,19 @@
 const SUPABASE_URL = "https://ifjkadoskbcgrqmcjvya.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_yXHovKCCYE04aUcybOc4KA_Fhdp5bTE";
 
+const CREATOR_EMAIL = "li19840610@gmail.com";
+
+function isCreator() {
+  return Boolean(state.user && state.user.email === CREATOR_EMAIL);
+}
+
+function hasCourseAccess(courseId) {
+  if (isCreator()) return true;
+  if (courseId === "all-access") return false;
+  return false;
+}
+
+
 let supabaseClient = null;
 if (window.supabase) {
   supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -623,7 +636,8 @@ function nav() {
   ];
 
   const authHtml = state.user
-    ? `<button class="lang" title="${state.user.email}">${state.user.email.split("@")[0]}</button>
+    ? `<button class="lang" title="${state.user.email}">${isCreator() ? "👑 " : ""}${state.user.email.split("@")[0]}</button>
+       ${isCreator() ? `<button class="lang">Creator</button>` : ""}
        <button class="lang" onclick="signOut()">${state.lang === "zh" ? "登出" : "Logout"}</button>`
     : `<button class="lang" onclick="signInWithGoogle()">${state.lang === "zh" ? "Google 登入" : "Google Login"}</button>`;
 
@@ -966,34 +980,52 @@ function courses() {
 }
 
 
+
 function premium() {
-  const courseCards = PREMIUM.map(course => `
-    <article class="pricing">
-      <span class="tag premiumtag">${course.id === "all-access" ? "All Access" : "Premium Course"}</span>
-      <h2>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h2>
-      <p>${state.lang === "zh" ? course.zhDesc : course.enDesc}</p>
-      <p><b>${L("premium.suitableFor")}：</b>${state.lang === "zh" ? course.zhUser : course.enUser}</p>
-      <p><b>${L("premium.outcome")}：</b>${state.lang === "zh" ? course.zhOutcome : course.enOutcome}</p>
-      <p><b>${text("完成作品", "Final Product")}：</b>${state.lang === "zh" ? course.zhFinalProduct : course.enFinalProduct}</p>
-      <p class="price">${course.price}</p>
+  const creatorBanner = isCreator()
+    ? `<section class="panel" style="margin-bottom:24px">
+        <span class="tag free">Creator Access</span>
+        <h2>${text("創辦人帳號已全站開通", "Founder account has full access")}</h2>
+        <p>${text("你目前使用創辦人 Email 登入，因此 6 個付費課程與全站通行證都會顯示為已解鎖。", "You are signed in with the founder email, so all 6 premium courses and the all-access pass are unlocked.")}</p>
+      </section>`
+    : "";
 
-      <div class="practice">
-        <h3>${text("課程內容", "Course Lessons")}</h3>
-        <ol>
-          ${(state.lang === "zh" ? course.zhLessons : course.enLessons).map(item => `<li>${item}</li>`).join("")}
-        </ol>
-      </div>
+  const courseCards = PREMIUM.map(course => {
+    const unlocked = hasCourseAccess(course.id);
+    return `
+      <article class="pricing">
+        <span class="tag ${unlocked ? "free" : "premiumtag"}">
+          ${unlocked ? text("已開通", "Unlocked") : (course.id === "all-access" ? "All Access" : "Premium Course")}
+        </span>
+        <h2>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h2>
+        <p>${state.lang === "zh" ? course.zhDesc : course.enDesc}</p>
+        <p><b>${L("premium.suitableFor")}：</b>${state.lang === "zh" ? course.zhUser : course.enUser}</p>
+        <p><b>${L("premium.outcome")}：</b>${state.lang === "zh" ? course.zhOutcome : course.enOutcome}</p>
+        <p><b>${text("完成作品", "Final Product")}：</b>${state.lang === "zh" ? course.zhFinalProduct : course.enFinalProduct}</p>
+        <p class="price">${course.price}</p>
 
-      <div class="practice">
-        <h3>${text("你會感受到的價值", "Value You Will Feel")}</h3>
-        <ul>
-          ${(state.lang === "zh" ? course.zhValue : course.enValue).map(item => `<li>${item}</li>`).join("")}
-        </ul>
-      </div>
+        <div class="practice">
+          <h3>${text("課程內容", "Course Lessons")}</h3>
+          <ol>
+            ${(state.lang === "zh" ? course.zhLessons : course.enLessons).map(item => `<li>${item}</li>`).join("")}
+          </ol>
+        </div>
 
-      <a class="btn primary" href="${course.paymentUrl}" target="_blank">${L("premium.goPay")}</a>
-    </article>
-  `).join("");
+        <div class="practice">
+          <h3>${text("你會感受到的價值", "Value You Will Feel")}</h3>
+          <ul>
+            ${(state.lang === "zh" ? course.zhValue : course.enValue).map(item => `<li>${item}</li>`).join("")}
+          </ul>
+        </div>
+
+        ${
+          unlocked
+            ? `<button class="btn primary" onclick="toast('${state.lang === "zh" ? "你是創辦人帳號，已開通此課程" : "Founder account: this course is unlocked"}')">${text("進入已開通課程", "Enter Unlocked Course")}</button>`
+            : `<a class="btn primary" href="${course.paymentUrl}" target="_blank">${L("premium.goPay")}</a>`
+        }
+      </article>
+    `;
+  }).join("");
 
   return shell(`
     <main class="page">
@@ -1004,12 +1036,14 @@ function premium() {
           "Premium courses are sold as complete courses, not by individual lessons. Each course includes 10 lessons, practical tasks, prompt templates, and a final product. The All-Access Pass unlocks everything."
         )}</p>
 
+        ${creatorBanner}
+
         <section class="panel" style="margin-bottom:24px">
           <h2>${text("付費課程總覽", "Premium Course Overview")}</h2>
           <div class="grid three">
             ${PREMIUM.map(course => `
               <article class="card">
-                <span class="tag ${course.id === "all-access" ? "free" : "premiumtag"}">${course.price}</span>
+                <span class="tag ${hasCourseAccess(course.id) ? "free" : "premiumtag"}">${hasCourseAccess(course.id) ? text("已開通", "Unlocked") : course.price}</span>
                 <h3>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h3>
                 <p>${state.lang === "zh" ? course.zhFinalProduct : course.enFinalProduct}</p>
               </article>
