@@ -1,23 +1,419 @@
 
-let state={lang:localStorage.getItem('asb_lang')||'zh',route:'home',activeLesson:localStorage.getItem('asb_lesson')||'ai',progress:JSON.parse(localStorage.getItem('asb_progress')||'{}')};
-function L(p){return p.split('.').reduce((o,k)=>o?.[k],I18N[state.lang])??p}
-function save(){localStorage.setItem('asb_lang',state.lang);localStorage.setItem('asb_lesson',state.activeLesson);localStorage.setItem('asb_progress',JSON.stringify(state.progress))}
-function pct(){return Math.round(Object.values(state.progress).filter(Boolean).length/LESSONS.length*100)}
-function setRoute(r){state.route=r;scrollTo(0,0);render()}
-function toggleLang(){state.lang=state.lang==='zh'?'en':'zh';save();render()}
-function toast(m){let e=document.createElement('div');e.className='toast';e.textContent=m;document.body.appendChild(e);setTimeout(()=>e.remove(),1600)}
-function nav(){let ns=[['home','nav.home'],['courses','nav.courses'],['free','nav.free'],['premium','nav.premium'],['tools','nav.tools'],['prompts','nav.prompts'],['community','nav.community'],['thailand','nav.thailand'],['impact','nav.impact']];return `<header class='topbar'><div class='wrap nav'><button class='brand' onclick="setRoute('home')"><span class='logo'>AI</span> Skill <span style='color:var(--blue)'>Bridge</span></button><nav class='navlinks'>${ns.map(([r,k])=>`<button class='${state.route===r?'active':''}' onclick="setRoute('${r}')">${L(k)}</button>`).join('')}<button class='lang' onclick='toggleLang()'>${state.lang==='zh'?'EN':'中文'}</button></nav></div></header>`}
-function shell(c){return nav()+c+`<footer class='footer'><div class='wrap'><p>© 2026 AI Skill Bridge.</p></div></footer>`}
-function home(){return shell(`<main><section class='hero'><div class='wrap hero-grid'><div><p class='eyebrow'>AI for Beginners</p><h1>${L('home.title')}</h1><p class='lead'>${L('home.lead')}</p><div class='btnrow'><button class='btn primary' onclick="setRoute('free')">${L('home.start')}</button><button class='btn secondary' onclick="setRoute('tools')">${L('home.tools')}</button><button class='btn secondary' onclick="setRoute('premium')">${L('home.premium')}</button></div></div><aside class='hero-card'><h2>${L('home.progress')}</h2><div class='progressbar'><div class='progressfill' style='width:${pct()}%'></div></div><p>${pct()}% completed</p><div class='grid two'><div class='card'><b>${LESSONS.length}</b><br>Free lessons</div><div class='card'><b>${TOOLS.length}</b><br>AI tools</div></div></aside></div></section><section class='section'><div class='wrap'><h2>${state.lang==='zh'?'從看得懂、做得到，到真的用得上。':'From understanding to practice to real use.'}</h2><div class='grid three'><article class='card'><span class='tag free'>Free</span><h3>${state.lang==='zh'?'免費入門':'Free Beginner'}</h3><p>${state.lang==='zh'?'讓 AI 小白從零開始。':'Start from zero.'}</p></article><article class='card'><span class='tag premiumtag'>Premium</span><h3>${state.lang==='zh'?'進階付費':'Premium'}</h3><p>${state.lang==='zh'?'研究、求職、創業分級課程。':'Research, career, startup tracks.'}</p></article><article class='card'><span class='tag communitytag'>Community</span><h3>${state.lang==='zh'?'討論社群':'Community'}</h3><p>${state.lang==='zh'?'讓使用者可以互相提問。':'Ask and share with peers.'}</p></article></div></div></section></main>`)}
-function courses(){return shell(`<main class='page'><div class='wrap'><h1>${state.lang==='zh'?'課程地圖':'Course Roadmap'}</h1><div class='grid two'><article class='pricing'><span class='tag free'>Free</span><h2>${state.lang==='zh'?'免費入門路徑':'Free Path'}</h2><p class='price'>NT$0</p><button class='btn primary' onclick="setRoute('free')">${state.lang==='zh'?'進入':'Enter'}</button></article><article class='pricing'><span class='tag premiumtag'>Premium</span><h2>${state.lang==='zh'?'進階付費路徑':'Premium Path'}</h2><p class='price'>NT$499+</p><button class='btn secondary' onclick="setRoute('premium')">${state.lang==='zh'?'查看':'View'}</button></article></div></div></main>`)}
-function free(){let l=LESSONS.find(x=>x.id===state.activeLesson)||LESSONS[0];return shell(`<main class='page'><div class='wrap'><h1>${state.lang==='zh'?'免費入門課程':'Free Beginner Course'}</h1><div class='dashboard'><aside><div class='panel'>${LESSONS.map(x=>`<button class='sidebtn ${x.id===l.id?'active':''}' onclick="state.activeLesson='${x.id}';save();render()"><span>${state.lang==='zh'?x.zhTitle:x.enTitle}</span><span>${state.progress[x.id]?'✓':''}</span></button>`).join('')}</div></aside><section>${lesson(l)}</section></div></div></main>`)}
-function lesson(l){let html=`<article class='lesson'><div class='meta'><span class='tag free'>${l.level}</span></div><h2>${state.lang==='zh'?l.zhTitle:l.enTitle}</h2><p>${state.lang==='zh'?l.zhText:l.enText}</p>`;if(l.quiz){html+=`<div class='practice'><h3>${state.lang==='zh'?l.quiz.zhQ:l.quiz.enQ}</h3>${l.quiz.options.map((o,i)=>`<button class='quiz-option' onclick="quiz('${l.id}',${i},this)">${state.lang==='zh'?o.zh:o.en}</button>`).join('')}<div id='fb-${l.id}' class='feedback hidden'></div></div>`}if(l.zhTask){html+=`<div class='practice'><h3>${state.lang==='zh'?'練習':'Practice'}</h3><p>${state.lang==='zh'?l.zhTask:l.enTask}</p><textarea></textarea><button class='btn secondary' onclick="document.getElementById('ans-${l.id}').classList.add('show')">${state.lang==='zh'?'看參考答案':'Reveal answer'}</button><div id='ans-${l.id}' class='answer'>${state.lang==='zh'?l.zhAnswer:l.enAnswer}</div></div>`}html+=`<button class='btn primary' onclick="state.progress['${l.id}']=true;save();render()">${state.lang==='zh'?'完成':'Complete'}</button></article>`;return html}
-function quiz(id,i,b){let l=LESSONS.find(x=>x.id===id),o=l.quiz.options[i];b.classList.add(o.correct?'correct':'wrong');let fb=document.getElementById('fb-'+id);fb.classList.remove('hidden');fb.textContent=(o.correct?L('misc.correct'):L('misc.wrong'))+' '+(state.lang==='zh'?l.quiz.zhExplain:l.quiz.enExplain)}
-function premium(){return shell(`<main class='page'><div class='wrap'><h1>${state.lang==='zh'?'進階付費課程':'Premium Courses'}</h1><div class='grid three'>${PREMIUM.map(c=>`<article class='pricing'><span class='tag premiumtag'>Premium</span><h2>${state.lang==='zh'?c.zhTitle:c.enTitle}</h2><p>${state.lang==='zh'?c.zhDesc:c.enDesc}</p><p class='price'>${c.price}</p><a class='btn primary' href='https://gumroad.com/' target='_blank'>${state.lang==='zh'?'前往付款':'Go to payment'}</a></article>`).join('')}</div></div></main>`)}
-function tools(){return shell(`<main class='page'><div class='wrap'><h1>${state.lang==='zh'?'AI 工具導航':'AI Tools'}</h1><div class='grid three'>${TOOLS.map(t=>`<article class='card'><div class='tool-logo'>${t[0][0]}</div><h3>${t[0]}</h3><p>${state.lang==='zh'?t[2]:t[3]}</p><a class='btn primary' href='${t[1]}' target='_blank'>${state.lang==='zh'?'開啟網站':'Open'}</a></article>`).join('')}</div></div></main>`)}
-function prompts(){return shell(`<main class='page'><div class='wrap'><h1>Prompt Library</h1><div class='grid two'>${PROMPTS.map((p,i)=>`<article class='card'><span class='tag'>${p[0]}</span><div class='promptbox' id='p${i}'>${p[1]}</div><button class='btn secondary' onclick="navigator.clipboard.writeText(document.getElementById('p${i}').innerText);toast(L('misc.copied'))">Copy</button></article>`).join('')}</div></div></main>`)}
-function community(){return shell(`<main class='page'><div class='wrap'><h1>${state.lang==='zh'?'討論區與 PPT 式看板':'Community & Slide Board'}</h1><div class='slide'><h3>${state.lang==='zh'?'我想用 AI 做報告，但不想讓它代替我思考，Prompt 應該怎麼寫？':'How can AI help with reports without replacing my thinking?'}</h3><div class='sticky-note'>Role + Task + Context + Verification</div></div></div></main>`)}
-function thailand(){return shell(`<main class='page'><div class='wrap'><h1>${state.lang==='zh'?'泰國 Yunus Center AIT 學習成果區':'Thailand Learning Documentation'}</h1><p class='lead'>${state.lang==='zh'?'記錄青年百億海外圓夢基金 I-3-8 的學習歷程。':'Documentation for Youth Overseas Dream Fund Project I-3-8.'}</p></div></main>`)}
-function impact(){return shell(`<main class='page'><div class='wrap'><h1>${state.lang==='zh'?'影響力模式':'Impact Model'}</h1><div class='grid three'><article class='card'><span class='tag free'>Access</span><h3>Free Learning</h3><p>Lower AI learning barriers.</p></article><article class='card'><span class='tag premiumtag'>Sustainability</span><h3>Premium Courses</h3><p>Support platform operation.</p></article><article class='card'><span class='tag communitytag'>Community</span><h3>Peer Learning</h3><p>Help users ask and share.</p></article></div></div></main>`)}
-function render(){let r={home,courses,free,premium,tools,prompts,community,thailand,impact};document.getElementById('app').innerHTML=(r[state.route]||home)();save()}
-addEventListener('DOMContentLoaded',render)
+let state = {
+  lang: localStorage.getItem("asb_lang") || "zh",
+  route: "home",
+  activeLesson: localStorage.getItem("asb_lesson") || "ai",
+  progress: JSON.parse(localStorage.getItem("asb_progress") || "{}")
+};
+
+function L(path) {
+  return path.split(".").reduce((obj, key) => obj && obj[key], I18N[state.lang]) || path;
+}
+
+function save() {
+  localStorage.setItem("asb_lang", state.lang);
+  localStorage.setItem("asb_lesson", state.activeLesson);
+  localStorage.setItem("asb_progress", JSON.stringify(state.progress));
+}
+
+function progressPercent() {
+  return Math.round((Object.values(state.progress).filter(Boolean).length / LESSONS.length) * 100);
+}
+
+function setRoute(route) {
+  state.route = route;
+  window.scrollTo(0, 0);
+  render();
+}
+
+function toggleLang() {
+  state.lang = state.lang === "zh" ? "en" : "zh";
+  save();
+  render();
+}
+
+function toast(message) {
+  const element = document.createElement("div");
+  element.className = "toast";
+  element.textContent = message;
+  document.body.appendChild(element);
+  setTimeout(() => element.remove(), 1600);
+}
+
+function nav() {
+  const items = [
+    ["home", "nav.home"],
+    ["courses", "nav.courses"],
+    ["free", "nav.free"],
+    ["premium", "nav.premium"],
+    ["tools", "nav.tools"],
+    ["prompts", "nav.prompts"],
+    ["community", "nav.community"],
+    ["thailand", "nav.thailand"],
+    ["impact", "nav.impact"]
+  ];
+
+  return `
+    <header class="topbar">
+      <div class="wrap nav">
+        <button class="brand" onclick="setRoute('home')">
+          <span class="logo">AI</span>
+          <span>Skill <span style="color:var(--blue)">Bridge</span></span>
+        </button>
+        <nav class="navlinks">
+          ${items.map(([route, key]) => `<button class="${state.route === route ? "active" : ""}" onclick="setRoute('${route}')">${L(key)}</button>`).join("")}
+          <button class="lang" onclick="toggleLang()">${state.lang === "zh" ? "EN" : "中文"}</button>
+        </nav>
+      </div>
+    </header>
+  `;
+}
+
+function shell(content) {
+  return `
+    ${nav()}
+    ${content}
+    <footer class="footer">
+      <div class="wrap">
+        <p>© 2026 AI Skill Bridge. ${state.lang === "zh" ? "讓不懂 AI 的人也能開始上手。" : "Helping beginners start using AI."}</p>
+      </div>
+    </footer>
+  `;
+}
+
+function home() {
+  return shell(`
+    <main>
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <p class="eyebrow">${L("home.eyebrow")}</p>
+            <h1>${L("home.title")}</h1>
+            <p class="lead">${L("home.lead")}</p>
+            <div class="btnrow">
+              <button class="btn primary" onclick="setRoute('free')">${L("home.start")}</button>
+              <button class="btn secondary" onclick="setRoute('tools')">${L("home.tools")}</button>
+              <button class="btn secondary" onclick="setRoute('premium')">${L("home.premium")}</button>
+            </div>
+          </div>
+          <aside class="hero-card">
+            <h2>${L("home.progress")}</h2>
+            <div class="progressbar"><div class="progressfill" style="width:${progressPercent()}%"></div></div>
+            <p>${progressPercent()}% completed</p>
+            <div class="grid two">
+              <div class="card"><b>${LESSONS.length}</b><br>${L("home.freeLessons")}</div>
+              <div class="card"><b>${TOOLS.length}</b><br>${L("home.aiTools")}</div>
+              <div class="card"><b>${PREMIUM.length}</b><br>${L("home.premiumTracks")}</div>
+              <div class="card"><b>2</b><br>${L("home.languages")}</div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <h2>${L("home.missionTitle")}</h2>
+          <p class="lead">${L("home.missionText")}</p>
+          <div class="grid three">
+            <article class="card">
+              <span class="tag free">Free</span>
+              <h3>${L("home.freeTitle")}</h3>
+              <p>${L("home.freeText")}</p>
+            </article>
+            <article class="card">
+              <span class="tag premiumtag">Premium</span>
+              <h3>${L("home.premiumTitle")}</h3>
+              <p>${L("home.premiumText")}</p>
+            </article>
+            <article class="card">
+              <span class="tag communitytag">Community</span>
+              <h3>${L("home.communityTitle")}</h3>
+              <p>${L("home.communityText")}</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+  `);
+}
+
+function courses() {
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <h1>${L("courses.title")}</h1>
+        <p class="lead">${L("courses.lead")}</p>
+        <div class="grid two">
+          <article class="pricing">
+            <span class="tag free">Free</span>
+            <h2>${L("courses.freePath")}</h2>
+            <p>${L("courses.freePathDesc")}</p>
+            <p class="price">NT$0</p>
+            <button class="btn primary" onclick="setRoute('free')">${L("courses.enter")}</button>
+          </article>
+          <article class="pricing">
+            <span class="tag premiumtag">Premium</span>
+            <h2>${L("courses.premiumPath")}</h2>
+            <p>${L("courses.premiumPathDesc")}</p>
+            <p class="price">NT$499+</p>
+            <button class="btn secondary" onclick="setRoute('premium')">${L("courses.view")}</button>
+          </article>
+        </div>
+        <section class="panel" style="margin-top:24px">
+          <h2>${L("courses.levelTitle")}</h2>
+          <div class="grid four">
+            <article class="card"><h3>Level 0</h3><p><b>${L("courses.level0")}</b></p><p>${L("courses.level0Goal")}</p></article>
+            <article class="card"><h3>Level 1</h3><p><b>${L("courses.level1")}</b></p><p>${L("courses.level1Goal")}</p></article>
+            <article class="card"><h3>Level 2</h3><p><b>${L("courses.level2")}</b></p><p>${L("courses.level2Goal")}</p></article>
+            <article class="card"><h3>Advanced</h3><p><b>${L("courses.advanced")}</b></p><p>${L("courses.advancedGoal")}</p></article>
+          </div>
+        </section>
+      </div>
+    </main>
+  `);
+}
+
+function free() {
+  const lesson = LESSONS.find(item => item.id === state.activeLesson) || LESSONS[0];
+
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <h1>${L("free.title")}</h1>
+        <p class="lead">${L("free.lead")}</p>
+        <div class="dashboard">
+          <aside>
+            <div class="panel">
+              ${LESSONS.map(item => `
+                <button class="sidebtn ${item.id === lesson.id ? "active" : ""}" onclick="state.activeLesson='${item.id}';save();render()">
+                  <span>${state.lang === "zh" ? item.zhTitle : item.enTitle}</span>
+                  <span>${state.progress[item.id] ? "✓" : ""}</span>
+                </button>
+              `).join("")}
+            </div>
+          </aside>
+          <section>${renderLesson(lesson)}</section>
+        </div>
+      </div>
+    </main>
+  `);
+}
+
+function renderLesson(lesson) {
+  let html = `
+    <article class="lesson">
+      <div class="meta">
+        <span class="tag free">${lesson.level}</span>
+        <span class="tag">${state.progress[lesson.id] ? L("free.completed") : L("misc.incomplete")}</span>
+      </div>
+      <h2>${state.lang === "zh" ? lesson.zhTitle : lesson.enTitle}</h2>
+      <p>${state.lang === "zh" ? lesson.zhText : lesson.enText}</p>
+  `;
+
+  if (lesson.quiz) {
+    html += `
+      <div class="practice">
+        <h3>${L("free.quiz")}</h3>
+        <p><b>${state.lang === "zh" ? lesson.quiz.zhQ : lesson.quiz.enQ}</b></p>
+        ${lesson.quiz.options.map((option, index) => `
+          <button class="quiz-option" onclick="answerQuiz('${lesson.id}', ${index}, this)">
+            ${state.lang === "zh" ? option.zh : option.en}
+          </button>
+        `).join("")}
+        <div id="fb-${lesson.id}" class="feedback hidden"></div>
+      </div>
+    `;
+  }
+
+  if (lesson.zhTask) {
+    html += `
+      <div class="practice">
+        <h3>${L("free.practice")}</h3>
+        <p>${state.lang === "zh" ? lesson.zhTask : lesson.enTask}</p>
+        <textarea placeholder="${L("free.answerPlaceholder")}"></textarea>
+        <div class="btnrow">
+          <button class="btn secondary" onclick="document.getElementById('ans-${lesson.id}').classList.add('show')">${L("free.reveal")}</button>
+        </div>
+        <div id="ans-${lesson.id}" class="answer">${state.lang === "zh" ? lesson.zhAnswer : lesson.enAnswer}</div>
+      </div>
+    `;
+  }
+
+  html += `
+      <button class="btn primary" onclick="state.progress['${lesson.id}']=true;save();render()">${L("free.complete")}</button>
+    </article>
+  `;
+
+  return html;
+}
+
+function answerQuiz(id, index, button) {
+  const lesson = LESSONS.find(item => item.id === id);
+  const option = lesson.quiz.options[index];
+  button.classList.add(option.correct ? "correct" : "wrong");
+  const feedback = document.getElementById("fb-" + id);
+  feedback.classList.remove("hidden");
+  feedback.textContent = (option.correct ? L("misc.correct") : L("misc.wrong")) + " " + (state.lang === "zh" ? lesson.quiz.zhExplain : lesson.quiz.enExplain);
+}
+
+function premium() {
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <h1>${L("premium.title")}</h1>
+        <p class="lead">${L("premium.lead")}</p>
+        <div class="grid three">
+          ${PREMIUM.map(course => `
+            <article class="pricing">
+              <span class="tag premiumtag">Premium</span>
+              <h2>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h2>
+              <p><b>${L("premium.suitableFor")}：</b>${state.lang === "zh" ? course.zhUser : course.enUser}</p>
+              <p><b>${L("premium.outcome")}：</b>${state.lang === "zh" ? course.zhOutcome : course.enOutcome}</p>
+              <p class="price">${course.price}</p>
+              <a class="btn primary" href="${course.paymentUrl}" target="_blank">${L("premium.goPay")}</a>
+            </article>
+          `).join("")}
+        </div>
+        <section class="panel" style="margin-top:24px">
+          <h2>${L("premium.noteTitle")}</h2>
+          <p>${L("premium.note")}</p>
+        </section>
+      </div>
+    </main>
+  `);
+}
+
+function tools() {
+  const scenarios = [
+    [L("tools.taskReport"), ["ChatGPT", "Claude", "NotebookLM"]],
+    [L("tools.taskSlides"), ["Canva", "Gamma", "ChatGPT"]],
+    [L("tools.taskResearch"), ["Perplexity", "NotebookLM", "Claude"]],
+    [L("tools.taskCareer"), ["ChatGPT", "LinkedIn", "Canva"]],
+    [L("tools.taskVisual"), ["Canva", "Gamma"]]
+  ];
+
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <h1>${L("tools.title")}</h1>
+        <p class="lead">${L("tools.lead")}</p>
+        <section class="panel">
+          <h2>${L("tools.taskTitle")}</h2>
+          <div class="grid three">
+            ${scenarios.map(([title, names]) => `
+              <article class="card">
+                <h3>${title}</h3>
+                <p>${names.map(name => `<span class="tag">${name}</span>`).join(" ")}</p>
+              </article>
+            `).join("")}
+          </div>
+        </section>
+        <div class="grid three">
+          ${TOOLS.map(tool => `
+            <article class="card">
+              <div class="tool-logo">${tool.name[0]}</div>
+              <h3>${tool.name}</h3>
+              <p>${state.lang === "zh" ? tool.zh : tool.en}</p>
+              <a class="btn primary" href="${tool.url}" target="_blank">${L("tools.open")}</a>
+            </article>
+          `).join("")}
+        </div>
+      </div>
+    </main>
+  `);
+}
+
+function prompts() {
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <h1>${L("prompts.title")}</h1>
+        <p class="lead">${L("prompts.lead")}</p>
+        <div class="grid two">
+          ${PROMPTS.map((prompt, index) => `
+            <article class="card">
+              <span class="tag">${prompt.cat}</span>
+              <div class="promptbox" id="prompt-${index}">${prompt.text}</div>
+              <button class="btn secondary" onclick="copyPrompt('prompt-${index}')">${L("prompts.copy")}</button>
+            </article>
+          `).join("")}
+        </div>
+      </div>
+    </main>
+  `);
+}
+
+function copyPrompt(id) {
+  navigator.clipboard.writeText(document.getElementById(id).innerText);
+  toast(L("prompts.copied"));
+}
+
+function community() {
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <h1>${L("community.title")}</h1>
+        <p class="lead">${L("community.lead")}</p>
+        <div class="slide">
+          <div>
+            <p class="eyebrow" style="color:#93c5fd">${L("community.boardTitle")}</p>
+            <h3>${L("community.boardQuestion")}</h3>
+          </div>
+          <div class="sticky-note">${L("community.note")}</div>
+        </div>
+        <div class="grid two">
+          <article class="post">
+            <span class="tag communitytag">Prompt Help</span>
+            <h3>How do I ask AI to help with research?</h3>
+            <p>Add constraints: do not write final answer, ask questions first, verify sources.</p>
+            <button class="btn secondary" onclick="toast('${L("community.demo")}')">${L("community.reply")}</button>
+          </article>
+        </div>
+      </div>
+    </main>
+  `);
+}
+
+function thailand() {
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <h1>${L("thailand.title")}</h1>
+        <p class="lead">${L("thailand.lead")}</p>
+        <section class="panel">
+          <h2>${L("thailand.journal")}</h2>
+          <div class="grid four">
+            <article class="card"><h3>${L("thailand.daily")}</h3><p>${L("thailand.dailyText")}</p></article>
+            <article class="card"><h3>${L("thailand.field")}</h3><p>${L("thailand.fieldText")}</p></article>
+            <article class="card"><h3>${L("thailand.project")}</h3><p>${L("thailand.projectText")}</p></article>
+            <article class="card"><h3>${L("thailand.action")}</h3><p>${L("thailand.actionText")}</p></article>
+          </div>
+        </section>
+      </div>
+    </main>
+  `);
+}
+
+function impact() {
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <h1>${L("impact.title")}</h1>
+        <p class="lead">${L("impact.lead")}</p>
+        <div class="grid three">
+          <article class="card"><span class="tag free">Access</span><h3>${L("impact.access")}</h3><p>${L("impact.accessText")}</p></article>
+          <article class="card"><span class="tag premiumtag">Sustainability</span><h3>${L("impact.sustainability")}</h3><p>${L("impact.sustainabilityText")}</p></article>
+          <article class="card"><span class="tag communitytag">Community</span><h3>${L("impact.community")}</h3><p>${L("impact.communityText")}</p></article>
+        </div>
+      </div>
+    </main>
+  `);
+}
+
+function render() {
+  const routes = { home, courses, free, premium, tools, prompts, community, thailand, impact };
+  document.getElementById("app").innerHTML = (routes[state.route] || home)();
+  save();
+}
+
+addEventListener("DOMContentLoaded", render);
