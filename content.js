@@ -647,82 +647,347 @@ const LESSONS = [
 
 const PREMIUM = [
   {
-    id: "student",
-    price: "NT$399",
-    paymentUrl: "https://gumroad.com/",
-    zhTitle: "AI 學生效率實戰班",
-    enTitle: "AI Student Productivity Lab",
-    zhUser: "高中生、大學生、剛開始用 AI 做報告與讀書的人",
-    enUser: "High school students, university students, and beginners using AI for study and reports",
-    zhOutcome: "完成後你會擁有一套可重複使用的讀書、報告、簡報與考試準備流程。",
-    enOutcome: "You will build a repeatable workflow for studying, reports, slides, and exam preparation.",
-    zhDesc: "模組包含：AI 讀書法、報告大綱、資料查證、簡報架構、考前複習、學術誠信。",
-    enDesc: "Modules: AI study workflow, report outlines, source verification, slide structure, exam review, and academic integrity."
-  },
-  {
-    id: "career",
+    id: "admissions",
     price: "NT$499",
     paymentUrl: "https://gumroad.com/",
-    zhTitle: "AI 求職與個人品牌實戰班",
-    enTitle: "AI Career and Personal Branding Lab",
-    zhUser: "想找實習、工作、交換、獎學金或海外計畫的學生",
-    enUser: "Students applying for internships, jobs, exchange programs, scholarships, or overseas programs",
-    zhOutcome: "完成後你會完成履歷、自我介紹、面試回答、LinkedIn 內容與申請信模板。",
-    enOutcome: "You will complete a resume, self-introduction, interview answers, LinkedIn content, and application email templates.",
-    zhDesc: "模組包含：履歷優化、STAR 面試法、英文自我介紹、申請信、作品集與 LinkedIn 個人品牌。",
-    enDesc: "Modules: resume optimization, STAR interviews, English self-introduction, application emails, portfolio, and LinkedIn personal branding."
+    zhTitle: "高中生申請大學 AI 實戰課",
+    enTitle: "AI University Application Lab for High School Students",
+    zhUser: "高二、高三、學測後準備申請大學、整理學習歷程與備審資料的學生",
+    enUser: "High school students preparing university applications, learning portfolios, and admissions materials",
+    zhOutcome: "完成後你會產出一份完整的大學申請包：科系探索、學習歷程整理、備審架構、自我介紹與面試準備。",
+    enOutcome: "You will produce a complete university application package: major exploration, learning portfolio organization, application structure, self-introduction, and interview preparation.",
+    zhDesc: "這門課不是教你用 AI 代寫備審，而是教你用 AI 把自己的經驗整理得更清楚、更有邏輯，讓你在申請大學時能說出自己的方向。",
+    enDesc: "This course does not teach students to let AI write applications for them. It teaches students how to use AI to organize their own experience clearly and logically for university applications.",
+    zhFinalProduct: "大學申請包",
+    enFinalProduct: "University Application Package",
+    zhLessons: [
+      "第1課：用 AI 找出適合自己的科系",
+      "第2課：用 AI 分析個人特質與學習優勢",
+      "第3課：用 AI 整理高中學習歷程",
+      "第4課：用 AI 撰寫學習歷程反思",
+      "第5課：用 AI 建立備審資料架構",
+      "第6課：用 AI 修改自我介紹",
+      "第7課：用 AI 準備大學面試常見題",
+      "第8課：用 AI 模擬教授面試",
+      "第9課：用 AI 回答科系動機與未來規劃",
+      "第10課：完成你的大學申請包"
+    ],
+    enLessons: [
+      "Lesson 1: Use AI to explore suitable university majors",
+      "Lesson 2: Use AI to analyze personal strengths and learning advantages",
+      "Lesson 3: Use AI to organize high school learning portfolios",
+      "Lesson 4: Use AI to write learning reflection drafts",
+      "Lesson 5: Use AI to structure application materials",
+      "Lesson 6: Use AI to improve self-introduction",
+      "Lesson 7: Use AI to prepare common university interview questions",
+      "Lesson 8: Use AI to simulate professor interviews",
+      "Lesson 9: Use AI to answer motivation and future planning questions",
+      "Lesson 10: Complete your university application package"
+    ],
+    zhValue: [
+      "不再不知道備審要寫什麼",
+      "把高中經驗整理成有邏輯的故事",
+      "面試前可以反覆練習"
+    ],
+    enValue: [
+      "No longer feel lost about application materials",
+      "Turn high school experience into a logical story",
+      "Practice interviews repeatedly before the real one"
+    ]
   },
   {
-    id: "research",
+    id: "college-learning",
     price: "NT$699",
     paymentUrl: "https://gumroad.com/",
-    zhTitle: "AI 研究與文獻回顧加速班",
-    enTitle: "AI Research and Literature Review Accelerator",
-    zhUser: "大學生、研究生、需要做專題、論文或競賽研究的人",
-    enUser: "University students, graduate students, and learners working on projects, papers, or research competitions",
-    zhOutcome: "完成後你會學會用 AI 規劃研究問題、整理文獻、建立筆記系統與製作學術簡報。",
-    enOutcome: "You will learn to use AI to plan research questions, organize literature, build note systems, and create academic presentations.",
-    zhDesc: "模組包含：研究問題設計、文獻搜尋、摘要比較表、研究缺口、引用風險、簡報與口頭報告。",
-    enDesc: "Modules: research question design, literature search, summary comparison tables, research gaps, citation risks, academic slides and presentation."
+    zhTitle: "大學生 AI 學習系統課",
+    enTitle: "AI Learning System for University Students",
+    zhUser: "大一到大四，想用 AI 提升讀書、報告、簡報、筆記與時間管理效率的大學生",
+    enUser: "University students who want to use AI for studying, reports, slides, notes, and time management",
+    zhOutcome: "完成後你會建立自己的 AI 大學生存系統，包含讀書流程、筆記流程、報告流程與簡報流程。",
+    enOutcome: "You will build your own AI university survival system, including workflows for studying, note-taking, reports, and presentations.",
+    zhDesc: "這門課幫助大學生把 AI 變成學習助手，而不是只拿來交作業。重點是建立可以重複使用的學習流程。",
+    enDesc: "This course helps university students turn AI into a learning assistant, not just a shortcut for assignments. The focus is building reusable learning workflows.",
+    zhFinalProduct: "AI 大學生存系統",
+    enFinalProduct: "AI University Survival System",
+    zhLessons: [
+      "第1課：建立 AI 大學學習觀念",
+      "第2課：AI 讀書法與重點整理",
+      "第3課：AI 課堂筆記與複習系統",
+      "第4課：AI 考試準備與題庫生成",
+      "第5課：AI 報告大綱與論點設計",
+      "第6課：AI 資料查證與來源判斷",
+      "第7課：AI 簡報架構與講稿設計",
+      "第8課：AI 團隊合作與分工流程",
+      "第9課：AI 時間管理與任務拆解",
+      "第10課：建立你的 AI 學習工作流"
+    ],
+    enLessons: [
+      "Lesson 1: Build the right AI learning mindset for university",
+      "Lesson 2: AI study method and key-point extraction",
+      "Lesson 3: AI class notes and review system",
+      "Lesson 4: AI exam preparation and question generation",
+      "Lesson 5: AI report outlines and argument design",
+      "Lesson 6: AI source verification and evidence checking",
+      "Lesson 7: AI slide structure and speaker notes",
+      "Lesson 8: AI teamwork and collaboration workflow",
+      "Lesson 9: AI time management and task breakdown",
+      "Lesson 10: Build your AI learning workflow"
+    ],
+    zhValue: [
+      "每次報告不再從零開始",
+      "讀書與考試準備更有系統",
+      "建立自己的 AI 學習 SOP"
+    ],
+    enValue: [
+      "Never start reports from zero again",
+      "Study and exam preparation become more systematic",
+      "Build your personal AI learning SOP"
+    ]
   },
   {
-    id: "productivity",
-    price: "NT$699",
+    id: "research-competition",
+    price: "NT$899",
     paymentUrl: "https://gumroad.com/",
-    zhTitle: "AI 工作效率與工作流實戰班",
-    enTitle: "AI Productivity and Workflow Lab",
-    zhUser: "想用 AI 處理 Email、會議紀錄、企劃、資料整理與工作流程的人",
-    enUser: "People who want to use AI for email, meeting notes, proposals, data organization, and workflows",
-    zhOutcome: "完成後你會建立個人的 AI 工作流程，能更快完成日常行政與企劃任務。",
-    enOutcome: "You will build a personal AI workflow for daily administration and planning tasks.",
-    zhDesc: "模組包含：Email 模板、會議紀錄、週報、企劃書、SOP、Notion/Google 文件工作流。",
-    enDesc: "Modules: email templates, meeting notes, weekly reports, proposals, SOPs, and Notion/Google Docs workflows."
+    zhTitle: "大學生研究與競賽 AI 實戰課",
+    enTitle: "AI Research and Competition Lab for University Students",
+    zhUser: "大學生、專題生、想參加競賽、做研究、做期末專案或整理資料的人",
+    enUser: "University students working on projects, competitions, research, final projects, or data organization",
+    zhOutcome: "完成後你會產出一份研究或競賽專案包，包含題目、資料整理、研究架構、簡報與提案。",
+    enOutcome: "You will produce a research or competition project package, including topic, source organization, research structure, slides, and proposal.",
+    zhDesc: "這門課會教你用 AI 協助研究與競賽，但不會讓 AI 取代你的思考。重點是題目釐清、資料整理、查證與呈現。",
+    enDesc: "This course teaches students to use AI for research and competitions without replacing their own thinking. The focus is topic clarification, source organization, verification, and presentation.",
+    zhFinalProduct: "研究與競賽專案包",
+    enFinalProduct: "Research and Competition Project Package",
+    zhLessons: [
+      "第1課：用 AI 發想研究或競賽題目",
+      "第2課：用 AI 縮小題目與設定問題",
+      "第3課：用 Perplexity 找資料與來源",
+      "第4課：用 NotebookLM 整理 PDF 與文獻",
+      "第5課：建立文獻與資料比較表",
+      "第6課：用 AI 找出研究缺口與觀點",
+      "第7課：用 AI 設計問卷與訪談問題",
+      "第8課：用 AI 整理資料與初步分析",
+      "第9課：用 AI 製作研究簡報與提案",
+      "第10課：完成研究或競賽專案包"
+    ],
+    enLessons: [
+      "Lesson 1: Use AI to generate research or competition topics",
+      "Lesson 2: Use AI to narrow topics and define questions",
+      "Lesson 3: Use Perplexity to find sources",
+      "Lesson 4: Use NotebookLM to organize PDFs and papers",
+      "Lesson 5: Build literature and source comparison tables",
+      "Lesson 6: Use AI to identify research gaps and viewpoints",
+      "Lesson 7: Use AI to design surveys and interview questions",
+      "Lesson 8: Use AI to organize data and initial analysis",
+      "Lesson 9: Use AI to create research slides and proposals",
+      "Lesson 10: Complete your research or competition package"
+    ],
+    zhValue: [
+      "讓專題與競賽不再只靠靈感",
+      "資料整理更快且更有條理",
+      "簡報與提案更完整"
+    ],
+    enValue: [
+      "Make projects and competitions less dependent on random inspiration",
+      "Organize sources faster and more systematically",
+      "Create stronger presentations and proposals"
+    ]
   },
   {
-    id: "automation",
+    id: "career-internship",
     price: "NT$999",
     paymentUrl: "https://gumroad.com/",
-    zhTitle: "AI 自動化與 Agent 入門班",
-    enTitle: "AI Automation and Agent Starter",
-    zhUser: "已經會用 ChatGPT，想學會多工具工作流、AI Agent 與自動化概念的人",
-    enUser: "Users who already use ChatGPT and want to learn multi-tool workflows, AI agents, and automation concepts",
-    zhOutcome: "完成後你會理解 AI Agent 的基本概念，並能設計自己的多步驟 AI 工作流程。",
-    enOutcome: "You will understand the basics of AI agents and design your own multi-step AI workflow.",
-    zhDesc: "模組包含：多工具組合、任務拆解、Agent 概念、資料輸入輸出、風險控管、低程式碼自動化。",
-    enDesc: "Modules: multi-tool workflows, task decomposition, agent concepts, data input/output, risk control, and low-code automation."
+    zhTitle: "求職與實習 AI 實戰課",
+    enTitle: "AI Career and Internship Lab",
+    zhUser: "想找實習、打工、第一份工作、交換計畫、獎學金或海外機會的學生",
+    enUser: "Students applying for internships, part-time jobs, first jobs, exchange programs, scholarships, or overseas opportunities",
+    zhOutcome: "完成後你會完成一份求職包，包含履歷、自我介紹、LinkedIn、面試題庫、求職信與作品集架構。",
+    enOutcome: "You will complete a career package, including resume, self-introduction, LinkedIn profile, interview question bank, application email, and portfolio structure.",
+    zhDesc: "這門課不是讓 AI 幫你捏造經歷，而是幫你把真實經驗整理得更具體、更有說服力。",
+    enDesc: "This course does not teach AI to invent experience. It helps you organize real experience more specifically and persuasively.",
+    zhFinalProduct: "求職與實習申請包",
+    enFinalProduct: "Career and Internship Application Package",
+    zhLessons: [
+      "第1課：用 AI 盤點個人經驗與能力",
+      "第2課：用 AI 建立履歷架構",
+      "第3課：用 AI 優化履歷描述",
+      "第4課：用 STAR 法則整理經驗",
+      "第5課：用 AI 建立自我介紹",
+      "第6課：用 AI 準備面試題庫",
+      "第7課：用 AI 模擬面試與回饋",
+      "第8課：用 AI 建立 LinkedIn 個人品牌",
+      "第9課：用 AI 撰寫求職信與申請信",
+      "第10課：完成你的求職與實習申請包"
+    ],
+    enLessons: [
+      "Lesson 1: Use AI to map personal experience and strengths",
+      "Lesson 2: Use AI to build resume structure",
+      "Lesson 3: Use AI to improve resume descriptions",
+      "Lesson 4: Organize experience with the STAR method",
+      "Lesson 5: Use AI to build self-introduction",
+      "Lesson 6: Use AI to prepare interview question banks",
+      "Lesson 7: Use AI to simulate interviews and feedback",
+      "Lesson 8: Use AI to build LinkedIn personal branding",
+      "Lesson 9: Use AI to write application emails and cover letters",
+      "Lesson 10: Complete your career and internship application package"
+    ],
+    zhValue: [
+      "履歷不再只是流水帳",
+      "面試前有明確練習方式",
+      "把真實經驗說得更有說服力"
+    ],
+    enValue: [
+      "Your resume becomes more than a timeline",
+      "You get a clear interview practice method",
+      "You explain real experience more persuasively"
+    ]
   },
   {
-    id: "startup",
+    id: "workplace-productivity",
+    price: "NT$1299",
+    paymentUrl: "https://gumroad.com/",
+    zhTitle: "職場生產力 AI 工作流課",
+    enTitle: "AI Workplace Productivity Workflow Lab",
+    zhUser: "想用 AI 處理 Email、會議紀錄、企劃、文件整理、任務管理與日常工作的使用者",
+    enUser: "Users who want to use AI for email, meeting notes, proposals, documents, task management, and daily work",
+    zhOutcome: "完成後你會建立一套個人 AI 工作流，能更快完成日常行政、企劃、文件與溝通任務。",
+    enOutcome: "You will build a personal AI workflow to complete daily admin, planning, document, and communication tasks faster.",
+    zhDesc: "這門課把 AI 從聊天工具變成工作系統，讓你知道每一種工作任務要怎麼拆解與交給 AI 協助。",
+    enDesc: "This course turns AI from a chat tool into a work system, showing how to break down tasks and use AI in daily work.",
+    zhFinalProduct: "個人 AI 工作流系統",
+    enFinalProduct: "Personal AI Workflow System",
+    zhLessons: [
+      "第1課：建立 AI 職場工作觀念",
+      "第2課：用 AI 處理 Email 與訊息回覆",
+      "第3課：用 AI 整理會議紀錄與待辦",
+      "第4課：用 AI 建立 SOP 與流程文件",
+      "第5課：用 AI 撰寫企劃書與提案初稿",
+      "第6課：用 AI 做週報與工作回顧",
+      "第7課：用 AI 整理文件與知識庫",
+      "第8課：用 AI 進行任務管理與優先順序排序",
+      "第9課：用 AI 協助團隊溝通與協作",
+      "第10課：完成你的個人 AI 工作流"
+    ],
+    enLessons: [
+      "Lesson 1: Build the right AI workplace mindset",
+      "Lesson 2: Use AI for emails and message replies",
+      "Lesson 3: Use AI to organize meeting notes and tasks",
+      "Lesson 4: Use AI to create SOPs and process documents",
+      "Lesson 5: Use AI to draft proposals and plans",
+      "Lesson 6: Use AI for weekly reports and work reviews",
+      "Lesson 7: Use AI to organize documents and knowledge bases",
+      "Lesson 8: Use AI for task management and prioritization",
+      "Lesson 9: Use AI for team communication and collaboration",
+      "Lesson 10: Complete your personal AI workflow"
+    ],
+    zhValue: [
+      "減少重複行政工作",
+      "把工作任務變成標準流程",
+      "提升文件與溝通效率"
+    ],
+    enValue: [
+      "Reduce repetitive admin work",
+      "Turn work tasks into standard workflows",
+      "Improve document and communication efficiency"
+    ]
+  },
+  {
+    id: "startup-automation",
     price: "NT$1499",
     paymentUrl: "https://gumroad.com/",
-    zhTitle: "AI 創業與社會創新提案班",
-    enTitle: "AI Startup and Social Innovation Lab",
-    zhUser: "想做社會創新、創業競賽、公益專案、海外計畫成果轉化的人",
-    enUser: "Learners interested in social innovation, startup competitions, nonprofit projects, and overseas program impact conversion",
-    zhOutcome: "完成後你會完成問題定義、使用者分析、商業模式、影響力指標與提案簡報。",
-    enOutcome: "You will complete problem definition, user analysis, business model, impact indicators, and a pitch deck.",
-    zhDesc: "模組包含：問題樹、利害關係人、使用者訪談、商業模式、影響力衡量、Pitch Deck。",
-    enDesc: "Modules: problem tree, stakeholders, user interviews, business model, impact measurement, and pitch deck."
+    zhTitle: "創業與 AI 自動化實戰課",
+    enTitle: "AI Startup and Automation Lab",
+    zhUser: "想做個人品牌、數位產品、社會創新、創業提案、AI 自動化或 AI Agent 的進階使用者",
+    enUser: "Advanced users interested in personal branding, digital products, social innovation, startup proposals, AI automation, or AI agents",
+    zhOutcome: "完成後你會完成一份創業提案與一套基礎 AI 自動化流程，包含問題定義、使用者分析、MVP、Pitch Deck 與自動化設計。",
+    enOutcome: "You will complete a startup proposal and basic AI automation workflow, including problem definition, user analysis, MVP, pitch deck, and automation design.",
+    zhDesc: "這門課適合已經有基礎 AI 能力的人，目標是把 AI 用在產品、服務、創業與自動化流程設計。",
+    enDesc: "This course is for users with basic AI skills who want to apply AI to products, services, startups, and automation workflows.",
+    zhFinalProduct: "創業提案與 AI 自動化流程",
+    enFinalProduct: "Startup Proposal and AI Automation Workflow",
+    zhLessons: [
+      "第1課：用 AI 進行問題定義",
+      "第2課：用 AI 分析目標使用者與痛點",
+      "第3課：用 AI 設計訪談問題",
+      "第4課：用 AI 建立商業模式草稿",
+      "第5課：用 AI 規劃 MVP 與功能優先順序",
+      "第6課：用 AI 設計內容行銷與個人品牌",
+      "第7課：用 AI 建立 Pitch Deck 架構",
+      "第8課：AI 自動化思維與流程拆解",
+      "第9課：Zapier、Make 與 AI Agent 概念",
+      "第10課：完成創業提案與 AI 自動化流程"
+    ],
+    enLessons: [
+      "Lesson 1: Use AI for problem definition",
+      "Lesson 2: Use AI to analyze target users and pain points",
+      "Lesson 3: Use AI to design interview questions",
+      "Lesson 4: Use AI to draft a business model",
+      "Lesson 5: Use AI to plan MVP and feature priorities",
+      "Lesson 6: Use AI for content marketing and personal branding",
+      "Lesson 7: Use AI to build pitch deck structure",
+      "Lesson 8: AI automation mindset and workflow breakdown",
+      "Lesson 9: Zapier, Make, and AI Agent concepts",
+      "Lesson 10: Complete your startup proposal and AI automation workflow"
+    ],
+    zhValue: [
+      "把想法變成可展示提案",
+      "理解 AI 自動化與 Agent 基礎",
+      "完成一套能延伸的創業流程"
+    ],
+    enValue: [
+      "Turn ideas into presentable proposals",
+      "Understand AI automation and agent basics",
+      "Complete a startup workflow that can be expanded"
+    ]
+  },
+  {
+    id: "all-access",
+    price: "早鳥 NT$2,999｜正式 NT$3,999",
+    paymentUrl: "https://gumroad.com/",
+    zhTitle: "AI Skill Bridge 全站通行證",
+    enTitle: "AI Skill Bridge All-Access Pass",
+    zhUser: "想一次解鎖全部 6 個付費課程、60 堂課與未來更新的使用者",
+    enUser: "Users who want to unlock all 6 premium courses, 60 lessons, and future updates",
+    zhOutcome: "完成後你可以從高中申請、大學學習、研究競賽、求職實習、職場效率到創業自動化完整學習。",
+    enOutcome: "You can learn the full path from university applications, university learning, research and competitions, career, workplace productivity, to startup automation.",
+    zhDesc: "全站通行證適合想完整走完 AI Skill Bridge 學習路徑的使用者。相比單買 6 個課程，全站方案更划算。",
+    enDesc: "The All-Access Pass is for users who want the full AI Skill Bridge learning path. It is more cost-effective than buying all 6 courses separately.",
+    zhFinalProduct: "完整 AI 成長路徑",
+    enFinalProduct: "Complete AI Growth Path",
+    zhLessons: [
+      "解鎖：高中生申請大學 AI 實戰課",
+      "解鎖：大學生 AI 學習系統課",
+      "解鎖：大學生研究與競賽 AI 實戰課",
+      "解鎖：求職與實習 AI 實戰課",
+      "解鎖：職場生產力 AI 工作流課",
+      "解鎖：創業與 AI 自動化實戰課",
+      "包含：全部 60 堂付費課",
+      "包含：未來新增課程更新",
+      "包含：Prompt Tutor 與工具導航",
+      "包含：徽章、證書與學習路徑"
+    ],
+    enLessons: [
+      "Unlock: AI University Application Lab",
+      "Unlock: AI Learning System for University Students",
+      "Unlock: AI Research and Competition Lab",
+      "Unlock: AI Career and Internship Lab",
+      "Unlock: AI Workplace Productivity Workflow Lab",
+      "Unlock: AI Startup and Automation Lab",
+      "Includes: all 60 premium lessons",
+      "Includes: future course updates",
+      "Includes: Prompt Tutor and AI tool navigator",
+      "Includes: badges, certificates, and learning path"
+    ],
+    zhValue: [
+      "一次解鎖完整學習路徑",
+      "價格比單買全部課程更划算",
+      "適合想長期學習 AI 的使用者"
+    ],
+    enValue: [
+      "Unlock the complete learning path",
+      "More cost-effective than buying all courses separately",
+      "Best for long-term AI learners"
+    ]
   }
 ];
 

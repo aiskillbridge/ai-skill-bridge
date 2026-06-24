@@ -965,25 +965,62 @@ function courses() {
   `);
 }
 
+
 function premium() {
+  const courseCards = PREMIUM.map(course => `
+    <article class="pricing">
+      <span class="tag premiumtag">${course.id === "all-access" ? "All Access" : "Premium Course"}</span>
+      <h2>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h2>
+      <p>${state.lang === "zh" ? course.zhDesc : course.enDesc}</p>
+      <p><b>${L("premium.suitableFor")}：</b>${state.lang === "zh" ? course.zhUser : course.enUser}</p>
+      <p><b>${L("premium.outcome")}：</b>${state.lang === "zh" ? course.zhOutcome : course.enOutcome}</p>
+      <p><b>${text("完成作品", "Final Product")}：</b>${state.lang === "zh" ? course.zhFinalProduct : course.enFinalProduct}</p>
+      <p class="price">${course.price}</p>
+
+      <div class="practice">
+        <h3>${text("課程內容", "Course Lessons")}</h3>
+        <ol>
+          ${(state.lang === "zh" ? course.zhLessons : course.enLessons).map(item => `<li>${item}</li>`).join("")}
+        </ol>
+      </div>
+
+      <div class="practice">
+        <h3>${text("你會感受到的價值", "Value You Will Feel")}</h3>
+        <ul>
+          ${(state.lang === "zh" ? course.zhValue : course.enValue).map(item => `<li>${item}</li>`).join("")}
+        </ul>
+      </div>
+
+      <a class="btn primary" href="${course.paymentUrl}" target="_blank">${L("premium.goPay")}</a>
+    </article>
+  `).join("");
+
   return shell(`
     <main class="page">
       <div class="wrap">
         <h1>${L("premium.title")}</h1>
-        <p class="lead">${L("premium.lead")}</p>
-        <div class="grid three">
-          ${PREMIUM.map(course => `
-            <article class="pricing">
-              <span class="tag premiumtag">Premium</span>
-              <h2>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h2>
-              <p>${state.lang === "zh" ? course.zhDesc : course.enDesc}</p>
-              <p><b>${L("premium.suitableFor")}：</b>${state.lang === "zh" ? course.zhUser : course.enUser}</p>
-              <p><b>${L("premium.outcome")}：</b>${state.lang === "zh" ? course.zhOutcome : course.enOutcome}</p>
-              <p class="price">${course.price}</p>
-              <a class="btn primary" href="${course.paymentUrl}" target="_blank">${L("premium.goPay")}</a>
-            </article>
-          `).join("")}
+        <p class="lead">${text(
+          "付費區採用「一個完整課程一個價格」的方式，不是單堂課收費。每個課程包含 10 堂課、實作任務、Prompt 模板與最後成果。全站通行證可解鎖全部課程。",
+          "Premium courses are sold as complete courses, not by individual lessons. Each course includes 10 lessons, practical tasks, prompt templates, and a final product. The All-Access Pass unlocks everything."
+        )}</p>
+
+        <section class="panel" style="margin-bottom:24px">
+          <h2>${text("付費課程總覽", "Premium Course Overview")}</h2>
+          <div class="grid three">
+            ${PREMIUM.map(course => `
+              <article class="card">
+                <span class="tag ${course.id === "all-access" ? "free" : "premiumtag"}">${course.price}</span>
+                <h3>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h3>
+                <p>${state.lang === "zh" ? course.zhFinalProduct : course.enFinalProduct}</p>
+              </article>
+            `).join("")}
+          </div>
+        </section>
+
+        <div class="grid two">
+          ${courseCards}
         </div>
+
         <section class="panel" style="margin-top:24px">
           <h2>${L("premium.noteTitle")}</h2>
           <p>${L("premium.note")}</p>
