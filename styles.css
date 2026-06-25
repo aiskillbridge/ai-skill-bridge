@@ -683,3 +683,20 @@ textarea[id^="free-portfolio-"] {
 textarea[id^="free-note-"] {
   min-height: 160px;
 }
+
+
+
+/* V40 Premium Lesson Quality */
+.panel ol li,
+.panel ul li {
+  line-height: 1.85;
+}
+
+.premium-quality-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.promptbox {
+  white-space: pre-wrap;
+}

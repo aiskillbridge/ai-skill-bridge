@@ -1805,6 +1805,32 @@ function toggleLessonComplete(courseId, lessonIndex) {
   setLessonComplete(courseId, lessonIndex, !currentlyComplete);
 }
 
+
+
+function savePremiumLessonToPackage(courseId, lessonIndex) {
+  if (courseId !== "admissions") {
+    toast(state.lang === "zh" ? "目前只有第一階段課程支援同步成果包" : "Package sync is currently available for Stage 1 only");
+    return;
+  }
+
+  const textarea = document.getElementById(`premium-note-${courseId}-${lessonIndex + 1}`);
+  const value = textarea ? textarea.value.trim() : "";
+  if (!value) {
+    toast(state.lang === "zh" ? "請先在課程筆記寫下你的成果，再同步到大學申請包" : "Write your output in course notes first, then sync it to the application package");
+    return;
+  }
+
+  const map = ["map", "majors", "portfolio", "activities", "autobiography", "majorSpecific", "interviewBank", "mockInterview", "advisorPrompt", "finalReview"];
+  const itemId = map[lessonIndex];
+  if (!itemId || typeof applicationPackageKey !== "function") {
+    toast(state.lang === "zh" ? "找不到對應的大學申請包欄位" : "No matching application package section found");
+    return;
+  }
+
+  localStorage.setItem(applicationPackageKey(itemId), value);
+  toast(state.lang === "zh" ? "已同步到大學申請包" : "Synced to application package");
+}
+
 function lesson() {
   const item = (typeof PREMIUM !== "undefined" && currentCourseId)
     ? PREMIUM.find(p => p.id === currentCourseId)
@@ -1857,6 +1883,41 @@ function lesson() {
             <h2>${text("核心概念", "Core Concept")}</h2>
             <p>${state.lang === "zh" ? detail.zhConcept : detail.enConcept}</p>
           </section>
+
+          ${(detail.zhCaseStudy || detail.enCaseStudy) ? `
+          <section class="panel" style="margin-top:24px">
+            <span class="tag premiumtag">V40</span>
+            <h2>${text("高中生情境案例", "Student Scenario Case")}</h2>
+            <p>${state.lang === "zh" ? detail.zhCaseStudy : detail.enCaseStudy}</p>
+          </section>` : ""}
+
+          ${(detail.zhWorkflow || detail.enWorkflow) ? `
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("AI 操作流程", "AI Workflow")}</h2>
+            <ol>
+              ${(state.lang === "zh" ? detail.zhWorkflow : detail.enWorkflow).map(step => `<li>${step}</li>`).join("")}
+            </ol>
+          </section>` : ""}
+
+          ${(detail.zhCommonMistakes || detail.enCommonMistakes) ? `
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("常見錯誤", "Common Mistakes")}</h2>
+            <ul>
+              ${(state.lang === "zh" ? detail.zhCommonMistakes : detail.enCommonMistakes).map(item => `<li>${item}</li>`).join("")}
+            </ul>
+          </section>` : ""}
+
+          ${(detail.zhExcellentExample || detail.enExcellentExample) ? `
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("優秀作品應該長什麼樣", "What a Strong Output Looks Like")}</h2>
+            <p>${state.lang === "zh" ? detail.zhExcellentExample : detail.enExcellentExample}</p>
+          </section>` : ""}
+
+          ${(detail.zhCoachPrompt || detail.enCoachPrompt) ? `
+          <section class="panel" style="margin-top:24px">
+            <h2>${text("AI 教練追問 Prompt", "AI Coach Follow-up Prompt")}</h2>
+            <div class="promptbox">${state.lang === "zh" ? detail.zhCoachPrompt : detail.enCoachPrompt}</div>
+          </section>` : ""}
 
           <section class="panel" style="margin-top:24px">
             <h2>Prompt Template</h2>

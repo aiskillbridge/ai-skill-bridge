@@ -1608,60 +1608,106 @@ const PREMIUM_LESSON_DETAILS = {
       "enFeedbackPrompt": "Act as a 具有 15 年經驗的大學申請顧問.\n\nHere is my completed work for: 申請準備地圖\n(paste my work here)\n\nDo not only say \"good\" or \"be more specific.\" Give me detailed professional feedback.\n\nPart 1: Overall scoring\nRate each item from 1-10 and explain the reason:\n- 流程理解度：1-10 分，並說明扣分原因\n- 第一階段準備完整度：1-10 分，並說明扣分原因\n- 第二階段準備完整度：1-10 分，並說明扣分原因\n- 可執行性：1-10 分，並說明扣分原因\n- 時間安排：1-10 分，並說明扣分原因\n- 資訊查證程度：1-10 分，並說明扣分原因\n- 風險意識：1-10 分，並說明扣分原因\n- 整體競爭力：1-10 分，並說明扣分原因\n\nPart 2: Strengths\nList the 3 strongest parts and explain why they help my university application.\n\nPart 3: Diagnosis\nList the 3 most important problems. For each problem, include:\n- What the issue is\n- Why it hurts the application\n- How to revise it\n\nPart 4: Reviewer perspective\nAnswer these:\n1. 哪些地方會讓學生誤以為自己準備好了，但其實還沒有？\n2. 請幫我排出未來 7 天最重要的行動順序。\n3. 如果只能先做 3 件事，請告訴我是哪 3 件。\n\nPart 5: Direct revision guidance\nProvide:\n1. A better revision direction\n2. Example sentences I can adapt\n3. Vague sentences I should avoid\n4. Information I need to add before revising\n\nPart 6: Next actions\nGive me 3 priorities:\n- Fix today:\n- Improve tomorrow:\n- Final check:\n\nDo not invent my experience. Only give suggestions based on what I provide.",
       "zhQuizItems": [
         {
-          "q": "AI 在申請準備中最適合扮演什麼角色？",
+          "q": "第一階段申請最應該先確認什麼？",
           "options": [
-            "保證錄取",
-            "整理、檢查、練習工具",
-            "捏造經歷"
+            "篩選條件與目標校系要求",
+            "簡報字體",
+            "社團朋友名單"
           ],
-          "answer": "整理、檢查、練習工具"
+          "answer": 0,
+          "explain": "第一階段通常先看成績與篩選條件，必須先確認。"
         },
         {
-          "q": "第一階段通常最先要確認什麼？",
+          "q": "AI 在大學申請流程中最適合扮演什麼角色？",
           "options": [
-            "面試服裝",
-            "篩選條件與採計科目",
-            "自傳字體"
+            "幫你捏造經歷",
+            "協助整理任務與檢查缺口",
+            "取代招生簡章"
           ],
-          "answer": "篩選條件與採計科目"
+          "answer": 1,
+          "explain": "AI 可以協助整理，但不能取代查證與真實經驗。"
         },
         {
-          "q": "第二階段通常會重視什麼？",
+          "q": "好的申請準備地圖不應該缺少什麼？",
           "options": [
-            "備審資料與面試表現",
-            "只看朋友推薦",
-            "只看校名"
+            "時間安排與待辦清單",
+            "遊戲帳號",
+            "完全不查證的建議"
           ],
-          "answer": "備審資料與面試表現"
+          "answer": 0,
+          "explain": "沒有時間安排，學生很難執行。"
+        },
+        {
+          "q": "AI 給出的招生資訊應該？",
+          "options": [
+            "回到校系簡章確認",
+            "直接相信",
+            "完全不用管"
+          ],
+          "answer": 0,
+          "explain": "招生資訊會變動，必須查證。"
+        },
+        {
+          "q": "本課成果應該放到哪裡？",
+          "options": [
+            "大學申請包第 1 欄",
+            "免費成果包的 AI 簡報",
+            "工具導航頁"
+          ],
+          "answer": 0,
+          "explain": "本課成果是大學申請準備地圖。"
         }
       ],
       "enQuizItems": [
         {
-          "q": "AI 在申請準備中最適合扮演什麼角色？",
+          "q": "第一階段申請最應該先確認什麼？",
           "options": [
-            "保證錄取",
-            "整理、檢查、練習工具",
-            "捏造經歷"
+            "篩選條件與目標校系要求",
+            "簡報字體",
+            "社團朋友名單"
           ],
-          "answer": "整理、檢查、練習工具"
+          "answer": 0,
+          "explain": "第一階段通常先看成績與篩選條件，必須先確認。"
         },
         {
-          "q": "第一階段通常最先要確認什麼？",
+          "q": "AI 在大學申請流程中最適合扮演什麼角色？",
           "options": [
-            "面試服裝",
-            "篩選條件與採計科目",
-            "自傳字體"
+            "幫你捏造經歷",
+            "協助整理任務與檢查缺口",
+            "取代招生簡章"
           ],
-          "answer": "篩選條件與採計科目"
+          "answer": 1,
+          "explain": "AI 可以協助整理，但不能取代查證與真實經驗。"
         },
         {
-          "q": "第二階段通常會重視什麼？",
+          "q": "好的申請準備地圖不應該缺少什麼？",
           "options": [
-            "備審資料與面試表現",
-            "只看朋友推薦",
-            "只看校名"
+            "時間安排與待辦清單",
+            "遊戲帳號",
+            "完全不查證的建議"
           ],
-          "answer": "備審資料與面試表現"
+          "answer": 0,
+          "explain": "沒有時間安排，學生很難執行。"
+        },
+        {
+          "q": "AI 給出的招生資訊應該？",
+          "options": [
+            "回到校系簡章確認",
+            "直接相信",
+            "完全不用管"
+          ],
+          "answer": 0,
+          "explain": "招生資訊會變動，必須查證。"
+        },
+        {
+          "q": "本課成果應該放到哪裡？",
+          "options": [
+            "大學申請包第 1 欄",
+            "免費成果包的 AI 簡報",
+            "工具導航頁"
+          ],
+          "answer": 0,
+          "explain": "本課成果是大學申請準備地圖。"
         }
       ],
       "zhOutcome": "大學申請準備地圖",
@@ -1697,7 +1743,39 @@ const PREMIUM_LESSON_DETAILS = {
         "時間規劃"
       ],
       "zhValueTip": "把這份準備地圖拿給老師、家長或同學看，確認他們是否能在 1 分鐘內理解你的申請方向。",
-      "enValueTip": "把這份準備地圖拿給老師、家長或同學看，確認他們是否能在 1 分鐘內理解你的申請方向。"
+      "enValueTip": "把這份準備地圖拿給老師、家長或同學看，確認他們是否能在 1 分鐘內理解你的申請方向。",
+      "zhCaseStudy": "情境案例：小安是高三學生，剛考完學測，只知道自己想申請大學，卻不知道第一階段、第二階段、備審、面試之間的關係。他打開 AI 問「我要申請大學怎麼辦？」AI 給出一堆太大的建議。後來他改成請 AI 幫他拆成：第一階段要確認什麼、第二階段要準備什麼、現在最急的是什麼。這時候他才看懂申請流程。",
+      "enCaseStudy": "情境案例：小安是高三學生，剛考完學測，只知道自己想申請大學，卻不知道第一階段、第二階段、備審、面試之間的關係。他打開 AI 問「我要申請大學怎麼辦？」AI 給出一堆太大的建議。後來他改成請 AI 幫他拆成：第一階段要確認什麼、第二階段要準備什麼、現在最急的是什麼。這時候他才看懂申請流程。",
+      "zhWorkflow": [
+        "先列出目標校系與目前成績。",
+        "請 AI 協助拆解第一階段與第二階段準備任務。",
+        "把任務分成：現在就要做、本週要做、之後要做。",
+        "整理成一份大學申請準備地圖。",
+        "把準備地圖放進大學申請包第 1 欄。"
+      ],
+      "enWorkflow": [
+        "先列出目標校系與目前成績。",
+        "請 AI 協助拆解第一階段與第二階段準備任務。",
+        "把任務分成：現在就要做、本週要做、之後要做。",
+        "整理成一份大學申請準備地圖。",
+        "把準備地圖放進大學申請包第 1 欄。"
+      ],
+      "zhCommonMistakes": [
+        "只問 AI「我要申請大學怎麼辦」但沒有提供目標校系與目前狀態。",
+        "把 AI 的建議當成正式招生規則，沒有回到校系簡章查證。",
+        "只準備備審，卻忘記第一階段篩選條件。",
+        "沒有把任務排成時間表。"
+      ],
+      "enCommonMistakes": [
+        "只問 AI「我要申請大學怎麼辦」但沒有提供目標校系與目前狀態。",
+        "把 AI 的建議當成正式招生規則，沒有回到校系簡章查證。",
+        "只準備備審，卻忘記第一階段篩選條件。",
+        "沒有把任務排成時間表。"
+      ],
+      "zhExcellentExample": "高品質成果應該包含：1. 目標校系列表；2. 第一階段檢查項目；3. 第二階段準備項目；4. 備審與面試待辦；5. 未來 7 天行動清單；6. 需要查證的招生資訊。",
+      "enExcellentExample": "高品質成果應該包含：1. 目標校系列表；2. 第一階段檢查項目；3. 第二階段準備項目；4. 備審與面試待辦；5. 未來 7 天行動清單；6. 需要查證的招生資訊。",
+      "zhCoachPrompt": "你是一位大學申請流程教練。請檢查我的大學申請準備地圖，並指出：第一階段是否有漏掉篩選條件、第二階段是否有準備備審與面試、時間安排是否可行、哪些資訊需要回到招生簡章查證。最後請給我未來 7 天行動清單。",
+      "enCoachPrompt": "你是一位大學申請流程教練。請檢查我的大學申請準備地圖，並指出：第一階段是否有漏掉篩選條件、第二階段是否有準備備審與面試、時間安排是否可行、哪些資訊需要回到招生簡章查證。最後請給我未來 7 天行動清單。"
     },
     {
       "zhTitle": "第2課：用 AI 找出最適合自己的科系",
@@ -1714,60 +1792,106 @@ const PREMIUM_LESSON_DETAILS = {
       "enFeedbackPrompt": "Act as a 高中升學輔導老師與生涯探索顧問.\n\nHere is my completed work for: 科系探索表\n(paste my work here)\n\nDo not only say \"good\" or \"be more specific.\" Give me detailed professional feedback.\n\nPart 1: Overall scoring\nRate each item from 1-10 and explain the reason:\n- 興趣連結度：1-10 分，並說明扣分原因\n- 能力匹配度：1-10 分，並說明扣分原因\n- 科系理解度：1-10 分，並說明扣分原因\n- 未來發展清楚度：1-10 分，並說明扣分原因\n- 查證完整度：1-10 分，並說明扣分原因\n- 選擇理由具體度：1-10 分，並說明扣分原因\n- 風險評估：1-10 分，並說明扣分原因\n- 決策成熟度：1-10 分，並說明扣分原因\n\nPart 2: Strengths\nList the 3 strongest parts and explain why they help my university application.\n\nPart 3: Diagnosis\nList the 3 most important problems. For each problem, include:\n- What the issue is\n- Why it hurts the application\n- How to revise it\n\nPart 4: Reviewer perspective\nAnswer these:\n1. 哪個科系看起來最適合我？哪個可能只是表面有興趣？\n2. 請指出我還需要查哪些課程、出路或能力要求。\n3. 請幫我把 3 個優先科系重新排序。\n\nPart 5: Direct revision guidance\nProvide:\n1. A better revision direction\n2. Example sentences I can adapt\n3. Vague sentences I should avoid\n4. Information I need to add before revising\n\nPart 6: Next actions\nGive me 3 priorities:\n- Fix today:\n- Improve tomorrow:\n- Final check:\n\nDo not invent my experience. Only give suggestions based on what I provide.",
       "zhQuizItems": [
         {
-          "q": "選科系最不建議只依靠哪一項？",
+          "q": "選科系時，只看科系名稱會有什麼問題？",
           "options": [
-            "興趣與能力",
-            "熱門程度",
-            "未來方向"
+            "可能誤解實際課程內容",
+            "一定比較準",
+            "完全沒有問題"
           ],
-          "answer": "熱門程度"
+          "answer": 0,
+          "explain": "科系名稱不等於課程內容，必須查課表與能力要求。"
         },
         {
-          "q": "AI 推薦科系後應該做什麼？",
+          "q": "AI 分析科系前，最好提供什麼？",
           "options": [
-            "直接照做",
-            "查證課程與出路",
-            "刪掉冷門科系"
+            "興趣、能力、科目、活動與限制",
+            "只有姓名",
+            "完全不提供背景"
           ],
-          "answer": "查證課程與出路"
+          "answer": 0,
+          "explain": "背景越完整，建議越貼近學生。"
         },
         {
-          "q": "好的科系探索表應包含什麼？",
+          "q": "科系探索表最需要包含？",
           "options": [
-            "適合原因、能力需求、未來發展",
+            "適合原因、能力需求、課程內容與出路",
             "只有校名",
             "只有排名"
           ],
-          "answer": "適合原因、能力需求、未來發展"
+          "answer": 0,
+          "explain": "這些資訊能幫助學生做出更成熟的選擇。"
+        },
+        {
+          "q": "AI 推薦科系後，下一步應該？",
+          "options": [
+            "查證課程與出路",
+            "立刻相信",
+            "刪掉所有資料"
+          ],
+          "answer": 0,
+          "explain": "AI 推薦只是起點，仍需查證。"
+        },
+        {
+          "q": "本課成果是？",
+          "options": [
+            "科系探索表",
+            "面試紀錄",
+            "最終總檢查"
+          ],
+          "answer": 0,
+          "explain": "本課要產出科系探索表。"
         }
       ],
       "enQuizItems": [
         {
-          "q": "選科系最不建議只依靠哪一項？",
+          "q": "選科系時，只看科系名稱會有什麼問題？",
           "options": [
-            "興趣與能力",
-            "熱門程度",
-            "未來方向"
+            "可能誤解實際課程內容",
+            "一定比較準",
+            "完全沒有問題"
           ],
-          "answer": "熱門程度"
+          "answer": 0,
+          "explain": "科系名稱不等於課程內容，必須查課表與能力要求。"
         },
         {
-          "q": "AI 推薦科系後應該做什麼？",
+          "q": "AI 分析科系前，最好提供什麼？",
           "options": [
-            "直接照做",
-            "查證課程與出路",
-            "刪掉冷門科系"
+            "興趣、能力、科目、活動與限制",
+            "只有姓名",
+            "完全不提供背景"
           ],
-          "answer": "查證課程與出路"
+          "answer": 0,
+          "explain": "背景越完整，建議越貼近學生。"
         },
         {
-          "q": "好的科系探索表應包含什麼？",
+          "q": "科系探索表最需要包含？",
           "options": [
-            "適合原因、能力需求、未來發展",
+            "適合原因、能力需求、課程內容與出路",
             "只有校名",
             "只有排名"
           ],
-          "answer": "適合原因、能力需求、未來發展"
+          "answer": 0,
+          "explain": "這些資訊能幫助學生做出更成熟的選擇。"
+        },
+        {
+          "q": "AI 推薦科系後，下一步應該？",
+          "options": [
+            "查證課程與出路",
+            "立刻相信",
+            "刪掉所有資料"
+          ],
+          "answer": 0,
+          "explain": "AI 推薦只是起點，仍需查證。"
+        },
+        {
+          "q": "本課成果是？",
+          "options": [
+            "科系探索表",
+            "面試紀錄",
+            "最終總檢查"
+          ],
+          "answer": 0,
+          "explain": "本課要產出科系探索表。"
         }
       ],
       "zhOutcome": "科系探索表",
@@ -1803,7 +1927,39 @@ const PREMIUM_LESSON_DETAILS = {
         "查證完整"
       ],
       "zhValueTip": "不要只看科系名稱，請至少查 3 門必修課，確認你是否真的想學。",
-      "enValueTip": "不要只看科系名稱，請至少查 3 門必修課，確認你是否真的想學。"
+      "enValueTip": "不要只看科系名稱，請至少查 3 門必修課，確認你是否真的想學。",
+      "zhCaseStudy": "情境案例：小美想讀心理系，但她只說「我喜歡跟人聊天」。AI 一開始給出很表面的建議。後來她補充自己喜歡的課、擅長的活動、做過的經驗與不喜歡的事情，AI 才能幫她分析：她是適合心理、教育、社工，還是傳播類方向。",
+      "enCaseStudy": "情境案例：小美想讀心理系，但她只說「我喜歡跟人聊天」。AI 一開始給出很表面的建議。後來她補充自己喜歡的課、擅長的活動、做過的經驗與不喜歡的事情，AI 才能幫她分析：她是適合心理、教育、社工，還是傳播類方向。",
+      "zhWorkflow": [
+        "列出自己喜歡的科目、活動、能力與不喜歡的事情。",
+        "請 AI 分析可能適合的 5 個科系。",
+        "請 AI 說明每個科系需要的能力與課程內容。",
+        "自己查證 3 個最有興趣的科系課表與出路。",
+        "整理成科系探索表。"
+      ],
+      "enWorkflow": [
+        "列出自己喜歡的科目、活動、能力與不喜歡的事情。",
+        "請 AI 分析可能適合的 5 個科系。",
+        "請 AI 說明每個科系需要的能力與課程內容。",
+        "自己查證 3 個最有興趣的科系課表與出路。",
+        "整理成科系探索表。"
+      ],
+      "zhCommonMistakes": [
+        "只看科系名稱，不查課程內容。",
+        "只因為熱門就選科系。",
+        "把興趣和能力混在一起，沒有分開分析。",
+        "沒有列出不適合自己的原因。"
+      ],
+      "enCommonMistakes": [
+        "只看科系名稱，不查課程內容。",
+        "只因為熱門就選科系。",
+        "把興趣和能力混在一起，沒有分開分析。",
+        "沒有列出不適合自己的原因。"
+      ],
+      "zhExcellentExample": "高品質成果應該包含：至少 5 個候選科系、每個科系的適合原因、需要能力、課程內容、未來出路、風險提醒，以及最後 3 個優先科系排序。",
+      "enExcellentExample": "高品質成果應該包含：至少 5 個候選科系、每個科系的適合原因、需要能力、課程內容、未來出路、風險提醒，以及最後 3 個優先科系排序。",
+      "zhCoachPrompt": "你是一位高中生升學探索顧問。請檢查我的科系探索表，幫我判斷哪些科系是真的適合、哪些只是表面有興趣。請指出我還需要查哪些課程內容、能力需求與未來出路，最後幫我排序前三志願。",
+      "enCoachPrompt": "你是一位高中生升學探索顧問。請檢查我的科系探索表，幫我判斷哪些科系是真的適合、哪些只是表面有興趣。請指出我還需要查哪些課程內容、能力需求與未來出路，最後幫我排序前三志願。"
     },
     {
       "zhTitle": "第3課：用 AI 整理高中三年的學習歷程素材",
@@ -1820,60 +1976,106 @@ const PREMIUM_LESSON_DETAILS = {
       "enFeedbackPrompt": "Act as a 大學備審資料審查教授.\n\nHere is my completed work for: 學習歷程素材庫\n(paste my work here)\n\nDo not only say \"good\" or \"be more specific.\" Give me detailed professional feedback.\n\nPart 1: Overall scoring\nRate each item from 1-10 and explain the reason:\n- 素材完整度：1-10 分，並說明扣分原因\n- 分類清楚度：1-10 分，並說明扣分原因\n- 能力證據強度：1-10 分，並說明扣分原因\n- 科系連結度：1-10 分，並說明扣分原因\n- 故事線潛力：1-10 分，並說明扣分原因\n- 重複性：1-10 分，並說明扣分原因\n- 可用性：1-10 分，並說明扣分原因\n- 教授印象分數：1-10 分，並說明扣分原因\n\nPart 2: Strengths\nList the 3 strongest parts and explain why they help my university application.\n\nPart 3: Diagnosis\nList the 3 most important problems. For each problem, include:\n- What the issue is\n- Why it hurts the application\n- How to revise it\n\nPart 4: Reviewer perspective\nAnswer these:\n1. 如果你是教授，你會對我留下什麼印象？\n2. 請把素材分成 S 級、A 級、B 級、C 級。\n3. 如果只能留下 5 個素材，請選出最值得保留的 5 個。\n\nPart 5: Direct revision guidance\nProvide:\n1. A better revision direction\n2. Example sentences I can adapt\n3. Vague sentences I should avoid\n4. Information I need to add before revising\n\nPart 6: Next actions\nGive me 3 priorities:\n- Fix today:\n- Improve tomorrow:\n- Final check:\n\nDo not invent my experience. Only give suggestions based on what I provide.",
       "zhQuizItems": [
         {
-          "q": "學習歷程整理第一步是什麼？",
+          "q": "整理學習歷程素材時，第一步最好是？",
           "options": [
-            "先分類盤點",
-            "直接寫自傳",
-            "先做封面"
+            "先全部列出再分類",
+            "只寫最華麗的活動",
+            "完全不整理"
           ],
-          "answer": "先分類盤點"
+          "answer": 0,
+          "explain": "先大量列出，之後才能篩選與分類。"
         },
         {
-          "q": "以下哪個可以是素材？",
+          "q": "素材只寫活動名稱有什麼問題？",
           "options": [
-            "課程作品",
-            "社團經驗",
-            "以上皆可"
+            "看不出你的行動與能力",
+            "一定更清楚",
+            "教授會自動理解"
           ],
-          "answer": "以上皆可"
+          "answer": 0,
+          "explain": "審查者需要看到你做了什麼與學到什麼。"
         },
         {
-          "q": "標註能力的目的？",
+          "q": "好的素材庫應該把素材連到？",
           "options": [
-            "讓素材和申請科系連結",
-            "增加字數",
-            "讓資料看起來很多"
+            "能力與科系需求",
+            "手機型號",
+            "朋友名單"
           ],
-          "answer": "讓素材和申請科系連結"
+          "answer": 0,
+          "explain": "素材要能證明能力並連結科系。"
+        },
+        {
+          "q": "素材 S/A/B/C 排序的目的？",
+          "options": [
+            "幫助取捨",
+            "讓表格變漂亮",
+            "隨機分類"
+          ],
+          "answer": 0,
+          "explain": "備審空間有限，要知道哪些最值得放。"
+        },
+        {
+          "q": "本課成果是？",
+          "options": [
+            "學習歷程素材庫",
+            "自我介紹錄音",
+            "付款紀錄"
+          ],
+          "answer": 0,
+          "explain": "本課要產出學習歷程素材庫。"
         }
       ],
       "enQuizItems": [
         {
-          "q": "學習歷程整理第一步是什麼？",
+          "q": "整理學習歷程素材時，第一步最好是？",
           "options": [
-            "先分類盤點",
-            "直接寫自傳",
-            "先做封面"
+            "先全部列出再分類",
+            "只寫最華麗的活動",
+            "完全不整理"
           ],
-          "answer": "先分類盤點"
+          "answer": 0,
+          "explain": "先大量列出，之後才能篩選與分類。"
         },
         {
-          "q": "以下哪個可以是素材？",
+          "q": "素材只寫活動名稱有什麼問題？",
           "options": [
-            "課程作品",
-            "社團經驗",
-            "以上皆可"
+            "看不出你的行動與能力",
+            "一定更清楚",
+            "教授會自動理解"
           ],
-          "answer": "以上皆可"
+          "answer": 0,
+          "explain": "審查者需要看到你做了什麼與學到什麼。"
         },
         {
-          "q": "標註能力的目的？",
+          "q": "好的素材庫應該把素材連到？",
           "options": [
-            "讓素材和申請科系連結",
-            "增加字數",
-            "讓資料看起來很多"
+            "能力與科系需求",
+            "手機型號",
+            "朋友名單"
           ],
-          "answer": "讓素材和申請科系連結"
+          "answer": 0,
+          "explain": "素材要能證明能力並連結科系。"
+        },
+        {
+          "q": "素材 S/A/B/C 排序的目的？",
+          "options": [
+            "幫助取捨",
+            "讓表格變漂亮",
+            "隨機分類"
+          ],
+          "answer": 0,
+          "explain": "備審空間有限，要知道哪些最值得放。"
+        },
+        {
+          "q": "本課成果是？",
+          "options": [
+            "學習歷程素材庫",
+            "自我介紹錄音",
+            "付款紀錄"
+          ],
+          "answer": 0,
+          "explain": "本課要產出學習歷程素材庫。"
         }
       ],
       "zhOutcome": "學習歷程素材庫",
@@ -1909,7 +2111,39 @@ const PREMIUM_LESSON_DETAILS = {
         "取捨能力"
       ],
       "zhValueTip": "如果一個素材不能說明你的能力或成長，就算看起來很厲害，也不一定要放。",
-      "enValueTip": "如果一個素材不能說明你的能力或成長，就算看起來很厲害，也不一定要放。"
+      "enValueTip": "如果一個素材不能說明你的能力或成長，就算看起來很厲害，也不一定要放。",
+      "zhCaseStudy": "情境案例：小宇高中三年其實做過很多事，但他只記得社團和幾份作業。AI 一開始也無法幫他整理。後來他把課程成果、活動、競賽、服務、專題、作品全部列出，AI 才能幫他分成能力類別，找出最適合放進備審的素材。",
+      "enCaseStudy": "情境案例：小宇高中三年其實做過很多事，但他只記得社團和幾份作業。AI 一開始也無法幫他整理。後來他把課程成果、活動、競賽、服務、專題、作品全部列出，AI 才能幫他分成能力類別，找出最適合放進備審的素材。",
+      "zhWorkflow": [
+        "先不要篩選，列出高中三年所有可能素材。",
+        "把素材分成課程成果、活動、競賽、服務、專題、作品。",
+        "請 AI 協助標註每個素材能證明的能力。",
+        "請 AI 幫你選出最有申請價值的 5 個素材。",
+        "整理成學習歷程素材庫。"
+      ],
+      "enWorkflow": [
+        "先不要篩選，列出高中三年所有可能素材。",
+        "把素材分成課程成果、活動、競賽、服務、專題、作品。",
+        "請 AI 協助標註每個素材能證明的能力。",
+        "請 AI 幫你選出最有申請價值的 5 個素材。",
+        "整理成學習歷程素材庫。"
+      ],
+      "zhCommonMistakes": [
+        "一開始就刪掉看似普通的素材。",
+        "只放活動名稱，沒有說明自己做了什麼。",
+        "沒有把素材和能力連起來。",
+        "放太多重複素材。"
+      ],
+      "enCommonMistakes": [
+        "一開始就刪掉看似普通的素材。",
+        "只放活動名稱，沒有說明自己做了什麼。",
+        "沒有把素材和能力連起來。",
+        "放太多重複素材。"
+      ],
+      "zhExcellentExample": "高品質成果應該包含：至少 10 個素材、素材分類、自己負責的行動、成果或影響、能證明的能力、適合連結的科系，以及 S/A/B/C 級排序。",
+      "enExcellentExample": "高品質成果應該包含：至少 10 個素材、素材分類、自己負責的行動、成果或影響、能證明的能力、適合連結的科系，以及 S/A/B/C 級排序。",
+      "zhCoachPrompt": "你是一位大學備審審查顧問。請檢查我的學習歷程素材庫，幫我把素材分成 S 級、A 級、B 級、C 級，指出哪些素材重複、哪些素材最能證明能力、哪些素材不建議放進備審。",
+      "enCoachPrompt": "你是一位大學備審審查顧問。請檢查我的學習歷程素材庫，幫我把素材分成 S 級、A 級、B 級、C 級，指出哪些素材重複、哪些素材最能證明能力、哪些素材不建議放進備審。"
     },
     {
       "zhTitle": "第4課：用 STAR 架構寫出有說服力的多元表現",
@@ -1926,60 +2160,106 @@ const PREMIUM_LESSON_DETAILS = {
       "enFeedbackPrompt": "Act as a 大學備審寫作教練.\n\nHere is my completed work for: 多元表現描述\n(paste my work here)\n\nDo not only say \"good\" or \"be more specific.\" Give me detailed professional feedback.\n\nPart 1: Overall scoring\nRate each item from 1-10 and explain the reason:\n- STAR 完整度：1-10 分，並說明扣分原因\n- 具體行動：1-10 分，並說明扣分原因\n- 結果清楚度：1-10 分，並說明扣分原因\n- 反思深度：1-10 分，並說明扣分原因\n- 真實感：1-10 分，並說明扣分原因\n- 文字精準度：1-10 分，並說明扣分原因\n- 科系連結：1-10 分，並說明扣分原因\n- 說服力：1-10 分，並說明扣分原因\n\nPart 2: Strengths\nList the 3 strongest parts and explain why they help my university application.\n\nPart 3: Diagnosis\nList the 3 most important problems. For each problem, include:\n- What the issue is\n- Why it hurts the application\n- How to revise it\n\nPart 4: Reviewer perspective\nAnswer these:\n1. 哪一句最加分？哪一句最扣分？\n2. 請指出哪裡像流水帳或口號。\n3. 請示範一版 300 字內的修改方向。\n\nPart 5: Direct revision guidance\nProvide:\n1. A better revision direction\n2. Example sentences I can adapt\n3. Vague sentences I should avoid\n4. Information I need to add before revising\n\nPart 6: Next actions\nGive me 3 priorities:\n- Fix today:\n- Improve tomorrow:\n- Final check:\n\nDo not invent my experience. Only give suggestions based on what I provide.",
       "zhQuizItems": [
         {
-          "q": "STAR 的 A 代表什麼？",
+          "q": "STAR 中的 A 代表什麼？",
           "options": [
-            "Action",
-            "Answer",
-            "Ability"
+            "Action 行動",
+            "Apple 蘋果",
+            "Answer 答案"
           ],
-          "answer": "Action"
+          "answer": 0,
+          "explain": "A 是 Action，也就是你做了什麼。"
         },
         {
-          "q": "多元表現最應避免什麼？",
+          "q": "「我學到很多」最大的問題是？",
           "options": [
-            "具體行動",
-            "真實結果",
-            "只列活動名稱"
+            "太空泛",
+            "太具體",
+            "太有證據"
           ],
-          "answer": "只列活動名稱"
+          "answer": 0,
+          "explain": "它沒有說明學到什麼、如何學到。"
         },
         {
-          "q": "好的活動描述要讓人看見什麼？",
+          "q": "多元表現描述最重要的是？",
           "options": [
-            "你採取的行動與成長",
-            "只有活動名稱",
-            "只有職稱"
+            "自己的行動與反思",
+            "活動名稱很長",
+            "字越多越好"
           ],
-          "answer": "你採取的行動與成長"
+          "answer": 0,
+          "explain": "審查者想看到你在活動中的角色與成長。"
+        },
+        {
+          "q": "好的結果可以包含？",
+          "options": [
+            "數字、改變、影響或回饋",
+            "只有心情",
+            "沒有任何結果"
+          ],
+          "answer": 0,
+          "explain": "結果讓經驗更具體可信。"
+        },
+        {
+          "q": "本課成果是？",
+          "options": [
+            "3 則多元表現描述",
+            "科系探索表",
+            "免費證書"
+          ],
+          "answer": 0,
+          "explain": "本課要完成多元表現描述。"
         }
       ],
       "enQuizItems": [
         {
-          "q": "STAR 的 A 代表什麼？",
+          "q": "STAR 中的 A 代表什麼？",
           "options": [
-            "Action",
-            "Answer",
-            "Ability"
+            "Action 行動",
+            "Apple 蘋果",
+            "Answer 答案"
           ],
-          "answer": "Action"
+          "answer": 0,
+          "explain": "A 是 Action，也就是你做了什麼。"
         },
         {
-          "q": "多元表現最應避免什麼？",
+          "q": "「我學到很多」最大的問題是？",
           "options": [
-            "具體行動",
-            "真實結果",
-            "只列活動名稱"
+            "太空泛",
+            "太具體",
+            "太有證據"
           ],
-          "answer": "只列活動名稱"
+          "answer": 0,
+          "explain": "它沒有說明學到什麼、如何學到。"
         },
         {
-          "q": "好的活動描述要讓人看見什麼？",
+          "q": "多元表現描述最重要的是？",
           "options": [
-            "你採取的行動與成長",
-            "只有活動名稱",
-            "只有職稱"
+            "自己的行動與反思",
+            "活動名稱很長",
+            "字越多越好"
           ],
-          "answer": "你採取的行動與成長"
+          "answer": 0,
+          "explain": "審查者想看到你在活動中的角色與成長。"
+        },
+        {
+          "q": "好的結果可以包含？",
+          "options": [
+            "數字、改變、影響或回饋",
+            "只有心情",
+            "沒有任何結果"
+          ],
+          "answer": 0,
+          "explain": "結果讓經驗更具體可信。"
+        },
+        {
+          "q": "本課成果是？",
+          "options": [
+            "3 則多元表現描述",
+            "科系探索表",
+            "免費證書"
+          ],
+          "answer": 0,
+          "explain": "本課要完成多元表現描述。"
         }
       ],
       "zhOutcome": "3 則多元表現描述",
@@ -2015,7 +2295,39 @@ const PREMIUM_LESSON_DETAILS = {
         "說服力"
       ],
       "zhValueTip": "教授看的是你做了什麼、怎麼做、學到什麼，不是活動名稱有多漂亮。",
-      "enValueTip": "教授看的是你做了什麼、怎麼做、學到什麼，不是活動名稱有多漂亮。"
+      "enValueTip": "教授看的是你做了什麼、怎麼做、學到什麼，不是活動名稱有多漂亮。",
+      "zhCaseStudy": "情境案例：小庭在多元表現中寫「我參加志工活動，學到很多」。AI 指出這句太空泛。她改用 STAR：情境是活動現場人手不足，任務是協助動線引導，行動是重新安排報到流程，結果是報到時間縮短。這樣才像能放進備審的內容。",
+      "enCaseStudy": "情境案例：小庭在多元表現中寫「我參加志工活動，學到很多」。AI 指出這句太空泛。她改用 STAR：情境是活動現場人手不足，任務是協助動線引導，行動是重新安排報到流程，結果是報到時間縮短。這樣才像能放進備審的內容。",
+      "zhWorkflow": [
+        "選出 3 個多元表現素材。",
+        "用 STAR 拆解：情境、任務、行動、結果。",
+        "請 AI 檢查是否太空泛。",
+        "補上具體數字、行動與反思。",
+        "完成 3 則多元表現描述。"
+      ],
+      "enWorkflow": [
+        "選出 3 個多元表現素材。",
+        "用 STAR 拆解：情境、任務、行動、結果。",
+        "請 AI 檢查是否太空泛。",
+        "補上具體數字、行動與反思。",
+        "完成 3 則多元表現描述。"
+      ],
+      "zhCommonMistakes": [
+        "只寫我學到很多，沒有說學到什麼。",
+        "只描述活動，沒有描述自己的行動。",
+        "沒有結果或影響。",
+        "反思太像口號。"
+      ],
+      "enCommonMistakes": [
+        "只寫我學到很多，沒有說學到什麼。",
+        "只描述活動，沒有描述自己的行動。",
+        "沒有結果或影響。",
+        "反思太像口號。"
+      ],
+      "zhExcellentExample": "高品質成果應該包含：明確情境、自己的任務、具體行動、可觀察結果、反思與科系能力連結。文字不需要誇張，但要具體。",
+      "enExcellentExample": "高品質成果應該包含：明確情境、自己的任務、具體行動、可觀察結果、反思與科系能力連結。文字不需要誇張，但要具體。",
+      "zhCoachPrompt": "你是一位備審寫作教練。請檢查我的多元表現描述，指出哪一句太空泛、哪裡缺少行動、哪裡缺少結果。請幫我改成更具體但不誇大的版本。",
+      "enCoachPrompt": "你是一位備審寫作教練。請檢查我的多元表現描述，指出哪一句太空泛、哪裡缺少行動、哪裡缺少結果。請幫我改成更具體但不誇大的版本。"
     },
     {
       "zhTitle": "第5課：用 AI 產出學習歷程自述初稿",
@@ -2032,60 +2344,106 @@ const PREMIUM_LESSON_DETAILS = {
       "enFeedbackPrompt": "Act as a 學習歷程自述修改老師.\n\nHere is my completed work for: 學習歷程自述初稿\n(paste my work here)\n\nDo not only say \"good\" or \"be more specific.\" Give me detailed professional feedback.\n\nPart 1: Overall scoring\nRate each item from 1-10 and explain the reason:\n- 主軸清楚度：1-10 分，並說明扣分原因\n- 經驗具體度：1-10 分，並說明扣分原因\n- 成長脈絡：1-10 分，並說明扣分原因\n- 科系連結：1-10 分，並說明扣分原因\n- 未來規劃：1-10 分，並說明扣分原因\n- 真實感：1-10 分，並說明扣分原因\n- 文字流暢度：1-10 分，並說明扣分原因\n- 教授記憶點：1-10 分，並說明扣分原因\n\nPart 2: Strengths\nList the 3 strongest parts and explain why they help my university application.\n\nPart 3: Diagnosis\nList the 3 most important problems. For each problem, include:\n- What the issue is\n- Why it hurts the application\n- How to revise it\n\nPart 4: Reviewer perspective\nAnswer these:\n1. 這份自述最想讓教授記住什麼？目前有做到嗎？\n2. 哪一段最弱？為什麼？\n3. 請給我一個更清楚的段落順序。\n\nPart 5: Direct revision guidance\nProvide:\n1. A better revision direction\n2. Example sentences I can adapt\n3. Vague sentences I should avoid\n4. Information I need to add before revising\n\nPart 6: Next actions\nGive me 3 priorities:\n- Fix today:\n- Improve tomorrow:\n- Final check:\n\nDo not invent my experience. Only give suggestions based on what I provide.",
       "zhQuizItems": [
         {
-          "q": "自述最應避免什麼？",
+          "q": "自述最需要先決定什麼？",
           "options": [
-            "真實反思",
-            "具體例子",
-            "空泛與誇大"
+            "主軸",
+            "字體顏色",
+            "檔案名稱"
           ],
-          "answer": "空泛與誇大"
+          "answer": 0,
+          "explain": "主軸決定整篇自述要讓教授記住什麼。"
         },
         {
-          "q": "自述應該連結什麼？",
+          "q": "「我從小就喜歡」常見問題是？",
           "options": [
-            "學習經驗與目標科系",
-            "朋友意見",
-            "熱門排名"
+            "太空泛且缺少具體經驗",
+            "太具體",
+            "一定最有說服力"
           ],
-          "answer": "學習經驗與目標科系"
+          "answer": 0,
+          "explain": "這類開頭常見且不夠有記憶點。"
         },
         {
-          "q": "AI 產出後你應該？",
+          "q": "好的自述經驗應該？",
           "options": [
-            "直接使用",
-            "加入真實細節並修改",
-            "刪掉所有個人內容"
+            "能支持申請主軸",
+            "越多越好但不連貫",
+            "完全不用反思"
           ],
-          "answer": "加入真實細節並修改"
+          "answer": 0,
+          "explain": "每個經驗都要服務主軸。"
+        },
+        {
+          "q": "未來規劃應該連到？",
+          "options": [
+            "目標科系與想學能力",
+            "隨便的夢想",
+            "不相關興趣"
+          ],
+          "answer": 0,
+          "explain": "規劃要和科系學習連接。"
+        },
+        {
+          "q": "本課成果是？",
+          "options": [
+            "學習歷程自述初稿",
+            "面試題庫",
+            "AI 專案成果"
+          ],
+          "answer": 0,
+          "explain": "本課要完成自述初稿。"
         }
       ],
       "enQuizItems": [
         {
-          "q": "自述最應避免什麼？",
+          "q": "自述最需要先決定什麼？",
           "options": [
-            "真實反思",
-            "具體例子",
-            "空泛與誇大"
+            "主軸",
+            "字體顏色",
+            "檔案名稱"
           ],
-          "answer": "空泛與誇大"
+          "answer": 0,
+          "explain": "主軸決定整篇自述要讓教授記住什麼。"
         },
         {
-          "q": "自述應該連結什麼？",
+          "q": "「我從小就喜歡」常見問題是？",
           "options": [
-            "學習經驗與目標科系",
-            "朋友意見",
-            "熱門排名"
+            "太空泛且缺少具體經驗",
+            "太具體",
+            "一定最有說服力"
           ],
-          "answer": "學習經驗與目標科系"
+          "answer": 0,
+          "explain": "這類開頭常見且不夠有記憶點。"
         },
         {
-          "q": "AI 產出後你應該？",
+          "q": "好的自述經驗應該？",
           "options": [
-            "直接使用",
-            "加入真實細節並修改",
-            "刪掉所有個人內容"
+            "能支持申請主軸",
+            "越多越好但不連貫",
+            "完全不用反思"
           ],
-          "answer": "加入真實細節並修改"
+          "answer": 0,
+          "explain": "每個經驗都要服務主軸。"
+        },
+        {
+          "q": "未來規劃應該連到？",
+          "options": [
+            "目標科系與想學能力",
+            "隨便的夢想",
+            "不相關興趣"
+          ],
+          "answer": 0,
+          "explain": "規劃要和科系學習連接。"
+        },
+        {
+          "q": "本課成果是？",
+          "options": [
+            "學習歷程自述初稿",
+            "面試題庫",
+            "AI 專案成果"
+          ],
+          "answer": 0,
+          "explain": "本課要完成自述初稿。"
         }
       ],
       "zhOutcome": "學習歷程自述初稿",
@@ -2121,7 +2479,39 @@ const PREMIUM_LESSON_DETAILS = {
         "記憶點"
       ],
       "zhValueTip": "請刪掉『我從小就很喜歡』這類空泛開頭，改用一個真實經驗開場。",
-      "enValueTip": "請刪掉『我從小就很喜歡』這類空泛開頭，改用一個真實經驗開場。"
+      "enValueTip": "請刪掉『我從小就很喜歡』這類空泛開頭，改用一個真實經驗開場。",
+      "zhCaseStudy": "情境案例：小恩寫自述時開頭是「我從小就很喜歡這個科系」。AI 提醒這句太常見也太空泛。後來她改用一次真實經驗開場：某堂課或某個專題讓她開始注意到這個領域，接著連到自己的能力與未來想學的方向，自述就變得更有記憶點。",
+      "enCaseStudy": "情境案例：小恩寫自述時開頭是「我從小就很喜歡這個科系」。AI 提醒這句太常見也太空泛。後來她改用一次真實經驗開場：某堂課或某個專題讓她開始注意到這個領域，接著連到自己的能力與未來想學的方向，自述就變得更有記憶點。",
+      "zhWorkflow": [
+        "先決定自述主軸：我想讓教授記住什麼。",
+        "選 3 個最能支持主軸的經驗。",
+        "用 AI 檢查段落順序是否清楚。",
+        "補上科系連結與未來學習規劃。",
+        "完成學習歷程自述初稿。"
+      ],
+      "enWorkflow": [
+        "先決定自述主軸：我想讓教授記住什麼。",
+        "選 3 個最能支持主軸的經驗。",
+        "用 AI 檢查段落順序是否清楚。",
+        "補上科系連結與未來學習規劃。",
+        "完成學習歷程自述初稿。"
+      ],
+      "zhCommonMistakes": [
+        "開頭太空泛，例如從小就喜歡。",
+        "只堆經歷，沒有主軸。",
+        "沒有連結目標科系。",
+        "未來規劃寫得太籠統。"
+      ],
+      "enCommonMistakes": [
+        "開頭太空泛，例如從小就喜歡。",
+        "只堆經歷，沒有主軸。",
+        "沒有連結目標科系。",
+        "未來規劃寫得太籠統。"
+      ],
+      "zhExcellentExample": "高品質成果應該包含：有記憶點的開場、清楚主軸、3 個具體經驗、能力成長、科系連結與未來規劃。語氣真實，不要像模板。",
+      "enExcellentExample": "高品質成果應該包含：有記憶點的開場、清楚主軸、3 個具體經驗、能力成長、科系連結與未來規劃。語氣真實，不要像模板。",
+      "zhCoachPrompt": "你是一位學習歷程自述修改老師。請檢查我的自述初稿，指出主軸是否清楚、開頭是否有記憶點、經驗是否具體、科系連結是否足夠。請幫我重排段落順序並給修改建議。",
+      "enCoachPrompt": "你是一位學習歷程自述修改老師。請檢查我的自述初稿，指出主軸是否清楚、開頭是否有記憶點、經驗是否具體、科系連結是否足夠。請幫我重排段落順序並給修改建議。"
     },
     {
       "zhTitle": "第6課：針對目標科系製作專屬備審資料",
