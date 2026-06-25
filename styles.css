@@ -644,3 +644,19 @@ button[onclick^="toggleLessonComplete"] {
 textarea[id^="free-portfolio-"] {
   min-height: 220px;
 }
+
+
+
+/* V38 Clean Learning Center */
+.certificate-card {
+  border: 2px solid #d7b56d;
+  border-radius: 24px;
+  padding: 36px;
+  background: linear-gradient(135deg, #fffaf0, #ffffff);
+  text-align: center;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+}
+
+.panel .btnrow {
+  margin-top: 14px;
+}

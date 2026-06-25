@@ -659,7 +659,6 @@ function nav() {
   ];
 
   const moreLinks = [
-    { route: "freeDashboard", zh: "免費 Dashboard", en: "Free Dashboard" },
     { route: "freePortfolio", zh: "我的免費成果包", en: "My Free Portfolio" },
     { action: "goApplicationPackage()", zh: "大學申請包", en: "Application Package" },
     { route: "tools", zh: "AI 工具", en: "AI Tools" },
@@ -757,7 +756,7 @@ function home() {
             <div class="btnrow">
               <button class="btn primary" onclick="setRoute('assessment')">${text("開始能力測驗", "Start Assessment")}</button>
               <button class="btn secondary" onclick="setRoute('map')">${text("查看學習地圖", "View Learning Map")}</button>
-              <button class="btn secondary" onclick="setRoute('free')">${L("home.start")}</button>
+              <button class="btn secondary" onclick="setRoute('courses')">${L("home.start")}</button>
             </div>
           </div>
           <aside class="hero-card">
@@ -819,7 +818,7 @@ function assessment() {
                   ${recommendedLessons().map(id => {
                     const lesson = LESSONS.find(l => l.id === id);
                     if (!lesson) return "";
-                    return `<article class="card"><h3>${state.lang === "zh" ? lesson.zhTitle : lesson.enTitle}</h3><button class="btn primary" onclick="state.activeLesson='${lesson.id}';setRoute('free')">${text("開始學習", "Start")}</button></article>`;
+                    return `<article class="card"><h3>${state.lang === "zh" ? lesson.zhTitle : lesson.enTitle}</h3><button class="btn primary" onclick="state.activeLesson='${lesson.id}';setRoute('courses')">${text("開始學習", "Start")}</button></article>`;
                   }).join("")}
                 </div>
                 <div class="btnrow"><button class="btn secondary" onclick="state.assessment=null;save();render()">${text("重新測驗", "Retake")}</button></div>
@@ -869,7 +868,7 @@ function learningMap() {
                       <article class="card">
                         <span class="tag ${state.progress[id] ? "free" : ""}">${state.progress[id] ? "✓" : "○"}</span>
                         <h3>${state.lang === "zh" ? lesson.zhTitle : lesson.enTitle}</h3>
-                        <button class="btn secondary" onclick="state.activeLesson='${lesson.id}';setRoute('free')">${text("前往課程", "Go to Lesson")}</button>
+                        <button class="btn secondary" onclick="state.activeLesson='${lesson.id}';setRoute('courses')">${text("前往課程", "Go to Lesson")}</button>
                       </article>
                     `;
                   }).join("")}
@@ -1069,7 +1068,7 @@ function courses() {
             <div class="package-progress-bar" style="width:${progress.percent}%"></div>
           </div>
           <div class="btnrow" style="margin-top:18px">
-            <button class="btn primary" onclick="setRoute('freeDashboard')">${text("免費 Dashboard", "Free Dashboard")}</button>
+            <button class="btn primary" onclick="setRoute('learning')">${text("免費 Dashboard", "Free Dashboard")}</button>
             <button class="btn secondary" onclick="setRoute('freePortfolio')">${text("我的免費成果包", "My Free Portfolio")}</button>
           </div>
         </section>
@@ -1344,13 +1343,71 @@ function freePortfolio() {
   `);
 }
 
+
+
+function v38SafeFreeProgress() {
+  if (typeof freeBootcampProgress === "function") return freeBootcampProgress();
+  if (typeof FREE_BOOTCAMP !== "undefined") {
+    const total = FREE_BOOTCAMP.length;
+    let completed = 0;
+    for (let i = 0; i < total; i++) {
+      try {
+        if (typeof isFreeLessonComplete === "function" && isFreeLessonComplete(i)) completed++;
+      } catch (e) {}
+    }
+    return { completed, total, percent: total ? Math.round((completed / total) * 100) : 0 };
+  }
+  return { completed: 0, total: 0, percent: 0 };
+}
+
+function v38SafeFreePortfolioProgress() {
+  if (typeof freePortfolioProgress === "function") return freePortfolioProgress();
+  if (typeof FREE_BOOTCAMP !== "undefined" && typeof getFreeOutput === "function") {
+    const total = FREE_BOOTCAMP.length;
+    let completed = 0;
+    for (let i = 0; i < total; i++) {
+      if ((getFreeOutput(i) || "").trim().length > 0) completed++;
+    }
+    return { completed, total, percent: total ? Math.round((completed / total) * 100) : 0 };
+  }
+  return { completed: 0, total: 0, percent: 0 };
+}
+
+function v38SafeFreeQuizProgress() {
+  if (typeof allFreeQuizProgress === "function") return allFreeQuizProgress();
+  return { correct: 0, total: 0, percent: 0 };
+}
+
+function v38SafeAdmissionsProgress() {
+  if (typeof courseProgress === "function") return courseProgress("admissions");
+  return { completed: 0, total: 10, percent: 0 };
+}
+
+function v38SafePackageProgress() {
+  if (typeof applicationPackageProgress === "function") return applicationPackageProgress(false);
+  return { completed: 0, total: 10, percent: 0 };
+}
+
+function v38FreeCertificateReady() {
+  if (typeof freeCertificateUnlocked === "function") return freeCertificateUnlocked();
+  const free = v38SafeFreeProgress();
+  const portfolio = v38SafeFreePortfolioProgress();
+  const quiz = v38SafeFreeQuizProgress();
+  return free.total > 0 && free.completed === free.total && portfolio.completed === portfolio.total && (quiz.total === 0 || quiz.correct === quiz.total);
+}
+
+
 function learning() {
+  const free = v38SafeFreeProgress();
+  const freePortfolio = v38SafeFreePortfolioProgress();
+  const freeQuiz = v38SafeFreeQuizProgress();
   const admissionsUnlocked = typeof hasCourseAccess === "function" && hasCourseAccess("admissions");
+  const admissions = v38SafeAdmissionsProgress();
+  const packageProgress = v38SafePackageProgress();
   const item = typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === "admissions") : null;
-  const lessons = item ? (state.lang === "zh" ? item.zhLessons : item.enLessons) : [];
-  const progress = courseProgress("admissions");
-  const packageProgress = typeof applicationPackageProgress === "function" ? applicationPackageProgress(false) : { completed: 0, total: 10, percent: 0 };
-  const nextIndex = lessons.findIndex((_, i) => !isLessonComplete("admissions", i));
+  const premiumLessons = item ? (state.lang === "zh" ? item.zhLessons : item.enLessons) : [];
+  const nextPremiumIndex = premiumLessons.findIndex((_, i) => !(typeof isLessonComplete === "function" && isLessonComplete("admissions", i)));
+  const freeReady = free.percent === 100;
 
   return shell(`
     <main class="page">
@@ -1358,61 +1415,86 @@ function learning() {
         <section class="panel">
           <span class="tag free">${text("學習中心", "Learning Center")}</span>
           <h1>${text("我的學習中心", "My Learning Center")}</h1>
-          <p class="lead">${text("這裡是你的課程進度、完成狀態與成果管理中心。", "This is your course progress, completion status, and output center.")}</p>
+          <p class="lead">${text("所有學習進度、免費成果包、付費課程與大學申請包都集中在這裡。", "All progress, free portfolio, premium course, and application package are managed here.")}</p>
         </section>
 
         <section class="panel">
-          <h2>${text("高中生申請大學 AI 實戰課", "University Application AI Lab")}</h2>
+          <h2>${text("下一步", "Next Step")}</h2>
+          ${
+            !freeReady
+              ? `<p>${text("建議先完成免費 AI 新手訓練營。", "Start by completing the free AI beginner bootcamp.")}</p><button class="btn primary" onclick="setRoute('courses')">${text("繼續免費課程", "Continue Free Lessons")}</button>`
+              : !admissionsUnlocked
+                ? `<p>${text("你已完成免費訓練營。下一步可以開始建立大學申請包。", "You finished the free bootcamp. Next, start building your university application package.")}</p><button class="btn primary" onclick="setRoute('premium')">${text("查看第一階段付費課程", "View Premium Course")}</button>`
+                : nextPremiumIndex >= 0
+                  ? `<p>${text("建議繼續第一階段付費課程：", "Continue premium course:")} Lesson ${nextPremiumIndex + 1}</p><button class="btn primary" onclick="currentCourseId='admissions'; setTimeout(()=>openLesson(${nextPremiumIndex}), 50);">${text("繼續上課", "Continue Lesson")}</button>`
+                  : `<p>${text("你已完成第一階段課程，請整理大學申請包。", "You completed the premium course. Finalize your application package.")}</p><button class="btn primary" onclick="setRoute('applicationPackage')">${text("打開大學申請包", "Open Application Package")}</button>`
+          }
+        </section>
+
+        <section class="panel">
+          <h2>${text("免費入門", "Free Intro")}</h2>
+          <p>${text("課程完成度", "Lesson Progress")}：${free.completed}/${free.total}（${free.percent}%）</p>
+          <div class="package-progress-track"><div class="package-progress-bar" style="width:${free.percent}%"></div></div>
+          <p>${text("測驗成績", "Quiz Score")}：${freeQuiz.correct}/${freeQuiz.total}${freeQuiz.total ? `（${freeQuiz.percent}%）` : ""}</p>
+          <div class="btnrow">
+            <button class="btn primary" onclick="setRoute('courses')">${text("前往免費入門", "Open Free Intro")}</button>
+            <button class="btn secondary" onclick="setRoute('freePortfolio')">${text("我的免費成果包", "My Free Portfolio")}</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>${text("免費成果包", "Free Portfolio")}</h2>
+          <p>${text("成果完成度", "Output Progress")}：${freePortfolio.completed}/${freePortfolio.total}（${freePortfolio.percent}%）</p>
+          <div class="package-progress-track"><div class="package-progress-bar" style="width:${freePortfolio.percent}%"></div></div>
+          <div class="grid two" style="margin-top:18px">
+            ${(typeof FREE_BOOTCAMP !== "undefined" ? FREE_BOOTCAMP : []).map((lesson, i) => {
+              const done = typeof getFreeOutput === "function" && (getFreeOutput(i) || "").trim().length > 0;
+              return `<article class="card">
+                <span class="tag ${done ? "free" : "premiumtag"}">${done ? "✓ " + text("已完成", "Completed") : "□ " + text("未完成", "Not completed")}</span>
+                <h3>${lesson.output || lesson.title}</h3>
+                <p>${lesson.title}</p>
+              </article>`;
+            }).join("")}
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>${text("第一階段付費課程", "Premium Stage 1")}</h2>
           <span class="tag ${admissionsUnlocked ? "free" : "premiumtag"}">${admissionsUnlocked ? text("已開通", "Unlocked") : text("尚未開通", "Locked")}</span>
-          <p>${text("課程完成度", "Course progress")}：${progress.completed}/${progress.total}（${progress.percent}%）</p>
-          <div class="package-progress-track">
-            <div class="package-progress-bar" style="width:${progress.percent}%"></div>
-          </div>
-
-          <div class="grid two" style="margin-top:24px">
-            <article class="card">
-              <h3>${text("下一步", "Next Step")}</h3>
-              ${
-                admissionsUnlocked
-                  ? (nextIndex >= 0
-                      ? `<p>${text("建議繼續：", "Continue with:")} Lesson ${nextIndex + 1}：${lessons[nextIndex]}</p><button class="btn primary" onclick="currentCourseId='admissions'; setTimeout(()=>openLesson(${nextIndex}), 50);">${text("繼續上課", "Continue")}</button>`
-                      : `<p>${text("你已完成全部課程。", "You have completed all lessons.")}</p><button class="btn primary" onclick="setRoute('applicationPackage')">${text("前往大學申請包", "Open Application Package")}</button>`)
-                  : `<p>${text("開通後即可追蹤 10 堂課進度。", "Unlock to track all 10 lessons.")}</p><button class="btn primary" onclick="setRoute('premium')">${text("前往開通", "Unlock Course")}</button>`
-              }
-            </article>
-
-            <article class="card">
-              <h3>${text("大學申請包", "Application Package")}</h3>
-              <p>${text("完成度", "Progress")}：${packageProgress.completed}/${packageProgress.total}（${packageProgress.percent}%）</p>
-              <div class="package-progress-track">
-                <div class="package-progress-bar" style="width:${packageProgress.percent}%"></div>
-              </div>
-              ${
-                admissionsUnlocked
-                  ? `<button class="btn secondary" onclick="setRoute('applicationPackage')">${text("打開申請包", "Open Package")}</button>`
-                  : `<button class="btn secondary" onclick="setRoute('premium')">${text("開通後可使用", "Unlock to Use")}</button>`
-              }
-            </article>
+          <p>${text("課程完成度", "Course Progress")}：${admissions.completed}/${admissions.total}（${admissions.percent}%）</p>
+          <div class="package-progress-track"><div class="package-progress-bar" style="width:${admissions.percent}%"></div></div>
+          <div class="btnrow">
+            ${admissionsUnlocked
+              ? `<button class="btn primary" onclick="openCourse('admissions')">${text("進入已開通課程", "Open Course")}</button>`
+              : `<button class="btn primary" onclick="setRoute('premium')">${text("前往開通", "Unlock")}</button>`
+            }
           </div>
         </section>
 
         <section class="panel">
-          <h2>${text("課程完成清單", "Lesson Checklist")}</h2>
-          <div class="grid two">
-            ${lessons.map((l, i) => `
-              <article class="card">
-                <span class="tag ${isLessonComplete("admissions", i) ? "free" : "premiumtag"}">${isLessonComplete("admissions", i) ? "✓ " + text("已完成", "Completed") : "□ " + text("未完成", "Not completed")}</span>
-                <h3>Lesson ${i + 1}</h3>
-                <p>${l}</p>
-                ${admissionsUnlocked ? `<button class="btn secondary" onclick="currentCourseId='admissions'; setTimeout(()=>openLesson(${i}), 50);">${text("進入本課", "Open Lesson")}</button>` : ""}
-              </article>
-            `).join("")}
-          </div>
+          <h2>${text("大學申請包", "University Application Package")}</h2>
+          <p>${text("完成度", "Progress")}：${packageProgress.completed}/${packageProgress.total}（${packageProgress.percent}%）</p>
+          <div class="package-progress-track"><div class="package-progress-bar" style="width:${packageProgress.percent}%"></div></div>
+          ${
+            admissionsUnlocked
+              ? `<button class="btn secondary" onclick="setRoute('applicationPackage')">${text("打開大學申請包", "Open Application Package")}</button>`
+              : `<p>${text("開通第一階段付費課程後可使用。", "Available after unlocking Stage 1 premium course.")}</p>`
+          }
+        </section>
+
+        <section class="panel">
+          <h2>${text("AI 新手訓練營證書", "AI Beginner Bootcamp Certificate")}</h2>
+          ${
+            v38FreeCertificateReady()
+              ? `<div class="certificate-card"><h2>AI Skill Bridge</h2><h3>${text("AI 新手訓練營結業證書", "AI Beginner Bootcamp Certificate")}</h3><p>${state.user?.email || "AI Skill Bridge Learner"}</p><p>${new Date().toLocaleDateString()}</p></div>`
+              : `<p>${text("完成免費課程、成果包與測驗後會在這裡解鎖。", "Complete free lessons, portfolio outputs, and quizzes to unlock it here.")}</p>`
+          }
         </section>
       </div>
     </main>
   `);
 }
+
 
 function premium() {
   const creatorBanner = isCreator()
@@ -2313,7 +2395,6 @@ function render() {
     learning,
     courses,
     freePortfolio,
-    freeDashboard,
     assessment,
     map: learningMap,
     center,
