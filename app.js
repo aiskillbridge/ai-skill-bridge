@@ -1089,6 +1089,7 @@ function courses() {
               <h3>${lesson.title}</h3>
               <p>${lesson.goal}</p>
               <p><b>${text("本課成果", "Output")}：</b>${lesson.output}</p>
+              <p><b>${text("測驗", "Quiz")}：</b>${(lesson.quizItems || []).length} ${text("題情境測驗", "scenario questions")}</p>
               <button class="btn primary" onclick="openFreeLesson(${i})">${text("進入本課", "Open Lesson")}</button>
             </article>
           `).join("")}
@@ -1133,6 +1134,18 @@ function freeLesson() {
         </section>
 
         <section class="panel">
+          <h2>${text("情境案例", "Scenario Case")}</h2>
+          <p>${lesson.caseStudy || ""}</p>
+        </section>
+
+        <section class="panel">
+          <h2>${text("常見錯誤", "Common Mistakes")}</h2>
+          <ul>
+            ${(lesson.commonMistakes || []).map(item => `<li>${item}</li>`).join("")}
+          </ul>
+        </section>
+
+        <section class="panel">
           <h2>Prompt Template</h2>
           <div class="promptbox">${lesson.prompt}</div>
         </section>
@@ -1172,6 +1185,13 @@ function freeLesson() {
             `;
           }).join(""))}
           <p><b>${text("本課測驗分數", "Quiz score")}：</b>${freeQuizScore(index).correct}/${freeQuizScore(index).total}（${freeQuizScore(index).percent}%）</p>
+        </section>
+
+        <section class="panel">
+          <h2>${text("課程筆記", "Course Notes")}</h2>
+          <p>${lesson.notePrompt || text("請寫下這堂課你學到什麼，以及下一次會如何使用 AI。", "Write what you learned and how you will use AI next time.")}</p>
+          <textarea id="free-note-${index}" placeholder="${text("在這裡寫下你的課程筆記...", "Write your course notes here...")}">${localStorage.getItem(freeBootcampKey(`note-${index}`)) || ""}</textarea>
+          <button class="btn secondary" onclick="localStorage.setItem(freeBootcampKey('note-${index}'), document.getElementById('free-note-${index}').value); toast('${state.lang === "zh" ? "課程筆記已儲存" : "Course note saved"}')">${text("儲存課程筆記", "Save Notes")}</button>
         </section>
 
         <section class="panel">
