@@ -733,10 +733,10 @@ function shell(content) {
 
 function home() {
   const outcomes = [
-    { icon: "🗺️", title: L("home.outcome1"), desc: L("home.outcome1Desc") },
-    { icon: "📁", title: L("home.outcome2"), desc: L("home.outcome2Desc") },
-    { icon: "📋", title: L("home.outcome3"), desc: L("home.outcome3Desc") },
-    { icon: "✍️", title: L("home.outcome4"), desc: L("home.outcome4Desc") },
+    { icon: "📝", title: L("home.outcome1"), desc: L("home.outcome1Desc") },
+    { icon: "📊", title: L("home.outcome2"), desc: L("home.outcome2Desc") },
+    { icon: "📖", title: L("home.outcome3"), desc: L("home.outcome3Desc") },
+    { icon: "🎒", title: L("home.outcome4"), desc: L("home.outcome4Desc") },
     { icon: "💬", title: L("home.outcome5"), desc: L("home.outcome5Desc") }
   ];
 
@@ -769,8 +769,8 @@ function home() {
               <div class="home-preview-header">
                 <span class="logo-badge">AI</span>
                 <div>
-                  <strong>${text("大學申請包預覽", "Application Package Preview")}</strong>
-                  <small>${text("完成課程後的交付成果", "Your deliverable after completing the course")}</small>
+                  <strong>${L("home.previewTitle")}</strong>
+                  <small>${L("home.previewSubtitle")}</small>
                 </div>
               </div>
               <ul class="home-preview-list">
@@ -782,7 +782,7 @@ function home() {
                 `).join("")}
               </ul>
               <div class="home-preview-footer">
-                <span class="tag premiumtag">NT$499</span>
+                <span class="tag premiumtag">${text("NT$499 起", "From NT$499")}</span>
                 <button class="btn primary" onclick="setRoute('premium')">${L("home.premium")}</button>
               </div>
             </div>
