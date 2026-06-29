@@ -731,133 +731,188 @@ function shell(content) {
   `;
 }
 
+function homeFooter() {
+  return `
+    <footer class="home-footer">
+      <div class="wrap home-footer-grid">
+        <div class="home-footer-brand">
+          <div class="home-footer-logo"><span>AI</span> AI Skill Bridge</div>
+          <p>${L("home.footerTagline")}</p>
+        </div>
+        <div>
+          <h4>${L("home.footerProduct")}</h4>
+          <button type="button" onclick="setRoute('courses')">${L("home.footerCourses")}</button>
+          <button type="button" onclick="setRoute('premium')">${L("home.footerPremium")}</button>
+          <button type="button" onclick="setRoute('tools')">${L("home.footerTools")}</button>
+        </div>
+        <div>
+          <h4>${L("home.footerLearn")}</h4>
+          <button type="button" onclick="setRoute('free')">${L("home.footerFree")}</button>
+          <button type="button" onclick="setRoute('assessment')">${text("Assessment", "Assessment")}</button>
+          <button type="button" onclick="setRoute('prompts')">${text("Prompts", "Prompts")}</button>
+        </div>
+        <div>
+          <h4>${L("home.footerCompany")}</h4>
+          <button type="button" onclick="setRoute('impact')">${L("home.footerImpact")}</button>
+          <button type="button" onclick="setRoute('community')">${L("home.footerCommunity")}</button>
+        </div>
+        <div>
+          <h4>${L("home.footerLegal")}</h4>
+          <span class="home-footer-muted">${L("home.footerPrivacy")}</span>
+          <span class="home-footer-muted">${L("home.footerTerms")}</span>
+        </div>
+      </div>
+      <div class="wrap home-footer-bottom">
+        <p>${L("home.footerCopy")}</p>
+      </div>
+    </footer>
+  `;
+}
+
+function homeLandingShell(content) {
+  return `${nav()}${content}${homeFooter()}`;
+}
+
 function home() {
-  const toolCards = [
-    { icon: "💬", label: L("home.toolChat"), color: "#6366f1" },
-    { icon: "✦", label: L("home.toolPrompt"), color: "#8b5cf6" },
-    { icon: "⚡", label: L("home.toolAutomation"), color: "#0ea5e9" },
-    { icon: "◆", label: L("home.toolDesign"), color: "#ec4899" },
-    { icon: "⌘", label: L("home.toolCoding"), color: "#14b8a6" },
-    { icon: "▣", label: L("home.toolAnalytics"), color: "#f59e0b" }
-  ];
-
-  const whyCards = [
-    { icon: "⚡", title: L("home.why1"), desc: L("home.why1Desc") },
-    { icon: "✓", title: L("home.why2"), desc: L("home.why2Desc") },
-    { icon: "→", title: L("home.why3"), desc: L("home.why3Desc") },
-    { icon: "↻", title: L("home.why4"), desc: L("home.why4Desc") }
-  ];
-
-  const outcomes = [
-    { icon: "⚡", title: L("home.outcome1"), desc: L("home.outcome1Desc") },
-    { icon: "💡", title: L("home.outcome2"), desc: L("home.outcome2Desc") },
-    { icon: "🔄", title: L("home.outcome3"), desc: L("home.outcome3Desc") },
-    { icon: "🤖", title: L("home.outcome4"), desc: L("home.outcome4Desc") },
-    { icon: "📁", title: L("home.outcome5"), desc: L("home.outcome5Desc") }
-  ];
-
-  const beforeItems = [L("home.before1"), L("home.before2"), L("home.before3")];
-  const afterItems = [L("home.after1"), L("home.after2"), L("home.after3")];
-
-  const activities = [L("home.activity1"), L("home.activity2"), L("home.activity3")];
+  const course = freeBootcampProgress();
+  const portfolio = freePortfolioProgress();
+  const quiz = allFreeQuizProgress();
+  const xp = course.completed * 50 + portfolio.completed * 20 + quiz.correct * 10;
+  const xpMax = Math.max(course.total * 50 + portfolio.total * 20 + quiz.total * 10, 1);
+  const xpPercent = Math.min(100, Math.round((xp / xpMax) * 100));
   const progress = progressPercent();
   const done = completedCount();
   const badgeCount = earnedBadges().length;
-  const projectCount = (state.favorites || []).length;
+  const projectCount = Math.max((state.favorites || []).length, done);
+  const active = LESSONS.find(l => l.id === state.activeLesson);
+  const currentCourseLabel = active
+    ? (state.lang === "zh" ? active.zhTitle : active.enTitle)
+    : L("home.defaultCourse");
+  const activities = [L("home.activity1"), L("home.activity2"), L("home.activity3")];
 
-  return shell(`
+  const buildCards = [
+    { title: L("home.build1"), desc: L("home.build1Desc"), img: "public/images/build-resume.svg" },
+    { title: L("home.build2"), desc: L("home.build2Desc"), img: "public/images/build-presentation.svg" },
+    { title: L("home.build3"), desc: L("home.build3Desc"), img: "public/images/build-website.svg" },
+    { title: L("home.build4"), desc: L("home.build4Desc"), img: "public/images/build-automation.svg" },
+    { title: L("home.build5"), desc: L("home.build5Desc"), img: "public/images/build-notes.svg" },
+    { title: L("home.build6"), desc: L("home.build6Desc"), img: "public/images/build-prompts.svg" }
+  ];
+
+  const pathSteps = [
+    { title: L("home.path1"), desc: L("home.path1Desc") },
+    { title: L("home.path2"), desc: L("home.path2Desc") },
+    { title: L("home.path3"), desc: L("home.path3Desc") },
+    { title: L("home.path4"), desc: L("home.path4Desc") },
+    { title: L("home.path5"), desc: L("home.path5Desc") }
+  ];
+
+  const featCards = [
+    { icon: "▶", title: L("home.feat1"), desc: L("home.feat1Desc") },
+    { icon: "◎", title: L("home.feat2"), desc: L("home.feat2Desc") },
+    { icon: "∞", title: L("home.feat3"), desc: L("home.feat3Desc") },
+    { icon: "◈", title: L("home.feat4"), desc: L("home.feat4Desc") }
+  ];
+
+  const stats = [
+    { value: L("home.stat1"), label: L("home.stat1Label") },
+    { value: L("home.stat2"), label: L("home.stat2Label") },
+    { value: L("home.stat3"), label: L("home.stat3Label") },
+    { value: L("home.stat4"), label: L("home.stat4Label") }
+  ];
+
+  const testimonials = [
+    { quote: L("home.test1"), role: L("home.test1Role") },
+    { quote: L("home.test2"), role: L("home.test2Role") },
+    { quote: L("home.test3"), role: L("home.test3Role") }
+  ];
+
+  const faqs = [
+    { q: L("home.faq1Q"), a: L("home.faq1A") },
+    { q: L("home.faq2Q"), a: L("home.faq2A") },
+    { q: L("home.faq3Q"), a: L("home.faq3A") },
+    { q: L("home.faq4Q"), a: L("home.faq4A") },
+    { q: L("home.faq5Q"), a: L("home.faq5A") }
+  ];
+
+  return homeLandingShell(`
     <main class="home-page">
       <section class="home-hero">
         <div class="home-hero-glow home-hero-glow-a" aria-hidden="true"></div>
         <div class="home-hero-glow home-hero-glow-b" aria-hidden="true"></div>
+        <div class="home-hero-glow home-hero-glow-c" aria-hidden="true"></div>
         <div class="wrap home-hero-grid">
-          <div class="home-hero-content">
+          <div class="home-hero-content hp-animate">
+            <p class="home-tagline">${L("home.tagline")}</p>
             <p class="home-badge">${L("home.badge")}</p>
             <h1>${L("home.title")}</h1>
             <p class="home-lead">${L("home.lead")}</p>
             <div class="home-hero-cta">
               <button class="home-btn home-btn-primary" onclick="setRoute('free')">${L("home.start")}</button>
-              <button class="home-btn home-btn-secondary" onclick="setRoute('courses')">${L("home.watchCourses")}</button>
+              <button class="home-btn home-btn-secondary" onclick="setRoute('courses')">${L("home.explore")}</button>
             </div>
+            <p class="home-trust">${L("home.trust")}</p>
           </div>
-          <aside class="home-hero-visual">
-            <div class="home-dashboard">
-              <div class="home-dash-top">
-                <div class="home-dash-brand">
-                  <span class="home-dash-logo">AI</span>
-                  <div>
-                    <strong>${L("home.dashboardTitle")}</strong>
-                    <small>${L("home.dashboardSubtitle")}</small>
-                  </div>
-                </div>
-                <span class="home-dash-pill">${currentLevel()}</span>
+          <aside class="home-hero-visual hp-animate hp-delay">
+            <img class="home-hero-illustration" src="public/images/hero-dashboard.png" alt="" loading="lazy" onerror="this.src='public/images/hero-dashboard.svg'">
+            <div class="home-glass-dashboard">
+              <div class="home-glass-header">
+                <span class="home-glass-logo">AI</span>
+                <strong>AI Learning Dashboard</strong>
               </div>
-              <div class="home-dash-progress-card">
-                <div class="home-dash-row">
-                  <span>${L("home.dashProgress")}</span>
-                  <span class="home-dash-metric">${done}/${LESSONS.length} ${L("home.dashLessonUnit")}</span>
-                </div>
-                <div class="home-dash-track"><div class="home-dash-bar" style="width:${progress}%"></div></div>
-                <div class="home-dash-row home-dash-row-sub">
-                  <span>${L("home.dashProgressLabel")}</span>
-                  <span>${progress}%</span>
-                </div>
-              </div>
-              <div class="home-dash-stats">
-                <div class="home-dash-stat">
-                  <span class="home-dash-stat-icon">🧭</span>
-                  <span class="home-dash-stat-label">${L("home.dashTools")}</span>
-                  <strong>${TOOLS.length}</strong>
-                </div>
-                <div class="home-dash-stat">
-                  <span class="home-dash-stat-icon">📂</span>
-                  <span class="home-dash-stat-label">${L("home.dashProjects")}</span>
-                  <strong>${Math.max(projectCount, done)}</strong>
-                </div>
-                <div class="home-dash-stat">
-                  <span class="home-dash-stat-icon">🏅</span>
-                  <span class="home-dash-stat-label">${L("home.dashCertificates")}</span>
+              <div class="home-glass-grid">
+                <article class="home-glass-card home-glass-wide">
+                  <span class="home-glass-label">${L("home.dashProgress")}</span>
+                  <div class="home-glass-track"><div class="home-glass-bar" style="width:${progress}%"></div></div>
+                  <small>${done}/${LESSONS.length} · ${progress}%</small>
+                </article>
+                <article class="home-glass-card">
+                  <span class="home-glass-label">${L("home.dashProjects")}</span>
+                  <strong>${projectCount}</strong>
+                </article>
+                <article class="home-glass-card">
+                  <span class="home-glass-label">${L("home.dashPrompts")}</span>
+                  <strong>40+</strong>
+                </article>
+                <article class="home-glass-card">
+                  <span class="home-glass-label">${L("home.dashCertificates")}</span>
                   <strong>${badgeCount}</strong>
-                </div>
-              </div>
-              <div class="home-dash-activity">
-                <div class="home-dash-activity-head">${L("home.dashActivity")}</div>
-                <ul>
-                  ${activities.map(item => `<li><span class="home-dash-dot"></span>${item}</li>`).join("")}
-                </ul>
+                </article>
+                <article class="home-glass-card home-glass-wide">
+                  <span class="home-glass-label">${L("home.dashCurrent")}</span>
+                  <p>${currentCourseLabel}</p>
+                </article>
+                <article class="home-glass-card">
+                  <span class="home-glass-label">${L("home.dashXp")}</span>
+                  <div class="home-glass-track home-glass-track-sm"><div class="home-glass-bar home-glass-bar-alt" style="width:${xpPercent}%"></div></div>
+                  <small>${xp} XP</small>
+                </article>
+                <article class="home-glass-card home-glass-wide">
+                  <span class="home-glass-label">${L("home.dashActivity")}</span>
+                  <ul class="home-glass-activity">${activities.map(a => `<li>${a}</li>`).join("")}</ul>
+                </article>
+                <article class="home-glass-card home-glass-wide home-glass-goal">
+                  <span class="home-glass-label">${L("home.dashGoal")}</span>
+                  <p>${L("home.goalText")}</p>
+                </article>
               </div>
             </div>
           </aside>
         </div>
       </section>
 
-      <section class="home-section home-section-tools">
+      <section class="home-section" id="build">
         <div class="wrap">
           <div class="home-section-header">
-            <h2>${L("home.toolsTitle")}</h2>
-            <p class="home-section-lead">${L("home.toolsLead")}</p>
+            <h2>${L("home.buildTitle")}</h2>
+            <p class="home-section-lead">${L("home.buildLead")}</p>
           </div>
-          <div class="home-tools-row">
-            ${toolCards.map(item => `
-              <article class="home-tool-card">
-                <span class="home-tool-icon" style="--tool-color:${item.color}">${item.icon}</span>
-                <span class="home-tool-label">${item.label}</span>
-              </article>
-            `).join("")}
-          </div>
-        </div>
-      </section>
-
-      <section class="home-section home-section-why">
-        <div class="wrap">
-          <div class="home-section-header">
-            <h2>${L("home.whyTitle")}</h2>
-            <p class="home-section-lead">${L("home.whyLead")}</p>
-          </div>
-          <div class="home-why-grid">
-            ${whyCards.map(item => `
-              <article class="home-why-card">
-                <span class="home-why-icon">${item.icon}</span>
+          <div class="home-build-grid">
+            ${buildCards.map(item => `
+              <article class="home-build-card">
+                <div class="home-build-media">
+                  <img src="${item.img}" alt="" loading="lazy">
+                </div>
                 <h3>${item.title}</h3>
                 <p>${item.desc}</p>
               </article>
@@ -866,16 +921,37 @@ function home() {
         </div>
       </section>
 
-      <section class="home-section">
+      <section class="home-section home-section-alt" id="path">
         <div class="wrap">
           <div class="home-section-header">
-            <h2>${L("home.outcomesTitle")}</h2>
-            <p class="home-section-lead">${L("home.outcomesLead")}</p>
+            <h2>${L("home.pathTitle")}</h2>
+            <p class="home-section-lead">${L("home.pathLead")}</p>
           </div>
-          <div class="home-outcomes-grid">
-            ${outcomes.map(item => `
-              <article class="home-outcome-card">
-                <span class="home-outcome-icon">${item.icon}</span>
+          <div class="home-path-timeline">
+            ${pathSteps.map((step, i) => `
+              <article class="home-path-step">
+                <span class="home-path-dot">${i + 1}</span>
+                <div>
+                  <h3>${step.title}</h3>
+                  <p>${step.desc}</p>
+                </div>
+              </article>
+              ${i < pathSteps.length - 1 ? '<div class="home-path-line" aria-hidden="true"></div>' : ""}
+            `).join("")}
+          </div>
+        </div>
+      </section>
+
+      <section class="home-section" id="features">
+        <div class="wrap">
+          <div class="home-section-header">
+            <h2>${L("home.featTitle")}</h2>
+            <p class="home-section-lead">${L("home.featLead")}</p>
+          </div>
+          <div class="home-feat-grid">
+            ${featCards.map(item => `
+              <article class="home-feat-card">
+                <span class="home-feat-icon">${item.icon}</span>
                 <h3>${item.title}</h3>
                 <p>${item.desc}</p>
               </article>
@@ -884,25 +960,93 @@ function home() {
         </div>
       </section>
 
-      <section class="home-section home-section-soft">
+      <section class="home-section home-stats-section">
+        <div class="wrap home-stats-grid">
+          ${stats.map(item => `
+            <div class="home-stat-item">
+              <strong>${item.value}</strong>
+              <span>${item.label}</span>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+
+      <section class="home-section home-section-alt" id="testimonials">
         <div class="wrap">
           <div class="home-section-header">
-            <h2>${L("home.beforeAfterTitle")}</h2>
+            <h2>${L("home.testTitle")}</h2>
+            <p class="home-section-lead">${L("home.testLead")}</p>
           </div>
-          <div class="home-before-after">
-            <div class="home-ba-col home-ba-before">
-              <span class="home-ba-label">${L("home.beforeLabel")}</span>
+          <div class="home-test-grid">
+            ${testimonials.map(item => `
+              <blockquote class="home-test-card">
+                <p>${item.quote}</p>
+                <footer>${item.role}</footer>
+              </blockquote>
+            `).join("")}
+          </div>
+        </div>
+      </section>
+
+      <section class="home-section" id="pricing">
+        <div class="wrap">
+          <div class="home-section-header">
+            <h2>${L("home.priceTitle")}</h2>
+            <p class="home-section-lead">${L("home.priceLead")}</p>
+          </div>
+          <div class="home-pricing-grid">
+            <article class="home-price-card">
+              <h3>${L("home.priceFree")}</h3>
+              <p>${L("home.priceFreeDesc")}</p>
               <ul>
-                ${beforeItems.map(item => `<li>${item}</li>`).join("")}
+                <li>${L("home.priceFree1")}</li>
+                <li>${L("home.priceFree2")}</li>
+                <li>${L("home.priceFree3")}</li>
               </ul>
-            </div>
-            <div class="home-ba-arrow" aria-hidden="true">→</div>
-            <div class="home-ba-col home-ba-after">
-              <span class="home-ba-label">${L("home.afterLabel")}</span>
+              <button class="home-btn home-btn-secondary" onclick="setRoute('free')">${L("home.priceCtaFree")}</button>
+            </article>
+            <article class="home-price-card home-price-featured">
+              <span class="home-price-badge">${L("home.priceOffer")}</span>
+              <h3>${L("home.pricePremium")}</h3>
+              <p>${L("home.pricePremiumDesc")}</p>
+              <div class="home-price-row">
+                <span class="home-price-old">${L("home.priceOriginal")} <s>NT$1990</s></span>
+                <span class="home-price-new">${L("home.priceLaunch")} <b>NT$999</b></span>
+              </div>
               <ul>
-                ${afterItems.map(item => `<li>${item}</li>`).join("")}
+                <li>${L("home.pricePremium1")}</li>
+                <li>${L("home.pricePremium2")}</li>
+                <li>${L("home.pricePremium3")}</li>
               </ul>
-            </div>
+              <button class="home-btn home-btn-primary" onclick="setRoute('premium')">${L("home.priceCtaPremium")}</button>
+            </article>
+            <article class="home-price-card home-price-muted">
+              <h3>${L("home.priceSoon")}</h3>
+              <p>${L("home.priceSoonDesc")}</p>
+              <ul>
+                <li>${L("home.priceSoon1")}</li>
+                <li>${L("home.priceSoon2")}</li>
+                <li>${L("home.priceSoon3")}</li>
+              </ul>
+              <button class="home-btn home-btn-secondary" disabled>${L("home.priceCtaSoon")}</button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-section home-section-alt" id="faq">
+        <div class="wrap">
+          <div class="home-section-header">
+            <h2>${L("home.faqTitle")}</h2>
+            <p class="home-section-lead">${L("home.faqLead")}</p>
+          </div>
+          <div class="home-faq">
+            ${faqs.map(item => `
+              <details class="home-faq-item">
+                <summary>${item.q}</summary>
+                <p>${item.a}</p>
+              </details>
+            `).join("")}
           </div>
         </div>
       </section>
@@ -915,7 +1059,7 @@ function home() {
           </div>
           <div class="home-hero-cta">
             <button class="home-btn home-btn-primary home-btn-light" onclick="setRoute('free')">${L("home.ctaStart")}</button>
-            <button class="home-btn home-btn-ghost" onclick="setRoute('courses')">${L("home.ctaWatch")}</button>
+            <button class="home-btn home-btn-ghost" onclick="setRoute('courses')">${L("home.ctaExplore")}</button>
           </div>
         </div>
       </section>
