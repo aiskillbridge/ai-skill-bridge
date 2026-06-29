@@ -858,7 +858,7 @@ function home() {
             <div class="home-glass-dashboard">
               <div class="home-glass-header">
                 <span class="home-glass-logo">AI</span>
-                <strong>AI Learning Dashboard</strong>
+                <strong>${L("home.dashTitle")}</strong>
               </div>
               <div class="home-glass-grid">
                 <article class="home-glass-card home-glass-wide">
