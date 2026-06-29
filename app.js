@@ -789,14 +789,15 @@ function home() {
     ? (state.lang === "zh" ? active.zhTitle : active.enTitle)
     : L("home.defaultCourse");
   const activities = [L("home.activity1"), L("home.activity2"), L("home.activity3")];
+  const toolCount = typeof TOOLS !== "undefined" ? TOOLS.length : 12;
 
   const buildCards = [
-    { title: L("home.build1"), desc: L("home.build1Desc"), img: "public/images/build-resume.svg" },
-    { title: L("home.build2"), desc: L("home.build2Desc"), img: "public/images/build-presentation.svg" },
-    { title: L("home.build3"), desc: L("home.build3Desc"), img: "public/images/build-website.svg" },
-    { title: L("home.build4"), desc: L("home.build4Desc"), img: "public/images/build-automation.svg" },
-    { title: L("home.build5"), desc: L("home.build5Desc"), img: "public/images/build-notes.svg" },
-    { title: L("home.build6"), desc: L("home.build6Desc"), img: "public/images/build-prompts.svg" }
+    { title: L("home.build1"), desc: L("home.build1Desc"), icon: "📄" },
+    { title: L("home.build2"), desc: L("home.build2Desc"), icon: "📊" },
+    { title: L("home.build3"), desc: L("home.build3Desc"), icon: "🌐" },
+    { title: L("home.build4"), desc: L("home.build4Desc"), icon: "⚡" },
+    { title: L("home.build5"), desc: L("home.build5Desc"), icon: "📝" },
+    { title: L("home.build6"), desc: L("home.build6Desc"), icon: "💬" }
   ];
 
   const pathSteps = [
@@ -854,7 +855,6 @@ function home() {
             <p class="home-trust">${L("home.trust")}</p>
           </div>
           <aside class="home-hero-visual hp-animate hp-delay">
-            <img class="home-hero-illustration" src="public/images/hero-dashboard.png" alt="" loading="lazy" onerror="this.src='public/images/hero-dashboard.svg'">
             <div class="home-glass-dashboard">
               <div class="home-glass-header">
                 <span class="home-glass-logo">AI</span>
@@ -867,12 +867,12 @@ function home() {
                   <small>${done}/${LESSONS.length} · ${progress}%</small>
                 </article>
                 <article class="home-glass-card">
-                  <span class="home-glass-label">${L("home.dashProjects")}</span>
-                  <strong>${projectCount}</strong>
+                  <span class="home-glass-label">${L("home.dashPrompts")}</span>
+                  <strong>${toolCount}+</strong>
                 </article>
                 <article class="home-glass-card">
-                  <span class="home-glass-label">${L("home.dashPrompts")}</span>
-                  <strong>40+</strong>
+                  <span class="home-glass-label">${L("home.dashProjects")}</span>
+                  <strong>${projectCount}</strong>
                 </article>
                 <article class="home-glass-card">
                   <span class="home-glass-label">${L("home.dashCertificates")}</span>
@@ -911,7 +911,7 @@ function home() {
             ${buildCards.map(item => `
               <article class="home-build-card">
                 <div class="home-build-media">
-                  <img src="${item.img}" alt="" loading="lazy">
+                  <span class="home-build-icon" aria-hidden="true">${item.icon}</span>
                 </div>
                 <h3>${item.title}</h3>
                 <p>${item.desc}</p>
@@ -1010,7 +1010,7 @@ function home() {
               <h3>${L("home.pricePremium")}</h3>
               <p>${L("home.pricePremiumDesc")}</p>
               <div class="home-price-row">
-                <span class="home-price-old">${L("home.priceOriginal")} <s>NT$1990</s></span>
+                <span class="home-price-old">${L("home.priceOriginal")} <s>NT$1,990</s></span>
                 <span class="home-price-new">${L("home.priceLaunch")} <b>NT$999</b></span>
               </div>
               <ul>
