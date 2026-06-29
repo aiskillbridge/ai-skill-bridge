@@ -719,6 +719,19 @@ textarea[id^="free-note-"] {
   align-items: center;
 }
 
+.home-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--line);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+  margin: 0 0 18px;
+}
+
 .home-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -815,12 +828,35 @@ textarea[id^="free-note-"] {
 }
 
 .home-preview-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  display: grid;
+  gap: 14px;
   padding-top: 16px;
   border-top: 1px solid var(--line);
+}
+
+.home-preview-package-title {
+  display: block;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.home-preview-package-desc {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 4px 0 0;
+}
+
+.home-preview-price {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--primary);
+  margin: 8px 0 0;
+  letter-spacing: -0.02em;
+}
+
+.home-preview-footer .btn {
+  width: 100%;
+  justify-content: center;
 }
 
 .home-section {

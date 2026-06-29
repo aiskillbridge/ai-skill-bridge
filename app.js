@@ -732,12 +732,20 @@ function shell(content) {
 }
 
 function home() {
+  const roadmapItems = [
+    L("home.roadmap1"),
+    L("home.roadmap2"),
+    L("home.roadmap3"),
+    L("home.roadmap4"),
+    L("home.roadmap5")
+  ];
+
   const outcomes = [
-    { icon: "📝", title: L("home.outcome1"), desc: L("home.outcome1Desc") },
-    { icon: "📊", title: L("home.outcome2"), desc: L("home.outcome2Desc") },
-    { icon: "📖", title: L("home.outcome3"), desc: L("home.outcome3Desc") },
-    { icon: "🎒", title: L("home.outcome4"), desc: L("home.outcome4Desc") },
-    { icon: "💬", title: L("home.outcome5"), desc: L("home.outcome5Desc") }
+    { icon: "⚡", title: L("home.outcome1"), desc: L("home.outcome1Desc") },
+    { icon: "💡", title: L("home.outcome2"), desc: L("home.outcome2Desc") },
+    { icon: "🔄", title: L("home.outcome3"), desc: L("home.outcome3Desc") },
+    { icon: "🤖", title: L("home.outcome4"), desc: L("home.outcome4Desc") },
+    { icon: "📁", title: L("home.outcome5"), desc: L("home.outcome5Desc") }
   ];
 
   const beforeItems = [L("home.before1"), L("home.before2"), L("home.before3")];
@@ -755,13 +763,12 @@ function home() {
       <section class="home-hero">
         <div class="wrap home-hero-grid">
           <div class="home-hero-content">
-            <p class="home-eyebrow">${L("home.eyebrow")}</p>
+            <p class="home-badge">${L("home.badge")}</p>
             <h1>${L("home.title")}</h1>
             <p class="lead">${L("home.lead")}</p>
-            <p class="home-price-hint">${L("home.priceHint")}</p>
             <div class="btnrow home-hero-cta">
-              <button class="btn primary home-btn-lg" onclick="setRoute('courses')">${L("home.start")}</button>
-              <button class="btn secondary home-btn-lg" onclick="setRoute('premium')">${L("home.premium")}</button>
+              <button class="btn primary home-btn-lg" onclick="setRoute('free')">${L("home.start")}</button>
+              <button class="btn secondary home-btn-lg" onclick="setRoute('courses')">${L("home.premium")}</button>
             </div>
           </div>
           <aside class="home-hero-visual">
@@ -774,16 +781,20 @@ function home() {
                 </div>
               </div>
               <ul class="home-preview-list">
-                ${outcomes.map(item => `
+                ${roadmapItems.map(item => `
                   <li>
                     <span class="home-preview-check">✓</span>
-                    <span>${item.title}</span>
+                    <span>${item}</span>
                   </li>
                 `).join("")}
               </ul>
               <div class="home-preview-footer">
-                <span class="tag premiumtag">${text("NT$499 起", "From NT$499")}</span>
-                <button class="btn primary" onclick="setRoute('premium')">${L("home.premium")}</button>
+                <div class="home-preview-package">
+                  <strong class="home-preview-package-title">${L("home.packageTitle")}</strong>
+                  <p class="home-preview-package-desc">${L("home.packageDesc")}</p>
+                  <p class="home-preview-price">${L("home.packagePrice")}</p>
+                </div>
+                <button class="btn primary" onclick="setRoute('premium')">${L("home.packageCta")}</button>
               </div>
             </div>
           </aside>
@@ -856,8 +867,8 @@ function home() {
             <p class="lead">${L("home.ctaLead")}</p>
           </div>
           <div class="btnrow">
-            <button class="btn primary home-btn-lg" onclick="setRoute('courses')">${L("home.ctaStart")}</button>
-            <button class="btn secondary home-btn-lg" onclick="setRoute('premium')">${L("home.ctaPremium")}</button>
+            <button class="btn primary home-btn-lg" onclick="setRoute('free')">${L("home.ctaStart")}</button>
+            <button class="btn secondary home-btn-lg" onclick="setRoute('courses')">${L("home.ctaPremium")}</button>
           </div>
         </div>
       </section>
