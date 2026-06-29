@@ -732,12 +732,20 @@ function shell(content) {
 }
 
 function home() {
-  const roadmapItems = [
-    L("home.roadmap1"),
-    L("home.roadmap2"),
-    L("home.roadmap3"),
-    L("home.roadmap4"),
-    L("home.roadmap5")
+  const toolCards = [
+    { icon: "💬", label: L("home.toolChat"), color: "#6366f1" },
+    { icon: "✦", label: L("home.toolPrompt"), color: "#8b5cf6" },
+    { icon: "⚡", label: L("home.toolAutomation"), color: "#0ea5e9" },
+    { icon: "◆", label: L("home.toolDesign"), color: "#ec4899" },
+    { icon: "⌘", label: L("home.toolCoding"), color: "#14b8a6" },
+    { icon: "▣", label: L("home.toolAnalytics"), color: "#f59e0b" }
+  ];
+
+  const whyCards = [
+    { icon: "⚡", title: L("home.why1"), desc: L("home.why1Desc") },
+    { icon: "✓", title: L("home.why2"), desc: L("home.why2Desc") },
+    { icon: "→", title: L("home.why3"), desc: L("home.why3Desc") },
+    { icon: "↻", title: L("home.why4"), desc: L("home.why4Desc") }
   ];
 
   const outcomes = [
@@ -751,53 +759,110 @@ function home() {
   const beforeItems = [L("home.before1"), L("home.before2"), L("home.before3")];
   const afterItems = [L("home.after1"), L("home.after2"), L("home.after3")];
 
-  const features = [
-    { icon: "📚", title: L("home.feature1"), desc: L("home.feature1Desc") },
-    { icon: "💡", title: L("home.feature2"), desc: L("home.feature2Desc") },
-    { icon: "🎒", title: L("home.feature3"), desc: L("home.feature3Desc") },
-    { icon: "🤖", title: L("home.feature4"), desc: L("home.feature4Desc") }
-  ];
+  const activities = [L("home.activity1"), L("home.activity2"), L("home.activity3")];
+  const progress = progressPercent();
+  const done = completedCount();
+  const badgeCount = earnedBadges().length;
+  const projectCount = (state.favorites || []).length;
 
   return shell(`
     <main class="home-page">
       <section class="home-hero">
+        <div class="home-hero-glow home-hero-glow-a" aria-hidden="true"></div>
+        <div class="home-hero-glow home-hero-glow-b" aria-hidden="true"></div>
         <div class="wrap home-hero-grid">
           <div class="home-hero-content">
             <p class="home-badge">${L("home.badge")}</p>
             <h1>${L("home.title")}</h1>
-            <p class="lead">${L("home.lead")}</p>
-            <div class="btnrow home-hero-cta">
-              <button class="btn primary home-btn-lg" onclick="setRoute('free')">${L("home.start")}</button>
-              <button class="btn secondary home-btn-lg" onclick="setRoute('courses')">${L("home.premium")}</button>
+            <p class="home-lead">${L("home.lead")}</p>
+            <div class="home-hero-cta">
+              <button class="home-btn home-btn-primary" onclick="setRoute('free')">${L("home.start")}</button>
+              <button class="home-btn home-btn-secondary" onclick="setRoute('courses')">${L("home.watchCourses")}</button>
             </div>
           </div>
           <aside class="home-hero-visual">
-            <div class="home-preview-card">
-              <div class="home-preview-header">
-                <span class="logo-badge">AI</span>
-                <div>
-                  <strong>${L("home.previewTitle")}</strong>
-                  <small>${L("home.previewSubtitle")}</small>
+            <div class="home-dashboard">
+              <div class="home-dash-top">
+                <div class="home-dash-brand">
+                  <span class="home-dash-logo">AI</span>
+                  <div>
+                    <strong>${L("home.dashboardTitle")}</strong>
+                    <small>${L("home.dashboardSubtitle")}</small>
+                  </div>
+                </div>
+                <span class="home-dash-pill">${currentLevel()}</span>
+              </div>
+              <div class="home-dash-progress-card">
+                <div class="home-dash-row">
+                  <span>${L("home.dashProgress")}</span>
+                  <span class="home-dash-metric">${done}/${LESSONS.length} ${L("home.dashLessonUnit")}</span>
+                </div>
+                <div class="home-dash-track"><div class="home-dash-bar" style="width:${progress}%"></div></div>
+                <div class="home-dash-row home-dash-row-sub">
+                  <span>${L("home.dashProgressLabel")}</span>
+                  <span>${progress}%</span>
                 </div>
               </div>
-              <ul class="home-preview-list">
-                ${roadmapItems.map(item => `
-                  <li>
-                    <span class="home-preview-check">✓</span>
-                    <span>${item}</span>
-                  </li>
-                `).join("")}
-              </ul>
-              <div class="home-preview-footer">
-                <div class="home-preview-package">
-                  <strong class="home-preview-package-title">${L("home.packageTitle")}</strong>
-                  <p class="home-preview-package-desc">${L("home.packageDesc")}</p>
-                  <p class="home-preview-price">${L("home.packagePrice")}</p>
+              <div class="home-dash-stats">
+                <div class="home-dash-stat">
+                  <span class="home-dash-stat-icon">🧭</span>
+                  <span class="home-dash-stat-label">${L("home.dashTools")}</span>
+                  <strong>${TOOLS.length}</strong>
                 </div>
-                <button class="btn primary" onclick="setRoute('premium')">${L("home.packageCta")}</button>
+                <div class="home-dash-stat">
+                  <span class="home-dash-stat-icon">📂</span>
+                  <span class="home-dash-stat-label">${L("home.dashProjects")}</span>
+                  <strong>${Math.max(projectCount, done)}</strong>
+                </div>
+                <div class="home-dash-stat">
+                  <span class="home-dash-stat-icon">🏅</span>
+                  <span class="home-dash-stat-label">${L("home.dashCertificates")}</span>
+                  <strong>${badgeCount}</strong>
+                </div>
+              </div>
+              <div class="home-dash-activity">
+                <div class="home-dash-activity-head">${L("home.dashActivity")}</div>
+                <ul>
+                  ${activities.map(item => `<li><span class="home-dash-dot"></span>${item}</li>`).join("")}
+                </ul>
               </div>
             </div>
           </aside>
+        </div>
+      </section>
+
+      <section class="home-section home-section-tools">
+        <div class="wrap">
+          <div class="home-section-header">
+            <h2>${L("home.toolsTitle")}</h2>
+            <p class="home-section-lead">${L("home.toolsLead")}</p>
+          </div>
+          <div class="home-tools-row">
+            ${toolCards.map(item => `
+              <article class="home-tool-card">
+                <span class="home-tool-icon" style="--tool-color:${item.color}">${item.icon}</span>
+                <span class="home-tool-label">${item.label}</span>
+              </article>
+            `).join("")}
+          </div>
+        </div>
+      </section>
+
+      <section class="home-section home-section-why">
+        <div class="wrap">
+          <div class="home-section-header">
+            <h2>${L("home.whyTitle")}</h2>
+            <p class="home-section-lead">${L("home.whyLead")}</p>
+          </div>
+          <div class="home-why-grid">
+            ${whyCards.map(item => `
+              <article class="home-why-card">
+                <span class="home-why-icon">${item.icon}</span>
+                <h3>${item.title}</h3>
+                <p>${item.desc}</p>
+              </article>
+            `).join("")}
+          </div>
         </div>
       </section>
 
@@ -805,7 +870,7 @@ function home() {
         <div class="wrap">
           <div class="home-section-header">
             <h2>${L("home.outcomesTitle")}</h2>
-            <p class="lead">${L("home.outcomesLead")}</p>
+            <p class="home-section-lead">${L("home.outcomesLead")}</p>
           </div>
           <div class="home-outcomes-grid">
             ${outcomes.map(item => `
@@ -842,33 +907,15 @@ function home() {
         </div>
       </section>
 
-      <section class="home-section">
-        <div class="wrap">
-          <div class="home-section-header">
-            <h2>${L("home.featuresTitle")}</h2>
-            <p class="lead">${L("home.featuresLead")}</p>
-          </div>
-          <div class="home-features-grid">
-            ${features.map(item => `
-              <article class="home-feature-card">
-                <span class="home-feature-icon">${item.icon}</span>
-                <h3>${item.title}</h3>
-                <p>${item.desc}</p>
-              </article>
-            `).join("")}
-          </div>
-        </div>
-      </section>
-
       <section class="home-cta-banner">
         <div class="wrap home-cta-inner">
           <div>
             <h2>${L("home.ctaTitle")}</h2>
-            <p class="lead">${L("home.ctaLead")}</p>
+            <p class="home-section-lead">${L("home.ctaLead")}</p>
           </div>
-          <div class="btnrow">
-            <button class="btn primary home-btn-lg" onclick="setRoute('free')">${L("home.ctaStart")}</button>
-            <button class="btn secondary home-btn-lg" onclick="setRoute('courses')">${L("home.ctaPremium")}</button>
+          <div class="home-hero-cta">
+            <button class="home-btn home-btn-primary home-btn-light" onclick="setRoute('free')">${L("home.ctaStart")}</button>
+            <button class="home-btn home-btn-ghost" onclick="setRoute('courses')">${L("home.ctaWatch")}</button>
           </div>
         </div>
       </section>
