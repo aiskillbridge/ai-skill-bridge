@@ -732,262 +732,132 @@ function shell(content) {
 }
 
 function home() {
-  const premiumCourses = PREMIUM.filter(c => c.id !== "all-access");
-  const allAccess = PREMIUM.find(c => c.id === "all-access");
-  const userWelcome = state.user
-    ? `<div class="lp-user-bar">
-        <span class="lp-user-dot"></span>
-        <span>${state.lang === "zh" ? "已登入" : "Signed in"}: <b>${state.user.email}</b></span>
-        <span class="lp-user-level">${state.lang === "zh" ? "等級" : "Level"}: ${currentLevel()}</span>
-        <span class="lp-user-progress">${completedCount()} / ${LESSONS.length} ${state.lang === "zh" ? "課完成" : "lessons done"}</span>
-      </div>`
-    : `<div class="lp-trust-row">
-        <span class="lp-trust-item">✓ ${text("免費入門課程", "Free beginner track")}</span>
-        <span class="lp-trust-item">✓ ${text("一次購買終身存取", "Lifetime access")}</span>
-        <span class="lp-trust-item">✓ ${text("雙語互動教學", "Bilingual lessons")}</span>
-      </div>`;
+  const outcomes = [
+    { icon: "🗺️", title: L("home.outcome1"), desc: L("home.outcome1Desc") },
+    { icon: "📁", title: L("home.outcome2"), desc: L("home.outcome2Desc") },
+    { icon: "📋", title: L("home.outcome3"), desc: L("home.outcome3Desc") },
+    { icon: "✍️", title: L("home.outcome4"), desc: L("home.outcome4Desc") },
+    { icon: "💬", title: L("home.outcome5"), desc: L("home.outcome5Desc") }
+  ];
 
-  const courseCards = premiumCourses.map((course, i) => `
-    <article class="lp-course-card${i === 0 ? " featured" : ""}">
-      ${i === 0 ? `<span class="lp-popular">${text("最受歡迎", "Most Popular")}</span>` : ""}
-      <span class="tag premiumtag">${course.price}</span>
-      <h3>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h3>
-      <p>${state.lang === "zh" ? course.zhFinalProduct : course.enFinalProduct}</p>
-      <ul class="lp-course-meta">
-        <li>${L("home.lessonsCount")}</li>
-        <li>${text("Prompt 模板", "Prompt templates")}</li>
-        <li>${text("可交付成果", "Deliverable outcome")}</li>
-      </ul>
-      <button class="btn ${i === 0 ? "primary" : "secondary"}" onclick="setRoute('premium')">${L("home.viewCourse")}</button>
-    </article>
-  `).join("");
+  const beforeItems = [L("home.before1"), L("home.before2"), L("home.before3")];
+  const afterItems = [L("home.after1"), L("home.after2"), L("home.after3")];
+
+  const features = [
+    { icon: "📚", title: L("home.feature1"), desc: L("home.feature1Desc") },
+    { icon: "💡", title: L("home.feature2"), desc: L("home.feature2Desc") },
+    { icon: "🎒", title: L("home.feature3"), desc: L("home.feature3Desc") },
+    { icon: "🤖", title: L("home.feature4"), desc: L("home.feature4Desc") }
+  ];
 
   return shell(`
-    <main class="lp">
-      <section class="lp-hero">
-        <div class="wrap lp-hero-grid">
-          <div class="lp-hero-content">
-            <span class="lp-eyebrow">${L("home.heroBadge")}</span>
-            <p class="eyebrow">${L("home.eyebrow")}</p>
+    <main class="home-page">
+      <section class="home-hero">
+        <div class="wrap home-hero-grid">
+          <div class="home-hero-content">
+            <p class="home-eyebrow">${L("home.eyebrow")}</p>
             <h1>${L("home.title")}</h1>
             <p class="lead">${L("home.lead")}</p>
-            <p class="lp-hero-sub">${L("home.heroSub")}</p>
-            ${userWelcome}
-            <div class="btnrow lp-hero-cta">
-              <button class="btn primary lp-btn-lg" onclick="setRoute('premium')">${L("home.premiumCta")}</button>
-              <button class="btn secondary lp-btn-lg" onclick="setRoute('courses')">${L("home.start")}</button>
-            </div>
-            <div class="btnrow">
-              <button class="btn secondary" onclick="setRoute('assessment')">${text("3 分鐘能力測驗", "3-min Assessment")}</button>
-              <button class="btn secondary" onclick="setRoute('tools')">${L("home.tools")}</button>
+            <p class="home-price-hint">${L("home.priceHint")}</p>
+            <div class="btnrow home-hero-cta">
+              <button class="btn primary home-btn-lg" onclick="setRoute('courses')">${L("home.start")}</button>
+              <button class="btn secondary home-btn-lg" onclick="setRoute('premium')">${L("home.premium")}</button>
             </div>
           </div>
-          <aside class="lp-hero-visual">
-            <div class="lp-visual-card">
-              <div class="lp-visual-header">
+          <aside class="home-hero-visual">
+            <div class="home-preview-card">
+              <div class="home-preview-header">
                 <span class="logo-badge">AI</span>
                 <div>
-                  <strong>AI Skill Bridge</strong>
-                  <small>${text("你的 AI 學習儀表板", "Your AI Learning Dashboard")}</small>
+                  <strong>${text("大學申請包預覽", "Application Package Preview")}</strong>
+                  <small>${text("完成課程後的交付成果", "Your deliverable after completing the course")}</small>
                 </div>
               </div>
-              <div class="lp-visual-progress">
-                <div class="lp-visual-progress-label">
-                  <span>${L("home.progress")}</span>
-                  <span>${progressPercent()}%</span>
-                </div>
-                <div class="package-progress-track"><div class="package-progress-bar" style="width:${progressPercent()}%"></div></div>
-              </div>
-              <div class="lp-visual-stats">
-                <div class="lp-visual-stat"><b>${LESSONS.length}</b><span>${L("home.freeLessons")}</span></div>
-                <div class="lp-visual-stat"><b>${premiumCourses.length}</b><span>${L("home.premiumTracks")}</span></div>
-                <div class="lp-visual-stat"><b>${TOOLS.length}</b><span>${L("home.aiTools")}</span></div>
-                <div class="lp-visual-stat"><b>${earnedBadges().length}</b><span>${text("徽章", "Badges")}</span></div>
-              </div>
-              <div class="lp-visual-course">
-                <span class="tag premiumtag">${premiumCourses[0]?.price || "NT$499"}</span>
-                <p><b>${state.lang === "zh" ? premiumCourses[0]?.zhTitle : premiumCourses[0]?.enTitle}</b></p>
-                <button class="btn primary" onclick="setRoute('premium')">${L("home.premiumCta")}</button>
+              <ul class="home-preview-list">
+                ${outcomes.map(item => `
+                  <li>
+                    <span class="home-preview-check">✓</span>
+                    <span>${item.title}</span>
+                  </li>
+                `).join("")}
+              </ul>
+              <div class="home-preview-footer">
+                <span class="tag premiumtag">NT$499</span>
+                <button class="btn primary" onclick="setRoute('premium')">${L("home.premium")}</button>
               </div>
             </div>
           </aside>
         </div>
       </section>
 
-      <section class="lp-stats-bar">
-        <div class="wrap lp-stats">
-          <div class="lp-stat"><b>1,000+</b><span>${L("home.statLearners")}</span></div>
-          <div class="lp-stat"><b>${LESSONS.length + premiumCourses.length * 10}</b><span>${L("home.statLessons")}</span></div>
-          <div class="lp-stat"><b>${premiumCourses.length}</b><span>${L("home.statCourses")}</span></div>
-          <div class="lp-stat"><b>${TOOLS.length}+</b><span>${L("home.statTools")}</span></div>
+      <section class="home-section">
+        <div class="wrap">
+          <div class="home-section-header">
+            <h2>${L("home.outcomesTitle")}</h2>
+            <p class="lead">${L("home.outcomesLead")}</p>
+          </div>
+          <div class="home-outcomes-grid">
+            ${outcomes.map(item => `
+              <article class="home-outcome-card">
+                <span class="home-outcome-icon">${item.icon}</span>
+                <h3>${item.title}</h3>
+                <p>${item.desc}</p>
+              </article>
+            `).join("")}
+          </div>
         </div>
       </section>
 
-      <section class="lp-section">
+      <section class="home-section home-section-soft">
         <div class="wrap">
-          <div class="lp-section-header">
+          <div class="home-section-header">
+            <h2>${L("home.beforeAfterTitle")}</h2>
+          </div>
+          <div class="home-before-after">
+            <div class="home-ba-col home-ba-before">
+              <span class="home-ba-label">${L("home.beforeLabel")}</span>
+              <ul>
+                ${beforeItems.map(item => `<li>${item}</li>`).join("")}
+              </ul>
+            </div>
+            <div class="home-ba-arrow" aria-hidden="true">→</div>
+            <div class="home-ba-col home-ba-after">
+              <span class="home-ba-label">${L("home.afterLabel")}</span>
+              <ul>
+                ${afterItems.map(item => `<li>${item}</li>`).join("")}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-section">
+        <div class="wrap">
+          <div class="home-section-header">
             <h2>${L("home.featuresTitle")}</h2>
             <p class="lead">${L("home.featuresLead")}</p>
           </div>
-          <div class="lp-feature-grid">
-            <article class="lp-feature-card">
-              <span class="lp-feature-icon">📊</span>
-              <h3>${L("home.feature1Title")}</h3>
-              <p>${L("home.feature1Text")}</p>
-              <button class="btn secondary" onclick="setRoute('assessment')">${text("開始測驗", "Take Quiz")}</button>
-            </article>
-            <article class="lp-feature-card">
-              <span class="lp-feature-icon">✍️</span>
-              <h3>${L("home.feature2Title")}</h3>
-              <p>${L("home.feature2Text")}</p>
-              <button class="btn secondary" onclick="setRoute('courses')">${L("home.start")}</button>
-            </article>
-            <article class="lp-feature-card">
-              <span class="lp-feature-icon">🎯</span>
-              <h3>${L("home.feature3Title")}</h3>
-              <p>${L("home.feature3Text")}</p>
-              <button class="btn secondary" onclick="setRoute('premium')">${L("home.premium")}</button>
-            </article>
-            <article class="lp-feature-card">
-              <span class="lp-feature-icon">🧭</span>
-              <h3>${L("home.feature4Title")}</h3>
-              <p>${L("home.feature4Text")}</p>
-              <button class="btn secondary" onclick="setRoute('tools')">${L("home.tools")}</button>
-            </article>
+          <div class="home-features-grid">
+            ${features.map(item => `
+              <article class="home-feature-card">
+                <span class="home-feature-icon">${item.icon}</span>
+                <h3>${item.title}</h3>
+                <p>${item.desc}</p>
+              </article>
+            `).join("")}
           </div>
         </div>
       </section>
 
-      <section class="lp-section lp-section-soft">
-        <div class="wrap">
-          <div class="lp-section-header">
-            <h2>${L("home.stepsTitle")}</h2>
-          </div>
-          <div class="lp-step-grid">
-            <article class="lp-step">
-              <span class="lp-step-num">1</span>
-              <h3>${L("home.step1Title")}</h3>
-              <p>${L("home.step1Text")}</p>
-            </article>
-            <article class="lp-step">
-              <span class="lp-step-num">2</span>
-              <h3>${L("home.step2Title")}</h3>
-              <p>${L("home.step2Text")}</p>
-            </article>
-            <article class="lp-step">
-              <span class="lp-step-num">3</span>
-              <h3>${L("home.step3Title")}</h3>
-              <p>${L("home.step3Text")}</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="lp-section" id="courses">
-        <div class="wrap">
-          <div class="lp-section-header">
-            <h2>${L("home.coursesTitle")}</h2>
-            <p class="lead">${L("home.coursesLead")}</p>
-          </div>
-          <div class="lp-course-grid">
-            ${courseCards}
-          </div>
-          ${
-            allAccess
-              ? `<div class="lp-all-access">
-                  <div>
-                    <span class="tag premiumtag">${text("最佳價值", "Best Value")}</span>
-                    <h3>${L("home.allAccessTitle")}</h3>
-                    <p>${L("home.allAccessDesc")}</p>
-                    <p class="price">${allAccess.price}</p>
-                  </div>
-                  <button class="btn primary lp-btn-lg" onclick="setRoute('premium')">${L("home.allAccessCta")}</button>
-                </div>`
-              : ""
-          }
-        </div>
-      </section>
-
-      <section class="lp-section lp-section-soft">
-        <div class="wrap">
-          <div class="lp-section-header">
-            <h2>${L("home.compareTitle")}</h2>
-          </div>
-          <div class="lp-compare">
-            <div class="lp-compare-col">
-              <h3>${L("home.compareFree")}</h3>
-              <ul>
-                <li class="yes">${L("home.compareRow1")}</li>
-                <li class="yes">${L("home.compareRow2")}</li>
-                <li class="no">${L("home.compareRow3")}</li>
-                <li class="no">${L("home.compareRow4")}</li>
-                <li class="no">${L("home.compareRow5")}</li>
-                <li class="partial">${L("home.compareRow6")}</li>
-              </ul>
-              <button class="btn secondary" onclick="setRoute('courses')">${L("home.start")}</button>
-            </div>
-            <div class="lp-compare-col lp-compare-premium">
-              <span class="lp-popular">${text("推薦", "Recommended")}</span>
-              <h3>${L("home.comparePremium")}</h3>
-              <ul>
-                <li class="yes">${L("home.compareRow1")}</li>
-                <li class="yes">${L("home.compareRow2")}</li>
-                <li class="yes">${L("home.compareRow3")}</li>
-                <li class="yes">${L("home.compareRow4")}</li>
-                <li class="yes">${L("home.compareRow5")}</li>
-                <li class="yes">${L("home.compareRow6")}</li>
-              </ul>
-              <button class="btn primary" onclick="setRoute('premium')">${L("home.premiumCta")}</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="lp-section">
-        <div class="wrap">
-          <div class="lp-section-header">
-            <h2>${L("home.testimonialsTitle")}</h2>
-          </div>
-          <div class="lp-testimonial-grid">
-            <blockquote class="lp-testimonial">
-              <p>${L("home.testimonial1")}</p>
-              <footer>${L("home.testimonial1Role")}</footer>
-            </blockquote>
-            <blockquote class="lp-testimonial">
-              <p>${L("home.testimonial2")}</p>
-              <footer>${L("home.testimonial2Role")}</footer>
-            </blockquote>
-            <blockquote class="lp-testimonial">
-              <p>${L("home.testimonial3")}</p>
-              <footer>${L("home.testimonial3Role")}</footer>
-            </blockquote>
-          </div>
-        </div>
-      </section>
-
-      <section class="lp-section lp-section-soft">
-        <div class="wrap">
-          <div class="lp-section-header">
-            <h2>${L("home.faqTitle")}</h2>
-          </div>
-          <div class="lp-faq">
-            <details class="lp-faq-item"><summary>${L("home.faq1Q")}</summary><p>${L("home.faq1A")}</p></details>
-            <details class="lp-faq-item"><summary>${L("home.faq2Q")}</summary><p>${L("home.faq2A")}</p></details>
-            <details class="lp-faq-item"><summary>${L("home.faq3Q")}</summary><p>${L("home.faq3A")}</p></details>
-            <details class="lp-faq-item"><summary>${L("home.faq4Q")}</summary><p>${L("home.faq4A")}</p></details>
-          </div>
-        </div>
-      </section>
-
-      <section class="lp-cta-banner">
-        <div class="wrap lp-cta-inner">
+      <section class="home-cta-banner">
+        <div class="wrap home-cta-inner">
           <div>
             <h2>${L("home.ctaTitle")}</h2>
             <p class="lead">${L("home.ctaLead")}</p>
           </div>
           <div class="btnrow">
-            <button class="btn primary lp-btn-lg" onclick="setRoute('premium')">${L("home.ctaPrimary")}</button>
-            <button class="btn secondary lp-btn-lg" onclick="setRoute('courses')">${L("home.ctaSecondary")}</button>
+            <button class="btn primary home-btn-lg" onclick="setRoute('courses')">${L("home.ctaStart")}</button>
+            <button class="btn secondary home-btn-lg" onclick="setRoute('premium')">${L("home.ctaPremium")}</button>
           </div>
         </div>
       </section>
