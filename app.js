@@ -1,4 +1,4 @@
-ㄇ
+
 const SUPABASE_URL = "https://ifjkadoskbcgrqmcjvya.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_yXHovKCCYE04aUcybOc4KA_Fhdp5bTE";
 
@@ -205,129 +205,30 @@ function toast(message) {
   setTimeout(() => element.remove(), 1800);
 }
 
-/*
- * Supabase schema — profiles (run once in SQL Editor):
- *
- * create table if not exists public.profiles (
- *   id uuid primary key references auth.users (id) on delete cascade,
- *   email text,
- *   display_name text,
- *   created_at timestamptz not null default now(),
- *   updated_at timestamptz not null default now()
- * );
- *
- * alter table public.profiles enable row level security;
- *
- * create policy "Users can read own profile"
- *   on public.profiles for select
- *   using (auth.uid() = id);
- *
- * create policy "Users can insert own profile"
- *   on public.profiles for insert
- *   with check (auth.uid() = id);
- *
- * create policy "Users can update own profile"
- *   on public.profiles for update
- *   using (auth.uid() = id)
- *   with check (auth.uid() = id);
- */
-
-async function syncUserProfile(user) {
-  if (!supabaseClient || !user?.id) return;
-
-  const { data: authData, error: authError } = await supabaseClient.auth.getUser();
-  if (authError || !authData?.user) {
-    console.error("Sync profile auth not ready:", authError);
-    return;
-  }
-
-  const authUser = authData.user.id === user.id ? authData.user : user;
-  const meta = authUser.user_metadata || {};
-  const display_name =
-    meta.display_name ||
-    meta.full_name ||
-    meta.name ||
-    (authUser.email ? authUser.email.split("@")[0] : "") ||
-    "User";
-
-  const payload = {
-    email: authUser.email || null,
-    display_name,
-    updated_at: new Date().toISOString()
-  };
-
-  const { data: existing, error: selectError } = await supabaseClient
-    .from("profiles")
-    .select("id")
-    .eq("id", authUser.id)
-    .maybeSingle();
-
-  if (selectError) {
-    console.error("Sync profile select error:", selectError);
-    return;
-  }
-
-  if (existing?.id) {
-    const { data, error } = await supabaseClient
-      .from("profiles")
-      .update(payload)
-      .eq("id", authUser.id)
-      .select("id, updated_at");
-
-    if (error) {
-      console.error("Sync profile update error:", error);
-      return;
-    }
-
-    if (!data?.length) {
-      console.error("Sync profile update blocked: no rows updated (check RLS policies).");
-    }
-
-    return;
-  }
-
-  const { error: insertError } = await supabaseClient
-    .from("profiles")
-    .insert({
-      id: authUser.id,
-      ...payload
-    });
-
-  if (insertError) {
-    console.error("Sync profile insert error:", insertError);
-  }
-}
-
-async function handleAuthSession(session) {
-  state.user = session?.user || null;
-
-  if (session?.user) {
-    await syncUserProfile(session.user);
-    await loadProgressFromSupabase();
-    await loadNotesFromSupabase();
-  } else {
-    state.progress = JSON.parse(localStorage.getItem("asb_progress") || "{}");
-    state.notes = JSON.parse(localStorage.getItem("asb_notes") || "{}");
-  }
-
-  render();
-}
-
 async function initAuth() {
   if (!supabaseClient) return;
-
-  supabaseClient.auth.onAuthStateChange(async (_event, session) => {
-    await handleAuthSession(session);
-  });
 
   const { data } = await supabaseClient.auth.getSession();
   state.user = data.session?.user || null;
 
   if (state.user) {
-    await syncUserProfile(state.user);
     await loadProgressFromSupabase();
     await loadNotesFromSupabase();
   }
+
+  supabaseClient.auth.onAuthStateChange(async (_event, session) => {
+    state.user = session?.user || null;
+
+    if (state.user) {
+      await loadProgressFromSupabase();
+      await loadNotesFromSupabase();
+    } else {
+      state.progress = JSON.parse(localStorage.getItem("asb_progress") || "{}");
+      state.notes = JSON.parse(localStorage.getItem("asb_notes") || "{}");
+    }
+
+    render();
+  });
 }
 
 async function signInWithGoogle() {
