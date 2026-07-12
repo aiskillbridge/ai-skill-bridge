@@ -152,12 +152,35 @@ function save() {
   localStorage.setItem("asb_favorites", JSON.stringify(state.favorites));
 }
 
+function freeBootcampLessonId(index) {
+  return `free-bootcamp-${Number(index)}`;
+}
+
+/** Dashboard Progress: user_progress via state.progress only (localStorage is cache). */
+function dashboardProgress() {
+  const total = typeof FREE_BOOTCAMP !== "undefined" ? FREE_BOOTCAMP.length : 0;
+  if (!state.user) {
+    return { completed: 0, total, percent: 0 };
+  }
+  let completed = 0;
+  for (let i = 0; i < total; i++) {
+    if (state.progress[freeBootcampLessonId(i)]) completed += 1;
+  }
+  return {
+    completed,
+    total,
+    percent: total ? Math.round((completed / total) * 100) : 0
+  };
+}
+
 function completedCount() {
   return Object.values(state.progress).filter(Boolean).length;
 }
 
 function progressPercent() {
-  return Math.round((completedCount() / LESSONS.length) * 100);
+  const dash = dashboardProgress();
+  if (state.user) return dash.percent;
+  return Math.round((completedCount() / Math.max(LESSONS.length, 1)) * 100);
 }
 
 function currentLevel() {
@@ -352,6 +375,89 @@ async function signOut() {
   render();
 }
 
+function applyFreeBootcampCacheFromProgress(progress) {
+  if (typeof FREE_BOOTCAMP === "undefined") return;
+  FREE_BOOTCAMP.forEach((_, index) => {
+    const done = !!progress[freeBootcampLessonId(index)];
+    localStorage.setItem(freeBootcampKey(`complete-${index}`), done ? "true" : "false");
+  });
+}
+
+async function upsertUserProgress(lessonId, completed = true) {
+  if (!supabaseClient || !state.user || !lessonId) {
+    return { ok: false, reason: "auth" };
+  }
+
+  const { data: existing, error: selectError } = await supabaseClient
+    .from("user_progress")
+    .select("id")
+    .eq("user_id", state.user.id)
+    .eq("lesson_id", lessonId)
+    .maybeSingle();
+
+  if (selectError) {
+    console.error("Select progress error:", selectError);
+    return { ok: false, reason: "select" };
+  }
+
+  const payload = {
+    completed: !!completed,
+    updated_at: new Date().toISOString()
+  };
+
+  if (existing?.id) {
+    const { error } = await supabaseClient
+      .from("user_progress")
+      .update(payload)
+      .eq("id", existing.id)
+      .eq("user_id", state.user.id);
+
+    if (error) {
+      console.error("Update progress error:", error);
+      return { ok: false, reason: "update" };
+    }
+  } else {
+    const { error } = await supabaseClient
+      .from("user_progress")
+      .insert({
+        user_id: state.user.id,
+        lesson_id: lessonId,
+        ...payload
+      });
+
+    if (error) {
+      console.error("Insert progress error:", error);
+      return { ok: false, reason: "insert" };
+    }
+  }
+
+  return { ok: true };
+}
+
+/** Push local free-bootcamp cache up to user_progress when cloud row is missing. */
+async function migrateFreeBootcampCacheToSupabase() {
+  if (!supabaseClient || !state.user || typeof FREE_BOOTCAMP === "undefined") return;
+
+  for (let index = 0; index < FREE_BOOTCAMP.length; index++) {
+    const lessonId = freeBootcampLessonId(index);
+    const userKey = freeBootcampKey(`complete-${index}`);
+    const guestKey = `asb-free-bootcamp-guest-complete-${index}`;
+    const localDone =
+      localStorage.getItem(userKey) === "true" ||
+      localStorage.getItem(guestKey) === "true";
+    if (!localDone) continue;
+    if (state.progress[lessonId]) continue;
+
+    state.progress[lessonId] = true;
+    const result = await upsertUserProgress(lessonId, true);
+    if (!result.ok) {
+      console.error("Migrate free bootcamp progress failed:", lessonId, result.reason);
+    }
+  }
+
+  save();
+}
+
 async function loadProgressFromSupabase() {
   if (!supabaseClient || !state.user) return;
 
@@ -370,7 +476,10 @@ async function loadProgressFromSupabase() {
     progress[row.lesson_id] = row.completed;
   });
 
+  // user_progress is the source of truth; localStorage is only a cache.
   state.progress = progress;
+  await migrateFreeBootcampCacheToSupabase();
+  applyFreeBootcampCacheFromProgress(state.progress);
   save();
 }
 
@@ -384,49 +493,14 @@ async function completeLesson(lessonId) {
     return;
   }
 
-  const { data: existing, error: selectError } = await supabaseClient
-    .from("user_progress")
-    .select("id")
-    .eq("user_id", state.user.id)
-    .eq("lesson_id", lessonId)
-    .maybeSingle();
-
-  if (selectError) {
-    console.error("Select progress error:", selectError);
-    toast(text("同步前檢查失敗", "Sync check failed"));
+  const result = await upsertUserProgress(lessonId, true);
+  if (!result.ok) {
+    toast(
+      result.reason === "select"
+        ? text("同步前檢查失敗", "Sync check failed")
+        : text("進度更新失敗", "Progress update failed")
+    );
     return;
-  }
-
-  if (existing?.id) {
-    const { error } = await supabaseClient
-      .from("user_progress")
-      .update({
-        completed: true,
-        updated_at: new Date().toISOString()
-      })
-      .eq("id", existing.id)
-      .eq("user_id", state.user.id);
-
-    if (error) {
-      console.error("Update progress error:", error);
-      toast(text("進度更新失敗", "Progress update failed"));
-      return;
-    }
-  } else {
-    const { error } = await supabaseClient
-      .from("user_progress")
-      .insert({
-        user_id: state.user.id,
-        lesson_id: lessonId,
-        completed: true,
-        updated_at: new Date().toISOString()
-      });
-
-    if (error) {
-      console.error("Insert progress error:", error);
-      toast(text("進度新增失敗", "Progress insert failed"));
-      return;
-    }
   }
 
   toast(text("學習進度已同步", "Progress synced"));
@@ -878,8 +952,10 @@ function home() {
   const xp = course.completed * 50 + portfolio.completed * 20 + quiz.correct * 10;
   const xpMax = Math.max(course.total * 50 + portfolio.total * 20 + quiz.total * 10, 1);
   const xpPercent = Math.min(100, Math.round((xp / xpMax) * 100));
-  const progress = progressPercent();
-  const done = completedCount();
+  const dash = dashboardProgress();
+  const progress = dash.percent;
+  const done = dash.completed;
+  const lessonTotal = dash.total;
   const badgeCount = earnedBadges().length;
   const projectCount = Math.max((state.favorites || []).length, done);
   const active = LESSONS.find(l => l.id === state.activeLesson);
@@ -962,7 +1038,7 @@ function home() {
                 <article class="home-glass-card home-glass-wide">
                   <span class="home-glass-label">${L("home.dashProgress")}</span>
                   <div class="home-glass-track"><div class="home-glass-bar" style="width:${progress}%"></div></div>
-                  <small>${done}/${LESSONS.length} · ${progress}%</small>
+                  <small>${done}/${lessonTotal} · ${progress}%</small>
                 </article>
                 <article class="home-glass-card">
                   <span class="home-glass-label">${L("home.dashProjects")}</span>
@@ -1399,14 +1475,39 @@ function saveFreeOutput(index) {
 }
 
 function isFreeLessonComplete(index) {
+  if (state.user) {
+    return !!state.progress[freeBootcampLessonId(index)];
+  }
   return localStorage.getItem(freeBootcampKey(`complete-${index}`)) === "true";
 }
 
-function toggleFreeLessonComplete(index) {
+async function toggleFreeLessonComplete(index) {
+  const lessonId = freeBootcampLessonId(index);
   const next = !isFreeLessonComplete(index);
+
+  if (state.user) {
+    state.progress[lessonId] = next;
+    save();
+  }
   localStorage.setItem(freeBootcampKey(`complete-${index}`), next ? "true" : "false");
-  toast(next ? (state.lang === "zh" ? "已完成免費課" : "Free lesson completed") : (state.lang === "zh" ? "已取消完成" : "Completion removed"));
   render();
+
+  if (!state.user || !supabaseClient) {
+    toast(next
+      ? (state.lang === "zh" ? "已完成免費課（本機）" : "Free lesson completed (local)")
+      : (state.lang === "zh" ? "已取消完成" : "Completion removed"));
+    return;
+  }
+
+  const result = await upsertUserProgress(lessonId, next);
+  if (!result.ok) {
+    toast(text("進度同步失敗", "Progress sync failed"));
+    return;
+  }
+
+  toast(next
+    ? (state.lang === "zh" ? "已完成免費課並同步" : "Free lesson completed and synced")
+    : (state.lang === "zh" ? "已取消完成並同步" : "Completion removed and synced"));
 }
 
 function freeBootcampProgress() {
