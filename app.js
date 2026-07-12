@@ -1,4 +1,3 @@
-ㄇ
 const SUPABASE_URL = "https://ifjkadoskbcgrqmcjvya.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_yXHovKCCYE04aUcybOc4KA_Fhdp5bTE";
 
@@ -847,8 +846,8 @@ function homeFooter() {
         <div>
           <h4>${L("home.footerLearn")}</h4>
           <button type="button" onclick="setRoute('free')">${L("home.footerFree")}</button>
-          <button type="button" onclick="setRoute('assessment')">${text("Assessment", "Assessment")}</button>
-          <button type="button" onclick="setRoute('prompts')">${text("Prompts", "Prompts")}</button>
+          <button type="button" onclick="setRoute('assessment')">${L("home.footerAssessment")}</button>
+          <button type="button" onclick="setRoute('prompts')">${L("home.footerPrompts")}</button>
         </div>
         <div>
           <h4>${L("home.footerCompany")}</h4>
