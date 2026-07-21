@@ -25,6 +25,7 @@ let state = {
   assessment: JSON.parse(localStorage.getItem("asb_assessment") || "null"),
   favorites: JSON.parse(localStorage.getItem("asb_favorites") || "[]"),
   user: null,
+  userPlan: "free",
   loadingProgress: false
 };
 
@@ -320,14 +321,54 @@ async function syncUserProfile(user) {
   }
 }
 
+function normalizeUserPlan(plan) {
+  return plan === "premium" ? "premium" : "free";
+}
+
+/**
+ * Single source of truth for plan: public.profiles.plan → state.userPlan.
+ * Never reads plan from localStorage. Creator email is not auto-upgraded.
+ */
+async function loadUserPlan(user) {
+  state.userPlan = "free";
+
+  if (!supabaseClient || !user?.id) return;
+
+  try {
+    const { data, error } = await supabaseClient
+      .from("profiles")
+      .select("plan")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    if (error) {
+      console.warn("Load user plan failed:", error);
+      state.userPlan = "free";
+      return;
+    }
+
+    if (!data || data.plan == null || data.plan === "") {
+      state.userPlan = "free";
+      return;
+    }
+
+    state.userPlan = normalizeUserPlan(data.plan);
+  } catch (err) {
+    console.warn("Load user plan failed:", err);
+    state.userPlan = "free";
+  }
+}
+
 async function handleAuthSession(session) {
   state.user = session?.user || null;
 
   if (session?.user) {
     await syncUserProfile(session.user);
+    await loadUserPlan(session.user);
     await loadProgressFromSupabase();
     await loadNotesFromSupabase();
   } else {
+    state.userPlan = "free";
     state.progress = JSON.parse(localStorage.getItem("asb_progress") || "{}");
     state.notes = JSON.parse(localStorage.getItem("asb_notes") || "{}");
   }
@@ -347,8 +388,11 @@ async function initAuth() {
 
   if (state.user) {
     await syncUserProfile(state.user);
+    await loadUserPlan(state.user);
     await loadProgressFromSupabase();
     await loadNotesFromSupabase();
+  } else {
+    state.userPlan = "free";
   }
 }
 
@@ -361,8 +405,7 @@ async function signInWithGoogle() {
   const { error } = await supabaseClient.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: "https://ai-skill-bridge-woad.vercel.app"
-    }
+redirectTo: window.location.origin    }
   });
 
   if (error) alert(error.message);
@@ -372,6 +415,7 @@ async function signOut() {
   if (!supabaseClient) return;
   await supabaseClient.auth.signOut();
   state.user = null;
+  state.userPlan = "free";
   render();
 }
 
@@ -1184,8 +1228,8 @@ function home() {
               <h3>${L("home.pricePremium")}</h3>
               <p>${L("home.pricePremiumDesc")}</p>
               <div class="home-price-row">
-                <span class="home-price-old">${L("home.priceOriginal")} <s>NT$1990</s></span>
-                <span class="home-price-new">${L("home.priceLaunch")} <b>NT$999</b></span>
+                <span class="home-price-old">${text("原價", "Original Price")} <s>NT$3,999</s></span>
+                <span class="home-price-new">${text("早鳥價", "Early Bird Price")} <b>NT$2,999</b></span>
               </div>
               <ul>
                 <li>${L("home.pricePremium1")}</li>
@@ -2116,6 +2160,7 @@ function course() {
         <section class="panel">
           <span class="tag free">${text("已開通", "Unlocked")}</span>
           <h1>${state.lang === "zh" ? item.zhTitle : item.enTitle}</h1>
+          <p class="price">${item.price}</p>
           <p class="lead">${state.lang === "zh" ? item.zhOutcome : item.enOutcome}</p><p><b>${text("課程完成度", "Course Progress")}：</b>${courseProgress(item.id).completed}/${courseProgress(item.id).total}（${courseProgress(item.id).percent}%）</p><button class="btn secondary" onclick="setRoute('applicationPackage')">${text("我的大學申請包", "My Application Package")}</button>
         </section>
         <section class="panel" style="margin-top:24px">

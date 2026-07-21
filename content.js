@@ -1664,7 +1664,7 @@ const PREMIUM = [
   },
   {
     id: "workplace-productivity",
-    price: "NT$1299",
+    price: "NT$1,299",
     paymentUrl: "https://gumroad.com/",
     zhTitle: "職場生產力 AI 工作流課",
     enTitle: "AI Workplace Productivity Workflow Lab",
@@ -1713,7 +1713,7 @@ const PREMIUM = [
   },
   {
     id: "startup-automation",
-    price: "NT$1499",
+    price: "NT$1,499",
     paymentUrl: "https://gumroad.com/",
     zhTitle: "創業與 AI 自動化實戰課",
     enTitle: "AI Startup and Automation Lab",
