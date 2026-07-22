@@ -2052,7 +2052,10 @@ function premium() {
         <div class="practice">
           <h3>${text("課程內容", "Course Lessons")}</h3>
           <ol>
-            ${(state.lang === "zh" ? course.zhLessons : course.enLessons).map(item => `<li>${item}</li>`).join("")}
+            ${(course.chapters
+              ? course.chapters.map(ch => state.lang === "zh" ? ch.zhTitle : ch.enTitle)
+              : (state.lang === "zh" ? course.zhLessons : course.enLessons)
+            ).map(item => `<li>${item}</li>`).join("")}
           </ol>
         </div>
 
@@ -2131,8 +2134,25 @@ function openCourse(courseId) {
   render();
 }
 
+function isLessonUnlocked(courseId, lessonIndex) {
+  const item = typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === courseId) : null;
+  if (!item) return false;
+  if (!item.sequentialUnlock) return true;
+  const index = Number(lessonIndex);
+  if (index <= 0) return true;
+  return isLessonComplete(courseId, index - 1);
+}
+
 function openLesson(index) {
-  currentLessonIndex = Number(index);
+  const item = (typeof PREMIUM !== "undefined" && currentCourseId)
+    ? PREMIUM.find(p => p.id === currentCourseId)
+    : null;
+  const lessonIndex = Number(index);
+  if (item && item.sequentialUnlock && !isLessonUnlocked(item.id, lessonIndex)) {
+    toast(state.lang === "zh" ? "請先完成上一課再解鎖" : "Complete the previous lesson to unlock this one");
+    return;
+  }
+  currentLessonIndex = lessonIndex;
   state.route = "lesson";
   window.scrollTo(0, 0);
   render();
@@ -2152,6 +2172,62 @@ function course() {
   }
 
   const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
+  const progress = courseProgress(item.id);
+  const details = (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[item.id])
+    ? PREMIUM_LESSON_DETAILS[item.id]
+    : [];
+
+  const renderLessonCard = (i) => {
+    const title = lessons[i] || "";
+    const detail = details[i] || {};
+    const complete = isLessonComplete(item.id, i);
+    const unlocked = isLessonUnlocked(item.id, i);
+    const desc = state.lang === "zh" ? (detail.zhValueTip || "") : (detail.enValueTip || "");
+    const icon = detail.icon || "";
+    const statusTag = complete
+      ? `<span class="tag free">${icon ? icon + " " : ""}✓ ${text("已完成", "Completed")}</span>`
+      : unlocked
+        ? `<span class="tag">${icon ? icon + " " : ""}Lesson ${i + 1}</span>`
+        : `<span class="tag premiumtag">${icon ? icon + " " : ""}🔒 ${text("未解鎖", "Locked")}</span>`;
+
+    return `
+      <article class="card">
+        ${statusTag}
+        <h3>${title}</h3>
+        ${desc ? `<p>${desc}</p>` : ""}
+        ${
+          unlocked
+            ? `<button type="button" class="btn primary" onclick="openLesson(${i})">${text("進入本課", "Open Lesson")}</button>`
+            : `<button type="button" class="btn secondary" disabled>${text("先完成上一課", "Complete previous lesson")}</button>`
+        }
+      </article>
+    `;
+  };
+
+  const lessonSections = item.chapters && item.chapters.length
+    ? item.chapters.map(ch => {
+        const start = Number(ch.start) || 0;
+        const count = Number(ch.count) || 0;
+        const chapterDone = Array.from({ length: count }, (_, offset) => isLessonComplete(item.id, start + offset)).filter(Boolean).length;
+        return `
+          <section class="panel" style="margin-top:24px">
+            <span class="tag">${ch.icon || ""} ${state.lang === "zh" ? ch.zhTitle : ch.enTitle}</span>
+            <h2>${state.lang === "zh" ? ch.zhTitle : ch.enTitle}</h2>
+            <p>${text("本章進度", "Chapter progress")}：${chapterDone}/${count}</p>
+            <div class="grid two">
+              ${Array.from({ length: count }, (_, offset) => renderLessonCard(start + offset)).join("")}
+            </div>
+          </section>
+        `;
+      }).join("")
+    : `
+      <section class="panel" style="margin-top:24px">
+        <h2>${text("課程章節", "Course Lessons")}</h2>
+        <div class="grid two">
+          ${lessons.map((_, i) => renderLessonCard(i)).join("")}
+        </div>
+      </section>
+    `;
 
   return shell(`
     <main class="page">
@@ -2161,20 +2237,12 @@ function course() {
           <span class="tag free">${text("已開通", "Unlocked")}</span>
           <h1>${state.lang === "zh" ? item.zhTitle : item.enTitle}</h1>
           <p class="price">${item.price}</p>
-          <p class="lead">${state.lang === "zh" ? item.zhOutcome : item.enOutcome}</p><p><b>${text("課程完成度", "Course Progress")}：</b>${courseProgress(item.id).completed}/${courseProgress(item.id).total}（${courseProgress(item.id).percent}%）</p><button class="btn secondary" onclick="setRoute('applicationPackage')">${text("我的大學申請包", "My Application Package")}</button>
+          <p class="lead">${state.lang === "zh" ? item.zhOutcome : item.enOutcome}</p>
+          <p><b>${text("課程完成度", "Course Progress")}：</b>${progress.completed}/${progress.total}（${progress.percent}%）</p>
+          <div class="package-progress-track"><div class="package-progress-bar" style="width:${progress.percent}%"></div></div>
+          ${item.id === "admissions" ? `<button class="btn secondary" onclick="setRoute('applicationPackage')">${text("我的大學申請包", "My Application Package")}</button>` : ""}
         </section>
-        <section class="panel" style="margin-top:24px">
-          <h2>${text("課程章節", "Course Lessons")}</h2>
-          <div class="grid two">
-            ${lessons.map((l, i) => `
-              <article class="card">
-                <span class="tag">Lesson ${i + 1}</span>
-                <h3>${l}</h3>
-                <button type="button" class="btn primary" onclick="openLesson(${i})">${text("進入本課", "Open Lesson")}</button>
-              </article>
-            `).join("")}
-          </div>
-        </section>
+        ${lessonSections}
       </div>
     </main>
   `);
@@ -2188,7 +2256,12 @@ function openNextLesson() {
     : null;
   const lessons = item ? (state.lang === "zh" ? item.zhLessons : item.enLessons) : [];
   const max = Math.max(lessons.length - 1, 0);
-  currentLessonIndex = Math.min(Number(currentLessonIndex || 0) + 1, max);
+  const nextIndex = Math.min(Number(currentLessonIndex || 0) + 1, max);
+  if (item && item.sequentialUnlock && !isLessonUnlocked(item.id, nextIndex)) {
+    toast(state.lang === "zh" ? "請先標記本課完成，才能進入下一課" : "Mark this lesson complete before opening the next one");
+    return;
+  }
+  currentLessonIndex = nextIndex;
   state.route = "lesson";
   window.scrollTo(0, 0);
   render();
@@ -2351,6 +2424,22 @@ function lesson() {
     return shell(`<main class="page"><div class="wrap"><h1>${text("找不到課程", "Course Not Found")}</h1><button class="btn primary" onclick="setRoute('premium')">${text("回到進階付費", "Back to Premium")}</button></div></main>`);
   }
 
+  if (item.sequentialUnlock && !isLessonUnlocked(item.id, currentLessonIndex)) {
+    return shell(`
+      <main class="page">
+        <div class="wrap">
+          <button class="btn secondary" onclick="setRoute('course')">← ${text("回到課程首頁", "Back to Course")}</button>
+          <section class="panel">
+            <span class="tag premiumtag">🔒 ${text("未解鎖", "Locked")}</span>
+            <h1>${text("請先完成上一課", "Complete the previous lesson first")}</h1>
+            <p class="lead">${text("這門課採循序解鎖。完成上一課並標記完成後，即可開啟本課。", "This course unlocks lessons in order. Mark the previous lesson complete to continue.")}</p>
+            <button class="btn primary" onclick="setRoute('course')">${text("回到課程地圖", "Back to Course Map")}</button>
+          </section>
+        </div>
+      </main>
+    `);
+  }
+
   const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
   const fallbackTitle = lessons[currentLessonIndex] || lessons[0];
   const courseDetails = (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[item.id])
@@ -2365,6 +2454,33 @@ function lesson() {
     const practiceSteps = practiceText.split("；").filter(Boolean);
     const checklist = state.lang === "zh" ? (detail.zhDeliverableChecklist || []) : (detail.enDeliverableChecklist || []);
     const scorecard = state.lang === "zh" ? (detail.zhScorecard || []) : (detail.enScorecard || []);
+    const chapter = (item.chapters || []).find(ch => {
+      const start = Number(ch.start) || 0;
+      const count = Number(ch.count) || 0;
+      return currentLessonIndex >= start && currentLessonIndex < start + count;
+    });
+    const chapterLessons = chapter
+      ? Array.from({ length: Number(chapter.count) || 0 }, (_, offset) => Number(chapter.start) + offset)
+      : [];
+
+    const chapterNav = chapter ? `
+          <section class="panel" style="margin-top:24px">
+            <span class="tag">${detail.icon || chapter.icon || ""} ${state.lang === "zh" ? chapter.zhTitle : chapter.enTitle}</span>
+            <h2>${text("課程導航", "Lesson Navigation")}</h2>
+            <p>${text("同一 Chapter 的課程快速切換：", "Jump within this chapter:")}</p>
+            <div class="btnrow">
+              ${chapterLessons.map(i => {
+                const complete = isLessonComplete(item.id, i);
+                const unlocked = isLessonUnlocked(item.id, i);
+                const active = i === currentLessonIndex;
+                if (!unlocked) {
+                  return `<button class="btn secondary" disabled>🔒 ${i + 1}</button>`;
+                }
+                return `<button class="btn ${active ? "primary" : "secondary"}" onclick="openLesson(${i})">${complete ? "✓ " : ""}${i + 1}</button>`;
+              }).join("")}
+            </div>
+          </section>
+    ` : "";
 
     return shell(`
       <main class="page">
@@ -2372,10 +2488,12 @@ function lesson() {
           <button class="btn secondary" onclick="setRoute('course')">← ${text("回到課程首頁", "Back to Course")}</button>
 
           <section class="panel">
-            <span class="tag">Lesson ${lessonNo}</span>
+            <span class="tag">${detail.icon || ""} Lesson ${lessonNo}${chapter ? " · " + (state.lang === "zh" ? chapter.zhTitle : chapter.enTitle) : ""}</span>
             <h1>${state.lang === "zh" ? detail.zhTitle : detail.enTitle}</h1>
-            <p class="lead">${text("這一課不只看內容，而是要完成一個可以放進大學申請包的實際成果。", "This lesson is not just reading content; it helps you create a real output for your application package.")}</p>
+            <p class="lead">${state.lang === "zh" ? (detail.zhValueTip || text("這一課會幫你完成一個可重用的學習成果。", "This lesson helps you create a reusable learning output.")) : (detail.enValueTip || text("這一課會幫你完成一個可重用的學習成果。", "This lesson helps you create a reusable learning output."))}</p>
           </section>
+
+          ${chapterNav}
 
           <section class="panel" style="margin-top:24px">
             <h2>${text("本課會完成什麼", "What You Will Complete")}</h2>
@@ -2502,7 +2620,10 @@ function lesson() {
           <section class="panel" style="margin-top:24px">
             <h2>${text("課後成果", "Final Output")}</h2>
             <p><b>${state.lang === "zh" ? detail.zhOutcome : detail.enOutcome}</b></p>
-            <p>${text("完成這個成果後，請放入你的「大學申請包」。10 課完成後，你會得到一份完整申請資料。", "After completing this output, add it to your application package. After 10 lessons, you will have a complete application package.")}</p><button class="btn secondary" onclick="setRoute('applicationPackage')">${text("打開我的大學申請包", "Open My Application Package")}</button>
+            ${item.id === "admissions"
+              ? `<p>${text("完成這個成果後，請放入你的「大學申請包」。10 課完成後，你會得到一份完整申請資料。", "After completing this output, add it to your application package. After 10 lessons, you will have a complete application package.")}</p><button class="btn secondary" onclick="setRoute('applicationPackage')">${text("打開我的大學申請包", "Open My Application Package")}</button>`
+              : `<p>${text("完成後請把成果存進你的 AI Workspace，並標記本課完成以解鎖下一課。", "Save your output to your AI Workspace, then mark this lesson complete to unlock the next one.")}</p>`
+            }
           </section>
 
           <section class="panel" style="margin-top:24px">
