@@ -833,26 +833,44 @@ First, do the following:
 
 
 
+let moreMenuIgnoreOutsideUntil = 0;
+
+function syncMoreMenuAria(isOpen) {
+  const btn = document.getElementById("moreMenuBtn");
+  if (btn) btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+}
+
 function toggleMoreMenu(event) {
-  if (event) event.stopPropagation();
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
   const menu = document.getElementById("moreMenu");
   if (!menu) return;
-  menu.classList.toggle("open");
+  const willOpen = !menu.classList.contains("open");
+  menu.classList.toggle("open", willOpen);
+  syncMoreMenuAria(willOpen);
+  // Avoid immediate outside-close from the same tap/click gesture on mobile.
+  moreMenuIgnoreOutsideUntil = Date.now() + 350;
 }
 
 function closeMoreMenu() {
   const menu = document.getElementById("moreMenu");
   if (menu) menu.classList.remove("open");
+  syncMoreMenuAria(false);
 }
 
-document.addEventListener("click", function(event) {
+function handleMoreMenuOutsidePointer(event) {
+  if (Date.now() < moreMenuIgnoreOutsideUntil) return;
   const menu = document.getElementById("moreMenu");
-  if (!menu) return;
+  if (!menu || !menu.classList.contains("open")) return;
   const wrap = menu.closest(".more-wrap");
-  if (wrap && !wrap.contains(event.target)) {
-    menu.classList.remove("open");
-  }
-});
+  if (wrap && wrap.contains(event.target)) return;
+  closeMoreMenu();
+}
+
+document.addEventListener("click", handleMoreMenuOutsidePointer);
+document.addEventListener("pointerdown", handleMoreMenuOutsidePointer);
 
 
 function goApplicationPackage() {
@@ -917,10 +935,20 @@ function nav() {
         </div>
 
         <div class="nav-main">
-          ${mainHtml}
+          <div class="nav-main-links">
+            ${mainHtml}
+          </div>
           <div class="more-wrap">
-            <button class="lang" onclick="toggleMoreMenu(event)">☰ ${state.lang === "zh" ? "更多" : "More"}</button>
-            <div id="moreMenu" class="more-menu">
+            <button
+              type="button"
+              id="moreMenuBtn"
+              class="lang"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="moreMenu"
+              onclick="toggleMoreMenu(event)"
+            >☰ ${state.lang === "zh" ? "更多" : "More"}</button>
+            <div id="moreMenu" class="more-menu" role="menu">
               ${moreHtml}
             </div>
           </div>

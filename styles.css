@@ -440,6 +440,16 @@ textarea[id^="application-package-"] {
   justify-content: center;
   gap: 8px;
   min-width: 0;
+  overflow: visible;
+}
+
+.nav-main-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 0 1 auto;
 }
 
 .nav-actions {
@@ -452,6 +462,10 @@ textarea[id^="application-package-"] {
 .more-wrap {
   position: relative;
   display: inline-flex;
+  z-index: 10001;
+  overflow: visible;
+  pointer-events: auto;
+  flex: 0 0 auto;
 }
 
 .more-menu {
@@ -467,7 +481,8 @@ textarea[id^="application-package-"] {
   border-radius: 18px;
   background: rgba(255,255,255,0.98);
   box-shadow: 0 18px 50px rgba(15,23,42,0.14);
-  z-index: 10000;
+  z-index: 10002;
+  pointer-events: auto;
 }
 
 .more-menu.open {
@@ -478,6 +493,7 @@ textarea[id^="application-package-"] {
   width: 100%;
   text-align: left;
   justify-content: flex-start;
+  pointer-events: auto;
 }
 
 .compact-nav button.active {
@@ -487,17 +503,38 @@ textarea[id^="application-package-"] {
 }
 
 @media (max-width: 1050px) {
+  header,
+  .asb-dynamic-header,
+  .compact-nav {
+    overflow: visible;
+  }
+
   .compact-nav {
     align-items: flex-start;
     flex-wrap: wrap !important;
   }
 
+  /* Keep links scrollable without clipping the More dropdown.
+     overflow-x:auto on .nav-main was clipping position:absolute .more-menu. */
   .nav-main {
     order: 3;
     width: 100%;
     justify-content: flex-start;
-    overflow-x: auto;
+    align-items: center;
+    gap: 8px;
+    overflow: visible;
     padding-bottom: 4px;
+  }
+
+  .nav-main-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
   }
 
   .nav-actions {
