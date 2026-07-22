@@ -834,10 +834,20 @@ First, do the following:
 
 
 let moreMenuIgnoreOutsideUntil = 0;
+let moreMenuDelegatedBound = false;
 
 function syncMoreMenuAria(isOpen) {
   const btn = document.getElementById("moreMenuBtn");
   if (btn) btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+}
+
+function setMoreMenuOpen(willOpen) {
+  const menu = document.getElementById("moreMenu");
+  if (!menu) return false;
+  menu.classList.toggle("open", willOpen);
+  syncMoreMenuAria(willOpen);
+  if (willOpen) moreMenuIgnoreOutsideUntil = Date.now() + 400;
+  return true;
 }
 
 function toggleMoreMenu(event) {
@@ -847,31 +857,48 @@ function toggleMoreMenu(event) {
   }
   const menu = document.getElementById("moreMenu");
   if (!menu) return;
-  const willOpen = !menu.classList.contains("open");
-  menu.classList.toggle("open", willOpen);
-  syncMoreMenuAria(willOpen);
-  // Avoid immediate outside-close from the same tap/click gesture on mobile.
-  moreMenuIgnoreOutsideUntil = Date.now() + 350;
+  setMoreMenuOpen(!menu.classList.contains("open"));
 }
 
 function closeMoreMenu() {
-  const menu = document.getElementById("moreMenu");
-  if (menu) menu.classList.remove("open");
-  syncMoreMenuAria(false);
+  setMoreMenuOpen(false);
 }
 
-function handleMoreMenuOutsidePointer(event) {
+function moreMenuEventElement(target) {
+  if (!target) return null;
+  if (target.nodeType === 1) return target;
+  return target.parentElement || null;
+}
+
+function handleMoreMenuDelegatedClick(event) {
+  const el = moreMenuEventElement(event.target);
+  if (!el || typeof el.closest !== "function") return;
+
+  // Toggle when the More button (or its contents) is clicked.
+  if (el.closest("#moreMenuBtn")) {
+    toggleMoreMenu(event);
+    return;
+  }
+
+  // Ignore the synthetic follow-up click from the same mobile tap that opened the menu.
   if (Date.now() < moreMenuIgnoreOutsideUntil) return;
+
   const menu = document.getElementById("moreMenu");
   if (!menu || !menu.classList.contains("open")) return;
-  const wrap = menu.closest(".more-wrap");
-  if (wrap && wrap.contains(event.target)) return;
+
+  // Clicks on menu items keep their own handlers; they call closeMoreMenu().
+  if (el.closest("#moreMenu") || el.closest(".more-wrap")) return;
+
   closeMoreMenu();
 }
 
-document.addEventListener("click", handleMoreMenuOutsidePointer);
-document.addEventListener("pointerdown", handleMoreMenuOutsidePointer);
-
+function bindMoreMenuEvents() {
+  // Event delegation on document survives every SPA render that replaces navbar HTML.
+  // Only bind once; never attach listeners to #moreMenuBtn itself (that node is destroyed on render).
+  if (moreMenuDelegatedBound) return;
+  document.addEventListener("click", handleMoreMenuDelegatedClick);
+  moreMenuDelegatedBound = true;
+}
 
 function goApplicationPackage() {
   if (typeof hasCourseAccess === "function" && hasCourseAccess("admissions")) {
@@ -946,7 +973,6 @@ function nav() {
               aria-haspopup="true"
               aria-expanded="false"
               aria-controls="moreMenu"
-              onclick="toggleMoreMenu(event)"
             >☰ ${state.lang === "zh" ? "更多" : "More"}</button>
             <div id="moreMenu" class="more-menu" role="menu">
               ${moreHtml}
@@ -3152,10 +3178,13 @@ function render() {
     impact
   };
   document.getElementById("app").innerHTML = (routes[state.route] || home)();
+  // Navbar DOM is fully rebuilt on every render; re-check nodes and keep delegation alive.
+  bindMoreMenuEvents();
   save();
 }
 
 async function startApp() {
+  bindMoreMenuEvents();
   await initAuth();
   render();
 }
