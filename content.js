@@ -13425,83 +13425,157 @@ const PREMIUM_LESSON_DETAILS = {
   ]
 };
 
+
 const COURSE_CASE_STUDY_LABELS = {
-  "admissions": {
-    "zh": "高中生升學情境案例",
-    "en": "University Admission Scenario"
-  },
-  "college-learning": {
-    "zh": "大學生學習情境案例",
-    "en": "University Learning Scenario"
-  },
-  "research-competition": {
-    "zh": "研究、專題與競賽情境案例",
-    "en": "Research and Competition Scenario"
-  },
-  "career-internship": {
-    "zh": "求職與實習情境案例",
-    "en": "Career and Internship Scenario"
-  },
-  "workplace-productivity": {
-    "zh": "職場工作情境案例",
-    "en": "Workplace Scenario"
-  },
-  "startup-automation": {
-    "zh": "創業與自動化情境案例",
-    "en": "Entrepreneurship and Automation Scenario"
-  }
+  "admissions": { "zh": "高中生升學情境案例", "en": "University Admission Scenario" },
+  "college-learning": { "zh": "大學生學習情境案例", "en": "University Learning Scenario" },
+  "research-competition": { "zh": "研究、專題與競賽情境案例", "en": "Research and Competition Scenario" },
+  "career-internship": { "zh": "求職與實習情境案例", "en": "Career and Internship Scenario" },
+  "workplace-productivity": { "zh": "職場工作情境案例", "en": "Workplace Scenario" },
+  "startup-automation": { "zh": "創業與自動化情境案例", "en": "Entrepreneurship and Automation Scenario" }
 };
 
-const COURSE_RESULT_PACKAGE_META = {
-  "admissions": {
-    "zhName": "大學申請成果包",
-    "enName": "University Application Result Package",
-    "zhPromise": "完成後你會得到一份完整的大學申請包，包含校系方向、學習歷程、備審架構、自我介紹與面試準備。",
-    "enPromise": "You will finish with a complete university application package: major direction, learning portfolio, review structure, self-introduction, and interview prep.",
-    "zhFinal": "一份完整的大學申請包，包含校系方向、學習歷程、備審架構、自我介紹與面試準備。",
-    "enFinal": "A complete university application package with major direction, learning portfolio, review structure, self-introduction, and interview preparation."
+const RESULT_PACKAGE_CONFIG = [
+  {
+    "id": "free-starter",
+    "courseId": null,
+    "free": true,
+    "icon": "🎁",
+    "totalItems": 5,
+    "zhTitle": "免費入門成果包",
+    "enTitle": "Free Starter Result Package",
+    "zhCourseName": "免費入門／AI 新手訓練營",
+    "enCourseName": "Free Intro / AI Beginner Bootcamp",
+    "zhCapability": "AI 基礎入門",
+    "enCapability": "AI fundamentals",
+    "zhDescription": "把免費入門課的實作成果集中保存，建立可重複使用的 AI 學習起點。",
+    "enDescription": "Collect free intro outputs into one reusable AI starting kit.",
+    "zhFinalOutcome": "一套可展示的 AI 入門成果：目標、Prompt、查證、工具選擇與 7 天行動計畫。",
+    "enFinalOutcome": "A showcase-ready AI starter kit: goals, prompts, verification, tool choice, and a 7-day plan.",
+    "items": [
+      { "zh": "我的 AI 使用目標", "en": "My AI usage goals" },
+      { "zh": "第一份有效 Prompt", "en": "My first effective prompt" },
+      { "zh": "AI 回答查證清單", "en": "AI answer verification checklist" },
+      { "zh": "個人 AI 工具選擇表", "en": "Personal AI tool selection sheet" },
+      { "zh": "我的 7 天 AI 行動計畫", "en": "My 7-day AI action plan" }
+    ]
   },
-  "college-learning": {
-    "zhName": "AI 大學學習系統包",
-    "enName": "AI University Learning System Package",
-    "zhPromise": "完成後你會建立一套個人 AI 大學學習系統，包含教材整理、課堂筆記、報告、簡報與考試複習流程。",
-    "enPromise": "You will build a personal AI university learning system for materials, notes, reports, presentations, and exam review.",
-    "zhFinal": "一套個人 AI 大學學習系統，包含教材整理、課堂筆記、報告、簡報與考試複習流程。",
-    "enFinal": "A personal AI university learning system covering materials, class notes, reports, presentations, and exam review workflows."
+  {
+    "id": "pkg-admissions",
+    "courseId": "admissions",
+    "free": false,
+    "icon": "🎓",
+    "totalItems": 10,
+    "zhTitle": "大學申請成果包",
+    "enTitle": "University Application Result Package",
+    "zhCourseName": "高中生申請大學 AI 實戰課",
+    "enCourseName": "AI University Application Course",
+    "zhCapability": "升學申請",
+    "enCapability": "University admissions",
+    "zhDescription": "集中保存升學申請各課成果，組成完整大學申請包。",
+    "enDescription": "Store every admissions lesson output into one application package.",
+    "zhFinalOutcome": "一份完整的大學申請包，包含校系方向、學習歷程、備審架構、自我介紹與面試準備。",
+    "enFinalOutcome": "A complete university application package with major direction, learning portfolio, review structure, self-introduction, and interview prep."
   },
-  "research-competition": {
-    "zhName": "研究、專題與競賽成果包",
-    "enName": "Research and Competition Result Package",
-    "zhPromise": "完成後你會得到一份研究、專題或競賽專案包，包含研究問題、資料來源、研究方法、成果架構與提案內容。",
-    "enPromise": "You will finish with a research, project, or competition package: question, sources, methods, structure, and proposal.",
-    "zhFinal": "一份研究、專題或競賽專案包，包含研究問題、資料來源、研究方法、成果架構與提案內容。",
-    "enFinal": "A research, project, or competition package with research question, sources, methods, output structure, and proposal content."
+  {
+    "id": "pkg-college-learning",
+    "courseId": "college-learning",
+    "free": false,
+    "icon": "📚",
+    "totalItems": 10,
+    "zhTitle": "AI 大學學習系統包",
+    "enTitle": "AI University Learning System Package",
+    "zhCourseName": "大學生 AI 學習系統",
+    "enCourseName": "AI Learning System for University Students",
+    "zhCapability": "課堂學習、作業與考試",
+    "enCapability": "Coursework, homework, and exams",
+    "zhDescription": "把教材整理、筆記、報告與考試複習流程集中成個人學習系統。",
+    "enDescription": "Turn notes, reports, and exam workflows into one personal learning system.",
+    "zhFinalOutcome": "一套個人 AI 大學學習系統，包含教材整理、課堂筆記、報告、簡報與考試複習流程。",
+    "enFinalOutcome": "A personal AI university learning system for materials, notes, reports, presentations, and exam review."
   },
-  "career-internship": {
-    "zhName": "求職與實習申請包",
-    "enName": "Career and Internship Application Package",
-    "zhPromise": "完成後你會得到一份完整的求職與實習申請包，包含履歷、自我介紹、Cover Letter、作品集與面試準備。",
-    "enPromise": "You will finish with a complete internship and job application package: resume, intro, cover letter, portfolio, and interview prep.",
-    "zhFinal": "一份完整的求職與實習申請包，包含履歷、自我介紹、Cover Letter、作品集與面試準備。",
-    "enFinal": "A complete career and internship application package with resume, self-introduction, cover letter, portfolio, and interview preparation."
+  {
+    "id": "pkg-research-competition",
+    "courseId": "research-competition",
+    "free": false,
+    "icon": "🔬",
+    "totalItems": 10,
+    "zhTitle": "研究、專題與競賽成果包",
+    "enTitle": "Research and Competition Result Package",
+    "zhCourseName": "大學生研究、專題與競賽 AI 實戰課",
+    "enCourseName": "AI Research and Competition Lab",
+    "zhCapability": "研究、專題與競賽",
+    "enCapability": "Research, projects, and competitions",
+    "zhDescription": "集中研究問題、文獻、方法與提案，形成可提交的專案包。",
+    "enDescription": "Collect research questions, sources, methods, and proposals into one project pack.",
+    "zhFinalOutcome": "一份研究、專題或競賽專案包，包含研究問題、資料來源、研究方法、成果架構與提案內容。",
+    "enFinalOutcome": "A research/project/competition package with question, sources, methods, structure, and proposal."
   },
-  "workplace-productivity": {
-    "zhName": "個人 AI 工作流程包",
-    "enName": "Personal AI Workplace Workflow Package",
-    "zhPromise": "完成後你會建立一套個人 AI 工作流程系統，包含文件、Email、SOP、任務管理與企業知識整理方法。",
-    "enPromise": "You will build a personal AI workplace workflow for documents, email, SOPs, tasks, and knowledge management.",
-    "zhFinal": "一套個人 AI 工作流程系統，包含文件、Email、SOP、任務管理與企業知識整理方法。",
-    "enFinal": "A personal AI workplace workflow system for documents, email, SOPs, task management, and enterprise knowledge organization."
+  {
+    "id": "pkg-career-internship",
+    "courseId": "career-internship",
+    "free": false,
+    "icon": "💼",
+    "totalItems": 10,
+    "zhTitle": "求職與實習申請包",
+    "enTitle": "Career and Internship Application Package",
+    "zhCourseName": "求職與實習 AI 實戰課",
+    "enCourseName": "AI Career and Internship Course",
+    "zhCapability": "實習與求職",
+    "enCapability": "Internships and job search",
+    "zhDescription": "集中履歷、Cover Letter、作品集與面試準備，組成求職申請包。",
+    "enDescription": "Collect resume, cover letter, portfolio, and interview prep into one job package.",
+    "zhFinalOutcome": "一份完整的求職與實習申請包，包含履歷、自我介紹、Cover Letter、作品集與面試準備。",
+    "enFinalOutcome": "A complete career/internship package with resume, intro, cover letter, portfolio, and interview prep."
   },
-  "startup-automation": {
-    "zhName": "創業驗證與自動化成果包",
-    "enName": "Startup Validation and Automation Package",
-    "zhPromise": "完成後你會得到一份創業驗證與自動化成果包，包含目標客群、訪談、商業模式、MVP、Pitch Deck 與自動化流程。",
-    "enPromise": "You will finish with a startup validation and automation package: audience, interviews, model, MVP, pitch deck, and automation.",
-    "zhFinal": "一份創業驗證與自動化成果包，包含目標客群、訪談、商業模式、MVP、Pitch Deck 與自動化流程。",
-    "enFinal": "A startup validation and automation package with target audience, interviews, business model, MVP, pitch deck, and automation flows."
+  {
+    "id": "pkg-workplace-productivity",
+    "courseId": "workplace-productivity",
+    "free": false,
+    "icon": "⚙️",
+    "totalItems": 10,
+    "zhTitle": "個人 AI 工作流程包",
+    "enTitle": "Personal AI Workplace Workflow Package",
+    "zhCourseName": "職場生產力 AI 工作流程課",
+    "enCourseName": "AI Workplace Productivity Course",
+    "zhCapability": "職場生產力與工作流程",
+    "enCapability": "Workplace productivity and workflows",
+    "zhDescription": "集中文件、Email、SOP 與任務管理方法，建立個人 AI 工作流。",
+    "enDescription": "Collect docs, email, SOP, and task systems into one workplace workflow pack.",
+    "zhFinalOutcome": "一套個人 AI 工作流程系統，包含文件、Email、SOP、任務管理與企業知識整理方法。",
+    "enFinalOutcome": "A personal AI workplace workflow for documents, email, SOPs, tasks, and knowledge management."
+  },
+  {
+    "id": "pkg-startup-automation",
+    "courseId": "startup-automation",
+    "free": false,
+    "icon": "🚀",
+    "totalItems": 10,
+    "zhTitle": "創業驗證與自動化成果包",
+    "enTitle": "Startup Validation and Automation Package",
+    "zhCourseName": "創業與 AI 自動化實戰課",
+    "enCourseName": "AI Startup and Automation Course",
+    "zhCapability": "創業、產品與自動化",
+    "enCapability": "Startups, products, and automation",
+    "zhDescription": "集中客群、訪談、商業模式、MVP 與自動化流程，形成創業驗證包。",
+    "enDescription": "Collect audience, interviews, model, MVP, and automation into one startup pack.",
+    "zhFinalOutcome": "一份創業驗證與自動化成果包，包含目標客群、訪談、商業模式、MVP、Pitch Deck 與自動化流程。",
+    "enFinalOutcome": "A startup validation and automation package with audience, interviews, model, MVP, pitch deck, and automation."
   }
-};
+];
+
+const COURSE_RESULT_PACKAGE_META = Object.fromEntries(
+  RESULT_PACKAGE_CONFIG.filter(function (p) { return p.courseId; }).map(function (p) {
+    return [p.courseId, {
+      zhName: p.zhTitle,
+      enName: p.enTitle,
+      zhPromise: p.zhDescription,
+      enPromise: p.enDescription,
+      zhFinal: p.zhFinalOutcome,
+      enFinal: p.enFinalOutcome
+    }];
+  })
+);
 
 
 const PREMIUM_LESSON_ID_MAP = {
