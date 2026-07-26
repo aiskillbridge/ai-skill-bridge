@@ -1522,37 +1522,37 @@ const PREMIUM = [
     sequentialUnlock: true,
     zhTitle: "大學生 AI 學習系統",
     enTitle: "AI Learning System for University Students",
-    zhUser: "大一到大四，想用 AI 提升讀書、報告、簡報、筆記與時間管理效率的大學生",
-    enUser: "University students who want to use AI for studying, reports, slides, notes, and time management",
-    zhOutcome: "完成後你會具備 AI 學習能力，並建立可重複使用的個人 AI 學習系統。",
-    enOutcome: "You will build your own AI learning system covering workspace, prompts, course materials, notes, reports, slides, exams, and English reading.",
-    zhDesc: "這門課幫助大學生把 AI 變成可重複使用的學習系統，而不是只拿來交作業。課程聚焦「AI 學習能力」，共 10 堂課。",
-    enDesc: "This course helps university students turn AI into a reusable learning system, not just a shortcut for assignments. It focuses on AI learning skills across 10 lessons.",
-    zhFinalProduct: "個人 AI 學習系統",
-    enFinalProduct: "Personal AI Learning System",
+    zhUser: "大一到大四，想用 AI 提升教材理解、筆記、報告、簡報與考試複習效率的大學生",
+    enUser: "University students who want to use AI for materials, notes, reports, slides, and exam review",
+    zhOutcome: "完成後你會具備 AI 學習能力，並建立可重複使用的個人 AI 大學學習系統。",
+    enOutcome: "You will build AI learning skills and a reusable personal AI university learning system.",
+    zhDesc: "這門課幫助大學生建立教材理解、筆記、報告、簡報與考試複習的 AI 學習系統，而不是只拿 AI 交作業。",
+    enDesc: "This course helps students build an AI system for materials, notes, reports, slides, and exams—not just homework shortcuts.",
+    zhFinalProduct: "AI 大學學習系統包",
+    enFinalProduct: "AI University Learning System Package",
     zhLessons: [
-      "第1課：為什麼大學生需要學習系統，而不是只會問 AI",
-      "第2課：建立 AI 學習工作區",
-      "第3課：為讀書與作業寫出可用的 Prompt",
-      "第4課：用 AI 安排一週課表與讀書優先順序",
-      "第5課：用 AI 做課堂筆記：聽得懂、找得到、複習得了",
-      "第6課：用 AI 消化教材與 PDF，抓出作業與考試重點",
-      "第7課：用 AI 讀懂作業要求，排出課堂報告大綱",
-      "第8課：用 AI 規劃課堂報告簡報結構",
-      "第9課：用 AI 建立考試複習清單與練習節奏",
-      "第10課：用 AI 提升英文閱讀，讀懂原文教材與作業"
+      "第1課：建立正確的 AI 學習方法與使用界線",
+      "第2課：把模糊問題轉成有效學習提問",
+      "第3課：使用 AI 快速理解課堂教材",
+      "第4課：分析圖片、表格、投影片與複雜課件",
+      "第5課：建立有結構的課堂筆記",
+      "第6課：整理課堂資料與重要資訊",
+      "第7課：完成一般課堂報告架構",
+      "第8課：製作清楚的課堂簡報",
+      "第9課：建立考試複習與練習流程",
+      "第10課：整合個人 AI 大學學習系統"
     ],
     enLessons: [
-      "Lesson 1: Why university students need a learning system, not just AI chat",
-      "Lesson 2: Build your AI learning workspace",
-      "Lesson 3: Write usable prompts for studying and assignments",
-      "Lesson 4: Use AI to plan a weekly study schedule and priorities",
-      "Lesson 5: Use AI for class notes you can understand, find, and review",
-      "Lesson 6: Use AI to digest materials and PDFs for assignment and exam focus",
-      "Lesson 7: Use AI to decode assignment briefs and build report outlines",
-      "Lesson 8: Use AI to plan classroom presentation structure",
-      "Lesson 9: Use AI to build exam review lists and practice rhythm",
-      "Lesson 10: Use AI to improve English reading for course materials"
+      "Lesson 1: Build the right AI learning method and usage boundaries",
+      "Lesson 2: Turn vague questions into effective study prompts",
+      "Lesson 3: Use AI to understand course materials quickly",
+      "Lesson 4: Analyze images, tables, slides, and complex courseware",
+      "Lesson 5: Build structured class notes",
+      "Lesson 6: Organize class materials and key information",
+      "Lesson 7: Build a classroom report structure",
+      "Lesson 8: Create a clear classroom presentation",
+      "Lesson 9: Build an exam review and practice workflow",
+      "Lesson 10: Integrate your personal AI university learning system"
     ],
     zhValue: [
       "用系統取代零散工具收藏",
@@ -3495,2038 +3495,4446 @@ const PREMIUM_LESSON_DETAILS = {
   ],
   "college-learning": [
     {
-      "icon": "🎯",
-      "title": "為什麼大學生需要學習系統，而不是只會問 AI",
-      "description": "釐清為什麼要建立大學學習系統：讀書、作業、筆記與考試，並畫出 AI 使用紅線。",
-      "goal": "產出「我的大學 AI 學習動機與風險地圖」：三個痛點、人／AI 分工、不可逾越紅線與 7 天實驗。",
-      "estimatedTime": "45-60 分鐘",
+      "estimatedTime": "50–70 分鐘",
       "difficulty": "入門",
-      "tags": [
-        "AI基礎",
-        "學習動機",
-        "大學生",
-        "Chapter1"
-      ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 0,
-      "chapterZh": "建立 AI 學習系統",
-      "chapterEn": "Build Your AI Learning System",
-      "zhTitle": "第1課：為什麼大學生需要學習系統，而不是只會問 AI",
-      "enTitle": "Lesson 1: Why university students need a learning system, not just AI chat",
-      "zhValueTip": "釐清為什麼要建立大學學習系統：讀書、作業、筆記與考試，並畫出 AI 使用紅線。",
-      "enValueTip": "Clarify why you need a university learning system for reading, homework, notes, and exams—and draw AI red lines.",
-      "zhOutcome": "產出「我的大學 AI 學習動機與風險地圖」：三個痛點、人／AI 分工、不可逾越紅線與 7 天實驗。",
-      "enOutcome": "Produce a motivation-and-risk map: three pain points, human/AI split, red lines, and a 7-day experiment.",
-      "zhConcept": "大學生需要的不是「會問 AI」，而是一套可重複的學習系統：面對讀書、課堂筆記、作業、報告與考試時，能穩定地定義任務、請 AI 協助結構、自己查證與改寫。AI 改變的是速度與結構，不取代理解與責任；你可以更快產出大綱、摘要與練習題，但判斷、記憶與署名仍在你。\n\n最常見錯誤是把作業整段丟給 AI 再原封貼上，這有學術倫理風險，也會失去能力成長。正確目標不是收藏很多工具，而是建立流程：定義任務 → 選擇協助方式 → 設計 Prompt → 檢查輸出 → 保存可重用模板。完成本課後，你要用自己的話回答：我為什麼學 AI？這學期最想改善哪三個學習痛點？我絕不能讓 AI 替我做哪些事？",
-      "enConcept": "University students need a reusable learning system for reading, notes, homework, reports, and exams—not just chatty AI use. AI changes speed and structure, not responsibility. The common failure is submitting unedited AI text. Build a workflow: define, choose help, prompt, inspect, and save templates. Finish by stating why you learn AI, which three study pains matter, and which red lines you will not cross.",
-      "zhCaseStudy": "大二小瑜每週趕報告，以前會說「幫我寫永續發展報告」，得到空泛文章，助教指出引用不明、沒有自己的觀點。後來她改成先寫真實問題「校園外送包裝如何減少？」，再請 AI 拆成討論問題、資料來源類型、大綱、反方觀點與查證點。同樣一小時，她得到能開始寫作的學習地圖，也明白 AI 最有用的是打開卡住的起點，不是代寫正文。",
-      "enCaseStudy": "Sophomore Xiaoyu stopped asking for a full ghostwritten report. She framed a real campus-waste question and asked AI for discussion questions, source types, outline, counterpoints, and verification checks—getting a usable learning map instead of empty prose.",
-      "zhWorkflow": [
-        "列出學習痛點",
-        "畫人／AI／自做邊界",
-        "產出動機與風險地圖",
-        "設定 7 天實驗",
-        "實驗後回顧並改紅線"
-      ],
-      "enWorkflow": [
-        "List study pains",
-        "Draw human/AI/self boundaries",
-        "Draft motivation-risk map",
-        "Set a 7-day experiment",
-        "Review and revise red lines"
-      ],
-      "zhCommonMistakes": [
-        "把「會問 AI」當成已經會學習",
-        "紅線寫得很漂亮卻仍整份貼上交",
-        "一次想改善所有科目導致失敗",
-        "只討論工具名稱，不討論學習任務",
-        "讓 AI 決定你該關心哪些課程目標"
-      ],
-      "enCommonMistakes": [
-        "Equating chatting with AI to having a learning system",
-        "Ignoring red lines and pasting full answers",
-        "Trying to fix every course at once",
-        "Talking tools instead of study tasks",
-        "Letting AI choose your course goals"
-      ],
-      "zhExcellentExample": "一頁地圖包含：三個本學期學習痛點、每個痛點的人／AI／必須自做分工、三條紅線、一個 7 天小實驗（只選一堂課或一份作業驗證流程）。",
-      "enExcellentExample": "One-page map with three study pains, human/AI/must-do-myself splits, three red lines, and a 7-day experiment on one course or assignment.",
-      "zhPrompt": "請擔任大學學習教練。我的科系：【】。這學期最耗時的學習任務：【列出 3 項，例如筆記／作業／考試】。我目前對 AI 的使用程度：【幾乎沒用／偶爾／常用】。\n\n請先問 5 個澄清問題。確認後輸出：\n1) 我建立學習系統的三個具體理由\n2) 最值得先改善的一個學習任務\n3) 我不該交給 AI 的三件事（紅線）\n4) 未來 7 天可執行的實驗計畫\n請用繁體中文，條列清楚，聚焦課堂學習。",
-      "enPrompt": "Act as a university learning coach. Major: []. Top 3 time-consuming study tasks: []. AI usage level: []. Ask 5 clarifying questions, then output three reasons, one priority study task, three red lines, and a 7-day experiment. Stay on classroom learning.",
-      "zhCoachPrompt": "請檢查我的學習動機與風險地圖是否空泛，紅線是否可執行，並建議如何縮小 7 天實驗。",
-      "enCoachPrompt": "Review whether my map is vague and whether red lines and the 7-day experiment are executable.",
-      "zhFeedbackPrompt": "你是一位大學學習教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 是否聚焦課堂學習\n- 紅線是否可執行\n- 實驗是否夠小\n- 是否避免代寫思維\n- 是否能說清楚為什麼學\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a university learning coach. Score 1-10 for: Focus on coursework, Actionable red lines, Small experiment, No ghostwriting mindset, Clear why. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhExample": "痛點「報告總拖到最後一晚」→ 人負責選題與論點；AI 協助大綱與反方觀點；必須自己查證來源。紅線：不讓 AI 直接交作業、不捏造資料、不使用未核對引用。7 天實驗：本週只選一堂課筆記做 AI 摘要＋自己改寫。",
-      "enExample": "Deadline panic → human chooses topic; AI helps outline; student verifies sources. Red lines forbid ghostwriting and unchecked citations. Weekly experiment: improve one lecture note only.",
-      "zhPractice": "寫下本學期最耗時的 3 個學習任務。；對每個任務做「人做／AI 協助／必須自己完成」分工。；用 Prompt 產動機與風險地圖初稿，再自己修改至少 40%。；把紅線寫進筆記首頁。；Challenge：選一個真實作業，寫下「若完全交給 AI 會失去什麼能力？」並提出替代用法。",
-      "enPractice": "List 3 study tasks.；Split human/AI/must-self.；Draft the map and revise 40%.；Put red lines on your notes home.；Challenge: for one real assignment, write what ability you would lose if AI did everything.",
-      "zhQuizItems": [
-        {
-          "q": "大學生學 AI 最正確的目標是？",
-          "options": [
-            "建立可重複、可查證的學習流程",
-            "收藏越多工具越好",
-            "讓 AI 直接完成所有作業"
-          ],
-          "answer": 0,
-          "explain": "重點是流程與判斷。"
-        },
-        {
-          "q": "下列哪一項最不適合完全交給 AI？",
-          "options": [
-            "直接生成並提交整份作業",
-            "產生報告大綱草稿",
-            "整理自己提供的筆記分類建議"
-          ],
-          "answer": 0,
-          "explain": "未修改直接提交有倫理風險。"
-        },
-        {
-          "q": "「動機與風險地圖」為什麼重要？",
-          "options": [
-            "先釐清為什麼學、學什麼、不學什麼",
-            "裝飾筆記封面",
-            "取代所有後續課程"
-          ],
-          "answer": 0,
-          "explain": "有方向後流程才有意義。"
-        },
-        {
-          "q": "本課討論範圍應聚焦？",
-          "options": [
-            "讀書、筆記、作業與考試",
-            "與課堂無關的長期職涯包裝",
-            "與本學期課程無關的雜事"
-          ],
-          "answer": 0,
-          "explain": "只服務學習能力。"
-        },
-        {
-          "q": "7 天實驗最好的設計是？",
-          "options": [
-            "只選一個小任務驗證流程",
-            "一次改完全部科目",
-            "完全不做只規劃"
-          ],
-          "answer": 0,
-          "explain": "小實驗才學得到。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "大學生學 AI 最正確的目標是？",
-          "options": [
-            "建立可重複、可查證的學習流程",
-            "收藏越多工具越好",
-            "讓 AI 直接完成所有作業"
-          ],
-          "answer": 0,
-          "explain": "重點是流程與判斷。"
-        },
-        {
-          "q": "下列哪一項最不適合完全交給 AI？",
-          "options": [
-            "直接生成並提交整份作業",
-            "產生報告大綱草稿",
-            "整理自己提供的筆記分類建議"
-          ],
-          "answer": 0,
-          "explain": "未修改直接提交有倫理風險。"
-        },
-        {
-          "q": "「動機與風險地圖」為什麼重要？",
-          "options": [
-            "先釐清為什麼學、學什麼、不學什麼",
-            "裝飾筆記封面",
-            "取代所有後續課程"
-          ],
-          "answer": 0,
-          "explain": "有方向後流程才有意義。"
-        },
-        {
-          "q": "本課討論範圍應聚焦？",
-          "options": [
-            "讀書、筆記、作業與考試",
-            "與課堂無關的長期職涯包裝",
-            "與本學期課程無關的雜事"
-          ],
-          "answer": 0,
-          "explain": "只服務學習能力。"
-        },
-        {
-          "q": "7 天實驗最好的設計是？",
-          "options": [
-            "只選一個小任務驗證流程",
-            "一次改完全部科目",
-            "完全不做只規劃"
-          ],
-          "answer": 0,
-          "explain": "小實驗才學得到。"
-        }
-      ],
-      "zhNotePrompt": "貼上你的動機與風險地圖（含紅線與 7 天實驗）。",
-      "enNotePrompt": "Paste your motivation-and-risk map with red lines and the 7-day experiment.",
-      "zhDeliverableChecklist": [
-        "三個痛點",
-        "分工表",
-        "三條紅線",
-        "7 天實驗",
-        "已用自己的話改寫"
-      ],
-      "enDeliverableChecklist": [
-        "Three pains",
-        "Split table",
-        "Three red lines",
-        "7-day experiment",
-        "Rewritten in your words"
-      ],
-      "zhScorecard": [
-        "是否聚焦課堂學習",
-        "紅線是否可執行",
-        "實驗是否夠小",
-        "是否避免代寫思維",
-        "是否能說清楚為什麼學"
-      ],
-      "enScorecard": [
-        "Focus on coursework",
-        "Actionable red lines",
-        "Small experiment",
-        "No ghostwriting mindset",
-        "Clear why"
-      ],
-      "resources": [
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "澄清動機、拆解任務、產出初稿地圖"
-        },
-        {
-          "name": "Claude",
-          "url": "https://claude.ai",
-          "note": "長文整理與較嚴謹的風險審核"
-        },
-        {
-          "name": "學校學術倫理規範",
-          "url": "https://www.google.com/search?q=university+generative+AI+academic+integrity",
-          "note": "查自己學校對生成式 AI 的規定"
-        }
-      ],
-      "challenge": "找一位同學，用 3 分鐘說明：你為什麼學 AI、紅線是什麼、本週要實驗什麼。講不清就改地圖。",
       "id": "college-learning-L1",
-      "lessonKey": "college-learning-L1"
-    },
-    {
-      "icon": "🖥️",
-      "title": "建立 AI 學習工作區",
-      "description": "建立可長期使用的 AI 學習工作區、資料夾結構與模板存放規則。",
-      "goal": "我的 AI Workspace 架構圖與資料夾規則",
-      "estimatedTime": "45-60 分鐘",
-      "difficulty": "入門",
-      "tags": [
-        "Workspace",
-        "檔案管理",
-        "模板",
-        "Chapter1"
+      "lessonKey": "college-learning-L1",
+      "zhTitle": "第1課：建立正確的 AI 學習方法與使用界線",
+      "enTitle": "Lesson 1: Build the right AI learning method and usage boundaries",
+      "zhValueTip": "先建立學習方法與紅線，再談工具，才不會把 AI 變成代寫捷徑。",
+      "enValueTip": "Set method and red lines before tools so AI does not become ghostwriting.",
+      "zhOutputName": "AI 學習方法與使用界線卡",
+      "enOutputName": "AI learning method and boundary card",
+      "zhOutcome": "完成本課後產出：AI 學習方法與使用界線卡",
+      "enOutcome": "After this lesson, produce: AI learning method and boundary card",
+      "zhObjectives": [
+        "能夠辨識「會問 AI」與「會用 AI 學習」的差異",
+        "能夠建立人／AI／必須自做的分工界線",
+        "能夠完成一張可執行的 AI 學習方法與使用界線卡"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 0,
-      "chapterZh": "建立 AI 學習系統",
-      "chapterEn": "Build Your AI Learning System",
-      "zhTitle": "第2課：建立 AI 學習工作區",
-      "enTitle": "Lesson 2: Build your AI learning workspace",
-      "zhValueTip": "建立可長期使用的 AI 學習工作區、資料夾結構與模板存放規則。",
-      "enValueTip": "Build a durable AI learning workspace, folder structure, and template rules.",
-      "zhOutcome": "我的 AI Workspace 架構圖與資料夾規則",
-      "enOutcome": "My AI Workspace Architecture and Folder Rules",
-      "zhConcept": "很多大學生不是沒有用 AI，而是每次都從頭聊、從頭找檔案、從頭複製舊 Prompt，結果看起來很忙，實際上沒有累積。AI Workspace 的意思，不是再買一個新軟體，而是把你的學習環境設計成「可找回、可重用、可升級」的系統。一個夠用的 Workspace 至少包含五區：Inbox（臨時丟入）、Courses（依課程分類）、Projects（報告與專題）、Prompts（可重用提示詞）、Outputs（已修改過的成果）。你可以用 Google Drive、Notion、Obsidian 或本機資料夾，重點不是工具品牌，而是命名規則與保存習慣。建議檔名包含日期、課程、任務，例如 2026-03-15_統計學_筆記摘要_v2。還要分開「AI 原始輸出」與「我修改後的版本」，避免以後分不清哪一段是自己的判斷。Workspace 建好後，後面每一課的成果都有地方放，Progress 才會變成真實資產，而不是聊天紀錄裡的碎片。",
-      "enConcept": "Many students use AI without accumulation because every chat and file starts from zero. An AI Workspace is a recoverable, reusable, upgradable system with Inbox, Courses, Projects, Prompts, and Outputs. Tool brand matters less than naming rules and the habit of separating raw AI output from your revised version.",
-      "zhCaseStudy": "情境案例：大一阿哲把所有 AI 對話都留在瀏覽器，報告檔散落在下載資料夾，需要舊大綱時永遠找不到。期中後他花 40 分鐘建立 Drive：01_Inbox、02_Courses、03_Projects、04_Prompts、05_Outputs，並規定每份 AI 草稿存成 raw，自己改完存成 final。兩週後寫同一門課第二份報告，他直接重用上份的結構模板與引用檢查清單，少花近一半時間。",
-      "enCaseStudy": "First-year Zhe kept AI chats in the browser and files in Downloads. After building a five-folder Drive system and separating raw/final versions, he reused templates on the next report and nearly halved his prep time.",
+      "enObjectives": [
+        "Identify chatting with AI versus learning with AI",
+        "Establish human / AI / must-do-myself boundaries",
+        "Complete an actionable method and boundary card"
+      ],
+      "zhWhyItMatters": {
+        "problem": "很多大學生一打開 AI 就說「幫我寫作業」。",
+        "ineffective": "只追求速度，沒有方法與紅線，最後失去理解與誠信。",
+        "solution": "先定義目標、分工與不可逾越界線，再讓 AI 協助結構。"
+      },
+      "enWhyItMatters": {
+        "problem": "Students often ask AI to write homework immediately.",
+        "ineffective": "Speed without method creates weak learning and integrity risk.",
+        "solution": "Define goals, roles, and red lines before using AI for structure."
+      },
+      "zhConceptBlocks": {
+        "principles": [
+          "AI 改變速度與結構，不取代理解與責任",
+          "先定義任務，再決定 AI 協助方式",
+          "用可重複流程取代零散提問"
+        ],
+        "terms": [
+          "學習系統",
+          "紅線",
+          "必須自做區"
+        ],
+        "criteria": [
+          "能說明人與 AI 分工",
+          "紅線可檢查",
+          "本週能用一堂課驗證"
+        ],
+        "boundaries": [
+          "不可未查證就繳交 AI 內容",
+          "不可偽造資料或引用",
+          "不可整份作業原封貼上"
+        ]
+      },
+      "enConceptBlocks": {
+        "principles": [
+          "AI changes speed and structure, not responsibility",
+          "Define the task before choosing AI help",
+          "Replace scattered prompts with a repeatable workflow"
+        ],
+        "terms": [
+          "Learning system",
+          "Red lines",
+          "Must-do zone"
+        ],
+        "criteria": [
+          "Human/AI roles are clear",
+          "Red lines are checkable",
+          "Testable on one course this week"
+        ],
+        "boundaries": [
+          "Never submit unchecked AI content",
+          "Never invent sources",
+          "Never paste a full assignment unchanged"
+        ]
+      },
+      "zhConcept": "AI 改變速度與結構，不取代理解與責任；先定義任務，再決定 AI 協助方式；用可重複流程取代零散提問；不可未查證就繳交 AI 內容；不可偽造資料或引用；不可整份作業原封貼上",
+      "enConcept": "AI changes speed and structure, not responsibility; Define the task before choosing AI help; Replace scattered prompts with a repeatable workflow; Never submit unchecked AI content; Never invent sources; Never paste a full assignment unchanged",
+      "zhCaseStudyBlocks": {
+        "problem": "大二小瑜報告總拖到最後一晚，直接叫 AI 寫完整篇。",
+        "wrong": "把題目丟給 AI 後原封貼上交。",
+        "right": "先寫真實問題與自己論點，再請 AI 拆大綱、反方觀點與查證清單。",
+        "result": "得到可開始寫作的地圖，並保住學術誠信。"
+      },
+      "enCaseStudyBlocks": {
+        "problem": "Xiaoyu rushed reports and asked AI to write everything.",
+        "wrong": "She pasted AI text as the final paper.",
+        "right": "She wrote her real question first, then asked AI for outline and verification checks.",
+        "result": "She got a usable writing map and kept integrity."
+      },
+      "zhCaseStudy": "問題：大二小瑜報告總拖到最後一晚，直接叫 AI 寫完整篇。。錯誤做法：把題目丟給 AI 後原封貼上交。。正確做法：先寫真實問題與自己論點，再請 AI 拆大綱、反方觀點與查證清單。。成果：得到可開始寫作的地圖，並保住學術誠信。",
+      "enCaseStudy": "Problem: Xiaoyu rushed reports and asked AI to write everything.. Wrong: She pasted AI text as the final paper.. Right: She wrote her real question first, then asked AI for outline and verification checks.. Result: She got a usable writing map and kept integrity.",
+      "zhWorkflowSteps": [
+        {
+          "do": "寫下本學期最耗時的 3 個學習任務",
+          "why": "找出真正痛點",
+          "input": "課表與作業",
+          "output": "三個具體任務",
+          "check": "是否對應真實課程？"
+        },
+        {
+          "do": "為每個任務劃分人／AI／必須自做",
+          "why": "避免代寫思維",
+          "input": "任務清單",
+          "output": "分工表",
+          "check": "必須自做區是否為空？"
+        },
+        {
+          "do": "寫出 3 條紅線與 7 天小實驗",
+          "why": "讓方法可驗證",
+          "input": "分工表",
+          "output": "界線卡",
+          "check": "實驗是否本週可完成？"
+        }
+      ],
+      "enWorkflowSteps": [
+        {
+          "do": "List 3 time-consuming study tasks",
+          "why": "Find real pains",
+          "input": "Syllabus and deadlines",
+          "output": "Three concrete tasks",
+          "check": "Do they map to real courses?"
+        },
+        {
+          "do": "Split human / AI / must-do",
+          "why": "Avoid ghostwriting mindset",
+          "input": "Task list",
+          "output": "Role table",
+          "check": "Is the must-do zone empty?"
+        },
+        {
+          "do": "Write 3 red lines and a 7-day experiment",
+          "why": "Make the method testable",
+          "input": "Role table",
+          "output": "Boundary card",
+          "check": "Can you finish the experiment this week?"
+        }
+      ],
       "zhWorkflow": [
-        "選定主工作區（Drive／Notion／本機）",
-        "建立 Inbox／Courses／Projects／Prompts／Outputs 五區",
-        "訂定檔名規則：日期_課程_任務_版本",
-        "區分 raw（AI原稿）與 final（自己修改）",
-        "把第1課地圖放進 Outputs，並寫一頁 Workspace 規則"
+        "寫下本學期最耗時的 3 個學習任務",
+        "為每個任務劃分人／AI／必須自做",
+        "寫出 3 條紅線與 7 天小實驗"
       ],
       "enWorkflow": [
-        "Choose a primary workspace",
-        "Create five zones",
-        "Define naming rules",
-        "Separate raw vs final",
-        "Save Lesson 1 map and write workspace rules"
+        "List 3 time-consuming study tasks",
+        "Split human / AI / must-do",
+        "Write 3 red lines and a 7-day experiment"
       ],
-      "zhCommonMistakes": [
-        "只建資料夾卻從不歸檔",
-        "所有檔案都叫「期末報告最終版真的最終」",
-        "AI 原稿與自己修改混在一起",
-        "同時維護五套互不同步的系統"
+      "zhPromptPack": {
+        "when": "開始用 AI 學習前",
+        "fields": [
+          "[科系]",
+          "[最耗時任務]",
+          "[AI 使用程度]"
+        ],
+        "body": "請擔任大學學習教練。科系：[科系]。最耗時任務：[最耗時任務]。AI 使用程度：[AI 使用程度]。先問 3 個澄清問題，再輸出：1) 建立學習系統的三個理由 2) 人／AI／必須自做分工 3) 三條可檢查紅線 4) 7 天小實驗。用繁體中文，聚焦課堂學習，不要鼓勵代寫。",
+        "exampleInput": "科系：傳播；任務：報告、筆記、考試；程度：偶爾",
+        "expected": "一份可執行的方法與界線卡"
+      },
+      "enPromptPack": {
+        "when": "Before using AI for study",
+        "fields": [
+          "[major]",
+          "[top tasks]",
+          "[AI usage]"
+        ],
+        "body": "Act as a university learning coach. Major: [major]. Top tasks: [top tasks]. AI usage: [AI usage]. Ask 3 clarifying questions, then output reasons, human/AI/must-do split, three checkable red lines, and a 7-day experiment. No ghostwriting advice.",
+        "exampleInput": "Major: Communication; tasks: reports, notes, exams; usage: occasional",
+        "expected": "An actionable method-and-boundary card"
+      },
+      "zhPrompt": "請擔任大學學習教練。科系：[科系]。最耗時任務：[最耗時任務]。AI 使用程度：[AI 使用程度]。先問 3 個澄清問題，再輸出：1) 建立學習系統的三個理由 2) 人／AI／必須自做分工 3) 三條可檢查紅線 4) 7 天小實驗。用繁體中文，聚焦課堂學習，不要鼓勵代寫。",
+      "enPrompt": "Act as a university learning coach. Major: [major]. Top tasks: [top tasks]. AI usage: [AI usage]. Ask 3 clarifying questions, then output reasons, human/AI/must-do split, three checkable red lines, and a 7-day experiment. No ghostwriting advice.",
+      "zhExample": "一頁界線卡：三個痛點、人／AI／自做分工、三條紅線、一個只選一堂課的 7 天實驗。",
+      "enExample": "One-page card with three pains, role split, three red lines, and one course experiment.",
+      "zhPracticeSteps": [
+        {
+          "task": "列出 3 個學習痛點",
+          "standard": "每個對應一門課或一類任務",
+          "mistakes": "只寫「我很累」",
+          "check": "是否具體？"
+        },
+        {
+          "task": "完成人／AI／必須自做分工",
+          "standard": "三欄都有內容",
+          "mistakes": "必須自做區空白",
+          "check": "提交前能否自檢？"
+        },
+        {
+          "task": "寫出紅線與 7 天實驗並存入成果包",
+          "standard": "實驗小到本週可完成",
+          "mistakes": "一次改全部科目",
+          "check": "明天就能開始？"
+        }
       ],
-      "enCommonMistakes": [
-        "Creating folders but never filing",
-        "Chaotic final-final filenames",
-        "Mixing raw AI and revised work",
-        "Maintaining too many unsynced systems"
+      "enPracticeSteps": [
+        {
+          "task": "List 3 study pains",
+          "standard": "Each maps to a course/task",
+          "mistakes": "Vague complaints",
+          "check": "Is it specific?"
+        },
+        {
+          "task": "Finish role split",
+          "standard": "All columns filled",
+          "mistakes": "Empty must-do zone",
+          "check": "Can you self-check?"
+        },
+        {
+          "task": "Write red lines and experiment",
+          "standard": "Small enough for this week",
+          "mistakes": "Covers every course",
+          "check": "Can you start tomorrow?"
+        }
       ],
-      "zhExcellentExample": "優秀成果包含：一張架構圖、五區用途說明、檔名範例 3 個、raw/final 規則、每週日 10 分鐘整理習慣。看完別人也能照做。",
-      "enExcellentExample": "A strong deliverable includes an architecture diagram, zone purposes, three filename examples, raw/final rules, and a weekly 10-minute cleanup habit.",
-      "zhPrompt": "【Prompt 1｜Workspace 設計師】\n請擔任大學生數位工作流顧問。我的裝置與工具：［例如 Mac + Google Drive + Notion］\n我每週主要任務：［讀書／報告／社團／實習準備］\n請先問我 4 個問題，再設計一套最小可行 AI Workspace：資料夾結構、命名規則、raw/final 規則、每週整理流程。輸出繁體中文檢查清單。",
-      "enPrompt": "[Prompt 1 | Workspace Designer] Ask 4 questions, then design a minimal AI Workspace with folders, naming, raw/final rules, and weekly cleanup.",
-      "zhCoachPrompt": "【Prompt 2｜規則壓力測試】\n請檢查我的 AI Workspace 架構圖。假設下週同時有兩門課報告、一次考試、一個社團企劃，指出哪裡會塞車，並給出更精簡的規則修正版。",
-      "enCoachPrompt": "[Prompt 2 | Stress Test] Review my workspace map against a heavy week with two reports, one exam, and a club plan. Find bottlenecks and propose a simpler rule set.",
-      "zhFeedbackPrompt": "【Prompt 3｜成果回饋】\n以下是我的 AI Workspace 架構圖與規則：\n（貼上）\n請評分：清晰度、可執行性、可擴充性、命名一致性、維護成本。給三個必改項與一版可直接複製的資料夾樹狀圖。",
-      "enFeedbackPrompt": "[Prompt 3 | Feedback] Score clarity, actionability, scalability, naming consistency, and maintenance cost. Give three must-fix items and a copy-ready folder tree.",
-      "zhExample": "範例資料夾：02_Courses/統計學/2026-03-10_講義摘要_raw.md 與 2026-03-10_講義摘要_final.md；04_Prompts/報告大綱_v1.txt；05_Outputs/動機風險地圖_final.pdf。",
-      "enExample": "Example: Courses/Statistics/2026-03-10_notes_raw.md and _final.md; Prompts/report-outline_v1.txt; Outputs/motivation-risk-map_final.pdf.",
-      "zhPractice": "選定一個主工作區並建立五區。；寫下檔名規則與 raw/final 規則。；把第1課成果歸檔到 Outputs。；用 Prompt 1 產架構圖，自己改到可執行。；Challenge：清空下載資料夾中與課業有關的檔案，全部依新規則歸檔至少 10 個檔。",
-      "enPractice": "Create five zones.；Write naming and raw/final rules.；File Lesson 1 output.；Draft with Prompt 1 and revise.；Challenge: refile at least 10 academic files from Downloads.",
+      "zhPractice": "列出 3 個學習痛點；完成人／AI／必須自做分工；寫出紅線與 7 天實驗並存入成果包",
+      "enPractice": "List 3 study pains; Finish role split; Write red lines and experiment",
+      "zhFeedbackPrompt": "你是大學學習教練。請評分我的界線卡（完整度／正確性／清晰度／可用性），檢查是否仍鼓勵代寫，並給出今天可改的三點。不要捏造資料。",
+      "enFeedbackPrompt": "Act as a university learning coach. Score my boundary card and check for ghostwriting mindset. Give three fixes. No invented facts.",
       "zhQuizItems": [
         {
-          "q": "AI Workspace 最核心的目的是什麼？",
+          "q": "大學生學 AI 最正確的目標是？",
           "options": [
-            "讓桌面看起來漂亮",
-            "讓學習成果可找回、可重用、可升級",
-            "強迫使用某個付費軟體"
+            "建立可重複、可查證的學習流程",
+            "收藏越多工具越好",
+            "讓 AI 直接完成所有作業"
           ],
-          "answer": 1,
-          "explain": "重點是累積與重用，不是工具品牌。"
+          "answer": 0,
+          "explain": "重點是流程與判斷。"
         },
         {
-          "q": "為什麼要分開 raw 與 final？",
+          "q": "哪一項最不適合完全交給 AI？",
           "options": [
-            "檔案比較多比較好",
-            "區分 AI 原稿與自己修改，方便查證與負責",
-            "讓老師無法檢查"
+            "直接生成並提交整份作業",
+            "產生報告大綱草稿",
+            "整理筆記分類建議"
           ],
-          "answer": 1,
-          "explain": "分隔版本有助學術誠信與後續修改。"
+          "answer": 0,
+          "explain": "未修改直接提交有風險。"
         },
         {
-          "q": "下列哪個檔名較佳？",
+          "q": "7 天實驗最好的設計是？",
           "options": [
-            "期末報告最終版真的最終.docx",
-            "2026-04-02_行銷學_競品分析_final.docx",
-            "newnew2.docx"
+            "只選一個小任務驗證流程",
+            "一次改完全部科目",
+            "完全不做只規劃"
           ],
-          "answer": 1,
-          "explain": "日期＋課程＋任務＋版本最易找回。"
+          "answer": 0,
+          "explain": "小實驗才學得到。"
         }
       ],
       "enQuizItems": [
         {
-          "q": "Core purpose of an AI Workspace?",
+          "q": "Best goal for AI learning in university?",
           "options": [
-            "Pretty desktop",
-            "Make learning outputs recoverable and reusable",
-            "Force a paid app"
+            "Build a repeatable study workflow",
+            "Collect more tools",
+            "Let AI finish homework"
           ],
-          "answer": 1,
-          "explain": "Accumulation matters most."
+          "answer": 0,
+          "explain": "Process and judgment matter."
         },
         {
-          "q": "Why separate raw and final?",
+          "q": "Which task should AI never fully own?",
           "options": [
-            "More files",
-            "Distinguish AI draft from your revision for integrity and reuse",
-            "Hide from teachers"
+            "Submit a full assignment",
+            "Draft an outline",
+            "Suggest note categories"
           ],
-          "answer": 1,
-          "explain": "Version clarity supports integrity."
+          "answer": 0,
+          "explain": "Unchecked submission is unsafe."
         },
         {
-          "q": "Best filename?",
+          "q": "Best 7-day experiment?",
           "options": [
-            "final-final.docx",
-            "2026-04-02_Marketing_CompetitorAnalysis_final.docx",
-            "newnew2.docx"
+            "Test one small task",
+            "Fix every course",
+            "Plan only"
           ],
-          "answer": 1,
-          "explain": "Date+course+task+version is searchable."
+          "answer": 0,
+          "explain": "Small tests create learning."
         }
       ],
-      "zhNotePrompt": "請寫下：我的主工作區是什麼？五區怎麼用？本週歸檔規則是什麼？",
-      "enNotePrompt": "Write your primary workspace, five-zone uses, and weekly filing rule.",
-      "zhDeliverableChecklist": [
-        "建立五區資料夾",
-        "寫好命名規則",
-        "定義 raw/final",
-        "歸檔第1課成果",
-        "完成一頁 Workspace 架構圖"
-      ],
-      "enDeliverableChecklist": [
-        "Created five zones",
-        "Wrote naming rules",
-        "Defined raw/final",
-        "Filed Lesson 1",
-        "Finished workspace map"
-      ],
-      "zhScorecard": [
-        "結構清晰",
-        "命名一致",
-        "可執行",
-        "可擴充",
-        "維護成本"
-      ],
-      "enScorecard": [
-        "Structure",
-        "Naming",
-        "Actionability",
-        "Scalability",
-        "Maintenance"
-      ],
-      "resources": [
+      "zhRubric": [
         {
-          "name": "Google Drive",
-          "url": "https://drive.google.com",
-          "note": "跨裝置同步的主檔案庫"
+          "name": "完整度",
+          "levels": {
+            "incomplete": "缺主要區塊",
+            "basic": "只有口號",
+            "good": "有分工與紅線",
+            "ready": "含可執行實驗"
+          }
         },
         {
-          "name": "Notion",
-          "url": "https://www.notion.so",
-          "note": "可做課程頁、模板與任務看板"
+          "name": "正確性",
+          "levels": {
+            "incomplete": "鼓勵代寫",
+            "basic": "界線模糊",
+            "good": "大致正確",
+            "ready": "責任清楚"
+          }
         },
         {
-          "name": "Obsidian",
-          "url": "https://obsidian.md",
-          "note": "適合本地筆記與 Second Brain 連結"
+          "name": "結構清晰度",
+          "levels": {
+            "incomplete": "雜亂",
+            "basic": "條列不足",
+            "good": "區塊清楚",
+            "ready": "他人可照做"
+          }
+        },
+        {
+          "name": "可實際使用程度",
+          "levels": {
+            "incomplete": "無法使用",
+            "basic": "需大改",
+            "good": "本週可用",
+            "ready": "可放進系統首頁"
+          }
         }
       ],
-      "challenge": "設定每週日固定 10 分鐘「Workspace 清理」，連續兩週執行並在筆記記錄你刪除或歸檔了什麼。",
-      "id": "college-learning-L2",
-      "lessonKey": "college-learning-L2"
-    },
-    {
-      "icon": "✍️",
-      "title": "為讀書與作業寫出可用的 Prompt",
-      "description": "為讀書與作業寫出可重用 Prompt：角色、目標、背景、格式、限制與檢查。",
-      "goal": "產出 Prompt 公式卡，以及 5 個可重用學習模板（筆記、報告大綱、測驗練習、概念卡、郵件／請假說明）。",
-      "estimatedTime": "45-60 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "Prompt",
-        "提示工程",
-        "模板",
-        "Chapter1"
+      "enRubric": [
+        {
+          "name": "Completeness",
+          "levels": {
+            "incomplete": "Missing blocks",
+            "basic": "Slogans only",
+            "good": "Has split and red lines",
+            "ready": "Includes executable experiment"
+          }
+        },
+        {
+          "name": "Correctness",
+          "levels": {
+            "incomplete": "Encourages ghostwriting",
+            "basic": "Vague",
+            "good": "Mostly correct",
+            "ready": "Clear ownership"
+          }
+        },
+        {
+          "name": "Clarity",
+          "levels": {
+            "incomplete": "Messy",
+            "basic": "Weak lists",
+            "good": "Clear blocks",
+            "ready": "Others can follow"
+          }
+        },
+        {
+          "name": "Usability",
+          "levels": {
+            "incomplete": "Unusable",
+            "basic": "Needs rewrite",
+            "good": "Usable this week",
+            "ready": "Ready for homepage"
+          }
+        }
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 0,
-      "chapterZh": "建立 AI 學習系統",
-      "chapterEn": "Build Your AI Learning System",
-      "zhTitle": "第3課：為讀書與作業寫出可用的 Prompt",
-      "enTitle": "Lesson 3: Write usable prompts for studying and assignments",
-      "zhValueTip": "為讀書與作業寫出可重用 Prompt：角色、目標、背景、格式、限制與檢查。",
-      "enValueTip": "Write reusable study prompts with role, goal, context, format, constraints, and checks.",
-      "zhOutcome": "產出 Prompt 公式卡，以及 5 個可重用學習模板（筆記、報告大綱、測驗練習、概念卡、郵件／請假說明）。",
-      "enOutcome": "Produce a prompt formula card and five reusable study templates (notes, outlines, quiz practice, concept cards, and course email).",
-      "zhConcept": "好的學習 Prompt 不是越短越好，而是把模糊需求翻譯成 AI 可執行的規格：角色、目標、背景、輸入資料、輸出格式、品質標準與禁止事項。大學生常見壞 Prompt 是「幫我寫報告」「幫我想想」；好 Prompt 會說「請擔任課程助教，依我提供的三點大綱，產出比較表與我需自行補充的資料清單，不要寫完整正文」。\n\n本課公式：角色＋目標＋背景＋格式＋限制＋檢查問題。五個模板都服務課堂學習：筆記摘要、報告大綱、測驗練習、概念卡整理、與老師／助教的課程郵件。以後只替換變數，不要每次從空白聊天重來。",
-      "enConcept": "A strong study prompt translates vague needs into specs: role, goal, context, inputs, format, quality bar, and constraints. Bad prompts say “write my report.” Good prompts request structure and forbid full ghostwriting. Build five coursework templates you can reuse by swapping variables.",
-      "zhCaseStudy": "大二阿凱要準備統計小考，對 AI 說「幫我複習」只得到空泛建議。後來他改成提供章節範圍、自己的錯題、考試題型，並要求「先問缺漏 → 產出 10 題練習 → 每題給解題步驟骨架 → 指出我還缺哪些公式卡」。練習立刻變具體，他也第一次知道自己缺的是「假設檢定適用條件」而不是整本再讀一次。",
-      "enCaseStudy": "Kai’s vague “help me review” failed. After providing chapter scope, wrong items, and exam formats—and asking for clarifying questions, 10 practice items, solution skeletons, and missing formula cards—he got actionable study practice.",
-      "zhWorkflow": [
-        "寫出壞 Prompt",
-        "對照公式找缺口",
-        "改寫並加限制",
-        "存成模板",
-        "用真實作業驗證"
+      "zhMistakesDetailed": [
+        {
+          "error": "把「會問 AI」當成已會學習",
+          "why": "沒有流程就無法累積能力",
+          "fix": "先寫任務→協助方式→檢查→保存"
+        },
+        {
+          "error": "紅線漂亮但仍整份貼上交",
+          "why": "有倫理與學習風險",
+          "fix": "提交前用檢查表確認必須自做區"
+        },
+        {
+          "error": "一次想改善所有科目",
+          "why": "實驗過大容易失敗",
+          "fix": "7 天只驗證一個小任務"
+        }
       ],
-      "enWorkflow": [
-        "Capture a weak prompt",
-        "Find missing formula parts",
-        "Rewrite with constraints",
-        "Save as template",
-        "Validate on real coursework"
+      "enMistakesDetailed": [
+        {
+          "error": "Equating chat with learning",
+          "why": "No workflow means no growth",
+          "fix": "Task → help → inspect → save"
+        },
+        {
+          "error": "Ignoring red lines",
+          "why": "Integrity risk",
+          "fix": "Use a pre-submit checklist"
+        },
+        {
+          "error": "Fixing every course at once",
+          "why": "Oversized experiments fail",
+          "fix": "Test one small task"
+        }
       ],
       "zhCommonMistakes": [
-        "只寫「幫我寫」沒有背景與限制",
-        "要求 AI 直接交完整作業",
-        "模板從不更新變數",
-        "用與課堂無關的任務當練習",
-        "把一次成功聊天當永久流程卻不存檔"
+        "把「會問 AI」當成已會學習",
+        "紅線漂亮但仍整份貼上交",
+        "一次想改善所有科目"
       ],
       "enCommonMistakes": [
-        "“Just write it” with no context",
-        "Asking for full submittable essays",
-        "Never updating template variables",
-        "Practicing on non-course tasks",
-        "Not saving a working prompt"
+        "Equating chat with learning",
+        "Ignoring red lines",
+        "Fixing every course at once"
       ],
-      "zhExcellentExample": "公式卡一頁＋五個模板，每個模板都有變數欄位與「禁止代寫全文／禁止假資料」限制，並至少用其中兩個模板完成真實課堂任務。",
-      "enExcellentExample": "One formula card plus five templates with variables and anti-ghostwriting constraints, with at least two used on real coursework.",
-      "zhPrompt": "請擔任 Prompt 教練。我的壞 Prompt 是：【貼上】。任務類型：【筆記摘要／報告大綱／測驗練習／概念卡／課程郵件】。\n\n請指出缺少哪些要素，改寫成包含角色、目標、背景、格式、限制、檢查問題的好 Prompt，並解釋每一段為什麼必要。限制：服務課堂學習；不要要求 AI 產出可直接提交的完整作業正文。",
-      "enPrompt": "Act as a prompt coach. Weak prompt: []. Task type: notes/outline/quiz/concept-cards/course email. Rewrite with role, goal, context, format, constraints, and checks. Stay on coursework; forbid full submittable ghostwriting.",
-      "zhCoachPrompt": "請檢查我的學習 Prompt 是否缺少背景或限制，並改寫得更可執行。",
-      "enCoachPrompt": "Check whether my study prompts lack context or constraints, and rewrite them to be executable.",
-      "zhFeedbackPrompt": "你是一位Prompt 教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 要素是否齊全\n- 是否可重用\n- 限制是否清楚\n- 是否服務學習任務\n- 輸出是否可檢查\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a prompt coach. Score 1-10 for: Completeness, Reusability, Clear constraints, Coursework focus, Checkable output. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhExample": "壞：幫我寫行銷報告。\n好：請擔任行銷系助教。目標：依我提供的主題與三個論點，產出報告大綱與每段需要的證據類型。背景：大三、2000 字、兩天後交。格式：表格。限制：不要寫完整正文、不要編造數據。先問我缺少什麼資料。",
-      "enExample": "Bad: write my marketing report. Good: act as a TA; outline and evidence types from my topic and three arguments; no full essay; no fabricated data; ask clarifying questions first.",
-      "zhPractice": "完成 Prompt 公式卡。；改寫至少 3 個自己以前的壞 Prompt（皆與讀書或作業有關）。；建立 5 個學習模板並存檔。；用其中 2 個完成真實任務後再改一輪。；Challenge：把 1 個模板分享給同學，請他只靠填空完成一次筆記或複習。",
-      "enPractice": "Finish the formula card.；Rewrite 3 weak study prompts.；Build 5 templates.；Run 2 on real tasks.；Challenge: let a classmate use one template by fill-in only.",
-      "zhQuizItems": [
-        {
-          "q": "好 Prompt 通常不該缺少？",
-          "options": [
-            "角色、目標、格式與限制",
-            "越短越好且無背景",
-            "要求一定寫完整作業正文"
-          ],
-          "answer": 0,
-          "explain": "規格越清楚越好控。"
-        },
-        {
-          "q": "為什麼要讓 AI 先問澄清問題？",
-          "options": [
-            "減少因背景不足產生的空泛答案",
-            "浪費時間",
-            "讓 AI 拒絕工作"
-          ],
-          "answer": 0,
-          "explain": "澄清提高相關性。"
-        },
-        {
-          "q": "大學生 Prompt 的重要限制常常是？",
-          "options": [
-            "不要代寫全文、不要假引用",
-            "不要查證",
-            "不要輸出格式"
-          ],
-          "answer": 0,
-          "explain": "學術場景要禁止代寫與假資料。"
-        },
-        {
-          "q": "本課五個模板應服務？",
-          "options": [
-            "筆記、作業、測驗與課程溝通",
-            "與本學期課程無關的雜事",
-            "一次產出整學期所有答案"
-          ],
-          "answer": 0,
-          "explain": "聚焦學習任務。"
-        },
-        {
-          "q": "模板最大價值是？",
-          "options": [
-            "替換變數即可重用",
-            "每次從空白重寫更有創意",
-            "永遠不修改"
-          ],
-          "answer": 0,
-          "explain": "重用降低摩擦。"
-        }
+      "zhSummary": [
+        "先方法後工具",
+        "紅線必須可檢查",
+        "AI 協助結構，人負責理解與署名",
+        "用小實驗驗證流程"
       ],
-      "enQuizItems": [
-        {
-          "q": "好 Prompt 通常不該缺少？",
-          "options": [
-            "角色、目標、格式與限制",
-            "越短越好且無背景",
-            "要求一定寫完整作業正文"
-          ],
-          "answer": 0,
-          "explain": "規格越清楚越好控。"
-        },
-        {
-          "q": "為什麼要讓 AI 先問澄清問題？",
-          "options": [
-            "減少因背景不足產生的空泛答案",
-            "浪費時間",
-            "讓 AI 拒絕工作"
-          ],
-          "answer": 0,
-          "explain": "澄清提高相關性。"
-        },
-        {
-          "q": "大學生 Prompt 的重要限制常常是？",
-          "options": [
-            "不要代寫全文、不要假引用",
-            "不要查證",
-            "不要輸出格式"
-          ],
-          "answer": 0,
-          "explain": "學術場景要禁止代寫與假資料。"
-        },
-        {
-          "q": "本課五個模板應服務？",
-          "options": [
-            "筆記、作業、測驗與課程溝通",
-            "與本學期課程無關的雜事",
-            "一次產出整學期所有答案"
-          ],
-          "answer": 0,
-          "explain": "聚焦學習任務。"
-        },
-        {
-          "q": "模板最大價值是？",
-          "options": [
-            "替換變數即可重用",
-            "每次從空白重寫更有創意",
-            "永遠不修改"
-          ],
-          "answer": 0,
-          "explain": "重用降低摩擦。"
-        }
+      "enSummary": [
+        "Method before tools",
+        "Checkable red lines",
+        "AI helps structure; you own understanding",
+        "Validate with a small experiment"
       ],
-      "zhNotePrompt": "貼上公式卡與你最常用的兩個學習模板。",
-      "enNotePrompt": "Paste your formula card and your two most-used study templates.",
       "zhDeliverableChecklist": [
-        "公式卡",
-        "5 個模板",
-        "至少 3 次改寫",
-        "2 次真實任務驗證",
-        "含禁止代寫限制"
+        "完成「AI 學習方法與使用界線卡」",
+        "完成自我檢查題",
+        "把成果存入成果包"
       ],
       "enDeliverableChecklist": [
-        "Formula card",
-        "5 templates",
-        "3 rewrites",
-        "2 real-task runs",
-        "Anti-ghostwriting constraints"
+        "Finish “AI learning method and boundary card”",
+        "Complete self-check questions",
+        "Save output to the result package"
       ],
       "zhScorecard": [
-        "要素是否齊全",
-        "是否可重用",
-        "限制是否清楚",
-        "是否服務學習任務",
-        "輸出是否可檢查"
+        "完整度",
+        "正確性",
+        "結構清晰度",
+        "可實際使用程度"
       ],
       "enScorecard": [
         "Completeness",
-        "Reusability",
-        "Clear constraints",
-        "Coursework focus",
-        "Checkable output"
+        "Correctness",
+        "Clarity",
+        "Usability"
       ],
-      "resources": [
+      "zhNotePrompt": "用自己的話寫下：本課最重要的一個原則，以及你會如何使用「AI 學習方法與使用界線卡」。",
+      "enNotePrompt": "In your own words: the key principle and how you will use “AI learning method and boundary card”.",
+      "zhCoachPrompt": "請檢查我的「AI 學習方法與使用界線卡」是否具體可執行，並指出空泛之處。",
+      "enCoachPrompt": "Check whether my “AI learning method and boundary card” is concrete and actionable.",
+      "zhExcellentExample": "一頁界線卡：三個痛點、人／AI／自做分工、三條紅線、一個只選一堂課的 7 天實驗。",
+      "enExcellentExample": "One-page card with three pains, role split, three red lines, and one course experiment."
+    },
+    {
+      "estimatedTime": "45–60 分鐘",
+      "difficulty": "入門",
+      "id": "college-learning-L2",
+      "lessonKey": "college-learning-L2",
+      "zhTitle": "第2課：把模糊問題轉成有效學習提問",
+      "enTitle": "Lesson 2: Turn vague questions into effective study prompts",
+      "zhValueTip": "把「看不懂」轉成可回答、可檢查的學習提問。",
+      "enValueTip": "Turn “I don’t get it” into answerable, checkable study questions.",
+      "zhOutputName": "學習提問轉換表",
+      "enOutputName": "Study question conversion sheet",
+      "zhOutcome": "完成本課後產出：學習提問轉換表",
+      "enOutcome": "After this lesson, produce: Study question conversion sheet",
+      "zhObjectives": [
+        "能夠比較模糊提問與有效學習提問",
+        "能夠把教材困惑拆成背景／目標／限制／輸出格式",
+        "能夠完成一張學習提問轉換表"
+      ],
+      "enObjectives": [
+        "Compare vague vs effective study questions",
+        "Break confusion into context/goal/constraints/format",
+        "Complete a question conversion sheet"
+      ],
+      "zhWhyItMatters": {
+        "problem": "學生常問「這章在講什麼？幫我總結」。",
+        "ineffective": "問題太寬，AI 只能給空泛摘要，無法對準你的卡住點。",
+        "solution": "用背景、目標、限制與輸出格式把問題寫清楚。"
+      },
+      "enWhyItMatters": {
+        "problem": "Students ask “summarize this chapter for me.”",
+        "ineffective": "Wide questions produce generic summaries.",
+        "solution": "Specify context, goal, constraints, and output format."
+      },
+      "zhConceptBlocks": {
+        "principles": [
+          "有效提問先說明你卡在哪",
+          "輸出格式決定能不能直接使用",
+          "一次只問一個主要學習問題"
+        ],
+        "terms": [
+          "模糊問題",
+          "有效提問",
+          "輸出格式"
+        ],
+        "criteria": [
+          "含背景與目標",
+          "有限制條件",
+          "輸出可檢查"
+        ],
+        "boundaries": [
+          "不要一次丟整本書不說明重點",
+          "不要要求 AI 替你決定課程目標"
+        ]
+      },
+      "enConceptBlocks": {
+        "principles": [
+          "Effective questions name the stuck point",
+          "Output format decides usability",
+          "Ask one main learning question at a time"
+        ],
+        "terms": [
+          "Vague question",
+          "Effective prompt",
+          "Output format"
+        ],
+        "criteria": [
+          "Includes context and goal",
+          "Has constraints",
+          "Output is checkable"
+        ],
+        "boundaries": [
+          "Don’t dump a whole book without focus",
+          "Don’t let AI choose your course goals"
+        ]
+      },
+      "zhConcept": "有效提問先說明你卡在哪；輸出格式決定能不能直接使用；一次只問一個主要學習問題；不要一次丟整本書不說明重點；不要要求 AI 替你決定課程目標",
+      "enConcept": "Effective questions name the stuck point; Output format decides usability; Ask one main learning question at a time; Don’t dump a whole book without focus; Don’t let AI choose your course goals",
+      "zhCaseStudyBlocks": {
+        "problem": "小哲看完經濟學 PDF 仍不懂供給曲線。",
+        "wrong": "直接說「解釋全部」。",
+        "right": "寫出：我已讀到哪、卡在哪個概念、需要對照例子與自我檢查題。",
+        "result": "得到針對卡住點的解釋與三題自測。"
+      },
+      "enCaseStudyBlocks": {
+        "problem": "Xiao-Zhe still didn’t understand supply curves after reading the PDF.",
+        "wrong": "He asked AI to “explain everything.”",
+        "right": "He stated what he read, where he was stuck, and asked for an example plus self-check questions.",
+        "result": "He got a focused explanation and three self-tests."
+      },
+      "zhCaseStudy": "問題：小哲看完經濟學 PDF 仍不懂供給曲線。。錯誤做法：直接說「解釋全部」。。正確做法：寫出：我已讀到哪、卡在哪個概念、需要對照例子與自我檢查題。。成果：得到針對卡住點的解釋與三題自測。",
+      "enCaseStudy": "Problem: Xiao-Zhe still didn’t understand supply curves after reading the PDF.. Wrong: He asked AI to “explain everything.”. Right: He stated what he read, where he was stuck, and asked for an example plus self-check questions.. Result: He got a focused explanation and three self-tests.",
+      "zhWorkflowSteps": [
         {
-          "name": "OpenAI Prompt examples",
-          "url": "https://platform.openai.com/docs/guides/prompt-engineering",
-          "note": "官方提示工程概念參考"
+          "do": "寫下原本的模糊問題",
+          "why": "看見問題為什麼無效",
+          "input": "當下困惑",
+          "output": "原句",
+          "check": "是否太寬？"
         },
         {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "測試與迭代你的模板"
+          "do": "補上背景、目標、限制、輸出格式",
+          "why": "讓 AI 對準卡住點",
+          "input": "原句與教材範圍",
+          "output": "有效提問",
+          "check": "別人能否據此回答？"
         },
         {
-          "name": "Claude",
-          "url": "https://claude.ai",
-          "note": "適合長模板與細緻改寫評審"
+          "do": "用 AI 回答並寫自測題驗證",
+          "why": "確認真的懂",
+          "input": "有效提問",
+          "output": "轉換表＋自測",
+          "check": "不看答案能否回答？"
         }
       ],
-      "challenge": "選一個你本週真正要交的任務，只用模板完成「規劃階段」（大綱／檢查清單），正文仍自己寫，並記錄省下多少時間。",
+      "enWorkflowSteps": [
+        {
+          "do": "Write the vague question",
+          "why": "See why it fails",
+          "input": "Current confusion",
+          "output": "Original sentence",
+          "check": "Is it too broad?"
+        },
+        {
+          "do": "Add context, goal, constraints, format",
+          "why": "Aim at the stuck point",
+          "input": "Original sentence and scope",
+          "output": "Effective prompt",
+          "check": "Could someone answer from this?"
+        },
+        {
+          "do": "Get an answer and write self-tests",
+          "why": "Verify understanding",
+          "input": "Effective prompt",
+          "output": "Conversion sheet + checks",
+          "check": "Can you answer without looking?"
+        }
+      ],
+      "zhWorkflow": [
+        "寫下原本的模糊問題",
+        "補上背景、目標、限制、輸出格式",
+        "用 AI 回答並寫自測題驗證"
+      ],
+      "enWorkflow": [
+        "Write the vague question",
+        "Add context, goal, constraints, format",
+        "Get an answer and write self-tests"
+      ],
+      "zhPromptPack": {
+        "when": "讀教材卡住時",
+        "fields": [
+          "[課程名稱]",
+          "[已讀範圍]",
+          "[卡住概念]",
+          "[需要的輸出格式]"
+        ],
+        "body": "我正在學習 [課程名稱]。已讀範圍：[已讀範圍]。我卡住的概念：[卡住概念]。請用大學生能懂的方式解釋，並提供：1) 核心定義 2) 一個生活例子 3) 一個常見誤解 4) 三題自我檢查題與答案。輸出格式：[需要的輸出格式]。不要超出現有範圍亂延伸。",
+        "exampleInput": "課程：經濟；範圍：第3章前半；卡住：供給曲線移動；格式：條列",
+        "expected": "針對卡住點的解釋與自測"
+      },
+      "enPromptPack": {
+        "when": "When stuck in materials",
+        "fields": [
+          "[course]",
+          "[range read]",
+          "[stuck concept]",
+          "[output format]"
+        ],
+        "body": "I am studying [course]. Range read: [range read]. Stuck concept: [stuck concept]. Explain for a university student with: 1) definition 2) one example 3) one misconception 4) three self-check questions with answers. Format: [output format]. Do not invent beyond scope.",
+        "exampleInput": "Course: Economics; range: Ch.3 first half; stuck: supply curve shifts; format: bullets",
+        "expected": "Focused explanation with self-checks"
+      },
+      "zhPrompt": "我正在學習 [課程名稱]。已讀範圍：[已讀範圍]。我卡住的概念：[卡住概念]。請用大學生能懂的方式解釋，並提供：1) 核心定義 2) 一個生活例子 3) 一個常見誤解 4) 三題自我檢查題與答案。輸出格式：[需要的輸出格式]。不要超出現有範圍亂延伸。",
+      "enPrompt": "I am studying [course]. Range read: [range read]. Stuck concept: [stuck concept]. Explain for a university student with: 1) definition 2) one example 3) one misconception 4) three self-check questions with answers. Format: [output format]. Do not invent beyond scope.",
+      "zhExample": "轉換表：原問題 → 背景／目標／限制／格式 → 改寫後提問 → AI 回答重點 → 自測結果。",
+      "enExample": "Sheet: original → context/goal/constraints/format → rewritten prompt → answer highlights → self-check.",
+      "zhPracticeSteps": [
+        {
+          "task": "收集 3 句你常問的模糊問題",
+          "standard": "來自真實課程",
+          "mistakes": "編造不存在的課",
+          "check": "是否真實？"
+        },
+        {
+          "task": "把每句改成有效提問",
+          "standard": "含背景目標限制格式",
+          "mistakes": "只加「請詳細一點」",
+          "check": "四要素是否齊全？"
+        },
+        {
+          "task": "選一題實際問 AI 並記錄結果",
+          "standard": "有自測驗證",
+          "mistakes": "只複製答案不檢查",
+          "check": "你是否真懂？"
+        }
+      ],
+      "enPracticeSteps": [
+        {
+          "task": "Collect 3 vague questions",
+          "standard": "From real courses",
+          "mistakes": "Invented courses",
+          "check": "Are they real?"
+        },
+        {
+          "task": "Rewrite each into an effective prompt",
+          "standard": "Has context/goal/constraints/format",
+          "mistakes": "Only add “be detailed”",
+          "check": "Are all four present?"
+        },
+        {
+          "task": "Ask AI once and record the result",
+          "standard": "Includes self-check",
+          "mistakes": "Copy answers without checking",
+          "check": "Do you actually understand?"
+        }
+      ],
+      "zhPractice": "收集 3 句你常問的模糊問題；把每句改成有效提問；選一題實際問 AI 並記錄結果",
+      "enPractice": "Collect 3 vague questions; Rewrite each into an effective prompt; Ask AI once and record the result",
+      "zhFeedbackPrompt": "請檢查我的學習提問轉換表是否仍太寬、是否缺輸出格式，並幫我改寫最弱的一題。",
+      "enFeedbackPrompt": "Review my conversion sheet for breadth and missing format; rewrite the weakest prompt.",
+      "zhQuizItems": [
+        {
+          "q": "有效學習提問最少應包含？",
+          "options": [
+            "背景、目標、限制與輸出格式",
+            "只說課程名稱",
+            "只說「幫我總結」"
+          ],
+          "answer": 0,
+          "explain": "四要素才能對準卡住點。"
+        },
+        {
+          "q": "為什麼要寫已讀範圍？",
+          "options": [
+            "避免 AI 重複已知並對準未知",
+            "讓答案更長",
+            "方便複製貼上"
+          ],
+          "answer": 0,
+          "explain": "對準未知才有效。"
+        },
+        {
+          "q": "哪種輸出最能驗證理解？",
+          "options": [
+            "含自我檢查題的解釋",
+            "只有華麗長文",
+            "只有關鍵字雲"
+          ],
+          "answer": 0,
+          "explain": "自測才能驗證。"
+        }
+      ],
+      "enQuizItems": [
+        {
+          "q": "An effective study prompt should include?",
+          "options": [
+            "Context, goal, constraints, format",
+            "Course name only",
+            "Just “summarize”"
+          ],
+          "answer": 0,
+          "explain": "Four elements aim at the stuck point."
+        },
+        {
+          "q": "Why state what you already read?",
+          "options": [
+            "Avoid repeats and target the unknown",
+            "Make answers longer",
+            "Easier copy-paste"
+          ],
+          "answer": 0,
+          "explain": "Target the unknown."
+        },
+        {
+          "q": "Best output to verify understanding?",
+          "options": [
+            "Explanation with self-checks",
+            "Long ornate text",
+            "Keyword cloud only"
+          ],
+          "answer": 0,
+          "explain": "Self-checks verify learning."
+        }
+      ],
+      "zhRubric": [
+        {
+          "name": "完整度",
+          "levels": {
+            "incomplete": "缺關鍵區塊",
+            "basic": "內容過少",
+            "good": "主要區塊齊全",
+            "ready": "可直接使用"
+          }
+        },
+        {
+          "name": "正確性",
+          "levels": {
+            "incomplete": "有明顯錯誤",
+            "basic": "部分含糊",
+            "good": "大致正確",
+            "ready": "經得起檢查"
+          }
+        },
+        {
+          "name": "結構清晰度",
+          "levels": {
+            "incomplete": "雜亂",
+            "basic": "略有結構",
+            "good": "層次清楚",
+            "ready": "他人可直接套用"
+          }
+        },
+        {
+          "name": "可實際使用程度",
+          "levels": {
+            "incomplete": "無法用於下堂課",
+            "basic": "需大幅修改",
+            "good": "本週可用",
+            "ready": "可長期重用"
+          }
+        }
+      ],
+      "enRubric": [
+        {
+          "name": "Completeness",
+          "levels": {
+            "incomplete": "Missing parts",
+            "basic": "Too thin",
+            "good": "Main parts present",
+            "ready": "Ready to use"
+          }
+        },
+        {
+          "name": "Correctness",
+          "levels": {
+            "incomplete": "Clear errors",
+            "basic": "Some vagueness",
+            "good": "Mostly correct",
+            "ready": "Withstands checks"
+          }
+        },
+        {
+          "name": "Clarity",
+          "levels": {
+            "incomplete": "Messy",
+            "basic": "Some structure",
+            "good": "Clear hierarchy",
+            "ready": "Reusable by others"
+          }
+        },
+        {
+          "name": "Usability",
+          "levels": {
+            "incomplete": "Not usable next class",
+            "basic": "Needs rewrite",
+            "good": "Usable this week",
+            "ready": "Long-term reusable"
+          }
+        }
+      ],
+      "zhMistakesDetailed": [
+        {
+          "error": "問題太寬",
+          "why": "AI 只能給空泛摘要",
+          "fix": "縮小到一個概念或一段教材"
+        },
+        {
+          "error": "不給已讀範圍",
+          "why": "AI 可能重複你已知內容",
+          "fix": "先說明讀到哪裡"
+        },
+        {
+          "error": "不要求檢查題",
+          "why": "以為看懂其實沒懂",
+          "fix": "每次都要 2–3 題自測"
+        }
+      ],
+      "enMistakesDetailed": [
+        {
+          "error": "Question too broad",
+          "why": "Generic summary only",
+          "fix": "Narrow to one concept"
+        },
+        {
+          "error": "No range stated",
+          "why": "AI may repeat known content",
+          "fix": "State what you already read"
+        },
+        {
+          "error": "No self-check questions",
+          "why": "Illusion of understanding",
+          "fix": "Always ask for 2–3 checks"
+        }
+      ],
+      "zhCommonMistakes": [
+        "問題太寬",
+        "不給已讀範圍",
+        "不要求檢查題"
+      ],
+      "enCommonMistakes": [
+        "Question too broad",
+        "No range stated",
+        "No self-check questions"
+      ],
+      "zhSummary": [
+        "模糊問題先拆四要素",
+        "一次只問一個卡住點",
+        "用自測確認真懂",
+        "保存可重用提問模板"
+      ],
+      "enSummary": [
+        "Split vague questions into four elements",
+        "One stuck point at a time",
+        "Verify with self-checks",
+        "Save reusable prompt templates"
+      ],
+      "zhDeliverableChecklist": [
+        "完成「學習提問轉換表」",
+        "完成自我檢查題",
+        "把成果存入成果包"
+      ],
+      "enDeliverableChecklist": [
+        "Finish “Study question conversion sheet”",
+        "Complete self-check questions",
+        "Save output to the result package"
+      ],
+      "zhScorecard": [
+        "完整度",
+        "正確性",
+        "結構清晰度",
+        "可實際使用程度"
+      ],
+      "enScorecard": [
+        "Completeness",
+        "Correctness",
+        "Clarity",
+        "Usability"
+      ],
+      "zhNotePrompt": "用自己的話寫下：本課最重要的一個原則，以及你會如何使用「學習提問轉換表」。",
+      "enNotePrompt": "In your own words: the key principle and how you will use “Study question conversion sheet”.",
+      "zhCoachPrompt": "請檢查我的「學習提問轉換表」是否具體可執行，並指出空泛之處。",
+      "enCoachPrompt": "Check whether my “Study question conversion sheet” is concrete and actionable.",
+      "zhExcellentExample": "轉換表：原問題 → 背景／目標／限制／格式 → 改寫後提問 → AI 回答重點 → 自測結果。",
+      "enExcellentExample": "Sheet: original → context/goal/constraints/format → rewritten prompt → answer highlights → self-check."
+    },
+    {
+      "estimatedTime": "55–75 分鐘",
+      "difficulty": "初階",
       "id": "college-learning-L3",
-      "lessonKey": "college-learning-L3"
-    },
-    {
-      "icon": "⚙️",
-      "title": "用 AI 安排一週課表與讀書優先順序",
-      "description": "用真實課表與截止日排出一週可執行的讀書優先序，每項任務都要有完成定義。",
-      "goal": "產出未來一週的課表化讀書計畫：每日任務、優先序、完成定義、複習區塊與過載警示。",
-      "estimatedTime": "70-90 分鐘",
-      "difficulty": "中階",
-      "tags": [
-        "Workflow",
-        "工作流",
-        "人工審核",
-        "Chapter12"
+      "lessonKey": "college-learning-L3",
+      "zhTitle": "第3課：使用 AI 快速理解課堂教材",
+      "enTitle": "Lesson 3: Use AI to understand course materials quickly",
+      "zhValueTip": "把厚重教材變成可複習的重點整理，而不是只拿摘要交差。",
+      "enValueTip": "Turn dense materials into a reviewable digest, not a disposable summary.",
+      "zhOutputName": "教材重點整理",
+      "enOutputName": "Course-material digest sheet",
+      "zhOutcome": "完成本課後產出：教材重點整理",
+      "enOutcome": "After this lesson, produce: Course-material digest sheet",
+      "zhObjectives": [
+        "能夠辨識教材中的主旨、關鍵概念與例證",
+        "能夠完成一份可複習的教材重點整理",
+        "能夠檢查 AI 摘要是否遺漏老師強調的重點"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 11,
-      "chapterZh": "AI University OS 與最終專案",
-      "chapterEn": "AI University OS and Capstone Project",
-      "zhTitle": "第4課：用 AI 安排一週課表與讀書優先順序",
-      "enTitle": "Lesson 4: Use AI to plan a weekly study schedule and priorities",
-      "zhValueTip": "用真實課表與截止日排出一週可執行的讀書優先序，每項任務都要有完成定義。",
-      "enValueTip": "Build a one-week study plan from your real timetable and deadlines, with a done definition for every task.",
-      "zhOutcome": "產出未來一週的課表化讀書計畫：每日任務、優先序、完成定義、複習區塊與過載警示。",
-      "enOutcome": "Produce a one-week timetable-based study plan with daily tasks, priorities, done definitions, review blocks, and overload warnings.",
-      "zhConcept": "這一課只服務大學生學習能力：理解教材節奏、整理課堂任務、完成作業與考試準備。你要根據真實課表、作業截止日與考試日，排出一週「做得到」的讀書優先序。\n\n排程原則：截止日近的先做、成績權重高的課程優先、每天留下固定複習與休息，不要只用「有空再讀」。每個任務都要有完成定義，例如「讀完第 3 章並寫出 5 張概念卡」，而不是「把統計讀一讀」。AI 可幫你估計工時、把大任務切成 25–50 分鐘區塊、指出哪一天明顯過載；但不能把未完成的閱讀標成已完成，也不能替你吸收教材。\n\n本課範圍僅限課堂學習、作業、筆記與考試安排。不要把與本週課堂無關的雜事塞進讀書時段。",
-      "enConcept": "This lesson serves only college learning: scheduling coursework, homework, notes, and exam prep from your real timetable. Prioritize near deadlines and high-weight courses, keep review and rest, and attach a done definition to every task. AI can chunk work and flag overload; it cannot mark unread material as done. Stay inside classroom learning—do not pack unrelated errands into study blocks.",
-      "zhCaseStudy": "大二學生本週固定有統計課與英文課，截止任務包含：統計習題（週四交）、英文指定閱讀（週三小組討論）、微積分小考（週五）。他先把上課時間標成不可挪用，再請 AI 依截止日與權重排序。統計被拆成「重做例題 → 整理公式卡 → 自測 10 題並訂正」；英文閱讀排在精神較好的兩個晚上；小考前一晚只做錯題複習，不再開新章節。計畫執行後，他第一次在討論前真的讀完指定篇章，而不是開會當場滑手機。",
-      "enCaseStudy": "A sophomore mapped fixed classes, then prioritized stats homework, English reading, and a calculus quiz. AI helped chunk stats practice and protect a light error-review night before the quiz. He arrived at discussion having actually finished the reading.",
+      "enObjectives": [
+        "Identify thesis, key concepts, and examples in materials",
+        "Complete a reviewable digest sheet",
+        "Check whether an AI summary missed instructor emphases"
+      ],
+      "zhWhyItMatters": {
+        "problem": "把厚重教材變成可複習的重點整理，而不是只拿摘要交差。",
+        "ineffective": "沒有清楚成果與檢查，學習容易停在「看過」.",
+        "solution": "用「教材重點整理」把理解變成可交付成果。"
+      },
+      "enWhyItMatters": {
+        "problem": "Turn dense materials into a reviewable digest, not a disposable summary.",
+        "ineffective": "Without a clear deliverable, learning stops at “I read it.”",
+        "solution": "Use “Course-material digest sheet” to turn understanding into an output."
+      },
+      "zhConceptBlocks": {
+        "principles": [
+          "理解先於摘要",
+          "重點必須對應學習目標",
+          "摘要後一定要回原文核對"
+        ],
+        "terms": [
+          "主旨",
+          "關鍵概念",
+          "核對點"
+        ],
+        "criteria": [
+          "含主旨與概念",
+          "有例證或公式位置",
+          "可在 10 分鐘內複習"
+        ],
+        "boundaries": [
+          "不可只靠摘要不回原文",
+          "不可漏掉老師指定重點"
+        ]
+      },
+      "enConceptBlocks": {
+        "principles": [
+          "Understand before summarizing",
+          "Highlights must map to learning goals",
+          "Always verify summaries against the source"
+        ],
+        "terms": [
+          "Thesis",
+          "Key concept",
+          "Verification point"
+        ],
+        "criteria": [
+          "Includes thesis and concepts",
+          "Examples or formula locations noted",
+          "Reviewable in 10 minutes"
+        ],
+        "boundaries": [
+          "Don’t rely on summary alone",
+          "Don’t skip instructor emphases"
+        ]
+      },
+      "zhConcept": "理解先於摘要；重點必須對應學習目標；摘要後一定要回原文核對；不可只靠摘要不回原文；不可漏掉老師指定重點",
+      "enConcept": "Understand before summarizing; Highlights must map to learning goals; Always verify summaries against the source; Don’t rely on summary alone; Don’t skip instructor emphases",
+      "zhCaseStudyBlocks": {
+        "problem": "小安面對 40 頁 PDF 不知從何讀起。",
+        "wrong": "直接叫 AI 總結全章後就以為讀完。",
+        "right": "先標出學習目標，再請 AI 依目標整理主旨、概念、例子與自測，並回原文核對。",
+        "result": "得到可複習的重點整理。"
+      },
+      "enCaseStudyBlocks": {
+        "problem": "Xiao-An faced a 40-page PDF with no plan.",
+        "wrong": "She asked AI to summarize everything and stopped.",
+        "right": "She listed learning goals first, asked AI to organize thesis/concepts/examples/self-tests, then verified against the source.",
+        "result": "She got a reviewable digest."
+      },
+      "zhCaseStudy": "問題：小安面對 40 頁 PDF 不知從何讀起。。錯誤做法：直接叫 AI 總結全章後就以為讀完。。正確做法：先標出學習目標，再請 AI 依目標整理主旨、概念、例子與自測，並回原文核對。。成果：得到可複習的重點整理。",
+      "enCaseStudy": "Problem: Xiao-An faced a 40-page PDF with no plan.. Wrong: She asked AI to summarize everything and stopped.. Right: She listed learning goals first, asked AI to organize thesis/concepts/examples/self-tests, then verified against the source.. Result: She got a reviewable digest.",
+      "zhWorkflowSteps": [
+        {
+          "do": "收集本課所需的真實課程素材",
+          "why": "對準真實任務",
+          "input": "教材／作業／筆記",
+          "output": "素材清單",
+          "check": "是否來自本學期課程？"
+        },
+        {
+          "do": "依流程完成「教材重點整理」初稿",
+          "why": "產出唯一成果",
+          "input": "素材清單",
+          "output": "教材重點整理 初稿",
+          "check": "是否只服務本課目標？"
+        },
+        {
+          "do": "用自我檢查與 Rubric 修正並存檔",
+          "why": "確保可實際使用",
+          "input": "初稿",
+          "output": "完成的教材重點整理",
+          "check": "能否在下堂課直接用？"
+        }
+      ],
+      "enWorkflowSteps": [
+        {
+          "do": "Collect real course materials",
+          "why": "Aim at a real task",
+          "input": "Materials / briefs / notes",
+          "output": "Material list",
+          "check": "From this term?"
+        },
+        {
+          "do": "Draft “Course-material digest sheet” with the workflow",
+          "why": "Produce one deliverable",
+          "input": "Material list",
+          "output": "Draft Course-material digest sheet",
+          "check": "Does it serve this lesson only?"
+        },
+        {
+          "do": "Revise with self-check and rubric, then save",
+          "why": "Make it usable",
+          "input": "Draft",
+          "output": "Finished Course-material digest sheet",
+          "check": "Usable in the next class?"
+        }
+      ],
       "zhWorkflow": [
-        "匯出課表與截止日",
-        "估計每項任務工時",
-        "排出優先序",
-        "切成可執行時間區塊",
-        "加入複習、緩衝與刪減備案",
-        "隔日回顧並微調"
+        "收集本課所需的真實課程素材",
+        "依流程完成「教材重點整理」初稿",
+        "用自我檢查與 Rubric 修正並存檔"
       ],
       "enWorkflow": [
-        "Export timetable and deadlines",
-        "Estimate task minutes",
-        "Set priorities",
-        "Chunk into executable blocks",
-        "Add review, buffer, and cut-first plan",
-        "Review next day and adjust"
+        "Collect real course materials",
+        "Draft “Course-material digest sheet” with the workflow",
+        "Revise with self-check and rubric, then save"
       ],
-      "zhCommonMistakes": [
-        "計畫塞爆，沒有可執行空間",
-        "只有科目名稱，沒有完成定義",
-        "忽略固定上課與通勤時間",
-        "把休息時段全部改成讀書卻無法持久",
-        "讓 AI 排入與本週課堂無關的雜事"
+      "zhPromptPack": {
+        "when": "製作「教材重點整理」時",
+        "fields": [
+          "[課程名稱]",
+          "[老師要求]",
+          "[教材內容]",
+          "[輸出格式]"
+        ],
+        "body": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「教材重點整理」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+        "exampleInput": "填入真實課程與要求",
+        "expected": "可用的教材重點整理草稿＋查證提醒"
+      },
+      "enPromptPack": {
+        "when": "When creating “Course-material digest sheet”",
+        "fields": [
+          "[course]",
+          "[instructor requirements]",
+          "[material focus]",
+          "[output format]"
+        ],
+        "body": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Course-material digest sheet” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+        "exampleInput": "Use a real course and brief",
+        "expected": "Usable Course-material digest sheet draft with verification notes"
+      },
+      "zhPrompt": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「教材重點整理」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+      "enPrompt": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Course-material digest sheet” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+      "zhExample": "完成版「教材重點整理」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExample": "A finished “Course-material digest sheet” should be ready for the next related class task, with sources and verification notes.",
+      "zhPracticeSteps": [
+        {
+          "task": "用真實課程完成「教材重點整理」",
+          "standard": "對應本課唯一成果",
+          "mistakes": "混入其他能力主題",
+          "check": "是否越界？"
+        },
+        {
+          "task": "依完成標準自評並修改",
+          "standard": "達到良好以上",
+          "mistakes": "不修改就存檔",
+          "check": "Rubric 哪項最低？"
+        },
+        {
+          "task": "存入成果包並寫一句下週用法",
+          "standard": "有保存時間與連結或文字",
+          "mistakes": "只存在聊天窗",
+          "check": "下週如何用？"
+        }
       ],
-      "enCommonMistakes": [
-        "Overloaded plans with no slack",
-        "Subject names without done definitions",
-        "Ignoring class and commute time",
-        "Deleting all rest and burning out",
-        "Letting AI insert non-coursework tasks"
+      "enPracticeSteps": [
+        {
+          "task": "Finish “Course-material digest sheet” with a real course",
+          "standard": "Matches this lesson’s deliverable",
+          "mistakes": "Mixes other skill domains",
+          "check": "Out of scope?"
+        },
+        {
+          "task": "Self-score and revise",
+          "standard": "Good or ready level",
+          "mistakes": "Save without revision",
+          "check": "Lowest rubric item?"
+        },
+        {
+          "task": "Save to package with next-week use note",
+          "standard": "Has text/link and timestamp",
+          "mistakes": "Only in chat history",
+          "check": "How will you use it next week?"
+        }
       ],
-      "zhExcellentExample": "一週表包含：每日可讀書時段、任務名稱、完成定義、預估分鐘、優先等級、緩衝區，以及「若當日超時先砍哪一項」的備案。另附週日 15 分鐘回顧：完成率、低估工時的任務、下週調整。",
-      "enExcellentExample": "A strong weekly plan includes available blocks, task names, done definitions, minute estimates, priority, buffers, and a cut-first contingency. Add a 15-minute Sunday review of completion rate and mis-estimated tasks.",
-      "zhPrompt": "請擔任大學學習教練。我的固定課表：【】。本週作業截止與考試：【】。每日可讀書時段：【】。各科目前卡住的地方：【】。\n\n請先確認工時估計是否合理，再輸出：\n1) 本週優先序（說明排序理由）\n2) 每日任務表（含完成定義與預估分鐘）\n3) 過載日警示與建議刪減項目\n4) 每日複習區塊建議\n5) 若只剩 60% 時間，應保留的最小必要清單\n\n限制：只安排課堂學習、作業、筆記與考試準備；不要插入與本週課程無關的事項；不要假設我已讀完未讀內容。用繁體中文。",
-      "enPrompt": "Act as a university study coach. Timetable: []. Deadlines/exams: []. Available study hours: []. Current stuck points: []. Confirm time estimates, then output weekly priorities, a daily task table with done definitions, overload warnings, review blocks, and a 60%-time minimum list. Stay on coursework only; never assume unread material is finished.",
-      "zhCoachPrompt": "請檢查我的一週讀書計畫是否過載、是否缺少完成定義，並建議如何刪減到可執行。",
-      "enCoachPrompt": "Check whether my weekly study plan is overloaded or missing done definitions, and suggest cuts.",
-      "zhFeedbackPrompt": "你是一位大學學習教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 是否對齊截止日\n- 任務是否可執行\n- 完成定義是否清楚\n- 是否保留複習與緩衝\n- 是否只服務課堂學習\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a university study coach. Score 1-10 for: Deadline alignment, Executability, Clarity of done definitions, Review/buffer preserved, Staying on coursework. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhExample": "弱計畫：「這週把書讀完」。\n可執行計畫：「週二 20:00–21:00 讀第 3 章並寫出 5 個概念卡；週三 21:00–21:30 用概念卡自問自答；週四交作業前一晚只訂正錯題。」",
-      "enExample": "Weak: “finish the book this week.” Executable: dated blocks with concept cards, self-testing, and error review before the deadline.",
-      "zhPractice": "列出本週所有截止日與考試日。；標出每天真實可讀書時段（扣除上課與通勤）。；用 Prompt 產出一週計畫。；人工刪掉明顯做不到的項目並補完成定義。；執行兩天後做一次回顧，調整工時估計。",
-      "enPractice": "List deadlines/exams.；Mark real available study hours.；Generate a weekly plan.；Cut impossible items and add done definitions.；Review after two days and recalibrate estimates.",
+      "zhPractice": "用真實課程完成「教材重點整理」；依完成標準自評並修改；存入成果包並寫一句下週用法",
+      "enPractice": "Finish “Course-material digest sheet” with a real course; Self-score and revise; Save to package with next-week use note",
+      "zhFeedbackPrompt": "請依完整度、正確性、結構清晰度、可實際使用程度評分我的「教材重點整理」，指出是否偏離課堂學習，並給出三個修改建議。",
+      "enFeedbackPrompt": "Score my “Course-material digest sheet” on completeness, correctness, clarity, and usability. Flag any drift away from classroom learning and give three fixes.",
       "zhQuizItems": [
         {
-          "q": "排一週讀書優先序時，應先看？",
+          "q": "本課唯一應產出的成果是？",
           "options": [
-            "截止日與成績權重",
-            "想做什麼就先做什麼",
-            "先做最輕鬆的"
+            "教材重點整理",
+            "履歷與求職信",
+            "創業商業模式"
           ],
           "answer": 0,
-          "explain": "截止與權重決定優先。"
+          "explain": "本課只服務大學學習能力。"
         },
         {
-          "q": "每個讀書任務最好具備？",
+          "q": "使用 AI 後仍必須做的是？",
           "options": [
-            "可檢查的完成定義",
-            "只有科目名稱",
-            "只有心情標籤"
+            "查證與自己改寫關鍵判斷",
+            "直接繳交未檢查內容",
+            "刪除所有自己的筆記"
           ],
           "answer": 0,
-          "explain": "才能知道有沒有做完。"
+          "explain": "理解與責任仍在你。"
         },
         {
-          "q": "AI 在本課最合適的協助是？",
+          "q": "哪種做法最不符合本課？",
           "options": [
-            "拆時間區塊並檢查過載",
-            "替你完成閱讀理解",
-            "保證考試及格"
+            "把未查證 AI 全文當作最終繳交",
+            "用 AI 協助結構後自己改寫",
+            "用檢查表確認完成標準"
           ],
           "answer": 0,
-          "explain": "排程輔助，不是代學。"
-        },
-        {
-          "q": "下列哪一項不屬於本課範圍？",
-          "options": [
-            "與本週課堂無關的雜事安排",
-            "作業複習時段",
-            "考試前錯題複習"
-          ],
-          "answer": 0,
-          "explain": "本課只做課堂學習節奏。"
-        },
-        {
-          "q": "本課應產出？",
-          "options": [
-            "一週課表化讀書計畫",
-            "完整學期成績預測",
-            "與課程無關的長期人生規劃表"
-          ],
-          "answer": 0,
-          "explain": "聚焦一週學習執行。"
+          "explain": "未查證繳交不可接受。"
         }
       ],
       "enQuizItems": [
         {
-          "q": "排一週讀書優先序時，應先看？",
+          "q": "This lesson’s single deliverable is?",
           "options": [
-            "截止日與成績權重",
-            "想做什麼就先做什麼",
-            "先做最輕鬆的"
+            "Course-material digest sheet",
+            "Resume and cover letter",
+            "Startup business model"
           ],
           "answer": 0,
-          "explain": "截止與權重決定優先。"
+          "explain": "This course serves university learning only."
         },
         {
-          "q": "每個讀書任務最好具備？",
+          "q": "After using AI you must still?",
           "options": [
-            "可檢查的完成定義",
-            "只有科目名稱",
-            "只有心情標籤"
+            "Verify and rewrite key judgments",
+            "Submit unchecked text",
+            "Delete your own notes"
           ],
           "answer": 0,
-          "explain": "才能知道有沒有做完。"
+          "explain": "Understanding stays yours."
         },
         {
-          "q": "AI 在本課最合適的協助是？",
+          "q": "Which practice is unacceptable?",
           "options": [
-            "拆時間區塊並檢查過載",
-            "替你完成閱讀理解",
-            "保證考試及格"
+            "Submit unchecked AI text as final work",
+            "Use AI for structure then revise",
+            "Use a checklist"
           ],
           "answer": 0,
-          "explain": "排程輔助，不是代學。"
-        },
-        {
-          "q": "下列哪一項不屬於本課範圍？",
-          "options": [
-            "與本週課堂無關的雜事安排",
-            "作業複習時段",
-            "考試前錯題複習"
-          ],
-          "answer": 0,
-          "explain": "本課只做課堂學習節奏。"
-        },
-        {
-          "q": "本課應產出？",
-          "options": [
-            "一週課表化讀書計畫",
-            "完整學期成績預測",
-            "與課程無關的長期人生規劃表"
-          ],
-          "answer": 0,
-          "explain": "聚焦一週學習執行。"
+          "explain": "Unchecked submission is not allowed."
         }
       ],
-      "zhNotePrompt": "貼上你的一週讀書計畫與兩天後的回顧筆記。",
-      "enNotePrompt": "Paste your weekly study plan and a two-day review note.",
+      "zhRubric": [
+        {
+          "name": "完整度",
+          "levels": {
+            "incomplete": "缺關鍵區塊",
+            "basic": "內容過少",
+            "good": "主要區塊齊全",
+            "ready": "可直接使用"
+          }
+        },
+        {
+          "name": "正確性",
+          "levels": {
+            "incomplete": "有明顯錯誤",
+            "basic": "部分含糊",
+            "good": "大致正確",
+            "ready": "經得起檢查"
+          }
+        },
+        {
+          "name": "結構清晰度",
+          "levels": {
+            "incomplete": "雜亂",
+            "basic": "略有結構",
+            "good": "層次清楚",
+            "ready": "他人可直接套用"
+          }
+        },
+        {
+          "name": "可實際使用程度",
+          "levels": {
+            "incomplete": "無法用於下堂課",
+            "basic": "需大幅修改",
+            "good": "本週可用",
+            "ready": "可長期重用"
+          }
+        }
+      ],
+      "enRubric": [
+        {
+          "name": "Completeness",
+          "levels": {
+            "incomplete": "Missing parts",
+            "basic": "Too thin",
+            "good": "Main parts present",
+            "ready": "Ready to use"
+          }
+        },
+        {
+          "name": "Correctness",
+          "levels": {
+            "incomplete": "Clear errors",
+            "basic": "Some vagueness",
+            "good": "Mostly correct",
+            "ready": "Withstands checks"
+          }
+        },
+        {
+          "name": "Clarity",
+          "levels": {
+            "incomplete": "Messy",
+            "basic": "Some structure",
+            "good": "Clear hierarchy",
+            "ready": "Reusable by others"
+          }
+        },
+        {
+          "name": "Usability",
+          "levels": {
+            "incomplete": "Not usable next class",
+            "basic": "Needs rewrite",
+            "good": "Usable this week",
+            "ready": "Long-term reusable"
+          }
+        }
+      ],
+      "zhMistakesDetailed": [
+        {
+          "error": "只有摘要沒有自己的判斷",
+          "why": "無法形成能力",
+          "fix": "標出你同意／不同意／需查證處"
+        },
+        {
+          "error": "成果與標題不一致",
+          "why": "學習目標漂移",
+          "fix": "回到本課唯一成果檢查"
+        },
+        {
+          "error": "未回原文或作業要求核對",
+          "why": "可能漏重點或跑題",
+          "fix": "保存前做一次來源核對"
+        }
+      ],
+      "enMistakesDetailed": [
+        {
+          "error": "Summary without judgment",
+          "why": "No skill built",
+          "fix": "Mark agree / disagree / verify"
+        },
+        {
+          "error": "Deliverable mismatches the lesson",
+          "why": "Goal drift",
+          "fix": "Return to the single outcome"
+        },
+        {
+          "error": "No verification against source/brief",
+          "why": "Missed emphasis or off-topic",
+          "fix": "Do one source check before saving"
+        }
+      ],
+      "zhCommonMistakes": [
+        "只有摘要沒有自己的判斷",
+        "成果與標題不一致",
+        "未回原文或作業要求核對"
+      ],
+      "enCommonMistakes": [
+        "Summary without judgment",
+        "Deliverable mismatches the lesson",
+        "No verification against source/brief"
+      ],
+      "zhSummary": [
+        "對準本課唯一成果",
+        "AI 協助結構，人負責判斷",
+        "一定回原文／要求核對",
+        "把「教材重點整理」存進學習系統"
+      ],
+      "enSummary": [
+        "Aim at one deliverable",
+        "AI helps structure; you judge",
+        "Always verify against source/brief",
+        "Save “Course-material digest sheet” into your system"
+      ],
       "zhDeliverableChecklist": [
-        "已對齊真實課表",
-        "每項任務有完成定義",
-        "有優先序與過載警示",
-        "有複習區塊",
-        "有刪減備案與回顧"
+        "完成「教材重點整理」",
+        "完成自我檢查題",
+        "把成果存入成果包"
       ],
       "enDeliverableChecklist": [
-        "Aligned to real timetable",
-        "Done definitions present",
-        "Priorities and overload warnings",
-        "Review blocks included",
-        "Cut-first plan and review noted"
+        "Finish “Course-material digest sheet”",
+        "Complete self-check questions",
+        "Save output to the result package"
       ],
       "zhScorecard": [
-        "是否對齊截止日",
-        "任務是否可執行",
-        "完成定義是否清楚",
-        "是否保留複習與緩衝",
-        "是否只服務課堂學習"
+        "完整度",
+        "正確性",
+        "結構清晰度",
+        "可實際使用程度"
       ],
       "enScorecard": [
-        "Deadline alignment",
-        "Executability",
-        "Clarity of done definitions",
-        "Review/buffer preserved",
-        "Staying on coursework"
+        "Completeness",
+        "Correctness",
+        "Clarity",
+        "Usability"
       ],
-      "resources": [
-        {
-          "name": "Notion",
-          "url": "https://www.notion.so",
-          "note": "工作流手冊與勾選清單"
-        },
-        {
-          "name": "Google Calendar",
-          "url": "https://calendar.google.com",
-          "note": "把每週節奏排進程式"
-        },
-        {
-          "name": "Google Tasks",
-          "url": "https://tasks.google.com",
-          "note": "檢查關卡待辦"
-        },
-        {
-          "name": "Trello",
-          "url": "https://trello.com",
-          "note": "工作流看板化"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "SOP 與 Prompt 模板"
-        },
-        {
-          "name": "NotebookLM",
-          "url": "https://notebooklm.google.com",
-          "note": "PDF／講義工作流的 grounded 層"
-        }
-      ],
-      "challenge": "出版你的《AI Workflow 手冊》v1（至少五套），並用一週真實執行其中兩套；複盤時只許寫事實發生次數，不許美化。",
+      "zhNotePrompt": "用自己的話寫下：本課最重要的一個原則，以及你會如何使用「教材重點整理」。",
+      "enNotePrompt": "In your own words: the key principle and how you will use “Course-material digest sheet”.",
+      "zhCoachPrompt": "請檢查我的「教材重點整理」是否具體可執行，並指出空泛之處。",
+      "enCoachPrompt": "Check whether my “Course-material digest sheet” is concrete and actionable.",
+      "zhExcellentExample": "完成版「教材重點整理」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExcellentExample": "A finished “Course-material digest sheet” should be ready for the next related class task, with sources and verification notes."
+    },
+    {
+      "estimatedTime": "55–75 分鐘",
+      "difficulty": "初階",
       "id": "college-learning-L4",
-      "lessonKey": "college-learning-L4"
-    },
-    {
-      "icon": "📒",
-      "title": "用 AI 做課堂筆記：聽得懂、找得到、複習得了",
-      "description": "建立課堂筆記捕捉模板：重點、不懂、例子、行動與連結，用 AI 整理但不取代你聽課與判斷。",
-      "goal": "我的 AI 課堂筆記模板與一堂真實課的整理稿",
-      "estimatedTime": "55-75 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "課堂筆記",
-        "捕捉模板",
-        "筆記系統",
-        "Chapter3"
+      "lessonKey": "college-learning-L4",
+      "zhTitle": "第4課：分析圖片、表格、投影片與複雜課件",
+      "enTitle": "Lesson 4: Analyze images, tables, slides, and complex courseware",
+      "zhValueTip": "學會讀圖表與投影片結構，才能抓住老師真正要考與要用的重點。",
+      "enValueTip": "Learn to read charts and slide structure so you catch what truly matters.",
+      "zhOutputName": "複雜課件解讀單",
+      "enOutputName": "Complex courseware reading sheet",
+      "zhOutcome": "完成本課後產出：複雜課件解讀單",
+      "enOutcome": "After this lesson, produce: Complex courseware reading sheet",
+      "zhObjectives": [
+        "能夠辨識圖表或投影片的主要訊息",
+        "能夠比較視覺資訊與文字說明的關係",
+        "能夠完成一份複雜課件解讀單"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 2,
-      "chapterZh": "AI 做筆記",
-      "chapterEn": "AI Note-Taking",
-      "zhTitle": "第5課：用 AI 做課堂筆記：聽得懂、找得到、複習得了",
-      "enTitle": "Lesson 5: Use AI for class notes you can understand, find, and review",
-      "zhValueTip": "建立課堂筆記捕捉模板：重點、不懂、例子、行動與連結，用 AI 整理但不取代你聽課與判斷。",
-      "enValueTip": "Build a class-note capture template—key points, confusions, examples, actions, links—using AI without replacing listening or judgment.",
-      "zhOutcome": "我的 AI 課堂筆記模板與一堂真實課的整理稿",
-      "enOutcome": "My AI Class-Note Template and One Real Lecture Write-up",
-      "zhConcept": "AI 課堂筆記不是「把整堂課丟給 AI」，而是建立一套大學生真正用得上的捕捉與整理節奏。一堂課的資訊密度很高：定義、例子、考試提示、作業要求、老師強調的例外條件常混在一起。若你只會事後對 AI 說「幫我整理筆記」，通常會得到通順但不可考、也找不到來源的長文。比較穩定的做法是兩段式：課堂中你只負責捕捉高價值訊號——關鍵定義、不懂、例子、行動、頁碼／投影片編號；下課後再用 AI 依你的原始捕捉做結構化，輸出成「可複習版本」。一個實用模板建議包含五欄：Focus（本堂主問題）、Keys（3-7 個關鍵點）、Confusion（不懂與假設）、Examples（例子／案例）、Actions（作業、複習、要問助教的事）。AI 適合幫忙去重、分類、轉成問答卡與複習清單；你必須保留判斷：哪一句是老師原意、哪一句是你的推論、哪一句還不確定。這一課也要把課堂筆記接到你的 AI 筆記系統：檔名規則、raw／final、課程資料夾、以及連回 Chapter 1 的 Workspace 與 Second Brain。完成後，你不是多一篇漂亮摘要，而是擁有「下一堂課也能重複使用」的課堂筆記作業系統。更重要的是，你會開始分辨：哪些內容該當場記、哪些可课后補、哪些必須回看投影片或錄音才能確認。當這套節奏穩定後，後面的 PDF、錄音、心智圖與考前重點才不會各自為政，而會匯流成同一個知識庫。接下來，請把課堂筆記想成「輸入層」：你在課堂上不是寫作文，而是採集可驗證訊號。建議把 Keys 控制在 3 到 7 點，超過就代表你把細節當重點；細節應進 Examples 或附註。Confusion 要寫成可追問的句子，例如「為什麼檢定要用雙尾？」而不是只寫一個問號。Actions 必須可在 48 小時內完成，並標註截止或對應作業編號。若老師突然改進度，先在 Focus 改主問題，不要硬塞舊模板造成錯位。每週日做一次「不懂清倉」：已解決的移出，未解決的升級成要問助教的問題清單。這樣第 12 到 15 課才有乾淨原料可匯入，不會變成一堆無法取捨的長文。",
-      "enConcept": "AI class notes are a two-stage system: capture high-signal items in class, then use AI to structure them afterward. Keep definitions, confusions, examples, and actions. Separate raw capture from final notes, and link into your workspace/second brain. AI organizes; you still decide what is certain, inferred, or unresolved.",
-      "zhCaseStudy": "情境案例：統計學大一的小恩以前習慣整堂課狂打字，下課對 AI 說「整理成重點」，結果得到很長、卻考不到點的摘要，因為她原始筆記沒有標出老師反覆強調的前提條件。後來她改成只記五欄模板，並在不懂處打「？」與投影片頁碼。下課用 ChatGPT／Claude 依模板整理，再自己改寫定義。第一次小考她能在三分鐘內從 Actions 與 Confusion 找回要補的觀念，不再翻十頁流水帳。她也把每堂 final 筆記放進 Notion 課程資料庫，週日只複習 Confusion 未解決項目。",
-      "enCaseStudy": "First-year stats student Xiaoen stopped transcript-style typing. Using a five-field template and slide numbers, she got reviewable notes, faster pretest retrieval, and a weekly confusion triage in Notion.",
+      "enObjectives": [
+        "Identify the main message of a chart or slide deck",
+        "Compare visual information with text explanations",
+        "Complete a courseware reading sheet"
+      ],
+      "zhWhyItMatters": {
+        "problem": "學會讀圖表與投影片結構，才能抓住老師真正要考與要用的重點。",
+        "ineffective": "沒有清楚成果與檢查，學習容易停在「看過」.",
+        "solution": "用「複雜課件解讀單」把理解變成可交付成果。"
+      },
+      "enWhyItMatters": {
+        "problem": "Learn to read charts and slide structure so you catch what truly matters.",
+        "ineffective": "Without a clear deliverable, learning stops at “I read it.”",
+        "solution": "Use “Complex courseware reading sheet” to turn understanding into an output."
+      },
+      "zhConceptBlocks": {
+        "principles": [
+          "先看標題與軸線，再看趨勢",
+          "投影片要抓論點結構而非逐字抄",
+          "AI 解讀後仍要回原圖核對"
+        ],
+        "terms": [
+          "主訊息",
+          "數據關係",
+          "投影片論點鏈"
+        ],
+        "criteria": [
+          "說出圖表主訊息",
+          "指出易誤解處",
+          "對應課堂問題"
+        ],
+        "boundaries": [
+          "不可只貼圖不說明問題",
+          "不可接受 AI 猜測未標示的數據"
+        ]
+      },
+      "enConceptBlocks": {
+        "principles": [
+          "Read titles and axes before trends",
+          "Capture argument structure, not every word",
+          "Verify AI readings against the original visual"
+        ],
+        "terms": [
+          "Main message",
+          "Data relationship",
+          "Slide argument chain"
+        ],
+        "criteria": [
+          "States the chart’s main message",
+          "Flags easy misreads",
+          "Links to class questions"
+        ],
+        "boundaries": [
+          "Don’t paste an image without a question",
+          "Don’t accept guessed unlabeled data"
+        ]
+      },
+      "zhConcept": "先看標題與軸線，再看趨勢；投影片要抓論點結構而非逐字抄；AI 解讀後仍要回原圖核對；不可只貼圖不說明問題；不可接受 AI 猜測未標示的數據",
+      "enConcept": "Read titles and axes before trends; Capture argument structure, not every word; Verify AI readings against the original visual; Don’t paste an image without a question; Don’t accept guessed unlabeled data",
+      "zhCaseStudyBlocks": {
+        "problem": "小美統計課看不懂分組長條圖。",
+        "wrong": "叫 AI「看圖說話」卻沒問自己要回答什麼。",
+        "right": "先寫題目：比較哪兩組、關注哪個差異；再請 AI 解讀並列出核對問題。",
+        "result": "她能向同學講清圖意並通過小考。"
+      },
+      "enCaseStudyBlocks": {
+        "problem": "Mei couldn’t read a grouped bar chart.",
+        "wrong": "She asked AI to “describe the image” with no question.",
+        "right": "She first wrote what comparison she needed, then asked AI to interpret and list verification questions.",
+        "result": "She could explain the chart and pass a quiz."
+      },
+      "zhCaseStudy": "問題：小美統計課看不懂分組長條圖。。錯誤做法：叫 AI「看圖說話」卻沒問自己要回答什麼。。正確做法：先寫題目：比較哪兩組、關注哪個差異；再請 AI 解讀並列出核對問題。。成果：她能向同學講清圖意並通過小考。",
+      "enCaseStudy": "Problem: Mei couldn’t read a grouped bar chart.. Wrong: She asked AI to “describe the image” with no question.. Right: She first wrote what comparison she needed, then asked AI to interpret and list verification questions.. Result: She could explain the chart and pass a quiz.",
+      "zhWorkflowSteps": [
+        {
+          "do": "收集本課所需的真實課程素材",
+          "why": "對準真實任務",
+          "input": "教材／作業／筆記",
+          "output": "素材清單",
+          "check": "是否來自本學期課程？"
+        },
+        {
+          "do": "依流程完成「複雜課件解讀單」初稿",
+          "why": "產出唯一成果",
+          "input": "素材清單",
+          "output": "複雜課件解讀單 初稿",
+          "check": "是否只服務本課目標？"
+        },
+        {
+          "do": "用自我檢查與 Rubric 修正並存檔",
+          "why": "確保可實際使用",
+          "input": "初稿",
+          "output": "完成的複雜課件解讀單",
+          "check": "能否在下堂課直接用？"
+        }
+      ],
+      "enWorkflowSteps": [
+        {
+          "do": "Collect real course materials",
+          "why": "Aim at a real task",
+          "input": "Materials / briefs / notes",
+          "output": "Material list",
+          "check": "From this term?"
+        },
+        {
+          "do": "Draft “Complex courseware reading sheet” with the workflow",
+          "why": "Produce one deliverable",
+          "input": "Material list",
+          "output": "Draft Complex courseware reading sheet",
+          "check": "Does it serve this lesson only?"
+        },
+        {
+          "do": "Revise with self-check and rubric, then save",
+          "why": "Make it usable",
+          "input": "Draft",
+          "output": "Finished Complex courseware reading sheet",
+          "check": "Usable in the next class?"
+        }
+      ],
       "zhWorkflow": [
-        "準備課堂捕捉模板（Focus／Keys／Confusion／Examples／Actions）",
-        "上課只記高價值訊號與頁碼／投影片編號",
-        "下課 15 分鐘內把 raw 筆記貼給 AI 做結構化",
-        "自己改寫關鍵定義，標記仍不確定處",
-        "存成 raw／final，並連結到課程筆記系統"
+        "收集本課所需的真實課程素材",
+        "依流程完成「複雜課件解讀單」初稿",
+        "用自我檢查與 Rubric 修正並存檔"
       ],
       "enWorkflow": [
-        "Prepare the five-field capture template",
-        "Capture only high-signal items with slide/page refs",
-        "Within 15 minutes, ask AI to structure the raw notes",
-        "Rewrite key definitions and mark uncertainties",
-        "Save raw/final and link into your course note system"
+        "Collect real course materials",
+        "Draft “Complex courseware reading sheet” with the workflow",
+        "Revise with self-check and rubric, then save"
       ],
-      "zhCommonMistakes": [
-        "上課不聽、只依賴课后 AI 腦補",
-        "原始捕捉沒有標不懂與頁碼",
-        "把 AI 輸出當最終理解不改寫",
-        "筆記不歸檔，下一堂又從頭找"
+      "zhPromptPack": {
+        "when": "製作「複雜課件解讀單」時",
+        "fields": [
+          "[課程名稱]",
+          "[老師要求]",
+          "[教材內容]",
+          "[輸出格式]"
+        ],
+        "body": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「複雜課件解讀單」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+        "exampleInput": "填入真實課程與要求",
+        "expected": "可用的複雜課件解讀單草稿＋查證提醒"
+      },
+      "enPromptPack": {
+        "when": "When creating “Complex courseware reading sheet”",
+        "fields": [
+          "[course]",
+          "[instructor requirements]",
+          "[material focus]",
+          "[output format]"
+        ],
+        "body": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Complex courseware reading sheet” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+        "exampleInput": "Use a real course and brief",
+        "expected": "Usable Complex courseware reading sheet draft with verification notes"
+      },
+      "zhPrompt": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「複雜課件解讀單」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+      "enPrompt": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Complex courseware reading sheet” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+      "zhExample": "完成版「複雜課件解讀單」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExample": "A finished “Complex courseware reading sheet” should be ready for the next related class task, with sources and verification notes.",
+      "zhPracticeSteps": [
+        {
+          "task": "用真實課程完成「複雜課件解讀單」",
+          "standard": "對應本課唯一成果",
+          "mistakes": "混入其他能力主題",
+          "check": "是否越界？"
+        },
+        {
+          "task": "依完成標準自評並修改",
+          "standard": "達到良好以上",
+          "mistakes": "不修改就存檔",
+          "check": "Rubric 哪項最低？"
+        },
+        {
+          "task": "存入成果包並寫一句下週用法",
+          "standard": "有保存時間與連結或文字",
+          "mistakes": "只存在聊天窗",
+          "check": "下週如何用？"
+        }
       ],
-      "enCommonMistakes": [
-        "Not listening and asking AI to invent the lecture",
-        "Capturing without confusions or references",
-        "Accepting unedited AI text as understanding",
-        "Never filing notes for reuse"
+      "enPracticeSteps": [
+        {
+          "task": "Finish “Complex courseware reading sheet” with a real course",
+          "standard": "Matches this lesson’s deliverable",
+          "mistakes": "Mixes other skill domains",
+          "check": "Out of scope?"
+        },
+        {
+          "task": "Self-score and revise",
+          "standard": "Good or ready level",
+          "mistakes": "Save without revision",
+          "check": "Lowest rubric item?"
+        },
+        {
+          "task": "Save to package with next-week use note",
+          "standard": "Has text/link and timestamp",
+          "mistakes": "Only in chat history",
+          "check": "How will you use it next week?"
+        }
       ],
-      "zhExcellentExample": "優秀課堂筆記看得到：本堂主問題一句話、5 個關鍵點、至少 2 個不懂、1 個例子、2 個行動；final 版定義是自己的話；並連到該週作業與考前複習清單。",
-      "enExcellentExample": "A strong note shows one focus question, about five keys, at least two confusions, one example, two actions, personally rewritten definitions, and links to homework/review.",
-      "zhPrompt": "【Prompt 1｜課堂筆記結構化教練】\n請擔任大學學習教練。以下是我課堂中的原始捕捉（可能很亂）：\n（貼上）\n課程：［科目］；本週主題：［主題］\n請整理成模板：Focus、Keys（3-7點）、Confusion、Examples、Actions。不清楚的地方請標成「待確認」，不要腦補老師沒講的內容。最後給我 5 題自我檢測問答卡。",
-      "enPrompt": "[Prompt 1 | Class-Note Structurer] Organize my raw lecture capture into Focus/Keys/Confusion/Examples/Actions. Mark uncertainties instead of inventing content, then give 5 self-check questions.",
-      "zhCoachPrompt": "【Prompt 2｜不懂處診斷】\n以下是我的 Confusion 清單：\n（貼上）\n請幫我判斷每個問題：是定義不清、例子不足、還是先備知識缺口。並給我下课後可執行的補救順序（先看哪頁投影片／先問誰／先做哪題）。",
-      "enCoachPrompt": "[Prompt 2 | Confusion Triage] Classify each confusion as definition, example gap, or prerequisite gap, and give a repair order.",
-      "zhFeedbackPrompt": "【Prompt 3｜課堂筆記驗收】\n以下是我的 final 課堂筆記：\n（貼上）\n請評分：可複習性、重點密度、不懂是否具體、行動是否可執行、是否過度依賴空泛句子。指出三段應改寫的文字，並給改寫示例。",
-      "enFeedbackPrompt": "[Prompt 3 | Class-Note Review] Score reviewability, signal density, confusion specificity, and actionability; rewrite three weak sentences.",
-      "zhExample": "Raw：變異數？老師說不要忘了除以 n-1？投影片12 例子用考試分數\nFinal Keys：樣本變異數常用 n-1；Confusion：何時用 n 何時用 n-1 待確認；Actions：重看投影片12、做習題3-2、下堂問助教。",
-      "enExample": "Raw: variance? n-1? slide 12 exam-score example → Final keys on sample variance, a concrete confusion, and three follow-up actions.",
-      "zhPractice": "選一堂本週真實課程。；用五欄模板完成課堂捕捉。；下課後用 Prompt 1 結構化並自己改寫定義。；用 Prompt 2 處理 Confusion。；Challenge：只用 final 筆記，在 5 分鐘內向同學講解本堂 3 個關鍵點。",
-      "enPractice": "Use one real lecture.；Capture with the template.；Structure with Prompt 1 and rewrite.；Triage confusions.；Challenge: teach 3 key points in 5 minutes using only your final notes.",
+      "zhPractice": "用真實課程完成「複雜課件解讀單」；依完成標準自評並修改；存入成果包並寫一句下週用法",
+      "enPractice": "Finish “Complex courseware reading sheet” with a real course; Self-score and revise; Save to package with next-week use note",
+      "zhFeedbackPrompt": "請依完整度、正確性、結構清晰度、可實際使用程度評分我的「複雜課件解讀單」，指出是否偏離課堂學習，並給出三個修改建議。",
+      "enFeedbackPrompt": "Score my “Complex courseware reading sheet” on completeness, correctness, clarity, and usability. Flag any drift away from classroom learning and give three fixes.",
       "zhQuizItems": [
         {
-          "q": "AI 課堂筆記最正確的目標是？",
+          "q": "本課唯一應產出的成果是？",
           "options": [
-            "讓 AI 替你上課並直接交作業",
-            "把聽課內容變成可複習、可連結、可行動的筆記系統",
-            "只追求筆記字數越多越好",
-            "上課全程不聽、下課一次貼上錄音就結束"
+            "複雜課件解讀單",
+            "履歷與求職信",
+            "創業商業模式"
           ],
-          "answer": 1,
-          "explain": "重點是可複習與可行動，不是代聽或堆字數。"
+          "answer": 0,
+          "explain": "本課只服務大學學習能力。"
         },
         {
-          "q": "課堂中最適合先自己記下、再交給 AI 整理的是？",
+          "q": "使用 AI 後仍必須做的是？",
           "options": [
-            "老師隨口講的笑話逐字稿",
-            "關鍵定義、不懂之處、例子與待辦",
-            "同學私人對話",
-            "教室裝潢細節"
+            "查證與自己改寫關鍵判斷",
+            "直接繳交未檢查內容",
+            "刪除所有自己的筆記"
           ],
-          "answer": 1,
-          "explain": "先捕捉高價值訊號，AI 才能整理出可用結構。"
+          "answer": 0,
+          "explain": "理解與責任仍在你。"
         },
         {
-          "q": "下列哪種做法最容易讓筆記失去學習價值？",
+          "q": "哪種做法最不符合本課？",
           "options": [
-            "標記不懂並课后追問",
-            "把 AI 整段輸出原封當最終理解、自己不改寫",
-            "把筆記連回課程地圖或 Second Brain",
-            "每週回顧一次不懂清單"
+            "把未查證 AI 全文當作最終繳交",
+            "用 AI 協助結構後自己改寫",
+            "用檢查表確認完成標準"
           ],
-          "answer": 1,
-          "explain": "不改寫就不算內化，筆記會變成堆積。"
+          "answer": 0,
+          "explain": "未查證繳交不可接受。"
         }
       ],
       "enQuizItems": [
         {
-          "q": "What is the best goal of AI class notes?",
+          "q": "This lesson’s single deliverable is?",
           "options": [
-            "Let AI attend class and submit work for you",
-            "Turn lecture content into reviewable, linkable, actionable notes",
-            "Maximize word count only",
-            "Never listen and only paste a recording afterward"
+            "Complex courseware reading sheet",
+            "Resume and cover letter",
+            "Startup business model"
           ],
-          "answer": 1,
-          "explain": "The goal is reviewable action, not outsourcing attention."
+          "answer": 0,
+          "explain": "This course serves university learning only."
         },
         {
-          "q": "What should you capture yourself before asking AI to organize?",
+          "q": "After using AI you must still?",
           "options": [
-            "Every joke verbatim",
-            "Key definitions, confusions, examples, and next actions",
-            "Private classmate chats",
-            "Classroom decoration details"
+            "Verify and rewrite key judgments",
+            "Submit unchecked text",
+            "Delete your own notes"
           ],
-          "answer": 1,
-          "explain": "High-signal capture makes AI organization useful."
+          "answer": 0,
+          "explain": "Understanding stays yours."
         },
         {
-          "q": "Which practice most often destroys learning value?",
+          "q": "Which practice is unacceptable?",
           "options": [
-            "Marking confusions and following up later",
-            "Keeping unedited AI text as your final understanding",
-            "Linking notes to a course map or second brain",
-            "Reviewing open questions weekly"
+            "Submit unchecked AI text as final work",
+            "Use AI for structure then revise",
+            "Use a checklist"
           ],
-          "answer": 1,
-          "explain": "Unedited AI text is storage, not learning."
+          "answer": 0,
+          "explain": "Unchecked submission is not allowed."
         }
       ],
-      "zhNotePrompt": "貼上你的五欄模板結果，並寫下：哪個不懂最危險？明天先補哪一件？",
-      "enNotePrompt": "Paste your five-field note and write which confusion is most dangerous and what you will fix tomorrow.",
+      "zhRubric": [
+        {
+          "name": "完整度",
+          "levels": {
+            "incomplete": "缺關鍵區塊",
+            "basic": "內容過少",
+            "good": "主要區塊齊全",
+            "ready": "可直接使用"
+          }
+        },
+        {
+          "name": "正確性",
+          "levels": {
+            "incomplete": "有明顯錯誤",
+            "basic": "部分含糊",
+            "good": "大致正確",
+            "ready": "經得起檢查"
+          }
+        },
+        {
+          "name": "結構清晰度",
+          "levels": {
+            "incomplete": "雜亂",
+            "basic": "略有結構",
+            "good": "層次清楚",
+            "ready": "他人可直接套用"
+          }
+        },
+        {
+          "name": "可實際使用程度",
+          "levels": {
+            "incomplete": "無法用於下堂課",
+            "basic": "需大幅修改",
+            "good": "本週可用",
+            "ready": "可長期重用"
+          }
+        }
+      ],
+      "enRubric": [
+        {
+          "name": "Completeness",
+          "levels": {
+            "incomplete": "Missing parts",
+            "basic": "Too thin",
+            "good": "Main parts present",
+            "ready": "Ready to use"
+          }
+        },
+        {
+          "name": "Correctness",
+          "levels": {
+            "incomplete": "Clear errors",
+            "basic": "Some vagueness",
+            "good": "Mostly correct",
+            "ready": "Withstands checks"
+          }
+        },
+        {
+          "name": "Clarity",
+          "levels": {
+            "incomplete": "Messy",
+            "basic": "Some structure",
+            "good": "Clear hierarchy",
+            "ready": "Reusable by others"
+          }
+        },
+        {
+          "name": "Usability",
+          "levels": {
+            "incomplete": "Not usable next class",
+            "basic": "Needs rewrite",
+            "good": "Usable this week",
+            "ready": "Long-term reusable"
+          }
+        }
+      ],
+      "zhMistakesDetailed": [
+        {
+          "error": "只有摘要沒有自己的判斷",
+          "why": "無法形成能力",
+          "fix": "標出你同意／不同意／需查證處"
+        },
+        {
+          "error": "成果與標題不一致",
+          "why": "學習目標漂移",
+          "fix": "回到本課唯一成果檢查"
+        },
+        {
+          "error": "未回原文或作業要求核對",
+          "why": "可能漏重點或跑題",
+          "fix": "保存前做一次來源核對"
+        }
+      ],
+      "enMistakesDetailed": [
+        {
+          "error": "Summary without judgment",
+          "why": "No skill built",
+          "fix": "Mark agree / disagree / verify"
+        },
+        {
+          "error": "Deliverable mismatches the lesson",
+          "why": "Goal drift",
+          "fix": "Return to the single outcome"
+        },
+        {
+          "error": "No verification against source/brief",
+          "why": "Missed emphasis or off-topic",
+          "fix": "Do one source check before saving"
+        }
+      ],
+      "zhCommonMistakes": [
+        "只有摘要沒有自己的判斷",
+        "成果與標題不一致",
+        "未回原文或作業要求核對"
+      ],
+      "enCommonMistakes": [
+        "Summary without judgment",
+        "Deliverable mismatches the lesson",
+        "No verification against source/brief"
+      ],
+      "zhSummary": [
+        "對準本課唯一成果",
+        "AI 協助結構，人負責判斷",
+        "一定回原文／要求核對",
+        "把「複雜課件解讀單」存進學習系統"
+      ],
+      "enSummary": [
+        "Aim at one deliverable",
+        "AI helps structure; you judge",
+        "Always verify against source/brief",
+        "Save “Complex courseware reading sheet” into your system"
+      ],
       "zhDeliverableChecklist": [
-        "完成課堂捕捉模板",
-        "產出一堂真實課的 raw＋final",
-        "至少標記 2 個不懂",
-        "關鍵定義已用自己的話改寫",
-        "筆記已歸檔並可在課程資料夾找到"
+        "完成「複雜課件解讀單」",
+        "完成自我檢查題",
+        "把成果存入成果包"
       ],
       "enDeliverableChecklist": [
-        "Template ready",
-        "Raw+final for one real lecture",
-        "At least 2 confusions marked",
-        "Definitions rewritten in your words",
-        "Filed in the course folder"
+        "Finish “Complex courseware reading sheet”",
+        "Complete self-check questions",
+        "Save output to the result package"
       ],
       "zhScorecard": [
-        "捕捉品質",
-        "結構清楚",
-        "不懂具體",
-        "可行動",
-        "可歸檔"
+        "完整度",
+        "正確性",
+        "結構清晰度",
+        "可實際使用程度"
       ],
       "enScorecard": [
-        "Capture quality",
-        "Structure",
-        "Confusion clarity",
-        "Actionability",
-        "Filing"
+        "Completeness",
+        "Correctness",
+        "Clarity",
+        "Usability"
       ],
-      "resources": [
-        {
-          "name": "Notion",
-          "url": "https://www.notion.so",
-          "note": "課程資料庫與課堂筆記模板"
-        },
-        {
-          "name": "Google Drive",
-          "url": "https://drive.google.com",
-          "note": "存放 raw／final 與投影片"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "下课後結構化整理"
-        },
-        {
-          "name": "Obsidian",
-          "url": "https://obsidian.md",
-          "note": "把課堂筆記雙向連結到知識庫"
-        }
-      ],
-      "challenge": "連續兩堂課使用同一模板；比較第二堂是否更快，並寫下你刪掉了哪些低價值記錄習慣。",
+      "zhNotePrompt": "用自己的話寫下：本課最重要的一個原則，以及你會如何使用「複雜課件解讀單」。",
+      "enNotePrompt": "In your own words: the key principle and how you will use “Complex courseware reading sheet”.",
+      "zhCoachPrompt": "請檢查我的「複雜課件解讀單」是否具體可執行，並指出空泛之處。",
+      "enCoachPrompt": "Check whether my “Complex courseware reading sheet” is concrete and actionable.",
+      "zhExcellentExample": "完成版「複雜課件解讀單」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExcellentExample": "A finished “Complex courseware reading sheet” should be ready for the next related class task, with sources and verification notes."
+    },
+    {
+      "estimatedTime": "50–70 分鐘",
+      "difficulty": "初階",
       "id": "college-learning-L5",
-      "lessonKey": "college-learning-L5"
-    },
-    {
-      "icon": "📄",
-      "title": "用 AI 消化教材與 PDF，抓出作業與考試重點",
-      "description": "把老師講義與論文 PDF 整理成可追溯重點：定義、結構、考點、待查，避免無出處長摘要。",
-      "goal": "我的 PDF 重點卡（可追溯）與一份講義整理包",
-      "estimatedTime": "55-75 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "PDF",
-        "講義整理",
-        "可追溯摘要",
-        "Chapter3"
+      "lessonKey": "college-learning-L5",
+      "zhTitle": "第5課：建立有結構的課堂筆記",
+      "enTitle": "Lesson 5: Build structured class notes",
+      "zhValueTip": "筆記要能聽得懂、找得到、複習得了，不是流水帳。",
+      "enValueTip": "Notes must be understandable, findable, and reviewable—not a transcript.",
+      "zhOutputName": "課堂筆記模板",
+      "enOutputName": "Structured class-notes template",
+      "zhOutcome": "完成本課後產出：課堂筆記模板",
+      "enOutcome": "After this lesson, produce: Structured class-notes template",
+      "zhObjectives": [
+        "能夠建立含主旨、概念、例子、疑問的筆記結構",
+        "能夠完成一堂課的結構化筆記",
+        "能夠檢查筆記是否足以支撐複習"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 2,
-      "chapterZh": "AI 做筆記",
-      "chapterEn": "AI Note-Taking",
-      "zhTitle": "第6課：用 AI 消化教材與 PDF，抓出作業與考試重點",
-      "enTitle": "Lesson 6: Use AI to digest materials and PDFs for assignment and exam focus",
-      "zhValueTip": "把老師講義與論文 PDF 整理成可追溯重點：定義、結構、考點、待查，避免無出處長摘要。",
-      "enValueTip": "Condense lecture/PDF materials into traceable key points—definitions, structure, exam cues, open questions—without sourceless long summaries.",
-      "zhOutcome": "我的 PDF 重點卡（可追溯）與一份講義整理包",
-      "enOutcome": "My Traceable PDF Key-Point Cards and One Lecture Condensation Pack",
-      "zhConcept": "PDF 重點整理是大學生每週最高頻的筆記任務之一：老師丟講義、你要在考試前變成可讀結構。很多學生會讓 AI「整份摘要」，結果得到平均、模糊、無法對應頁碼的文字，考試時找不到原句，寫報告時也不敢引用。正確做法是「重點卡」而不是「長文改寫」：每張卡只放一個概念，包含名稱、定義（自己的話）、原文線索（頁碼／標題）、例子、可能考法、仍不懂處。流程建議：先快速掃過目錄與標題建立地圖 → 標記必讀區（定義、公式、流程、老師強調）→ 對必讀區做精讀式整理 → 用 AI 幫忙去重與轉成問答，但每點保留追溯。若使用 NotebookLM，把它當「依來源問答層」，不是「免看 PDF 層」。整理 PPT 時也一樣：投影片常缺推論，你要用筆記補上老師口頭強調的條件與例外。實務上也可把 PDF 重點卡與第11課課堂筆記對齊：課堂講過的標成「已講解」，只在講義出現的標成「自学補充」，考試前才知道哪些要回放錄音或問助教。當你開始寫報告需要引用講義定義時，有頁碼的重點卡能直接回到原句，大幅降低張冠李戴。這一課結束後，你會有一份可進考前系統的 PDF 重點包，並能說出每個重點來自哪裡。這也是避免報告引用錯誤的基礎：你引用的是核對過的概念，不是 AI 重新講的故事。請把 raw AI 整理與你校對後的 final 分開存放，形成可審計的筆記版本史。整理 PDF 時，先問「這份文件在考試／報告中扮演什麼角色」：指定必讀、補充閱讀，還是作業附件。必讀才做重點卡；補充閱讀可只做目錄地圖與三句摘要，避免能量耗盡。遇到掃描影像 PDF，優先確認 OCR 品質；若文字錯亂，先手動抄關鍵定義再交給 AI，不要整份硬餵。PPT 轉重點時，把「口頭補充」欄位留空並在課後用錄音或記憶補上，否則卡片會缺前提條件。每張卡完成後做 10 秒自測：不看原文能否用自己的話說出定義；說不出就標記待重讀。報告引用前，務必回到頁碼核對原句，AI 轉述不能當引用來源。最後把重點包檔名寫上課程代碼、章節與日期，讓考前包能精準呼叫。",
-      "enConcept": "PDF key-point condensing means building traceable concept cards—not fluent sourceless essays. Map the document, mark must-read zones, condense with page anchors, and verify in the original. NotebookLM can help with grounded Q&A, but it does not replace opening the PDF.",
-      "zhCaseStudy": "情境案例：會計系小北曾把 80 頁講義一次丟給 AI，得到漂亮摘要，小考却考老師在第 47 頁的例外規定，摘要沒寫到。後來她改成先畫章節地圖，只對「收入認列條件」相關頁做重點卡，每卡標頁碼，再用 NotebookLM 問「第47頁例外條件是什麼？請指出依據」。她回 PDF 核對後才寫 final。下次小考她直接翻重點卡頁碼區，三分鐘定位。她也把同一方法用在老師 PPT：口頭補充另開 Actions 欄。",
-      "enCaseStudy": "Accounting student Xiaobei stopped one-shot full-PDF summaries. She mapped sections, built page-anchored cards for recognition criteria, verified exceptions, and could locate test points in minutes.",
+      "enObjectives": [
+        "Build a note structure with thesis, concepts, examples, and questions",
+        "Complete structured notes for one class",
+        "Check whether notes support review"
+      ],
+      "zhWhyItMatters": {
+        "problem": "筆記要能聽得懂、找得到、複習得了，不是流水帳。",
+        "ineffective": "沒有清楚成果與檢查，學習容易停在「看過」.",
+        "solution": "用「課堂筆記模板」把理解變成可交付成果。"
+      },
+      "enWhyItMatters": {
+        "problem": "Notes must be understandable, findable, and reviewable—not a transcript.",
+        "ineffective": "Without a clear deliverable, learning stops at “I read it.”",
+        "solution": "Use “Structured class-notes template” to turn understanding into an output."
+      },
+      "zhConceptBlocks": {
+        "principles": [
+          "筆記服務未來複習",
+          "結構比完整抄寫重要",
+          "每堂留下待解答問題"
+        ],
+        "terms": [
+          "主旨",
+          "概念卡",
+          "待辦疑問"
+        ],
+        "criteria": [
+          "有標題與日期",
+          "概念可獨立理解",
+          "有複習提示"
+        ],
+        "boundaries": [
+          "不可整堂課只貼 AI 逐字稿",
+          "不可沒有自己的疑問區"
+        ]
+      },
+      "enConceptBlocks": {
+        "principles": [
+          "Notes serve future review",
+          "Structure beats verbatim capture",
+          "Leave open questions each class"
+        ],
+        "terms": [
+          "Thesis",
+          "Concept card",
+          "Open questions"
+        ],
+        "criteria": [
+          "Has title and date",
+          "Concepts stand alone",
+          "Includes review cues"
+        ],
+        "boundaries": [
+          "Don’t save only an AI transcript",
+          "Don’t omit a questions section"
+        ]
+      },
+      "zhConcept": "筆記服務未來複習；結構比完整抄寫重要；每堂留下待解答問題；不可整堂課只貼 AI 逐字稿；不可沒有自己的疑問區",
+      "enConcept": "Notes serve future review; Structure beats verbatim capture; Leave open questions each class; Don’t save only an AI transcript; Don’t omit a questions section",
+      "zhCaseStudyBlocks": {
+        "problem": "阿哲筆記又長又亂，考前找不到重點。",
+        "wrong": "把錄音丟給 AI 轉成超長文字就算筆記。",
+        "right": "用模板：主旨／三個概念／兩個例子／三個疑問／下週行動。",
+        "result": "複習時間從 2 小時降到 25 分鐘。"
+      },
+      "enCaseStudyBlocks": {
+        "problem": "A-Zhe’s notes were long and unusable before exams.",
+        "wrong": "He dumped the recording into AI and saved the transcript.",
+        "right": "He used a template: thesis / three concepts / two examples / three questions / next action.",
+        "result": "Review time dropped from 2 hours to 25 minutes."
+      },
+      "zhCaseStudy": "問題：阿哲筆記又長又亂，考前找不到重點。。錯誤做法：把錄音丟給 AI 轉成超長文字就算筆記。。正確做法：用模板：主旨／三個概念／兩個例子／三個疑問／下週行動。。成果：複習時間從 2 小時降到 25 分鐘。",
+      "enCaseStudy": "Problem: A-Zhe’s notes were long and unusable before exams.. Wrong: He dumped the recording into AI and saved the transcript.. Right: He used a template: thesis / three concepts / two examples / three questions / next action.. Result: Review time dropped from 2 hours to 25 minutes.",
+      "zhWorkflowSteps": [
+        {
+          "do": "收集本課所需的真實課程素材",
+          "why": "對準真實任務",
+          "input": "教材／作業／筆記",
+          "output": "素材清單",
+          "check": "是否來自本學期課程？"
+        },
+        {
+          "do": "依流程完成「課堂筆記模板」初稿",
+          "why": "產出唯一成果",
+          "input": "素材清單",
+          "output": "課堂筆記模板 初稿",
+          "check": "是否只服務本課目標？"
+        },
+        {
+          "do": "用自我檢查與 Rubric 修正並存檔",
+          "why": "確保可實際使用",
+          "input": "初稿",
+          "output": "完成的課堂筆記模板",
+          "check": "能否在下堂課直接用？"
+        }
+      ],
+      "enWorkflowSteps": [
+        {
+          "do": "Collect real course materials",
+          "why": "Aim at a real task",
+          "input": "Materials / briefs / notes",
+          "output": "Material list",
+          "check": "From this term?"
+        },
+        {
+          "do": "Draft “Structured class-notes template” with the workflow",
+          "why": "Produce one deliverable",
+          "input": "Material list",
+          "output": "Draft Structured class-notes template",
+          "check": "Does it serve this lesson only?"
+        },
+        {
+          "do": "Revise with self-check and rubric, then save",
+          "why": "Make it usable",
+          "input": "Draft",
+          "output": "Finished Structured class-notes template",
+          "check": "Usable in the next class?"
+        }
+      ],
       "zhWorkflow": [
-        "建立 PDF／PPT 目錄地圖（章／節／必讀區）",
-        "只對必讀區製作重點卡（定義／例子／考點／頁碼）",
-        "用 AI 去重與轉問答，但保留追溯欄",
-        "回原檔核對關鍵句",
-        "匯出成可進考前複習的重點包"
+        "收集本課所需的真實課程素材",
+        "依流程完成「課堂筆記模板」初稿",
+        "用自我檢查與 Rubric 修正並存檔"
       ],
       "enWorkflow": [
-        "Map chapters and must-read zones",
-        "Build key-point cards with page anchors",
-        "Use AI to dedupe and convert to Q&A while keeping provenance",
-        "Verify key lines in the original",
-        "Export a revision-ready pack"
+        "Collect real course materials",
+        "Draft “Structured class-notes template” with the workflow",
+        "Revise with self-check and rubric, then save"
       ],
-      "zhCommonMistakes": [
-        "整份一次摘要、無頁碼",
-        "把例子當定義、把口頭補充遺失",
-        "不回原文核對",
-        "重點卡太多導致無法複習"
+      "zhPromptPack": {
+        "when": "製作「課堂筆記模板」時",
+        "fields": [
+          "[課程名稱]",
+          "[老師要求]",
+          "[教材內容]",
+          "[輸出格式]"
+        ],
+        "body": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「課堂筆記模板」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+        "exampleInput": "填入真實課程與要求",
+        "expected": "可用的課堂筆記模板草稿＋查證提醒"
+      },
+      "enPromptPack": {
+        "when": "When creating “Structured class-notes template”",
+        "fields": [
+          "[course]",
+          "[instructor requirements]",
+          "[material focus]",
+          "[output format]"
+        ],
+        "body": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Structured class-notes template” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+        "exampleInput": "Use a real course and brief",
+        "expected": "Usable Structured class-notes template draft with verification notes"
+      },
+      "zhPrompt": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「課堂筆記模板」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+      "enPrompt": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Structured class-notes template” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+      "zhExample": "完成版「課堂筆記模板」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExample": "A finished “Structured class-notes template” should be ready for the next related class task, with sources and verification notes.",
+      "zhPracticeSteps": [
+        {
+          "task": "用真實課程完成「課堂筆記模板」",
+          "standard": "對應本課唯一成果",
+          "mistakes": "混入其他能力主題",
+          "check": "是否越界？"
+        },
+        {
+          "task": "依完成標準自評並修改",
+          "standard": "達到良好以上",
+          "mistakes": "不修改就存檔",
+          "check": "Rubric 哪項最低？"
+        },
+        {
+          "task": "存入成果包並寫一句下週用法",
+          "standard": "有保存時間與連結或文字",
+          "mistakes": "只存在聊天窗",
+          "check": "下週如何用？"
+        }
       ],
-      "enCommonMistakes": [
-        "One-shot sourceless summaries",
-        "Confusing examples with definitions",
-        "Never verifying the original",
-        "Creating too many cards to review"
+      "enPracticeSteps": [
+        {
+          "task": "Finish “Structured class-notes template” with a real course",
+          "standard": "Matches this lesson’s deliverable",
+          "mistakes": "Mixes other skill domains",
+          "check": "Out of scope?"
+        },
+        {
+          "task": "Self-score and revise",
+          "standard": "Good or ready level",
+          "mistakes": "Save without revision",
+          "check": "Lowest rubric item?"
+        },
+        {
+          "task": "Save to package with next-week use note",
+          "standard": "Has text/link and timestamp",
+          "mistakes": "Only in chat history",
+          "check": "How will you use it next week?"
+        }
       ],
-      "zhExcellentExample": "優秀重點卡：概念名＋自己的話定義＋頁碼＋一個例子＋可能考題＋待確認。一章通常 5-12 張卡，而不是一篇 2000 字摘要。",
-      "enExcellentExample": "A strong card has name, your definition, page ref, one example, likely exam angle, and an open check. Prefer 5–12 cards over one giant essay.",
-      "zhPrompt": "【Prompt 1｜PDF 重點卡生成器】\n請根據我提供的講義摘錄（含頁碼）整理重點卡。\n摘錄：\n（貼上，儘量含頁碼）\n每張卡格式：概念｜我的定義草稿｜原文頁碼／標題｜例子｜可能考法｜待確認。\n若摘錄不足請要求我補頁，不要發明講義沒有的規則。",
-      "enPrompt": "[Prompt 1 | PDF Key-Point Cards] Turn my page-referenced excerpts into concept cards. Ask for more pages if needed; do not invent rules.",
-      "zhCoachPrompt": "【Prompt 2｜PPT／PDF 缺口檢查】\n以下是我的重點卡：\n（貼上）\n請指出哪些像定義、哪些像例子、哪些可能是老師口頭補充缺口；並給我回原檔時該搜尋的關鍵詞。",
-      "enCoachPrompt": "[Prompt 2 | Gap Check] Identify definitions vs examples vs likely oral-only gaps, and give search terms for the original file.",
-      "zhFeedbackPrompt": "【Prompt 3｜重點包驗收】\n以下是我的 PDF 重點包：\n（貼上）\n請評分：追溯完整度、考點清晰度、是否過度冗長、是否把不確定當確定。刪減到可在 25 分鐘內複習完的版本，並說明你刪了什麼。",
-      "enFeedbackPrompt": "[Prompt 3 | Pack Review] Score traceability and exam clarity; cut the pack to a 25-minute review version and explain deletions.",
-      "zhExample": "卡示例：收入認列｜需滿足履約義務與可衡量等條件（自述）｜講義 p.47｜例子：預收款｜考法：給情境判斷能否認列｜待確認：老師上課補充的例外。",
-      "enExample": "Card example: revenue recognition | conditions in my words | p.47 | example: deferred revenue | exam angle: scenario judgment | check oral exceptions.",
-      "zhPractice": "選一份本週真實講義或 PPT。；先做目錄地圖再做 8-15 張重點卡。；用 Prompt 整理後回原文核對。；轉成 10 題問答卡。；Challenge：關掉 PDF，只看重點卡默寫 3 個定義，再開檔對答案。",
-      "enPractice": "Choose one real PDF/PPT.；Map then build 8–15 cards.；Verify.；Make 10 Q&A cards.；Challenge: rewrite 3 definitions from cards only, then check the file.",
+      "zhPractice": "用真實課程完成「課堂筆記模板」；依完成標準自評並修改；存入成果包並寫一句下週用法",
+      "enPractice": "Finish “Structured class-notes template” with a real course; Self-score and revise; Save to package with next-week use note",
+      "zhFeedbackPrompt": "請依完整度、正確性、結構清晰度、可實際使用程度評分我的「課堂筆記模板」，指出是否偏離課堂學習，並給出三個修改建議。",
+      "enFeedbackPrompt": "Score my “Structured class-notes template” on completeness, correctness, clarity, and usability. Flag any drift away from classroom learning and give three fixes.",
       "zhQuizItems": [
         {
-          "q": "整理老師 PDF／PPT 講義時，最重要的原則是？",
+          "q": "本課唯一應產出的成果是？",
           "options": [
-            "越長越好，表示很認真",
-            "重點可追溯到頁碼或章節，並分清定義／例子／考點",
-            "只保留標題、刪光所有例子",
-            "完全交給 AI、自己不看原文"
+            "課堂筆記模板",
+            "履歷與求職信",
+            "創業商業模式"
           ],
-          "answer": 1,
-          "explain": "可追溯且分類清楚，複習與引用才安全。"
+          "answer": 0,
+          "explain": "本課只服務大學學習能力。"
         },
         {
-          "q": "下列哪種 PDF 摘要最危險？",
+          "q": "使用 AI 後仍必須做的是？",
           "options": [
-            "標註頁碼的定義卡",
-            "看起來通順但無法指回原文、還混入原文沒有的主張",
-            "條列待確認問題",
-            "比較兩個章節差異的對照表"
+            "查證與自己改寫關鍵判斷",
+            "直接繳交未檢查內容",
+            "刪除所有自己的筆記"
           ],
-          "answer": 1,
-          "explain": "無出處且腦補的摘要最容易造成錯誤理解與錯誤引用。"
+          "answer": 0,
+          "explain": "理解與責任仍在你。"
         },
         {
-          "q": "用 NotebookLM 整理 PDF 後，你仍應？",
+          "q": "哪種做法最不符合本課？",
           "options": [
-            "直接交出去當作業正文",
-            "回原 PDF 核對關鍵句與頁碼",
-            "刪除所有原始檔",
-            "禁止再做任何複習"
+            "把未查證 AI 全文當作最終繳交",
+            "用 AI 協助結構後自己改寫",
+            "用檢查表確認完成標準"
           ],
-          "answer": 1,
-          "explain": "工具整理後仍要原文核對。"
+          "answer": 0,
+          "explain": "未查證繳交不可接受。"
         }
       ],
       "enQuizItems": [
         {
-          "q": "What matters most when condensing a lecture PDF/PPT?",
+          "q": "This lesson’s single deliverable is?",
           "options": [
-            "Longer is always better",
-            "Traceable points with page/section refs, separated into definition/example/exam cues",
-            "Keep titles only and delete all examples",
-            "Let AI read and never open the file"
+            "Structured class-notes template",
+            "Resume and cover letter",
+            "Startup business model"
           ],
-          "answer": 1,
-          "explain": "Traceability and classification make review safe."
+          "answer": 0,
+          "explain": "This course serves university learning only."
         },
         {
-          "q": "Which PDF summary is most dangerous?",
+          "q": "After using AI you must still?",
           "options": [
-            "Definition cards with page numbers",
-            "Fluent text that cannot be traced and adds claims absent from the source",
-            "A list of open questions",
-            "A comparison table between sections"
+            "Verify and rewrite key judgments",
+            "Submit unchecked text",
+            "Delete your own notes"
           ],
-          "answer": 1,
-          "explain": "Sourceless invented claims are high risk."
+          "answer": 0,
+          "explain": "Understanding stays yours."
         },
         {
-          "q": "After NotebookLM condenses a PDF, you should still?",
+          "q": "Which practice is unacceptable?",
           "options": [
-            "Submit it as the full assignment",
-            "Verify key sentences and pages in the original PDF",
-            "Delete all source files",
-            "Never review again"
+            "Submit unchecked AI text as final work",
+            "Use AI for structure then revise",
+            "Use a checklist"
           ],
-          "answer": 1,
-          "explain": "Always verify against the original."
+          "answer": 0,
+          "explain": "Unchecked submission is not allowed."
         }
       ],
-      "zhNotePrompt": "寫下你的章節地圖、最重要的 5 張卡，以及 2 個必須回原文確認的點。",
-      "enNotePrompt": "Write your section map, top 5 cards, and 2 must-verify points.",
+      "zhRubric": [
+        {
+          "name": "完整度",
+          "levels": {
+            "incomplete": "缺關鍵區塊",
+            "basic": "內容過少",
+            "good": "主要區塊齊全",
+            "ready": "可直接使用"
+          }
+        },
+        {
+          "name": "正確性",
+          "levels": {
+            "incomplete": "有明顯錯誤",
+            "basic": "部分含糊",
+            "good": "大致正確",
+            "ready": "經得起檢查"
+          }
+        },
+        {
+          "name": "結構清晰度",
+          "levels": {
+            "incomplete": "雜亂",
+            "basic": "略有結構",
+            "good": "層次清楚",
+            "ready": "他人可直接套用"
+          }
+        },
+        {
+          "name": "可實際使用程度",
+          "levels": {
+            "incomplete": "無法用於下堂課",
+            "basic": "需大幅修改",
+            "good": "本週可用",
+            "ready": "可長期重用"
+          }
+        }
+      ],
+      "enRubric": [
+        {
+          "name": "Completeness",
+          "levels": {
+            "incomplete": "Missing parts",
+            "basic": "Too thin",
+            "good": "Main parts present",
+            "ready": "Ready to use"
+          }
+        },
+        {
+          "name": "Correctness",
+          "levels": {
+            "incomplete": "Clear errors",
+            "basic": "Some vagueness",
+            "good": "Mostly correct",
+            "ready": "Withstands checks"
+          }
+        },
+        {
+          "name": "Clarity",
+          "levels": {
+            "incomplete": "Messy",
+            "basic": "Some structure",
+            "good": "Clear hierarchy",
+            "ready": "Reusable by others"
+          }
+        },
+        {
+          "name": "Usability",
+          "levels": {
+            "incomplete": "Not usable next class",
+            "basic": "Needs rewrite",
+            "good": "Usable this week",
+            "ready": "Long-term reusable"
+          }
+        }
+      ],
+      "zhMistakesDetailed": [
+        {
+          "error": "只有摘要沒有自己的判斷",
+          "why": "無法形成能力",
+          "fix": "標出你同意／不同意／需查證處"
+        },
+        {
+          "error": "成果與標題不一致",
+          "why": "學習目標漂移",
+          "fix": "回到本課唯一成果檢查"
+        },
+        {
+          "error": "未回原文或作業要求核對",
+          "why": "可能漏重點或跑題",
+          "fix": "保存前做一次來源核對"
+        }
+      ],
+      "enMistakesDetailed": [
+        {
+          "error": "Summary without judgment",
+          "why": "No skill built",
+          "fix": "Mark agree / disagree / verify"
+        },
+        {
+          "error": "Deliverable mismatches the lesson",
+          "why": "Goal drift",
+          "fix": "Return to the single outcome"
+        },
+        {
+          "error": "No verification against source/brief",
+          "why": "Missed emphasis or off-topic",
+          "fix": "Do one source check before saving"
+        }
+      ],
+      "zhCommonMistakes": [
+        "只有摘要沒有自己的判斷",
+        "成果與標題不一致",
+        "未回原文或作業要求核對"
+      ],
+      "enCommonMistakes": [
+        "Summary without judgment",
+        "Deliverable mismatches the lesson",
+        "No verification against source/brief"
+      ],
+      "zhSummary": [
+        "對準本課唯一成果",
+        "AI 協助結構，人負責判斷",
+        "一定回原文／要求核對",
+        "把「課堂筆記模板」存進學習系統"
+      ],
+      "enSummary": [
+        "Aim at one deliverable",
+        "AI helps structure; you judge",
+        "Always verify against source/brief",
+        "Save “Structured class-notes template” into your system"
+      ],
       "zhDeliverableChecklist": [
-        "完成目錄地圖",
-        "產出可追溯重點卡",
-        "回原文核對關鍵點",
-        "生成問答卡",
-        "重點包已存檔"
+        "完成「課堂筆記模板」",
+        "完成自我檢查題",
+        "把成果存入成果包"
       ],
       "enDeliverableChecklist": [
-        "Section map done",
-        "Traceable cards created",
-        "Verified in original",
-        "Q&A cards ready",
-        "Pack saved"
+        "Finish “Structured class-notes template”",
+        "Complete self-check questions",
+        "Save output to the result package"
       ],
       "zhScorecard": [
-        "追溯",
-        "密度",
-        "考點",
-        "可複習",
-        "正確性"
+        "完整度",
+        "正確性",
+        "結構清晰度",
+        "可實際使用程度"
       ],
       "enScorecard": [
-        "Provenance",
-        "Density",
-        "Exam focus",
-        "Reviewability",
-        "Correctness"
+        "Completeness",
+        "Correctness",
+        "Clarity",
+        "Usability"
       ],
-      "resources": [
-        {
-          "name": "NotebookLM",
-          "url": "https://notebooklm.google.com",
-          "note": "依上傳 PDF 做 grounded 問答與整理"
-        },
-        {
-          "name": "Google Drive",
-          "url": "https://drive.google.com",
-          "note": "管理講義、PPT 與重點包版本"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "在你提供頁碼摘錄後生成重點卡"
-        },
-        {
-          "name": "Notion",
-          "url": "https://www.notion.so",
-          "note": "把重點卡做成可篩選資料庫"
-        }
-      ],
-      "challenge": "把同一份講義做成「長摘要版」與「重點卡版」，計時各複習 15 分鐘，寫下哪一版更能答出細節題並說明原因。",
+      "zhNotePrompt": "用自己的話寫下：本課最重要的一個原則，以及你會如何使用「課堂筆記模板」。",
+      "enNotePrompt": "In your own words: the key principle and how you will use “Structured class-notes template”.",
+      "zhCoachPrompt": "請檢查我的「課堂筆記模板」是否具體可執行，並指出空泛之處。",
+      "enCoachPrompt": "Check whether my “Structured class-notes template” is concrete and actionable.",
+      "zhExcellentExample": "完成版「課堂筆記模板」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExcellentExample": "A finished “Structured class-notes template” should be ready for the next related class task, with sources and verification notes."
+    },
+    {
+      "estimatedTime": "45–65 分鐘",
+      "difficulty": "初階",
       "id": "college-learning-L6",
-      "lessonKey": "college-learning-L6"
-    },
-    {
-      "icon": "🗂️",
-      "title": "用 AI 讀懂作業要求，排出課堂報告大綱",
-      "description": "把規格書轉成有論點順序的報告架構：研究問題、章節邏輯、每段主張與證據空位。",
-      "goal": "我的報告大綱（研究問題＋章節主張＋證據空位＋字數配置）",
-      "estimatedTime": "55-75 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "報告大綱",
-        "論點結構",
-        "章節邏輯",
-        "Chapter4"
+      "lessonKey": "college-learning-L6",
+      "zhTitle": "第6課：整理課堂資料與重要資訊",
+      "enTitle": "Lesson 6: Organize class materials and key information",
+      "zhValueTip": "把作業要求、截止日期、評分標準與資源集中，減少漏交與遺漏。",
+      "enValueTip": "Centralize requirements, deadlines, rubrics, and resources to reduce missed work.",
+      "zhOutputName": "重要資訊整理表",
+      "enOutputName": "Key-information organizer",
+      "zhOutcome": "完成本課後產出：重要資訊整理表",
+      "enOutcome": "After this lesson, produce: Key-information organizer",
+      "zhObjectives": [
+        "能夠辨識作業與課程中的關鍵資訊類型",
+        "能夠建立一份重要資訊整理表",
+        "能夠檢查是否漏掉評分標準或截止日期"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 3,
-      "chapterZh": "AI 寫報告",
-      "chapterEn": "AI for Reports",
-      "zhTitle": "第7課：用 AI 讀懂作業要求，排出課堂報告大綱",
-      "enTitle": "Lesson 7: Use AI to decode assignment briefs and build report outlines",
-      "zhValueTip": "把規格書轉成有論點順序的報告架構：研究問題、章節邏輯、每段主張與證據空位。",
-      "enValueTip": "Turn your specs sheet into an argumentative outline—research question, section logic, claim slots, and evidence gaps.",
-      "zhOutcome": "我的報告大綱（研究問題＋章節主張＋證據空位＋字數配置）",
-      "enOutcome": "My Report Outline (RQ + section claims + evidence slots + word budget)",
-      "zhConcept": "好的大學報告不是先寫很多字，而是先有可防禦的結構。大綱要回答四件事：你的核心問題是什麼、各章節如何推進論證、每一節的主張句是什麼、證據目前缺在哪裡。AI 很擅長提出多種結構選項，但容易寫成「背景—優點—缺點—結論」的空殼。你要用第16課規格書約束它：任務若是比較，大綱就必須出現對照維度；若是評論，就要有評價標準。建議流程：先寫一句研究問題（RQ）與一句暫時主張（working thesis）；再請 AI 產出 2-3 套大綱；你選擇一套後，把每節改成「主張句＋預計證據類型＋預估字數」。證據空位很重要：標成「需期刊定義」「需數據」「需案例」，之後文獻搜尋才有目標，不會漫無目的下載二十篇 PDF。字數配置要對齊評分：文獻回顧與分析通常應佔最多，前言與結語宜短。若老師要求方法或限制，大綱必須預留區塊，不要最後硬塞。也要把反向觀點放進結構：至少一節處理限制或反對意見，這會讓報告看起來像學術論證而非宣傳文。完成大綱後做壓力測試：刪掉任何一節，論證是否仍成立？若不成立，那一節才是必要的；若成立，可能是灌水。大綱是活文件：讀完文獻後應更新主張與證據空位，而不是把初版大綱當聖經。與 AI 協作時，禁止直接說「幫我寫報告」；要說「依此規格書與 RQ，給我大綱選項，每節用主張句，並標出需要證據的位置」。當大綱穩定，第18課的文獻整理才會高效，第19課潤稿才有清楚段落可改，第20課定稿檢查也才有對照基準。實務模板可採：I 緒論（問題、重要性、RQ、論文主張）→ II 文獻／概念架構 → III 分析或比較（依維度分節）→ IV 討論（發現、反向觀點）→ V 結論與限制／建議。每節標題避免空泛「第一章 介紹」；改成能看出主張的標題，例如「注意力碎片化如何影響深度閱讀」。標題即論點，寫作時較不易跑題。若是小組報告，大綱還要標註負責人與交接格式，避免最後拼貼語氣分裂。AI 可協助統一章節功能描述，但主張仍由負責同學決定。",
-      "enConcept": "Outlines should encode research question, argument flow, claim sentences, evidence gaps, and word budget aligned to the rubric. Use AI for structure options, then force claim-level specificity and counterargument space. Treat the outline as a living map for sourcing and drafting.",
-      "zhCaseStudy": "情境案例：資管系阿哲以前請 AI「寫大綱」，得到五章空標題，初稿變成資料堆砌。這次他先給規格書與 RQ：「混合式學習是否提升程式課通過率？」AI 給三套結構後，他選「定義—機制—證據—限制」，並把每節改成主張句，標出需找的實證研究。搜文獻時他只針對空位找五篇關鍵論文，寫作速度反而更快，助教回饋「邏輯清楚、不是百科」。",
-      "enCaseStudy": "A-Zhe replaced empty AI chapter titles with claim-level sections tied to evidence gaps, which made sourcing and drafting faster and clearer.",
+      "enObjectives": [
+        "Identify key information types in coursework",
+        "Build a key-information organizer",
+        "Check for missing rubrics or deadlines"
+      ],
+      "zhWhyItMatters": {
+        "problem": "把作業要求、截止日期、評分標準與資源集中，減少漏交與遺漏。",
+        "ineffective": "沒有清楚成果與檢查，學習容易停在「看過」.",
+        "solution": "用「重要資訊整理表」把理解變成可交付成果。"
+      },
+      "enWhyItMatters": {
+        "problem": "Centralize requirements, deadlines, rubrics, and resources to reduce missed work.",
+        "ineffective": "Without a clear deliverable, learning stops at “I read it.”",
+        "solution": "Use “Key-information organizer” to turn understanding into an output."
+      },
+      "zhConceptBlocks": {
+        "principles": [
+          "先分類再整理",
+          "截止日期與評分標準優先",
+          "每個資訊都要有來源位置"
+        ],
+        "terms": [
+          "要求",
+          "截止",
+          "評分",
+          "資源"
+        ],
+        "criteria": [
+          "含截止與評分",
+          "來源可回查",
+          "下週行動清楚"
+        ],
+        "boundaries": [
+          "不可只整理內容忽略繳交規則",
+          "不可省略老師口頭補充"
+        ]
+      },
+      "enConceptBlocks": {
+        "principles": [
+          "Classify before organizing",
+          "Deadlines and rubrics come first",
+          "Every item needs a source location"
+        ],
+        "terms": [
+          "Requirement",
+          "Deadline",
+          "Rubric",
+          "Resource"
+        ],
+        "criteria": [
+          "Includes deadlines and weights",
+          "Sources are traceable",
+          "Next actions are clear"
+        ],
+        "boundaries": [
+          "Don’t ignore submission rules",
+          "Don’t skip oral announcements"
+        ]
+      },
+      "zhConcept": "先分類再整理；截止日期與評分標準優先；每個資訊都要有來源位置；不可只整理內容忽略繳交規則；不可省略老師口頭補充",
+      "enConcept": "Classify before organizing; Deadlines and rubrics come first; Every item needs a source location; Don’t ignore submission rules; Don’t skip oral announcements",
+      "zhCaseStudyBlocks": {
+        "problem": "小寧常漏看作業附檔與評分比例。",
+        "wrong": "把所有 PDF 丟進資料夾不管。",
+        "right": "用整理表列出任務、截止、比重、必讀與疑問。",
+        "result": "連續兩週沒有漏交。"
+      },
+      "enCaseStudyBlocks": {
+        "problem": "Ning often missed attachments and grading weights.",
+        "wrong": "She dumped PDFs into a folder.",
+        "right": "She used an organizer for task, deadline, weight, required reading, and questions.",
+        "result": "She submitted on time for two weeks."
+      },
+      "zhCaseStudy": "問題：小寧常漏看作業附檔與評分比例。。錯誤做法：把所有 PDF 丟進資料夾不管。。正確做法：用整理表列出任務、截止、比重、必讀與疑問。。成果：連續兩週沒有漏交。",
+      "enCaseStudy": "Problem: Ning often missed attachments and grading weights.. Wrong: She dumped PDFs into a folder.. Right: She used an organizer for task, deadline, weight, required reading, and questions.. Result: She submitted on time for two weeks.",
+      "zhWorkflowSteps": [
+        {
+          "do": "收集本課所需的真實課程素材",
+          "why": "對準真實任務",
+          "input": "教材／作業／筆記",
+          "output": "素材清單",
+          "check": "是否來自本學期課程？"
+        },
+        {
+          "do": "依流程完成「重要資訊整理表」初稿",
+          "why": "產出唯一成果",
+          "input": "素材清單",
+          "output": "重要資訊整理表 初稿",
+          "check": "是否只服務本課目標？"
+        },
+        {
+          "do": "用自我檢查與 Rubric 修正並存檔",
+          "why": "確保可實際使用",
+          "input": "初稿",
+          "output": "完成的重要資訊整理表",
+          "check": "能否在下堂課直接用？"
+        }
+      ],
+      "enWorkflowSteps": [
+        {
+          "do": "Collect real course materials",
+          "why": "Aim at a real task",
+          "input": "Materials / briefs / notes",
+          "output": "Material list",
+          "check": "From this term?"
+        },
+        {
+          "do": "Draft “Key-information organizer” with the workflow",
+          "why": "Produce one deliverable",
+          "input": "Material list",
+          "output": "Draft Key-information organizer",
+          "check": "Does it serve this lesson only?"
+        },
+        {
+          "do": "Revise with self-check and rubric, then save",
+          "why": "Make it usable",
+          "input": "Draft",
+          "output": "Finished Key-information organizer",
+          "check": "Usable in the next class?"
+        }
+      ],
       "zhWorkflow": [
-        "從規格書寫出 RQ 與暫時主張",
-        "請 AI 產出 2-3 套大綱選項並比較優缺",
-        "選定一套，改成主張句＋證據空位＋字數",
-        "加入反向觀點／限制區塊",
-        "做刪節壓力測試，存成 outline-v1"
+        "收集本課所需的真實課程素材",
+        "依流程完成「重要資訊整理表」初稿",
+        "用自我檢查與 Rubric 修正並存檔"
       ],
       "enWorkflow": [
-        "Write RQ and working thesis from the specs sheet",
-        "Generate 2–3 outline options with AI and compare",
-        "Convert chosen outline into claims, evidence gaps, word counts",
-        "Add counterargument/limitations",
-        "Stress-test by cutting sections; save outline-v1"
+        "Collect real course materials",
+        "Draft “Key-information organizer” with the workflow",
+        "Revise with self-check and rubric, then save"
       ],
-      "zhCommonMistakes": [
-        "大綱只有章名沒有主張",
-        "字數平均分配、忽略評分權重",
-        "沒有證據空位，導致亂找資料",
-        "把 AI 大綱原封當最終結構"
+      "zhPromptPack": {
+        "when": "製作「重要資訊整理表」時",
+        "fields": [
+          "[課程名稱]",
+          "[老師要求]",
+          "[教材內容]",
+          "[輸出格式]"
+        ],
+        "body": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「重要資訊整理表」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+        "exampleInput": "填入真實課程與要求",
+        "expected": "可用的重要資訊整理表草稿＋查證提醒"
+      },
+      "enPromptPack": {
+        "when": "When creating “Key-information organizer”",
+        "fields": [
+          "[course]",
+          "[instructor requirements]",
+          "[material focus]",
+          "[output format]"
+        ],
+        "body": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Key-information organizer” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+        "exampleInput": "Use a real course and brief",
+        "expected": "Usable Key-information organizer draft with verification notes"
+      },
+      "zhPrompt": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「重要資訊整理表」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+      "enPrompt": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Key-information organizer” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+      "zhExample": "完成版「重要資訊整理表」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExample": "A finished “Key-information organizer” should be ready for the next related class task, with sources and verification notes.",
+      "zhPracticeSteps": [
+        {
+          "task": "用真實課程完成「重要資訊整理表」",
+          "standard": "對應本課唯一成果",
+          "mistakes": "混入其他能力主題",
+          "check": "是否越界？"
+        },
+        {
+          "task": "依完成標準自評並修改",
+          "standard": "達到良好以上",
+          "mistakes": "不修改就存檔",
+          "check": "Rubric 哪項最低？"
+        },
+        {
+          "task": "存入成果包並寫一句下週用法",
+          "standard": "有保存時間與連結或文字",
+          "mistakes": "只存在聊天窗",
+          "check": "下週如何用？"
+        }
       ],
-      "enCommonMistakes": [
-        "Titles without claims",
-        "Equal word budgets ignoring the rubric",
-        "No evidence gaps",
-        "Accepting the first AI outline unchanged"
+      "enPracticeSteps": [
+        {
+          "task": "Finish “Key-information organizer” with a real course",
+          "standard": "Matches this lesson’s deliverable",
+          "mistakes": "Mixes other skill domains",
+          "check": "Out of scope?"
+        },
+        {
+          "task": "Self-score and revise",
+          "standard": "Good or ready level",
+          "mistakes": "Save without revision",
+          "check": "Lowest rubric item?"
+        },
+        {
+          "task": "Save to package with next-week use note",
+          "standard": "Has text/link and timestamp",
+          "mistakes": "Only in chat history",
+          "check": "How will you use it next week?"
+        }
       ],
-      "zhExcellentExample": "優秀大綱看得到：一句 RQ、一句 thesis、每節主張句、證據空位類型、字數配置、至少一處反向觀點，且與規格書任務動詞一致。",
-      "enExcellentExample": "A strong outline shows RQ, thesis, claim sentences, evidence gap types, word budget, and a counterargument slot aligned to the brief.",
-      "zhPrompt": "【Prompt 1｜報告大綱架構師】\n請依我的報告規格書與研究問題，提供 3 套不同邏輯的大綱（例如：主題式／比較式／問題—證據—意涵）。\n規格書：\n（貼上）\n研究問題：［RQ］\n暫時主張：［thesis］\n每套大綱請用「節標題＝主張句」格式，並標註預估字數。最後用表格比較三套：優點、風險、適合何種評分重點。不要寫正文。",
-      "enPrompt": "[Prompt 1 | Outline Architect] Propose 3 outline logics from my specs + RQ. Use claim-sentence section titles, word estimates, and a comparison table. No full prose.",
-      "zhCoachPrompt": "【Prompt 2｜主張句與證據空位強化】\n這是我選定的大綱：\n（貼上）\n請把每一節改得更具體：1) 主張句（可爭論）2) 需要的證據類型 3) 可能的反證 4) 與前後節的邏輯連接詞建議。刪掉空泛標題。若某節無法寫成主張句，標成應合併或刪除。",
-      "enCoachPrompt": "[Prompt 2 | Claim & Gap Hardener] Rewrite each section as a contestable claim with evidence type, possible counterevidence, and logical connectors.",
-      "zhFeedbackPrompt": "【Prompt 3｜大綱驗收】\n規格書：\n（貼上）\n大綱：\n（貼上）\n請評分：是否對齊任務動詞、論證是否前進、有無灌水節、字數是否合理、證據空位是否可執行。指出最弱的兩節並給改寫版。不要幫我寫完整報告正文。",
-      "enFeedbackPrompt": "[Prompt 3 | Outline Review] Score alignment, argument progress, fluff risk, word budget, and evidence gaps; rewrite the two weakest sections.",
-      "zhExample": "RQ：短影音使用是否降低大學生深度閱讀時間？\nIII-A 主張：高頻短影音使用者的深度閱讀時段更碎片化（需問卷或既有研究數據）。\nIII-B 主張：即使總閱讀時間相近，理解測驗表現仍可能下降（需實驗或準實驗文獻）。",
-      "enExample": "RQ on short-video use and deep reading; sections state contestable claims and name the evidence types still missing.",
-      "zhPractice": "帶著第16課規格書寫出 RQ 與 thesis。；用 Prompt 1 產出三套大綱並選擇。；用 Prompt 2 補齊主張句與證據空位。；Challenge：只根據大綱，用 90 秒向同學口述整篇報告的論證路線，並請對方指出聽不懂的跳接。",
-      "enPractice": "Write RQ/thesis from Lesson 16.；Generate and choose among 3 outlines.；Harden claims and gaps.；Challenge: pitch the argument path in 90 seconds and note unclear jumps.",
+      "zhPractice": "用真實課程完成「重要資訊整理表」；依完成標準自評並修改；存入成果包並寫一句下週用法",
+      "enPractice": "Finish “Key-information organizer” with a real course; Self-score and revise; Save to package with next-week use note",
+      "zhFeedbackPrompt": "請依完整度、正確性、結構清晰度、可實際使用程度評分我的「重要資訊整理表」，指出是否偏離課堂學習，並給出三個修改建議。",
+      "enFeedbackPrompt": "Score my “Key-information organizer” on completeness, correctness, clarity, and usability. Flag any drift away from classroom learning and give three fixes.",
       "zhQuizItems": [
         {
-          "q": "大學報告大綱最關鍵的單位是？",
+          "q": "本課唯一應產出的成果是？",
           "options": [
-            "漂亮的章節編號",
-            "可爭論的主張句與證據空位",
-            "越多章越好",
-            "先寫完正文再補大綱"
+            "重要資訊整理表",
+            "履歷與求職信",
+            "創業商業模式"
           ],
-          "answer": 1,
-          "explain": "主張與證據空位決定論證與搜尋方向。"
+          "answer": 0,
+          "explain": "本課只服務大學學習能力。"
         },
         {
-          "q": "使用 AI 產大綱時應避免？",
+          "q": "使用 AI 後仍必須做的是？",
           "options": [
-            "提供規格書與 RQ 作為約束",
-            "接受只有「介紹／正文／結論」的空殼並直接開寫",
-            "比較多套結構再選擇",
-            "為每節標字數與證據類型"
+            "查證與自己改寫關鍵判斷",
+            "直接繳交未檢查內容",
+            "刪除所有自己的筆記"
           ],
-          "answer": 1,
-          "explain": "空殼大綱無法導向可防禦寫作。"
+          "answer": 0,
+          "explain": "理解與責任仍在你。"
         },
         {
-          "q": "為什麼大綱要留反向觀點區塊？",
+          "q": "哪種做法最不符合本課？",
           "options": [
-            "為了增加字數",
-            "展現學術論證的完整度與限制意識",
-            "讓 AI 比較好代寫",
-            "老師規定一定要罵對手"
+            "把未查證 AI 全文當作最終繳交",
+            "用 AI 協助結構後自己改寫",
+            "用檢查表確認完成標準"
           ],
-          "answer": 1,
-          "explain": "處理反對意見能提高論證可信度。"
+          "answer": 0,
+          "explain": "未查證繳交不可接受。"
         }
       ],
       "enQuizItems": [
         {
-          "q": "What is the key unit of a university report outline?",
+          "q": "This lesson’s single deliverable is?",
           "options": [
-            "Pretty numbering",
-            "Contestable claims and evidence gaps",
-            "As many chapters as possible",
-            "Drafting first, outlining later"
+            "Key-information organizer",
+            "Resume and cover letter",
+            "Startup business model"
           ],
-          "answer": 1,
-          "explain": "Claims and gaps drive argument and sourcing."
+          "answer": 0,
+          "explain": "This course serves university learning only."
         },
         {
-          "q": "What should you avoid when using AI for outlines?",
+          "q": "After using AI you must still?",
           "options": [
-            "Constraining with specs and RQ",
-            "Accepting an empty intro/body/conclusion shell",
-            "Comparing multiple structures",
-            "Adding word counts and evidence types"
+            "Verify and rewrite key judgments",
+            "Submit unchecked text",
+            "Delete your own notes"
           ],
-          "answer": 1,
-          "explain": "Empty shells do not support defendable writing."
+          "answer": 0,
+          "explain": "Understanding stays yours."
         },
         {
-          "q": "Why include a counterargument section?",
+          "q": "Which practice is unacceptable?",
           "options": [
-            "To inflate length",
-            "To show complete academic argumentation and limits",
-            "To make AI ghostwriting easier",
-            "Because you must attack opponents"
+            "Submit unchecked AI text as final work",
+            "Use AI for structure then revise",
+            "Use a checklist"
           ],
-          "answer": 1,
-          "explain": "Addressing objections raises credibility."
+          "answer": 0,
+          "explain": "Unchecked submission is not allowed."
         }
       ],
-      "zhNotePrompt": "貼上 outline-v1：RQ、thesis、各節主張句，以及你最缺的三個證據空位。",
-      "enNotePrompt": "Paste outline-v1 with RQ, thesis, claims, and your top three evidence gaps.",
+      "zhRubric": [
+        {
+          "name": "完整度",
+          "levels": {
+            "incomplete": "缺關鍵區塊",
+            "basic": "內容過少",
+            "good": "主要區塊齊全",
+            "ready": "可直接使用"
+          }
+        },
+        {
+          "name": "正確性",
+          "levels": {
+            "incomplete": "有明顯錯誤",
+            "basic": "部分含糊",
+            "good": "大致正確",
+            "ready": "經得起檢查"
+          }
+        },
+        {
+          "name": "結構清晰度",
+          "levels": {
+            "incomplete": "雜亂",
+            "basic": "略有結構",
+            "good": "層次清楚",
+            "ready": "他人可直接套用"
+          }
+        },
+        {
+          "name": "可實際使用程度",
+          "levels": {
+            "incomplete": "無法用於下堂課",
+            "basic": "需大幅修改",
+            "good": "本週可用",
+            "ready": "可長期重用"
+          }
+        }
+      ],
+      "enRubric": [
+        {
+          "name": "Completeness",
+          "levels": {
+            "incomplete": "Missing parts",
+            "basic": "Too thin",
+            "good": "Main parts present",
+            "ready": "Ready to use"
+          }
+        },
+        {
+          "name": "Correctness",
+          "levels": {
+            "incomplete": "Clear errors",
+            "basic": "Some vagueness",
+            "good": "Mostly correct",
+            "ready": "Withstands checks"
+          }
+        },
+        {
+          "name": "Clarity",
+          "levels": {
+            "incomplete": "Messy",
+            "basic": "Some structure",
+            "good": "Clear hierarchy",
+            "ready": "Reusable by others"
+          }
+        },
+        {
+          "name": "Usability",
+          "levels": {
+            "incomplete": "Not usable next class",
+            "basic": "Needs rewrite",
+            "good": "Usable this week",
+            "ready": "Long-term reusable"
+          }
+        }
+      ],
+      "zhMistakesDetailed": [
+        {
+          "error": "只有摘要沒有自己的判斷",
+          "why": "無法形成能力",
+          "fix": "標出你同意／不同意／需查證處"
+        },
+        {
+          "error": "成果與標題不一致",
+          "why": "學習目標漂移",
+          "fix": "回到本課唯一成果檢查"
+        },
+        {
+          "error": "未回原文或作業要求核對",
+          "why": "可能漏重點或跑題",
+          "fix": "保存前做一次來源核對"
+        }
+      ],
+      "enMistakesDetailed": [
+        {
+          "error": "Summary without judgment",
+          "why": "No skill built",
+          "fix": "Mark agree / disagree / verify"
+        },
+        {
+          "error": "Deliverable mismatches the lesson",
+          "why": "Goal drift",
+          "fix": "Return to the single outcome"
+        },
+        {
+          "error": "No verification against source/brief",
+          "why": "Missed emphasis or off-topic",
+          "fix": "Do one source check before saving"
+        }
+      ],
+      "zhCommonMistakes": [
+        "只有摘要沒有自己的判斷",
+        "成果與標題不一致",
+        "未回原文或作業要求核對"
+      ],
+      "enCommonMistakes": [
+        "Summary without judgment",
+        "Deliverable mismatches the lesson",
+        "No verification against source/brief"
+      ],
+      "zhSummary": [
+        "對準本課唯一成果",
+        "AI 協助結構，人負責判斷",
+        "一定回原文／要求核對",
+        "把「重要資訊整理表」存進學習系統"
+      ],
+      "enSummary": [
+        "Aim at one deliverable",
+        "AI helps structure; you judge",
+        "Always verify against source/brief",
+        "Save “Key-information organizer” into your system"
+      ],
       "zhDeliverableChecklist": [
-        "RQ 與 thesis 已寫定",
-        "大綱每節皆為主張句",
-        "證據空位已標類型",
-        "字數配置對齊評分",
-        "含反向觀點或限制"
+        "完成「重要資訊整理表」",
+        "完成自我檢查題",
+        "把成果存入成果包"
       ],
       "enDeliverableChecklist": [
-        "RQ and thesis set",
-        "Claim-level sections",
-        "Evidence gaps typed",
-        "Word budget matches rubric",
-        "Counterargument/limits included"
+        "Finish “Key-information organizer”",
+        "Complete self-check questions",
+        "Save output to the result package"
       ],
       "zhScorecard": [
-        "問題清楚",
-        "主張具體",
-        "邏輯前進",
-        "證據導向",
-        "對齊規格"
+        "完整度",
+        "正確性",
+        "結構清晰度",
+        "可實際使用程度"
       ],
       "enScorecard": [
-        "Clear RQ",
-        "Specific claims",
-        "Logical progress",
-        "Evidence-driven",
-        "Brief alignment"
+        "Completeness",
+        "Correctness",
+        "Clarity",
+        "Usability"
       ],
-      "resources": [
-        {
-          "name": "Google Scholar",
-          "url": "https://scholar.google.com",
-          "note": "依證據空位搜尋可支撐主張的文獻"
-        },
-        {
-          "name": "Semantic Scholar",
-          "url": "https://www.semanticscholar.org",
-          "note": "看引用關係，找高相關論文"
-        },
-        {
-          "name": "NotebookLM",
-          "url": "https://notebooklm.google.com",
-          "note": "上傳你已有的講義／論文，協助檢查大綱是否覆蓋"
-        },
-        {
-          "name": "Perplexity",
-          "url": "https://www.perplexity.ai",
-          "note": "快速掃描領域爭論點，回頭強化反向觀點節"
-        }
-      ],
-      "challenge": "把大綱印成一頁檢查表：每節旁寫「證據來源候選」。若某一節找不到任何可信來源，重寫或刪除該主張，不得硬寫。",
+      "zhNotePrompt": "用自己的話寫下：本課最重要的一個原則，以及你會如何使用「重要資訊整理表」。",
+      "enNotePrompt": "In your own words: the key principle and how you will use “Key-information organizer”.",
+      "zhCoachPrompt": "請檢查我的「重要資訊整理表」是否具體可執行，並指出空泛之處。",
+      "enCoachPrompt": "Check whether my “Key-information organizer” is concrete and actionable.",
+      "zhExcellentExample": "完成版「重要資訊整理表」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExcellentExample": "A finished “Key-information organizer” should be ready for the next related class task, with sources and verification notes."
+    },
+    {
+      "estimatedTime": "60–80 分鐘",
+      "difficulty": "中階",
       "id": "college-learning-L7",
-      "lessonKey": "college-learning-L7"
-    },
-    {
-      "icon": "🧭",
-      "title": "用 AI 規劃課堂報告簡報結構",
-      "description": "先拆解老師的簡報要求，建立故事線、頁面架構與時間分配，再開始做畫面。",
-      "goal": "我的簡報規格書＋故事線大綱（頁面主張／時間／視覺需求）",
-      "estimatedTime": "55-75 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "簡報架構",
-        "故事線",
-        "規格書",
-        "Chapter5"
+      "lessonKey": "college-learning-L7",
+      "zhTitle": "第7課：完成一般課堂報告架構",
+      "enTitle": "Lesson 7: Build a classroom report structure",
+      "zhValueTip": "先做出可寫作的報告架構，再進入撰寫，避免空白頁焦慮。",
+      "enValueTip": "Build a writable outline before drafting to avoid blank-page anxiety.",
+      "zhOutputName": "課堂報告架構",
+      "enOutputName": "Classroom report outline",
+      "zhOutcome": "完成本課後產出：課堂報告架構",
+      "enOutcome": "After this lesson, produce: Classroom report outline",
+      "zhObjectives": [
+        "能夠讀懂作業要求並轉成章節目標",
+        "能夠完成一份課堂報告架構",
+        "能夠檢查架構是否回答題目而非離題"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 4,
-      "chapterZh": "AI 做簡報",
-      "chapterEn": "AI Presentations",
-      "zhTitle": "第8課：用 AI 規劃課堂報告簡報結構",
-      "enTitle": "Lesson 8: Use AI to plan classroom presentation structure",
-      "zhValueTip": "先拆解老師的簡報要求，建立故事線、頁面架構與時間分配，再開始做畫面。",
-      "enValueTip": "Decode the presentation brief first, then build a storyline, slide map, and time budget before designing visuals.",
-      "zhOutcome": "我的簡報規格書＋故事線大綱（頁面主張／時間／視覺需求）",
-      "enOutcome": "My Presentation Specs + Storyline Outline (slide claims / time / visual needs)",
-      "zhConcept": "大學簡報最常見的失敗，不是版面不夠美，而是架構先錯：時間超時、重點不突出、投影片像報告全文搬家。這一課要先建立「簡報規格書」與「故事線大綱」。規格書拆解：時長、人數、評分（內容／台風／視覺／問答）、是否需資料來源、是否禁止念稿、檔案格式。故事線不是目錄，而是聽眾 3 分鐘後還記得的主訊息。建議用「情境→問題→洞察→證據→行動／結論」推進，每頁只承擔一個主張。AI 適合幫你把報告大綱轉成口語簡報架構、壓縮頁數、標出可刪頁；但你必須用評分與時長約束它，避免生出 30 頁裝飾頁。實務規則：1 分鐘大約 1 頁（含過渡），10 分鐘簡報常見 8-12 頁；封面與結語要短，分析與證據頁才是重心。每頁寫三欄：頁面主張（一句話）、你要講的口語要點（不寫長文）、視覺需求（圖表／對比／流程／照片）。這三欄會直接餵給 Gamma／Canva。也要預留問答風險頁：老師可能追問的定義、限制、數據來源。不必每題都做一頁，但講者筆記要有備答。若作業來自書面報告，簡報不是把報告貼上，而是重做「聽覺＋視覺」版本：減少文字、提高對比、用圖說關係。完成架構後做壓力測試：刪掉任意兩頁，主訊息是否仍在？若否，那些頁才是核心；若是，可能是灌水。本章後面的工具課都建立在這份架構上：Gamma 產初稿、Canva 美化、講稿與模擬提問都對齊同一故事線，才不會各做各的。分析老師要求時，把抽象詞轉成可檢查行為。例如「台風佳」=開場 20 秒內進主題、眼神與音量穩定、準時結束；「內容完整」=RQ／方法或論點／證據／結論都有對應頁。小組簡報還要標註每頁負責人與交接秒數，避免一人講太久、轉場失控。AI 可協助平均時間，但現場仍需彩排微調。把架構存成 raw／final：raw 是作業原文與腦力激盪，final 是可進入製作的頁面地圖。這是大學簡報作業系統的入口。此外，請把本課產出存成 raw 與 final：raw 保留生成紀錄與草稿，final 是可進入下一課或可上台的版本，方便追溯與組員交接。每次結束寫三行日誌：今天最有效的一步、仍卡關之處、明天第一個行動，並存進 AI Workspace。",
-      "enConcept": "Plan presentation specs and a claim-per-slide storyline before tools. Constrain AI with time and rubric, map oral points and visual needs, and stress-test which slides are truly core. Later Gamma/Canva/script lessons reuse this map.",
-      "zhCaseStudy": "情境案例：企管系小樂拿到「10 分鐘個案簡報」就開 Canva 找模板，做了 22 頁，上台超時且被問「你的建議是什麼？」答不出。重做時她先寫規格書與故事線：主訊息=建議導入 X 流程；頁數壓到 10；每頁一句主張；最後兩頁給風險與問答備答。用 AI 只幫忙刪頁與重排邏輯，不再先挑漂亮模板。第二次得分明顯提高，老師回饋「聽得懂、抓得到重點」。",
-      "enCaseStudy": "Xiao Le stopped decorating first. After a specs sheet and 10-slide claim map, her second presentation was on time and clearer.",
+      "enObjectives": [
+        "Translate assignment briefs into section goals",
+        "Complete a classroom report outline",
+        "Check that the outline answers the question"
+      ],
+      "zhWhyItMatters": {
+        "problem": "先做出可寫作的報告架構，再進入撰寫，避免空白頁焦慮。",
+        "ineffective": "沒有清楚成果與檢查，學習容易停在「看過」.",
+        "solution": "用「課堂報告架構」把理解變成可交付成果。"
+      },
+      "enWhyItMatters": {
+        "problem": "Build a writable outline before drafting to avoid blank-page anxiety.",
+        "ineffective": "Without a clear deliverable, learning stops at “I read it.”",
+        "solution": "Use “Classroom report outline” to turn understanding into an output."
+      },
+      "zhConceptBlocks": {
+        "principles": [
+          "架構服務問題意識",
+          "每段要有論點與證據位置",
+          "先結構後文筆"
+        ],
+        "terms": [
+          "問題意識",
+          "章節目的",
+          "證據缺口"
+        ],
+        "criteria": [
+          "對準作業要求",
+          "每段有論點",
+          "標出待查證處"
+        ],
+        "boundaries": [
+          "不可讓 AI 直接寫完整報告代交",
+          "不可捏造文獻"
+        ]
+      },
+      "enConceptBlocks": {
+        "principles": [
+          "Outlines serve the research question",
+          "Each section needs a claim and evidence slot",
+          "Structure before prose"
+        ],
+        "terms": [
+          "Question focus",
+          "Section purpose",
+          "Evidence gap"
+        ],
+        "criteria": [
+          "Aligned to the brief",
+          "Each section has a claim",
+          "Verification gaps marked"
+        ],
+        "boundaries": [
+          "Don’t let AI write the full paper for submission",
+          "Don’t invent sources"
+        ]
+      },
+      "zhConcept": "架構服務問題意識；每段要有論點與證據位置；先結構後文筆；不可讓 AI 直接寫完整報告代交；不可捏造文獻",
+      "enConcept": "Outlines serve the research question; Each section needs a claim and evidence slot; Structure before prose; Don’t let AI write the full paper for submission; Don’t invent sources",
+      "zhCaseStudyBlocks": {
+        "problem": "小凱面對報告題目完全空白。",
+        "wrong": "直接叫 AI 寫 2000 字。",
+        "right": "先拆題目動詞與限制，排出五段架構與每段需要的資料。",
+        "result": "兩小時內開始正式寫作。"
+      },
+      "enCaseStudyBlocks": {
+        "problem": "Kai froze on a report prompt.",
+        "wrong": "He asked AI for 2,000 words immediately.",
+        "right": "He unpacked verbs and constraints, then built a five-section outline with evidence needs.",
+        "result": "He started real writing within two hours."
+      },
+      "zhCaseStudy": "問題：小凱面對報告題目完全空白。。錯誤做法：直接叫 AI 寫 2000 字。。正確做法：先拆題目動詞與限制，排出五段架構與每段需要的資料。。成果：兩小時內開始正式寫作。",
+      "enCaseStudy": "Problem: Kai froze on a report prompt.. Wrong: He asked AI for 2,000 words immediately.. Right: He unpacked verbs and constraints, then built a five-section outline with evidence needs.. Result: He started real writing within two hours.",
+      "zhWorkflowSteps": [
+        {
+          "do": "收集本課所需的真實課程素材",
+          "why": "對準真實任務",
+          "input": "教材／作業／筆記",
+          "output": "素材清單",
+          "check": "是否來自本學期課程？"
+        },
+        {
+          "do": "依流程完成「課堂報告架構」初稿",
+          "why": "產出唯一成果",
+          "input": "素材清單",
+          "output": "課堂報告架構 初稿",
+          "check": "是否只服務本課目標？"
+        },
+        {
+          "do": "用自我檢查與 Rubric 修正並存檔",
+          "why": "確保可實際使用",
+          "input": "初稿",
+          "output": "完成的課堂報告架構",
+          "check": "能否在下堂課直接用？"
+        }
+      ],
+      "enWorkflowSteps": [
+        {
+          "do": "Collect real course materials",
+          "why": "Aim at a real task",
+          "input": "Materials / briefs / notes",
+          "output": "Material list",
+          "check": "From this term?"
+        },
+        {
+          "do": "Draft “Classroom report outline” with the workflow",
+          "why": "Produce one deliverable",
+          "input": "Material list",
+          "output": "Draft Classroom report outline",
+          "check": "Does it serve this lesson only?"
+        },
+        {
+          "do": "Revise with self-check and rubric, then save",
+          "why": "Make it usable",
+          "input": "Draft",
+          "output": "Finished Classroom report outline",
+          "check": "Usable in the next class?"
+        }
+      ],
       "zhWorkflow": [
-        "閱讀作業說明與評分，建立簡報規格書",
-        "寫出 1 句主訊息與聽眾記住的 3 點",
-        "請 AI 產出 2 套故事線並用時長刪減",
-        "完成頁面地圖：主張／口語要點／視覺需求／秒數",
-        "壓力測試刪頁，存成 structure-v1"
+        "收集本課所需的真實課程素材",
+        "依流程完成「課堂報告架構」初稿",
+        "用自我檢查與 Rubric 修正並存檔"
       ],
       "enWorkflow": [
-        "Build a presentation specs sheet from the brief",
-        "Write one core message and three takeaways",
-        "Generate two storylines with AI and cut to time",
-        "Make a slide map: claim / talk track / visual / seconds",
-        "Stress-test by cutting slides; save structure-v1"
+        "Collect real course materials",
+        "Draft “Classroom report outline” with the workflow",
+        "Revise with self-check and rubric, then save"
       ],
-      "zhCommonMistakes": [
-        "先挑模板再想內容",
-        "投影片貼滿報告文字",
-        "頁數與時間不成比例",
-        "沒有主訊息，只有資料堆疊"
+      "zhPromptPack": {
+        "when": "製作「課堂報告架構」時",
+        "fields": [
+          "[課程名稱]",
+          "[老師要求]",
+          "[教材內容]",
+          "[輸出格式]"
+        ],
+        "body": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「課堂報告架構」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+        "exampleInput": "填入真實課程與要求",
+        "expected": "可用的課堂報告架構草稿＋查證提醒"
+      },
+      "enPromptPack": {
+        "when": "When creating “Classroom report outline”",
+        "fields": [
+          "[course]",
+          "[instructor requirements]",
+          "[material focus]",
+          "[output format]"
+        ],
+        "body": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Classroom report outline” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+        "exampleInput": "Use a real course and brief",
+        "expected": "Usable Classroom report outline draft with verification notes"
+      },
+      "zhPrompt": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「課堂報告架構」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+      "enPrompt": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Classroom report outline” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+      "zhExample": "完成版「課堂報告架構」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExample": "A finished “Classroom report outline” should be ready for the next related class task, with sources and verification notes.",
+      "zhPracticeSteps": [
+        {
+          "task": "用真實課程完成「課堂報告架構」",
+          "standard": "對應本課唯一成果",
+          "mistakes": "混入其他能力主題",
+          "check": "是否越界？"
+        },
+        {
+          "task": "依完成標準自評並修改",
+          "standard": "達到良好以上",
+          "mistakes": "不修改就存檔",
+          "check": "Rubric 哪項最低？"
+        },
+        {
+          "task": "存入成果包並寫一句下週用法",
+          "standard": "有保存時間與連結或文字",
+          "mistakes": "只存在聊天窗",
+          "check": "下週如何用？"
+        }
       ],
-      "enCommonMistakes": [
-        "Picking templates before content",
-        "Pasting report text onto slides",
-        "Too many slides for the time",
-        "No core message, only data piles"
+      "enPracticeSteps": [
+        {
+          "task": "Finish “Classroom report outline” with a real course",
+          "standard": "Matches this lesson’s deliverable",
+          "mistakes": "Mixes other skill domains",
+          "check": "Out of scope?"
+        },
+        {
+          "task": "Self-score and revise",
+          "standard": "Good or ready level",
+          "mistakes": "Save without revision",
+          "check": "Lowest rubric item?"
+        },
+        {
+          "task": "Save to package with next-week use note",
+          "standard": "Has text/link and timestamp",
+          "mistakes": "Only in chat history",
+          "check": "How will you use it next week?"
+        }
       ],
-      "zhExcellentExample": "優秀架構：規格書清楚、一句主訊息、8-12 頁主張地圖、每頁視覺需求、時間分配加總等於時長、含問答備答。",
-      "enExcellentExample": "A strong plan has clear specs, one core message, an 8–12 slide claim map, visual needs, a time sum that fits, and Q&A prep.",
-      "zhPrompt": "【Prompt 1｜簡報規格與故事線教練】\n請擔任大學簡報教練。作業說明如下：\n（貼上）\n我的主題／既有大綱：\n（貼上）\n請輸出：1) 簡報規格書（時長、評分、格式、禁令）2) 一句主訊息 3) 聽眾應記住的 3 點\n4) 兩套故事線（頁數不同），每頁用「頁碼｜主張句｜預估秒數｜建議視覺」。\n規則：總秒數不可超過時長；不要寫完整講稿；不要發明作業沒有的硬性規定，推斷須標示。",
-      "enPrompt": "[Prompt 1 | Specs & Storyline Coach] Build specs, one core message, 3 takeaways, and two timed slide maps with claim sentences. No full script. Label inferences.",
-      "zhCoachPrompt": "【Prompt 2｜刪頁與時間壓力測試】\n這是我的頁面地圖：\n（貼上）\n時長：［分鐘］\n請指出最該刪或合併的頁，給一版「可準時講完」的精簡地圖，並說明刪除原則。另列出老師最可能追問的 5 題，標註應在哪一頁備答。",
-      "enCoachPrompt": "[Prompt 2 | Cut-for-Time Stress Test] Cut/merge slides to fit time, explain principles, and list 5 likely questions mapped to backup slides.",
-      "zhFeedbackPrompt": "【Prompt 3｜架構驗收】\n規格書與頁面地圖：\n（貼上）\n請評分：主訊息清楚度、邏輯前進、時間可行性、視覺需求是否可執行、是否像報告搬家。指出最弱 2 頁並改寫主張句。不要生成完整投影片正文。",
-      "enFeedbackPrompt": "[Prompt 3 | Structure Review] Score clarity, logic, timing, visual feasibility, and anti-wall-of-text; rewrite the two weakest claims.",
-      "zhExample": "主訊息：建議宿舍導入晚間安靜時段以提升睡眠品質。\nP3 主張：噪音是影響 GPA 的間接因子（圖：路徑圖，90秒）。\nP7 主張：三階段試辦計畫可行（流程圖，70秒）。",
-      "enExample": "Core message plus claim-timed slides with visual needs for a path diagram and a three-phase pilot flowchart.",
-      "zhPractice": "選一份真實簡報作業，完成規格書。；用 Prompt 1 產出兩套故事線並選擇。；用 Prompt 2 壓到可準時的頁數。；Challenge：只用頁面主張句，在 60 秒向同學講完整故事；對方聽不懂的跳接必須改架構。",
-      "enPractice": "Build specs from a real brief.；Generate and choose a storyline.；Cut to time.；Challenge: tell the whole story in 60 seconds using only claim sentences.",
+      "zhPractice": "用真實課程完成「課堂報告架構」；依完成標準自評並修改；存入成果包並寫一句下週用法",
+      "enPractice": "Finish “Classroom report outline” with a real course; Self-score and revise; Save to package with next-week use note",
+      "zhFeedbackPrompt": "請依完整度、正確性、結構清晰度、可實際使用程度評分我的「課堂報告架構」，指出是否偏離課堂學習，並給出三個修改建議。",
+      "enFeedbackPrompt": "Score my “Classroom report outline” on completeness, correctness, clarity, and usability. Flag any drift away from classroom learning and give three fixes.",
       "zhQuizItems": [
         {
-          "q": "做大學簡報時，較正確的起手式是？",
+          "q": "本課唯一應產出的成果是？",
           "options": [
-            "先在 Canva 挑最漂亮模板",
-            "先拆解要求並建立故事線／頁面主張地圖",
-            "先把報告全文貼上投影片",
-            "先請 AI 生成 40 頁再上台"
+            "課堂報告架構",
+            "履歷與求職信",
+            "創業商業模式"
           ],
-          "answer": 1,
-          "explain": "架構與主訊息優先，工具與美化在後。"
+          "answer": 0,
+          "explain": "本課只服務大學學習能力。"
         },
         {
-          "q": "「每頁一個主張」主要是為了？",
+          "q": "使用 AI 後仍必須做的是？",
           "options": [
-            "讓頁數越多越好",
-            "降低聽眾認知負荷，讓口語與視覺對齊",
-            "方便完全照念長文",
-            "避免準備問答"
+            "查證與自己改寫關鍵判斷",
+            "直接繳交未檢查內容",
+            "刪除所有自己的筆記"
           ],
-          "answer": 1,
-          "explain": "單頁單主張有助理解與時間控制。"
+          "answer": 0,
+          "explain": "理解與責任仍在你。"
         },
         {
-          "q": "10 分鐘簡報若做出 25 頁密集文字，最可能問題是？",
+          "q": "哪種做法最不符合本課？",
           "options": [
-            "一定更專業",
-            "時間與重點失控，聽眾難以抓住主訊息",
-            "老師會自動幫你刪頁",
-            "完全沒問題，只要字體小"
+            "把未查證 AI 全文當作最終繳交",
+            "用 AI 協助結構後自己改寫",
+            "用檢查表確認完成標準"
           ],
-          "answer": 1,
-          "explain": "頁數與密度必須服務時長與理解。"
+          "answer": 0,
+          "explain": "未查證繳交不可接受。"
         }
       ],
       "enQuizItems": [
         {
-          "q": "Best starting move for a university presentation?",
+          "q": "This lesson’s single deliverable is?",
           "options": [
-            "Pick the prettiest Canva template first",
-            "Decode the brief and build a claim-based storyline",
-            "Paste the full report onto slides",
-            "Generate 40 slides with AI and present"
+            "Classroom report outline",
+            "Resume and cover letter",
+            "Startup business model"
           ],
-          "answer": 1,
-          "explain": "Structure before tools and decoration."
+          "answer": 0,
+          "explain": "This course serves university learning only."
         },
         {
-          "q": "Why one claim per slide?",
+          "q": "After using AI you must still?",
           "options": [
-            "To maximize slide count",
-            "To reduce cognitive load and align talk with visuals",
-            "To encourage reading long text aloud",
-            "To avoid Q&A prep"
+            "Verify and rewrite key judgments",
+            "Submit unchecked text",
+            "Delete your own notes"
           ],
-          "answer": 1,
-          "explain": "Single claims aid understanding and timing."
+          "answer": 0,
+          "explain": "Understanding stays yours."
         },
         {
-          "q": "What is the likely problem with 25 text-heavy slides in 10 minutes?",
+          "q": "Which practice is unacceptable?",
           "options": [
-            "It is always more professional",
-            "Timing and focus break; the core message gets lost",
-            "The teacher will edit for you",
-            "Tiny fonts fix everything"
+            "Submit unchecked AI text as final work",
+            "Use AI for structure then revise",
+            "Use a checklist"
           ],
-          "answer": 1,
-          "explain": "Density must serve time and comprehension."
+          "answer": 0,
+          "explain": "Unchecked submission is not allowed."
         }
       ],
-      "zhNotePrompt": "貼上主訊息、頁面主張清單與每頁秒數加總，確認是否 ≤ 時長。",
-      "enNotePrompt": "Paste core message, claim list, and total seconds; confirm it fits the time limit.",
+      "zhRubric": [
+        {
+          "name": "完整度",
+          "levels": {
+            "incomplete": "缺關鍵區塊",
+            "basic": "內容過少",
+            "good": "主要區塊齊全",
+            "ready": "可直接使用"
+          }
+        },
+        {
+          "name": "正確性",
+          "levels": {
+            "incomplete": "有明顯錯誤",
+            "basic": "部分含糊",
+            "good": "大致正確",
+            "ready": "經得起檢查"
+          }
+        },
+        {
+          "name": "結構清晰度",
+          "levels": {
+            "incomplete": "雜亂",
+            "basic": "略有結構",
+            "good": "層次清楚",
+            "ready": "他人可直接套用"
+          }
+        },
+        {
+          "name": "可實際使用程度",
+          "levels": {
+            "incomplete": "無法用於下堂課",
+            "basic": "需大幅修改",
+            "good": "本週可用",
+            "ready": "可長期重用"
+          }
+        }
+      ],
+      "enRubric": [
+        {
+          "name": "Completeness",
+          "levels": {
+            "incomplete": "Missing parts",
+            "basic": "Too thin",
+            "good": "Main parts present",
+            "ready": "Ready to use"
+          }
+        },
+        {
+          "name": "Correctness",
+          "levels": {
+            "incomplete": "Clear errors",
+            "basic": "Some vagueness",
+            "good": "Mostly correct",
+            "ready": "Withstands checks"
+          }
+        },
+        {
+          "name": "Clarity",
+          "levels": {
+            "incomplete": "Messy",
+            "basic": "Some structure",
+            "good": "Clear hierarchy",
+            "ready": "Reusable by others"
+          }
+        },
+        {
+          "name": "Usability",
+          "levels": {
+            "incomplete": "Not usable next class",
+            "basic": "Needs rewrite",
+            "good": "Usable this week",
+            "ready": "Long-term reusable"
+          }
+        }
+      ],
+      "zhMistakesDetailed": [
+        {
+          "error": "只有摘要沒有自己的判斷",
+          "why": "無法形成能力",
+          "fix": "標出你同意／不同意／需查證處"
+        },
+        {
+          "error": "成果與標題不一致",
+          "why": "學習目標漂移",
+          "fix": "回到本課唯一成果檢查"
+        },
+        {
+          "error": "未回原文或作業要求核對",
+          "why": "可能漏重點或跑題",
+          "fix": "保存前做一次來源核對"
+        }
+      ],
+      "enMistakesDetailed": [
+        {
+          "error": "Summary without judgment",
+          "why": "No skill built",
+          "fix": "Mark agree / disagree / verify"
+        },
+        {
+          "error": "Deliverable mismatches the lesson",
+          "why": "Goal drift",
+          "fix": "Return to the single outcome"
+        },
+        {
+          "error": "No verification against source/brief",
+          "why": "Missed emphasis or off-topic",
+          "fix": "Do one source check before saving"
+        }
+      ],
+      "zhCommonMistakes": [
+        "只有摘要沒有自己的判斷",
+        "成果與標題不一致",
+        "未回原文或作業要求核對"
+      ],
+      "enCommonMistakes": [
+        "Summary without judgment",
+        "Deliverable mismatches the lesson",
+        "No verification against source/brief"
+      ],
+      "zhSummary": [
+        "對準本課唯一成果",
+        "AI 協助結構，人負責判斷",
+        "一定回原文／要求核對",
+        "把「課堂報告架構」存進學習系統"
+      ],
+      "enSummary": [
+        "Aim at one deliverable",
+        "AI helps structure; you judge",
+        "Always verify against source/brief",
+        "Save “Classroom report outline” into your system"
+      ],
       "zhDeliverableChecklist": [
-        "完成簡報規格書",
-        "一句主訊息＋3 個記住點",
-        "頁面主張地圖完成",
-        "時間加總合規",
-        "標出問答備答點"
+        "完成「課堂報告架構」",
+        "完成自我檢查題",
+        "把成果存入成果包"
       ],
       "enDeliverableChecklist": [
-        "Specs sheet done",
-        "Core message + 3 takeaways",
-        "Claim map complete",
-        "Time budget fits",
-        "Q&A backup points marked"
+        "Finish “Classroom report outline”",
+        "Complete self-check questions",
+        "Save output to the result package"
       ],
       "zhScorecard": [
-        "規格對齊",
-        "主訊息",
-        "單頁主張",
-        "時間可行",
-        "可製作"
+        "完整度",
+        "正確性",
+        "結構清晰度",
+        "可實際使用程度"
       ],
       "enScorecard": [
-        "Brief alignment",
-        "Core message",
-        "One claim/slide",
-        "Timing",
-        "Buildability"
+        "Completeness",
+        "Correctness",
+        "Clarity",
+        "Usability"
       ],
-      "resources": [
-        {
-          "name": "Google Slides",
-          "url": "https://docs.google.com/presentation/",
-          "note": "可用文字大綱先排出頁面地圖"
-        },
-        {
-          "name": "Microsoft PowerPoint",
-          "url": "https://www.microsoft.com/powerpoint",
-          "note": "大綱檢視適合調整架構"
-        },
-        {
-          "name": "Gamma",
-          "url": "https://gamma.app",
-          "note": "下一課用架構生成初稿"
-        },
-        {
-          "name": "Canva",
-          "url": "https://www.canva.com",
-          "note": "先別急著美化，等架構鎖定"
-        }
-      ],
-      "challenge": "把一份已完成的書面報告（或第20課報告）改成 10 分鐘簡報架構：刪到 ≤12 頁，並寫下你刪除的 5 個內容與理由。",
+      "zhNotePrompt": "用自己的話寫下：本課最重要的一個原則，以及你會如何使用「課堂報告架構」。",
+      "enNotePrompt": "In your own words: the key principle and how you will use “Classroom report outline”.",
+      "zhCoachPrompt": "請檢查我的「課堂報告架構」是否具體可執行，並指出空泛之處。",
+      "enCoachPrompt": "Check whether my “Classroom report outline” is concrete and actionable.",
+      "zhExcellentExample": "完成版「課堂報告架構」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExcellentExample": "A finished “Classroom report outline” should be ready for the next related class task, with sources and verification notes."
+    },
+    {
+      "estimatedTime": "55–75 分鐘",
+      "difficulty": "中階",
       "id": "college-learning-L8",
-      "lessonKey": "college-learning-L8"
-    },
-    {
-      "icon": "📌",
-      "title": "用 AI 建立考試複習清單與練習節奏",
-      "description": "拆解考試範圍、教材優先序與老師提示，把講義／PDF／筆記轉成可執行的必考重點清單。",
-      "goal": "我的考試範圍清單（必考／次要／低頻）＋教材優先序與複習入口包",
-      "estimatedTime": "55-75 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "考試範圍",
-        "必考重點",
-        "教材優先序",
-        "Chapter6"
+      "lessonKey": "college-learning-L8",
+      "zhTitle": "第8課：製作清楚的課堂簡報",
+      "enTitle": "Lesson 8: Create a clear classroom presentation",
+      "zhValueTip": "簡報要讓聽眾 3 秒抓住重點，而不是把報告全文貼上投影片。",
+      "enValueTip": "Slides should make the point in 3 seconds—not dump the full paper onto slides.",
+      "zhOutputName": "課堂簡報結構稿",
+      "enOutputName": "Classroom presentation structure draft",
+      "zhOutcome": "完成本課後產出：課堂簡報結構稿",
+      "enOutcome": "After this lesson, produce: Classroom presentation structure draft",
+      "zhObjectives": [
+        "能夠設計簡報的訊息層級",
+        "能夠完成一份課堂簡報結構稿",
+        "能夠檢查每頁是否只有一個重點"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 5,
-      "chapterZh": "AI 考試與複習系統",
-      "chapterEn": "AI Exam and Review System",
-      "zhTitle": "第9課：用 AI 建立考試複習清單與練習節奏",
-      "enTitle": "Lesson 9: Use AI to build exam review lists and practice rhythm",
-      "zhValueTip": "拆解考試範圍、教材優先序與老師提示，把講義／PDF／筆記轉成可執行的必考重點清單。",
-      "enValueTip": "Decode exam scope, material priority, and instructor hints into an actionable must-know checklist.",
-      "zhOutcome": "我的考試範圍清單（必考／次要／低頻）＋教材優先序與複習入口包",
-      "enOutcome": "My Exam Scope List (must/secondary/low) + Material Priority Pack",
-      "zhConcept": "考試複習的第一失敗點，不是不夠努力，而是範圍沒對齊：把低頻細節讀到半夜，卻漏掉老師連續兩週強調的定義與題型。這一課要建立「考試範圍清單」與「教材優先序」。先收集範圍來源：課程大綱考試說明、老師口頭提示、作業類型、投影片標題、課本指定章節、歷屆或考古題（若有）、討論課強調點。拆解方法：把範圍寫成可檢查條目，例如「第3-5章＋講義W6-W9＋公式表A」；再標註考試形式（選擇／申論／計算／口試）與允許工具。教材優先序建議：老師講義與課堂強調 > 指定習題與作業錯題 > 課本核心定義／定理 > 補充閱讀。補充材料只有在高優先覆蓋後才進場。必考概念判斷可用四個訊號：反覆出現、被說「很重要／會考」、能串多章、對應作業或小考題型。次要概念能解釋但不主導答題；低頻細節只在時間充足時掃過。把 PDF、簡報、筆記轉成複習資料時，不要整份摘要成長文。正確做法是產出「範圍條目→關鍵定義→典型題型→仍不懂」四欄卡，並保留頁碼／投影片編號以便回查。AI 可協助分類與去重，但不得捏造教材沒有的章節或定義。資料不足時必須明確說「原文未提供」，並列出你需回講義確認的問題。若有歷屆題，先做題型盤點（不是先刷爆）：計算佔比、申論主題、是否愛考例外條件。把題型回寫到範圍清單的「可能考法」欄。完成後你會有一份可進入第27課題庫建設的輸入包：哪些概念要出選擇題、哪些要出申論、哪些要出計算。也請連回 Chapter 3 的課堂筆記與 PDF 重點卡：考試系統不是另起爐灶，而是把既有筆記壓成考試導向層。實務上建議在 Google Drive 建資料夾：00_範圍清單、01_教材raw、02_重點卡、03_題庫、04_模擬考、05_錯題本，檔名含科目與考試日期。當範圍清單能在一頁內說清「考什麼／先讀什麼／怎麼考」，你才算開始有效複習，而不是焦慮性重讀。",
-      "enConcept": "Build an exam-scope checklist and material priority order from syllabus, lectures, slides, and past papers. Convert PDFs/notes into must-know cards with provenance. AI may classify but must not invent syllabus content.",
-      "zhCaseStudy": "完整大學生案例：統計學大二的阿哲期末考範圍寫「Ch.6-10，著重假設檢定與回歸，可帶公式紙」。他以前整本重讀，分數不穩定。這次他先做範圍清單：必考=假設檢定步驟、p-value 解釋、簡單回歸假設；次要=進階診斷圖；低頻=課本延伸閱讀。他用 NotebookLM 上傳講義與自己筆記，只問「依我上傳來源列出必考概念與頁碼，不足請標未提供」，再對照老師上課口頭「回歸一定會考解釋係數」。他又掃兩份小考，發現選擇題愛考前提條件。範圍清單加上「可能考法：前提缺一會怎樣」。之後兩週他只依優先序推進，不再從第一章焦慮重讀。期末選擇與計算都明顯回穩，他說關鍵是「終於知道先讀什麼」。",
-      "enCaseStudy": "Stats student A-Zhe replaced full-book rereading with a scoped must-know list grounded in uploaded notes and quiz patterns, then improved.",
+      "enObjectives": [
+        "Design message hierarchy for slides",
+        "Complete a presentation structure draft",
+        "Check that each slide has one main point"
+      ],
+      "zhWhyItMatters": {
+        "problem": "簡報要讓聽眾 3 秒抓住重點，而不是把報告全文貼上投影片。",
+        "ineffective": "沒有清楚成果與檢查，學習容易停在「看過」.",
+        "solution": "用「課堂簡報結構稿」把理解變成可交付成果。"
+      },
+      "enWhyItMatters": {
+        "problem": "Slides should make the point in 3 seconds—not dump the full paper onto slides.",
+        "ineffective": "Without a clear deliverable, learning stops at “I read it.”",
+        "solution": "Use “Classroom presentation structure draft” to turn understanding into an output."
+      },
+      "zhConceptBlocks": {
+        "principles": [
+          "一頁一個重點",
+          "標題是結論不是主題",
+          "口語稿與投影片分離"
+        ],
+        "terms": [
+          "訊息層級",
+          "結論式標題",
+          "講者提示"
+        ],
+        "criteria": [
+          "開場有問題",
+          "每頁單一重點",
+          "結尾有行動或問題"
+        ],
+        "boundaries": [
+          "不可整段貼報告原文",
+          "不可用 AI 圖代替未理解的內容"
+        ]
+      },
+      "enConceptBlocks": {
+        "principles": [
+          "One point per slide",
+          "Titles are claims, not topics",
+          "Separate speaker notes from slides"
+        ],
+        "terms": [
+          "Message hierarchy",
+          "Claim title",
+          "Speaker cue"
+        ],
+        "criteria": [
+          "Opening question present",
+          "One point per slide",
+          "Clear ending ask"
+        ],
+        "boundaries": [
+          "Don’t paste full paragraphs",
+          "Don’t use AI images to fake understanding"
+        ]
+      },
+      "zhConcept": "一頁一個重點；標題是結論不是主題；口語稿與投影片分離；不可整段貼報告原文；不可用 AI 圖代替未理解的內容",
+      "enConcept": "One point per slide; Titles are claims, not topics; Separate speaker notes from slides; Don’t paste full paragraphs; Don’t use AI images to fake understanding",
+      "zhCaseStudyBlocks": {
+        "problem": "小瑜簡報字超多，同學看不懂。",
+        "wrong": "把報告段落直接貼上投影片。",
+        "right": "改成結論式標題＋三個支撐點＋講者提示。",
+        "result": "報告時間更穩，問題也答得出來。"
+      },
+      "enCaseStudyBlocks": {
+        "problem": "Yu’s slides were text-heavy and confusing.",
+        "wrong": "She pasted report paragraphs onto slides.",
+        "right": "She switched to claim titles, three supports, and speaker notes.",
+        "result": "Her timing stabilized and Q&A improved."
+      },
+      "zhCaseStudy": "問題：小瑜簡報字超多，同學看不懂。。錯誤做法：把報告段落直接貼上投影片。。正確做法：改成結論式標題＋三個支撐點＋講者提示。。成果：報告時間更穩，問題也答得出來。",
+      "enCaseStudy": "Problem: Yu’s slides were text-heavy and confusing.. Wrong: She pasted report paragraphs onto slides.. Right: She switched to claim titles, three supports, and speaker notes.. Result: Her timing stabilized and Q&A improved.",
+      "zhWorkflowSteps": [
+        {
+          "do": "收集本課所需的真實課程素材",
+          "why": "對準真實任務",
+          "input": "教材／作業／筆記",
+          "output": "素材清單",
+          "check": "是否來自本學期課程？"
+        },
+        {
+          "do": "依流程完成「課堂簡報結構稿」初稿",
+          "why": "產出唯一成果",
+          "input": "素材清單",
+          "output": "課堂簡報結構稿 初稿",
+          "check": "是否只服務本課目標？"
+        },
+        {
+          "do": "用自我檢查與 Rubric 修正並存檔",
+          "why": "確保可實際使用",
+          "input": "初稿",
+          "output": "完成的課堂簡報結構稿",
+          "check": "能否在下堂課直接用？"
+        }
+      ],
+      "enWorkflowSteps": [
+        {
+          "do": "Collect real course materials",
+          "why": "Aim at a real task",
+          "input": "Materials / briefs / notes",
+          "output": "Material list",
+          "check": "From this term?"
+        },
+        {
+          "do": "Draft “Classroom presentation structure draft” with the workflow",
+          "why": "Produce one deliverable",
+          "input": "Material list",
+          "output": "Draft Classroom presentation structure draft",
+          "check": "Does it serve this lesson only?"
+        },
+        {
+          "do": "Revise with self-check and rubric, then save",
+          "why": "Make it usable",
+          "input": "Draft",
+          "output": "Finished Classroom presentation structure draft",
+          "check": "Usable in the next class?"
+        }
+      ],
       "zhWorkflow": [
-        "收集考試說明、口頭提示、指定章節與考古題",
-        "拆成範圍條目：內容／題型／工具／禁令",
-        "建立教材優先序並標必考／次要／低頻",
-        "把 PDF／簡報／筆記轉成四欄重點卡（含頁碼）",
-        "請 AI 去重分類但禁止捏造；輸出複習入口包"
+        "收集本課所需的真實課程素材",
+        "依流程完成「課堂簡報結構稿」初稿",
+        "用自我檢查與 Rubric 修正並存檔"
       ],
       "enWorkflow": [
-        "Gather syllabus, hints, chapters, past papers",
-        "Split into scope items: content/types/tools/constraints",
-        "Rank materials and label must/secondary/low",
-        "Convert notes/PDFs into four-field cards with page refs",
-        "Ask AI to classify without inventing; export a review entry pack"
+        "Collect real course materials",
+        "Draft “Classroom presentation structure draft” with the workflow",
+        "Revise with self-check and rubric, then save"
       ],
-      "zhCommonMistakes": [
-        "忽略老師口頭提示，只看目錄",
-        "讓 AI 發明範圍外章節",
-        "整份長摘要取代可檢查清單",
-        "平均用力，沒有教材優先序"
+      "zhPromptPack": {
+        "when": "製作「課堂簡報結構稿」時",
+        "fields": [
+          "[課程名稱]",
+          "[老師要求]",
+          "[教材內容]",
+          "[輸出格式]"
+        ],
+        "body": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「課堂簡報結構稿」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+        "exampleInput": "填入真實課程與要求",
+        "expected": "可用的課堂簡報結構稿草稿＋查證提醒"
+      },
+      "enPromptPack": {
+        "when": "When creating “Classroom presentation structure draft”",
+        "fields": [
+          "[course]",
+          "[instructor requirements]",
+          "[material focus]",
+          "[output format]"
+        ],
+        "body": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Classroom presentation structure draft” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+        "exampleInput": "Use a real course and brief",
+        "expected": "Usable Classroom presentation structure draft draft with verification notes"
+      },
+      "zhPrompt": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「課堂簡報結構稿」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+      "enPrompt": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Classroom presentation structure draft” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+      "zhExample": "完成版「課堂簡報結構稿」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExample": "A finished “Classroom presentation structure draft” should be ready for the next related class task, with sources and verification notes.",
+      "zhPracticeSteps": [
+        {
+          "task": "用真實課程完成「課堂簡報結構稿」",
+          "standard": "對應本課唯一成果",
+          "mistakes": "混入其他能力主題",
+          "check": "是否越界？"
+        },
+        {
+          "task": "依完成標準自評並修改",
+          "standard": "達到良好以上",
+          "mistakes": "不修改就存檔",
+          "check": "Rubric 哪項最低？"
+        },
+        {
+          "task": "存入成果包並寫一句下週用法",
+          "standard": "有保存時間與連結或文字",
+          "mistakes": "只存在聊天窗",
+          "check": "下週如何用？"
+        }
       ],
-      "enCommonMistakes": [
-        "Ignoring oral hints",
-        "Letting AI invent out-of-scope chapters",
-        "Long summaries instead of checklists",
-        "Equal effort with no priority"
+      "enPracticeSteps": [
+        {
+          "task": "Finish “Classroom presentation structure draft” with a real course",
+          "standard": "Matches this lesson’s deliverable",
+          "mistakes": "Mixes other skill domains",
+          "check": "Out of scope?"
+        },
+        {
+          "task": "Self-score and revise",
+          "standard": "Good or ready level",
+          "mistakes": "Save without revision",
+          "check": "Lowest rubric item?"
+        },
+        {
+          "task": "Save to package with next-week use note",
+          "standard": "Has text/link and timestamp",
+          "mistakes": "Only in chat history",
+          "check": "How will you use it next week?"
+        }
       ],
-      "zhExcellentExample": "優秀範圍包：一頁清單含必考／次要／低頻、教材優先序、題型預測欄、頁碼可回查、並註明資料不足處。",
-      "enExcellentExample": "A strong pack has must/secondary/low items, material priority, likely item types, page refs, and explicit gaps.",
-      "zhPrompt": "【Prompt 1｜考試範圍拆解（禁止捏造教材）】\n請擔任大學考試教練。以下是我提供的考試說明／講義目錄／筆記摘錄：\n（貼上，可分段）\n請輸出「考試範圍清單」，欄位：條目、來源（頁碼／投影片／口頭提示）、題型可能、優先級（必考／次要／低頻）、仍待確認。\n規則：只能根據我提供的內容整理；若資訊不足，明確寫「資訊不足：…」並列出我要回教材確認的問題。禁止新增我沒提供的章節、定義或必考宣稱。",
-      "enPrompt": "[Prompt 1 | Scope Decoder] Build a scope checklist only from my materials; mark gaps explicitly; never invent chapters or must-know claims.",
-      "zhCoachPrompt": "【Prompt 2｜教材優先序與必考判斷】\n考試形式：［選擇／申論／計算／口試］；時長：［ ］\n我的範圍清單草稿：\n（貼上）\n老師提示：\n（貼上）\n歷屆／小考題型觀察：\n（貼上）\n請排出教材閱讀優先序（高→低），並解釋每個必考條目的判斷訊號。若題型觀察與範圍衝突，指出風險。資料不足處請標示，不要腦補老師沒說的比重。",
-      "enCoachPrompt": "[Prompt 2 | Material Priority] Rank study order and justify must-know labels from my hints and item-type observations; mark insufficient info.",
-      "zhFeedbackPrompt": "【Prompt 3｜範圍清單驗收】\n原始材料摘要：\n（貼上）\n我的最終範圍清單：\n（貼上）\n請檢查：是否漏掉形式／工具限制？是否把推斷誤標成必考？是否有不可回查的條目？給 1-10 分、三個風險、三個立刻修正。不要替我發明新範圍。",
-      "enFeedbackPrompt": "[Prompt 3 | Scope QA] Check misses, false must-know labels, and untraceable items; score and fix without inventing scope.",
-      "zhExample": "條目：單一樣本 t 檢定步驟｜來源：講義 p.12-15＋老師口頭「步驟一定考」｜題型：計算＋選擇前提｜優先：必考｜待確認：是否開放公式紙含臨界值表。",
-      "enExample": "A must-know t-test steps item with page refs, likely item types, and one confirmation gap about formula sheets.",
-      "zhPractice": "為一科真實考試建立範圍來源包。；完成必考／次要／低頻清單與教材優先序。；把兩份 PDF／簡報轉成四欄重點卡。；Challenge：用一頁範圍清單向同學講解「這科先讀什麼、為什麼」，並依對方追問補上待確認項。",
-      "enPractice": "Build a real exam scope pack.；Finish must/secondary/low + priorities.；Convert two PDFs/decks into cards.；Challenge: teach your one-page scope list and capture follow-up gaps.",
+      "zhPractice": "用真實課程完成「課堂簡報結構稿」；依完成標準自評並修改；存入成果包並寫一句下週用法",
+      "enPractice": "Finish “Classroom presentation structure draft” with a real course; Self-score and revise; Save to package with next-week use note",
+      "zhFeedbackPrompt": "請依完整度、正確性、結構清晰度、可實際使用程度評分我的「課堂簡報結構稿」，指出是否偏離課堂學習，並給出三個修改建議。",
+      "enFeedbackPrompt": "Score my “Classroom presentation structure draft” on completeness, correctness, clarity, and usability. Flag any drift away from classroom learning and give three fixes.",
       "zhQuizItems": [
         {
-          "q": "整理考試範圍時，最優先對齊的通常是？",
+          "q": "本課唯一應產出的成果是？",
           "options": [
-            "把整本課本從第一頁讀到最後",
-            "考試說明、老師提示、指定章節與題型形式",
-            "只看同學整理的未核對摘要",
-            "只收藏更多 PDF 不拆解"
+            "課堂簡報結構稿",
+            "履歷與求職信",
+            "創業商業模式"
           ],
-          "answer": 1,
-          "explain": "先對齊官方範圍與提示，才不會用錯力氣。"
+          "answer": 0,
+          "explain": "本課只服務大學學習能力。"
         },
         {
-          "q": "請 AI 整理必考重點時，正確規則是？",
+          "q": "使用 AI 後仍必須做的是？",
           "options": [
-            "允許 AI 自行添加看起來重要的章節",
-            "只能依你提供來源整理，不足要明確標示",
-            "AI 說必考就一定會考",
-            "只要摘要很長就代表完整"
+            "查證與自己改寫關鍵判斷",
+            "直接繳交未檢查內容",
+            "刪除所有自己的筆記"
           ],
-          "answer": 1,
-          "explain": "禁止捏造教材；資訊不足必須說清楚。"
+          "answer": 0,
+          "explain": "理解與責任仍在你。"
         },
         {
-          "q": "教材優先序較合理的起點通常是？",
+          "q": "哪種做法最不符合本課？",
           "options": [
-            "先讀全部補充論文",
-            "老師講義與課堂強調，再才是延伸閱讀",
-            "先背目錄頁碼",
-            "先做無關趣聞閃卡"
+            "把未查證 AI 全文當作最終繳交",
+            "用 AI 協助結構後自己改寫",
+            "用檢查表確認完成標準"
           ],
-          "answer": 1,
-          "explain": "高訊號教材先覆蓋，補充材料後進。"
+          "answer": 0,
+          "explain": "未查證繳交不可接受。"
         }
       ],
       "enQuizItems": [
         {
-          "q": "When mapping exam scope, align first to:",
+          "q": "This lesson’s single deliverable is?",
           "options": [
-            "Rereading the whole textbook from page one",
-            "Exam instructions, instructor hints, assigned chapters, and item formats",
-            "Unchecked classmate summaries only",
-            "Collecting more PDFs without decoding"
+            "Classroom presentation structure draft",
+            "Resume and cover letter",
+            "Startup business model"
           ],
-          "answer": 1,
-          "explain": "Official scope and hints come first."
+          "answer": 0,
+          "explain": "This course serves university learning only."
         },
         {
-          "q": "Correct rule when asking AI to extract must-knows:",
+          "q": "After using AI you must still?",
           "options": [
-            "Let AI add plausible chapters",
-            "Use only your sources and mark gaps explicitly",
-            "Whatever AI calls must-know will appear",
-            "Longer summaries equal completeness"
+            "Verify and rewrite key judgments",
+            "Submit unchecked text",
+            "Delete your own notes"
           ],
-          "answer": 1,
-          "explain": "No invented syllabus; gaps must be stated."
+          "answer": 0,
+          "explain": "Understanding stays yours."
         },
         {
-          "q": "A sensible material priority usually starts with:",
+          "q": "Which practice is unacceptable?",
           "options": [
-            "All supplemental papers first",
-            "Lecture notes and in-class emphasis before extras",
-            "Memorizing the table of contents only",
-            "Trivia flashcards first"
+            "Submit unchecked AI text as final work",
+            "Use AI for structure then revise",
+            "Use a checklist"
           ],
-          "answer": 1,
-          "explain": "High-signal materials first."
+          "answer": 0,
+          "explain": "Unchecked submission is not allowed."
         }
       ],
-      "zhNotePrompt": "貼上你的必考清單前 10 項，並寫下仍待向老師／助教確認的 3 件事。",
-      "enNotePrompt": "Paste your top 10 must-know items and 3 confirmations still needed.",
+      "zhRubric": [
+        {
+          "name": "完整度",
+          "levels": {
+            "incomplete": "缺關鍵區塊",
+            "basic": "內容過少",
+            "good": "主要區塊齊全",
+            "ready": "可直接使用"
+          }
+        },
+        {
+          "name": "正確性",
+          "levels": {
+            "incomplete": "有明顯錯誤",
+            "basic": "部分含糊",
+            "good": "大致正確",
+            "ready": "經得起檢查"
+          }
+        },
+        {
+          "name": "結構清晰度",
+          "levels": {
+            "incomplete": "雜亂",
+            "basic": "略有結構",
+            "good": "層次清楚",
+            "ready": "他人可直接套用"
+          }
+        },
+        {
+          "name": "可實際使用程度",
+          "levels": {
+            "incomplete": "無法用於下堂課",
+            "basic": "需大幅修改",
+            "good": "本週可用",
+            "ready": "可長期重用"
+          }
+        }
+      ],
+      "enRubric": [
+        {
+          "name": "Completeness",
+          "levels": {
+            "incomplete": "Missing parts",
+            "basic": "Too thin",
+            "good": "Main parts present",
+            "ready": "Ready to use"
+          }
+        },
+        {
+          "name": "Correctness",
+          "levels": {
+            "incomplete": "Clear errors",
+            "basic": "Some vagueness",
+            "good": "Mostly correct",
+            "ready": "Withstands checks"
+          }
+        },
+        {
+          "name": "Clarity",
+          "levels": {
+            "incomplete": "Messy",
+            "basic": "Some structure",
+            "good": "Clear hierarchy",
+            "ready": "Reusable by others"
+          }
+        },
+        {
+          "name": "Usability",
+          "levels": {
+            "incomplete": "Not usable next class",
+            "basic": "Needs rewrite",
+            "good": "Usable this week",
+            "ready": "Long-term reusable"
+          }
+        }
+      ],
+      "zhMistakesDetailed": [
+        {
+          "error": "只有摘要沒有自己的判斷",
+          "why": "無法形成能力",
+          "fix": "標出你同意／不同意／需查證處"
+        },
+        {
+          "error": "成果與標題不一致",
+          "why": "學習目標漂移",
+          "fix": "回到本課唯一成果檢查"
+        },
+        {
+          "error": "未回原文或作業要求核對",
+          "why": "可能漏重點或跑題",
+          "fix": "保存前做一次來源核對"
+        }
+      ],
+      "enMistakesDetailed": [
+        {
+          "error": "Summary without judgment",
+          "why": "No skill built",
+          "fix": "Mark agree / disagree / verify"
+        },
+        {
+          "error": "Deliverable mismatches the lesson",
+          "why": "Goal drift",
+          "fix": "Return to the single outcome"
+        },
+        {
+          "error": "No verification against source/brief",
+          "why": "Missed emphasis or off-topic",
+          "fix": "Do one source check before saving"
+        }
+      ],
+      "zhCommonMistakes": [
+        "只有摘要沒有自己的判斷",
+        "成果與標題不一致",
+        "未回原文或作業要求核對"
+      ],
+      "enCommonMistakes": [
+        "Summary without judgment",
+        "Deliverable mismatches the lesson",
+        "No verification against source/brief"
+      ],
+      "zhSummary": [
+        "對準本課唯一成果",
+        "AI 協助結構，人負責判斷",
+        "一定回原文／要求核對",
+        "把「課堂簡報結構稿」存進學習系統"
+      ],
+      "enSummary": [
+        "Aim at one deliverable",
+        "AI helps structure; you judge",
+        "Always verify against source/brief",
+        "Save “Classroom presentation structure draft” into your system"
+      ],
       "zhDeliverableChecklist": [
-        "完成考試範圍清單",
-        "標註必考／次要／低頻",
-        "教材優先序已排出",
-        "重點卡含頁碼可回查",
-        "資料不足處已明示"
+        "完成「課堂簡報結構稿」",
+        "完成自我檢查題",
+        "把成果存入成果包"
       ],
       "enDeliverableChecklist": [
-        "Scope list done",
-        "Must/secondary/low labeled",
-        "Material priority set",
-        "Cards have page refs",
-        "Gaps explicitly marked"
+        "Finish “Classroom presentation structure draft”",
+        "Complete self-check questions",
+        "Save output to the result package"
       ],
       "zhScorecard": [
-        "範圍對齊",
-        "優先序",
-        "可回查",
-        "題型意識",
-        "無捏造"
+        "完整度",
+        "正確性",
+        "結構清晰度",
+        "可實際使用程度"
       ],
       "enScorecard": [
-        "Scope alignment",
-        "Priority",
-        "Traceability",
-        "Item-type awareness",
-        "No invention"
+        "Completeness",
+        "Correctness",
+        "Clarity",
+        "Usability"
       ],
-      "resources": [
-        {
-          "name": "NotebookLM",
-          "url": "https://notebooklm.google.com",
-          "note": "上傳講義／筆記做 grounded 範圍整理"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "在禁止捏造約束下做分類與去重"
-        },
-        {
-          "name": "Google Drive",
-          "url": "https://drive.google.com",
-          "note": "建立考試資料夾與版本管理"
-        },
-        {
-          "name": "Anki",
-          "url": "https://apps.ankiweb.net",
-          "note": "後續把必考定義轉成間隔重複卡片"
-        }
-      ],
-      "challenge": "選一科兩週內的真實考試，產出一頁範圍清單＋教材優先序；用它刪掉你原本計畫中至少 20% 的低價值重讀內容，並記錄刪除清單。",
+      "zhNotePrompt": "用自己的話寫下：本課最重要的一個原則，以及你會如何使用「課堂簡報結構稿」。",
+      "enNotePrompt": "In your own words: the key principle and how you will use “Classroom presentation structure draft”.",
+      "zhCoachPrompt": "請檢查我的「課堂簡報結構稿」是否具體可執行，並指出空泛之處。",
+      "enCoachPrompt": "Check whether my “Classroom presentation structure draft” is concrete and actionable.",
+      "zhExcellentExample": "完成版「課堂簡報結構稿」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExcellentExample": "A finished “Classroom presentation structure draft” should be ready for the next related class task, with sources and verification notes."
+    },
+    {
+      "estimatedTime": "60–80 分鐘",
+      "difficulty": "中階",
       "id": "college-learning-L9",
-      "lessonKey": "college-learning-L9"
-    },
-    {
-      "icon": "📖",
-      "title": "用 AI 提升英文閱讀，讀懂原文教材與作業",
-      "description": "用 AI 做分級閱讀、抓主旨與觀點、拆長句與整理單字，但不直接翻譯全文取代理解。",
-      "goal": "我的英文閱讀工作單（主旨／段落重點／長句拆解／單字表）",
-      "estimatedTime": "55-75 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "英文閱讀",
-        "長句拆解",
-        "分級解釋",
-        "Chapter7"
+      "lessonKey": "college-learning-L9",
+      "zhTitle": "第9課：建立考試複習與練習流程",
+      "enTitle": "Lesson 9: Build an exam review and practice workflow",
+      "zhValueTip": "複習要能排出範圍、弱點與練習節奏，而不是從頭到尾重讀。",
+      "enValueTip": "Review should map scope, weak spots, and practice rhythm—not reread everything.",
+      "zhOutputName": "考試複習表",
+      "enOutputName": "Exam review plan sheet",
+      "zhOutcome": "完成本課後產出：考試複習表",
+      "enOutcome": "After this lesson, produce: Exam review plan sheet",
+      "zhObjectives": [
+        "能夠比較重讀與主動練習的差異",
+        "能夠完成一份考試複習表",
+        "能夠檢查複習計畫是否含自測與訂正"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 6,
-      "chapterZh": "AI 英文學習系統",
-      "chapterEn": "AI English Learning System",
-      "zhTitle": "第10課：用 AI 提升英文閱讀，讀懂原文教材與作業",
-      "enTitle": "Lesson 10: Use AI to improve English reading for course materials",
-      "zhValueTip": "用 AI 做分級閱讀、抓主旨與觀點、拆長句與整理單字，但不直接翻譯全文取代理解。",
-      "enValueTip": "Use AI for leveled reading, main ideas, long-sentence parsing, and vocabulary—without replacing comprehension with full translation.",
-      "zhOutcome": "我的英文閱讀工作單（主旨／段落重點／長句拆解／單字表）",
-      "enOutcome": "My English Reading Worksheet (gist / paragraph points / sentence parse / vocab)",
-      "zhConcept": "大學英文閱讀常卡在兩件事：一看到難字就整篇丟給翻譯、或逐字查到失去主軸。這一課建立「閱讀前—中—後」流程，讓 AI 當教練而不是代讀。閱讀前：先看標題、小標、首末段，預測主題與文類（新聞／教科書／論文摘要）。寫下你已知與想確認的問題。可請 AI 依你的程度給「讀前導讀」，但禁止它編造原文沒有的情節。閱讀中：分段抓主旨句與作者態度（支持／反對／中立／有所保留）。遇到長句先拆骨架：主詞—動詞—受詞／補語，再掛上關係子句與插入語。例：Although the sample was small, the authors argue that… → 讓步＋主張。閱讀後：用自己的話寫 3-5 句摘要、列出關鍵單字／片語（含搭配與例句）、標記仍不懂處。單字表要服務理解，不是無限收集。分級解釋：可要求 AI 用 CEFR B1／B2／C1 重述同一段，幫你搭鷹架；但重述必須標明「改寫自原文」，且你仍要回到原文核對。完整示範文章（節錄，可作練習）：\"Many university students believe that translating every sentence is the fastest way to finish assigned readings. However, this habit often prevents them from noticing the writer's main claim and the structure of the argument. A more effective approach is to identify the topic of each paragraph first, then study only the sentences that carry definitions, evidence, or contrast.\"示範任務：主旨≈「逐句翻譯不利抓主張；應先抓段落主題再精讀關鍵句」。單字：assigned readings / main claim / contrast。長句拆解第二句：However（轉折）＋ this habit（主詞）＋ prevents… from noticing…。AI 規則：不捏造段落；原文未給的細節要說資訊不足；不直接給全文中譯當唯一產出；要問你先嘗試再給提示。工具可搭配 Cambridge／Oxford 查詞、YouGlish 看搭配、BBC Learning English 做分級材料；ChatGPT／DeepL 只作輔助。當你能不靠全文翻譯說出主旨與作者觀點，才算真正讀懂，而不是「看過中文版」。此外，請把本課產出存成 raw／final：raw 保留與 AI 的練習紀錄，final 是你核對後可交給下一課或可上台的版本。每次練習結束寫三行：今天最有效的一句英語、仍卡住的點、明天第一個 10 分鐘行動。與同學對練時只分享允許分享的內容；不要用 AI 捏造他人沒同意的對話當作業證據。當閱讀、寫作、翻譯、口說、簡報能形成英文學習閉環，你換科目也能重複使用同一套提示與紀錄表。也請遵守學術誠信：AI 是教練與編輯，最終表達與事實責任屬於你；資訊不足時要敢標示，不要硬編。此外，請把本課產出存成 raw／final：raw 保留與 AI 的練習紀錄，final 是你核對後可交給下一課或可上台的版本。每次練習結束寫三行：今天最有效的一句英語、仍卡住的點、明天第一個 10 分鐘行動。與同學對練時只分享允許分享的內容；不要用 AI 捏造他人沒同意的對話當作業證據。當閱讀、寫作、翻譯、口說、簡報能形成英文學習閉環，你換科目也能重複使用同一套提示與紀錄表。",
-      "enConcept": "Use a before-during-after reading workflow: preview, claim/attitude tracking, sentence parsing, leveled paraphrase, and a focused vocab list. AI must not invent content or replace reading with full translation.",
-      "zhCaseStudy": "情境案例：企管系小安讀 Harvard Business Review 節錄，以前整篇貼進翻譯，考試問 “What is the author's main claim?” 答不出。她改用本課工作單：先預測、分段寫 paragraph point、兩句長句拆骨架、單字只留 8 個高頻學術詞。第二次小考她能用英文口述主旨。老師回饋 “You finally answered the claim, not the story.”",
-      "enCaseStudy": "Xiao An stopped full-document translation, used a reading worksheet, and could finally state the author's claim.",
+      "enObjectives": [
+        "Compare rereading versus active practice",
+        "Complete an exam review plan sheet",
+        "Check that the plan includes self-tests and correction"
+      ],
+      "zhWhyItMatters": {
+        "problem": "複習要能排出範圍、弱點與練習節奏，而不是從頭到尾重讀。",
+        "ineffective": "沒有清楚成果與檢查，學習容易停在「看過」.",
+        "solution": "用「考試複習表」把理解變成可交付成果。"
+      },
+      "enWhyItMatters": {
+        "problem": "Review should map scope, weak spots, and practice rhythm—not reread everything.",
+        "ineffective": "Without a clear deliverable, learning stops at “I read it.”",
+        "solution": "Use “Exam review plan sheet” to turn understanding into an output."
+      },
+      "zhConceptBlocks": {
+        "principles": [
+          "主動回想優於重讀",
+          "先弱點後全面",
+          "每次練習都要訂正"
+        ],
+        "terms": [
+          "範圍地圖",
+          "弱點清單",
+          "練習節奏"
+        ],
+        "criteria": [
+          "含考試範圍",
+          "有弱點優先序",
+          "有每日練習格"
+        ],
+        "boundaries": [
+          "不可只生題不訂正",
+          "不可略過老師強調題型"
+        ]
+      },
+      "enConceptBlocks": {
+        "principles": [
+          "Active recall beats rereading",
+          "Weak spots before full coverage",
+          "Every practice needs correction"
+        ],
+        "terms": [
+          "Scope map",
+          "Weak-spot list",
+          "Practice rhythm"
+        ],
+        "criteria": [
+          "Includes exam scope",
+          "Prioritized weak spots",
+          "Daily practice slots"
+        ],
+        "boundaries": [
+          "Don’t generate questions without correction",
+          "Don’t ignore emphasized item types"
+        ]
+      },
+      "zhConcept": "主動回想優於重讀；先弱點後全面；每次練習都要訂正；不可只生題不訂正；不可略過老師強調題型",
+      "enConcept": "Active recall beats rereading; Weak spots before full coverage; Every practice needs correction; Don’t generate questions without correction; Don’t ignore emphasized item types",
+      "zhCaseStudyBlocks": {
+        "problem": "阿明考前只重讀筆記仍失常。",
+        "wrong": "把整本講義丟給 AI「出題」但不做訂正。",
+        "right": "用複習表：範圍、必考概念、弱點、練習日、錯題本。",
+        "result": "模考分數明顯上升。"
+      },
+      "enCaseStudyBlocks": {
+        "problem": "Ming reread notes and still underperformed.",
+        "wrong": "He asked AI for questions but never corrected mistakes.",
+        "right": "He used a review sheet: scope, must-know concepts, weak spots, practice days, error log.",
+        "result": "Mock exam scores rose."
+      },
+      "zhCaseStudy": "問題：阿明考前只重讀筆記仍失常。。錯誤做法：把整本講義丟給 AI「出題」但不做訂正。。正確做法：用複習表：範圍、必考概念、弱點、練習日、錯題本。。成果：模考分數明顯上升。",
+      "enCaseStudy": "Problem: Ming reread notes and still underperformed.. Wrong: He asked AI for questions but never corrected mistakes.. Right: He used a review sheet: scope, must-know concepts, weak spots, practice days, error log.. Result: Mock exam scores rose.",
+      "zhWorkflowSteps": [
+        {
+          "do": "收集本課所需的真實課程素材",
+          "why": "對準真實任務",
+          "input": "教材／作業／筆記",
+          "output": "素材清單",
+          "check": "是否來自本學期課程？"
+        },
+        {
+          "do": "依流程完成「考試複習表」初稿",
+          "why": "產出唯一成果",
+          "input": "素材清單",
+          "output": "考試複習表 初稿",
+          "check": "是否只服務本課目標？"
+        },
+        {
+          "do": "用自我檢查與 Rubric 修正並存檔",
+          "why": "確保可實際使用",
+          "input": "初稿",
+          "output": "完成的考試複習表",
+          "check": "能否在下堂課直接用？"
+        }
+      ],
+      "enWorkflowSteps": [
+        {
+          "do": "Collect real course materials",
+          "why": "Aim at a real task",
+          "input": "Materials / briefs / notes",
+          "output": "Material list",
+          "check": "From this term?"
+        },
+        {
+          "do": "Draft “Exam review plan sheet” with the workflow",
+          "why": "Produce one deliverable",
+          "input": "Material list",
+          "output": "Draft Exam review plan sheet",
+          "check": "Does it serve this lesson only?"
+        },
+        {
+          "do": "Revise with self-check and rubric, then save",
+          "why": "Make it usable",
+          "input": "Draft",
+          "output": "Finished Exam review plan sheet",
+          "check": "Usable in the next class?"
+        }
+      ],
       "zhWorkflow": [
-        "閱讀前：預覽標題與首末段，寫預測問題",
-        "閱讀中：分段抓主旨／觀點，拆難句骨架",
-        "請 AI 做分級解釋與提示，但不取代原文",
-        "閱讀後：自寫摘要＋單字／片語表",
-        "核對 AI 是否捏造，標記資訊不足處"
+        "收集本課所需的真實課程素材",
+        "依流程完成「考試複習表」初稿",
+        "用自我檢查與 Rubric 修正並存檔"
       ],
       "enWorkflow": [
-        "Preview and predict",
-        "Track claims/attitude and parse hard sentences",
-        "Ask for leveled help without replacing the text",
-        "Write your own summary and vocab list",
-        "Verify no invented details"
+        "Collect real course materials",
+        "Draft “Exam review plan sheet” with the workflow",
+        "Revise with self-check and rubric, then save"
       ],
-      "zhCommonMistakes": [
-        "全文翻譯取代理解",
-        "單字表無限膨脹",
-        "不拆長句只猜大意",
-        "任由 AI 編造原文沒有的例子"
+      "zhPromptPack": {
+        "when": "製作「考試複習表」時",
+        "fields": [
+          "[課程名稱]",
+          "[老師要求]",
+          "[教材內容]",
+          "[輸出格式]"
+        ],
+        "body": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「考試複習表」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+        "exampleInput": "填入真實課程與要求",
+        "expected": "可用的考試複習表草稿＋查證提醒"
+      },
+      "enPromptPack": {
+        "when": "When creating “Exam review plan sheet”",
+        "fields": [
+          "[course]",
+          "[instructor requirements]",
+          "[material focus]",
+          "[output format]"
+        ],
+        "body": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Exam review plan sheet” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+        "exampleInput": "Use a real course and brief",
+        "expected": "Usable Exam review plan sheet draft with verification notes"
+      },
+      "zhPrompt": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「考試複習表」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+      "enPrompt": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Exam review plan sheet” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+      "zhExample": "完成版「考試複習表」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExample": "A finished “Exam review plan sheet” should be ready for the next related class task, with sources and verification notes.",
+      "zhPracticeSteps": [
+        {
+          "task": "用真實課程完成「考試複習表」",
+          "standard": "對應本課唯一成果",
+          "mistakes": "混入其他能力主題",
+          "check": "是否越界？"
+        },
+        {
+          "task": "依完成標準自評並修改",
+          "standard": "達到良好以上",
+          "mistakes": "不修改就存檔",
+          "check": "Rubric 哪項最低？"
+        },
+        {
+          "task": "存入成果包並寫一句下週用法",
+          "standard": "有保存時間與連結或文字",
+          "mistakes": "只存在聊天窗",
+          "check": "下週如何用？"
+        }
       ],
-      "enCommonMistakes": [
-        "Full translation instead of comprehension",
-        "Endless vocab lists",
-        "Skipping sentence structure",
-        "Accepting invented examples"
+      "enPracticeSteps": [
+        {
+          "task": "Finish “Exam review plan sheet” with a real course",
+          "standard": "Matches this lesson’s deliverable",
+          "mistakes": "Mixes other skill domains",
+          "check": "Out of scope?"
+        },
+        {
+          "task": "Self-score and revise",
+          "standard": "Good or ready level",
+          "mistakes": "Save without revision",
+          "check": "Lowest rubric item?"
+        },
+        {
+          "task": "Save to package with next-week use note",
+          "standard": "Has text/link and timestamp",
+          "mistakes": "Only in chat history",
+          "check": "How will you use it next week?"
+        }
       ],
-      "zhExcellentExample": "優秀工作單：主旨一句、每段重點、至少兩句長句拆解、8-15 個單字含搭配、並註明未懂處與來源句。",
-      "enExcellentExample": "A strong worksheet has a one-line gist, paragraph points, ≥2 parsed sentences, 8–15 useful items, and explicit gaps.",
-      "zhPrompt": "【Prompt 1｜分級閱讀教練（禁止全文代讀）】\n我的程度：［例如 CEFR B1／B2］。英文原文：\n（貼上）\n請依程度給：1) 讀前 3 個預測問題 2) 每段主旨（英文短句＋中文提示）3) 作者態度判斷與依據句\n規則：不可捏造原文沒有的內容；不足請說「資訊不足」；不要輸出全文逐句中譯；先問我是否已自行讀過一遍。",
-      "enPrompt": "[Prompt 1 | Leveled Reading Coach] Preview questions, paragraph gists, and attitude with evidence; no invented content; no full translation dump.",
-      "zhCoachPrompt": "【Prompt 2｜長句拆解與單字表】\n請拆解下列長句：標出主子句、連接詞、修飾語，並用我的程度重述一次。\n句子：\n（貼上）\n接著從同一原文挑 10 個高價值單字／片語，做成表：詞、詞性、原文例句、簡單英文定義、我程度的中文、搭配。不要加入原文未出現的單字充數。",
-      "enCoachPrompt": "[Prompt 2 | Sentence Parse + Vocab] Parse the long sentence and build a 10-item vocab table only from the source text.",
-      "zhFeedbackPrompt": "【Prompt 3｜閱讀理解驗收】\n原文：\n（貼上）\n我的主旨與段落重點：\n（貼上）\n請評分：是否抓到 claim、有無誤讀、是否過度依賴翻譯腔。指出兩處需回原文重讀的地方，並給提示而非直接給完整標準答案。不要替我重寫整份作業。",
-      "enFeedbackPrompt": "[Prompt 3 | Comprehension Check] Score claim accuracy and misreads; give hints, not a full replacement answer key essay.",
-      "zhExample": "主旨：逐句翻譯會讓人忽略作者主張。｜P2 重點：先抓段落主題再精讀定義／證據／對比句。｜單字：main claim, assigned readings。",
-      "enExample": "Gist + paragraph point + two academic vocabulary items from the demo passage.",
-      "zhPractice": "選一篇真實課程英文閱讀（300-600字）。；完成閱讀前中後工作單。；拆解至少兩句長句並做單字表。；Challenge：不看中譯，用英文 60 秒向同學說明主旨與作者態度。",
-      "enPractice": "Use a real 300–600 word course text.；Complete the worksheet.；Parse ≥2 sentences.；Challenge: explain gist and attitude in English for 60 seconds without a Chinese translation.",
+      "zhPractice": "用真實課程完成「考試複習表」；依完成標準自評並修改；存入成果包並寫一句下週用法",
+      "enPractice": "Finish “Exam review plan sheet” with a real course; Self-score and revise; Save to package with next-week use note",
+      "zhFeedbackPrompt": "請依完整度、正確性、結構清晰度、可實際使用程度評分我的「考試複習表」，指出是否偏離課堂學習，並給出三個修改建議。",
+      "enFeedbackPrompt": "Score my “Exam review plan sheet” on completeness, correctness, clarity, and usability. Flag any drift away from classroom learning and give three fixes.",
       "zhQuizItems": [
         {
-          "q": "大學英文閱讀時，較不建議的做法是？",
+          "q": "本課唯一應產出的成果是？",
           "options": [
-            "先預覽標題與段落主題",
-            "把全文丟去翻譯後只讀中文版當理解",
-            "拆長句骨架再讀細節",
-            "整理少量高價值單字"
+            "考試複習表",
+            "履歷與求職信",
+            "創業商業模式"
           ],
-          "answer": 1,
-          "explain": "全文翻譯取代理解會讓你抓不到 claim。"
+          "answer": 0,
+          "explain": "本課只服務大學學習能力。"
         },
         {
-          "q": "分級解釋的正確用途是？",
+          "q": "使用 AI 後仍必須做的是？",
           "options": [
-            "讓 AI 編造原文沒有的故事幫助記憶",
-            "搭鷹架理解，但仍需回原文核對",
-            "完全取代原文",
-            "只用來產生更難的字炫耀"
+            "查證與自己改寫關鍵判斷",
+            "直接繳交未檢查內容",
+            "刪除所有自己的筆記"
           ],
-          "answer": 1,
-          "explain": "分級是鷹架，不是偽造或取代原文。"
+          "answer": 0,
+          "explain": "理解與責任仍在你。"
         },
         {
-          "q": "長句拆解時優先找出的是？",
+          "q": "哪種做法最不符合本課？",
           "options": [
-            "每個形容詞的中文",
-            "主子句的主詞與動詞關係",
-            "字型顏色",
-            "作者生日"
+            "把未查證 AI 全文當作最終繳交",
+            "用 AI 協助結構後自己改寫",
+            "用檢查表確認完成標準"
           ],
-          "answer": 1,
-          "explain": "先抓骨架再掛修飾，理解才穩。"
+          "answer": 0,
+          "explain": "未查證繳交不可接受。"
         }
       ],
       "enQuizItems": [
         {
-          "q": "Least advisable university reading habit?",
+          "q": "This lesson’s single deliverable is?",
           "options": [
-            "Preview titles and paragraph topics",
-            "Only reading a full machine translation as “comprehension”",
-            "Parsing long-sentence frames",
-            "Keeping a short high-value vocab list"
+            "Exam review plan sheet",
+            "Resume and cover letter",
+            "Startup business model"
           ],
-          "answer": 1,
-          "explain": "Translation-only reading hides the claim."
+          "answer": 0,
+          "explain": "This course serves university learning only."
         },
         {
-          "q": "Leveled explanation should:",
+          "q": "After using AI you must still?",
           "options": [
-            "Invent missing plot",
-            "Scaffold understanding while you return to the source",
-            "Fully replace the source",
-            "Only add harder words to impress"
+            "Verify and rewrite key judgments",
+            "Submit unchecked text",
+            "Delete your own notes"
           ],
-          "answer": 1,
-          "explain": "Scaffold, don’t fabricate or replace."
+          "answer": 0,
+          "explain": "Understanding stays yours."
         },
         {
-          "q": "When parsing a long sentence, find first:",
+          "q": "Which practice is unacceptable?",
           "options": [
-            "Every adjective in Chinese",
-            "The main subject–verb relation",
-            "Font colors",
-            "The author’s birthday"
+            "Submit unchecked AI text as final work",
+            "Use AI for structure then revise",
+            "Use a checklist"
           ],
-          "answer": 1,
-          "explain": "Frame first, modifiers second."
+          "answer": 0,
+          "explain": "Unchecked submission is not allowed."
         }
       ],
-      "zhNotePrompt": "貼上你的主旨一句、兩段段落重點，以及單字表前 5 項。",
-      "enNotePrompt": "Paste your one-line gist, two paragraph points, and top 5 vocab items.",
+      "zhRubric": [
+        {
+          "name": "完整度",
+          "levels": {
+            "incomplete": "缺關鍵區塊",
+            "basic": "內容過少",
+            "good": "主要區塊齊全",
+            "ready": "可直接使用"
+          }
+        },
+        {
+          "name": "正確性",
+          "levels": {
+            "incomplete": "有明顯錯誤",
+            "basic": "部分含糊",
+            "good": "大致正確",
+            "ready": "經得起檢查"
+          }
+        },
+        {
+          "name": "結構清晰度",
+          "levels": {
+            "incomplete": "雜亂",
+            "basic": "略有結構",
+            "good": "層次清楚",
+            "ready": "他人可直接套用"
+          }
+        },
+        {
+          "name": "可實際使用程度",
+          "levels": {
+            "incomplete": "無法用於下堂課",
+            "basic": "需大幅修改",
+            "good": "本週可用",
+            "ready": "可長期重用"
+          }
+        }
+      ],
+      "enRubric": [
+        {
+          "name": "Completeness",
+          "levels": {
+            "incomplete": "Missing parts",
+            "basic": "Too thin",
+            "good": "Main parts present",
+            "ready": "Ready to use"
+          }
+        },
+        {
+          "name": "Correctness",
+          "levels": {
+            "incomplete": "Clear errors",
+            "basic": "Some vagueness",
+            "good": "Mostly correct",
+            "ready": "Withstands checks"
+          }
+        },
+        {
+          "name": "Clarity",
+          "levels": {
+            "incomplete": "Messy",
+            "basic": "Some structure",
+            "good": "Clear hierarchy",
+            "ready": "Reusable by others"
+          }
+        },
+        {
+          "name": "Usability",
+          "levels": {
+            "incomplete": "Not usable next class",
+            "basic": "Needs rewrite",
+            "good": "Usable this week",
+            "ready": "Long-term reusable"
+          }
+        }
+      ],
+      "zhMistakesDetailed": [
+        {
+          "error": "只有摘要沒有自己的判斷",
+          "why": "無法形成能力",
+          "fix": "標出你同意／不同意／需查證處"
+        },
+        {
+          "error": "成果與標題不一致",
+          "why": "學習目標漂移",
+          "fix": "回到本課唯一成果檢查"
+        },
+        {
+          "error": "未回原文或作業要求核對",
+          "why": "可能漏重點或跑題",
+          "fix": "保存前做一次來源核對"
+        }
+      ],
+      "enMistakesDetailed": [
+        {
+          "error": "Summary without judgment",
+          "why": "No skill built",
+          "fix": "Mark agree / disagree / verify"
+        },
+        {
+          "error": "Deliverable mismatches the lesson",
+          "why": "Goal drift",
+          "fix": "Return to the single outcome"
+        },
+        {
+          "error": "No verification against source/brief",
+          "why": "Missed emphasis or off-topic",
+          "fix": "Do one source check before saving"
+        }
+      ],
+      "zhCommonMistakes": [
+        "只有摘要沒有自己的判斷",
+        "成果與標題不一致",
+        "未回原文或作業要求核對"
+      ],
+      "enCommonMistakes": [
+        "Summary without judgment",
+        "Deliverable mismatches the lesson",
+        "No verification against source/brief"
+      ],
+      "zhSummary": [
+        "對準本課唯一成果",
+        "AI 協助結構，人負責判斷",
+        "一定回原文／要求核對",
+        "把「考試複習表」存進學習系統"
+      ],
+      "enSummary": [
+        "Aim at one deliverable",
+        "AI helps structure; you judge",
+        "Always verify against source/brief",
+        "Save “Exam review plan sheet” into your system"
+      ],
       "zhDeliverableChecklist": [
-        "完成閱讀前中後工作單",
-        "寫出主旨與作者觀點",
-        "至少兩句長句拆解",
-        "單字／片語表完成",
-        "未讓 AI 捏造原文內容"
+        "完成「考試複習表」",
+        "完成自我檢查題",
+        "把成果存入成果包"
       ],
       "enDeliverableChecklist": [
-        "Before-during-after worksheet done",
-        "Gist and attitude stated",
-        "≥2 sentences parsed",
-        "Vocab list done",
-        "No invented source content"
+        "Finish “Exam review plan sheet”",
+        "Complete self-check questions",
+        "Save output to the result package"
       ],
       "zhScorecard": [
-        "主旨正確",
-        "段落掌握",
-        "長句能力",
-        "單字有效",
-        "不依賴全文翻譯"
+        "完整度",
+        "正確性",
+        "結構清晰度",
+        "可實際使用程度"
       ],
       "enScorecard": [
-        "Gist accuracy",
-        "Paragraph control",
-        "Sentence parsing",
-        "Useful vocab",
-        "No full-translation dependency"
+        "Completeness",
+        "Correctness",
+        "Clarity",
+        "Usability"
       ],
-      "resources": [
+      "zhNotePrompt": "用自己的話寫下：本課最重要的一個原則，以及你會如何使用「考試複習表」。",
+      "enNotePrompt": "In your own words: the key principle and how you will use “Exam review plan sheet”.",
+      "zhCoachPrompt": "請檢查我的「考試複習表」是否具體可執行，並指出空泛之處。",
+      "enCoachPrompt": "Check whether my “Exam review plan sheet” is concrete and actionable.",
+      "zhExcellentExample": "完成版「考試複習表」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExcellentExample": "A finished “Exam review plan sheet” should be ready for the next related class task, with sources and verification notes."
+    },
+    {
+      "estimatedTime": "70–90 分鐘",
+      "difficulty": "中階",
+      "id": "college-learning-L10",
+      "lessonKey": "college-learning-L10",
+      "zhTitle": "第10課：整合個人 AI 大學學習系統",
+      "enTitle": "Lesson 10: Integrate your personal AI university learning system",
+      "zhValueTip": "把前九課模板整合成一套可每週重複使用的學習系統。",
+      "enValueTip": "Combine the previous templates into a weekly reusable learning system.",
+      "zhOutputName": "個人 AI 大學學習系統總覽",
+      "enOutputName": "Personal AI university learning system overview",
+      "zhOutcome": "完成本課後產出：個人 AI 大學學習系統總覽",
+      "enOutcome": "After this lesson, produce: Personal AI university learning system overview",
+      "zhObjectives": [
+        "能夠整併前九課成果為一套系統",
+        "能夠完成個人 AI 大學學習系統總覽",
+        "能夠檢查系統是否涵蓋教材、筆記、報告、簡報與考試"
+      ],
+      "enObjectives": [
+        "Combine prior lesson outputs into one system",
+        "Complete a personal learning-system overview",
+        "Check coverage of materials, notes, reports, slides, and exams"
+      ],
+      "zhWhyItMatters": {
+        "problem": "把前九課模板整合成一套可每週重複使用的學習系統。",
+        "ineffective": "沒有清楚成果與檢查，學習容易停在「看過」.",
+        "solution": "用「個人 AI 大學學習系統總覽」把理解變成可交付成果。"
+      },
+      "enWhyItMatters": {
+        "problem": "Combine the previous templates into a weekly reusable learning system.",
+        "ineffective": "Without a clear deliverable, learning stops at “I read it.”",
+        "solution": "Use “Personal AI university learning system overview” to turn understanding into an output."
+      },
+      "zhConceptBlocks": {
+        "principles": [
+          "系統是一組可重複流程，不是資料夾堆疊",
+          "每週固定回顧與更新",
+          "所有模板都要能連回真實課程"
+        ],
+        "terms": [
+          "系統地圖",
+          "每週節奏",
+          "模板入口"
+        ],
+        "criteria": [
+          "五類任務都有入口",
+          "有每週檢查清單",
+          "有紅線提醒"
+        ],
+        "boundaries": [
+          "不可只放連結沒有使用規則",
+          "不可加入求職或創業流程"
+        ]
+      },
+      "enConceptBlocks": {
+        "principles": [
+          "A system is a set of repeatable workflows",
+          "Weekly review and update",
+          "Every template must connect to real courses"
+        ],
+        "terms": [
+          "System map",
+          "Weekly rhythm",
+          "Template entry points"
+        ],
+        "criteria": [
+          "Five task types have entries",
+          "Weekly checklist present",
+          "Red-line reminder present"
+        ],
+        "boundaries": [
+          "Don’t store links without usage rules",
+          "Don’t add career or startup workflows"
+        ]
+      },
+      "zhConcept": "系統是一組可重複流程，不是資料夾堆疊；每週固定回顧與更新；所有模板都要能連回真實課程；不可只放連結沒有使用規則；不可加入求職或創業流程",
+      "enConcept": "A system is a set of repeatable workflows; Weekly review and update; Every template must connect to real courses; Don’t store links without usage rules; Don’t add career or startup workflows",
+      "zhCaseStudyBlocks": {
+        "problem": "小恩學了很多方法卻每次重來。",
+        "wrong": "模板散落在聊天紀錄與不同文件。",
+        "right": "做一頁系統總覽：五類任務入口、每週節奏、紅線、下週實驗。",
+        "result": "新學期第一週就能直接套用。"
+      },
+      "enCaseStudyBlocks": {
+        "problem": "En learned many methods but restarted every time.",
+        "wrong": "Templates lived in chats and random files.",
+        "right": "She made one overview: five task entries, weekly rhythm, red lines, next experiment.",
+        "result": "She could apply it in week one of the new term."
+      },
+      "zhCaseStudy": "問題：小恩學了很多方法卻每次重來。。錯誤做法：模板散落在聊天紀錄與不同文件。。正確做法：做一頁系統總覽：五類任務入口、每週節奏、紅線、下週實驗。。成果：新學期第一週就能直接套用。",
+      "enCaseStudy": "Problem: En learned many methods but restarted every time.. Wrong: Templates lived in chats and random files.. Right: She made one overview: five task entries, weekly rhythm, red lines, next experiment.. Result: She could apply it in week one of the new term.",
+      "zhWorkflowSteps": [
         {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "分級解釋與長句拆解教練"
+          "do": "收集本課所需的真實課程素材",
+          "why": "對準真實任務",
+          "input": "教材／作業／筆記",
+          "output": "素材清單",
+          "check": "是否來自本學期課程？"
         },
         {
-          "name": "Cambridge Dictionary",
-          "url": "https://dictionary.cambridge.org",
-          "note": "查詞義、詞性與例句"
+          "do": "依流程完成「個人 AI 大學學習系統總覽」初稿",
+          "why": "產出唯一成果",
+          "input": "素材清單",
+          "output": "個人 AI 大學學習系統總覽 初稿",
+          "check": "是否只服務本課目標？"
         },
         {
-          "name": "Oxford Learner’s Dictionaries",
-          "url": "https://www.oxfordlearnersdictionaries.com",
-          "note": "學習者友善定義與搭配"
-        },
-        {
-          "name": "BBC Learning English",
-          "url": "https://www.bbc.co.uk/learningenglish",
-          "note": "分級閱讀與聽讀材料"
-        },
-        {
-          "name": "YouGlish",
-          "url": "https://youglish.com",
-          "note": "看真實語境中的發音與搭配"
+          "do": "用自我檢查與 Rubric 修正並存檔",
+          "why": "確保可實際使用",
+          "input": "初稿",
+          "output": "完成的個人 AI 大學學習系統總覽",
+          "check": "能否在下堂課直接用？"
         }
       ],
-      "challenge": "完成一篇課程指定英文閱讀工作單；隔天不看筆記，默寫主旨與三個關鍵片語，錯誤處回原文重讀。",
-      "id": "college-learning-L10",
-      "lessonKey": "college-learning-L10"
+      "enWorkflowSteps": [
+        {
+          "do": "Collect real course materials",
+          "why": "Aim at a real task",
+          "input": "Materials / briefs / notes",
+          "output": "Material list",
+          "check": "From this term?"
+        },
+        {
+          "do": "Draft “Personal AI university learning system overview” with the workflow",
+          "why": "Produce one deliverable",
+          "input": "Material list",
+          "output": "Draft Personal AI university learning system overview",
+          "check": "Does it serve this lesson only?"
+        },
+        {
+          "do": "Revise with self-check and rubric, then save",
+          "why": "Make it usable",
+          "input": "Draft",
+          "output": "Finished Personal AI university learning system overview",
+          "check": "Usable in the next class?"
+        }
+      ],
+      "zhWorkflow": [
+        "收集本課所需的真實課程素材",
+        "依流程完成「個人 AI 大學學習系統總覽」初稿",
+        "用自我檢查與 Rubric 修正並存檔"
+      ],
+      "enWorkflow": [
+        "Collect real course materials",
+        "Draft “Personal AI university learning system overview” with the workflow",
+        "Revise with self-check and rubric, then save"
+      ],
+      "zhPromptPack": {
+        "when": "製作「個人 AI 大學學習系統總覽」時",
+        "fields": [
+          "[課程名稱]",
+          "[老師要求]",
+          "[教材內容]",
+          "[輸出格式]"
+        ],
+        "body": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「個人 AI 大學學習系統總覽」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+        "exampleInput": "填入真實課程與要求",
+        "expected": "可用的個人 AI 大學學習系統總覽草稿＋查證提醒"
+      },
+      "enPromptPack": {
+        "when": "When creating “Personal AI university learning system overview”",
+        "fields": [
+          "[course]",
+          "[instructor requirements]",
+          "[material focus]",
+          "[output format]"
+        ],
+        "body": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Personal AI university learning system overview” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+        "exampleInput": "Use a real course and brief",
+        "expected": "Usable Personal AI university learning system overview draft with verification notes"
+      },
+      "zhPrompt": "請擔任大學學習教練。課程：[課程名稱]。老師要求：[老師要求]。教材重點：[教材內容]。請協助我完成「個人 AI 大學學習系統總覽」，輸出格式：[輸出格式]。請標出需要我自己判斷與查證的地方，不要直接給可繳交的完整作業正文。",
+      "enPrompt": "Act as a university learning coach. Course: [course]. Requirements: [instructor requirements]. Material focus: [material focus]. Help me produce “Personal AI university learning system overview” in [output format]. Mark what I must judge and verify myself. Do not provide a ready-to-submit full assignment.",
+      "zhExample": "完成版「個人 AI 大學學習系統總覽」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExample": "A finished “Personal AI university learning system overview” should be ready for the next related class task, with sources and verification notes.",
+      "zhPracticeSteps": [
+        {
+          "task": "用真實課程完成「個人 AI 大學學習系統總覽」",
+          "standard": "對應本課唯一成果",
+          "mistakes": "混入其他能力主題",
+          "check": "是否越界？"
+        },
+        {
+          "task": "依完成標準自評並修改",
+          "standard": "達到良好以上",
+          "mistakes": "不修改就存檔",
+          "check": "Rubric 哪項最低？"
+        },
+        {
+          "task": "存入成果包並寫一句下週用法",
+          "standard": "有保存時間與連結或文字",
+          "mistakes": "只存在聊天窗",
+          "check": "下週如何用？"
+        }
+      ],
+      "enPracticeSteps": [
+        {
+          "task": "Finish “Personal AI university learning system overview” with a real course",
+          "standard": "Matches this lesson’s deliverable",
+          "mistakes": "Mixes other skill domains",
+          "check": "Out of scope?"
+        },
+        {
+          "task": "Self-score and revise",
+          "standard": "Good or ready level",
+          "mistakes": "Save without revision",
+          "check": "Lowest rubric item?"
+        },
+        {
+          "task": "Save to package with next-week use note",
+          "standard": "Has text/link and timestamp",
+          "mistakes": "Only in chat history",
+          "check": "How will you use it next week?"
+        }
+      ],
+      "zhPractice": "用真實課程完成「個人 AI 大學學習系統總覽」；依完成標準自評並修改；存入成果包並寫一句下週用法",
+      "enPractice": "Finish “Personal AI university learning system overview” with a real course; Self-score and revise; Save to package with next-week use note",
+      "zhFeedbackPrompt": "請依完整度、正確性、結構清晰度、可實際使用程度評分我的「個人 AI 大學學習系統總覽」，指出是否偏離課堂學習，並給出三個修改建議。",
+      "enFeedbackPrompt": "Score my “Personal AI university learning system overview” on completeness, correctness, clarity, and usability. Flag any drift away from classroom learning and give three fixes.",
+      "zhQuizItems": [
+        {
+          "q": "本課唯一應產出的成果是？",
+          "options": [
+            "個人 AI 大學學習系統總覽",
+            "履歷與求職信",
+            "創業商業模式"
+          ],
+          "answer": 0,
+          "explain": "本課只服務大學學習能力。"
+        },
+        {
+          "q": "使用 AI 後仍必須做的是？",
+          "options": [
+            "查證與自己改寫關鍵判斷",
+            "直接繳交未檢查內容",
+            "刪除所有自己的筆記"
+          ],
+          "answer": 0,
+          "explain": "理解與責任仍在你。"
+        },
+        {
+          "q": "哪種做法最不符合本課？",
+          "options": [
+            "把未查證 AI 全文當作最終繳交",
+            "用 AI 協助結構後自己改寫",
+            "用檢查表確認完成標準"
+          ],
+          "answer": 0,
+          "explain": "未查證繳交不可接受。"
+        }
+      ],
+      "enQuizItems": [
+        {
+          "q": "This lesson’s single deliverable is?",
+          "options": [
+            "Personal AI university learning system overview",
+            "Resume and cover letter",
+            "Startup business model"
+          ],
+          "answer": 0,
+          "explain": "This course serves university learning only."
+        },
+        {
+          "q": "After using AI you must still?",
+          "options": [
+            "Verify and rewrite key judgments",
+            "Submit unchecked text",
+            "Delete your own notes"
+          ],
+          "answer": 0,
+          "explain": "Understanding stays yours."
+        },
+        {
+          "q": "Which practice is unacceptable?",
+          "options": [
+            "Submit unchecked AI text as final work",
+            "Use AI for structure then revise",
+            "Use a checklist"
+          ],
+          "answer": 0,
+          "explain": "Unchecked submission is not allowed."
+        }
+      ],
+      "zhRubric": [
+        {
+          "name": "完整度",
+          "levels": {
+            "incomplete": "缺關鍵區塊",
+            "basic": "內容過少",
+            "good": "主要區塊齊全",
+            "ready": "可直接使用"
+          }
+        },
+        {
+          "name": "正確性",
+          "levels": {
+            "incomplete": "有明顯錯誤",
+            "basic": "部分含糊",
+            "good": "大致正確",
+            "ready": "經得起檢查"
+          }
+        },
+        {
+          "name": "結構清晰度",
+          "levels": {
+            "incomplete": "雜亂",
+            "basic": "略有結構",
+            "good": "層次清楚",
+            "ready": "他人可直接套用"
+          }
+        },
+        {
+          "name": "可實際使用程度",
+          "levels": {
+            "incomplete": "無法用於下堂課",
+            "basic": "需大幅修改",
+            "good": "本週可用",
+            "ready": "可長期重用"
+          }
+        }
+      ],
+      "enRubric": [
+        {
+          "name": "Completeness",
+          "levels": {
+            "incomplete": "Missing parts",
+            "basic": "Too thin",
+            "good": "Main parts present",
+            "ready": "Ready to use"
+          }
+        },
+        {
+          "name": "Correctness",
+          "levels": {
+            "incomplete": "Clear errors",
+            "basic": "Some vagueness",
+            "good": "Mostly correct",
+            "ready": "Withstands checks"
+          }
+        },
+        {
+          "name": "Clarity",
+          "levels": {
+            "incomplete": "Messy",
+            "basic": "Some structure",
+            "good": "Clear hierarchy",
+            "ready": "Reusable by others"
+          }
+        },
+        {
+          "name": "Usability",
+          "levels": {
+            "incomplete": "Not usable next class",
+            "basic": "Needs rewrite",
+            "good": "Usable this week",
+            "ready": "Long-term reusable"
+          }
+        }
+      ],
+      "zhMistakesDetailed": [
+        {
+          "error": "只有摘要沒有自己的判斷",
+          "why": "無法形成能力",
+          "fix": "標出你同意／不同意／需查證處"
+        },
+        {
+          "error": "成果與標題不一致",
+          "why": "學習目標漂移",
+          "fix": "回到本課唯一成果檢查"
+        },
+        {
+          "error": "未回原文或作業要求核對",
+          "why": "可能漏重點或跑題",
+          "fix": "保存前做一次來源核對"
+        }
+      ],
+      "enMistakesDetailed": [
+        {
+          "error": "Summary without judgment",
+          "why": "No skill built",
+          "fix": "Mark agree / disagree / verify"
+        },
+        {
+          "error": "Deliverable mismatches the lesson",
+          "why": "Goal drift",
+          "fix": "Return to the single outcome"
+        },
+        {
+          "error": "No verification against source/brief",
+          "why": "Missed emphasis or off-topic",
+          "fix": "Do one source check before saving"
+        }
+      ],
+      "zhCommonMistakes": [
+        "只有摘要沒有自己的判斷",
+        "成果與標題不一致",
+        "未回原文或作業要求核對"
+      ],
+      "enCommonMistakes": [
+        "Summary without judgment",
+        "Deliverable mismatches the lesson",
+        "No verification against source/brief"
+      ],
+      "zhSummary": [
+        "對準本課唯一成果",
+        "AI 協助結構，人負責判斷",
+        "一定回原文／要求核對",
+        "把「個人 AI 大學學習系統總覽」存進學習系統"
+      ],
+      "enSummary": [
+        "Aim at one deliverable",
+        "AI helps structure; you judge",
+        "Always verify against source/brief",
+        "Save “Personal AI university learning system overview” into your system"
+      ],
+      "zhDeliverableChecklist": [
+        "完成「個人 AI 大學學習系統總覽」",
+        "完成自我檢查題",
+        "把成果存入成果包"
+      ],
+      "enDeliverableChecklist": [
+        "Finish “Personal AI university learning system overview”",
+        "Complete self-check questions",
+        "Save output to the result package"
+      ],
+      "zhScorecard": [
+        "完整度",
+        "正確性",
+        "結構清晰度",
+        "可實際使用程度"
+      ],
+      "enScorecard": [
+        "Completeness",
+        "Correctness",
+        "Clarity",
+        "Usability"
+      ],
+      "zhNotePrompt": "用自己的話寫下：本課最重要的一個原則，以及你會如何使用「個人 AI 大學學習系統總覽」。",
+      "enNotePrompt": "In your own words: the key principle and how you will use “Personal AI university learning system overview”.",
+      "zhCoachPrompt": "請檢查我的「個人 AI 大學學習系統總覽」是否具體可執行，並指出空泛之處。",
+      "enCoachPrompt": "Check whether my “Personal AI university learning system overview” is concrete and actionable.",
+      "zhExcellentExample": "完成版「個人 AI 大學學習系統總覽」應能在下一次相關課程任務中直接打開使用，並標註來源與待查證點。",
+      "enExcellentExample": "A finished “Personal AI university learning system overview” should be ready for the next related class task, with sources and verification notes."
     }
   ],
   "research-competition": [
@@ -13433,6 +15841,166 @@ const COURSE_CASE_STUDY_LABELS = {
   "career-internship": { "zh": "求職與實習情境案例", "en": "Career and Internship Scenario" },
   "workplace-productivity": { "zh": "職場工作情境案例", "en": "Workplace Scenario" },
   "startup-automation": { "zh": "創業與自動化情境案例", "en": "Entrepreneurship and Automation Scenario" }
+};
+
+
+const COURSE_DESIGN_META = {
+  "admissions": {
+    "zhCapability": "AI 升學申請能力",
+    "enCapability": "AI Admissions Skills",
+    "zhPositioning": "幫助高中生用 AI 整理校系方向、學習歷程、備審資料、自我介紹與面試準備。",
+    "enPositioning": "Help high school students use AI for majors, portfolios, application materials, self-introductions, and interviews.",
+    "difficulty": {"zh": "入門到中階", "en": "Beginner to Intermediate"},
+    "suggestedHours": {"zh": "約 10–14 小時", "en": "About 10–14 hours"},
+    "lessonCount": 10,
+    "zhCanDo": [
+      "釐清大學申請流程與 AI 使用界線",
+      "盤點興趣優勢並比較校系",
+      "整理學習歷程與活動故事",
+      "建立備審架構與自我介紹初稿",
+      "準備面試題庫與模擬練習",
+      "完成大學申請成果包"
+    ],
+    "enCanDo": [
+      "Clarify admissions steps and AI boundaries",
+      "Map strengths and compare majors",
+      "Organize learning portfolios and activity stories",
+      "Build application structure and self-intro drafts",
+      "Prepare interview banks and mock practice",
+      "Complete the university application package"
+    ],
+    "useProLayout": true
+  },
+  "college-learning": {
+    "zhCapability": "AI 學習能力",
+    "enCapability": "AI Learning Skills",
+    "zhPositioning": "幫助大學生建立教材理解、筆記、報告、簡報與考試複習的 AI 學習系統。",
+    "enPositioning": "Help university students build an AI learning system for materials, notes, reports, slides, and exam review.",
+    "difficulty": {"zh": "入門到中階", "en": "Beginner to Intermediate"},
+    "suggestedHours": {"zh": "約 12–15 小時", "en": "About 12–15 hours"},
+    "lessonCount": 10,
+    "zhCanDo": [
+      "使用 AI 理解複雜教材",
+      "整理有結構的課堂筆記",
+      "完成一般課堂報告",
+      "製作清楚的課堂簡報",
+      "建立考試複習流程",
+      "完成自己的 AI 大學學習系統包"
+    ],
+    "enCanDo": [
+      "Use AI to understand complex materials",
+      "Organize structured class notes",
+      "Complete a typical class report",
+      "Build a clear class presentation",
+      "Create an exam review workflow",
+      "Finish your AI university learning system package"
+    ],
+    "useProLayout": true
+  },
+  "research-competition": {
+    "zhCapability": "AI 研究與競賽能力",
+    "enCapability": "AI Research and Competition Skills",
+    "zhPositioning": "幫助大學生用 AI 推進研究問題、文獻、方法、資料分析、專題與競賽提案。",
+    "enPositioning": "Help university students use AI for research questions, literature, methods, analysis, projects, and competition proposals.",
+    "difficulty": {"zh": "中階", "en": "Intermediate"},
+    "suggestedHours": {"zh": "約 12–16 小時", "en": "About 12–16 hours"},
+    "lessonCount": 10,
+    "zhCanDo": [
+      "釐清研究問題與專題範圍",
+      "整理文獻與研究方法",
+      "規劃資料分析與論證結構",
+      "準備競賽提案與簡報",
+      "建立可查證的研究工作流",
+      "完成研究、專題與競賽成果包"
+    ],
+    "enCanDo": [
+      "Clarify research questions and project scope",
+      "Organize literature and methods",
+      "Plan analysis and argument structure",
+      "Prepare competition proposals and decks",
+      "Build a verifiable research workflow",
+      "Complete the research and competition package"
+    ],
+    "useProLayout": true
+  },
+  "career-internship": {
+    "zhCapability": "AI 求職與實習能力",
+    "enCapability": "AI Career and Internship Skills",
+    "zhPositioning": "幫助學生用 AI 準備實習與求職：履歷、Cover Letter、作品集、面試與職涯定位。",
+    "enPositioning": "Help students use AI for internships and jobs: resumes, cover letters, portfolios, interviews, and career positioning.",
+    "difficulty": {"zh": "入門到中階", "en": "Beginner to Intermediate"},
+    "suggestedHours": {"zh": "約 10–14 小時", "en": "About 10–14 hours"},
+    "lessonCount": 10,
+    "zhCanDo": [
+      "釐清目標職缺與能力缺口",
+      "產出可投遞的履歷與 Cover Letter",
+      "整理作品集與專案說明",
+      "準備面試回答架構",
+      "建立求職追蹤與修正流程",
+      "完成求職與實習申請包"
+    ],
+    "enCanDo": [
+      "Clarify target roles and skill gaps",
+      "Produce usable resumes and cover letters",
+      "Organize portfolios and project stories",
+      "Prepare interview answer structures",
+      "Build a job-search tracking loop",
+      "Complete the career and internship package"
+    ],
+    "useProLayout": true
+  },
+  "workplace-productivity": {
+    "zhCapability": "AI 職場生產力",
+    "enCapability": "AI Workplace Productivity",
+    "zhPositioning": "幫助職場工作者用 AI 處理 Email、會議、文件、簡報、報告、SOP 與任務管理。",
+    "enPositioning": "Help professionals use AI for email, meetings, documents, slides, reports, SOPs, and task management.",
+    "difficulty": {"zh": "入門到中階", "en": "Beginner to Intermediate"},
+    "suggestedHours": {"zh": "約 10–14 小時", "en": "About 10–14 hours"},
+    "lessonCount": 10,
+    "zhCanDo": [
+      "用 AI 寫清楚的職場溝通",
+      "整理會議與行動項目",
+      "產出文件、簡報與工作報告",
+      "建立 SOP 與知識整理方式",
+      "設計可重複的任務工作流",
+      "完成個人 AI 工作流程包"
+    ],
+    "enCanDo": [
+      "Write clearer workplace communication with AI",
+      "Organize meetings and action items",
+      "Produce documents, decks, and reports",
+      "Build SOPs and knowledge systems",
+      "Design repeatable task workflows",
+      "Complete your personal AI workflow package"
+    ],
+    "useProLayout": true
+  },
+  "startup-automation": {
+    "zhCapability": "AI 創業與自動化",
+    "enCapability": "AI Startup and Automation",
+    "zhPositioning": "幫助創業者用 AI 驗證問題、客群、訪談、商業模式、MVP、Pitch 與自動化流程。",
+    "enPositioning": "Help founders use AI for problem validation, audience, interviews, models, MVP, pitch decks, and automation.",
+    "difficulty": {"zh": "中階", "en": "Intermediate"},
+    "suggestedHours": {"zh": "約 12–16 小時", "en": "About 12–16 hours"},
+    "lessonCount": 10,
+    "zhCanDo": [
+      "釐清創業問題與目標客群",
+      "設計訪談與驗證節奏",
+      "整理商業模式與 MVP 方向",
+      "產出 Pitch Deck 架構",
+      "規劃自動化與 AI Agent 流程",
+      "完成創業驗證與自動化成果包"
+    ],
+    "enCanDo": [
+      "Clarify startup problems and target users",
+      "Design interview and validation loops",
+      "Organize business model and MVP direction",
+      "Draft pitch deck structure",
+      "Plan automation and AI agent workflows",
+      "Complete the startup validation package"
+    ],
+    "useProLayout": true
+  }
 };
 
 const RESULT_PACKAGE_CONFIG = [
