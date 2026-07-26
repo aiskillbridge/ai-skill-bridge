@@ -28,6 +28,7 @@ let state = {
   user: null,
   userPlan: "free",
   unlockedCourses: [],
+  authReady: false,
   loadingProgress: false
 };
 
@@ -214,6 +215,134 @@ function setRoute(route) {
   state.route = route;
   window.scrollTo(0, 0);
   render();
+}
+
+const POST_LOGIN_DESTINATION_KEY = "asb_post_login_destination_v1";
+const AUTH_REQUIRED_ROUTES = new Set(["freeLesson", "freePortfolio", "learning", "free"]);
+
+function isAuthRequiredRoute(route) {
+  return AUTH_REQUIRED_ROUTES.has(route);
+}
+
+function savePostLoginDestination(destination) {
+  try {
+    const payload = {
+      route: destination.route || null,
+      courseId: destination.courseId || null,
+      lessonId: destination.lessonId != null ? Number(destination.lessonId) : null,
+      packageId: destination.packageId || null,
+      action: destination.action || null,
+      savedAt: Date.now()
+    };
+    localStorage.setItem(POST_LOGIN_DESTINATION_KEY, JSON.stringify(payload));
+  } catch (error) {}
+}
+
+function clearPostLoginDestination() {
+  try {
+    localStorage.removeItem(POST_LOGIN_DESTINATION_KEY);
+  } catch (error) {}
+}
+
+function readPostLoginDestination() {
+  try {
+    const raw = localStorage.getItem(POST_LOGIN_DESTINATION_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") return null;
+    // Ignore stale destinations older than 2 hours
+    if (parsed.savedAt && Date.now() - Number(parsed.savedAt) > 2 * 60 * 60 * 1000) {
+      clearPostLoginDestination();
+      return null;
+    }
+    return parsed;
+  } catch (error) {
+    return null;
+  }
+}
+
+function consumePostLoginDestination() {
+  const dest = readPostLoginDestination();
+  clearPostLoginDestination();
+  return dest;
+}
+
+function applyPostLoginDestination(destination) {
+  if (!destination) return false;
+  if (destination.courseId) currentCourseId = destination.courseId;
+  if (destination.packageId) currentResultPackageId = destination.packageId;
+  if (destination.lessonId != null && !Number.isNaN(Number(destination.lessonId))) {
+    state.freeLessonIndex = Number(destination.lessonId);
+  }
+
+  if (destination.action === "openFreeLesson") {
+    state.route = "freeLesson";
+    state.freeLessonIndex = Number(destination.lessonId) || 0;
+    return true;
+  }
+  if (destination.action === "openResultPackage" && destination.packageId) {
+    currentResultPackageId = destination.packageId;
+    state.route = "courseResultPackage";
+    return true;
+  }
+  if (destination.route) {
+    state.route = destination.route;
+    return true;
+  }
+  return false;
+}
+
+function requireGoogleLogin(destination = {}) {
+  if (state.user) {
+    if (destination && (destination.route || destination.action)) {
+      applyPostLoginDestination(destination);
+      render();
+    }
+    return true;
+  }
+  savePostLoginDestination(destination || {});
+  toast(state.lang === "zh"
+    ? "請先使用 Google 登入後開始免費學習"
+    : "Please sign in with Google to start free learning");
+  signInWithGoogle();
+  return false;
+}
+
+function renderAuthChecking() {
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <section class="panel auth-gate-panel">
+          <span class="tag">Auth</span>
+          <h1>${text("正在確認登入狀態…", "Checking sign-in status…")}</h1>
+          <p class="lead">${text("請稍候，我們正在確認你的 Google 登入狀態。", "Please wait while we confirm your Google sign-in status.")}</p>
+        </section>
+      </div>
+    </main>
+  `);
+}
+
+function renderGoogleLoginGate(options = {}) {
+  const destination = options.destination || { route: options.route || "courses" };
+  const backRoute = options.backRoute || "courses";
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <section class="panel auth-gate-panel">
+          <span class="tag premiumtag">${text("需要登入", "Sign-in required")}</span>
+          <h1>${options.title || text("登入後開始免費學習", "Sign in to start free learning")}</h1>
+          <p class="lead">${options.message || text(
+            "免費課程不需要付款，但必須使用 Google 登入，才能保存學習進度、測驗結果與成果作品。",
+            "Free courses do not require payment, but Google sign-in is required to save progress, quizzes, and outputs."
+          )}</p>
+          <div class="btnrow">
+            <button class="btn primary" onclick='requireGoogleLogin(${JSON.stringify(destination)})'>${text("使用 Google 登入", "Sign in with Google")}</button>
+            <button class="btn secondary" onclick="setRoute('${backRoute}')">${options.backLabel || text("返回課程介紹", "Back to Course Intro")}</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  `);
 }
 
 function toggleLang() {
@@ -423,25 +552,37 @@ async function loadUserPlan(user) {
 }
 
 async function handleAuthSession(session) {
+  const previousUserId = state.user?.id || null;
   state.user = session?.user || null;
+  state.authReady = true;
 
   if (session?.user) {
     await syncUserProfile(session.user);
     await loadUserPlan(session.user);
     await loadProgressFromSupabase();
     await loadNotesFromSupabase();
+
+    const justSignedIn = previousUserId !== session.user.id;
+    if (justSignedIn) {
+      const destination = consumePostLoginDestination();
+      if (destination) applyPostLoginDestination(destination);
+    }
   } else {
     state.userPlan = "free";
     state.unlockedCourses = [];
     state.progress = JSON.parse(localStorage.getItem("asb_progress") || "{}");
     state.notes = JSON.parse(localStorage.getItem("asb_notes") || "{}");
+    // Do not clear saved learning data; gated routes will show login UI.
   }
 
   render();
 }
 
 async function initAuth() {
-  if (!supabaseClient) return;
+  if (!supabaseClient) {
+    state.authReady = true;
+    return;
+  }
 
   supabaseClient.auth.onAuthStateChange(async (_event, session) => {
     await handleAuthSession(session);
@@ -455,10 +596,13 @@ async function initAuth() {
     await loadUserPlan(state.user);
     await loadProgressFromSupabase();
     await loadNotesFromSupabase();
+    const destination = consumePostLoginDestination();
+    if (destination) applyPostLoginDestination(destination);
   } else {
     state.userPlan = "free";
     state.unlockedCourses = [];
   }
+  state.authReady = true;
 }
 
 async function signInWithGoogle() {
@@ -467,21 +611,41 @@ async function signInWithGoogle() {
     return;
   }
 
+  if (!readPostLoginDestination()) {
+    savePostLoginDestination({
+      route: state.route,
+      courseId: currentCourseId || null,
+      lessonId: state.route === "freeLesson" ? state.freeLessonIndex : null,
+      packageId: state.route === "courseResultPackage" ? currentResultPackageId : null,
+      action: state.route === "freeLesson" ? "openFreeLesson" : null
+    });
+  }
+
   const { error } = await supabaseClient.auth.signInWithOAuth({
     provider: "google",
     options: {
-redirectTo: window.location.origin    }
+      redirectTo: window.location.origin + window.location.pathname
+    }
   });
 
   if (error) alert(error.message);
 }
 
 async function signOut() {
-  if (!supabaseClient) return;
+  clearPostLoginDestination();
+  if (!supabaseClient) {
+    state.user = null;
+    state.userPlan = "free";
+    state.unlockedCourses = [];
+    state.authReady = true;
+    render();
+    return;
+  }
   await supabaseClient.auth.signOut();
   state.user = null;
   state.userPlan = "free";
   state.unlockedCourses = [];
+  state.authReady = true;
   render();
 }
 
@@ -594,12 +758,16 @@ async function loadProgressFromSupabase() {
 }
 
 async function completeLesson(lessonId) {
+  if (!state.user) {
+    requireGoogleLogin({ route: "free", action: "completeLesson" });
+    return;
+  }
   state.progress[lessonId] = true;
   save();
   render();
 
-  if (!state.user || !supabaseClient) {
-    toast(text("已儲存在本機。登入後可同步進度。", "Saved locally. Login to sync progress."));
+  if (!supabaseClient) {
+    toast(text("已儲存在本機。", "Saved locally."));
     return;
   }
 
@@ -1188,7 +1356,7 @@ function home() {
             <h1>${L("home.title")}</h1>
             <p class="home-lead">${L("home.lead")}</p>
             <div class="home-hero-cta">
-              <button class="home-btn home-btn-primary" onclick="setRoute('free')">${L("home.start")}</button>
+              <button class="home-btn home-btn-primary" onclick="setRoute('courses')">${L("home.start")}</button>
               <button class="home-btn home-btn-secondary" onclick="setRoute('courses')">${L("home.explore")}</button>
             </div>
             <p class="home-trust">${L("home.trust")}</p>
@@ -1343,7 +1511,7 @@ function home() {
                 <li>${L("home.priceFree2")}</li>
                 <li>${L("home.priceFree3")}</li>
               </ul>
-              <button class="home-btn home-btn-secondary" onclick="setRoute('free')">${L("home.priceCtaFree")}</button>
+              <button class="home-btn home-btn-secondary" onclick="setRoute('courses')">${L("home.priceCtaFree")}</button>
             </article>
             <article class="home-price-card home-price-featured">
               <span class="home-price-badge">${L("home.priceOffer")}</span>
@@ -1398,7 +1566,7 @@ function home() {
             <p class="home-section-lead">${L("home.ctaLead")}</p>
           </div>
           <div class="home-hero-cta">
-            <button class="home-btn home-btn-primary home-btn-light" onclick="setRoute('free')">${L("home.ctaStart")}</button>
+            <button class="home-btn home-btn-primary home-btn-light" onclick="setRoute('courses')">${L("home.ctaStart")}</button>
             <button class="home-btn home-btn-ghost" onclick="setRoute('courses')">${L("home.ctaExplore")}</button>
           </div>
         </div>
@@ -1478,8 +1646,8 @@ function learningMap() {
             <p><b>${text("堂數", "Lessons")}：</b>${freeProgress.total || (typeof FREE_BOOTCAMP !== "undefined" ? FREE_BOOTCAMP.length : 0)} ${text("堂", "lessons")}</p>
             <p><b>${text("最終成果包", "Final package")}：</b>${freePkg ? (state.lang === "zh" ? freePkg.zhTitle : freePkg.enTitle) : text("免費入門成果包", "Free Starter Package")}</p>
             <p><b>${text("價格", "Price")}：</b>${text("免費", "Free")}</p>
-            <p>${text("學習進度", "Progress")}：${freeProgress.completed}/${freeProgress.total}（${freeProgress.percent}%）</p>
-            <div class="package-progress-track"><div class="package-progress-bar" style="width:${freeProgress.percent}%"></div></div>
+            <p>${text("學習進度", "Progress")}：${state.user ? `${freeProgress.completed}/${freeProgress.total}（${freeProgress.percent}%）` : text("登入後顯示個人進度", "Sign in to view personal progress")}</p>
+            <div class="package-progress-track"><div class="package-progress-bar" style="width:${state.user ? freeProgress.percent : 0}%"></div></div>
             <div class="btnrow">
               <button class="btn primary" onclick="setRoute('courses')">${text("查看課程", "View Course")}</button>
               <button class="btn secondary" onclick="openResultPackage('free-starter')">${text("查看成果包", "View Package")}</button>
@@ -1536,13 +1704,27 @@ function learningMap() {
 }
 
 function center() {
+  if (!state.authReady) return renderAuthChecking();
+  if (!state.user) {
+    return renderGoogleLoginGate({
+      destination: { route: "center" },
+      backRoute: "home",
+      title: text("登入後查看學習中心", "Sign in to view Learning Center"),
+      message: text(
+        "請先使用 Google 登入，才能查看你的學習進度、課程與成果。",
+        "Sign in with Google to view your courses, progress, and results."
+      ),
+      backLabel: text("返回首頁", "Back to Home")
+    });
+  }
+
   const badges = earnedBadges();
   const certs = earnedCertificates();
   return shell(`
     <main class="page">
       <div class="wrap">
         <h1>${text("我的學習中心", "My Learning Center")}</h1>
-        <p class="lead">${state.user ? state.user.email : text("登入後可同步學習紀錄。", "Login to sync your learning records.")}</p>
+        <p class="lead">${state.user.email}</p>
 
         <div class="grid four">
           <article class="card"><span class="tag">Progress</span><h3>${completedCount()} / ${LESSONS.length}</h3><p>${text("已完成課程", "Lessons completed")}</p></article>
@@ -1574,6 +1756,12 @@ function center() {
 }
 
 function free() {
+  if (!state.authReady) return renderAuthChecking();
+  if (!state.user) {
+    // Guests may browse the free-course intro, not the lesson body.
+    return courses();
+  }
+
   const lesson = LESSONS.find(item => item.id === state.activeLesson) || LESSONS[0];
 
   return shell(`
@@ -1679,6 +1867,10 @@ function getFreeOutput(index) {
 }
 
 function saveFreeOutput(index) {
+  if (!state.user) {
+    requireGoogleLogin({ route: "freeLesson", lessonId: index, action: "openFreeLesson" });
+    return;
+  }
   const el = document.getElementById(`free-output-${index}`);
   if (!el) return;
   localStorage.setItem(freeBootcampKey(`output-${index}`), el.value);
@@ -1686,24 +1878,24 @@ function saveFreeOutput(index) {
 }
 
 function isFreeLessonComplete(index) {
-  if (state.user) {
-    return !!state.progress[freeBootcampLessonId(index)];
-  }
-  return localStorage.getItem(freeBootcampKey(`complete-${index}`)) === "true";
+  if (!state.user) return false;
+  return !!state.progress[freeBootcampLessonId(index)];
 }
 
 async function toggleFreeLessonComplete(index) {
+  if (!state.user) {
+    requireGoogleLogin({ route: "freeLesson", lessonId: index, action: "openFreeLesson" });
+    return;
+  }
   const lessonId = freeBootcampLessonId(index);
   const next = !isFreeLessonComplete(index);
 
-  if (state.user) {
-    state.progress[lessonId] = next;
-    save();
-  }
+  state.progress[lessonId] = next;
+  save();
   localStorage.setItem(freeBootcampKey(`complete-${index}`), next ? "true" : "false");
   render();
 
-  if (!state.user || !supabaseClient) {
+  if (!supabaseClient) {
     toast(next
       ? (state.lang === "zh" ? "已完成免費課（本機）" : "Free lesson completed (local)")
       : (state.lang === "zh" ? "已取消完成" : "Completion removed"));
@@ -1723,12 +1915,17 @@ async function toggleFreeLessonComplete(index) {
 
 function freeBootcampProgress() {
   const total = FREE_BOOTCAMP.length;
+  if (!state.user) return { completed: 0, total, percent: 0 };
   const completed = FREE_BOOTCAMP.filter((_, i) => isFreeLessonComplete(i)).length;
   return { completed, total, percent: total ? Math.round((completed / total) * 100) : 0 };
 }
 
 function courses() {
+  const loggedIn = !!state.user;
   const progress = freeBootcampProgress();
+  const startCta = loggedIn
+    ? `<button class="btn primary" onclick="openFreeLesson(0)">${text("開始免費課程", "Start Free Course")}</button>`
+    : `<button class="btn primary" onclick='requireGoogleLogin({"route":"freeLesson","lessonId":0,"action":"openFreeLesson"})'>${text("使用 Google 登入後開始免費課程", "Sign in with Google to Start")}</button>`;
 
   return shell(`
     <main class="page">
@@ -1740,17 +1937,29 @@ function courses() {
             "免費區不是只看內容，而是讓你完成 8 個 AI 實作成果。完成後，你會更適合進入付費的大學申請課程。",
             "The free section is not just reading. You will complete 8 real AI outputs and be ready for the premium application course."
           )}</p>
-          <h2>${text("完成度", "Progress")}：${progress.completed}/${progress.total}（${progress.percent}%）</h2>
-          <div class="package-progress-track">
-            <div class="package-progress-bar" style="width:${progress.percent}%"></div>
-          </div>
+          <p><b>${text("課程堂數", "Lessons")}：</b>${FREE_BOOTCAMP.length}</p>
+          <p><b>${text("適合對象", "Who it’s for")}：</b>${text("完全沒學過 AI、想先上手實作的學習者", "Beginners who want hands-on AI practice first")}</p>
+          <p><b>${text("學習成果", "Learning outcomes")}：</b>${text("完成 8 項 AI 實作成果，並建立免費成果包", "Complete 8 AI outputs and build a free portfolio")}</p>
+          ${loggedIn ? `
+            <h2>${text("完成度", "Progress")}：${progress.completed}/${progress.total}（${progress.percent}%）</h2>
+            <div class="package-progress-track">
+              <div class="package-progress-bar" style="width:${progress.percent}%"></div>
+            </div>
+          ` : `
+            <p class="auth-gate-hint">${text("免費課程可預覽介紹與 Lesson 標題；登入後才能開始學習並保存進度。", "You can preview the intro and lesson titles. Sign in to start learning and save progress.")}</p>
+          `}
           <div class="btnrow" style="margin-top:18px">
-            <button class="btn primary" onclick="setRoute('learning')">${text("免費 Dashboard", "Free Dashboard")}</button>
-            <button class="btn secondary" onclick="setRoute('freePortfolio')">${text("我的免費成果包", "My Free Portfolio")}</button>
+            ${startCta}
+            ${loggedIn ? `
+              <button class="btn secondary" onclick="setRoute('learning')">${text("免費 Dashboard", "Free Dashboard")}</button>
+              <button class="btn secondary" onclick="setRoute('freePortfolio')">${text("我的免費成果包", "My Free Portfolio")}</button>
+            ` : `
+              <button class="btn secondary" onclick="setRoute('learning')">${text("我的學習中心", "My Learning Center")}</button>
+            `}
           </div>
         </section>
 
-        ${progress.percent === 100 ? `
+        ${loggedIn && progress.percent === 100 ? `
           <section class="panel">
             <span class="tag free">🏆 Certificate</span>
             <h2>${text("AI 新手訓練營結業證書", "AI Beginner Bootcamp Certificate")}</h2>
@@ -1762,12 +1971,16 @@ function courses() {
         <div class="grid two">
           ${FREE_BOOTCAMP.map((lesson, i) => `
             <article class="card">
-              <span class="tag ${isFreeLessonComplete(i) ? "free" : "premiumtag"}">${isFreeLessonComplete(i) ? "✓ " + text("已完成", "Completed") : "Free " + (i + 1)}</span>
+              <span class="tag ${loggedIn && isFreeLessonComplete(i) ? "free" : "premiumtag"}">${loggedIn && isFreeLessonComplete(i) ? "✓ " + text("已完成", "Completed") : "Free " + (i + 1)}</span>
               <h3>${lesson.title}</h3>
               <p>${lesson.goal}</p>
               <p><b>${text("本課成果", "Output")}：</b>${lesson.output}</p>
-              <p><b>${text("測驗", "Quiz")}：</b>${(lesson.quizItems || []).length} ${text("題情境測驗", "scenario questions")}</p>
-              <button class="btn primary" onclick="openFreeLesson(${i})">${text("進入本課", "Open Lesson")}</button>
+              ${loggedIn ? `
+                <p><b>${text("測驗", "Quiz")}：</b>${(lesson.quizItems || []).length} ${text("題情境測驗", "scenario questions")}</p>
+                <button class="btn primary" onclick="openFreeLesson(${i})">${text("進入本課", "Open Lesson")}</button>
+              ` : `
+                <button class="btn primary" onclick='requireGoogleLogin({"route":"freeLesson","lessonId":${i},"action":"openFreeLesson"})'>${text("使用 Google 登入後開始免費課程", "Sign in with Google to Start")}</button>
+              `}
             </article>
           `).join("")}
         </div>
@@ -1777,8 +1990,26 @@ function courses() {
 }
 
 function openFreeLesson(index) {
+  state.freeLessonIndex = Number(index) || 0;
+  if (!state.authReady) {
+    state.route = "freeLesson";
+    window.scrollTo(0, 0);
+    render();
+    return;
+  }
+  if (!state.user) {
+    savePostLoginDestination({
+      route: "freeLesson",
+      lessonId: state.freeLessonIndex,
+      action: "openFreeLesson"
+    });
+    state.route = "freeLesson";
+    window.scrollTo(0, 0);
+    render();
+    return;
+  }
   state.route = "freeLesson";
-  state.freeLessonIndex = index;
+  setLastStudiedCourse("free-starter", state.freeLessonIndex);
   window.scrollTo(0, 0);
   render();
 }
@@ -1786,6 +2017,20 @@ function openFreeLesson(index) {
 function freeLesson() {
   const index = Number(state.freeLessonIndex || 0);
   const lesson = FREE_BOOTCAMP[index] || FREE_BOOTCAMP[0];
+
+  if (!state.authReady) return renderAuthChecking();
+  if (!state.user) {
+    return renderGoogleLoginGate({
+      destination: { route: "freeLesson", lessonId: index, action: "openFreeLesson" },
+      backRoute: "courses",
+      title: text("登入後開始免費學習", "Sign in to start free learning"),
+      message: text(
+        "免費課程不需要付款，但必須使用 Google 登入，才能保存學習進度、測驗結果與成果作品。",
+        "Free courses do not require payment, but Google sign-in is required to save progress, quizzes, and outputs."
+      )
+    });
+  }
+
   const output = getFreeOutput(index);
 
   return shell(`
@@ -1923,6 +2168,10 @@ function getFreeQuizAnswer(index, qIndex) {
 }
 
 function setFreeQuizAnswer(index, qIndex, answerIndex) {
+  if (!state.user) {
+    requireGoogleLogin({ route: "freeLesson", lessonId: index, action: "openFreeLesson" });
+    return;
+  }
   localStorage.setItem(freeQuizKey(index, qIndex), String(answerIndex));
   render();
 }
@@ -2004,6 +2253,20 @@ function freeDashboard() {
 }
 
 function freePortfolio() {
+  if (!state.authReady) return renderAuthChecking();
+  if (!state.user) {
+    return renderGoogleLoginGate({
+      destination: { route: "freePortfolio" },
+      backRoute: "courses",
+      title: text("登入後開始免費學習", "Sign in to start free learning"),
+      message: text(
+        "免費成果包介紹可公開瀏覽，但必須使用 Google 登入後，才能查看、輸入或儲存你的成果內容。",
+        "You can browse the free portfolio intro, but Google sign-in is required to view, enter, or save your outputs."
+      ),
+      backLabel: text("返回課程介紹", "Back to Course Intro")
+    });
+  }
+
   const items = freePortfolioItems();
   const progress = freePortfolioProgress();
 
@@ -2025,7 +2288,7 @@ function freePortfolio() {
               <h2>${index + 1}. ${item.title}</h2>
               <p>${item.lessonTitle}</p>
               <textarea id="free-portfolio-${index}" placeholder="${item.title}">${String(item.value || "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}</textarea>
-              <button class="btn secondary" onclick="document.getElementById('free-output-${index}') ? null : localStorage.setItem(freeBootcampKey('output-${index}'), document.getElementById('free-portfolio-${index}').value); toast('${state.lang === "zh" ? "成果已儲存" : "Output saved"}'); render();">${text("儲存成果", "Save Output")}</button>
+              <button class="btn secondary" onclick="if(!state.user){requireGoogleLogin({route:'freePortfolio'});return;} localStorage.setItem(freeBootcampKey('output-${index}'), document.getElementById('free-portfolio-${index}').value); toast('${state.lang === "zh" ? "成果已儲存" : "Output saved"}'); render();">${text("儲存成果", "Save Output")}</button>
             </section>
           `).join("")}
         </div>
@@ -2095,6 +2358,20 @@ function v38FreeCertificateReady() {
 
 
 function learning() {
+  if (!state.authReady) return renderAuthChecking();
+  if (!state.user) {
+    return renderGoogleLoginGate({
+      destination: { route: "learning" },
+      backRoute: "home",
+      title: text("登入後查看學習中心", "Sign in to view Learning Center"),
+      message: text(
+        "請先使用 Google 登入，才能查看你的學習進度、課程與成果。",
+        "Sign in with Google to view your courses, progress, and results."
+      ),
+      backLabel: text("返回首頁", "Back to Home")
+    });
+  }
+
   const free = v38SafeFreeProgress();
   const freePortfolio = v38SafeFreePortfolioProgress();
   const premiumCourses = getPremiumCourses();
@@ -3018,8 +3295,11 @@ function resultPackageProgressByConfig(pkg) {
 function saveCourseResultEntry(courseId, lessonIndex, options = {}) {
   const pkg = getResultPackageByCourseId(courseId) || getResultPackageById(courseId);
   if (pkg && pkg.free && !state.user) {
-    toast(state.lang === "zh" ? "請先登入後再儲存個人成果" : "Please sign in before saving your results");
-    if (typeof signInWithGoogle === "function") signInWithGoogle();
+    requireGoogleLogin({
+      route: "courseResultPackage",
+      packageId: pkg.id,
+      action: "openResultPackage"
+    });
     return;
   }
   if (pkg && !pkg.free && pkg.courseId && !hasCourseAccess(pkg.courseId)) {
@@ -3073,6 +3353,23 @@ function openResultPackage(packageId) {
   if (!pkg) {
     toast(state.lang === "zh" ? "找不到成果包" : "Result package not found");
     setRoute("result-packages");
+    return;
+  }
+  if (pkg.free) {
+    currentResultPackageId = packageId;
+    currentCourseId = pkg.courseId || null;
+    if (!state.authReady || !state.user) {
+      if (!state.user) {
+        savePostLoginDestination({
+          route: "courseResultPackage",
+          packageId,
+          action: "openResultPackage"
+        });
+      }
+      setRoute("courseResultPackage");
+      return;
+    }
+    setRoute("courseResultPackage");
     return;
   }
   if (!hasResultPackageAccess(packageId)) {
@@ -3198,22 +3495,28 @@ function resultPackages() {
 
         <div class="grid three result-package-overview-grid">
           ${packages.map((pkg, index) => {
+            const needsLogin = pkg.free && !state.user;
             const unlocked = hasResultPackageAccess(pkg.id);
-            const progress = resultPackageProgressByConfig(pkg);
+            const progress = (!state.user && pkg.free)
+              ? { completed: 0, total: Number(pkg.totalItems) || (pkg.items ? pkg.items.length : 0), percent: 0 }
+              : resultPackageProgressByConfig(pkg);
             const course = pkg.courseId && typeof PREMIUM !== "undefined"
               ? PREMIUM.find(p => p.id === pkg.courseId)
               : null;
             const price = pkg.free ? text("免費", "Free") : (course ? course.price : "");
             return `
-              <article class="card result-package-card ${unlocked ? "" : "result-package-card-locked"}">
-                <span class="tag ${unlocked ? "free" : "premiumtag"}">${resultPackageAccessLabel(pkg.id)}</span>
+              <article class="card result-package-card ${unlocked && !needsLogin ? "" : "result-package-card-locked"}">
+                <span class="tag ${pkg.free || unlocked ? "free" : "premiumtag"}">${resultPackageAccessLabel(pkg.id)}</span>
                 <h2>${index}. ${state.lang === "zh" ? pkg.zhTitle : pkg.enTitle}</h2>
                 <p><b>${text("所屬課程", "Course")}：</b>${state.lang === "zh" ? pkg.zhCourseName : pkg.enCourseName}</p>
                 <p>${state.lang === "zh" ? pkg.zhFinalOutcome : pkg.enFinalOutcome}</p>
-                <p>${text("完成進度", "Progress")}：${progress.completed} / ${progress.total}（${progress.percent}%）</p>
-                <div class="package-progress-track"><div class="package-progress-bar" style="width:${progress.percent}%"></div></div>
+                <p>${text("完成進度", "Progress")}：${needsLogin ? text("登入後顯示", "Sign in to view") : `${progress.completed} / ${progress.total}（${progress.percent}%）`}</p>
+                <div class="package-progress-track"><div class="package-progress-bar" style="width:${needsLogin ? 0 : progress.percent}%"></div></div>
                 <div class="btnrow">
-                  ${unlocked
+                  ${needsLogin
+                    ? `<button class="btn primary" onclick="openResultPackage('${pkg.id}')">${text("查看介紹", "View Intro")}</button>
+                       <button class="btn secondary" onclick='requireGoogleLogin({"route":"courseResultPackage","packageId":"${pkg.id}","action":"openResultPackage"})'>${text("使用 Google 登入", "Sign in with Google")}</button>`
+                    : unlocked
                     ? `<button class="btn primary" onclick="openResultPackage('${pkg.id}')">${text("查看成果包", "View Package")}</button>`
                     : `<button class="btn secondary" onclick="showResultPackageLockedMessage('${pkg.id}')">${text("已鎖定", "Locked")}</button>
                        <button class="btn secondary" onclick="setRoute('premium')">${text("查看課程", "View Course")}</button>
@@ -3237,6 +3540,32 @@ function courseResultPackage() {
 
   if (!pkg) {
     return shell(`<main class="page"><div class="wrap"><h1>${text("找不到成果包", "Package Not Found")}</h1><button class="btn primary" onclick="setRoute('result-packages')">${text("回到成果禮包", "Back to Result Packages")}</button></div></main>`);
+  }
+
+  if (pkg.free) {
+    if (!state.authReady) return renderAuthChecking();
+    if (!state.user) {
+      return shell(`
+        <main class="page">
+          <div class="wrap">
+            <section class="panel auth-gate-panel">
+              <span class="tag free">${text("免費成果包", "Free Portfolio")}</span>
+              <h1>${state.lang === "zh" ? pkg.zhTitle : pkg.enTitle}</h1>
+              <p class="lead">${state.lang === "zh" ? pkg.zhDescription : pkg.enDescription}</p>
+              <p><b>${text("這門課完成後會得到什麼", "What you will get")}：</b>${state.lang === "zh" ? pkg.zhFinalOutcome : pkg.enFinalOutcome}</p>
+              <p>${text(
+                "你可以先了解成果包內容。登入後才能查看已輸入內容、輸入或儲存成果。",
+                "You can review this package intro first. Sign in to view saved content and enter or save outputs."
+              )}</p>
+              <div class="btnrow">
+                <button class="btn primary" onclick='requireGoogleLogin({"route":"courseResultPackage","packageId":"${pkg.id}","action":"openResultPackage"})'>${text("使用 Google 登入", "Sign in with Google")}</button>
+                <button class="btn secondary" onclick="setRoute('result-packages')">${text("返回成果禮包", "Back to Result Packages")}</button>
+              </div>
+            </section>
+          </div>
+        </main>
+      `);
+    }
   }
 
   if (!hasResultPackageAccess(pkg.id)) {
@@ -3813,6 +4142,7 @@ function render() {
 
 async function startApp() {
   bindMoreMenuEvents();
+  render();
   await initAuth();
   render();
 }

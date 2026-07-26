@@ -1593,8 +1593,28 @@ textarea[id^="free-note-"] {
   margin-top: 24px;
 }
 
+.auth-gate-panel {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.auth-gate-panel .btnrow {
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.auth-gate-hint {
+  margin-top: 12px;
+  color: #4a5a73;
+}
+
 @media (max-width: 900px) {
   .result-package-overview-grid {
     grid-template-columns: 1fr;
+  }
+
+  .auth-gate-panel .btnrow .btn {
+    width: 100%;
   }
 }
