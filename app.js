@@ -1,13 +1,118 @@
 const SUPABASE_URL = "https://ifjkadoskbcgrqmcjvya.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_yXHovKCCYE04aUcybOc4KA_Fhdp5bTE";
 
-const CREATOR_EMAIL = "li19840610@gmail.com";
+/** Central special-account roles. Keys must be lowercase full emails. Never written to profiles.plan. */
+const SPECIAL_ACCOUNT_ROLES = {
+  "li19840610@gmail.com": {
+    role: "creator",
+    zhLabel: "創辦人",
+    enLabel: "Creator",
+    allAccess: true,
+    adminAccess: true
+  },
+  "zoechen0118@gmail.com": {
+    role: "queen",
+    zhLabel: "女王",
+    enLabel: "Queen",
+    allAccess: true,
+    adminAccess: false
+  }
+};
 
+function normalizeAccountEmail(email) {
+  return String(email || "").trim().toLowerCase();
+}
 
+function getSpecialAccountRole(user = state.user) {
+  if (!user || !user.email) return null;
+  return SPECIAL_ACCOUNT_ROLES[normalizeAccountEmail(user.email)] || null;
+}
 
+function isCreatorAccount(user = state.user) {
+  const account = getSpecialAccountRole(user);
+  return Boolean(account && account.role === "creator");
+}
 
+function isQueenAccount(user = state.user) {
+  const account = getSpecialAccountRole(user);
+  return Boolean(account && account.role === "queen");
+}
 
+function hasAdminAccess(user = state.user) {
+  const account = getSpecialAccountRole(user);
+  return Boolean(account && account.adminAccess === true);
+}
 
+function hasAllAccess(user = state.user) {
+  const account = getSpecialAccountRole(user);
+  if (account && account.allAccess === true) return true;
+  return state.userPlan === "premium";
+}
+
+function getAccountDisplayName(user = state.user) {
+  if (!user) return "";
+  const meta = user.user_metadata || {};
+  const name = meta.display_name || meta.full_name || meta.name || "";
+  if (String(name).trim()) return String(name).trim().split(/\s+/)[0];
+  const email = user.email || "";
+  return email.includes("@") ? email.split("@")[0] : "";
+}
+
+function getAccountAccessLabel(user = state.user) {
+  if (!user) return text("未登入", "Signed out");
+  if (hasAllAccess(user)) return text("全站開通", "Full access");
+  if (Array.isArray(state.unlockedCourses) && state.unlockedCourses.length) {
+    return text("單門課程", "Single course");
+  }
+  return text("免費方案", "Free plan");
+}
+
+function getAccountPlanLabel(user = state.user) {
+  // Special roles are not payment plans — never show plan: creator/queen.
+  if (getSpecialAccountRole(user)) return "";
+  if (state.userPlan === "premium") return text("全站通行證", "All-Access Pass");
+  if (Array.isArray(state.unlockedCourses) && state.unlockedCourses.length) {
+    return text("單門課方案", "Single-course plan");
+  }
+  return text("免費", "Free");
+}
+
+function renderAccountRoleBadge(user = state.user) {
+  const account = getSpecialAccountRole(user);
+  if (!account) return "";
+  const label = state.lang === "zh" ? account.zhLabel : account.enLabel;
+  const isQueen = account.role === "queen";
+  const crown = isQueen
+    ? `<span class="account-role-crown" aria-hidden="true">♛</span>`
+    : "";
+  const className = isQueen
+    ? "account-role-badge account-role-badge-queen"
+    : "account-role-badge account-role-badge-creator";
+  return `<span class="${className}" role="status" aria-label="${label}">${label}${crown ? ` ${crown}` : ""}</span>`;
+}
+
+function renderAccountIdentity(user = state.user) {
+  if (!user) return "";
+  const name = getAccountDisplayName(user);
+  const badge = renderAccountRoleBadge(user);
+  return `<span class="account-identity"><span class="account-identity-name">${name}</span>${badge ? ` ${badge}` : ""}</span>`;
+}
+
+function renderAccountMembershipSummary(user = state.user) {
+  if (!user) return "";
+  const special = getSpecialAccountRole(user);
+  const roleHtml = special
+    ? renderAccountRoleBadge(user)
+    : text("會員", "Member");
+  const planLabel = getAccountPlanLabel(user);
+  return `
+    <div class="account-membership-summary">
+      <p><b>${text("角色", "Role")}：</b>${roleHtml}</p>
+      <p><b>${text("存取權限", "Access")}：</b>${getAccountAccessLabel(user)}</p>
+      ${planLabel ? `<p><b>${text("方案", "Plan")}：</b>${planLabel}</p>` : ""}
+    </div>
+  `;
+}
 let supabaseClient = null;
 if (window.supabase) {
   supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -503,7 +608,8 @@ function getAllAccessCourse() {
 /**
  * Single source of truth for plan: public.profiles.plan → state.userPlan.
  * Optional profiles.unlocked_courses supports single-course purchases.
- * Never reads plan from localStorage. Creator email is not auto-upgraded into plan.
+ * Never reads plan from localStorage.
+ * Special roles (Creator / Queen) are email-based and must not rewrite profiles.plan.
  */
 async function loadUserPlan(user) {
   state.userPlan = "free";
@@ -1183,10 +1289,16 @@ function nav() {
     </button>
   `).join("");
 
+  const moreAccountHtml = state.user
+    ? `<div class="more-menu-account">${renderAccountIdentity()}
+         <p class="more-menu-access">${text("存取權限", "Access")}：${getAccountAccessLabel()}</p>
+       </div>`
+    : "";
+
   const authHtml = state.user
-    ? `<button class="lang" title="${state.user.email}">${typeof isCreator === "function" && isCreator() ? "👑 " : ""}${state.user.email.split("@")[0]}</button>
-       ${typeof isCreator === "function" && isCreator() ? `<button class="lang">Creator</button>` : ""}
-       <button class="lang" onclick="signOut()">${state.lang === "zh" ? "登出" : "Logout"}</button>`
+    ? `<div class="nav-account">${renderAccountIdentity()}
+         <button class="lang" onclick="signOut()">${state.lang === "zh" ? "登出" : "Logout"}</button>
+       </div>`
     : `<button class="lang" onclick="signInWithGoogle()">${state.lang === "zh" ? "Google 登入" : "Google Login"}</button>`;
 
   return `
@@ -1211,6 +1323,7 @@ function nav() {
               aria-controls="moreMenu"
             >☰ ${state.lang === "zh" ? "更多" : "More"}</button>
             <div id="moreMenu" class="more-menu" role="menu">
+              ${moreAccountHtml}
               ${moreHtml}
             </div>
           </div>
@@ -1243,33 +1356,37 @@ function homeFooter() {
       <div class="wrap home-footer-grid">
         <div class="home-footer-brand">
           <div class="home-footer-logo"><span>AI</span> AI Skill Bridge</div>
-          <p>${L("home.footerTagline")}</p>
+          <p>${text(
+            "從學習到創業的 AI 能力養成平台。讓 AI 能力成為每個人都能跨越的橋樑。",
+            "An AI skill platform from learning to entrepreneurship. Making AI ability a bridge anyone can cross."
+          )}</p>
         </div>
         <div>
-          <h4>${L("home.footerProduct")}</h4>
-          <button type="button" onclick="setRoute('courses')">${L("home.footerCourses")}</button>
-          <button type="button" onclick="setRoute('premium')">${L("home.footerPremium")}</button>
-          <button type="button" onclick="setRoute('tools')">${L("home.footerTools")}</button>
+          <h4>${text("產品", "Product")}</h4>
+          <button type="button" onclick="setRoute('courses')">${text("免費入門", "Free Intro")}</button>
+          <button type="button" onclick="setRoute('map')">${text("課程地圖", "Learning Map")}</button>
+          <button type="button" onclick="setRoute('premium')">${text("進階課程", "Premium Courses")}</button>
+          <button type="button" onclick="setRoute('result-packages')">${text("成果禮包", "Result Packages")}</button>
         </div>
         <div>
-          <h4>${L("home.footerLearn")}</h4>
-          <button type="button" onclick="setRoute('free')">${L("home.footerFree")}</button>
-          <button type="button" onclick="setRoute('assessment')">${L("home.footerAssessment")}</button>
-          <button type="button" onclick="setRoute('prompts')">${L("home.footerPrompts")}</button>
+          <h4>${text("學習", "Learn")}</h4>
+          <button type="button" onclick="setRoute('learning')">${text("我的學習中心", "Learning Center")}</button>
+          <button type="button" onclick="setRoute('tools')">${text("AI 工具", "AI Tools")}</button>
+          <button type="button" onclick="setRoute('prompts')">${text("Prompt 資源", "Prompt Library")}</button>
+          <button type="button" onclick="setRoute('assessment')">${text("能力測驗", "Assessment")}</button>
         </div>
         <div>
-          <h4>${L("home.footerCompany")}</h4>
-          <button type="button" onclick="setRoute('impact')">${L("home.footerImpact")}</button>
-          <button type="button" onclick="setRoute('community')">${L("home.footerCommunity")}</button>
-        </div>
-        <div>
-          <h4>${L("home.footerLegal")}</h4>
-          <span class="home-footer-muted">${L("home.footerPrivacy")}</span>
-          <span class="home-footer-muted">${L("home.footerTerms")}</span>
+          <h4>${text("品牌", "Brand")}</h4>
+          <button type="button" onclick="setRoute('impact')">${text("社會影響", "Social Impact")}</button>
+          <button type="button" onclick="setRoute('community')">${text("社群與聯絡", "Community & Contact")}</button>
         </div>
       </div>
       <div class="wrap home-footer-bottom">
-        <p>${L("home.footerCopy")}</p>
+        <p>© 2026 AI Skill Bridge</p>
+        <p class="home-footer-tagline">${text(
+          "讓 AI 能力成為每個人都能跨越的橋樑。",
+          "Making AI ability a bridge anyone can cross."
+        )}</p>
       </div>
     </footer>
   `;
@@ -1279,301 +1396,577 @@ function homeLandingShell(content) {
   return `${nav()}${content}${homeFooter()}`;
 }
 
-function home() {
-  const course = freeBootcampProgress();
-  const portfolio = freePortfolioProgress();
-  const quiz = allFreeQuizProgress();
-  const xp = course.completed * 50 + portfolio.completed * 20 + quiz.correct * 10;
-  const xpMax = Math.max(course.total * 50 + portfolio.total * 20 + quiz.total * 10, 1);
-  const xpPercent = Math.min(100, Math.round((xp / xpMax) * 100));
-  const dash = dashboardProgress();
-  const progress = dash.percent;
-  const done = dash.completed;
-  const lessonTotal = dash.total;
-  const badgeCount = earnedBadges().length;
-  const projectCount = Math.max((state.favorites || []).length, done);
-  const active = LESSONS.find(l => l.id === state.activeLesson);
-  const currentCourseLabel = active
-    ? (state.lang === "zh" ? active.zhTitle : active.enTitle)
-    : L("home.defaultCourse");
-  const activities = [L("home.activity1"), L("home.activity2"), L("home.activity3")];
+const HOME_CAPABILITY_LABELS = {
+  admissions: { zh: "AI 升學能力", en: "AI Admissions Skills" },
+  "college-learning": { zh: "AI 學習能力", en: "AI Learning Skills" },
+  "research-competition": { zh: "AI 研究能力", en: "AI Research Skills" },
+  "career-internship": { zh: "AI 求職能力", en: "AI Career Skills" },
+  "workplace-productivity": { zh: "AI 工作能力", en: "AI Workplace Skills" },
+  "startup-automation": { zh: "AI 創業能力", en: "AI Startup Skills" }
+};
 
-  const buildCards = [
-    { title: L("home.build1"), desc: L("home.build1Desc"), img: "public/images/build-resume.svg" },
-    { title: L("home.build2"), desc: L("home.build2Desc"), img: "public/images/build-presentation.svg" },
-    { title: L("home.build3"), desc: L("home.build3Desc"), img: "public/images/build-website.svg" },
-    { title: L("home.build4"), desc: L("home.build4Desc"), img: "public/images/build-automation.svg" },
-    { title: L("home.build5"), desc: L("home.build5Desc"), img: "public/images/build-notes.svg" },
-    { title: L("home.build6"), desc: L("home.build6Desc"), img: "public/images/build-prompts.svg" }
-  ];
+const HOME_AUDIENCE = [
+  { courseId: "admissions", zh: "我要準備大學申請", en: "I am preparing university applications" },
+  { courseId: "college-learning", zh: "我要提升大學學習效率", en: "I want to study smarter in university" },
+  { courseId: "research-competition", zh: "我要完成研究、專題或競賽", en: "I need research, projects, or competitions" },
+  { courseId: "career-internship", zh: "我要找實習或工作", en: "I am looking for internships or jobs" },
+  { courseId: "workplace-productivity", zh: "我要提升職場效率", en: "I want to work more productively" },
+  { courseId: "startup-automation", zh: "我要做產品、創業或自動化", en: "I am building products, startups, or automation" }
+];
 
-  const pathSteps = [
-    { title: L("home.path1"), desc: L("home.path1Desc") },
-    { title: L("home.path2"), desc: L("home.path2Desc") },
-    { title: L("home.path3"), desc: L("home.path3Desc") },
-    { title: L("home.path4"), desc: L("home.path4Desc") },
-    { title: L("home.path5"), desc: L("home.path5Desc") }
-  ];
+function getHomeDisplayName() {
+  return getAccountDisplayName();
+}
 
-  const featCards = [
-    { icon: "▶", title: L("home.feat1"), desc: L("home.feat1Desc") },
-    { icon: "◎", title: L("home.feat2"), desc: L("home.feat2Desc") },
-    { icon: "∞", title: L("home.feat3"), desc: L("home.feat3Desc") },
-    { icon: "◈", title: L("home.feat4"), desc: L("home.feat4Desc") }
-  ];
+function getHomePlatformStats() {
+  const premiumCourses = getPremiumCourses();
+  const courseCount = premiumCourses.length;
+  let lessonCount = 0;
+  premiumCourses.forEach(course => {
+    const details = (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[course.id])
+      ? PREMIUM_LESSON_DETAILS[course.id]
+      : null;
+    if (Array.isArray(details) && details.length) {
+      lessonCount += details.length;
+    } else {
+      lessonCount += (course.zhLessons || course.enLessons || []).length;
+    }
+  });
+  const packageCount = getResultPackageConfigList().length;
+  const freeLessonCount = (typeof FREE_BOOTCAMP !== "undefined") ? FREE_BOOTCAMP.length : 0;
+  return { courseCount, lessonCount, packageCount, freeLessonCount };
+}
 
-  const stats = [
-    { value: L("home.stat1"), label: L("home.stat1Label") },
-    { value: L("home.stat2"), label: L("home.stat2Label") },
-    { value: L("home.stat3"), label: L("home.stat3Label") },
-    { value: L("home.stat4"), label: L("home.stat4Label") }
-  ];
+function getHomeSingleCoursePriceLabel() {
+  const courses = getPremiumCourses();
+  const amounts = courses.map(c => {
+    const match = String(c.price || "").replace(/,/g, "").match(/(\d+)/);
+    return match ? Number(match[1]) : null;
+  }).filter(n => n != null);
+  if (!amounts.length) return text("依課程而定", "Varies by course");
+  const min = Math.min(...amounts);
+  return text(`價格自 NT$${min.toLocaleString("en-US")} 起`, `From NT$${min.toLocaleString("en-US")}`);
+}
 
-  const testimonials = [
-    { quote: L("home.test1"), role: L("home.test1Role") },
-    { quote: L("home.test2"), role: L("home.test2Role") },
-    { quote: L("home.test3"), role: L("home.test3Role") }
-  ];
+function getHomeAllAccessPriceLabel() {
+  const allAccess = getAllAccessCourse();
+  if (!allAccess || !allAccess.price) return "";
+  const price = String(allAccess.price);
+  const formal = price.match(/正式\s*(NT\$[\d,]+)/i) || price.match(/Official\s*(NT\$[\d,]+)/i);
+  if (formal) return formal[1];
+  const any = price.match(/NT\$[\d,]+/g);
+  return any && any.length ? any[any.length - 1] : price;
+}
 
-  const faqs = [
-    { q: L("home.faq1Q"), a: L("home.faq1A") },
-    { q: L("home.faq2Q"), a: L("home.faq2A") },
-    { q: L("home.faq3Q"), a: L("home.faq3A") },
-    { q: L("home.faq4Q"), a: L("home.faq4A") },
-    { q: L("home.faq5Q"), a: L("home.faq5A") }
-  ];
+function countUnlockedPremiumCourses() {
+  return getPremiumCourses().filter(c => hasCourseAccess(c.id)).length;
+}
 
-  return homeLandingShell(`
-    <main class="home-page">
-      <section class="home-hero">
-        <div class="home-hero-glow home-hero-glow-a" aria-hidden="true"></div>
-        <div class="home-hero-glow home-hero-glow-b" aria-hidden="true"></div>
-        <div class="home-hero-glow home-hero-glow-c" aria-hidden="true"></div>
-        <div class="wrap home-hero-grid">
-          <div class="home-hero-content hp-animate">
-            <p class="home-tagline">${L("home.tagline")}</p>
-            <p class="home-badge">${L("home.badge")}</p>
-            <h1>${L("home.title")}</h1>
-            <p class="home-lead">${L("home.lead")}</p>
-            <div class="home-hero-cta">
-              <button class="home-btn home-btn-primary" onclick="setRoute('courses')">${L("home.start")}</button>
-              <button class="home-btn home-btn-secondary" onclick="setRoute('courses')">${L("home.explore")}</button>
-            </div>
-            <p class="home-trust">${L("home.trust")}</p>
-          </div>
-          <aside class="home-hero-visual hp-animate hp-delay">
-            <img class="home-hero-illustration" src="public/images/hero-dashboard.png" alt="" loading="lazy" onerror="this.src='public/images/hero-dashboard.svg'">
-            <div class="home-glass-dashboard">
-              <div class="home-glass-header">
-                <span class="home-glass-logo">AI</span>
-                <strong>${L("home.dashTitle")}</strong>
-              </div>
-              <div class="home-glass-grid">
-                <article class="home-glass-card home-glass-wide">
-                  <span class="home-glass-label">${L("home.dashProgress")}</span>
-                  <div class="home-glass-track"><div class="home-glass-bar" style="width:${progress}%"></div></div>
-                  <small>${done}/${lessonTotal} · ${progress}%</small>
-                </article>
-                <article class="home-glass-card">
-                  <span class="home-glass-label">${L("home.dashProjects")}</span>
-                  <strong>${projectCount}</strong>
-                </article>
-                <article class="home-glass-card">
-                  <span class="home-glass-label">${L("home.dashPrompts")}</span>
-                  <strong>40+</strong>
-                </article>
-                <article class="home-glass-card">
-                  <span class="home-glass-label">${L("home.dashCertificates")}</span>
-                  <strong>${badgeCount}</strong>
-                </article>
-                <article class="home-glass-card home-glass-wide">
-                  <span class="home-glass-label">${L("home.dashCurrent")}</span>
-                  <p>${currentCourseLabel}</p>
-                </article>
-                <article class="home-glass-card">
-                  <span class="home-glass-label">${L("home.dashXp")}</span>
-                  <div class="home-glass-track home-glass-track-sm"><div class="home-glass-bar home-glass-bar-alt" style="width:${xpPercent}%"></div></div>
-                  <small>${xp} XP</small>
-                </article>
-                <article class="home-glass-card home-glass-wide">
-                  <span class="home-glass-label">${L("home.dashActivity")}</span>
-                  <ul class="home-glass-activity">${activities.map(a => `<li>${a}</li>`).join("")}</ul>
-                </article>
-                <article class="home-glass-card home-glass-wide home-glass-goal">
-                  <span class="home-glass-label">${L("home.dashGoal")}</span>
-                  <p>${L("home.goalText")}</p>
-                </article>
-              </div>
-            </div>
-          </aside>
+function countCompletedLessonsAcrossPlatform() {
+  let completed = 0;
+  if (state.user && typeof FREE_BOOTCAMP !== "undefined") {
+    for (let i = 0; i < FREE_BOOTCAMP.length; i++) {
+      if (isFreeLessonComplete(i)) completed += 1;
+    }
+  }
+  getPremiumCourses().forEach(course => {
+    if (!hasCourseAccess(course.id)) return;
+    completed += courseProgress(course.id).completed;
+  });
+  return completed;
+}
+
+function countCompletedResultPackageItems() {
+  if (!state.user) return 0;
+  return getResultPackageConfigList().reduce((sum, pkg) => {
+    if (!hasResultPackageAccess(pkg.id)) return sum;
+    return sum + resultPackageProgressByConfig(pkg).completed;
+  }, 0);
+}
+
+function homeHasLearningHistory() {
+  if (!state.user) return false;
+  const last = getLastStudiedCourse();
+  if (last && last.courseId) return true;
+  if (countCompletedLessonsAcrossPlatform() > 0) return true;
+  return false;
+}
+
+function homePrimaryAction() {
+  if (!state.authReady) {
+    toast(text("正在確認登入狀態…", "Checking sign-in status…"));
+    return;
+  }
+  if (!state.user) {
+    requireGoogleLogin({ route: "freeLesson", lessonId: 0, action: "openFreeLesson" });
+    return;
+  }
+  if (hasAllAccessPass()) {
+    setRoute("learning");
+    return;
+  }
+  if (homeHasLearningHistory()) {
+    homeContinueLastLearning();
+    return;
+  }
+  openFreeLesson(0);
+}
+
+function homeContinueLastLearning() {
+  const last = getLastStudiedCourse();
+  if (last && last.courseId === "free-starter") {
+    openFreeLesson(Number(last.lessonIndex) || 0);
+    return;
+  }
+  if (last && last.courseId && hasCourseAccess(last.courseId)) {
+    currentCourseId = last.courseId;
+    openLesson(Number(last.lessonIndex) || 0);
+    return;
+  }
+  if (typeof FREE_BOOTCAMP !== "undefined") {
+    for (let i = 0; i < FREE_BOOTCAMP.length; i++) {
+      if (!isFreeLessonComplete(i)) {
+        openFreeLesson(i);
+        return;
+      }
+    }
+  }
+  openFreeLesson(0);
+}
+
+function homeOpenCapability(courseId) {
+  if (!courseId) {
+    setRoute("map");
+    return;
+  }
+  openCourse(courseId);
+}
+
+function homeHeroCtaCopy() {
+  const name = getHomeDisplayName();
+  const greet = name ? text(`${name}，`, `${name}, `) : "";
+
+  if (!state.user) {
+    return {
+      primary: text("使用 Google 登入，免費開始", "Sign in with Google to Start Free"),
+      secondary: text("查看完整課程地圖", "View Full Learning Map"),
+      note: text("登入後可保存進度與成果。", "Sign in to save progress and results."),
+      primaryAction: "homePrimaryAction()"
+    };
+  }
+
+  if (hasAllAccessPass()) {
+    return {
+      primary: text("前往我的學習中心", "Go to Learning Center"),
+      secondary: text("查看所有成果禮包", "View All Result Packages"),
+      note: text(`${greet}你已解鎖完整學習路徑。`, `${greet}your full learning path is unlocked.`),
+      primaryAction: "setRoute('learning')",
+      secondaryAction: "setRoute('result-packages')"
+    };
+  }
+
+  if (homeHasLearningHistory()) {
+    const last = getLastStudiedCourse();
+    let detail = text("繼續你的學習進度。", "Continue where you left off.");
+    if (last && last.courseId === "free-starter") {
+      const free = freeBootcampProgress();
+      detail = text(
+        `最近：免費入門 · Lesson ${(Number(last.lessonIndex) || 0) + 1} · 進度 ${free.completed}/${free.total}`,
+        `Recent: Free Intro · Lesson ${(Number(last.lessonIndex) || 0) + 1} · ${free.completed}/${free.total}`
+      );
+    } else if (last && last.courseId) {
+      const course = getPremiumCourses().find(c => c.id === last.courseId);
+      const progress = courseProgress(last.courseId);
+      const title = course ? (state.lang === "zh" ? course.zhTitle : course.enTitle) : last.courseId;
+      detail = text(
+        `最近：${title} · Lesson ${(Number(last.lessonIndex) || 0) + 1} · ${progress.completed}/${progress.total}`,
+        `Recent: ${title} · Lesson ${(Number(last.lessonIndex) || 0) + 1} · ${progress.completed}/${progress.total}`
+      );
+    }
+    return {
+      primary: text("繼續上次學習", "Continue Learning"),
+      secondary: text("探索進階課程", "Explore Premium Courses"),
+      note: `${greet}${detail}`,
+      primaryAction: "homeContinueLastLearning()",
+      secondaryAction: "setRoute('premium')"
+    };
+  }
+
+  return {
+    primary: text("繼續免費課程", "Continue Free Course"),
+    secondary: text("探索進階課程", "Explore Premium Courses"),
+    note: text(`${greet}免費課程不需付款，進度會自動保存。`, `${greet}free courses need no payment, and progress is saved.`),
+    primaryAction: "openFreeLesson(0)",
+    secondaryAction: "setRoute('premium')"
+  };
+}
+
+function renderHomeHeroPreview() {
+  const isPreview = !state.user;
+  const stats = getHomePlatformStats();
+  const unlocked = isPreview ? 1 : countUnlockedPremiumCourses();
+  const completedLessons = isPreview ? 3 : countCompletedLessonsAcrossPlatform();
+  const packageItems = isPreview ? 2 : countCompletedResultPackageItems();
+  const free = freeBootcampProgress();
+  const progressPercent = isPreview ? 38 : (free.total ? free.percent : 0);
+  const planLabel = !state.user
+    ? text("平台預覽", "Platform Preview")
+    : getAccountAccessLabel();
+  const accountLine = !state.user
+    ? ""
+    : `<div class="home-preview-account">${renderAccountIdentity()}</div>`;
+
+  const capabilities = getPremiumCourses().slice(0, 6).map(course => {
+    const label = HOME_CAPABILITY_LABELS[course.id] || { zh: course.zhTitle, en: course.enTitle };
+    const unlockedCourse = !isPreview && hasCourseAccess(course.id);
+    return `
+      <li class="${unlockedCourse ? "is-unlocked" : "is-locked"}">
+        <span>${state.lang === "zh" ? label.zh : label.en}</span>
+        <em>${unlockedCourse ? text("已解鎖", "Unlocked") : text("鎖定", "Locked")}</em>
+      </li>
+    `;
+  }).join("");
+
+  return `
+    <aside class="home-hero-visual hp-animate hp-delay" aria-label="${text("產品介面預覽", "Product interface preview")}">
+      <div class="home-product-preview">
+        <div class="home-preview-chrome">
+          <span></span><span></span><span></span>
+          <strong>${text("我的學習中心", "Learning Center")}</strong>
+          ${isPreview ? `<em class="home-preview-badge">${text("平台預覽", "Platform Preview")}</em>` : `<em class="home-preview-badge home-preview-badge-live">${planLabel}</em>`}
         </div>
-      </section>
-
-      <section class="home-section" id="build">
-        <div class="wrap">
-          <div class="home-section-header">
-            <h2>${L("home.buildTitle")}</h2>
-            <p class="home-section-lead">${L("home.buildLead")}</p>
+        ${accountLine}
+        <div class="home-preview-body">
+          <div class="home-preview-main">
+            <p class="home-preview-kicker">${text("目前課程進度", "Current course progress")}</p>
+            <h3>${text("免費入門／AI 新手訓練營", "Free Intro / AI Beginner Bootcamp")}</h3>
+            <div class="home-preview-track"><div class="home-preview-bar" style="width:${progressPercent}%"></div></div>
+            <p class="home-preview-meta">${isPreview ? `3 / ${stats.freeLessonCount || 8}` : `${free.completed} / ${free.total}`} · ${progressPercent}%</p>
+            <button type="button" class="home-btn home-btn-primary home-btn-compact" onclick="homePrimaryAction()">${text("繼續學習", "Continue")}</button>
           </div>
-          <div class="home-build-grid">
-            ${buildCards.map(item => `
-              <article class="home-build-card">
-                <div class="home-build-media">
-                  <img src="${item.img}" alt="" loading="lazy">
-                </div>
-                <h3>${item.title}</h3>
-                <p>${item.desc}</p>
-              </article>
-            `).join("")}
-          </div>
-        </div>
-      </section>
-
-      <section class="home-section home-section-alt" id="path">
-        <div class="wrap">
-          <div class="home-section-header">
-            <h2>${L("home.pathTitle")}</h2>
-            <p class="home-section-lead">${L("home.pathLead")}</p>
-          </div>
-          <div class="home-path-timeline">
-            ${pathSteps.map((step, i) => `
-              <article class="home-path-step">
-                <span class="home-path-dot">${i + 1}</span>
-                <div>
-                  <h3>${step.title}</h3>
-                  <p>${step.desc}</p>
-                </div>
-              </article>
-              ${i < pathSteps.length - 1 ? '<div class="home-path-line" aria-hidden="true"></div>' : ""}
-            `).join("")}
+          <div class="home-preview-side">
+            <article>
+              <span>${text("已解鎖課程", "Unlocked courses")}</span>
+              <strong>${unlocked}<small>/${stats.courseCount}</small></strong>
+            </article>
+            <article>
+              <span>${text("已完成 Lesson", "Lessons completed")}</span>
+              <strong>${completedLessons}</strong>
+            </article>
+            <article>
+              <span>${text("成果包完成數", "Package items")}</span>
+              <strong>${packageItems}</strong>
+            </article>
           </div>
         </div>
-      </section>
-
-      <section class="home-section" id="features">
-        <div class="wrap">
-          <div class="home-section-header">
-            <h2>${L("home.featTitle")}</h2>
-            <p class="home-section-lead">${L("home.featLead")}</p>
-          </div>
-          <div class="home-feat-grid">
-            ${featCards.map(item => `
-              <article class="home-feat-card">
-                <span class="home-feat-icon">${item.icon}</span>
-                <h3>${item.title}</h3>
-                <p>${item.desc}</p>
-              </article>
-            `).join("")}
-          </div>
+        <div class="home-preview-caps">
+          <p>${text("六大 AI 能力", "Six AI capabilities")}</p>
+          <ul>${capabilities}</ul>
         </div>
-      </section>
+      </div>
+    </aside>
+  `;
+}
 
-      <section class="home-section home-stats-section">
-        <div class="wrap home-stats-grid">
-          ${stats.map(item => `
-            <div class="home-stat-item">
-              <strong>${item.value}</strong>
-              <span>${item.label}</span>
-            </div>
+function renderHomeHero() {
+  const cta = homeHeroCtaCopy();
+  const secondaryAction = cta.secondaryAction || "setRoute('map')";
+  return `
+    <section class="home-hero">
+      <div class="home-hero-glow home-hero-glow-a" aria-hidden="true"></div>
+      <div class="home-hero-glow home-hero-glow-b" aria-hidden="true"></div>
+      <div class="home-hero-glow home-hero-glow-c" aria-hidden="true"></div>
+      <div class="wrap home-hero-grid">
+        <div class="home-hero-content hp-animate">
+          <p class="home-tagline">${text("從學習到創業的 AI 能力養成平台", "AI skill platform from learning to entrepreneurship")}</p>
+          <h1>${text("把 AI 從工具，<br>變成你真正會用的能力", "Turn AI Tools into<br>Skills You Can Actually Use")}</h1>
+          <p class="home-lead">${text(
+            "從免費入門、大學學習、研究競賽、求職實習、職場效率到創業自動化，建立一套真正能持續使用的 AI 能力系統。",
+            "Build practical AI skills across learning, research, career, workplace productivity, and entrepreneurship."
+          )}</p>
+          <div class="home-hero-cta">
+            <button class="home-btn home-btn-primary" onclick="${cta.primaryAction}">${cta.primary}</button>
+            <button class="home-btn home-btn-secondary" onclick="${secondaryAction}">${cta.secondary}</button>
+          </div>
+          <button type="button" class="home-text-link" onclick="setRoute('result-packages')">${text("探索成果禮包", "Explore Result Packages")} →</button>
+          <p class="home-trust-note">${cta.note}</p>
+          <ul class="home-trust-list">
+            <li>${text("Google 登入即可開始", "Start with Google sign-in")}</li>
+            <li>${text("免費課程不需付款", "Free courses need no payment")}</li>
+            <li>${text("學習進度自動保存", "Progress saves automatically")}</li>
+          </ul>
+        </div>
+        ${renderHomeHeroPreview()}
+      </div>
+    </section>
+  `;
+}
+
+function renderHomeStats() {
+  const stats = getHomePlatformStats();
+  const items = [
+    { value: text("免費入門課程", "Free intro course"), label: text(`${stats.freeLessonCount} 堂實作課`, `${stats.freeLessonCount} practice lessons`) },
+    { value: String(stats.courseCount), label: text("門核心能力課程", "core capability courses") },
+    { value: String(stats.lessonCount), label: text("堂付費實戰課", "premium practice lessons") },
+    { value: String(stats.packageCount), label: text("個成果禮包", "result packages") },
+    { value: text("中／英", "ZH / EN"), label: text("雙語介面", "bilingual interface") },
+    { value: "Google", label: text("帳號同步進度", "account syncs progress") }
+  ];
+  return `
+    <section class="home-stats-bar" aria-label="${text("平台資訊", "Platform facts")}">
+      <div class="wrap home-stats-bar-grid">
+        ${items.map(item => `
+          <div class="home-stat-chip">
+            <strong>${item.value}</strong>
+            <span>${item.label}</span>
+          </div>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderHomeCapabilities() {
+  const cards = getPremiumCourses().map(course => {
+    const label = HOME_CAPABILITY_LABELS[course.id] || { zh: course.zhTitle, en: course.enTitle };
+    const pkg = getResultPackageByCourseId(course.id);
+    const lessonCount = (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[course.id])
+      ? PREMIUM_LESSON_DETAILS[course.id].length
+      : (course.zhLessons || course.enLessons || []).length;
+    const unlocked = !!state.user && hasCourseAccess(course.id);
+    return `
+      <article class="home-cap-card">
+        <div class="home-cap-top">
+          <span class="home-cap-status ${unlocked ? "is-on" : ""}">${unlocked ? text("已解鎖", "Unlocked") : text("鎖定", "Locked")}</span>
+          <h3>${state.lang === "zh" ? label.zh : label.en}</h3>
+        </div>
+        <p class="home-cap-course">${state.lang === "zh" ? course.zhTitle : course.enTitle}</p>
+        <p class="home-cap-desc">${state.lang === "zh" ? (course.zhOutcome || course.zhDesc) : (course.enOutcome || course.enDesc)}</p>
+        <ul class="home-cap-meta">
+          <li>${lessonCount} ${text("堂課", "lessons")}</li>
+          <li>${pkg ? (state.lang === "zh" ? pkg.zhTitle : pkg.enTitle) : (state.lang === "zh" ? course.zhFinalProduct : course.enFinalProduct)}</li>
+        </ul>
+        <button type="button" class="home-btn home-btn-secondary home-btn-compact" onclick="homeOpenCapability('${course.id}')">${text("查看課程", "View Course")}</button>
+      </article>
+    `;
+  }).join("");
+
+  return `
+    <section class="home-section" id="capabilities">
+      <div class="wrap">
+        <div class="home-section-header">
+          <h2>${text("一個平台，建立六種真正可用的 AI 能力", "One platform for six practical AI capabilities")}</h2>
+          <p class="home-section-lead">${text(
+            "每一門課只專注一種能力。單門課解決一個問題，全站通行證建立完整能力地圖。",
+            "Each course focuses on one capability. Buy one to solve one problem, or unlock the full map with All-Access."
+          )}</p>
+        </div>
+        <div class="home-cap-grid">${cards}</div>
+      </div>
+    </section>
+  `;
+}
+
+function renderHomeProcess() {
+  const steps = [
+    {
+      n: "01",
+      title: text("選擇你現在需要的能力", "Choose the capability you need now"),
+      desc: text("先從免費課程開始，再依照升學、學習、研究、求職、職場或創業需求選擇路徑。", "Start with the free course, then choose a path for admissions, learning, research, career, workplace, or startup needs.")
+    },
+    {
+      n: "02",
+      title: text("完成每堂課的實作", "Complete each lesson’s practice"),
+      desc: text("每堂課包含核心概念、操作流程、Prompt、案例、練習與成果任務。", "Every lesson includes concepts, workflows, prompts, cases, practice, and deliverables.")
+    },
+    {
+      n: "03",
+      title: text("建立自己的成果禮包", "Build your own result package"),
+      desc: text("將十堂課的成果集中保存，最後組合成可以使用、展示或持續優化的成果包。", "Save all ten lesson outputs and combine them into a usable, showable, improvable package.")
+    }
+  ];
+  return `
+    <section class="home-section home-section-alt" id="process">
+      <div class="wrap">
+        <div class="home-section-header">
+          <h2>${text("不是看完影片，而是完成真正的成果", "Not just watching videos — completing real outcomes")}</h2>
+        </div>
+        <div class="home-process-grid">
+          ${steps.map((step, i) => `
+            <article class="home-process-card">
+              <div class="home-process-num">${step.n}</div>
+              <h3>${step.title}</h3>
+              <p>${step.desc}</p>
+              ${i < steps.length - 1 ? '<div class="home-process-line" aria-hidden="true"></div>' : ""}
+            </article>
           `).join("")}
         </div>
-      </section>
+      </div>
+    </section>
+  `;
+}
 
-      <section class="home-section home-section-alt" id="testimonials">
-        <div class="wrap">
-          <div class="home-section-header">
-            <h2>${L("home.testTitle")}</h2>
-            <p class="home-section-lead">${L("home.testLead")}</p>
-          </div>
-          <div class="home-test-grid">
-            ${testimonials.map(item => `
-              <blockquote class="home-test-card">
-                <p>${item.quote}</p>
-                <footer>${item.role}</footer>
-              </blockquote>
-            `).join("")}
-          </div>
-        </div>
-      </section>
+function renderHomeResultPackages() {
+  const packages = getResultPackageConfigList();
+  const featured = packages[0] || null;
+  const featuredProgress = featured
+    ? ((!state.user && featured.free)
+      ? { completed: 0, total: featured.totalItems || 0, percent: 0 }
+      : resultPackageProgressByConfig(featured))
+    : { completed: 0, total: 0, percent: 0 };
 
-      <section class="home-section" id="pricing">
-        <div class="wrap">
-          <div class="home-section-header">
-            <h2>${L("home.priceTitle")}</h2>
-            <p class="home-section-lead">${L("home.priceLead")}</p>
-          </div>
-          <div class="home-pricing-grid">
-            <article class="home-price-card">
-              <h3>${L("home.priceFree")}</h3>
-              <p>${L("home.priceFreeDesc")}</p>
-              <ul>
-                <li>${L("home.priceFree1")}</li>
-                <li>${L("home.priceFree2")}</li>
-                <li>${L("home.priceFree3")}</li>
-              </ul>
-              <button class="home-btn home-btn-secondary" onclick="setRoute('courses')">${L("home.priceCtaFree")}</button>
-            </article>
-            <article class="home-price-card home-price-featured">
-              <span class="home-price-badge">${L("home.priceOffer")}</span>
-              <h3>${L("home.pricePremium")}</h3>
-              <p>${L("home.pricePremiumDesc")}</p>
-              <div class="home-price-row">
-                <span class="home-price-old">${text("原價", "Original Price")} <s>NT$3,999</s></span>
-                <span class="home-price-new">${text("早鳥價", "Early Bird Price")} <b>NT$2,999</b></span>
-              </div>
-              <ul>
-                <li>${L("home.pricePremium1")}</li>
-                <li>${L("home.pricePremium2")}</li>
-                <li>${L("home.pricePremium3")}</li>
-              </ul>
-              <button class="home-btn home-btn-primary" onclick="setRoute('premium')">${L("home.priceCtaPremium")}</button>
-            </article>
-            <article class="home-price-card home-price-muted">
-              <h3>${L("home.priceSoon")}</h3>
-              <p>${L("home.priceSoonDesc")}</p>
-              <ul>
-                <li>${L("home.priceSoon1")}</li>
-                <li>${L("home.priceSoon2")}</li>
-                <li>${L("home.priceSoon3")}</li>
-              </ul>
-              <button class="home-btn home-btn-secondary" disabled>${L("home.priceCtaSoon")}</button>
-            </article>
-          </div>
-        </div>
-      </section>
+  const list = packages.map(pkg => {
+    const unlocked = pkg.free ? true : (!!state.user && hasResultPackageAccess(pkg.id));
+    const progress = (!state.user && pkg.free)
+      ? { completed: 0, total: pkg.totalItems || 0, percent: 0 }
+      : (state.user && hasResultPackageAccess(pkg.id) ? resultPackageProgressByConfig(pkg) : { completed: 0, total: pkg.totalItems || 0, percent: 0 });
+    return `
+      <button type="button" class="home-pkg-list-item ${unlocked ? "" : "is-locked"}" onclick="openResultPackage('${pkg.id}')">
+        <span class="home-pkg-list-title">${state.lang === "zh" ? pkg.zhTitle : pkg.enTitle}</span>
+        <span class="home-pkg-list-meta">
+          ${unlocked ? `${progress.completed}/${progress.total}` : text("鎖定", "Locked")}
+        </span>
+      </button>
+    `;
+  }).join("");
 
-      <section class="home-section home-section-alt" id="faq">
-        <div class="wrap">
-          <div class="home-section-header">
-            <h2>${L("home.faqTitle")}</h2>
-            <p class="home-section-lead">${L("home.faqLead")}</p>
-          </div>
-          <div class="home-faq">
-            ${faqs.map(item => `
-              <details class="home-faq-item">
-                <summary>${item.q}</summary>
-                <p>${item.a}</p>
-              </details>
-            `).join("")}
-          </div>
+  return `
+    <section class="home-section" id="packages">
+      <div class="wrap">
+        <div class="home-section-header">
+          <h2>${text("學完不只留下進度，而是留下真正的成果", "Finish with real outcomes, not just progress bars")}</h2>
+          <p class="home-section-lead">${text(
+            "每門課都對應一個成果禮包，將零散練習整理成完整的作品與系統。",
+            "Every course maps to a result package that turns scattered practice into a complete system."
+          )}</p>
         </div>
-      </section>
+        <div class="home-pkg-layout">
+          <article class="home-pkg-feature">
+            <span class="home-cap-status is-on">${featured && featured.free ? text("免費", "Free") : text("成果禮包", "Result Package")}</span>
+            <h3>${featured ? (state.lang === "zh" ? featured.zhTitle : featured.enTitle) : ""}</h3>
+            <p>${featured ? (state.lang === "zh" ? featured.zhDescription : featured.enDescription) : ""}</p>
+            <div class="home-preview-track"><div class="home-preview-bar" style="width:${featuredProgress.percent}%"></div></div>
+            <p class="home-preview-meta">${text("完成進度", "Progress")}：${featuredProgress.completed} / ${featuredProgress.total}</p>
+            <div class="home-hero-cta">
+              <button class="home-btn home-btn-primary home-btn-compact" onclick="openResultPackage('${featured ? featured.id : "free-starter"}')">${text("查看此成果包", "Open This Package")}</button>
+              <button class="home-btn home-btn-secondary home-btn-compact" onclick="setRoute('result-packages')">${text("查看所有成果禮包", "View All Result Packages")}</button>
+            </div>
+          </article>
+          <div class="home-pkg-list">${list}</div>
+        </div>
+      </div>
+    </section>
+  `;
+}
 
-      <section class="home-cta-banner">
-        <div class="wrap home-cta-inner">
-          <div>
-            <h2>${L("home.ctaTitle")}</h2>
-            <p class="home-section-lead">${L("home.ctaLead")}</p>
-          </div>
-          <div class="home-hero-cta">
-            <button class="home-btn home-btn-primary home-btn-light" onclick="setRoute('courses')">${L("home.ctaStart")}</button>
-            <button class="home-btn home-btn-ghost" onclick="setRoute('courses')">${L("home.ctaExplore")}</button>
-          </div>
+function renderHomePricing() {
+  const stats = getHomePlatformStats();
+  const singlePrice = getHomeSingleCoursePriceLabel();
+  const allAccessPrice = getHomeAllAccessPriceLabel();
+  return `
+    <section class="home-section home-section-alt" id="pricing">
+      <div class="wrap">
+        <div class="home-section-header">
+          <h2>${text("依你的需求選擇開始方式", "Choose how you want to start")}</h2>
+          <p class="home-section-lead">${text(
+            "先免費上手，再解鎖單一能力，或一次打通完整路徑。",
+            "Start free, unlock one capability, or open the full path at once."
+          )}</p>
         </div>
-      </section>
+        <div class="home-pricing-grid">
+          <article class="home-price-card">
+            <h3>${text("免費開始", "Start Free")}</h3>
+            <p class="home-price-amount">NT$0</p>
+            <ul>
+              <li>${text("免費入門課程", "Free intro course")}</li>
+              <li>${text("免費入門成果包", "Free starter result package")}</li>
+              <li>${text("Google 登入保存進度", "Google sign-in saves progress")}</li>
+            </ul>
+            <button class="home-btn home-btn-secondary" onclick="homePrimaryAction()">${text("免費開始學習", "Start Learning Free")}</button>
+          </article>
+          <article class="home-price-card">
+            <h3>${text("單門能力課程", "Single Capability Course")}</h3>
+            <p class="home-price-amount">${singlePrice}</p>
+            <ul>
+              <li>${text("選擇一種需要的核心能力", "Choose one core capability")}</li>
+              <li>${text("10 堂完整實戰課", "10 complete practice lessons")}</li>
+              <li>${text("專屬成果禮包", "Dedicated result package")}</li>
+            </ul>
+            <button class="home-btn home-btn-secondary" onclick="setRoute('premium')">${text("查看單門課程", "View Single Courses")}</button>
+          </article>
+          <article class="home-price-card home-price-featured">
+            <span class="home-price-badge">${text("最完整", "Most complete")}</span>
+            <h3>${text("全站通行證", "All-Access Pass")}</h3>
+            <p class="home-price-amount">${allAccessPrice || text("查看方案", "See plan")}</p>
+            <ul>
+              <li>${text(`解鎖 ${stats.courseCount} 門付費課程`, `Unlock ${stats.courseCount} premium courses`)}</li>
+              <li>${text(`共 ${stats.lessonCount} 堂實戰課`, `${stats.lessonCount} practice lessons total`)}</li>
+              <li>${text("全部成果禮包", "All result packages")}</li>
+              <li>${text("未來課程更新", "Future course updates")}</li>
+            </ul>
+            <button class="home-btn home-btn-primary" onclick="setRoute('premium')">${text("查看全站方案", "View All-Access Plan")}</button>
+          </article>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderHomeAudience() {
+  return `
+    <section class="home-section" id="audience">
+      <div class="wrap">
+        <div class="home-section-header">
+          <h2>${text("無論你在哪個階段，都有清楚的下一步", "Wherever you are, there is a clear next step")}</h2>
+        </div>
+        <div class="home-audience-grid">
+          ${HOME_AUDIENCE.map(item => `
+            <button type="button" class="home-audience-card" onclick="homeOpenCapability('${item.courseId}')">
+              <span>${state.lang === "zh" ? item.zh : item.en}</span>
+              <em>→</em>
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderHomeFinalCTA() {
+  return `
+    <section class="home-cta-banner">
+      <div class="wrap home-cta-inner">
+        <div>
+          <h2>${text("從今天開始，建立真正屬於你的 AI 能力", "Start today and build AI skills that are truly yours")}</h2>
+          <p class="home-section-lead">${text(
+            "免費課程不需付款。使用 Google 登入後，即可保存學習進度、測驗與成果。",
+            "Free courses need no payment. Sign in with Google to save progress, quizzes, and results."
+          )}</p>
+        </div>
+        <div class="home-hero-cta">
+          <button class="home-btn home-btn-primary home-btn-light" onclick="homePrimaryAction()">${text("免費開始學習", "Start Learning Free")}</button>
+          <button class="home-btn home-btn-ghost" onclick="setRoute('map')">${text("查看課程地圖", "View Learning Map")}</button>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function home() {
+  return homeLandingShell(`
+    <main class="home-page">
+      ${renderHomeHero()}
+      ${renderHomeStats()}
+      ${renderHomeCapabilities()}
+      ${renderHomeProcess()}
+      ${renderHomeResultPackages()}
+      ${renderHomePricing()}
+      ${renderHomeAudience()}
+      ${renderHomeFinalCTA()}
     </main>
   `);
 }
+
 
 function assessment() {
   return shell(`
@@ -1636,6 +2029,7 @@ function learningMap() {
             "依正式產品架構循序前進：免費入門 → 升學 → 大學學習 → 研究競賽 → 求職 → 職場 → 創業自動化。",
             "Follow the official path: Free intro → Admissions → College learning → Research → Career → Workplace → Startup automation."
           )}</p>
+          ${state.user ? renderAccountMembershipSummary() : ""}
         </section>
 
         <section class="panel map-path-panel">
@@ -2417,6 +2811,7 @@ function learning() {
           <span class="tag free">${text("學習中心", "Learning Center")}</span>
           <h1>${text("我的學習中心", "My Learning Center")}</h1>
           <p class="lead">${text("繼續學習、管理已擁有課程，並追蹤你的成果禮包進度。", "Continue learning, manage owned courses, and track your result packages.")}</p>
+          ${renderAccountMembershipSummary()}
         </section>
 
         <section class="panel">
@@ -2504,13 +2899,28 @@ function learning() {
 
 
 function premium() {
-  const creatorBanner = isCreator()
-    ? `<section class="panel" style="margin-bottom:24px">
-        <span class="tag free">Creator Access</span>
-        <h2>${text("創辦人帳號已全站開通", "Founder account has full access")}</h2>
-        <p>${text("你目前使用創辦人 Email 登入，因此 6 個付費課程與全站通行證都會顯示為已解鎖。", "You are signed in with the founder email, so all 6 premium courses and the all-access pass are unlocked.")}</p>
-      </section>`
-    : "";
+  let accessBanner = "";
+  if (isCreatorAccount()) {
+    accessBanner = `<section class="panel account-access-banner" style="margin-bottom:24px">
+        <span class="tag free">${text("創辦人存取", "Creator Access")}</span>
+        <h2>${text("創辦人帳號已全站開通", "Creator account has full access")}</h2>
+        <div class="account-access-banner-meta">${renderAccountIdentity()}</div>
+        <p>${text("你目前擁有全站學習權限與 Creator 管理權限。", "You currently have full learning access and Creator admin access.")}</p>
+      </section>`;
+  } else if (isQueenAccount()) {
+    accessBanner = `<section class="panel account-access-banner" style="margin-bottom:24px">
+        <span class="tag free">${text("女王存取", "Queen Access")}</span>
+        <h2>${text("女王帳號已全站開通", "Queen account has full access")}</h2>
+        <div class="account-access-banner-meta">${renderAccountIdentity()}</div>
+        <p>${text("你目前擁有全站學習權限，可使用全部付費課程與成果禮包。", "You currently have full learning access to all premium courses and result packages.")}</p>
+      </section>`;
+  } else if (hasAllAccessPass()) {
+    accessBanner = `<section class="panel account-access-banner" style="margin-bottom:24px">
+        <span class="tag free">${text("全站通行證", "All-Access Pass")}</span>
+        <h2>${text("全站通行證已開通", "All-Access Pass is active")}</h2>
+        <div class="account-access-banner-meta">${renderAccountMembershipSummary()}</div>
+      </section>`;
+  }
 
   const courseCards = PREMIUM.map(course => {
     const unlocked = hasCourseAccess(course.id);
@@ -2561,7 +2971,7 @@ function premium() {
           "Premium courses are sold as complete courses, not by individual lessons. Each course includes 10 lessons, practical tasks, prompt templates, and a final product. The All-Access Pass unlocks everything."
         )}</p>
 
-        ${creatorBanner}
+        ${accessBanner}
 
         <section class="panel" style="margin-bottom:24px">
           <h2>${text("付費課程總覽", "Premium Course Overview")}</h2>
@@ -2591,18 +3001,17 @@ function premium() {
 
 
 function isCreator() {
-  return Boolean(state.user && state.user.email === CREATOR_EMAIL);
+  return isCreatorAccount();
 }
 
 function hasAllAccessPass() {
-  return isCreator() || state.userPlan === "premium";
+  return hasAllAccess();
 }
 
 function hasCourseAccess(courseId) {
   if (!courseId) return false;
   if (courseId === "free-starter" || courseId === "free") return true;
-  if (isCreator()) return true;
-  if (state.userPlan === "premium") return true;
+  if (hasAllAccess()) return true;
   if (courseId === "all-access") return hasAllAccessPass();
   return Array.isArray(state.unlockedCourses) && state.unlockedCourses.includes(courseId);
 }
@@ -3481,6 +3890,12 @@ function renderLessonResultPackagePanel(courseId, lessonIndex, detail) {
 
 function resultPackages() {
   const packages = getResultPackageConfigList();
+  const membership = state.user ? `
+    <section class="panel" style="margin-bottom:24px">
+      <h2>${text("帳號存取狀態", "Account Access")}</h2>
+      ${renderAccountMembershipSummary()}
+    </section>
+  ` : "";
   return shell(`
     <main class="page">
       <div class="wrap">
@@ -3492,6 +3907,8 @@ function resultPackages() {
             "Save each lesson output in one place, then combine them into usable showcase packages."
           )}</p>
         </section>
+
+        ${membership}
 
         <div class="grid three result-package-overview-grid">
           ${packages.map((pkg, index) => {
