@@ -1569,3 +1569,32 @@ textarea[id^="free-note-"] {
     width: 100%;
   }
 }
+
+.map-path-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.map-path-arrow {
+  text-align: center;
+  font-size: 1.4rem;
+  color: #667085;
+  line-height: 1;
+}
+
+.map-path-card-locked,
+.result-package-card-locked {
+  opacity: 0.92;
+  border: 1px dashed #c9d3e5;
+}
+
+.result-package-overview-grid {
+  margin-top: 24px;
+}
+
+@media (max-width: 900px) {
+  .result-package-overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
