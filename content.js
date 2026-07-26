@@ -5996,7 +5996,7 @@ const PREMIUM_LESSON_DETAILS = {
       "enOutcome": "My Google Scholar Source List (8+) and Deep-Read Plan for 3 Papers",
       "zhConcept": "Google Scholar 文獻搜尋不是「搜到越多越好」，而是建立一條能持續加深的文獻路徑。先帶入第 6 課策略卡關鍵字，再用年份篩選、相關文章、被引用次數來擴展。看到一篇關鍵論文時，先讀摘要判斷相關性，再決定是否進入方法與結論；不要一開始就精讀全部。大學生常犯兩個錯：一是只依引用次數排序，忽略題目是否真的對口；二是書目複製不完整，後來引用格式錯誤或張冠李戴。這一課要你完成至少 8 筆文獻清單：每筆含書目要素、一句話重點、與研究問題的關係、疑點、下一步。最後標出 3 篇精讀對象，並說明為何先讀它們（定義清楚、方法可借、情境接近、或爭議關鍵）。完成後你會開始有「研究資料庫」的雛形：不是下載資料夾一團亂，而是可檢索、可排序、可交接給組員的清單。",
       "enConcept": "Google Scholar literature search is about building a deepen-able path, not maximizing hits. Filter, follow related/cited-by trails, screen abstracts first, and log reasons. Verify bibliographic fields before citing. Your deliverable is an 8+ item list plus a 3-paper deep-read plan.",
-      "zhCaseStudy": "情境案例：心理系阿哲搜 academic stress students 出現海量結果。他加上 Taiwan、university students，並限制近五年，再把結果分成「定義可用／方法可借／情境接近／離題」。他沒有假裝讀完 30 篇，而是先做 10 筆清單，再精讀 3 篇方法段。組會時他能清楚說：這篇提供量表、那篇提供台灣樣本限制、另一篇雖然高引用但對象是高中生故先備用。後來引用檢查幾乎沒有書目錯誤，因為他每筆都回原頁核對過。",
+      "zhCaseStudy": "情境案例：心理系阿哲搜 academic stress students 出現海量結果。他加上 Taiwan、university students，並限制近五年，再把結果分成「定義可用／方法可借／情境接近／離題」。他沒有假裝讀完 30 篇，而是先做 10 筆清單，再精讀 3 篇方法段。組會時他能清楚說：這篇提供量表、那篇提供台灣樣本限制、另一篇雖然高引用但研究對象不符大學樣本故先備用。後來引用檢查幾乎沒有書目錯誤，因為他每筆都回原頁核對過。",
       "enCaseStudy": "Zhe narrowed Scholar results, tagged why each paper mattered, deep-read three methods sections, and avoided citation errors by verifying every bibliographic field.",
       "zhWorkflow": [
         "用第6課關鍵字在 Google Scholar 搜尋並設定年份",
@@ -13424,6 +13424,85 @@ const PREMIUM_LESSON_DETAILS = {
     }
   ]
 };
+
+const COURSE_CASE_STUDY_LABELS = {
+  "admissions": {
+    "zh": "高中生升學情境案例",
+    "en": "University Admission Scenario"
+  },
+  "college-learning": {
+    "zh": "大學生學習情境案例",
+    "en": "University Learning Scenario"
+  },
+  "research-competition": {
+    "zh": "研究、專題與競賽情境案例",
+    "en": "Research and Competition Scenario"
+  },
+  "career-internship": {
+    "zh": "求職與實習情境案例",
+    "en": "Career and Internship Scenario"
+  },
+  "workplace-productivity": {
+    "zh": "職場工作情境案例",
+    "en": "Workplace Scenario"
+  },
+  "startup-automation": {
+    "zh": "創業與自動化情境案例",
+    "en": "Entrepreneurship and Automation Scenario"
+  }
+};
+
+const COURSE_RESULT_PACKAGE_META = {
+  "admissions": {
+    "zhName": "大學申請成果包",
+    "enName": "University Application Result Package",
+    "zhPromise": "完成後你會得到一份完整的大學申請包，包含校系方向、學習歷程、備審架構、自我介紹與面試準備。",
+    "enPromise": "You will finish with a complete university application package: major direction, learning portfolio, review structure, self-introduction, and interview prep.",
+    "zhFinal": "一份完整的大學申請包，包含校系方向、學習歷程、備審架構、自我介紹與面試準備。",
+    "enFinal": "A complete university application package with major direction, learning portfolio, review structure, self-introduction, and interview preparation."
+  },
+  "college-learning": {
+    "zhName": "AI 大學學習系統包",
+    "enName": "AI University Learning System Package",
+    "zhPromise": "完成後你會建立一套個人 AI 大學學習系統，包含教材整理、課堂筆記、報告、簡報與考試複習流程。",
+    "enPromise": "You will build a personal AI university learning system for materials, notes, reports, presentations, and exam review.",
+    "zhFinal": "一套個人 AI 大學學習系統，包含教材整理、課堂筆記、報告、簡報與考試複習流程。",
+    "enFinal": "A personal AI university learning system covering materials, class notes, reports, presentations, and exam review workflows."
+  },
+  "research-competition": {
+    "zhName": "研究、專題與競賽成果包",
+    "enName": "Research and Competition Result Package",
+    "zhPromise": "完成後你會得到一份研究、專題或競賽專案包，包含研究問題、資料來源、研究方法、成果架構與提案內容。",
+    "enPromise": "You will finish with a research, project, or competition package: question, sources, methods, structure, and proposal.",
+    "zhFinal": "一份研究、專題或競賽專案包，包含研究問題、資料來源、研究方法、成果架構與提案內容。",
+    "enFinal": "A research, project, or competition package with research question, sources, methods, output structure, and proposal content."
+  },
+  "career-internship": {
+    "zhName": "求職與實習申請包",
+    "enName": "Career and Internship Application Package",
+    "zhPromise": "完成後你會得到一份完整的求職與實習申請包，包含履歷、自我介紹、Cover Letter、作品集與面試準備。",
+    "enPromise": "You will finish with a complete internship and job application package: resume, intro, cover letter, portfolio, and interview prep.",
+    "zhFinal": "一份完整的求職與實習申請包，包含履歷、自我介紹、Cover Letter、作品集與面試準備。",
+    "enFinal": "A complete career and internship application package with resume, self-introduction, cover letter, portfolio, and interview preparation."
+  },
+  "workplace-productivity": {
+    "zhName": "個人 AI 工作流程包",
+    "enName": "Personal AI Workplace Workflow Package",
+    "zhPromise": "完成後你會建立一套個人 AI 工作流程系統，包含文件、Email、SOP、任務管理與企業知識整理方法。",
+    "enPromise": "You will build a personal AI workplace workflow for documents, email, SOPs, tasks, and knowledge management.",
+    "zhFinal": "一套個人 AI 工作流程系統，包含文件、Email、SOP、任務管理與企業知識整理方法。",
+    "enFinal": "A personal AI workplace workflow system for documents, email, SOPs, task management, and enterprise knowledge organization."
+  },
+  "startup-automation": {
+    "zhName": "創業驗證與自動化成果包",
+    "enName": "Startup Validation and Automation Package",
+    "zhPromise": "完成後你會得到一份創業驗證與自動化成果包，包含目標客群、訪談、商業模式、MVP、Pitch Deck 與自動化流程。",
+    "enPromise": "You will finish with a startup validation and automation package: audience, interviews, model, MVP, pitch deck, and automation.",
+    "zhFinal": "一份創業驗證與自動化成果包，包含目標客群、訪談、商業模式、MVP、Pitch Deck 與自動化流程。",
+    "enFinal": "A startup validation and automation package with target audience, interviews, business model, MVP, pitch deck, and automation flows."
+  }
+};
+
 
 const PREMIUM_LESSON_ID_MAP = {
   "admissions:index:0": "admissions:index:0",

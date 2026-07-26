@@ -2294,7 +2294,10 @@ function course() {
           <p class="lead">${state.lang === "zh" ? item.zhOutcome : item.enOutcome}</p>
           <p><b>${text("課程完成度", "Course Progress")}：</b>${progress.completed}/${progress.total}（${progress.percent}%）</p>
           <div class="package-progress-track"><div class="package-progress-bar" style="width:${progress.percent}%"></div></div>
-          ${item.id === "admissions" ? `<button class="btn secondary" onclick="setRoute('applicationPackage')">${text("我的大學申請包", "My Application Package")}</button>` : ""}
+          <div class="btnrow" style="margin-top:16px">
+            <button class="btn primary" onclick="openCourseResultPackage('${item.id}')">${text("查看我的成果包", "View My Result Package")}</button>
+            ${item.id === "admissions" ? `<button class="btn secondary" onclick="setRoute('applicationPackage')">${text("我的大學申請包", "My Application Package")}</button>` : ""}
+          </div>
         </section>
         ${lessonSections}
       </div>
@@ -2569,8 +2572,8 @@ function lesson() {
 
           ${(detail.zhCaseStudy || detail.enCaseStudy) ? `
           <section class="panel" style="margin-top:24px">
-            <span class="tag premiumtag">V40</span>
-            <h2>${text("高中生情境案例", "Student Scenario Case")}</h2>
+            <span class="tag premiumtag">Case</span>
+            <h2>${getCourseCaseStudyTitle(item.id)}</h2>
             <p>${state.lang === "zh" ? detail.zhCaseStudy : detail.enCaseStudy}</p>
           </section>` : ""}
 
@@ -2618,6 +2621,8 @@ function lesson() {
               ${practiceSteps.map(step => `<li>${step}</li>`).join("")}
             </ol>
           </section>
+
+          ${renderLessonResultPackagePanel(item.id, currentLessonIndex, detail)}
 
           <section class="panel" style="margin-top:24px">
             <h2>${text("AI 專家實作回饋 Prompt", "AI Expert Practice Feedback Prompt")}</h2>
@@ -2674,10 +2679,12 @@ function lesson() {
           <section class="panel" style="margin-top:24px">
             <h2>${text("課後成果", "Final Output")}</h2>
             <p><b>${state.lang === "zh" ? detail.zhOutcome : detail.enOutcome}</b></p>
-            ${item.id === "admissions"
-              ? `<p>${text("完成這個成果後，請放入你的「大學申請包」。10 課完成後，你會得到一份完整申請資料。", "After completing this output, add it to your application package. After 10 lessons, you will have a complete application package.")}</p><button class="btn secondary" onclick="setRoute('applicationPackage')">${text("打開我的大學申請包", "Open My Application Package")}</button>`
-              : `<p>${text("完成後請把成果存進你的 AI Workspace，並標記本課完成以解鎖下一課。", "Save your output to your AI Workspace, then mark this lesson complete to unlock the next one.")}</p>`
-            }
+            <p>${text("完成後請把成果存進本課「課程成果包」，並標記本課完成以解鎖下一課。", "Save your output to this course result package, then mark the lesson complete to unlock the next one.")}</p>
+            <div class="btnrow">
+              <button class="btn secondary" onclick="openCourseResultPackage('${item.id}')">${text("查看我的成果包", "View My Result Package")}</button>
+              ${lessonNo === 10 ? `<button class="btn primary" onclick="openCourseResultPackage('${item.id}')">${text("查看完整課程成果包", "View Full Course Result Package")}</button>` : ""}
+              ${item.id === "admissions" ? `<button class="btn secondary" onclick="setRoute('applicationPackage')">${text("打開我的大學申請包", "Open My Application Package")}</button>` : ""}
+            </div>
           </section>
 
           <section class="panel" style="margin-top:24px">
@@ -2714,6 +2721,241 @@ function lesson() {
 
 
 
+const COURSE_RESULT_PACKAGE_STORAGE_KEY = "asb_course_result_packages_v1";
+
+const COURSE_CASE_STUDY_TITLE_FALLBACK = {
+  admissions: { zh: "高中生升學情境案例", en: "University Admission Scenario" },
+  "college-learning": { zh: "大學生學習情境案例", en: "University Learning Scenario" },
+  "research-competition": { zh: "研究、專題與競賽情境案例", en: "Research and Competition Scenario" },
+  "career-internship": { zh: "求職與實習情境案例", en: "Career and Internship Scenario" },
+  "workplace-productivity": { zh: "職場工作情境案例", en: "Workplace Scenario" },
+  "startup-automation": { zh: "創業與自動化情境案例", en: "Entrepreneurship and Automation Scenario" }
+};
+
+function getCourseCaseStudyTitle(courseId) {
+  const fromContent = (typeof COURSE_CASE_STUDY_LABELS !== "undefined" && COURSE_CASE_STUDY_LABELS[courseId])
+    ? COURSE_CASE_STUDY_LABELS[courseId]
+    : null;
+  const fallback = COURSE_CASE_STUDY_TITLE_FALLBACK[courseId] || { zh: "情境案例", en: "Scenario Case" };
+  const label = fromContent || fallback;
+  return state.lang === "zh" ? label.zh : label.en;
+}
+
+function getCourseResultPackageMeta(courseId) {
+  if (typeof COURSE_RESULT_PACKAGE_META !== "undefined" && COURSE_RESULT_PACKAGE_META[courseId]) {
+    return COURSE_RESULT_PACKAGE_META[courseId];
+  }
+  return {
+    zhName: "我的課程成果包",
+    enName: "My Course Result Package",
+    zhPromise: "完成這門課後，你會集中保存 10 堂課成果。",
+    enPromise: "After this course, you will keep all 10 lesson outputs in one place.",
+    zhFinal: "完成本課 10 堂成果。",
+    enFinal: "Complete all 10 lesson outputs."
+  };
+}
+
+function courseResultPackageUserKey() {
+  if (state.user && state.user.id) return String(state.user.id);
+  if (state.user && state.user.email) return String(state.user.email);
+  return "guest";
+}
+
+function loadCourseResultPackagesStore() {
+  try {
+    const raw = localStorage.getItem(COURSE_RESULT_PACKAGE_STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch (error) {
+    return {};
+  }
+}
+
+function saveCourseResultPackagesStore(store) {
+  localStorage.setItem(COURSE_RESULT_PACKAGE_STORAGE_KEY, JSON.stringify(store));
+}
+
+function getCourseResultEntry(courseId, lessonIndex) {
+  const store = loadCourseResultPackagesStore();
+  const userKey = courseResultPackageUserKey();
+  const lessonKey = String(lessonIndex);
+  const entry = (((store[userKey] || {})[courseId] || {})[lessonKey]) || {};
+  return {
+    text: typeof entry.text === "string" ? entry.text : "",
+    url: typeof entry.url === "string" ? entry.url : "",
+    savedAt: entry.savedAt || ""
+  };
+}
+
+function isCourseResultEntryComplete(entry) {
+  const text = (entry && entry.text ? entry.text : "").trim();
+  const url = (entry && entry.url ? entry.url : "").trim();
+  return Boolean(text || url);
+}
+
+function courseResultPackageProgress(courseId) {
+  const total = 10;
+  let completed = 0;
+  for (let i = 0; i < total; i++) {
+    if (isCourseResultEntryComplete(getCourseResultEntry(courseId, i))) completed += 1;
+  }
+  return {
+    completed,
+    total,
+    percent: Math.round((completed / total) * 100)
+  };
+}
+
+function saveCourseResultEntry(courseId, lessonIndex, options = {}) {
+  const textEl = document.getElementById(`course-result-text-${courseId}-${lessonIndex}`);
+  const urlEl = document.getElementById(`course-result-url-${courseId}-${lessonIndex}`);
+  const text = textEl ? textEl.value : (options.text || "");
+  const url = urlEl ? urlEl.value : (options.url || "");
+  const store = loadCourseResultPackagesStore();
+  const userKey = courseResultPackageUserKey();
+  if (!store[userKey]) store[userKey] = {};
+  if (!store[userKey][courseId]) store[userKey][courseId] = {};
+  store[userKey][courseId][String(lessonIndex)] = {
+    text,
+    url,
+    savedAt: new Date().toISOString()
+  };
+  saveCourseResultPackagesStore(store);
+  toast(state.lang === "zh" ? "已儲存到課程成果包" : "Saved to course result package");
+  if (state.route === "courseResultPackage" || state.route === "lesson") {
+    render();
+  }
+}
+
+function openCourseResultPackage(courseId) {
+  if (!(typeof hasCourseAccess === "function" && hasCourseAccess(courseId))) {
+    toast(state.lang === "zh" ? "請先開通此課程" : "Please unlock this course first");
+    setRoute("premium");
+    return;
+  }
+  currentCourseId = courseId;
+  setRoute("courseResultPackage");
+}
+
+function formatCourseResultSavedAt(iso) {
+  if (!iso) return state.lang === "zh" ? "尚未儲存" : "Not saved yet";
+  try {
+    return new Date(iso).toLocaleString();
+  } catch (error) {
+    return iso;
+  }
+}
+
+function renderLessonResultPackagePanel(courseId, lessonIndex, detail) {
+  const entry = getCourseResultEntry(courseId, lessonIndex);
+  const done = isCourseResultEntryComplete(entry);
+  const outcome = state.lang === "zh" ? (detail.zhOutcome || "") : (detail.enOutcome || "");
+  return `
+    <section class="panel course-result-save-panel" style="margin-top:24px">
+      <span class="tag ${done ? "free" : "premiumtag"}">${done ? text("成果包：已儲存", "Package: Saved") : text("成果包：尚未完成", "Package: Incomplete")}</span>
+      <h2>${text("儲存到成果包", "Save to Result Package")}</h2>
+      <p>${text("本堂應產出：", "This lesson deliverable:")} <b>${outcome}</b></p>
+      <label class="course-result-label">${text("成果文字", "Result text")}</label>
+      <textarea id="course-result-text-${courseId}-${lessonIndex}" placeholder="${text("把本堂實作成果貼在這裡...", "Paste this lesson's output here...")}">${escapeTextareaValue(entry.text)}</textarea>
+      <label class="course-result-label">${text("成果連結（Google Drive / Notion / Canva / GitHub 等）", "Result link (Google Drive / Notion / Canva / GitHub, etc.)")}</label>
+      <input class="course-result-url-input" id="course-result-url-${courseId}-${lessonIndex}" type="url" value="${escapeTextareaValue(entry.url)}" placeholder="https://" />
+      <p class="course-result-meta">${text("最後儲存時間", "Last saved")}: ${formatCourseResultSavedAt(entry.savedAt)}</p>
+      <div class="btnrow">
+        <button class="btn primary" onclick="saveCourseResultEntry('${courseId}', ${lessonIndex})">${text("儲存到成果包", "Save to Result Package")}</button>
+        <button class="btn secondary" onclick="openCourseResultPackage('${courseId}')">${text("查看我的成果包", "View My Result Package")}</button>
+      </div>
+    </section>
+  `;
+}
+
+function courseResultPackage() {
+  const courseId = currentCourseId;
+  const item = (typeof PREMIUM !== "undefined" && courseId)
+    ? PREMIUM.find(p => p.id === courseId)
+    : null;
+
+  if (!item) {
+    return shell(`<main class="page"><div class="wrap"><h1>${text("找不到課程", "Course Not Found")}</h1><button class="btn primary" onclick="setRoute('premium')">${text("回到進階付費", "Back to Premium")}</button></div></main>`);
+  }
+
+  if (!(typeof hasCourseAccess === "function" && hasCourseAccess(courseId))) {
+    return shell(`
+      <main class="page">
+        <div class="wrap">
+          <section class="panel">
+            <span class="tag premiumtag">${text("付費功能", "Premium Feature")}</span>
+            <h1>${text("課程成果包尚未開通", "Result Package Locked")}</h1>
+            <p class="lead">${text("請先開通此課程，才能保存與查看 10 堂課成果。", "Unlock this course to save and review all 10 lesson outputs.")}</p>
+            <button class="btn primary" onclick="setRoute('premium')">${text("前往進階付費", "Go to Premium")}</button>
+          </section>
+        </div>
+      </main>
+    `);
+  }
+
+  const meta = getCourseResultPackageMeta(courseId);
+  const progress = courseResultPackageProgress(courseId);
+  const details = (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[courseId])
+    ? PREMIUM_LESSON_DETAILS[courseId]
+    : [];
+  const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
+  const packageName = state.lang === "zh" ? meta.zhName : meta.enName;
+  const promise = state.lang === "zh" ? meta.zhPromise : meta.enPromise;
+  const finalText = state.lang === "zh" ? meta.zhFinal : meta.enFinal;
+
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <button class="btn secondary" onclick="openCourse('${courseId}')">← ${text("回到課程首頁", "Back to Course")}</button>
+
+        <section class="panel" style="margin-top:16px">
+          <span class="tag free">${text("我的課程成果包", "My Course Result Package")}</span>
+          <h1>${packageName}</h1>
+          <p class="lead">${promise}</p>
+          <h2>${text("完成進度", "Progress")}：${progress.completed} / ${progress.total}（${progress.percent}%）</h2>
+          <div class="package-progress-track">
+            <div class="package-progress-bar" style="width:${progress.percent}%"></div>
+          </div>
+        </section>
+
+        <div class="grid course-result-grid" style="margin-top:24px">
+          ${Array.from({ length: 10 }, (_, i) => {
+            const detail = details[i] || {};
+            const entry = getCourseResultEntry(courseId, i);
+            const done = isCourseResultEntryComplete(entry);
+            const title = lessons[i] || detail.zhTitle || `Lesson ${i + 1}`;
+            const outcome = state.lang === "zh" ? (detail.zhOutcome || "") : (detail.enOutcome || "");
+            return `
+              <section class="panel application-package-item course-result-item">
+                <span class="tag ${done ? "free" : "premiumtag"}">${done ? text("已儲存", "Saved") : text("尚未完成", "Incomplete")}</span>
+                <h2>Lesson ${i + 1}</h2>
+                <h3>${title}</h3>
+                <p><b>${text("應產出成果", "Deliverable")}:</b> ${outcome}</p>
+                <label class="course-result-label">${text("成果文字", "Result text")}</label>
+                <textarea id="course-result-text-${courseId}-${i}" placeholder="${text("貼上本堂成果...", "Paste this lesson output...")}">${escapeTextareaValue(entry.text)}</textarea>
+                <label class="course-result-label">${text("成果連結", "Result link")}</label>
+                <input class="course-result-url-input" id="course-result-url-${courseId}-${i}" type="url" value="${escapeTextareaValue(entry.url)}" placeholder="https://" />
+                <p class="course-result-meta">${text("最後儲存時間", "Last saved")}: ${formatCourseResultSavedAt(entry.savedAt)}</p>
+                <div class="btnrow">
+                  <button class="btn primary" onclick="saveCourseResultEntry('${courseId}', ${i})">${text("儲存這一項", "Save This Item")}</button>
+                  <button class="btn secondary" onclick="openLesson(${i})">${text("前往對應 Lesson", "Open Lesson")}</button>
+                </div>
+              </section>
+            `;
+          }).join("")}
+        </div>
+
+        <section class="panel" style="margin-top:24px">
+          <h2>${text("這門課的最終成果", "Final Course Outcome")}</h2>
+          <p>${finalText}</p>
+          <button class="btn secondary" onclick="openCourse('${courseId}')">${text("回到課程繼續學習", "Back to Course")}</button>
+        </section>
+      </div>
+    </main>
+  `);
+}
+
 const APPLICATION_PACKAGE_ITEMS = [
   { id: "map", title: "1. 大學申請準備地圖", desc: "整理第一階段、第二階段、備審與面試準備方向。", placeholder: "貼上你第1課完成的大學申請準備地圖..." },
   { id: "majors", title: "2. 科系探索表", desc: "整理 5 個可能科系與 3 個優先申請科系。", placeholder: "貼上你第2課完成的科系探索表..." },
@@ -2736,7 +2978,8 @@ function escapeTextareaValue(value) {
   return String(value || "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;");
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 }
 
 function loadApplicationPackageValue(id) {
@@ -3168,6 +3411,7 @@ function render() {
     free,
     premium,
     applicationPackage,
+    courseResultPackage,
     tools,
     prompts,
     community,
