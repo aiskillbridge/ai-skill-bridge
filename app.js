@@ -465,38 +465,27 @@ function toast(message) {
 }
 
 /*
- * Supabase schema — profiles (run once in SQL Editor):
- *
- * create table if not exists public.profiles (
- *   id uuid primary key references auth.users (id) on delete cascade,
- *   email text,
- *   display_name text,
- *   created_at timestamptz not null default now(),
- *   updated_at timestamptz not null default now()
- * );
- *
- * alter table public.profiles enable row level security;
- *
- * create policy "Users can read own profile"
- *   on public.profiles for select
- *   using (auth.uid() = id);
- *
- * create policy "Users can insert own profile"
- *   on public.profiles for insert
- *   with check (auth.uid() = id);
- *
- * create policy "Users can update own profile"
- *   on public.profiles for update
- *   using (auth.uid() = id)
- *   with check (auth.uid() = id);
+ * Supabase profiles columns currently in use:
+ *   id, email, display_name, plan, created_at
+ * Do not select/write unlocked_courses, updated_at, role, etc.
  */
+
+function logSupabaseError(label, error) {
+  if (!error) return;
+  console.error(label, {
+    code: error.code || null,
+    message: error.message || String(error),
+    details: error.details || null,
+    hint: error.hint || null
+  });
+}
 
 async function syncUserProfile(user) {
   if (!supabaseClient || !user?.id) return;
 
   const { data: authData, error: authError } = await supabaseClient.auth.getUser();
   if (authError || !authData?.user) {
-    console.error("Sync profile auth not ready:", authError);
+    logSupabaseError("Sync profile auth not ready:", authError);
     return;
   }
 
@@ -509,32 +498,32 @@ async function syncUserProfile(user) {
     (authUser.email ? authUser.email.split("@")[0] : "") ||
     "User";
 
-  const payload = {
+  // Existing profiles: never overwrite plan. New profiles only: default plan to free.
+  const identityPayload = {
     email: authUser.email || null,
-    display_name,
-    updated_at: new Date().toISOString()
+    display_name
   };
 
   const { data: existing, error: selectError } = await supabaseClient
     .from("profiles")
-    .select("id")
+    .select("id, email, display_name, plan, created_at")
     .eq("id", authUser.id)
     .maybeSingle();
 
   if (selectError) {
-    console.error("Sync profile select error:", selectError);
+    logSupabaseError("Sync profile select error:", selectError);
     return;
   }
 
   if (existing?.id) {
     const { data, error } = await supabaseClient
       .from("profiles")
-      .update(payload)
+      .update(identityPayload)
       .eq("id", authUser.id)
-      .select("id, updated_at");
+      .select("id, email, display_name, plan, created_at");
 
     if (error) {
-      console.error("Sync profile update error:", error);
+      logSupabaseError("Sync profile update error:", error);
       return;
     }
 
@@ -549,11 +538,12 @@ async function syncUserProfile(user) {
     .from("profiles")
     .insert({
       id: authUser.id,
-      ...payload
+      ...identityPayload,
+      plan: "free"
     });
 
   if (insertError) {
-    console.error("Sync profile insert error:", insertError);
+    logSupabaseError("Sync profile insert error:", insertError);
   }
 }
 
@@ -607,7 +597,7 @@ function getAllAccessCourse() {
 
 /**
  * Single source of truth for plan: public.profiles.plan → state.userPlan.
- * Optional profiles.unlocked_courses supports single-course purchases.
+ * unlocked_courses column does not exist yet → state.unlockedCourses stays [].
  * Never reads plan from localStorage.
  * Special roles (Creator / Queen) are email-based and must not rewrite profiles.plan.
  */
@@ -618,25 +608,14 @@ async function loadUserPlan(user) {
   if (!supabaseClient || !user?.id) return;
 
   try {
-    let data = null;
-    let error = null;
-
-    ({ data, error } = await supabaseClient
+    const { data, error } = await supabaseClient
       .from("profiles")
-      .select("plan, unlocked_courses")
+      .select("id, email, display_name, plan, created_at")
       .eq("id", user.id)
-      .maybeSingle());
+      .maybeSingle();
 
     if (error) {
-      ({ data, error } = await supabaseClient
-        .from("profiles")
-        .select("plan")
-        .eq("id", user.id)
-        .maybeSingle());
-    }
-
-    if (error) {
-      console.warn("Load user plan failed:", error);
+      logSupabaseError("Load user plan failed:", error);
       state.userPlan = "free";
       state.unlockedCourses = [];
       return;
@@ -644,34 +623,47 @@ async function loadUserPlan(user) {
 
     if (!data || data.plan == null || data.plan === "") {
       state.userPlan = "free";
-      state.unlockedCourses = parseUnlockedCoursesFromPlan("", data?.unlocked_courses);
+      state.unlockedCourses = [];
       return;
     }
 
     state.userPlan = normalizeUserPlan(data.plan);
-    state.unlockedCourses = parseUnlockedCoursesFromPlan(data.plan, data.unlocked_courses);
+    // No unlocked_courses column in profiles yet; keep empty unless plan itself is a course id.
+    state.unlockedCourses = parseUnlockedCoursesFromPlan(data.plan, null);
   } catch (err) {
-    console.warn("Load user plan failed:", err);
+    logSupabaseError("Load user plan failed:", err);
     state.userPlan = "free";
     state.unlockedCourses = [];
   }
 }
 
-async function handleAuthSession(session) {
+let authStateListenerBound = false;
+
+async function handleAuthSession(session, eventName = "session") {
   const previousUserId = state.user?.id || null;
   state.user = session?.user || null;
   state.authReady = true;
 
+  console.log("[AUTH] auth event", eventName);
+  console.log("[AUTH] user email", state.user?.email || null);
+
   if (session?.user) {
-    await syncUserProfile(session.user);
-    await loadUserPlan(session.user);
-    await loadProgressFromSupabase();
-    await loadNotesFromSupabase();
+    try {
+      await syncUserProfile(session.user);
+      await loadUserPlan(session.user);
+      await loadProgressFromSupabase();
+      await loadNotesFromSupabase();
+    } catch (error) {
+      console.error("[AUTH] error", "post-login sync failed (login still succeeds)", error);
+    }
 
     const justSignedIn = previousUserId !== session.user.id;
     if (justSignedIn) {
       const destination = consumePostLoginDestination();
-      if (destination) applyPostLoginDestination(destination);
+      if (destination) {
+        applyPostLoginDestination(destination);
+        console.log("[AUTH] post-login destination applied", destination.route || destination.action || null);
+      }
     }
   } else {
     state.userPlan = "free";
@@ -681,38 +673,67 @@ async function handleAuthSession(session) {
     // Do not clear saved learning data; gated routes will show login UI.
   }
 
-  render();
+  try {
+    render();
+  } catch (error) {
+    console.error("[AUTH] error", "render after auth session failed", error);
+  }
 }
 
 async function initAuth() {
   if (!supabaseClient) {
+    console.error("[AUTH] error", "supabaseClient is null — window.supabase may not have loaded");
     state.authReady = true;
     return;
   }
 
-  supabaseClient.auth.onAuthStateChange(async (_event, session) => {
-    await handleAuthSession(session);
-  });
+  console.log("[AUTH] client ready");
 
-  const { data } = await supabaseClient.auth.getSession();
-  state.user = data.session?.user || null;
-
-  if (state.user) {
-    await syncUserProfile(state.user);
-    await loadUserPlan(state.user);
-    await loadProgressFromSupabase();
-    await loadNotesFromSupabase();
-    const destination = consumePostLoginDestination();
-    if (destination) applyPostLoginDestination(destination);
-  } else {
-    state.userPlan = "free";
-    state.unlockedCourses = [];
+  if (!authStateListenerBound) {
+    supabaseClient.auth.onAuthStateChange(async (event, session) => {
+      await handleAuthSession(session, event);
+    });
+    authStateListenerBound = true;
   }
+
+  try {
+    const { data, error } = await supabaseClient.auth.getSession();
+    if (error) {
+      console.error("[AUTH] error", "getSession failed", error);
+    }
+    state.user = data?.session?.user || null;
+    console.log("[AUTH] session loaded", !!data?.session, state.user?.email || null);
+
+    if (state.user) {
+      try {
+        await syncUserProfile(state.user);
+        await loadUserPlan(state.user);
+        await loadProgressFromSupabase();
+        await loadNotesFromSupabase();
+      } catch (syncError) {
+        console.error("[AUTH] error", "init sync failed (session still kept)", syncError);
+      }
+      const destination = consumePostLoginDestination();
+      if (destination) {
+        applyPostLoginDestination(destination);
+        console.log("[AUTH] post-login destination applied", destination.route || destination.action || null);
+      }
+    } else {
+      state.userPlan = "free";
+      state.unlockedCourses = [];
+    }
+  } catch (error) {
+    console.error("[AUTH] error", "initAuth failed", error);
+  }
+
   state.authReady = true;
 }
 
 async function signInWithGoogle() {
+  console.log("[AUTH] sign-in requested");
+
   if (!supabaseClient) {
+    console.error("[AUTH] error", "sign-in aborted: supabaseClient is null");
     alert(state.lang === "zh" ? "Supabase 尚未載入。" : "Supabase is not loaded.");
     return;
   }
@@ -727,14 +748,23 @@ async function signInWithGoogle() {
     });
   }
 
-  const { error } = await supabaseClient.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      redirectTo: window.location.origin + window.location.pathname
-    }
-  });
+  const redirectTo = window.location.origin + window.location.pathname;
+  console.log("[AUTH] redirectTo", redirectTo);
 
-  if (error) alert(error.message);
+  try {
+    const { error } = await supabaseClient.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo }
+    });
+
+    if (error) {
+      console.error("[AUTH] error", error);
+      alert(error.message);
+    }
+  } catch (error) {
+    console.error("[AUTH] error", error);
+    alert(error?.message || String(error));
+  }
 }
 
 async function signOut() {
@@ -2787,16 +2817,26 @@ function learning() {
       <button class="btn primary" onclick="setRoute('courses')">${text("繼續學習", "Continue Learning")}</button>
     `;
   } else if (last && last.courseId) {
-    const course = premiumCourses.find(c => c.id === last.courseId);
-    const progress = courseProgress(last.courseId);
-    const lessons = course ? (state.lang === "zh" ? course.zhLessons : course.enLessons) : [];
-    const lessonTitle = lessons[last.lessonIndex] || `Lesson ${(last.lessonIndex || 0) + 1}`;
-    continueBlock = `
-      <p><b>${text("課程", "Course")}：</b>${course ? (state.lang === "zh" ? course.zhTitle : course.enTitle) : last.courseId}</p>
-      <p><b>${text("目前 Lesson", "Current lesson")}：</b>${lessonTitle}</p>
-      <p><b>${text("課程進度", "Course progress")}：</b>${progress.completed}/${progress.total}（${progress.percent}%）</p>
-      <button class="btn primary" onclick="currentCourseId='${last.courseId}'; openLesson(${Number(last.lessonIndex) || 0})">${text("繼續學習", "Continue Learning")}</button>
-    `;
+    const guidance = getPremiumContinueGuidance(last.courseId, last.lessonIndex);
+    if (guidance) {
+      const lessonLine = state.lang === "zh"
+        ? `第 ${guidance.lessonNo} 課：${guidance.lessonTitle}`
+        : `Lesson ${guidance.lessonNo}: ${guidance.lessonTitle}`;
+      continueBlock = `
+        <div class="learning-continue-guide">
+          <p><b>${text("課程", "Course")}：</b>${guidance.courseTitle}</p>
+          <p><b>${text("目前 Lesson", "Current lesson")}：</b>${lessonLine}</p>
+          <p><b>${text("目前進度", "Current progress")}：</b>${guidance.currentLabel}</p>
+          <p><b>${text("下一步", "Next step")}：</b>${guidance.nextLabel}</p>
+          <button class="btn primary" onclick="continuePremiumLearningStep('${guidance.courseId}', ${guidance.lessonIndex}, '${guidance.nextTab}')">${text("繼續下一步", "Continue next step")}</button>
+        </div>
+      `;
+    } else {
+      continueBlock = `
+        <p>${text("找不到對應課程進度。", "Could not find matching course progress.")}</p>
+        <button class="btn primary" onclick="setRoute('premium')">${text("查看進階課程", "View premium courses")}</button>
+      `;
+    }
   } else {
     continueBlock = `
       <p>${text("還沒有最近學習紀錄。建議先從免費入門開始。", "No recent learning yet. Start with the free intro.")}</p>
@@ -3051,17 +3091,23 @@ function resultPackageStorageCourseKey(pkg) {
   return pkg.courseId || pkg.id || "free-starter";
 }
 
+/* Restored after Accordion refactor accidentally removed these helpers.
+ * Post-login home/map/course/lesson render still depends on them; missing
+ * definitions caused ReferenceError and made Google login appear broken. */
+function progressUserKey() {
+  return state.user && state.user.email ? state.user.email : "guest";
+}
 
+function lessonProgressKey(courseId, lessonIndex) {
+  return `asb-lesson-complete-${progressUserKey()}-${courseId}-${Number(lessonIndex)}`;
+}
 
-
-
-
-function openCourse(courseId) {
-  currentCourseId = courseId;
-  currentLessonIndex = 0;
-  state.route = "course";
-  window.scrollTo(0, 0);
-  render();
+function isLessonComplete(courseId, lessonIndex) {
+  try {
+    return localStorage.getItem(lessonProgressKey(courseId, lessonIndex)) === "true";
+  } catch (error) {
+    return false;
+  }
 }
 
 function isLessonUnlocked(courseId, lessonIndex) {
@@ -3071,6 +3117,35 @@ function isLessonUnlocked(courseId, lessonIndex) {
   const index = Number(lessonIndex);
   if (index <= 0) return true;
   return isLessonComplete(courseId, index - 1);
+}
+
+function courseProgress(courseId) {
+  const item = typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === courseId) : null;
+  if (!item) return { completed: 0, total: 0, percent: 0 };
+  const lessons = item.zhLessons || item.enLessons || [];
+  const completed = lessons.filter((_, i) => isLessonComplete(courseId, i)).length;
+  const total = lessons.length;
+  return { completed, total, percent: total ? Math.round((completed / total) * 100) : 0 };
+}
+
+function setLessonComplete(courseId, lessonIndex, value = true) {
+  try {
+    localStorage.setItem(lessonProgressKey(courseId, lessonIndex), value ? "true" : "false");
+    currentCourseId = courseId;
+    currentLessonIndex = Number(lessonIndex);
+    toast(value ? (state.lang === "zh" ? "已標記本課完成" : "Lesson marked complete") : (state.lang === "zh" ? "已取消完成" : "Completion removed"));
+    render();
+  } catch (error) {
+    toast(state.lang === "zh" ? "更新失敗，請確認瀏覽器允許本機儲存" : "Update failed. Please allow local storage.");
+  }
+}
+
+function openCourse(courseId) {
+  currentCourseId = courseId;
+  currentLessonIndex = 0;
+  state.route = "course";
+  window.scrollTo(0, 0);
+  render();
 }
 
 function openLesson(index) {
@@ -3088,101 +3163,6 @@ function openLesson(index) {
   window.scrollTo(0, 0);
   render();
 }
-
-
-
-
-
-function course() {
-  const item = (typeof PREMIUM !== "undefined" && currentCourseId)
-    ? PREMIUM.find(p => p.id === currentCourseId)
-    : null;
-
-  if (!item) {
-    return shell(`<main class="page"><div class="wrap"><h1>${text("找不到課程", "Course Not Found")}</h1><button class="btn primary" onclick="setRoute('premium')">${text("回到進階付費", "Back to Premium")}</button></div></main>`);
-  }
-
-  const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
-  const progress = courseProgress(item.id);
-  const details = (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[item.id])
-    ? PREMIUM_LESSON_DETAILS[item.id]
-    : [];
-
-  const renderLessonCard = (i) => {
-    const title = lessons[i] || "";
-    const detail = details[i] || {};
-    const complete = isLessonComplete(item.id, i);
-    const unlocked = isLessonUnlocked(item.id, i);
-    const desc = state.lang === "zh" ? (detail.zhValueTip || "") : (detail.enValueTip || "");
-    const icon = detail.icon || "";
-    const statusTag = complete
-      ? `<span class="tag free">${icon ? icon + " " : ""}✓ ${text("已完成", "Completed")}</span>`
-      : unlocked
-        ? `<span class="tag">${icon ? icon + " " : ""}Lesson ${i + 1}</span>`
-        : `<span class="tag premiumtag">${icon ? icon + " " : ""}🔒 ${text("未解鎖", "Locked")}</span>`;
-
-    return `
-      <article class="card">
-        ${statusTag}
-        <h3>${title}</h3>
-        ${desc ? `<p>${desc}</p>` : ""}
-        ${
-          unlocked
-            ? `<button type="button" class="btn primary" onclick="openLesson(${i})">${text("進入本課", "Open Lesson")}</button>`
-            : `<button type="button" class="btn secondary" disabled>${text("先完成上一課", "Complete previous lesson")}</button>`
-        }
-      </article>
-    `;
-  };
-
-  const lessonSections = item.chapters && item.chapters.length
-    ? item.chapters.map(ch => {
-        const start = Number(ch.start) || 0;
-        const count = Number(ch.count) || 0;
-        const chapterDone = Array.from({ length: count }, (_, offset) => isLessonComplete(item.id, start + offset)).filter(Boolean).length;
-        return `
-          <section class="panel" style="margin-top:24px">
-            <span class="tag">${ch.icon || ""} ${state.lang === "zh" ? ch.zhTitle : ch.enTitle}</span>
-            <h2>${state.lang === "zh" ? ch.zhTitle : ch.enTitle}</h2>
-            <p>${text("本章進度", "Chapter progress")}：${chapterDone}/${count}</p>
-            <div class="grid two">
-              ${Array.from({ length: count }, (_, offset) => renderLessonCard(start + offset)).join("")}
-            </div>
-          </section>
-        `;
-      }).join("")
-    : `
-      <section class="panel" style="margin-top:24px">
-        <h2>${text("課程章節", "Course Lessons")}</h2>
-        <div class="grid two">
-          ${lessons.map((_, i) => renderLessonCard(i)).join("")}
-        </div>
-      </section>
-    `;
-
-  return shell(`
-    <main class="page">
-      <div class="wrap">
-        <button class="btn secondary" onclick="setRoute('premium')">← ${text("回到進階付費", "Back to Premium")}</button>
-        <section class="panel">
-          <span class="tag free">${text("已開通", "Unlocked")}</span>
-          <h1>${state.lang === "zh" ? item.zhTitle : item.enTitle}</h1>
-          <p class="price">${item.price}</p>
-          <p class="lead">${state.lang === "zh" ? item.zhOutcome : item.enOutcome}</p>
-          <p><b>${text("課程完成度", "Course Progress")}：</b>${progress.completed}/${progress.total}（${progress.percent}%）</p>
-          <div class="package-progress-track"><div class="package-progress-bar" style="width:${progress.percent}%"></div></div>
-          <div class="btnrow" style="margin-top:16px">
-            <button class="btn primary" onclick="openCourseResultPackage('${item.id}')">${text("查看我的成果包", "View My Result Package")}</button>
-            ${item.id === "admissions" ? `<button class="btn secondary" onclick="setRoute('applicationPackage')">${text("我的大學申請包", "My Application Package")}</button>` : ""}
-          </div>
-        </section>
-        ${lessonSections}
-      </div>
-    </main>
-  `);
-}
-
-
 
 function openNextLesson() {
   const item = (typeof PREMIUM !== "undefined" && currentCourseId)
@@ -3208,145 +3188,1565 @@ function openPrevLesson() {
   render();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function progressUserKey() {
-  return state.user && state.user.email ? state.user.email : "guest";
-}
-
-function lessonProgressKey(courseId, lessonIndex) {
-  return `asb-lesson-complete-${progressUserKey()}-${courseId}-${Number(lessonIndex)}`;
-}
-
-function scoreKey(courseId, lessonIndex, metric) {
-  return `asb-score-${progressUserKey()}-${courseId}-${Number(lessonIndex)}-${metric}`;
-}
-
-function isLessonComplete(courseId, lessonIndex) {
-  try {
-    return localStorage.getItem(lessonProgressKey(courseId, lessonIndex)) === "true";
-  } catch (error) {
-    return false;
+function getCourseDesignMeta(courseId) {
+  if (typeof COURSE_DESIGN_META !== "undefined" && COURSE_DESIGN_META[courseId]) {
+    return COURSE_DESIGN_META[courseId];
   }
-}
-
-function setLessonComplete(courseId, lessonIndex, value = true) {
-  try {
-    localStorage.setItem(lessonProgressKey(courseId, lessonIndex), value ? "true" : "false");
-    currentCourseId = courseId;
-    currentLessonIndex = Number(lessonIndex);
-    toast(value ? (state.lang === "zh" ? "已標記本課完成" : "Lesson marked complete") : (state.lang === "zh" ? "已取消完成" : "Completion removed"));
-    render();
-  } catch (error) {
-    toast(state.lang === "zh" ? "更新失敗，請確認瀏覽器允許本機儲存" : "Update failed. Please allow local storage.");
-  }
-}
-
-function courseProgress(courseId) {
   const item = typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === courseId) : null;
-  if (!item) return { completed: 0, total: 0, percent: 0 };
-  const lessons = item.zhLessons || item.enLessons || [];
-  const completed = lessons.filter((_, i) => isLessonComplete(courseId, i)).length;
-  const total = lessons.length;
-  return { completed, total, percent: total ? Math.round((completed / total) * 100) : 0 };
-}
-
-function getLessonScore(courseId, lessonIndex, metric) {
-  try {
-    return Number(localStorage.getItem(scoreKey(courseId, lessonIndex, metric)) || 0);
-  } catch (error) {
-    return 0;
-  }
-}
-
-function setLessonScore(courseId, lessonIndex, metric, value) {
-  try {
-    localStorage.setItem(scoreKey(courseId, lessonIndex, metric), String(value));
-    updateLessonScoreUI(courseId, lessonIndex);
-  } catch (error) {}
-}
-
-function lessonScoreAverage(courseId, lessonIndex, metrics) {
-  const values = metrics.map(m => getLessonScore(courseId, lessonIndex, m)).filter(v => v > 0);
-  if (!values.length) return { avg: 0, total: 0, count: 0 };
-  const avg = values.reduce((a, b) => a + b, 0) / values.length;
-  return { avg, total: Math.round(avg * 10), count: values.length };
-}
-
-function updateLessonScoreUI(courseId, lessonIndex) {
-  const detail = (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[courseId])
-    ? PREMIUM_LESSON_DETAILS[courseId][lessonIndex]
+  const pkg = typeof RESULT_PACKAGE_CONFIG !== "undefined"
+    ? RESULT_PACKAGE_CONFIG.find(p => p.courseId === courseId)
     : null;
-  const metrics = detail ? (state.lang === "zh" ? (detail.zhScorecard || []) : (detail.enScorecard || [])) : [];
-  const score = lessonScoreAverage(courseId, lessonIndex, metrics);
-  const el = document.getElementById("lesson-score-summary");
-  if (el) {
-    el.textContent = score.count
-      ? `${state.lang === "zh" ? "自我評分" : "Self-score"}：${score.total}/100（${score.avg.toFixed(1)}/10）`
-      : `${state.lang === "zh" ? "尚未評分" : "Not scored yet"}`;
+  if (!item) return null;
+  return {
+    zhCapability: pkg ? pkg.zhCapability : (state.lang === "zh" ? item.zhFinalProduct : item.enFinalProduct),
+    enCapability: pkg ? pkg.enCapability : item.enFinalProduct,
+    zhPositioning: item.zhDesc || "",
+    enPositioning: item.enDesc || "",
+    difficulty: { zh: "標準", en: "Standard" },
+    suggestedHours: { zh: "約 10–15 小時", en: "About 10–15 hours" },
+    lessonCount: (item.zhLessons || []).length || 10,
+    zhCanDo: Array.isArray(item.zhValue) ? item.zhValue : [],
+    enCanDo: Array.isArray(item.enValue) ? item.enValue : [],
+    useProLayout: true
+  };
+}
+
+function splitPracticeTasks(raw) {
+  if (!raw) return [];
+  if (Array.isArray(raw)) return raw.map(String).map(s => s.trim()).filter(Boolean);
+  return String(raw).split(/；|;|\n/).map(s => s.trim()).filter(Boolean);
+}
+
+function splitConceptSentences(raw) {
+  if (!raw) return [];
+  return String(raw)
+    .split(/(?<=[。！？.!?])\s*/)
+    .map(s => s.trim())
+    .filter(Boolean);
+}
+
+function deriveCaseBlocksFromText(caseText, outcome, mistakes, workflow) {
+  const textValue = String(caseText || "").trim();
+  const mistakeList = Array.isArray(mistakes) ? mistakes.filter(Boolean) : [];
+  const workflowList = Array.isArray(workflow)
+    ? workflow.map(step => (typeof step === "string" ? step : (step && step.do) || "")).filter(Boolean)
+    : [];
+  if (!textValue && !mistakeList.length && !workflowList.length && !outcome) return null;
+
+  let problem = textValue;
+  let wrong = mistakeList[0] || "";
+  let right = workflowList.slice(0, 2).join(" ") || "";
+  let result = outcome || "";
+
+  if (textValue) {
+    const later = textValue.split(/(?:後來|之後|改成|正確做法|正確方法)/);
+    if (later.length > 1) {
+      problem = later[0].replace(/^情境案例[：:]\s*/, "").trim();
+      const rest = later.slice(1).join("後來").trim();
+      const resultSplit = rest.split(/(?:這時候|結果|最後|於是他才|才看懂|才理解)/);
+      right = (resultSplit[0] || rest).trim();
+      if (resultSplit.length > 1) result = resultSplit.slice(1).join("").trim() || result;
+    } else {
+      problem = textValue.replace(/^情境案例[：:]\s*/, "").trim();
+    }
+    if (!wrong) {
+      const wrongMatch = textValue.match(/(?:卻|但是|只是|一堆|太大|不知道)[^。！？.!?]*[。！？.!?]?/);
+      if (wrongMatch) wrong = wrongMatch[0].trim();
+    }
   }
 
-  metrics.forEach(metric => {
-    const value = getLessonScore(courseId, lessonIndex, metric);
-    for (let i = 1; i <= 10; i++) {
-      const safeId = `score-${lessonIndex}-${metric}-${i}`;
-      const btn = document.getElementById(safeId);
-      if (btn) btn.classList.toggle("selected", i === value);
-    }
+  if (!wrong && mistakeList[0]) wrong = mistakeList[0];
+  if (!right && workflowList.length) right = workflowList.join(" → ");
+  if (!result && outcome) result = outcome;
+
+  return {
+    problem: problem || textValue || text("請先理解本課情境。", "Start by understanding this lesson’s scenario."),
+    wrong: wrong || text("常見錯誤是直接問 AI 泛問，沒有提供自己的條件與目標。", "A common mistake is asking AI vaguely without your own context and goal."),
+    right: right || text("先提供條件與目標，再請 AI 依步驟協助。", "Provide your conditions and goal, then ask AI to help step by step."),
+    result: result || text("完成本堂可交付成果。", "Produce this lesson’s deliverable.")
+  };
+}
+
+function normalizePremiumLessonDetail(courseId, lessonDetail) {
+  const raw = lessonDetail && typeof lessonDetail === "object" ? lessonDetail : {};
+  const zhConcept = raw.zhConcept || "";
+  const enConcept = raw.enConcept || zhConcept;
+  const zhOutcome = raw.zhOutputName || raw.zhOutcome || "";
+  const enOutcome = raw.enOutputName || raw.enOutcome || zhOutcome;
+  const zhChecklist = Array.isArray(raw.zhDeliverableChecklist) ? raw.zhDeliverableChecklist : [];
+  const enChecklist = Array.isArray(raw.enDeliverableChecklist) ? raw.enDeliverableChecklist : zhChecklist;
+  const zhMistakes = Array.isArray(raw.zhCommonMistakes) ? raw.zhCommonMistakes : [];
+  const enMistakes = Array.isArray(raw.enCommonMistakes) ? raw.enCommonMistakes : zhMistakes;
+  const zhWorkflow = Array.isArray(raw.zhWorkflow) ? raw.zhWorkflow : [];
+  const enWorkflow = Array.isArray(raw.enWorkflow) ? raw.enWorkflow : zhWorkflow;
+  const zhScorecard = Array.isArray(raw.zhScorecard) ? raw.zhScorecard : [];
+  const enScorecard = Array.isArray(raw.enScorecard) ? raw.enScorecard : zhScorecard;
+
+  const zhObjectives = Array.isArray(raw.zhObjectives) && raw.zhObjectives.length
+    ? raw.zhObjectives
+    : (zhChecklist.length ? zhChecklist.slice(0, 3) : (zhOutcome ? [zhOutcome] : (raw.zhValueTip ? [raw.zhValueTip] : [])));
+  const enObjectives = Array.isArray(raw.enObjectives) && raw.enObjectives.length
+    ? raw.enObjectives
+    : (enChecklist.length ? enChecklist.slice(0, 3) : (enOutcome ? [enOutcome] : (raw.enValueTip ? [raw.enValueTip] : zhObjectives)));
+
+  const zhWhy = raw.zhWhyItMatters && typeof raw.zhWhyItMatters === "object"
+    ? raw.zhWhyItMatters
+    : {
+        problem: splitConceptSentences(zhConcept)[0] || raw.zhValueTip || zhOutcome || "",
+        ineffective: zhMistakes[0] || text("沒有清楚目標與檢查標準，AI 輸出很難真正可用。", "Without a clear goal and checks, AI output is hard to use."),
+        solution: raw.zhValueTip || zhOutcome || text("用本課流程產出可檢查、可重用的成果。", "Use this lesson’s workflow to produce a checkable, reusable output.")
+      };
+  const enWhy = raw.enWhyItMatters && typeof raw.enWhyItMatters === "object"
+    ? raw.enWhyItMatters
+    : {
+        problem: splitConceptSentences(enConcept)[0] || raw.enValueTip || enOutcome || zhWhy.problem,
+        ineffective: enMistakes[0] || "Without a clear goal and checks, AI output is hard to use.",
+        solution: raw.enValueTip || enOutcome || zhWhy.solution
+      };
+
+  const zhConceptBlocks = raw.zhConceptBlocks && typeof raw.zhConceptBlocks === "object"
+    ? raw.zhConceptBlocks
+    : {
+        principles: (() => {
+          const sentences = splitConceptSentences(zhConcept).slice(0, 3);
+          return sentences.length ? sentences : [zhConcept].filter(Boolean);
+        })(),
+        terms: [],
+        criteria: zhChecklist.slice(0, 3),
+        boundaries: zhMistakes.slice(0, 2).map(m => `避免：${m}`)
+      };
+  const enConceptBlocks = raw.enConceptBlocks && typeof raw.enConceptBlocks === "object"
+    ? raw.enConceptBlocks
+    : {
+        principles: (() => {
+          const sentences = splitConceptSentences(enConcept).slice(0, 3);
+          return sentences.length ? sentences : [enConcept].filter(Boolean);
+        })(),
+        terms: [],
+        criteria: enChecklist.slice(0, 3),
+        boundaries: enMistakes.slice(0, 2).map(m => `Avoid: ${m}`)
+      };
+
+  const zhCase = raw.zhCaseStudyBlocks && raw.zhCaseStudyBlocks.problem
+    ? raw.zhCaseStudyBlocks
+    : deriveCaseBlocksFromText(raw.zhCaseStudy || raw.zhScenario || "", zhOutcome, zhMistakes, zhWorkflow);
+  const enCase = raw.enCaseStudyBlocks && raw.enCaseStudyBlocks.problem
+    ? raw.enCaseStudyBlocks
+    : deriveCaseBlocksFromText(raw.enCaseStudy || raw.enScenario || raw.zhCaseStudy || "", enOutcome, enMistakes, enWorkflow);
+
+  const zhWorkflowSteps = Array.isArray(raw.zhWorkflowSteps) && raw.zhWorkflowSteps.length && typeof raw.zhWorkflowSteps[0] === "object"
+    ? raw.zhWorkflowSteps
+    : zhWorkflow.map(doText => ({ do: doText, why: "", input: "", output: "", check: "" }));
+  const enWorkflowSteps = Array.isArray(raw.enWorkflowSteps) && raw.enWorkflowSteps.length && typeof raw.enWorkflowSteps[0] === "object"
+    ? raw.enWorkflowSteps
+    : enWorkflow.map(doText => ({ do: doText, why: "", input: "", output: "", check: "" }));
+
+  const zhPromptBody = (raw.zhPromptPack && raw.zhPromptPack.body) || raw.zhPrompt || "";
+  const enPromptBody = (raw.enPromptPack && raw.enPromptPack.body) || raw.enPrompt || zhPromptBody;
+  const zhPromptPack = raw.zhPromptPack && raw.zhPromptPack.body
+    ? raw.zhPromptPack
+    : (zhPromptBody ? {
+        when: text("完成本課實作時使用", "Use when practicing this lesson"),
+        fields: [],
+        body: zhPromptBody,
+        exampleInput: raw.zhExample || "",
+        expected: zhOutcome || text("本堂可交付成果", "This lesson’s deliverable")
+      } : null);
+  const enPromptPack = raw.enPromptPack && raw.enPromptPack.body
+    ? raw.enPromptPack
+    : (enPromptBody ? {
+        when: "Use when practicing this lesson",
+        fields: [],
+        body: enPromptBody,
+        exampleInput: raw.enExample || raw.zhExample || "",
+        expected: enOutcome || "This lesson’s deliverable"
+      } : null);
+
+  const zhPracticeTasks = splitPracticeTasks(raw.zhPractice);
+  const enPracticeTasks = splitPracticeTasks(raw.enPractice);
+  const zhPracticeSteps = Array.isArray(raw.zhPracticeSteps) && raw.zhPracticeSteps.length && typeof raw.zhPracticeSteps[0] === "object"
+    ? raw.zhPracticeSteps
+    : zhPracticeTasks.map((task, i) => ({
+        task,
+        standard: zhChecklist[i] || text("可清楚說明做了什麼、為何這樣做", "You can clearly explain what you did and why"),
+        mistakes: zhMistakes[i] || "",
+        check: text("我是否能向別人重講一遍？", "Could I explain this again to someone else?")
+      }));
+  const enPracticeSteps = Array.isArray(raw.enPracticeSteps) && raw.enPracticeSteps.length && typeof raw.enPracticeSteps[0] === "object"
+    ? raw.enPracticeSteps
+    : (enPracticeTasks.length ? enPracticeTasks : zhPracticeTasks).map((task, i) => ({
+        task,
+        standard: enChecklist[i] || zhChecklist[i] || "You can clearly explain what you did and why",
+        mistakes: enMistakes[i] || zhMistakes[i] || "",
+        check: "Could I explain this again to someone else?"
+      }));
+
+  const zhMistakesDetailed = Array.isArray(raw.zhMistakesDetailed) && raw.zhMistakesDetailed.length
+    ? raw.zhMistakesDetailed
+    : zhMistakes.map(error => ({
+        error,
+        why: text("缺少條件、目標或查證步驟", "Missing conditions, goals, or verification"),
+        fix: text("先補齊自己的資料，再請 AI 依步驟協助，並回到原始資料查證。", "Provide your own details first, ask AI step by step, and verify against source material.")
+      }));
+  const enMistakesDetailed = Array.isArray(raw.enMistakesDetailed) && raw.enMistakesDetailed.length
+    ? raw.enMistakesDetailed
+    : enMistakes.map(error => ({
+        error,
+        why: "Missing conditions, goals, or verification",
+        fix: "Provide your own details first, ask AI step by step, and verify against source material."
+      }));
+
+  const zhRubric = Array.isArray(raw.zhRubric) && raw.zhRubric.length
+    ? raw.zhRubric
+    : zhScorecard.map(name => ({
+        name,
+        levels: {
+          incomplete: text("尚未完成或無法使用", "Incomplete or unusable"),
+          basic: text("有產出但結構不清", "Produced but unclear"),
+          good: text("結構清楚且可修改", "Clear and revisable"),
+          ready: text("可正式使用並納入成果包", "Ready to use and save to package")
+        }
+      }));
+  const enRubric = Array.isArray(raw.enRubric) && raw.enRubric.length
+    ? raw.enRubric
+    : enScorecard.map(name => ({
+        name,
+        levels: {
+          incomplete: "Incomplete or unusable",
+          basic: "Produced but unclear",
+          good: "Clear and revisable",
+          ready: "Ready to use and save to package"
+        }
+      }));
+
+  const zhSummary = Array.isArray(raw.zhSummary) && raw.zhSummary.length
+    ? raw.zhSummary
+    : [
+        zhOutcome ? text(`本堂成果：${zhOutcome}`, `Deliverable: ${zhOutcome}`) : "",
+        text("先理解目標與界線，再進入案例與方法。", "Understand goals and boundaries before method."),
+        text("用 Prompt 完成實作後，務必儲存並自我檢查。", "After prompt practice, save output and self-check.")
+      ].filter(Boolean);
+  const enSummary = Array.isArray(raw.enSummary) && raw.enSummary.length
+    ? raw.enSummary
+    : [
+        enOutcome ? `Deliverable: ${enOutcome}` : "",
+        "Understand goals and boundaries before method.",
+        "After prompt practice, save output and self-check."
+      ].filter(Boolean);
+
+  return {
+    ...raw,
+    courseId: courseId || raw.courseId || "",
+    estimatedTime: raw.estimatedTime || text("約 40–50 分鐘", "About 40–50 min"),
+    difficulty: raw.difficulty || text("標準", "Standard"),
+    zhOutputName: zhOutcome || text("本堂成果", "Lesson output"),
+    enOutputName: enOutcome || "Lesson output",
+    zhObjectives,
+    enObjectives,
+    zhWhyItMatters: zhWhy,
+    enWhyItMatters: enWhy,
+    zhConceptBlocks,
+    enConceptBlocks,
+    zhCaseStudyBlocks: zhCase,
+    enCaseStudyBlocks: enCase,
+    zhWorkflowSteps,
+    enWorkflowSteps,
+    zhPromptPack,
+    enPromptPack,
+    zhPracticeSteps,
+    enPracticeSteps,
+    zhMistakesDetailed,
+    enMistakesDetailed,
+    zhRubric,
+    enRubric,
+    zhSummary,
+    enSummary
+  };
+}
+
+function getCourseLessonDetail(courseId, lessonIndex) {
+  const details = (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[courseId])
+    ? PREMIUM_LESSON_DETAILS[courseId]
+    : [];
+  const raw = details[lessonIndex] || null;
+  if (!raw) return null;
+  return normalizePremiumLessonDetail(courseId, raw);
+}
+
+function pickLocalized(detail, zhKey, enKey, fallback = "") {
+  if (!detail) return fallback;
+  const value = state.lang === "zh" ? detail[zhKey] : detail[enKey];
+  if (value == null || value === "") return fallback;
+  return value;
+}
+
+function getLessonOutputName(detail) {
+  return pickLocalized(detail, "zhOutputName", "enOutputName", text("本堂成果", "Lesson output"));
+}
+
+function getLessonObjectives(detail) {
+  const list = pickLocalized(detail, "zhObjectives", "enObjectives", []);
+  return Array.isArray(list) ? list.filter(Boolean) : [];
+}
+
+function getLessonConceptBlocks(detail) {
+  const blocks = pickLocalized(detail, "zhConceptBlocks", "enConceptBlocks", null);
+  return blocks && typeof blocks === "object" ? blocks : null;
+}
+
+function getLessonCaseBlocks(detail) {
+  const blocks = pickLocalized(detail, "zhCaseStudyBlocks", "enCaseStudyBlocks", null);
+  return blocks && blocks.problem ? blocks : null;
+}
+
+function getLessonWorkflowSteps(detail) {
+  const steps = pickLocalized(detail, "zhWorkflowSteps", "enWorkflowSteps", []);
+  return Array.isArray(steps) ? steps : [];
+}
+
+function getLessonPromptPack(detail) {
+  const pack = pickLocalized(detail, "zhPromptPack", "enPromptPack", null);
+  return pack && pack.body ? pack : null;
+}
+
+function getLessonPracticeSteps(detail) {
+  const steps = pickLocalized(detail, "zhPracticeSteps", "enPracticeSteps", []);
+  return Array.isArray(steps) ? steps : [];
+}
+
+function getLessonMistakesDetailed(detail) {
+  const list = pickLocalized(detail, "zhMistakesDetailed", "enMistakesDetailed", []);
+  return Array.isArray(list) ? list : [];
+}
+
+function getLessonRubric(detail) {
+  const list = pickLocalized(detail, "zhRubric", "enRubric", []);
+  return Array.isArray(list) ? list : [];
+}
+
+function getLessonSummaryPoints(detail) {
+  const list = pickLocalized(detail, "zhSummary", "enSummary", []);
+  return Array.isArray(list) ? list : [];
+}
+
+function getLessonWhyItMatters(detail) {
+  const why = pickLocalized(detail, "zhWhyItMatters", "enWhyItMatters", null);
+  return why && typeof why === "object" ? why : null;
+}
+
+
+function findContinueLessonIndex(courseId) {
+  const item = typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === courseId) : null;
+  const total = item ? (item.zhLessons || []).length : 0;
+  for (let i = 0; i < total; i++) {
+    if (!isLessonComplete(courseId, i) && isLessonUnlocked(courseId, i)) return i;
+  }
+  return Math.max(total - 1, 0);
+}
+
+function copyTextById(elementId) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  const value = el.innerText || el.textContent || "";
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(value).then(() => {
+      toast(state.lang === "zh" ? "已複製 Prompt" : "Prompt copied");
+    }).catch(() => {
+      toast(state.lang === "zh" ? "複製失敗" : "Copy failed");
+    });
+    return;
+  }
+  toast(state.lang === "zh" ? "無法複製" : "Copy unavailable");
+}
+
+function premiumQuizKey(courseId, lessonIndex, qIndex) {
+  return `asb_premium_quiz_v1_${courseId}_${lessonIndex}_${qIndex}`;
+}
+
+function getPremiumQuizAnswer(courseId, lessonIndex, qIndex) {
+  return localStorage.getItem(premiumQuizKey(courseId, lessonIndex, qIndex));
+}
+
+function setPremiumQuizAnswer(courseId, lessonIndex, qIndex, answerIndex) {
+  localStorage.setItem(premiumQuizKey(courseId, lessonIndex, qIndex), String(answerIndex));
+  if (isLessonQuizFullyAnswered(courseId, lessonIndex)) {
+    updateLessonFlowState(courseId, lessonIndex, { quizCompleted: true });
+  }
+  render();
+}
+
+function toggleCourseSidebar() {
+  const layout = document.querySelector(".course-pro-layout, .lesson-pro-layout");
+  if (!layout) return;
+  const open = layout.classList.toggle("sidebar-open");
+  document.querySelectorAll(".lesson-toc-toggle").forEach(btn => {
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
   });
 }
 
+function renderCourseHeader(item, progress, meta) {
+  const unlocked = hasCourseAccess(item.id);
+  const capability = meta
+    ? (state.lang === "zh" ? meta.zhCapability : meta.enCapability)
+    : text("核心能力", "Core capability");
+  const positioning = meta
+    ? (state.lang === "zh" ? meta.zhPositioning : meta.enPositioning)
+    : (state.lang === "zh" ? item.zhDesc : item.enDesc);
+  const difficulty = meta && meta.difficulty
+    ? (state.lang === "zh" ? meta.difficulty.zh : meta.difficulty.en)
+    : text("依課程而定", "Varies");
+  const hours = meta && meta.suggestedHours
+    ? (state.lang === "zh" ? meta.suggestedHours.zh : meta.suggestedHours.en)
+    : text("依進度而定", "Depends on pace");
+  const lessonCount = meta && meta.lessonCount
+    ? meta.lessonCount
+    : (item.zhLessons || []).length;
+  const pkgMeta = getCourseResultPackageMeta(item.id);
+  const pkgName = state.lang === "zh" ? (pkgMeta.zhName || item.zhFinalProduct) : (pkgMeta.enName || item.enFinalProduct);
+  const resultProgress = courseResultPackageProgress(item.id);
 
-function toggleLessonComplete(courseId, lessonIndex) {
-  const currentlyComplete = isLessonComplete(courseId, lessonIndex);
-  setLessonComplete(courseId, lessonIndex, !currentlyComplete);
+  return `
+    <section class="course-pro-hero">
+      <div class="course-pro-hero-top">
+        <button class="btn secondary" onclick="setRoute('premium')">← ${text("回到進階付費", "Back to Premium")}</button>
+        <span class="tag ${unlocked ? "free" : "premiumtag"}">${unlocked ? text("已開通", "Unlocked") : text("尚未解鎖", "Locked")}</span>
+      </div>
+      <p class="course-pro-kicker">${capability}</p>
+      <h1>${state.lang === "zh" ? item.zhTitle : item.enTitle}</h1>
+      <p class="course-pro-lead">${positioning || ""}</p>
+      <div class="course-pro-meta-grid">
+        <div><span>${text("適合對象", "Who it’s for")}</span><strong>${state.lang === "zh" ? item.zhUser : item.enUser}</strong></div>
+        <div><span>${text("難度", "Difficulty")}</span><strong>${difficulty}</strong></div>
+        <div><span>${text("課程堂數", "Lessons")}</span><strong>${lessonCount} ${text("堂", "lessons")}</strong></div>
+        <div><span>${text("建議總學習時間", "Suggested total time")}</span><strong>${hours}</strong></div>
+        <div><span>${text("成果包", "Result package")}</span><strong>${pkgName || text("課程成果包", "Course package")}</strong></div>
+        <div><span>${text("已儲存成果", "Saved outputs")}</span><strong>${resultProgress.completed}/${resultProgress.total}</strong></div>
+      </div>
+      <div class="course-pro-progress">
+        <div class="course-pro-progress-label">
+          <span>${text("目前完成進度", "Current progress")}</span>
+          <strong>${progress.completed}/${progress.total}（${progress.percent}%）</strong>
+        </div>
+        <div class="package-progress-track"><div class="package-progress-bar" style="width:${progress.percent}%"></div></div>
+      </div>
+      <div class="btnrow course-pro-cta">
+        ${unlocked
+          ? `<button class="btn secondary" onclick="document.getElementById('course-how-to-learn')?.scrollIntoView({behavior:'smooth',block:'start'})">${text("查看學習方法", "See how to learn")}</button>
+             <button class="btn secondary" onclick="openCourseResultPackage('${item.id}')">${text("查看成果包", "View Result Package")}</button>`
+          : `<a class="btn primary" href="${item.paymentUrl || "#"}" target="_blank" rel="noopener">${text("解鎖此課程", "Unlock Course")}</a>`
+        }
+      </div>
+    </section>
+  `;
+}
+
+function renderCourseOutcomes(meta, item) {
+  const list = meta
+    ? (state.lang === "zh" ? meta.zhCanDo : meta.enCanDo)
+    : (state.lang === "zh" ? item.zhValue : item.enValue);
+  if (!Array.isArray(list) || !list.length) return "";
+  return `
+    <section class="course-pro-panel">
+      <h2>${text("完成這門課後，你可以做到", "After this course, you will be able to")}</h2>
+      <ul class="course-pro-checklist">
+        ${list.map(itemText => `<li>${itemText}</li>`).join("")}
+      </ul>
+    </section>
+  `;
+}
+
+function renderCourseCurriculum(item, details, progress) {
+  const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
+  const continueIndex = findContinueLessonIndex(item.id);
+  return `
+    <section class="course-pro-panel course-pro-curriculum" id="course-curriculum">
+      <div class="course-pro-curriculum-head">
+        <h2>${text("課程目錄", "Curriculum")}</h2>
+        <p>${text("課程完成度", "Course progress")}：${progress.completed}/${progress.total}</p>
+      </div>
+      <ol class="course-curriculum-list">
+        ${lessons.map((title, i) => {
+          const detail = getCourseLessonDetail(item.id, i) || details[i] || {};
+          const complete = isLessonComplete(item.id, i);
+          const unlocked = isLessonUnlocked(item.id, i);
+          const current = i === continueIndex && !complete;
+          const outcome = getLessonOutputName(detail);
+          const time = detail.estimatedTime || "";
+          const diff = detail.difficulty || "";
+          return `
+            <li class="course-curriculum-item ${complete ? "is-complete" : ""} ${current ? "is-current" : ""} ${unlocked ? "" : "is-locked"}">
+              <div class="course-curriculum-index">L${i + 1}</div>
+              <div class="course-curriculum-body">
+                <h3>${title}</h3>
+                <p class="course-curriculum-outcome">${outcome}</p>
+                <div class="course-curriculum-meta">
+                  ${time ? `<span>${time}</span>` : ""}
+                  ${diff ? `<span>${diff}</span>` : ""}
+                  <span>${complete ? text("已完成", "Completed") : unlocked ? (current ? text("目前課程", "Current") : text("可開始", "Available")) : text("未解鎖", "Locked")}</span>
+                </div>
+              </div>
+              <div class="course-curriculum-action">
+                ${unlocked
+                  ? `<button class="btn ${current || complete ? "primary" : "secondary"}" onclick="openLesson(${i})">${complete ? text("複習本課", "Review") : text("進入課程", "Open Lesson")}</button>`
+                  : `<button class="btn secondary" disabled>${text("先完成上一課", "Complete previous")}</button>`
+                }
+              </div>
+            </li>
+          `;
+        }).join("")}
+      </ol>
+    </section>
+  `;
+}
+
+
+function course() {
+  const item = (typeof PREMIUM !== "undefined" && currentCourseId)
+    ? PREMIUM.find(p => p.id === currentCourseId)
+    : null;
+
+  if (!item) {
+    return shell(`<main class="page"><div class="wrap"><h1>${text("找不到課程", "Course Not Found")}</h1><button class="btn primary" onclick="setRoute('premium')">${text("回到進階付費", "Back to Premium")}</button></div></main>`);
+  }
+
+  return shell(renderPremiumCourseOverview(item));
+}
+
+function renderPremiumCourseOverview(item) {
+  const progress = courseProgress(item.id);
+  const details = (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[item.id])
+    ? PREMIUM_LESSON_DETAILS[item.id]
+    : [];
+  const meta = getCourseDesignMeta(item.id);
+  const pkgMeta = getCourseResultPackageMeta(item.id);
+  const pkgName = state.lang === "zh" ? pkgMeta.zhName : pkgMeta.enName;
+
+  return `
+    <main class="page course-pro-page">
+      <div class="wrap course-pro-wrap">
+        ${renderCourseHeader(item, progress, meta)}
+        ${renderCourseHowToLearn(item, progress)}
+        ${renderCourseCompletionCriteria(item.id)}
+        ${renderCourseOutcomes(meta, item)}
+        <div class="course-pro-layout">
+          <div class="course-pro-main">
+            ${renderCourseCurriculum(item, details, progress)}
+          </div>
+          <aside class="course-pro-aside">
+            <div class="course-pro-aside-card">
+              <h2>${text("學習提示", "Study tips")}</h2>
+              <ul>
+                <li>${text("建議依序完成，以累積可重用模板。", "Complete lessons in order to build reusable templates.")}</li>
+                <li>${text("每堂課只追求一個明確成果。", "Aim for one clear deliverable per lesson.")}</li>
+                <li>${text("繳交前務必查證 AI 內容。", "Always verify AI content before submitting.")}</li>
+              </ul>
+              <p class="lesson-pro-muted">${text("成果包", "Package")}：${pkgName}</p>
+              <button class="btn secondary" onclick="openCourseResultPackage('${item.id}')">${text("打開成果包", "Open Result Package")}</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+  `;
 }
 
 
 
-function savePremiumLessonToPackage(courseId, lessonIndex) {
-  if (courseId !== "admissions") {
-    toast(state.lang === "zh" ? "目前只有第一階段課程支援同步成果包" : "Package sync is currently available for Stage 1 only");
+
+const LESSON_FLOW_STORAGE_KEY = "asb_lesson_learning_flow_v1";
+const LESSON_ONBOARDING_STORAGE_KEY = "asb_lesson_onboarding_seen_v1";
+const LESSON_FLOW_STEP_META = [
+  {
+    id: "overview",
+    key: "overviewCompleted",
+    weight: 8,
+    zh: "先看懂這堂課",
+    en: "Understand the Lesson",
+    zhBlurb: "目標、概念與為什麼重要",
+    enBlurb: "Goals, concepts, and why it matters"
+  },
+  {
+    id: "method",
+    key: "scenarioCompleted",
+    weight: 10,
+    zh: "看案例與方法",
+    en: "Review the Scenario and Method",
+    zhBlurb: "情境、做法與操作流程",
+    enBlurb: "Scenario, approach, and workflow"
+  },
+  {
+    id: "practice",
+    key: "practiceCompleted",
+    weight: 20,
+    zh: "使用 Prompt 完成實作",
+    en: "Complete the Prompt Practice",
+    zhBlurb: "複製 Prompt 並完成任務",
+    enBlurb: "Copy the prompt and finish the task"
+  },
+  {
+    id: "review",
+    key: "resultCompleted",
+    weight: 10,
+    zh: "儲存成果並完成本課",
+    en: "Save the Output and Complete",
+    zhBlurb: "成果、檢查與標記完成",
+    enBlurb: "Output, review, and mark complete"
+  }
+];
+
+function lessonFlowUserKey() {
+  if (state.user && state.user.id) return String(state.user.id);
+  if (state.user && state.user.email) return String(state.user.email).toLowerCase();
+  return progressUserKey();
+}
+
+function defaultLessonFlowState() {
+  return {
+    overviewCompleted: false,
+    scenarioCompleted: false,
+    practiceCompleted: false,
+    resultCompleted: false,
+    quizCompleted: false,
+    lessonCompleted: false,
+    promptOpened: false,
+    practiceStarted: false,
+    lastActiveStep: "",
+    updatedAt: ""
+  };
+}
+
+function loadLessonFlowStore() {
+  try {
+    const raw = localStorage.getItem(LESSON_FLOW_STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch (error) {
+    return {};
+  }
+}
+
+function saveLessonFlowStore(store) {
+  localStorage.setItem(LESSON_FLOW_STORAGE_KEY, JSON.stringify(store));
+}
+
+function lessonFlowEntryKey(courseId, lessonIndex) {
+  return `${lessonFlowUserKey()}::${courseId || "course"}::${Number(lessonIndex) || 0}`;
+}
+
+function getLessonFlowState(courseId = currentCourseId, lessonIndex = currentLessonIndex) {
+  const store = loadLessonFlowStore();
+  const saved = store[lessonFlowEntryKey(courseId, lessonIndex)] || {};
+  const base = defaultLessonFlowState();
+  const merged = { ...base, ...saved };
+  if (isLessonComplete(courseId, lessonIndex)) {
+    merged.lessonCompleted = true;
+    merged.overviewCompleted = true;
+    merged.scenarioCompleted = true;
+    merged.practiceCompleted = true;
+    merged.resultCompleted = true;
+    merged.quizCompleted = true;
+  }
+  if (isLessonQuizFullyAnswered(courseId, lessonIndex)) {
+    merged.quizCompleted = true;
+  }
+  const entry = typeof getCourseResultEntry === "function"
+    ? getCourseResultEntry(courseId, lessonIndex)
+    : null;
+  if (entry && typeof isCourseResultEntryComplete === "function" && isCourseResultEntryComplete(entry)) {
+    merged.resultCompleted = true;
+  }
+  return merged;
+}
+
+function updateLessonFlowState(courseId, lessonIndex, patch = {}) {
+  const store = loadLessonFlowStore();
+  const key = lessonFlowEntryKey(courseId, lessonIndex);
+  const current = { ...defaultLessonFlowState(), ...(store[key] || {}), ...patch, updatedAt: new Date().toISOString() };
+  store[key] = current;
+  saveLessonFlowStore(store);
+  return current;
+}
+
+function isLessonQuizFullyAnswered(courseId, lessonIndex) {
+  const detail = getCourseLessonDetail(courseId, lessonIndex) || {};
+  const quizItems = pickLocalized(detail, "zhQuizItems", "enQuizItems", []) || [];
+  if (!quizItems.length) return true;
+  return quizItems.every((_, i) => {
+    const v = getPremiumQuizAnswer(courseId, lessonIndex, i);
+    return v !== null && v !== undefined && v !== "";
+  });
+}
+
+function getLessonStepMinutes(detail) {
+  const raw = (detail && detail.estimatedTime) || "";
+  const match = String(raw).match(/(\d+)/);
+  const total = match ? Math.max(Number(match[1]), 20) : 48;
+  const weights = LESSON_FLOW_STEP_META.map(step => step.weight);
+  const sum = weights.reduce((a, b) => a + b, 0);
+  return weights.map(w => Math.max(1, Math.round((total * w) / sum)));
+}
+
+const LESSON_QUIZ_FOCUS_KEY = "asb_lesson_quiz_focus_v1";
+
+function lessonQuizFocusStorageId(courseId, lessonIndex) {
+  return `${courseId || "course"}:${Number(lessonIndex) || 0}`;
+}
+
+function getLessonQuizFocusIndex(courseId, lessonIndex, quizItems) {
+  const total = quizItems.length;
+  if (!total) return 0;
+  try {
+    const raw = sessionStorage.getItem(LESSON_QUIZ_FOCUS_KEY);
+    const store = raw ? JSON.parse(raw) : {};
+    const saved = Number(store[lessonQuizFocusStorageId(courseId, lessonIndex)]);
+    if (Number.isFinite(saved) && saved >= 0 && saved < total) return saved;
+  } catch (error) {}
+  return 0;
+}
+
+function setLessonQuizFocusIndex(courseId, lessonIndex, focusIndex) {
+  try {
+    const raw = sessionStorage.getItem(LESSON_QUIZ_FOCUS_KEY);
+    const store = raw ? JSON.parse(raw) : {};
+    store[lessonQuizFocusStorageId(courseId, lessonIndex)] = Number(focusIndex) || 0;
+    sessionStorage.setItem(LESSON_QUIZ_FOCUS_KEY, JSON.stringify(store));
+  } catch (error) {}
+}
+
+function advanceLessonQuiz(courseId, lessonIndex, total) {
+  const next = Math.min(getLessonQuizFocusIndex(courseId, lessonIndex, Array(total)) + 1, Math.max(total - 1, 0));
+  setLessonQuizFocusIndex(courseId, lessonIndex, next);
+  render();
+}
+
+function getCourseLearningCriteria(courseId) {
+  const item = typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === courseId) : null;
+  const total = item ? (item.zhLessons || []).length : 10;
+  let lessonsDone = 0;
+  let resultsDone = 0;
+  let quizzesDone = 0;
+  for (let i = 0; i < total; i++) {
+    if (isLessonComplete(courseId, i)) lessonsDone += 1;
+    if (isCourseResultEntryComplete(getCourseResultEntry(courseId, i))) resultsDone += 1;
+    if (isLessonQuizFullyAnswered(courseId, i)) quizzesDone += 1;
+  }
+  const pkgProgress = typeof courseResultPackageProgress === "function"
+    ? courseResultPackageProgress(courseId)
+    : { completed: resultsDone, total, percent: 0 };
+  const packageDone = pkgProgress.completed >= pkgProgress.total && pkgProgress.total > 0;
+  return {
+    total,
+    lessonsDone,
+    resultsDone,
+    quizzesDone,
+    packageDone,
+    packageProgress: pkgProgress
+  };
+}
+
+function getPremiumContinueGuidance(courseId, lessonIndex) {
+  const item = typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === courseId) : null;
+  if (!item) return null;
+  const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
+  const idx = Number(lessonIndex) || 0;
+  const flow = getLessonFlowState(courseId, idx);
+  let currentLabel = text("尚未開始", "Not started");
+  let nextLabel = text("先看懂這堂課", "Understand the lesson");
+  let nextTab = "overview";
+  if (flow.lessonCompleted || isLessonComplete(courseId, idx)) {
+    currentLabel = text("本課已完成", "Lesson completed");
+    nextLabel = text("前往下一課或查看成果包", "Go to the next lesson or result package");
+    nextTab = "review";
+  } else if (!flow.overviewCompleted) {
+    currentLabel = text("進行中：先看懂這堂課", "In progress: Understand the Lesson");
+    nextLabel = text("閱讀學習目標與核心概念", "Read objectives and core concepts");
+    nextTab = "overview";
+  } else if (!flow.scenarioCompleted) {
+    currentLabel = text("已完成：先看懂這堂課", "Completed: Understand the Lesson");
+    nextLabel = text("看案例與方法", "Review scenario and method");
+    nextTab = "method";
+  } else if (!flow.practiceCompleted) {
+    currentLabel = text("已完成：看案例與方法", "Completed: Scenario and Method");
+    nextLabel = text("使用 Prompt 完成實作", "Complete the prompt practice");
+    nextTab = "practice";
+  } else {
+    currentLabel = text("已完成：Prompt 實作", "Completed: Prompt Practice");
+    nextLabel = text("儲存成果並完成本課", "Save output and complete");
+    nextTab = "review";
+  }
+  return {
+    courseId,
+    lessonIndex: idx,
+    courseTitle: state.lang === "zh" ? item.zhTitle : item.enTitle,
+    lessonTitle: lessons[idx] || `Lesson ${idx + 1}`,
+    lessonNo: idx + 1,
+    currentLabel,
+    nextLabel,
+    nextTab
+  };
+}
+
+function continuePremiumLearningStep(courseId, lessonIndex, tabId) {
+  currentCourseId = courseId;
+  currentLessonIndex = Number(lessonIndex) || 0;
+  const stage = resolveLessonStageId(tabId);
+  updateLessonFlowState(courseId, currentLessonIndex, {
+    lastActiveStep: stage
+  });
+  try {
+    const raw = sessionStorage.getItem(LESSON_TAB_STORAGE_KEY);
+    const store = raw ? JSON.parse(raw) : {};
+    store[lessonTabStorageId(courseId, currentLessonIndex)] = stage;
+    sessionStorage.setItem(LESSON_TAB_STORAGE_KEY, JSON.stringify(store));
+  } catch (error) {}
+  openLesson(currentLessonIndex);
+}
+
+function renderCourseHowToLearn(item, progress) {
+  const continueIndex = findContinueLessonIndex(item.id);
+  const allDone = progress.total > 0 && progress.completed >= progress.total;
+  const hasProgress = progress.completed > 0 || Boolean(getLastStudiedCourse()?.courseId === item.id);
+  let cta;
+  if (allDone) {
+    cta = `<button class="btn primary" onclick="openCourseResultPackage('${item.id}')">${text("查看完整成果包", "View full result package")}</button>`;
+  } else if (hasProgress) {
+    cta = `<button class="btn primary" onclick="openLesson(${continueIndex})">${text(`繼續第 ${continueIndex + 1} 課`, `Continue Lesson ${continueIndex + 1}`)}</button>`;
+  } else {
+    cta = `<button class="btn primary" onclick="openLesson(0)">${text("開始第 1 課", "Start Lesson 1")}</button>`;
+  }
+  const steps = [
+    { n: 1, zhTitle: "理解本課重點", enTitle: "Understand the lesson focus", zh: "先閱讀學習目標、核心概念及這堂課的重要性。", en: "Read the objectives, core concepts, and why this lesson matters." },
+    { n: 2, zhTitle: "查看案例與方法", enTitle: "Review scenario and method", zh: "理解實際情境、錯誤做法、正確方法與操作流程。", en: "Study the scenario, wrong approach, right method, and workflow." },
+    { n: 3, zhTitle: "使用 Prompt 完成實作", enTitle: "Practice with the prompt", zh: "複製 Prompt，替換自己的資料，完成本堂實作任務。", en: "Copy the prompt, replace your details, and finish the practice task." },
+    { n: 4, zhTitle: "儲存成果並完成本課", enTitle: "Save output and complete", zh: "把成果存入成果包，完成自我檢查後標記本課完成。", en: "Save to your result package, finish self-check, then mark the lesson complete." }
+  ];
+  return `
+    <section class="course-guide-panel" id="course-how-to-learn">
+      <h2>${text("這門課要怎麼學？", "How to Take This Course")}</h2>
+      <ol class="course-guide-steps">
+        ${steps.map(step => `
+          <li>
+            <span class="course-guide-step-num">${step.n}</span>
+            <div>
+              <h3>${state.lang === "zh" ? step.zhTitle : step.enTitle}</h3>
+              <p>${state.lang === "zh" ? step.zh : step.en}</p>
+            </div>
+          </li>
+        `).join("")}
+      </ol>
+      <div class="course-guide-cta">${cta}</div>
+    </section>
+  `;
+}
+
+function renderCourseCompletionCriteria(courseId) {
+  const criteria = getCourseLearningCriteria(courseId);
+  const packageStatus = criteria.packageDone
+    ? text("已完成", "Complete")
+    : text("進行中", "In progress");
+  const pkgMeta = getCourseResultPackageMeta(courseId);
+  const pkgName = state.lang === "zh" ? pkgMeta.zhName : pkgMeta.enName;
+  return `
+    <section class="course-guide-panel course-criteria-panel">
+      <h2>${text("怎樣才算完成這門課？", "How do you complete this course?")}</h2>
+      <ol class="course-criteria-list">
+        <li>${text(`完成全部 ${criteria.total} 堂課`, `Complete all ${criteria.total} lessons`)}</li>
+        <li>${text("每堂至少儲存一份實作成果", "Save at least one output per lesson")}</li>
+        <li>${text("完成每堂自我檢查", "Finish each lesson’s self-check")}</li>
+        <li>${text(`完成「${pkgName}」`, `Complete “${pkgName}”`)}</li>
+      </ol>
+      <ul class="course-criteria-status">
+        <li><span>${text("已完成課程", "Lessons completed")}</span><strong>${criteria.lessonsDone} / ${criteria.total}</strong></li>
+        <li><span>${text("已儲存成果", "Outputs saved")}</span><strong>${criteria.resultsDone} / ${criteria.total}</strong></li>
+        <li><span>${text("已完成檢查", "Self-checks done")}</span><strong>${criteria.quizzesDone} / ${criteria.total}</strong></li>
+        <li><span>${text("最終成果包", "Final package")}</span><strong>${packageStatus}（${criteria.packageProgress.completed}/${criteria.packageProgress.total}）</strong></li>
+      </ul>
+    </section>
+  `;
+}
+
+
+const LESSON_TAB_STORAGE_KEY = "asb_lesson_active_tab_v1";
+const LESSON_TAB_IDS = ["overview", "method", "practice", "review"];
+const LESSON_TAB_ALIASES = {
+  overview: "overview",
+  method: "method",
+  practice: "practice",
+  review: "review",
+  scenario: "method",
+  result: "review",
+  output: "review"
+};
+
+function resolveLessonStageId(tabOrStage) {
+  return LESSON_TAB_ALIASES[tabOrStage] || (LESSON_FLOW_STEP_META.some(s => s.id === tabOrStage) ? tabOrStage : "overview");
+}
+
+function lessonTabStorageId(courseId, lessonIndex) {
+  return `${courseId || "course"}:${Number(lessonIndex) || 0}`;
+}
+
+function getFlowStepStatus(flow, stepId, activeStage) {
+  const meta = LESSON_FLOW_STEP_META.find(s => s.id === stepId);
+  if (!meta) return "todo";
+  if (flow[meta.key] || flow.lessonCompleted) return "done";
+  if (activeStage === stepId) return "current";
+  return "todo";
+}
+
+function getRecommendedLessonStage(courseId, lessonIndex) {
+  const flow = getLessonFlowState(courseId, lessonIndex);
+  if (flow.lessonCompleted || isLessonComplete(courseId, lessonIndex)) return null;
+  if (!flow.overviewCompleted) return "overview";
+  if (!flow.scenarioCompleted) return "method";
+  if (!flow.practiceCompleted) return "practice";
+  return "review";
+}
+
+function getActiveLessonStage(courseId = currentCourseId, lessonIndex = currentLessonIndex) {
+  const flow = getLessonFlowState(courseId, lessonIndex);
+  if (flow.lessonCompleted || isLessonComplete(courseId, lessonIndex)) return null;
+
+  const saved = flow.lastActiveStep;
+  if (saved && LESSON_FLOW_STEP_META.some(s => s.id === saved)) return saved;
+
+  // Compat: migrate old tab storage into accordion stage
+  try {
+    const raw = sessionStorage.getItem(LESSON_TAB_STORAGE_KEY);
+    const store = raw ? JSON.parse(raw) : {};
+    const tab = store[lessonTabStorageId(courseId, lessonIndex)];
+    const mapped = tab ? resolveLessonStageId(tab) : "";
+    if (mapped && LESSON_FLOW_STEP_META.some(s => s.id === mapped)) {
+      updateLessonFlowState(courseId, lessonIndex, { lastActiveStep: mapped });
+      return mapped;
+    }
+  } catch (error) {}
+
+  return getRecommendedLessonStage(courseId, lessonIndex) || "overview";
+}
+
+function setLessonStage(stageId, options = {}) {
+  const next = resolveLessonStageId(stageId);
+  const soft = options === true || Boolean(options && options.softSkipCheck);
+  if (soft) {
+    const flow = getLessonFlowState(currentCourseId, currentLessonIndex);
+    const order = LESSON_FLOW_STEP_META.map(s => s.id);
+    const idx = order.indexOf(next);
+    if (idx > 0) {
+      const prev = LESSON_FLOW_STEP_META[idx - 1];
+      if (!flow[prev.key] && !flow.lessonCompleted) {
+        toast(text("建議先完成前一個步驟。", "Tip: finish the previous step first."));
+      }
+    }
+  }
+  updateLessonFlowState(currentCourseId, currentLessonIndex, { lastActiveStep: next });
+  try {
+    const raw = sessionStorage.getItem(LESSON_TAB_STORAGE_KEY);
+    const store = raw ? JSON.parse(raw) : {};
+    store[lessonTabStorageId(currentCourseId, currentLessonIndex)] = next;
+    sessionStorage.setItem(LESSON_TAB_STORAGE_KEY, JSON.stringify(store));
+  } catch (error) {}
+  render();
+  const el = document.getElementById(`lesson-stage-${next}`);
+  if (el && typeof el.scrollIntoView === "function") {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+// Backward-compatible alias used by learning-center continue CTA
+function setLessonTab(tabId) {
+  setLessonStage(tabId, true);
+}
+
+function getActiveLessonTab(courseId = currentCourseId, lessonIndex = currentLessonIndex) {
+  return getActiveLessonStage(courseId, lessonIndex) || "overview";
+}
+
+function dismissLessonOnboarding() {
+  try {
+    const raw = localStorage.getItem(LESSON_ONBOARDING_STORAGE_KEY);
+    const store = raw ? JSON.parse(raw) : {};
+    store[lessonFlowUserKey()] = { seenAt: new Date().toISOString() };
+    localStorage.setItem(LESSON_ONBOARDING_STORAGE_KEY, JSON.stringify(store));
+  } catch (error) {}
+  render();
+}
+
+function markLessonPromptOpened(courseId = currentCourseId, lessonIndex = currentLessonIndex) {
+  updateLessonFlowState(courseId, lessonIndex, { promptOpened: true, practiceStarted: true });
+}
+
+function markLessonPracticeStarted(courseId = currentCourseId, lessonIndex = currentLessonIndex) {
+  updateLessonFlowState(courseId, lessonIndex, { practiceStarted: true });
+}
+
+function advanceLessonFlowStep(fromStepId) {
+  const courseId = currentCourseId;
+  const lessonIndex = currentLessonIndex;
+  const order = LESSON_FLOW_STEP_META.map(s => s.id);
+  const idx = order.indexOf(fromStepId);
+  const patch = {};
+  if (fromStepId === "overview") patch.overviewCompleted = true;
+  if (fromStepId === "method") patch.scenarioCompleted = true;
+  if (fromStepId === "practice") {
+    const flow = getLessonFlowState(courseId, lessonIndex);
+    if (!flow.promptOpened && !flow.practiceStarted) {
+      toast(text("請先完成實作，再前往儲存成果。", "Please finish practice before saving your output."));
+    }
+    patch.practiceCompleted = true;
+    patch.practiceStarted = true;
+  }
+  const next = idx >= 0 && idx < order.length - 1 ? order[idx + 1] : "review";
+  patch.lastActiveStep = next;
+  updateLessonFlowState(courseId, lessonIndex, patch);
+  try {
+    const raw = sessionStorage.getItem(LESSON_TAB_STORAGE_KEY);
+    const store = raw ? JSON.parse(raw) : {};
+    store[lessonTabStorageId(courseId, lessonIndex)] = next;
+    sessionStorage.setItem(LESSON_TAB_STORAGE_KEY, JSON.stringify(store));
+  } catch (error) {}
+  render();
+  const el = document.getElementById(`lesson-stage-${next}`);
+  if (el && typeof el.scrollIntoView === "function") {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+function getLessonCompletionGaps(courseId, lessonIndex) {
+  const gaps = [];
+  const entry = getCourseResultEntry(courseId, lessonIndex);
+  if (!isCourseResultEntryComplete(entry)) {
+    gaps.push(text("尚未輸入成果（文字或網址至少一項）", "Output is missing (add text or a URL)"));
+  }
+  if (!isLessonQuizFullyAnswered(courseId, lessonIndex)) {
+    gaps.push(text("尚未完成自我檢查", "Self-check is incomplete"));
+  }
+  return gaps;
+}
+
+function completeLessonWithChecks(courseId, lessonIndex) {
+  const gaps = getLessonCompletionGaps(courseId, lessonIndex);
+  if (gaps.length) {
+    updateLessonFlowState(courseId, lessonIndex, {
+      lastActiveStep: "review",
+      completionGaps: gaps
+    });
+    toast(gaps[0]);
+    render();
+    const el = document.querySelector(".lesson-completion-gaps, #lesson-output");
+    if (el && typeof el.scrollIntoView === "function") {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
     return;
   }
+  saveCourseResultEntry(courseId, lessonIndex);
+  updateLessonFlowState(courseId, lessonIndex, {
+    overviewCompleted: true,
+    scenarioCompleted: true,
+    practiceCompleted: true,
+    resultCompleted: true,
+    quizCompleted: true,
+    lessonCompleted: true,
+    lastActiveStep: "review",
+    completionGaps: []
+  });
+  setLessonComplete(courseId, lessonIndex, true);
+}
 
-  const textarea = document.getElementById(`premium-note-${courseId}-${lessonIndex + 1}`);
-  const value = textarea ? textarea.value.trim() : "";
-  if (!value) {
-    toast(state.lang === "zh" ? "請先在課程筆記寫下你的成果，再同步到大學申請包" : "Write your output in course notes first, then sync it to the application package");
-    return;
+function getStageStatusLabel(status) {
+  if (status === "done") return text("已完成", "Done");
+  if (status === "current") return text("目前進行中", "In progress");
+  return text("尚未開始", "Not started");
+}
+
+function renderLessonPathHint() {
+  return `
+    <div class="lesson-path-hint">
+      <p>${text("依序完成下方四個步驟，就能完成這堂課並將成果存入成果包。", "Complete the four steps below to finish this lesson and save your output.")}</p>
+      <details class="lesson-path-hint-details">
+        <summary>${text("了解學習方式", "How learning works")}</summary>
+        <ol>
+          <li>${text("先看懂目標與概念", "Understand goals and concepts")}</li>
+          <li>${text("看案例與正確方法", "Review the scenario and method")}</li>
+          <li>${text("用 Prompt 完成實作", "Practice with the prompt")}</li>
+          <li>${text("儲存成果並完成本課", "Save output and complete")}</li>
+        </ol>
+      </details>
+    </div>
+  `;
+}
+
+function renderLessonCurrentStepLine(activeStage, flow) {
+  if (flow.lessonCompleted) {
+    return `<p class="lesson-current-step-line">${text("目前步驟：本課已完成", "Current step: lesson complete")}</p>`;
   }
+  const meta = LESSON_FLOW_STEP_META.find(s => s.id === activeStage) || LESSON_FLOW_STEP_META[0];
+  return `<p class="lesson-current-step-line">${text("目前步驟", "Current step")}：${state.lang === "zh" ? meta.zh : meta.en}</p>`;
+}
 
-  const map = ["map", "majors", "portfolio", "activities", "autobiography", "majorSpecific", "interviewBank", "mockInterview", "advisorPrompt", "finalReview"];
-  const itemId = map[lessonIndex];
-  if (!itemId || typeof applicationPackageKey !== "function") {
-    toast(state.lang === "zh" ? "找不到對應的大學申請包欄位" : "No matching application package section found");
-    return;
+function renderLessonStageBody(stageId, item, detail, lessonIndex, flow) {
+  if (stageId === "overview") {
+    const time = detail.estimatedTime || text("依個人進度", "Self-paced");
+    const diff = detail.difficulty || text("標準", "Standard");
+    return `
+      <div class="lesson-stage-meta-row">
+        <span>${text("預估時間", "Time")}：${time}</span>
+        <span>${text("難度", "Difficulty")}：${diff}</span>
+        <span>${text("本堂成果", "Deliverable")}：${getLessonOutputName(detail)}</span>
+      </div>
+      ${pickLocalized(detail, "zhValueTip", "enValueTip", "") ? `<p class="lesson-pro-value">${pickLocalized(detail, "zhValueTip", "enValueTip", "")}</p>` : ""}
+      ${renderLessonObjectives(detail)}
+      ${renderLessonWhyItMatters(detail)}
+      ${renderLessonConcept(detail)}
+      <div class="lesson-stage-cta">
+        <button class="btn primary" type="button" onclick="advanceLessonFlowStep('overview')">${text("我看懂了，繼續看案例", "I understand — continue to scenario")}</button>
+      </div>
+    `;
   }
+  if (stageId === "method") {
+    return `
+      ${renderLessonScenario(item.id, detail)}
+      ${renderLessonWorkflow(detail)}
+      ${renderLessonMistakes(detail)}
+      <div class="lesson-stage-cta">
+        <button class="btn primary" type="button" onclick="advanceLessonFlowStep('method')">${text("我知道怎麼做了，開始實作", "I know what to do — start practice")}</button>
+      </div>
+    `;
+  }
+  if (stageId === "practice") {
+    return `
+      ${renderLessonPrompt(detail, item.id, lessonIndex)}
+      ${renderLessonPractice(detail)}
+      <div class="lesson-stage-cta">
+        <button class="btn primary" type="button" onclick="advanceLessonFlowStep('practice')">${text("我完成實作了，前往儲存成果", "Practice done — save output")}</button>
+      </div>
+    `;
+  }
+  const gaps = getLessonCompletionGaps(item.id, lessonIndex);
+  return `
+    ${renderLessonOutput(item.id, lessonIndex, detail)}
+    ${renderLessonQuiz(item.id, lessonIndex, detail)}
+    ${renderLessonRubric(detail)}
+    ${gaps.length ? `<ul class="lesson-completion-gaps">${gaps.map(g => `<li>${g}</li>`).join("")}</ul>` : ""}
+    <div class="lesson-stage-cta">
+      <button class="btn primary" type="button" onclick="completeLessonWithChecks('${item.id}', ${lessonIndex})">${text("儲存成果並完成本課", "Save output and complete lesson")}</button>
+    </div>
+  `;
+}
 
-  localStorage.setItem(applicationPackageKey(itemId), value);
-  toast(state.lang === "zh" ? "已同步到大學申請包" : "Synced to application package");
+function renderLessonAccordionPath(item, detail, lessonIndex, activeStage, flow) {
+  const lessonDone = flow.lessonCompleted || isLessonComplete(item.id, lessonIndex);
+  return `
+    <div class="lesson-path-accordion" role="list">
+      ${LESSON_FLOW_STEP_META.map((step, index) => {
+        const status = getFlowStepStatus(flow, step.id, activeStage);
+        const open = !lessonDone && activeStage === step.id;
+        const mark = status === "done" ? "✓" : String(index + 1);
+        const skipHint = open && index > 0 && !flow[LESSON_FLOW_STEP_META[index - 1].key] && !lessonDone
+          ? `<p class="lesson-skip-hint" role="status">${text("建議先完成前一個步驟。", "Tip: finish the previous step first.")}</p>`
+          : "";
+        return `
+          <section class="lesson-path-stage is-${status} ${open ? "is-open" : ""}" id="lesson-stage-${step.id}" role="listitem">
+            <button
+              type="button"
+              class="lesson-path-stage-header"
+              aria-expanded="${open ? "true" : "false"}"
+              aria-controls="lesson-stage-body-${step.id}"
+              onclick="setLessonStage('${step.id}', true)"
+            >
+              <span class="lesson-path-stage-mark" aria-hidden="true">${mark}</span>
+              <span class="lesson-path-stage-copy">
+                <strong>${index + 1}. ${state.lang === "zh" ? step.zh : step.en}</strong>
+                <em>${state.lang === "zh" ? step.zhBlurb : step.enBlurb}</em>
+              </span>
+              <span class="lesson-path-stage-status">${getStageStatusLabel(status)}</span>
+              <span class="lesson-path-stage-chevron" aria-hidden="true">${open ? "▾" : "▸"}</span>
+            </button>
+            ${open ? `
+              <div class="lesson-path-stage-body" id="lesson-stage-body-${step.id}">
+                ${skipHint}
+                ${renderLessonStageBody(step.id, item, detail, lessonIndex, flow)}
+              </div>
+            ` : ""}
+          </section>
+        `;
+      }).join("")}
+    </div>
+  `;
+}
+
+function renderLessonCompletionCard(item, lessonIndex) {
+  const detail = getCourseLessonDetail(item.id, lessonIndex) || {};
+  const progress = courseProgress(item.id);
+  const remaining = Math.max(progress.total - progress.completed, 0);
+  const nextIndex = lessonIndex + 1;
+  const isLast = nextIndex >= progress.total;
+  return `
+    <section class="lesson-complete-card">
+      <h2>${text(`第 ${lessonIndex + 1} 課完成`, `Lesson ${lessonIndex + 1} complete`)}</h2>
+      <ul class="lesson-complete-meta">
+        <li><span>${text("本堂成果", "Deliverable")}</span><strong>${getLessonOutputName(detail)}</strong></li>
+        <li><span>${text("儲存狀態", "Save status")}</span><strong>${text("本堂成果已儲存", "Output saved")}</strong></li>
+        <li><span>${text("課程進度", "Course progress")}</span><strong>${progress.completed} / ${progress.total}</strong></li>
+        <li><span>${text("還剩幾堂", "Remaining")}</span><strong>${remaining}</strong></li>
+      </ul>
+      <div class="btnrow">
+        ${isLast
+          ? `<button class="btn primary" onclick="openCourseResultPackage('${item.id}')">${text("查看完整成果包", "View full result package")}</button>`
+          : `<button class="btn primary" onclick="openNextLesson()">${text("前往下一課", "Go to next lesson")}</button>`
+        }
+        <button class="btn secondary" onclick="openCourseResultPackage('${item.id}')">${text("查看成果包", "View result package")}</button>
+      </div>
+    </section>
+  `;
+}
+
+function renderLessonNavigation(item, detail, lessonNo, total, progress) {
+  return `
+    <section class="lesson-pro-nav">
+      <div class="lesson-pro-nav-row">
+        <button class="btn secondary" onclick="setRoute('course')">← ${text("返回課程總覽", "Back to Course Overview")}</button>
+        <button class="btn secondary lesson-toc-toggle" type="button" onclick="toggleCourseSidebar()" aria-expanded="false">${text("查看課程目錄", "View Curriculum")}</button>
+      </div>
+      <div class="lesson-pro-nav-status">
+        <span>Lesson ${lessonNo} / ${total}</span>
+        <span>${text("進度", "Progress")}：${progress.completed}/${progress.total}</span>
+      </div>
+      <div class="package-progress-track"><div class="package-progress-bar" style="width:${progress.percent}%"></div></div>
+      <div class="btnrow lesson-pro-nav-actions">
+        <button class="btn secondary" onclick="openPrevLesson()">${text("上一課", "Previous")}</button>
+        <button class="btn secondary" onclick="openNextLesson()">${text("下一課", "Next")}</button>
+      </div>
+    </section>
+  `;
+}
+
+function renderLessonHeader(detail, lessonNo, activeStage, flow) {
+  const title = pickLocalized(detail, "zhTitle", "enTitle", `Lesson ${lessonNo}`);
+  const tip = pickLocalized(detail, "zhValueTip", "enValueTip", "");
+  return `
+    <div class="lesson-pro-header">
+      <span class="lesson-pro-eyebrow">Lesson ${lessonNo}</span>
+      <h1>${title}</h1>
+      ${tip ? `<p class="lesson-pro-value">${tip}</p>` : ""}
+      ${renderLessonCurrentStepLine(activeStage, flow)}
+    </div>
+  `;
+}
+
+function renderLessonObjectives(detail) {
+  const objectives = getLessonObjectives(detail);
+  if (!objectives.length) return "";
+  return `
+    <section class="lesson-block">
+      <h2>${text("本課學習目標", "Learning Objectives")}</h2>
+      <ol class="lesson-pro-objectives">
+        ${objectives.map(item => `<li>${item}</li>`).join("")}
+      </ol>
+    </section>
+  `;
+}
+
+function renderLessonWhyItMatters(detail) {
+  const why = getLessonWhyItMatters(detail);
+  if (!why) return "";
+  return `
+    <section class="lesson-block">
+      <h2>${text("為什麼這一課重要", "Why This Lesson Matters")}</h2>
+      <div class="lesson-pro-why-grid">
+        <div><h3>${text("目前問題", "Current problem")}</h3><p>${why.problem || ""}</p></div>
+        <div><h3>${text("一般做法為何沒效", "Why usual approaches fail")}</h3><p>${why.ineffective || ""}</p></div>
+        <div><h3>${text("本課解法", "This lesson’s solution")}</h3><p>${why.solution || ""}</p></div>
+      </div>
+    </section>
+  `;
+}
+
+function renderLessonConcept(detail) {
+  const blocks = getLessonConceptBlocks(detail);
+  if (!blocks) return "";
+  return `
+    <section class="lesson-block">
+      <h2>${text("核心概念", "Core Concepts")}</h2>
+      <div class="lesson-pro-concept-grid">
+        <div><h3>${text("核心原則", "Principles")}</h3><ul>${(blocks.principles || []).map(x => `<li>${x}</li>`).join("")}</ul></div>
+        <div><h3>${text("關鍵名詞", "Key terms")}</h3><ul>${(blocks.terms || []).map(x => `<li>${x}</li>`).join("")}</ul></div>
+        <div><h3>${text("判斷標準", "Criteria")}</h3><ul>${(blocks.criteria || []).map(x => `<li>${x}</li>`).join("")}</ul></div>
+        <div><h3>${text("使用界線", "Boundaries")}</h3><ul>${(blocks.boundaries || []).map(x => `<li>${x}</li>`).join("")}</ul></div>
+      </div>
+    </section>
+  `;
+}
+
+function renderLessonScenario(courseId, detail) {
+  const blocks = getLessonCaseBlocks(detail);
+  if (!blocks) return "";
+  return `
+    <section class="lesson-block lesson-pro-scenario">
+      <h2>${getCourseCaseStudyTitle(courseId)}</h2>
+      <div class="lesson-scenario-steps">
+        <div><span>1</span><h3>${text("情境", "Scenario")}</h3><p>${blocks.problem || ""}</p></div>
+        <div><span>2</span><h3>${text("錯誤做法", "Wrong approach")}</h3><p>${blocks.wrong || ""}</p></div>
+        <div><span>3</span><h3>${text("正確方法", "Right method")}</h3><p>${blocks.right || ""}</p></div>
+        <div><span>4</span><h3>${text("預期成果", "Expected result")}</h3><p>${blocks.result || ""}</p></div>
+      </div>
+    </section>
+  `;
+}
+
+function renderLessonWorkflow(detail) {
+  const steps = getLessonWorkflowSteps(detail);
+  if (!steps.length) return "";
+  return `
+    <section class="lesson-block">
+      <h2>${text("操作流程", "Workflow")}</h2>
+      <ol class="lesson-pro-workflow">
+        ${steps.map((step, index) => `
+          <li>
+            <div class="lesson-pro-workflow-index">${index + 1}</div>
+            <div>
+              <h3>${step.do || ""}</h3>
+              ${step.why ? `<p><b>${text("為什麼", "Why")}：</b>${step.why}</p>` : ""}
+              ${step.input ? `<p><b>${text("輸入", "Input")}：</b>${step.input}</p>` : ""}
+              ${step.output ? `<p><b>${text("應得到", "Expected output")}：</b>${step.output}</p>` : ""}
+              ${step.check ? `<p><b>${text("如何檢查", "How to check")}：</b>${step.check}</p>` : ""}
+            </div>
+          </li>
+        `).join("")}
+      </ol>
+    </section>
+  `;
+}
+
+function renderLessonPrompt(detail, courseId, lessonIndex) {
+  const pack = getLessonPromptPack(detail);
+  if (!pack) return "";
+  const promptId = `prompt-${courseId}-${lessonIndex}`;
+  const example = pickLocalized(detail, "zhExample", "enExample", "") || pack.exampleInput || "";
+  return `
+    <section class="lesson-block lesson-pro-prompt">
+      <h2>${text("Prompt 工作區", "Prompt Workspace")}</h2>
+      <p class="lesson-pro-muted"><b>${text("使用時機", "When to use")}：</b>${pack.when || ""}</p>
+      ${(pack.fields || []).length ? `<p class="lesson-pro-muted"><b>${text("需要替換的欄位", "Fields to replace")}：</b>${pack.fields.join(" · ")}</p>` : ""}
+      <div class="lesson-callout">
+        <div class="lesson-callout-head">
+          <div>
+            <h3>${text("本課主 Prompt", "Main lesson prompt")}</h3>
+          </div>
+          <button class="btn secondary" type="button" onclick="markLessonPromptOpened('${courseId}', ${lessonIndex}); copyTextById('${promptId}')">${text("複製 Prompt", "Copy Prompt")}</button>
+        </div>
+        <details class="lesson-accordion" ontoggle="if(this.open){markLessonPromptOpened('${courseId}', ${lessonIndex})}">
+          <summary aria-expanded="false">${text("查看完整 Prompt", "View full prompt")}</summary>
+          <div class="promptbox" id="${promptId}">${pack.body || ""}</div>
+        </details>
+        ${example ? `
+          <details class="lesson-accordion">
+            <summary aria-expanded="false">${text("範例輸入", "Example input")}</summary>
+            <p>${example}</p>
+          </details>
+        ` : ""}
+        ${pack.expected ? `
+          <details class="lesson-accordion">
+            <summary aria-expanded="false">${text("預期輸出", "Expected output")}</summary>
+            <p>${pack.expected}</p>
+          </details>
+        ` : ""}
+      </div>
+    </section>
+  `;
+}
+
+function renderLessonPractice(detail) {
+  const steps = getLessonPracticeSteps(detail);
+  if (!steps.length) return "";
+  return `
+    <section class="lesson-block lesson-pro-practice" id="lesson-practice" onclick="markLessonPracticeStarted()">
+      <h2>${text("引導式實作", "Guided Practice")}</h2>
+      <ol class="lesson-pro-practice-list">
+        ${steps.map((step, index) => `
+          <li>
+            <h3>${text("步驟", "Step")} ${index + 1}. ${step.task || ""}</h3>
+            ${step.standard ? `<p><b>${text("完成標準", "Done standard")}：</b>${step.standard}</p>` : ""}
+            ${step.check ? `<p><b>${text("檢查問題", "Check question")}：</b>${step.check}</p>` : ""}
+            ${step.mistakes ? `
+              <details class="lesson-accordion">
+                <summary aria-expanded="false">${text("常見錯誤", "Common mistake")}</summary>
+                <p>${step.mistakes}</p>
+              </details>
+            ` : ""}
+          </li>
+        `).join("")}
+      </ol>
+    </section>
+  `;
+}
+
+function renderLessonOutput(courseId, lessonIndex, detail) {
+  return `
+    <section class="lesson-block" id="lesson-output">
+      <h2>${text("本堂成果", "Lesson Deliverable")}</h2>
+      <p>${text("完成本課後，你應該產出：", "After this lesson, you should produce:")} <b>${getLessonOutputName(detail)}</b></p>
+      ${renderLessonResultPackagePanel(courseId, lessonIndex, detail)}
+    </section>
+  `;
+}
+
+function renderLessonQuiz(courseId, lessonIndex, detail) {
+  const quizItems = pickLocalized(detail, "zhQuizItems", "enQuizItems", []) || [];
+  if (!quizItems.length) return "";
+  const focus = getLessonQuizFocusIndex(courseId, lessonIndex, quizItems);
+  const q = quizItems[focus];
+  const selected = getPremiumQuizAnswer(courseId, lessonIndex, focus);
+  const hasSelected = selected !== null && selected !== undefined && selected !== "";
+  const correct = Number(selected) === Number(q.answer);
+  const answeredCount = quizItems.filter((_, i) => {
+    const v = getPremiumQuizAnswer(courseId, lessonIndex, i);
+    return v !== null && v !== undefined && v !== "";
+  }).length;
+  return `
+    <section class="lesson-block">
+      <h2>${text("自我檢查", "Self-Check")}</h2>
+      <p class="lesson-pro-muted">${text("一次一題", "One question at a time")} · ${answeredCount}/${quizItems.length}</p>
+      <article class="lesson-pro-quiz-card">
+        <h3>Q${focus + 1}. ${q.q}</h3>
+        <div class="lesson-pro-quiz-options">
+          ${(q.options || []).map((opt, optIndex) => `
+            <button type="button" class="quiz-option ${hasSelected && String(selected) === String(optIndex) ? (correct ? "correct" : "wrong") : ""}" onclick="setPremiumQuizAnswer('${courseId}', ${lessonIndex}, ${focus}, ${optIndex})">
+              ${String.fromCharCode(65 + optIndex)}. ${opt}
+            </button>
+          `).join("")}
+        </div>
+        ${hasSelected ? `<p><b>${correct ? text("正確", "Correct") : text("再想想", "Try again")}</b> ${q.explain || ""}</p>` : ""}
+        ${hasSelected && focus < quizItems.length - 1 ? `<button class="btn secondary" type="button" onclick="advanceLessonQuiz('${courseId}', ${lessonIndex}, ${quizItems.length})">${text("下一題", "Next question")}</button>` : ""}
+      </article>
+    </section>
+  `;
+}
+
+function renderLessonRubric(detail) {
+  const rubric = getLessonRubric(detail);
+  if (!rubric.length) return "";
+  return `
+    <section class="lesson-block">
+      <h2>${text("成果評分標準", "Rubric")}</h2>
+      <ul class="lesson-rubric-summary">
+        ${rubric.map(row => `<li><b>${row.name}</b><span>${text("未完成 → 可以正式使用", "Incomplete → Ready to use")}</span></li>`).join("")}
+      </ul>
+      <details class="lesson-accordion">
+        <summary aria-expanded="false">${text("查看完整評分標準", "View full rubric")}</summary>
+        <div class="lesson-pro-rubric">
+          ${rubric.map(row => `
+            <div>
+              <h3>${row.name}</h3>
+              <ul>
+                <li><b>${text("未完成", "Incomplete")}：</b>${row.levels?.incomplete || ""}</li>
+                <li><b>${text("基本完成", "Basic")}：</b>${row.levels?.basic || ""}</li>
+                <li><b>${text("良好", "Good")}：</b>${row.levels?.good || ""}</li>
+                <li><b>${text("可以正式使用", "Ready")}：</b>${row.levels?.ready || ""}</li>
+              </ul>
+            </div>
+          `).join("")}
+        </div>
+      </details>
+    </section>
+  `;
+}
+
+function renderLessonMistakes(detail) {
+  const mistakes = getLessonMistakesDetailed(detail);
+  if (!mistakes.length) return "";
+  return `
+    <section class="lesson-block lesson-pro-mistakes">
+      <h2>${text("常見錯誤與注意事項", "Common Mistakes & Notes")}</h2>
+      <details class="lesson-accordion">
+        <summary aria-expanded="false">${text("查看常見錯誤詳細說明", "View detailed common mistakes")}</summary>
+        <div class="lesson-pro-mistake-list">
+          ${mistakes.map(item => `
+            <div>
+              <p><b>${text("錯誤", "Mistake")}：</b>${item.error || ""}</p>
+              ${item.why ? `<p><b>${text("原因", "Why")}：</b>${item.why}</p>` : ""}
+              ${item.fix ? `<p><b>${text("改進方式", "Fix")}：</b>${item.fix}</p>` : ""}
+            </div>
+          `).join("")}
+        </div>
+      </details>
+    </section>
+  `;
+}
+
+function renderLessonSidebar(item, details, activeIndex) {
+  const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
+  return `
+    <aside class="lesson-pro-sidebar">
+      <div class="lesson-pro-sidebar-card">
+        <p class="lesson-pro-kicker">${state.lang === "zh" ? item.zhTitle : item.enTitle}</p>
+        <h2>${text("課程目錄", "Curriculum")}</h2>
+        <ol>
+          ${lessons.map((title, i) => {
+            const complete = isLessonComplete(item.id, i);
+            const unlocked = isLessonUnlocked(item.id, i);
+            return `
+              <li class="${i === activeIndex ? "is-active" : ""} ${complete ? "is-complete" : ""}">
+                <button type="button" ${unlocked ? `onclick="openLesson(${i})"` : "disabled"}>
+                  <span>L${i + 1}${complete ? " ✓" : ""}</span>
+                  <em>${title.replace(/^第\d+課：/, "").replace(/^Lesson \d+:\s*/, "")}</em>
+                </button>
+              </li>
+            `;
+          }).join("")}
+        </ol>
+        <button class="btn secondary" onclick="openCourseResultPackage('${item.id}')">${text("查看成果包", "View Result Package")}</button>
+      </div>
+    </aside>
+  `;
+}
+
+function renderLessonAccordion(item, detail, lessonIndex, activeStage, flow) {
+  return renderLessonAccordionPath(item, detail, lessonIndex, activeStage, flow);
+}
+
+function renderLessonAccordionStage(stageId, item, detail, lessonIndex, flow) {
+  return renderLessonStageBody(stageId, item, detail, lessonIndex, flow);
+}
+
+function completeLessonStage(fromStepId) {
+  return advanceLessonFlowStep(fromStepId);
+}
+
+function completePremiumLesson(courseId, lessonIndex) {
+  return completeLessonWithChecks(courseId, lessonIndex);
+}
+
+function saveLessonFlowState(courseId, lessonIndex, patch) {
+  return updateLessonFlowState(courseId, lessonIndex, patch);
+}
+
+function renderPremiumLessonPage(item, detail, lessonIndex) {
+  const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
+  const lessonNo = lessonIndex + 1;
+  const progress = courseProgress(item.id);
+  const flow = getLessonFlowState(item.id, lessonIndex);
+  const lessonDone = flow.lessonCompleted || isLessonComplete(item.id, lessonIndex);
+  const activeStage = lessonDone ? null : (getActiveLessonStage(item.id, lessonIndex) || "overview");
+
+  return `
+    <main class="page lesson-pro-page">
+      <div class="wrap lesson-pro-wrap">
+        <div class="lesson-pro-layout">
+          ${renderLessonSidebar(item, [], lessonIndex)}
+          <article class="lesson-pro-content">
+            ${renderLessonNavigation(item, detail, lessonNo, lessons.length, progress)}
+            ${renderLessonHeader(detail, lessonNo, activeStage || "review", flow)}
+            ${lessonDone ? renderLessonCompletionCard(item, lessonIndex) : `
+              ${renderLessonPathHint()}
+              ${renderLessonAccordion(item, detail, lessonIndex, activeStage, flow)}
+            `}
+          </article>
+        </div>
+      </div>
+    </main>
+  `;
 }
 
 function lesson() {
@@ -3376,224 +4776,28 @@ function lesson() {
 
   const lessons = state.lang === "zh" ? item.zhLessons : item.enLessons;
   const fallbackTitle = lessons[currentLessonIndex] || lessons[0];
-  const courseDetails = (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[item.id])
-    ? PREMIUM_LESSON_DETAILS[item.id]
-    : [];
-  const detail = courseDetails[currentLessonIndex];
+  const detail = getCourseLessonDetail(item.id, currentLessonIndex);
   const lessonNo = currentLessonIndex + 1;
 
-  if (detail) {
-    const quizItems = state.lang === "zh" ? (detail.zhQuizItems || []) : (detail.enQuizItems || []);
-    const practiceText = state.lang === "zh" ? detail.zhPractice : detail.enPractice;
-    const practiceSteps = practiceText.split("；").filter(Boolean);
-    const checklist = state.lang === "zh" ? (detail.zhDeliverableChecklist || []) : (detail.enDeliverableChecklist || []);
-    const scorecard = state.lang === "zh" ? (detail.zhScorecard || []) : (detail.enScorecard || []);
-    const chapter = (item.chapters || []).find(ch => {
-      const start = Number(ch.start) || 0;
-      const count = Number(ch.count) || 0;
-      return currentLessonIndex >= start && currentLessonIndex < start + count;
-    });
-    const chapterLessons = chapter
-      ? Array.from({ length: Number(chapter.count) || 0 }, (_, offset) => Number(chapter.start) + offset)
-      : [];
-
-    const chapterNav = chapter ? `
-          <section class="panel" style="margin-top:24px">
-            <span class="tag">${detail.icon || chapter.icon || ""} ${state.lang === "zh" ? chapter.zhTitle : chapter.enTitle}</span>
-            <h2>${text("課程導航", "Lesson Navigation")}</h2>
-            <p>${text("同一 Chapter 的課程快速切換：", "Jump within this chapter:")}</p>
-            <div class="btnrow">
-              ${chapterLessons.map(i => {
-                const complete = isLessonComplete(item.id, i);
-                const unlocked = isLessonUnlocked(item.id, i);
-                const active = i === currentLessonIndex;
-                if (!unlocked) {
-                  return `<button class="btn secondary" disabled>🔒 ${i + 1}</button>`;
-                }
-                return `<button class="btn ${active ? "primary" : "secondary"}" onclick="openLesson(${i})">${complete ? "✓ " : ""}${i + 1}</button>`;
-              }).join("")}
-            </div>
-          </section>
-    ` : "";
-
+  if (!detail) {
     return shell(`
       <main class="page">
         <div class="wrap">
           <button class="btn secondary" onclick="setRoute('course')">← ${text("回到課程首頁", "Back to Course")}</button>
-
           <section class="panel">
-            <span class="tag">${detail.icon || ""} Lesson ${lessonNo}${chapter ? " · " + (state.lang === "zh" ? chapter.zhTitle : chapter.enTitle) : ""}</span>
-            <h1>${state.lang === "zh" ? detail.zhTitle : detail.enTitle}</h1>
-            <p class="lead">${state.lang === "zh" ? (detail.zhValueTip || text("這一課會幫你完成一個可重用的學習成果。", "This lesson helps you create a reusable learning output.")) : (detail.enValueTip || text("這一課會幫你完成一個可重用的學習成果。", "This lesson helps you create a reusable learning output."))}</p>
+            <span class="tag">Lesson ${lessonNo}</span>
+            <h1>${fallbackTitle}</h1>
+            <p class="lead">${text("這堂課的完整教材會在後續版本補上。", "Full lesson content will be added later.")}</p>
           </section>
-
-          ${chapterNav}
-
-          <section class="panel" style="margin-top:24px">
-            <h2>${text("本課會完成什麼", "What You Will Complete")}</h2>
-            <p><b>${state.lang === "zh" ? detail.zhOutcome : detail.enOutcome}</b></p>
-            <p>${state.lang === "zh" ? (detail.zhValueTip || "") : (detail.enValueTip || "")}</p>
-          </section>
-
-          <section class="panel" style="margin-top:24px">
-            <h2>${text("成果完成檢查表", "Deliverable Checklist")}</h2>
-            <ul>
-              ${checklist.map(x => `<li>□ ${x}</li>`).join("")}
-            </ul>
-          </section>
-
-          <section class="panel" style="margin-top:24px">
-            <h2>${text("核心概念", "Core Concept")}</h2>
-            <p>${state.lang === "zh" ? detail.zhConcept : detail.enConcept}</p>
-          </section>
-
-          ${(detail.zhCaseStudy || detail.enCaseStudy) ? `
-          <section class="panel" style="margin-top:24px">
-            <span class="tag premiumtag">Case</span>
-            <h2>${getCourseCaseStudyTitle(item.id)}</h2>
-            <p>${state.lang === "zh" ? detail.zhCaseStudy : detail.enCaseStudy}</p>
-          </section>` : ""}
-
-          ${(detail.zhWorkflow || detail.enWorkflow) ? `
-          <section class="panel" style="margin-top:24px">
-            <h2>${text("AI 操作流程", "AI Workflow")}</h2>
-            <ol>
-              ${(state.lang === "zh" ? detail.zhWorkflow : detail.enWorkflow).map(step => `<li>${step}</li>`).join("")}
-            </ol>
-          </section>` : ""}
-
-          ${(detail.zhCommonMistakes || detail.enCommonMistakes) ? `
-          <section class="panel" style="margin-top:24px">
-            <h2>${text("常見錯誤", "Common Mistakes")}</h2>
-            <ul>
-              ${(state.lang === "zh" ? detail.zhCommonMistakes : detail.enCommonMistakes).map(item => `<li>${item}</li>`).join("")}
-            </ul>
-          </section>` : ""}
-
-          ${(detail.zhExcellentExample || detail.enExcellentExample) ? `
-          <section class="panel" style="margin-top:24px">
-            <h2>${text("優秀作品應該長什麼樣", "What a Strong Output Looks Like")}</h2>
-            <p>${state.lang === "zh" ? detail.zhExcellentExample : detail.enExcellentExample}</p>
-          </section>` : ""}
-
-          ${(detail.zhCoachPrompt || detail.enCoachPrompt) ? `
-          <section class="panel" style="margin-top:24px">
-            <h2>${text("AI 教練追問 Prompt", "AI Coach Follow-up Prompt")}</h2>
-            <div class="promptbox">${state.lang === "zh" ? detail.zhCoachPrompt : detail.enCoachPrompt}</div>
-          </section>` : ""}
-
-          <section class="panel" style="margin-top:24px">
-            <h2>Prompt Template</h2>
-            <div class="promptbox">${state.lang === "zh" ? detail.zhPrompt : detail.enPrompt}</div>
-          </section>
-
-          <section class="panel" style="margin-top:24px">
-            <h2>${text("範例", "Example")}</h2>
-            <p>${state.lang === "zh" ? detail.zhExample : detail.enExample}</p>
-          </section>
-
-          <section class="panel" style="margin-top:24px">
-            <h2>${text("實作任務", "Practice Task")}</h2>
-            <ol>
-              ${practiceSteps.map(step => `<li>${step}</li>`).join("")}
-            </ol>
-          </section>
-
-          ${renderLessonResultPackagePanel(item.id, currentLessonIndex, detail)}
-
-          <section class="panel" style="margin-top:24px">
-            <h2>${text("AI 專家實作回饋 Prompt", "AI Expert Practice Feedback Prompt")}</h2>
-            <p>${text("完成實作後，把成果貼到 AI，使用這段 Prompt 取得評分、診斷、修改建議與下一步行動。", "After completing the task, paste your work into AI and use this prompt to get scoring, diagnosis, revision advice, and next actions.")}</p>
-            <div class="promptbox">${state.lang === "zh" ? detail.zhFeedbackPrompt : detail.enFeedbackPrompt}</div>
-          </section>
-
-          <section class="panel" style="margin-top:24px">
-            <h2>${text("自我評分表", "Self-Scorecard")}</h2>
-            <p id="lesson-score-summary">${text("尚未評分", "Not scored yet")}</p>
-            <div class="scorecard-list">
-              ${scorecard.map(metric => `
-                <div class="score-row">
-                  <strong>${metric}</strong>
-                  <div class="score-buttons">
-                    ${[1,2,3,4,5,6,7,8,9,10].map(n => `
-                      <button
-                        id="score-${lessonNo - 1}-${metric}-${n}"
-                        class="score-btn ${getLessonScore(item.id, lessonNo - 1, metric) === n ? "selected" : ""}"
-                        onclick="setLessonScore('${item.id}', ${lessonNo - 1}, '${metric.replaceAll("'", "\'")}', ${n})"
-                      >${n}</button>
-                    `).join("")}
-                  </div>
-                </div>
-              `).join("")}
-            </div>
-          </section>
-
-          <section class="panel" style="margin-top:24px">
-            <h2>${text("小測驗", "Mini Quiz")}</h2>
-            <div class="grid">
-              ${quizItems.map((q, idx) => `
-                <article class="card">
-                  <h3>Q${idx + 1}. ${q.q}</h3>
-                  <ol type="A">
-                    ${q.options.map(opt => `<li>${opt}</li>`).join("")}
-                  </ol>
-                  <details>
-                    <summary>${text("看答案", "Show Answer")}</summary>
-                    <p><b>${q.answer}</b></p>
-                  </details>
-                </article>
-              `).join("")}
-            </div>
-          </section>
-
-          <section class="panel" style="margin-top:24px">
-            <h2>${text("課程筆記", "Course Notes")}</h2>
-            <p>${state.lang === "zh" ? detail.zhNotePrompt : detail.enNotePrompt}</p>
-            <textarea id="premium-note-${item.id}-${lessonNo}" placeholder="${text("在這裡寫下你的課程筆記...", "Write your course notes here...")}"></textarea>
-            <button class="btn secondary" onclick="localStorage.setItem('premium-note-${item.id}-${lessonNo}', document.getElementById('premium-note-${item.id}-${lessonNo}').value); toast('${state.lang === "zh" ? "課程筆記已儲存" : "Course note saved"}')">${text("儲存課程筆記", "Save Course Notes")}</button>
-          </section>
-
-          <section class="panel" style="margin-top:24px">
-            <h2>${text("課後成果", "Final Output")}</h2>
-            <p><b>${state.lang === "zh" ? detail.zhOutcome : detail.enOutcome}</b></p>
-            <p>${text("完成後請把成果存進本課「課程成果包」，並標記本課完成以解鎖下一課。", "Save your output to this course result package, then mark the lesson complete to unlock the next one.")}</p>
-            <div class="btnrow">
-              <button class="btn secondary" onclick="openCourseResultPackage('${item.id}')">${text("查看我的成果包", "View My Result Package")}</button>
-              ${lessonNo === 10 ? `<button class="btn primary" onclick="openCourseResultPackage('${item.id}')">${text("查看完整課程成果包", "View Full Course Result Package")}</button>` : ""}
-              ${item.id === "admissions" ? `<button class="btn secondary" onclick="setRoute('applicationPackage')">${text("打開我的大學申請包", "Open My Application Package")}</button>` : ""}
-            </div>
-          </section>
-
-          <section class="panel" style="margin-top:24px">
-            <h2>${text("完成本課", "Complete Lesson")}</h2>
-            <p>${isLessonComplete(item.id, lessonNo - 1) ? text("你已標記完成這一課。課程完成度已更新。", "You marked this lesson as complete. Course progress has been updated.") : text("完成實作任務、AI 回饋、自我評分與課程筆記後，請標記本課完成。", "After finishing the practice task, AI feedback, self-score, and notes, mark this lesson complete.")}</p>
-            <button class="${isLessonComplete(item.id, lessonNo - 1) ? "btn secondary" : "btn primary"}" onclick="toggleLessonComplete('${item.id}', ${lessonNo - 1})">
-              ${isLessonComplete(item.id, lessonNo - 1) ? text("取消完成", "Undo Complete") : "✓ " + text("標記本課完成", "Mark Complete")}
-            </button>
-          </section>
-
-          <div class="btnrow" style="margin-top:24px">
-            <button class="btn secondary" onclick="openPrevLesson()">${text("上一課", "Previous")}</button>
-            <button class="btn primary" onclick="openNextLesson()">${text("下一課", "Next")}</button>
-          </div>
         </div>
       </main>
     `);
   }
 
-  return shell(`
-    <main class="page">
-      <div class="wrap">
-        <button class="btn secondary" onclick="setRoute('course')">← ${text("回到課程首頁", "Back to Course")}</button>
-        <section class="panel">
-          <span class="tag">Lesson ${lessonNo}</span>
-          <h1>${fallbackTitle}</h1>
-          <p class="lead">${text("這堂課的完整教材會在後續版本補上。", "Full lesson content will be added later.")}</p>
-        </section>
-      </div>
-    </main>
-  `);
+  return shell(renderPremiumLessonPage(item, detail, currentLessonIndex));
 }
+
+
 
 
 
@@ -3869,20 +5073,22 @@ function getRecentEditedResults(limit = 3) {
 function renderLessonResultPackagePanel(courseId, lessonIndex, detail) {
   const entry = getCourseResultEntry(courseId, lessonIndex);
   const done = isCourseResultEntryComplete(entry);
-  const outcome = state.lang === "zh" ? (detail.zhOutcome || "") : (detail.enOutcome || "");
+  const outcome = (typeof getLessonOutputName === "function")
+    ? getLessonOutputName(detail)
+    : (state.lang === "zh" ? (detail.zhOutcome || "") : (detail.enOutcome || ""));
   return `
-    <section class="panel course-result-save-panel" style="margin-top:24px">
+    <section class="panel course-result-save-panel" style="margin-top:16px">
       <span class="tag ${done ? "free" : "premiumtag"}">${done ? text("成果包：已儲存", "Package: Saved") : text("成果包：尚未完成", "Package: Incomplete")}</span>
-      <h2>${text("儲存到成果包", "Save to Result Package")}</h2>
+      <h3>${text("儲存到成果包", "Save to Result Package")}</h3>
       <p>${text("本堂應產出：", "This lesson deliverable:")} <b>${outcome}</b></p>
       <label class="course-result-label">${text("成果文字", "Result text")}</label>
       <textarea id="course-result-text-${courseId}-${lessonIndex}" placeholder="${text("把本堂實作成果貼在這裡...", "Paste this lesson's output here...")}">${escapeTextareaValue(entry.text)}</textarea>
-      <label class="course-result-label">${text("成果連結（Google Drive / Notion / Canva / GitHub 等）", "Result link (Google Drive / Notion / Canva / GitHub, etc.)")}</label>
+      <label class="course-result-label">${text("成果連結（選填）", "Result link (optional)")}</label>
       <input class="course-result-url-input" id="course-result-url-${courseId}-${lessonIndex}" type="url" value="${escapeTextareaValue(entry.url)}" placeholder="https://" />
       <p class="course-result-meta">${text("最後儲存時間", "Last saved")}: ${formatCourseResultSavedAt(entry.savedAt)}</p>
       <div class="btnrow">
-        <button class="btn primary" onclick="saveCourseResultEntry('${courseId}', ${lessonIndex})">${text("儲存到成果包", "Save to Result Package")}</button>
-        <button class="btn secondary" onclick="openCourseResultPackage('${courseId}')">${text("查看我的成果包", "View My Result Package")}</button>
+        <button class="btn secondary" onclick="saveCourseResultEntry('${courseId}', ${lessonIndex})">${text("儲存到成果包", "Save to Result Package")}</button>
+        <button class="linkish" onclick="openCourseResultPackage('${courseId}')">${text("查看我的成果包", "View My Result Package")}</button>
       </div>
     </section>
   `;
@@ -4526,35 +5732,71 @@ function impact() {
   `);
 }
 
+function bindLessonInteractiveA11y() {
+  document.querySelectorAll(".lesson-accordion").forEach(details => {
+    const summary = details.querySelector("summary");
+    if (!summary) return;
+    const sync = () => summary.setAttribute("aria-expanded", details.open ? "true" : "false");
+    sync();
+    if (details.dataset.boundAccordion === "1") return;
+    details.dataset.boundAccordion = "1";
+    details.addEventListener("toggle", sync);
+  });
+
+  const tablist = document.querySelector(".lesson-pro-tabs");
+  if (!tablist || tablist.dataset.boundTabs === "1") return;
+  tablist.dataset.boundTabs = "1";
+  tablist.addEventListener("keydown", event => {
+    const tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
+    const current = tabs.indexOf(document.activeElement);
+    if (current < 0) return;
+    let next = current;
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") next = (current + 1) % tabs.length;
+    else if (event.key === "ArrowLeft" || event.key === "ArrowUp") next = (current - 1 + tabs.length) % tabs.length;
+    else if (event.key === "Home") next = 0;
+    else if (event.key === "End") next = tabs.length - 1;
+    else return;
+    event.preventDefault();
+    tabs[next].focus();
+    tabs[next].click();
+  });
+}
+
 function render() {
-  const routes = {
-    home,
-    freeLesson,
-    learning,
-    courses,
-    freePortfolio,
-    assessment,
-    map: learningMap,
-    center,
-    free,
-    premium,
-    applicationPackage,
-    courseResultPackage,
-    "result-packages": resultPackages,
-    resultPackages,
-    tools,
-    prompts,
-    community,
-    tutor,
-    course,
-    lesson,
-    thailand,
-    impact
-  };
-  document.getElementById("app").innerHTML = (routes[state.route] || home)();
-  // Navbar DOM is fully rebuilt on every render; re-check nodes and keep delegation alive.
-  bindMoreMenuEvents();
-  save();
+  try {
+    const routes = {
+      home,
+      freeLesson,
+      learning,
+      courses,
+      freePortfolio,
+      assessment,
+      map: learningMap,
+      center,
+      free,
+      premium,
+      applicationPackage,
+      courseResultPackage,
+      "result-packages": resultPackages,
+      resultPackages,
+      tools,
+      prompts,
+      community,
+      tutor,
+      course,
+      lesson,
+      thailand,
+      impact
+    };
+    document.getElementById("app").innerHTML = (routes[state.route] || home)();
+    // Navbar DOM is fully rebuilt on every render; re-check nodes and keep delegation alive.
+    bindMoreMenuEvents();
+    bindLessonInteractiveA11y();
+    save();
+  } catch (error) {
+    console.error("[AUTH] error", "render failed", error);
+    throw error;
+  }
 }
 
 async function startApp() {
