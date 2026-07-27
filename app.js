@@ -126,8 +126,9 @@ let state = {
   lang: localStorage.getItem("asb_lang") || "zh",
   route: "home",
   activeLesson: localStorage.getItem("asb_lesson") || "ai",
-  progress: JSON.parse(localStorage.getItem("asb_progress") || "{}"),
-  notes: JSON.parse(localStorage.getItem("asb_notes") || "{}"),
+  // Do not hydrate member progress from global localStorage before auth.
+  progress: {},
+  notes: {},
   assessment: JSON.parse(localStorage.getItem("asb_assessment") || "null"),
   favorites: JSON.parse(localStorage.getItem("asb_favorites") || "[]"),
   user: null,
@@ -255,10 +256,22 @@ function L(path) {
 function save() {
   localStorage.setItem("asb_lang", state.lang);
   localStorage.setItem("asb_lesson", state.activeLesson);
-  localStorage.setItem("asb_progress", JSON.stringify(state.progress));
-  localStorage.setItem("asb_notes", JSON.stringify(state.notes));
+  // Only cache progress/notes for the signed-in member; never write guest empties over a cache.
+  if (state.user) {
+    localStorage.setItem("asb_progress", JSON.stringify(state.progress));
+    localStorage.setItem("asb_notes", JSON.stringify(state.notes));
+  }
   localStorage.setItem("asb_assessment", JSON.stringify(state.assessment));
   localStorage.setItem("asb_favorites", JSON.stringify(state.favorites));
+}
+
+function resetGuestLearningState() {
+  state.user = null;
+  state.userPlan = "free";
+  state.unlockedCourses = [];
+  state.progress = {};
+  state.notes = {};
+  state.loadingProgress = false;
 }
 
 function freeBootcampLessonId(index) {
@@ -319,6 +332,7 @@ function recommendedLessons() {
 function setRoute(route) {
   state.route = route;
   window.scrollTo(0, 0);
+  if (typeof closeAllNavMenus === "function") closeAllNavMenus();
   render();
 }
 
@@ -666,11 +680,8 @@ async function handleAuthSession(session, eventName = "session") {
       }
     }
   } else {
-    state.userPlan = "free";
-    state.unlockedCourses = [];
-    state.progress = JSON.parse(localStorage.getItem("asb_progress") || "{}");
-    state.notes = JSON.parse(localStorage.getItem("asb_notes") || "{}");
-    // Do not clear saved learning data; gated routes will show login UI.
+    resetGuestLearningState();
+    // Do not load global asb_progress / asb_notes into guest UI.
   }
 
   try {
@@ -683,6 +694,7 @@ async function handleAuthSession(session, eventName = "session") {
 async function initAuth() {
   if (!supabaseClient) {
     console.error("[AUTH] error", "supabaseClient is null — window.supabase may not have loaded");
+    resetGuestLearningState();
     state.authReady = true;
     return;
   }
@@ -719,8 +731,7 @@ async function initAuth() {
         console.log("[AUTH] post-login destination applied", destination.route || destination.action || null);
       }
     } else {
-      state.userPlan = "free";
-      state.unlockedCourses = [];
+      resetGuestLearningState();
     }
   } catch (error) {
     console.error("[AUTH] error", "initAuth failed", error);
@@ -770,17 +781,13 @@ async function signInWithGoogle() {
 async function signOut() {
   clearPostLoginDestination();
   if (!supabaseClient) {
-    state.user = null;
-    state.userPlan = "free";
-    state.unlockedCourses = [];
+    resetGuestLearningState();
     state.authReady = true;
     render();
     return;
   }
   await supabaseClient.auth.signOut();
-  state.user = null;
-  state.userPlan = "free";
-  state.unlockedCourses = [];
+  resetGuestLearningState();
   state.authReady = true;
   render();
 }
@@ -1205,17 +1212,105 @@ First, do the following:
 
 let moreMenuIgnoreOutsideUntil = 0;
 let moreMenuDelegatedBound = false;
+let navEscapeBound = false;
+
+const ONBOARDING_DISMISSED_KEY = "asb_onboarding_dismissed_v1";
+
+/** Shared nav config — desktop and mobile use the same source. */
+const MAIN_NAV_ITEMS = [
+  { id: "home", route: "home", zh: "首頁", en: "Home" },
+  { id: "courses", route: "courses", zh: "免費入門", en: "Free Course" },
+  { id: "map", route: "map", zh: "所有課程", en: "All Courses" },
+  { id: "result-packages", route: "result-packages", zh: "成果禮包", en: "Result Packages" },
+  { id: "learning", route: "learning", zh: "我的學習", en: "My Learning" }
+];
+
+const MORE_NAV_GROUPS = [
+  {
+    id: "learning-tools",
+    zh: "學習工具",
+    en: "Learning Tools",
+    items: [
+      { route: "assessment", zh: "能力測驗", en: "Skill Assessment" },
+      { route: "tools", zh: "AI 工具", en: "AI Tools" },
+      { route: "prompts", zh: "Prompt 範例", en: "Prompt Examples" },
+      { route: "tutor", zh: "AI Tutor", en: "AI Tutor" }
+    ]
+  },
+  {
+    id: "results-platform",
+    zh: "成果與平台",
+    en: "Results & Platform",
+    items: [
+      { route: "freePortfolio", zh: "我的免費成果包", en: "My Free Result Package" },
+      { route: "impact", zh: "影響力", en: "Impact" }
+    ]
+  }
+];
+
+const MORE_ACTIVE_ROUTES = new Set([
+  "assessment", "tools", "prompts", "tutor", "impact", "freePortfolio", "community"
+]);
+
+function isMainNavActive(itemId) {
+  const r = state.route;
+  if (itemId === "home") return r === "home";
+  if (itemId === "courses") return r === "courses" || r === "freeLesson" || r === "free";
+  if (itemId === "map") {
+    return r === "map" || r === "premium" || r === "course" || r === "lesson" || r === "applicationPackage";
+  }
+  if (itemId === "result-packages") {
+    return r === "result-packages" || r === "resultPackages" || r === "courseResultPackage";
+  }
+  if (itemId === "learning") return r === "learning" || r === "center";
+  return false;
+}
+
+function isMoreNavActive() {
+  return MORE_ACTIVE_ROUTES.has(state.route);
+}
 
 function syncMoreMenuAria(isOpen) {
   const btn = document.getElementById("moreMenuBtn");
   if (btn) btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
 }
 
+function syncMobileNavAria(isOpen) {
+  const btn = document.getElementById("mobileNavBtn");
+  if (btn) btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+}
+
+function setMenuVisible(menu, willOpen, openClass) {
+  if (!menu) return false;
+  menu.classList.toggle(openClass, willOpen);
+  if (willOpen) menu.removeAttribute("hidden");
+  else menu.setAttribute("hidden", "");
+  return true;
+}
+
 function setMoreMenuOpen(willOpen) {
   const menu = document.getElementById("moreMenu");
   if (!menu) return false;
-  menu.classList.toggle("open", willOpen);
+  if (willOpen) setMobileNavOpen(false);
+  setMenuVisible(menu, willOpen, "open");
   syncMoreMenuAria(willOpen);
+  if (willOpen) moreMenuIgnoreOutsideUntil = Date.now() + 400;
+  return true;
+}
+
+function setAccountMenuOpen(_willOpen) {
+  // Account dropdown removed from header; keep no-op for compatibility.
+  return false;
+}
+
+function setMobileNavOpen(willOpen) {
+  const menu = document.getElementById("mobileNavPanel");
+  if (!menu) return false;
+  if (willOpen) setMoreMenuOpen(false);
+  setMenuVisible(menu, willOpen, "is-open");
+  menu.classList.toggle("open", willOpen);
+  document.body.classList.toggle("asb-mobile-nav-open", willOpen);
+  syncMobileNavAria(willOpen);
   if (willOpen) moreMenuIgnoreOutsideUntil = Date.now() + 400;
   return true;
 }
@@ -1227,11 +1322,40 @@ function toggleMoreMenu(event) {
   }
   const menu = document.getElementById("moreMenu");
   if (!menu) return;
-  setMoreMenuOpen(!menu.classList.contains("open"));
+  setMoreMenuOpen(menu.hasAttribute("hidden") || !menu.classList.contains("open"));
+}
+
+function toggleAccountMenu(event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+}
+
+function toggleMobileNav(event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  const menu = document.getElementById("mobileNavPanel");
+  if (!menu) return;
+  const willOpen = menu.hasAttribute("hidden") || !menu.classList.contains("is-open");
+  setMobileNavOpen(willOpen);
 }
 
 function closeMoreMenu() {
   setMoreMenuOpen(false);
+}
+
+function closeAccountMenu() {}
+
+function closeMobileNav() {
+  setMobileNavOpen(false);
+}
+
+function closeAllNavMenus() {
+  closeMoreMenu();
+  closeMobileNav();
 }
 
 function moreMenuEventElement(target) {
@@ -1244,30 +1368,44 @@ function handleMoreMenuDelegatedClick(event) {
   const el = moreMenuEventElement(event.target);
   if (!el || typeof el.closest !== "function") return;
 
-  // Toggle when the More button (or its contents) is clicked.
   if (el.closest("#moreMenuBtn")) {
     toggleMoreMenu(event);
     return;
   }
+  if (el.closest("#mobileNavBtn")) {
+    toggleMobileNav(event);
+    return;
+  }
 
-  // Ignore the synthetic follow-up click from the same mobile tap that opened the menu.
   if (Date.now() < moreMenuIgnoreOutsideUntil) return;
 
-  const menu = document.getElementById("moreMenu");
-  if (!menu || !menu.classList.contains("open")) return;
+  const moreOpen = document.getElementById("moreMenu")?.classList.contains("open");
+  const mobileOpen = document.getElementById("mobileNavPanel")?.classList.contains("is-open");
+  if (!moreOpen && !mobileOpen) return;
 
-  // Clicks on menu items keep their own handlers; they call closeMoreMenu().
   if (el.closest("#moreMenu") || el.closest(".more-wrap")) return;
+  if (el.closest("#mobileNavPanel") || el.closest(".mobile-nav-wrap")) return;
 
-  closeMoreMenu();
+  closeAllNavMenus();
+}
+
+function handleNavEscape(event) {
+  if (event.key === "Escape") closeAllNavMenus();
+}
+
+function handleNavResizeClose() {
+  closeAllNavMenus();
 }
 
 function bindMoreMenuEvents() {
-  // Event delegation on document survives every SPA render that replaces navbar HTML.
-  // Only bind once; never attach listeners to #moreMenuBtn itself (that node is destroyed on render).
   if (moreMenuDelegatedBound) return;
   document.addEventListener("click", handleMoreMenuDelegatedClick);
   moreMenuDelegatedBound = true;
+  if (!navEscapeBound) {
+    document.addEventListener("keydown", handleNavEscape);
+    window.addEventListener("resize", handleNavResizeClose);
+    navEscapeBound = true;
+  }
 }
 
 function goApplicationPackage() {
@@ -1279,49 +1417,42 @@ function goApplicationPackage() {
   }
 }
 
+function renderMoreMenuGroupsHtml(closeFnName) {
+  return MORE_NAV_GROUPS.map(group => `
+    <div class="more-menu-group">
+      <p class="more-menu-group-label">${state.lang === "zh" ? group.zh : group.en}</p>
+      ${group.items.map(item => `
+        <button type="button" onclick="setRoute('${item.route}'); ${closeFnName}();">
+          ${state.lang === "zh" ? item.zh : item.en}
+        </button>
+      `).join("")}
+    </div>
+  `).join("");
+}
+
+function renderAccountMenuHtml() {
+  if (!state.user) return "";
+  return `
+    <div class="nav-account">
+      ${renderAccountIdentity()}
+      <button type="button" class="lang" onclick="signOut()">${text("登出", "Sign Out")}</button>
+    </div>
+  `;
+}
+
 function nav() {
-  const mainLinks = [
-    { route: "home", zh: "首頁", en: "Home" },
-    { route: "courses", zh: "免費入門", en: "Free Intro" },
-    { route: "map", zh: "課程地圖", en: "Roadmap" },
-    { route: "assessment", zh: "能力測驗", en: "Assessment" },
-    { route: "learning", zh: "我的學習中心", en: "Learning" },
-    { route: "result-packages", zh: "成果禮包", en: "Result Packages" },
-    { route: "premium", zh: "進階付費", en: "Premium" }
-  ];
-
-  const moreLinks = [
-    { route: "freePortfolio", zh: "我的免費成果包", en: "My Free Portfolio" },
-    { route: "result-packages", zh: "成果禮包", en: "Result Packages" },
-    { route: "tools", zh: "AI 工具", en: "AI Tools" },
-    { route: "prompts", zh: "Prompt 範例", en: "Prompts" },
-    { route: "tutor", zh: "AI Tutor", en: "AI Tutor" },
-    { route: "impact", zh: "影響力", en: "Impact" }
-  ];
-
-  const mainHtml = mainLinks.map(item => `
-    <button class="${state.route === item.route ? "active" : ""}" onclick="setRoute('${item.route}')">
+  const mainHtml = MAIN_NAV_ITEMS.map(item => `
+    <button type="button" class="nav-link-btn ${isMainNavActive(item.id) ? "active" : ""}" onclick="setRoute('${item.route}')">
       ${state.lang === "zh" ? item.zh : item.en}
     </button>
   `).join("");
 
-  const moreHtml = moreLinks.map(item => `
-    <button onclick="${item.action ? item.action : `setRoute('${item.route}')`}; closeMoreMenu();">
-      ${state.lang === "zh" ? item.zh : item.en}
-    </button>
-  `).join("");
-
-  const moreAccountHtml = state.user
-    ? `<div class="more-menu-account">${renderAccountIdentity()}
-         <p class="more-menu-access">${text("存取權限", "Access")}：${getAccountAccessLabel()}</p>
-       </div>`
-    : "";
+  const moreGroupsHtml = renderMoreMenuGroupsHtml("closeMoreMenu");
+  const mobileMoreGroupsHtml = renderMoreMenuGroupsHtml("closeMobileNav");
 
   const authHtml = state.user
-    ? `<div class="nav-account">${renderAccountIdentity()}
-         <button class="lang" onclick="signOut()">${state.lang === "zh" ? "登出" : "Logout"}</button>
-       </div>`
-    : `<button class="lang" onclick="signInWithGoogle()">${state.lang === "zh" ? "Google 登入" : "Google Login"}</button>`;
+    ? renderAccountMenuHtml()
+    : `<button type="button" class="lang" onclick="signInWithGoogle()">${state.lang === "zh" ? "Google 登入" : "Google Login"}</button>`;
 
   return `
     <header>
@@ -1331,7 +1462,7 @@ function nav() {
           <span>AI Skill Bridge</span>
         </div>
 
-        <div class="nav-main">
+        <nav class="desktop-nav nav-main nav-main-desktop" aria-label="${text("主導覽", "Main navigation")}">
           <div class="nav-main-links">
             ${mainHtml}
           </div>
@@ -1339,21 +1470,43 @@ function nav() {
             <button
               type="button"
               id="moreMenuBtn"
-              class="lang"
+              class="lang nav-link-btn ${isMoreNavActive() ? "active" : ""}"
               aria-haspopup="true"
               aria-expanded="false"
               aria-controls="moreMenu"
-            >☰ ${state.lang === "zh" ? "更多" : "More"}</button>
-            <div id="moreMenu" class="more-menu" role="menu">
-              ${moreAccountHtml}
-              ${moreHtml}
+            >${state.lang === "zh" ? "更多" : "More"}</button>
+            <div id="moreMenu" class="more-menu more-menu-grouped" role="menu" hidden>
+              ${moreGroupsHtml}
             </div>
           </div>
-        </div>
+        </nav>
 
         <div class="nav-actions">
           ${authHtml}
-          <button class="lang" onclick="toggleLang()">${state.lang === "zh" ? "EN" : "中文"}</button>
+          <button type="button" class="lang" onclick="toggleLang()">${state.lang === "zh" ? "EN" : "中文"}</button>
+          <div class="mobile-nav-wrap">
+            <button
+              type="button"
+              id="mobileNavBtn"
+              class="lang mobile-nav-btn mobile-nav-toggle"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="mobileNavPanel"
+            >☰ ${state.lang === "zh" ? "選單" : "Menu"}</button>
+            <div id="mobileNavPanel" class="mobile-nav-panel" role="menu" hidden>
+              <div class="mobile-nav-main">
+                ${MAIN_NAV_ITEMS.map(item => `
+                  <button type="button" class="nav-link-btn ${isMainNavActive(item.id) ? "active" : ""}" onclick="setRoute('${item.route}'); closeMobileNav();">
+                    ${state.lang === "zh" ? item.zh : item.en}
+                  </button>
+                `).join("")}
+              </div>
+              <div class="mobile-nav-more ${isMoreNavActive() ? "is-active-section" : ""}">
+                <p class="more-menu-group-label">${state.lang === "zh" ? "更多" : "More"}</p>
+                ${mobileMoreGroupsHtml}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -1385,14 +1538,14 @@ function homeFooter() {
         </div>
         <div>
           <h4>${text("產品", "Product")}</h4>
-          <button type="button" onclick="setRoute('courses')">${text("免費入門", "Free Intro")}</button>
-          <button type="button" onclick="setRoute('map')">${text("課程地圖", "Learning Map")}</button>
+          <button type="button" onclick="setRoute('courses')">${text("免費入門", "Free Course")}</button>
+          <button type="button" onclick="setRoute('map')">${text("所有課程", "All Courses")}</button>
           <button type="button" onclick="setRoute('premium')">${text("進階課程", "Premium Courses")}</button>
           <button type="button" onclick="setRoute('result-packages')">${text("成果禮包", "Result Packages")}</button>
         </div>
         <div>
           <h4>${text("學習", "Learn")}</h4>
-          <button type="button" onclick="setRoute('learning')">${text("我的學習中心", "Learning Center")}</button>
+          <button type="button" onclick="setRoute('learning')">${text("我的學習", "My Learning")}</button>
           <button type="button" onclick="setRoute('tools')">${text("AI 工具", "AI Tools")}</button>
           <button type="button" onclick="setRoute('prompts')">${text("Prompt 資源", "Prompt Library")}</button>
           <button type="button" onclick="setRoute('assessment')">${text("能力測驗", "Assessment")}</button>
@@ -1514,6 +1667,134 @@ function homeHasLearningHistory() {
   return false;
 }
 
+function isFreeBootcampComplete() {
+  if (!state.user || typeof FREE_BOOTCAMP === "undefined") return false;
+  const progress = freeBootcampProgress();
+  return progress.total > 0 && progress.completed >= progress.total;
+}
+
+function isFreeBootcampStarted() {
+  if (!state.user || typeof FREE_BOOTCAMP === "undefined") return false;
+  if (freeBootcampProgress().completed > 0) return true;
+  const last = getLastStudiedCourse();
+  return !!(last && last.courseId === "free-starter");
+}
+
+function isOnboardingDismissed() {
+  try {
+    return localStorage.getItem(ONBOARDING_DISMISSED_KEY) === "true";
+  } catch (error) {
+    return false;
+  }
+}
+
+function dismissOnboarding() {
+  try {
+    localStorage.setItem(ONBOARDING_DISMISSED_KEY, "true");
+  } catch (error) {}
+  render();
+}
+
+function shouldShowOnboarding() {
+  if (!state.authReady || !state.user) return false;
+  if (isOnboardingDismissed()) return false;
+  if (homeHasLearningHistory()) return false;
+  if (isFreeBootcampStarted()) return false;
+  return true;
+}
+
+function startFreeCourseFromOnboarding() {
+  dismissOnboarding();
+  openFreeLesson(0);
+}
+
+/**
+ * Single source for homepage primary CTA.
+ * Returns: { label, action, variant, note, secondaryLabel, secondaryAction }
+ */
+function getHomePrimaryAction() {
+  const name = getHomeDisplayName();
+  const greet = name ? text(`${name}，`, `${name}, `) : "";
+  const secondary = {
+    secondaryLabel: text("查看成果禮包", "View Result Packages"),
+    secondaryAction: "setRoute('result-packages')"
+  };
+
+  if (!state.user) {
+    return {
+      label: text("開始免費學習", "Start Learning Free"),
+      action: "homePrimaryAction()",
+      variant: "primary",
+      note: text("登入後可保存進度與成果。", "Sign in to save progress and results."),
+      ...secondary
+    };
+  }
+
+  if (hasAllAccessPass()) {
+    if (homeHasLearningHistory()) {
+      return {
+        label: text("繼續學習", "Continue Learning"),
+        action: "homeContinueLastLearning()",
+        variant: "primary",
+        note: text(`${greet}你已解鎖完整學習路徑。`, `${greet}your full learning path is unlocked.`),
+        ...secondary
+      };
+    }
+    return {
+      label: text("選擇一門課程", "Choose a Course"),
+      action: "setRoute('map')",
+      variant: "primary",
+      note: text(`${greet}從所有課程中選擇你目前需要的能力。`, `${greet}choose the capability you need from All Courses.`),
+      ...secondary
+    };
+  }
+
+  if (isFreeBootcampComplete()) {
+    return {
+      label: text("探索所有課程", "Explore All Courses"),
+      action: "setRoute('map')",
+      variant: "primary",
+      note: text(`${greet}免費課程已完成，下一步可探索所有課程。`, `${greet}free course complete — explore all courses next.`),
+      ...secondary
+    };
+  }
+
+  if (isFreeBootcampStarted() || homeHasLearningHistory()) {
+    const last = getLastStudiedCourse();
+    let detail = text("繼續你的學習進度。", "Continue where you left off.");
+    if (last && last.courseId === "free-starter") {
+      const free = freeBootcampProgress();
+      detail = text(
+        `最近：免費入門 · Lesson ${(Number(last.lessonIndex) || 0) + 1} · 進度 ${free.completed}/${free.total}`,
+        `Recent: Free Intro · Lesson ${(Number(last.lessonIndex) || 0) + 1} · ${free.completed}/${free.total}`
+      );
+    } else if (last && last.courseId) {
+      const course = getPremiumCourses().find(c => c.id === last.courseId);
+      const progress = courseProgress(last.courseId);
+      const title = course ? (state.lang === "zh" ? course.zhTitle : course.enTitle) : last.courseId;
+      detail = text(
+        `最近：${title} · Lesson ${(Number(last.lessonIndex) || 0) + 1} · ${progress.completed}/${progress.total}`,
+        `Recent: ${title} · Lesson ${(Number(last.lessonIndex) || 0) + 1} · ${progress.completed}/${progress.total}`
+      );
+    }
+    return {
+      label: text("繼續學習", "Continue Learning"),
+      action: "homeContinueLastLearning()",
+      variant: "primary",
+      note: `${greet}${detail}`,
+      ...secondary
+    };
+  }
+
+  return {
+    label: text("開始第一堂課", "Start Lesson 1"),
+    action: "openFreeLesson(0)",
+    variant: "primary",
+    note: text(`${greet}免費課程不需付款，進度會自動保存。`, `${greet}free courses need no payment, and progress is saved.`),
+    ...secondary
+  };
+}
+
 function homePrimaryAction() {
   if (!state.authReady) {
     toast(text("正在確認登入狀態…", "Checking sign-in status…"));
@@ -1523,15 +1804,26 @@ function homePrimaryAction() {
     requireGoogleLogin({ route: "freeLesson", lessonId: 0, action: "openFreeLesson" });
     return;
   }
-  if (hasAllAccessPass()) {
-    setRoute("learning");
+  const cta = getHomePrimaryAction();
+  if (cta.action === "homePrimaryAction()") {
+    openFreeLesson(0);
     return;
   }
-  if (homeHasLearningHistory()) {
+  if (cta.action === "homeContinueLastLearning()") {
     homeContinueLastLearning();
     return;
   }
-  openFreeLesson(0);
+  if (cta.action === "openFreeLesson(0)") {
+    openFreeLesson(0);
+    return;
+  }
+  if (cta.action === "setRoute('map')") {
+    setRoute("map");
+    return;
+  }
+  if (cta.action === "setRoute('learning')") {
+    setRoute("learning");
+  }
 }
 
 function homeContinueLastLearning() {
@@ -1553,6 +1845,10 @@ function homeContinueLastLearning() {
       }
     }
   }
+  if (isFreeBootcampComplete()) {
+    setRoute("map");
+    return;
+  }
   openFreeLesson(0);
 }
 
@@ -1565,82 +1861,105 @@ function homeOpenCapability(courseId) {
 }
 
 function homeHeroCtaCopy() {
-  const name = getHomeDisplayName();
-  const greet = name ? text(`${name}，`, `${name}, `) : "";
-
-  if (!state.user) {
-    return {
-      primary: text("使用 Google 登入，免費開始", "Sign in with Google to Start Free"),
-      secondary: text("查看完整課程地圖", "View Full Learning Map"),
-      note: text("登入後可保存進度與成果。", "Sign in to save progress and results."),
-      primaryAction: "homePrimaryAction()"
-    };
-  }
-
-  if (hasAllAccessPass()) {
-    return {
-      primary: text("前往我的學習中心", "Go to Learning Center"),
-      secondary: text("查看所有成果禮包", "View All Result Packages"),
-      note: text(`${greet}你已解鎖完整學習路徑。`, `${greet}your full learning path is unlocked.`),
-      primaryAction: "setRoute('learning')",
-      secondaryAction: "setRoute('result-packages')"
-    };
-  }
-
-  if (homeHasLearningHistory()) {
-    const last = getLastStudiedCourse();
-    let detail = text("繼續你的學習進度。", "Continue where you left off.");
-    if (last && last.courseId === "free-starter") {
-      const free = freeBootcampProgress();
-      detail = text(
-        `最近：免費入門 · Lesson ${(Number(last.lessonIndex) || 0) + 1} · 進度 ${free.completed}/${free.total}`,
-        `Recent: Free Intro · Lesson ${(Number(last.lessonIndex) || 0) + 1} · ${free.completed}/${free.total}`
-      );
-    } else if (last && last.courseId) {
-      const course = getPremiumCourses().find(c => c.id === last.courseId);
-      const progress = courseProgress(last.courseId);
-      const title = course ? (state.lang === "zh" ? course.zhTitle : course.enTitle) : last.courseId;
-      detail = text(
-        `最近：${title} · Lesson ${(Number(last.lessonIndex) || 0) + 1} · ${progress.completed}/${progress.total}`,
-        `Recent: ${title} · Lesson ${(Number(last.lessonIndex) || 0) + 1} · ${progress.completed}/${progress.total}`
-      );
-    }
-    return {
-      primary: text("繼續上次學習", "Continue Learning"),
-      secondary: text("探索進階課程", "Explore Premium Courses"),
-      note: `${greet}${detail}`,
-      primaryAction: "homeContinueLastLearning()",
-      secondaryAction: "setRoute('premium')"
-    };
-  }
-
+  const cta = getHomePrimaryAction();
   return {
-    primary: text("繼續免費課程", "Continue Free Course"),
-    secondary: text("探索進階課程", "Explore Premium Courses"),
-    note: text(`${greet}免費課程不需付款，進度會自動保存。`, `${greet}free courses need no payment, and progress is saved.`),
-    primaryAction: "openFreeLesson(0)",
-    secondaryAction: "setRoute('premium')"
+    primary: cta.label,
+    secondary: cta.secondaryLabel,
+    note: cta.note,
+    primaryAction: cta.action,
+    secondaryAction: cta.secondaryAction
   };
 }
 
+function renderOnboardingCard() {
+  if (!shouldShowOnboarding()) return "";
+  return `
+    <section class="home-onboarding-card" aria-label="${text("新手引導", "Onboarding")}">
+      <div class="wrap">
+        <div class="home-onboarding-panel">
+          <button type="button" class="home-onboarding-close" onclick="dismissOnboarding()" aria-label="${text("關閉", "Close")}">×</button>
+          <h2>${text("歡迎來到 AI Skill Bridge", "Welcome to AI Skill Bridge")}</h2>
+          <p>${text("你可以按照以下步驟開始：", "Get started in three steps:")}</p>
+          <ol>
+            <li>${text("完成免費入門課程", "Complete the free foundation course")}</li>
+            <li>${text("選擇目前需要的 AI 能力", "Choose the AI skill you need")}</li>
+            <li>${text("完成課程並儲存成果", "Finish lessons and save your results")}</li>
+          </ol>
+          <div class="home-hero-cta">
+            <button type="button" class="home-btn home-btn-primary" onclick="startFreeCourseFromOnboarding()">${text("開始免費課程", "Start Free Course")}</button>
+            <button type="button" class="home-btn home-btn-secondary" onclick="dismissOnboarding()">${text("稍後再說", "Maybe Later")}</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderHomeAssessmentNudge() {
+  return `
+    <section class="home-assessment-nudge" aria-label="${text("建議第一步：AI 能力測驗", "Recommended first step: AI skill assessment")}">
+      <div class="wrap">
+        <div class="home-assessment-card">
+          <div class="home-assessment-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="28" fill="rgba(30,58,138,0.08)" stroke="rgba(30,58,138,0.22)" stroke-width="2"/>
+              <circle cx="32" cy="32" r="16" stroke="#1e3a8a" stroke-width="2" stroke-dasharray="4 3" opacity="0.55"/>
+              <path d="M32 12v8M32 44v8M12 32h8M44 32h8" stroke="#2f5bea" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="32" cy="32" r="4" fill="#1e3a8a"/>
+              <path d="M32 32 L46 22" stroke="#1e3a8a" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="46" cy="22" r="3" fill="#2f5bea"/>
+            </svg>
+          </div>
+          <div class="home-assessment-copy">
+            <span class="home-assessment-badge">
+              <span class="home-assessment-badge-num">01</span>
+              ${text("建議第一步", "RECOMMENDED FIRST STEP")}
+            </span>
+            <h2>${text("不知道該從哪門課開始？", "Not sure which course to start with?")}</h2>
+            <p class="home-assessment-lead">${text(
+              "先完成 AI 能力測驗，了解你目前的能力與需求，取得最適合你的學習路徑建議。",
+              "Take the AI skill assessment to understand your current strengths and get a learning path matched to your goals."
+            )}</p>
+            <p class="home-assessment-note">${text(
+              "完成後即可查看推薦能力方向與課程。",
+              "See your recommended skills and courses after completing the assessment."
+            )}</p>
+          </div>
+          <div class="home-assessment-action">
+            <button type="button" class="home-assessment-cta" onclick="setRoute('assessment')">
+              ${text("開始 AI 能力測驗", "Start AI Skill Assessment")}
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 function renderHomeHeroPreview() {
-  const isPreview = !state.user;
+  const isGuest = !state.user;
   const stats = getHomePlatformStats();
-  const unlocked = isPreview ? 1 : countUnlockedPremiumCourses();
-  const completedLessons = isPreview ? 3 : countCompletedLessonsAcrossPlatform();
-  const packageItems = isPreview ? 2 : countCompletedResultPackageItems();
-  const free = freeBootcampProgress();
-  const progressPercent = isPreview ? 38 : (free.total ? free.percent : 0);
-  const planLabel = !state.user
-    ? text("平台預覽", "Platform Preview")
+  const free = isGuest
+    ? { completed: 0, total: stats.freeLessonCount || (typeof FREE_BOOTCAMP !== "undefined" ? FREE_BOOTCAMP.length : 0), percent: 0 }
+    : freeBootcampProgress();
+  const unlocked = isGuest ? 0 : countUnlockedPremiumCourses();
+  const completedLessons = isGuest ? 0 : countCompletedLessonsAcrossPlatform();
+  const packageItems = isGuest ? 0 : countCompletedResultPackageItems();
+  const progressPercent = isGuest ? 0 : (free.total ? free.percent : 0);
+  const planLabel = isGuest
+    ? text("訪客", "Guest")
     : getAccountAccessLabel();
-  const accountLine = !state.user
+  const accountLine = isGuest
     ? ""
     : `<div class="home-preview-account">${renderAccountIdentity()}</div>`;
+  const previewCta = isGuest
+    ? text("登入後開始", "Sign In to Start")
+    : getHomePrimaryAction().label;
 
   const capabilities = getPremiumCourses().slice(0, 6).map(course => {
     const label = HOME_CAPABILITY_LABELS[course.id] || { zh: course.zhTitle, en: course.enTitle };
-    const unlockedCourse = !isPreview && hasCourseAccess(course.id);
+    const unlockedCourse = !isGuest && hasCourseAccess(course.id);
     return `
       <li class="${unlockedCourse ? "is-unlocked" : "is-locked"}">
         <span>${state.lang === "zh" ? label.zh : label.en}</span>
@@ -1655,7 +1974,7 @@ function renderHomeHeroPreview() {
         <div class="home-preview-chrome">
           <span></span><span></span><span></span>
           <strong>${text("我的學習中心", "Learning Center")}</strong>
-          ${isPreview ? `<em class="home-preview-badge">${text("平台預覽", "Platform Preview")}</em>` : `<em class="home-preview-badge home-preview-badge-live">${planLabel}</em>`}
+          <em class="home-preview-badge">${planLabel}</em>
         </div>
         ${accountLine}
         <div class="home-preview-body">
@@ -1663,8 +1982,12 @@ function renderHomeHeroPreview() {
             <p class="home-preview-kicker">${text("目前課程進度", "Current course progress")}</p>
             <h3>${text("免費入門／AI 新手訓練營", "Free Intro / AI Beginner Bootcamp")}</h3>
             <div class="home-preview-track"><div class="home-preview-bar" style="width:${progressPercent}%"></div></div>
-            <p class="home-preview-meta">${isPreview ? `3 / ${stats.freeLessonCount || 8}` : `${free.completed} / ${free.total}`} · ${progressPercent}%</p>
-            <button type="button" class="home-btn home-btn-primary home-btn-compact" onclick="homePrimaryAction()">${text("繼續學習", "Continue")}</button>
+            <p class="home-preview-meta">${
+              isGuest
+                ? text("尚未開始", "Not started yet")
+                : `${free.completed} / ${free.total} · ${progressPercent}%`
+            }</p>
+            <button type="button" class="home-btn home-btn-primary home-btn-compact" onclick="homePrimaryAction()">${previewCta}</button>
           </div>
           <div class="home-preview-side">
             <article>
@@ -1692,7 +2015,7 @@ function renderHomeHeroPreview() {
 
 function renderHomeHero() {
   const cta = homeHeroCtaCopy();
-  const secondaryAction = cta.secondaryAction || "setRoute('map')";
+  const secondaryAction = cta.secondaryAction || "setRoute('result-packages')";
   return `
     <section class="home-hero">
       <div class="home-hero-glow home-hero-glow-a" aria-hidden="true"></div>
@@ -1710,7 +2033,6 @@ function renderHomeHero() {
             <button class="home-btn home-btn-primary" onclick="${cta.primaryAction}">${cta.primary}</button>
             <button class="home-btn home-btn-secondary" onclick="${secondaryAction}">${cta.secondary}</button>
           </div>
-          <button type="button" class="home-text-link" onclick="setRoute('result-packages')">${text("探索成果禮包", "Explore Result Packages")} →</button>
           <p class="home-trust-note">${cta.note}</p>
           <ul class="home-trust-list">
             <li>${text("Google 登入即可開始", "Start with Google sign-in")}</li>
@@ -1955,6 +2277,7 @@ function renderHomeAudience() {
 }
 
 function renderHomeFinalCTA() {
+  const cta = getHomePrimaryAction();
   return `
     <section class="home-cta-banner">
       <div class="wrap home-cta-inner">
@@ -1966,8 +2289,8 @@ function renderHomeFinalCTA() {
           )}</p>
         </div>
         <div class="home-hero-cta">
-          <button class="home-btn home-btn-primary home-btn-light" onclick="homePrimaryAction()">${text("免費開始學習", "Start Learning Free")}</button>
-          <button class="home-btn home-btn-ghost" onclick="setRoute('map')">${text("查看課程地圖", "View Learning Map")}</button>
+          <button class="home-btn home-btn-primary home-btn-light" onclick="${cta.action}">${cta.label}</button>
+          <button class="home-btn home-btn-ghost" onclick="${cta.secondaryAction}">${cta.secondaryLabel}</button>
         </div>
       </div>
     </section>
@@ -1978,6 +2301,8 @@ function home() {
   return homeLandingShell(`
     <main class="home-page">
       ${renderHomeHero()}
+      ${renderOnboardingCard()}
+      ${renderHomeAssessmentNudge()}
       ${renderHomeStats()}
       ${renderHomeCapabilities()}
       ${renderHomeProcess()}
@@ -2045,16 +2370,17 @@ function learningMap() {
     <main class="page">
       <div class="wrap">
         <section class="panel">
-          <span class="tag free">${text("學習路徑", "Learning Path")}</span>
-          <h1>${text("我的學習地圖", "My Learning Map")}</h1>
+          <span class="tag free">${text("所有課程", "All Courses")}</span>
+          <h1>${text("所有課程", "All Courses")}</h1>
           <p class="lead">${text(
-            "依正式產品架構循序前進：免費入門 → 升學 → 大學學習 → 研究競賽 → 求職 → 職場 → 創業自動化。",
-            "Follow the official path: Free intro → Admissions → College learning → Research → Career → Workplace → Startup automation."
+            "從免費入門到升學、學習、研究、求職、職場與創業，選擇你目前最需要的 AI 能力路徑。",
+            "Choose the AI learning path that matches your current goals, from free foundations to study, research, career, work, and startup skills."
           )}</p>
           ${state.user ? renderAccountMembershipSummary() : ""}
         </section>
 
         <section class="panel map-path-panel">
+          <h2 class="map-section-title">${text("免費入門課程", "Free Foundation Course")}</h2>
           <article class="card map-path-card">
             <span class="tag free">${text("免費", "Free")}</span>
             <h2>${text("免費入門／AI 新手訓練營", "Free Intro / AI Beginner Bootcamp")}</h2>
@@ -2065,18 +2391,39 @@ function learningMap() {
             <p>${text("學習進度", "Progress")}：${state.user ? `${freeProgress.completed}/${freeProgress.total}（${freeProgress.percent}%）` : text("登入後顯示個人進度", "Sign in to view personal progress")}</p>
             <div class="package-progress-track"><div class="package-progress-bar" style="width:${state.user ? freeProgress.percent : 0}%"></div></div>
             <div class="btnrow">
-              <button class="btn primary" onclick="setRoute('courses')">${text("查看課程", "View Course")}</button>
+              <button class="btn primary" onclick="setRoute('courses')">${
+                state.user && freeProgress.completed > 0 && freeProgress.completed < freeProgress.total
+                  ? text("繼續學習", "Continue Learning")
+                  : state.user && freeProgress.completed >= freeProgress.total && freeProgress.total > 0
+                  ? text("查看成果", "View Results")
+                  : state.user
+                  ? text("開始學習", "Start Learning")
+                  : text("查看課程", "View Course")
+              }</button>
               <button class="btn secondary" onclick="openResultPackage('free-starter')">${text("查看成果包", "View Package")}</button>
             </div>
           </article>
 
+          <h2 class="map-section-title" style="margin-top:28px">${text("六門付費課程", "Six Premium Courses")}</h2>
           ${premiumCourses.map((course, index) => {
             const unlocked = hasCourseAccess(course.id);
             const progress = courseProgress(course.id);
             const pkg = getResultPackageByCourseId(course.id);
             const lessonCount = (course.zhLessons || course.enLessons || []).length;
+            const primaryLabel = unlocked
+              ? (progress.completed > 0 && progress.completed < progress.total
+                ? text("繼續學習", "Continue Learning")
+                : progress.completed >= progress.total && progress.total > 0
+                ? text("查看成果", "View Results")
+                : text("開始學習", "Start Learning"))
+              : text("查看課程", "View Course");
+            const primaryAction = unlocked
+              ? (progress.completed >= progress.total && progress.total > 0 && pkg
+                ? `openResultPackage('${pkg.id}')`
+                : `openCourse('${course.id}')`)
+              : "setRoute('premium')";
             return `
-              <div class="map-path-arrow">↓</div>
+              ${index === 0 ? "" : `<div class="map-path-arrow">↓</div>`}
               <article class="card map-path-card ${unlocked ? "" : "map-path-card-locked"}">
                 <span class="tag ${unlocked ? "free" : "premiumtag"}">${unlocked ? text("已解鎖", "Unlocked") : text("尚未解鎖", "Locked")}</span>
                 <h2>${index + 1}. ${state.lang === "zh" ? course.zhTitle : course.enTitle}</h2>
@@ -2087,11 +2434,10 @@ function learningMap() {
                 <p>${text("學習進度", "Progress")}：${progress.completed}/${progress.total}（${progress.percent}%）</p>
                 <div class="package-progress-track"><div class="package-progress-bar" style="width:${progress.percent}%"></div></div>
                 <div class="btnrow">
+                  <button class="btn ${unlocked ? "primary" : "secondary"}" onclick="${primaryAction}">${primaryLabel}</button>
                   ${unlocked
-                    ? `<button class="btn primary" onclick="openCourse('${course.id}')">${text("查看課程", "View Course")}</button>
-                       <button class="btn secondary" onclick="openResultPackage('${pkg ? pkg.id : ""}')">${text("查看成果包", "View Package")}</button>`
-                    : `<button class="btn primary" onclick="setRoute('premium')">${text("查看課程", "View Course")}</button>
-                       <a class="btn secondary" href="${course.paymentUrl || "#"}" target="_blank" rel="noopener">${text("解鎖此課程", "Unlock Course")}</a>`
+                    ? `<button class="btn secondary" onclick="openResultPackage('${pkg ? pkg.id : ""}')">${text("查看成果包", "View Package")}</button>`
+                    : `<a class="btn secondary" href="${course.paymentUrl || "#"}" target="_blank" rel="noopener">${text("解鎖此課程", "Unlock Course")}</a>`
                   }
                 </div>
               </article>
@@ -2340,8 +2686,12 @@ function courses() {
   const loggedIn = !!state.user;
   const progress = freeBootcampProgress();
   const startCta = loggedIn
-    ? `<button class="btn primary" onclick="openFreeLesson(0)">${text("開始免費課程", "Start Free Course")}</button>`
-    : `<button class="btn primary" onclick='requireGoogleLogin({"route":"freeLesson","lessonId":0,"action":"openFreeLesson"})'>${text("使用 Google 登入後開始免費課程", "Sign in with Google to Start")}</button>`;
+    ? (progress.completed > 0 && progress.completed < progress.total
+      ? `<button class="btn primary" onclick="homeContinueLastLearning()">${text("繼續學習", "Continue Learning")}</button>`
+      : progress.completed >= progress.total && progress.total > 0
+      ? `<button class="btn primary" onclick="openResultPackage('free-starter')">${text("查看成果", "View Results")}</button>`
+      : `<button class="btn primary" onclick="openFreeLesson(0)">${text("開始學習", "Start Learning")}</button>`)
+    : `<button class="btn primary" onclick='requireGoogleLogin({"route":"freeLesson","lessonId":0,"action":"openFreeLesson"})'>${text("登入後開始", "Sign In to Start")}</button>`;
 
   return shell(`
     <main class="page">
@@ -2393,9 +2743,9 @@ function courses() {
               <p><b>${text("本課成果", "Output")}：</b>${lesson.output}</p>
               ${loggedIn ? `
                 <p><b>${text("測驗", "Quiz")}：</b>${(lesson.quizItems || []).length} ${text("題情境測驗", "scenario questions")}</p>
-                <button class="btn primary" onclick="openFreeLesson(${i})">${text("進入本課", "Open Lesson")}</button>
+                <button class="btn primary" onclick="openFreeLesson(${i})">${text("開始學習", "Start Learning")}</button>
               ` : `
-                <button class="btn primary" onclick='requireGoogleLogin({"route":"freeLesson","lessonId":${i},"action":"openFreeLesson"})'>${text("使用 Google 登入後開始免費課程", "Sign in with Google to Start")}</button>
+                <button class="btn primary" onclick='requireGoogleLogin({"route":"freeLesson","lessonId":${i},"action":"openFreeLesson"})'>${text("登入後開始", "Sign In to Start")}</button>
               `}
             </article>
           `).join("")}
