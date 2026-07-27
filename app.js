@@ -1293,7 +1293,6 @@ function nav() {
   const moreLinks = [
     { route: "freePortfolio", zh: "我的免費成果包", en: "My Free Portfolio" },
     { route: "result-packages", zh: "成果禮包", en: "Result Packages" },
-    { action: "goApplicationPackage()", zh: "大學申請包", en: "Application Package" },
     { route: "tools", zh: "AI 工具", en: "AI Tools" },
     { route: "prompts", zh: "Prompt 範例", en: "Prompts" },
     { route: "tutor", zh: "AI Tutor", en: "AI Tutor" },
@@ -1306,14 +1305,7 @@ function nav() {
     </button>
   `).join("");
 
-  const filteredMoreLinks = moreLinks.filter(item => {
-    if (item.zh === "大學申請包") {
-      return typeof hasCourseAccess === "function" && hasCourseAccess("admissions");
-    }
-    return true;
-  });
-
-  const moreHtml = filteredMoreLinks.map(item => `
+  const moreHtml = moreLinks.map(item => `
     <button onclick="${item.action ? item.action : `setRoute('${item.route}')`}; closeMoreMenu();">
       ${state.lang === "zh" ? item.zh : item.en}
     </button>
@@ -4905,6 +4897,76 @@ function resultPackageProgressByConfig(pkg) {
   };
 }
 
+function hasApplicationPackageAccess() {
+  return typeof hasCourseAccess === "function" && hasCourseAccess("admissions");
+}
+
+function applicationPackageAccessLabel() {
+  if (hasApplicationPackageAccess()) return text("已解鎖", "Unlocked");
+  return text("尚未解鎖", "Locked");
+}
+
+function getResultPackagesHubEntries() {
+  const packages = getResultPackageConfigList().filter(pkg => pkg.id !== "pkg-admissions");
+  const order = [
+    "free-starter",
+    "pkg-research-competition",
+    "pkg-career-internship",
+    "pkg-workplace-productivity",
+    "pkg-startup-automation",
+    "pkg-college-learning"
+  ];
+  const sorted = [];
+  order.forEach(id => {
+    const pkg = packages.find(p => p.id === id);
+    if (pkg) sorted.push({ type: "package", pkg });
+  });
+  packages.forEach(pkg => {
+    if (!sorted.some(entry => entry.type === "package" && entry.pkg.id === pkg.id)) {
+      sorted.push({ type: "package", pkg });
+    }
+  });
+  const freeIndex = sorted.findIndex(entry => entry.type === "package" && entry.pkg.id === "free-starter");
+  sorted.splice(freeIndex >= 0 ? freeIndex + 1 : 0, 0, { type: "application-kit" });
+  return sorted;
+}
+
+function renderApplicationKitHubCard(index) {
+  const unlocked = hasApplicationPackageAccess();
+  const needsLogin = !state.user;
+  const progress = (!needsLogin && unlocked)
+    ? applicationPackageProgress(false)
+    : { completed: 0, total: APPLICATION_PACKAGE_ITEMS.length, percent: 0 };
+  const course = typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === "admissions") : null;
+  const price = course ? course.price : "";
+
+  return `
+    <article class="card result-package-card ${unlocked && !needsLogin ? "" : "result-package-card-locked"}">
+      <span class="tag ${unlocked ? "free" : "premiumtag"}">${applicationPackageAccessLabel()}</span>
+      <h2>${index}. ${text("大學申請包", "University Application Kit")}</h2>
+      <p><b>${text("主題", "Topics")}：</b>${text("大學申請 · 學習歷程 · 面試準備 · 申請文件", "University apps · Learning portfolio · Interview prep · Application docs")}</p>
+      <p><b>${text("所屬課程", "Course")}：</b>${text("高中生申請大學 AI 實戰課", "AI University Application Course")}</p>
+      <p>${text(
+        "整合申請動機、自傳、學習歷程、面試準備與資料檢查工具，協助你完成完整的大學申請成果。",
+        "Create a complete university application package with personal statements, learning portfolios, interview preparation, and application checklists."
+      )}</p>
+      <p>${text("完成進度", "Progress")}：${needsLogin ? text("登入後顯示", "Sign in to view") : `${progress.completed} / ${progress.total}（${progress.percent}%）`}</p>
+      <div class="package-progress-track"><div class="package-progress-bar" style="width:${needsLogin ? 0 : progress.percent}%"></div></div>
+      <div class="btnrow">
+        ${needsLogin
+          ? `<button class="btn primary" onclick='requireGoogleLogin({"route":"applicationPackage"})'>${text("開啟申請包", "Open Application Kit")}</button>`
+          : unlocked
+          ? `<button class="btn primary" onclick="goApplicationPackage()">${text("開啟申請包", "Open Application Kit")}</button>`
+          : `<button class="btn secondary" onclick="goApplicationPackage()">${text("已鎖定", "Locked")}</button>
+             <button class="btn secondary" onclick="setRoute('premium')">${text("查看課程", "View Course")}</button>
+             ${course ? `<a class="btn primary" href="${course.paymentUrl || "#"}" target="_blank" rel="noopener">${text("解鎖此課程", "Unlock Course")} · ${price}</a>` : ""}`
+        }
+      </div>
+      ${!unlocked && !needsLogin ? `<p class="course-result-meta">${text("價格", "Price")}：${price}</p>` : ""}
+    </article>
+  `;
+}
+
 function saveCourseResultEntry(courseId, lessonIndex, options = {}) {
   const pkg = getResultPackageByCourseId(courseId) || getResultPackageById(courseId);
   if (pkg && pkg.free && !state.user) {
@@ -4943,6 +5005,41 @@ function saveCourseResultEntry(courseId, lessonIndex, options = {}) {
   if (state.route === "courseResultPackage" || state.route === "lesson" || state.route === "result-packages") {
     render();
   }
+}
+
+function renderResultPackageHubCard(pkg, index) {
+  const needsLogin = pkg.free && !state.user;
+  const unlocked = hasResultPackageAccess(pkg.id);
+  const progress = (!state.user && pkg.free)
+    ? { completed: 0, total: Number(pkg.totalItems) || (pkg.items ? pkg.items.length : 0), percent: 0 }
+    : resultPackageProgressByConfig(pkg);
+  const course = pkg.courseId && typeof PREMIUM !== "undefined"
+    ? PREMIUM.find(p => p.id === pkg.courseId)
+    : null;
+  const price = pkg.free ? text("免費", "Free") : (course ? course.price : "");
+
+  return `
+    <article class="card result-package-card ${unlocked && !needsLogin ? "" : "result-package-card-locked"}">
+      <span class="tag ${pkg.free || unlocked ? "free" : "premiumtag"}">${resultPackageAccessLabel(pkg.id)}</span>
+      <h2>${index}. ${state.lang === "zh" ? pkg.zhTitle : pkg.enTitle}</h2>
+      <p><b>${text("所屬課程", "Course")}：</b>${state.lang === "zh" ? pkg.zhCourseName : pkg.enCourseName}</p>
+      <p>${state.lang === "zh" ? pkg.zhFinalOutcome : pkg.enFinalOutcome}</p>
+      <p>${text("完成進度", "Progress")}：${needsLogin ? text("登入後顯示", "Sign in to view") : `${progress.completed} / ${progress.total}（${progress.percent}%）`}</p>
+      <div class="package-progress-track"><div class="package-progress-bar" style="width:${needsLogin ? 0 : progress.percent}%"></div></div>
+      <div class="btnrow">
+        ${needsLogin
+          ? `<button class="btn primary" onclick="openResultPackage('${pkg.id}')">${text("查看介紹", "View Intro")}</button>
+             <button class="btn secondary" onclick='requireGoogleLogin({"route":"courseResultPackage","packageId":"${pkg.id}","action":"openResultPackage"})'>${text("使用 Google 登入", "Sign in with Google")}</button>`
+          : unlocked
+          ? `<button class="btn primary" onclick="openResultPackage('${pkg.id}')">${text("查看成果包", "View Package")}</button>`
+          : `<button class="btn secondary" onclick="showResultPackageLockedMessage('${pkg.id}')">${text("已鎖定", "Locked")}</button>
+             <button class="btn secondary" onclick="setRoute('premium')">${text("查看課程", "View Course")}</button>
+             ${course ? `<a class="btn primary" href="${course.paymentUrl || "#"}" target="_blank" rel="noopener">${text("解鎖此課程", "Unlock Course")} · ${price}</a>` : ""}`
+        }
+      </div>
+      ${!unlocked && !pkg.free ? `<p class="course-result-meta">${text("價格", "Price")}：${price}</p>` : ""}
+    </article>
+  `;
 }
 
 function openCourseResultPackage(courseId) {
@@ -5095,7 +5192,7 @@ function renderLessonResultPackagePanel(courseId, lessonIndex, detail) {
 }
 
 function resultPackages() {
-  const packages = getResultPackageConfigList();
+  const hubEntries = getResultPackagesHubEntries();
   const membership = state.user ? `
     <section class="panel" style="margin-bottom:24px">
       <h2>${text("帳號存取狀態", "Account Access")}</h2>
@@ -5117,39 +5214,11 @@ function resultPackages() {
         ${membership}
 
         <div class="grid three result-package-overview-grid">
-          ${packages.map((pkg, index) => {
-            const needsLogin = pkg.free && !state.user;
-            const unlocked = hasResultPackageAccess(pkg.id);
-            const progress = (!state.user && pkg.free)
-              ? { completed: 0, total: Number(pkg.totalItems) || (pkg.items ? pkg.items.length : 0), percent: 0 }
-              : resultPackageProgressByConfig(pkg);
-            const course = pkg.courseId && typeof PREMIUM !== "undefined"
-              ? PREMIUM.find(p => p.id === pkg.courseId)
-              : null;
-            const price = pkg.free ? text("免費", "Free") : (course ? course.price : "");
-            return `
-              <article class="card result-package-card ${unlocked && !needsLogin ? "" : "result-package-card-locked"}">
-                <span class="tag ${pkg.free || unlocked ? "free" : "premiumtag"}">${resultPackageAccessLabel(pkg.id)}</span>
-                <h2>${index}. ${state.lang === "zh" ? pkg.zhTitle : pkg.enTitle}</h2>
-                <p><b>${text("所屬課程", "Course")}：</b>${state.lang === "zh" ? pkg.zhCourseName : pkg.enCourseName}</p>
-                <p>${state.lang === "zh" ? pkg.zhFinalOutcome : pkg.enFinalOutcome}</p>
-                <p>${text("完成進度", "Progress")}：${needsLogin ? text("登入後顯示", "Sign in to view") : `${progress.completed} / ${progress.total}（${progress.percent}%）`}</p>
-                <div class="package-progress-track"><div class="package-progress-bar" style="width:${needsLogin ? 0 : progress.percent}%"></div></div>
-                <div class="btnrow">
-                  ${needsLogin
-                    ? `<button class="btn primary" onclick="openResultPackage('${pkg.id}')">${text("查看介紹", "View Intro")}</button>
-                       <button class="btn secondary" onclick='requireGoogleLogin({"route":"courseResultPackage","packageId":"${pkg.id}","action":"openResultPackage"})'>${text("使用 Google 登入", "Sign in with Google")}</button>`
-                    : unlocked
-                    ? `<button class="btn primary" onclick="openResultPackage('${pkg.id}')">${text("查看成果包", "View Package")}</button>`
-                    : `<button class="btn secondary" onclick="showResultPackageLockedMessage('${pkg.id}')">${text("已鎖定", "Locked")}</button>
-                       <button class="btn secondary" onclick="setRoute('premium')">${text("查看課程", "View Course")}</button>
-                       ${course ? `<a class="btn primary" href="${course.paymentUrl || "#"}" target="_blank" rel="noopener">${text("解鎖此課程", "Unlock Course")} · ${price}</a>` : ""}`
-                  }
-                </div>
-                ${!unlocked && !pkg.free ? `<p class="course-result-meta">${text("價格", "Price")}：${price}</p>` : ""}
-              </article>
-            `;
-          }).join("")}
+          ${hubEntries.map((entry, index) => (
+            entry.type === "application-kit"
+              ? renderApplicationKitHubCard(index)
+              : renderResultPackageHubCard(entry.pkg, index)
+          )).join("")}
         </div>
       </div>
     </main>
