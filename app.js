@@ -609,6 +609,153 @@ function getAllAccessCourse() {
   return PREMIUM.find(p => p.id === "all-access") || null;
 }
 
+function getFreeCourseOffer() {
+  if (typeof FREE_COURSE_OFFER !== "undefined" && FREE_COURSE_OFFER) return FREE_COURSE_OFFER;
+  return { id: "free", price: 0, currency: "TWD", isFree: true, lessonCount: 8 };
+}
+
+function normalizePriceNumber(value) {
+  if (value == null || value === "") return null;
+  if (typeof value === "number" && Number.isFinite(value)) return Math.round(value);
+  const match = String(value).replace(/,/g, "").match(/(\d+)/);
+  return match ? Number(match[1]) : null;
+}
+
+function formatTwdPrice(price) {
+  const amount = normalizePriceNumber(price);
+  if (amount === 0) return text("免費", "Free");
+  if (amount == null || Number.isNaN(amount)) return "";
+  return `NT$${amount.toLocaleString("en-US")}`;
+}
+
+function getCoursePriceInfo(courseOrId) {
+  if (courseOrId === "free" || courseOrId === "free-starter") {
+    const free = getFreeCourseOffer();
+    return {
+      id: "free",
+      price: 0,
+      originalPrice: null,
+      currency: free.currency || "TWD",
+      isFree: true,
+      course: free
+    };
+  }
+  const course = typeof courseOrId === "object" && courseOrId
+    ? courseOrId
+    : ((typeof PREMIUM !== "undefined" && PREMIUM.find(p => p.id === courseOrId)) || null);
+  if (!course) {
+    return { id: "", price: null, originalPrice: null, currency: "TWD", isFree: false, course: null };
+  }
+  const price = normalizePriceNumber(course.price);
+  const originalPrice = normalizePriceNumber(course.originalPrice);
+  const isFree = course.isFree === true || price === 0;
+  return {
+    id: course.id || "",
+    price: isFree ? 0 : price,
+    originalPrice: originalPrice != null ? originalPrice : null,
+    currency: course.currency || "TWD",
+    isFree,
+    course
+  };
+}
+
+function getCourseAccessStatusLabel(courseId) {
+  if (courseId === "free" || courseId === "free-starter") {
+    return text("免費", "Free");
+  }
+  if (hasAllAccessPass() && courseId !== "all-access") {
+    return text("全站已解鎖", "All-access unlocked");
+  }
+  if (courseId === "all-access" && hasAllAccessPass()) {
+    return text("全站已解鎖", "All-access unlocked");
+  }
+  if (hasCourseAccess(courseId)) {
+    return text("已解鎖", "Unlocked");
+  }
+  return text("尚未解鎖", "Locked");
+}
+
+function renderPaymentComingSoonNote() {
+  return `<p class="course-price-coming-soon">${text("付款功能建置中", "Payment service coming soon")}</p>`;
+}
+
+function renderCourseProductFacts() {
+  return `
+    <ul class="course-price-facts">
+      <li><span>${text("商品類型", "Product Type")}</span><strong>${text("線上 AI 教育課程與數位學習內容", "Online AI courses and digital learning content")}</strong></li>
+      <li><span>${text("計價貨幣", "Currency")}</span><strong>${text("新臺幣", "New Taiwan Dollar")}</strong></li>
+      <li><span>${text("交付方式", "Delivery")}</span><strong>${text("帳號開通後於 AI Skill Bridge 網站登入使用", "Access through the AI Skill Bridge website after account activation")}</strong></li>
+      <li><span>${text("實體配送", "Physical Delivery")}</span><strong>${text("無", "None")}</strong></li>
+    </ul>
+  `;
+}
+
+function renderCoursePriceBlock(courseOrId, options = {}) {
+  const info = getCoursePriceInfo(courseOrId);
+  const compact = Boolean(options.compact);
+  const showFacts = options.showFacts !== false && !compact;
+  const lessonCount = options.lessonCount != null
+    ? options.lessonCount
+    : (info.isFree
+      ? (info.course && info.course.lessonCount) || 8
+      : ((info.course && (info.course.zhLessons || info.course.enLessons)) || []).length || 10);
+  const packageName = options.packageName || "";
+
+  if (info.isFree) {
+    return `
+      <div class="course-price-block is-free ${compact ? "is-compact" : ""}">
+        <p class="course-price-label">${text("課程售價", "Course Price")}</p>
+        <p class="course-price-amount is-free">${formatTwdPrice(0)}</p>
+        <p class="course-price-meta">${text(`${lessonCount}堂實作課`, `${lessonCount} practical lessons`)}</p>
+        ${compact ? "" : renderCourseProductFacts()}
+      </div>
+    `;
+  }
+
+  if (info.id === "all-access") {
+    const saveAmount = (info.originalPrice != null && info.price != null)
+      ? Math.max(info.originalPrice - info.price, 0)
+      : 0;
+    return `
+      <div class="course-price-block is-all-access ${compact ? "is-compact" : ""}">
+        <p class="course-price-label">${text("全站通行證", "All-Access Pass")}</p>
+        ${info.originalPrice != null ? `<p class="course-price-original"><span>${text("原價", "Regular Price")}</span> <s>${formatTwdPrice(info.originalPrice)}</s></p>` : ""}
+        <p class="course-price-amount is-earlybird"><span class="course-price-eyebrow">${text("早鳥價", "Early-bird Price")}</span>${formatTwdPrice(info.price)}</p>
+        ${saveAmount > 0 ? `<p class="course-price-save">${text(`現省 ${formatTwdPrice(saveAmount)}`, `Save ${formatTwdPrice(saveAmount)}`)}</p>` : ""}
+        <p class="course-price-meta">${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</p>
+        ${compact ? "" : `
+          <ul class="course-price-includes">
+            <li>${text("六門付費課程", "Six premium courses")}</li>
+            <li>${text("共60堂實戰課", "60 practical lessons in total")}</li>
+            <li>${text("六種核心 AI 能力", "Six core AI capabilities")}</li>
+            <li>${text("全部對應付費成果包", "All matching premium result packages")}</li>
+            <li>${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</li>
+          </ul>
+          ${renderPaymentComingSoonNote()}
+          ${showFacts ? renderCourseProductFacts() : ""}
+        `}
+      </div>
+    `;
+  }
+
+  return `
+    <div class="course-price-block ${compact ? "is-compact" : ""}">
+      <p class="course-price-label">${text("課程售價", "Course Price")}</p>
+      <p class="course-price-amount">${formatTwdPrice(info.price)}</p>
+      <p class="course-price-meta">${text("一次付費", "One-time payment")}</p>
+      ${compact ? "" : `
+        <ul class="course-price-includes">
+          <li>${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</li>
+          <li>${text(`包含${lessonCount}堂線上實戰課與對應成果包`, `Includes ${lessonCount} practical online lessons and the corresponding result package`)}${packageName ? `（${packageName}）` : ""}</li>
+          <li>${text("本商品為線上數位課程，不提供實體配送", "This is a digital course with no physical delivery")}</li>
+        </ul>
+        ${renderPaymentComingSoonNote()}
+        ${showFacts ? renderCourseProductFacts() : ""}
+      `}
+    </div>
+  `;
+}
+
 /**
  * Single source of truth for plan: public.profiles.plan → state.userPlan.
  * unlocked_courses column does not exist yet → state.unlockedCourses stays [].
@@ -1614,23 +1761,30 @@ function getHomePlatformStats() {
 
 function getHomeSingleCoursePriceLabel() {
   const courses = getPremiumCourses();
-  const amounts = courses.map(c => {
-    const match = String(c.price || "").replace(/,/g, "").match(/(\d+)/);
-    return match ? Number(match[1]) : null;
-  }).filter(n => n != null);
+  const amounts = courses
+    .map(c => normalizePriceNumber(c.price))
+    .filter(n => n != null && n > 0);
   if (!amounts.length) return text("依課程而定", "Varies by course");
   const min = Math.min(...amounts);
-  return text(`價格自 NT$${min.toLocaleString("en-US")} 起`, `From NT$${min.toLocaleString("en-US")}`);
+  return text(`付費課程 ${formatTwdPrice(min)} 起`, `Premium courses from ${formatTwdPrice(min)}`);
 }
 
 function getHomeAllAccessPriceLabel() {
-  const allAccess = getAllAccessCourse();
-  if (!allAccess || !allAccess.price) return "";
-  const price = String(allAccess.price);
-  const formal = price.match(/正式\s*(NT\$[\d,]+)/i) || price.match(/Official\s*(NT\$[\d,]+)/i);
-  if (formal) return formal[1];
-  const any = price.match(/NT\$[\d,]+/g);
-  return any && any.length ? any[any.length - 1] : price;
+  const info = getCoursePriceInfo("all-access");
+  if (info.price == null) return "";
+  return formatTwdPrice(info.price);
+}
+
+function renderHomePriceTeaser() {
+  const single = getHomeSingleCoursePriceLabel();
+  const allAccess = getHomeAllAccessPriceLabel();
+  return `
+    <p class="home-price-teaser">
+      <button type="button" class="home-price-teaser-link" onclick="setRoute('map')">
+        ${single}${allAccess ? text(`｜全站通行證早鳥價 ${allAccess}`, `｜All-access early-bird price ${allAccess}`) : ""}
+      </button>
+    </p>
+  `;
 }
 
 function countUnlockedPremiumCourses() {
@@ -2033,6 +2187,7 @@ function renderHomeHero() {
             <button class="home-btn home-btn-primary" onclick="${cta.primaryAction}">${cta.primary}</button>
             <button class="home-btn home-btn-secondary" onclick="${secondaryAction}">${cta.secondary}</button>
           </div>
+          ${renderHomePriceTeaser()}
           <p class="home-trust-note">${cta.note}</p>
           <ul class="home-trust-list">
             <li>${text("Google 登入即可開始", "Start with Google sign-in")}</li>
@@ -2089,6 +2244,7 @@ function renderHomeCapabilities() {
         <ul class="home-cap-meta">
           <li>${lessonCount} ${text("堂課", "lessons")}</li>
           <li>${pkg ? (state.lang === "zh" ? pkg.zhTitle : pkg.enTitle) : (state.lang === "zh" ? course.zhFinalProduct : course.enFinalProduct)}</li>
+          <li class="home-cap-price"><span class="price-nowrap">${formatTwdPrice(course.price)}</span> · ${text("一次付費", "One-time payment")}</li>
         </ul>
         <button type="button" class="home-btn home-btn-secondary home-btn-compact" onclick="homeOpenCapability('${course.id}')">${text("查看課程", "View Course")}</button>
       </article>
@@ -2205,22 +2361,25 @@ function renderHomeResultPackages() {
 
 function renderHomePricing() {
   const stats = getHomePlatformStats();
-  const singlePrice = getHomeSingleCoursePriceLabel();
-  const allAccessPrice = getHomeAllAccessPriceLabel();
+  const allAccessInfo = getCoursePriceInfo("all-access");
+  const saveAmount = (allAccessInfo.originalPrice != null && allAccessInfo.price != null)
+    ? Math.max(allAccessInfo.originalPrice - allAccessInfo.price, 0)
+    : 0;
   return `
     <section class="home-section home-section-alt" id="pricing">
       <div class="wrap">
         <div class="home-section-header">
           <h2>${text("依你的需求選擇開始方式", "Choose how you want to start")}</h2>
           <p class="home-section-lead">${text(
-            "先免費上手，再解鎖單一能力，或一次打通完整路徑。",
-            "Start free, unlock one capability, or open the full path at once."
+            "先免費上手，再選擇單門能力課程，或一次打通完整路徑。",
+            "Start free, choose one capability course, or open the full path at once."
           )}</p>
         </div>
         <div class="home-pricing-grid">
           <article class="home-price-card">
             <h3>${text("免費開始", "Start Free")}</h3>
-            <p class="home-price-amount">NT$0</p>
+            <p class="home-price-amount is-free">${formatTwdPrice(0)}</p>
+            <p class="home-price-note">${text("8堂實作課", "8 practical lessons")}</p>
             <ul>
               <li>${text("免費入門課程", "Free intro course")}</li>
               <li>${text("免費入門成果包", "Free starter result package")}</li>
@@ -2230,25 +2389,29 @@ function renderHomePricing() {
           </article>
           <article class="home-price-card">
             <h3>${text("單門能力課程", "Single Capability Course")}</h3>
-            <p class="home-price-amount">${singlePrice}</p>
+            <p class="home-price-amount">${getHomeSingleCoursePriceLabel()}</p>
+            <p class="home-price-note">${text("一次付費", "One-time payment")}</p>
             <ul>
               <li>${text("選擇一種需要的核心能力", "Choose one core capability")}</li>
               <li>${text("10 堂完整實戰課", "10 complete practice lessons")}</li>
               <li>${text("專屬成果禮包", "Dedicated result package")}</li>
             </ul>
-            <button class="home-btn home-btn-secondary" onclick="setRoute('premium')">${text("查看單門課程", "View Single Courses")}</button>
+            <button class="home-btn home-btn-secondary" onclick="setRoute('map')">${text("查看所有課程", "View All Courses")}</button>
           </article>
           <article class="home-price-card home-price-featured">
-            <span class="home-price-badge">${text("最完整", "Most complete")}</span>
+            <span class="home-price-badge">${text("早鳥價", "Early-bird")}</span>
             <h3>${text("全站通行證", "All-Access Pass")}</h3>
-            <p class="home-price-amount">${allAccessPrice || text("查看方案", "See plan")}</p>
+            ${allAccessInfo.originalPrice != null ? `<p class="home-price-original"><s>${formatTwdPrice(allAccessInfo.originalPrice)}</s></p>` : ""}
+            <p class="home-price-amount">${formatTwdPrice(allAccessInfo.price)}</p>
+            ${saveAmount > 0 ? `<p class="home-price-note">${text(`現省 ${formatTwdPrice(saveAmount)}`, `Save ${formatTwdPrice(saveAmount)}`)}</p>` : `<p class="home-price-note">${text("一次付費", "One-time payment")}</p>`}
             <ul>
               <li>${text(`解鎖 ${stats.courseCount} 門付費課程`, `Unlock ${stats.courseCount} premium courses`)}</li>
               <li>${text(`共 ${stats.lessonCount} 堂實戰課`, `${stats.lessonCount} practice lessons total`)}</li>
               <li>${text("全部成果禮包", "All result packages")}</li>
-              <li>${text("未來課程更新", "Future course updates")}</li>
+              <li>${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</li>
             </ul>
-            <button class="home-btn home-btn-primary" onclick="setRoute('premium')">${text("查看全站方案", "View All-Access Plan")}</button>
+            <button class="home-btn home-btn-primary" onclick="setRoute('map')">${text("查看全站方案", "View All-Access Plan")}</button>
+            ${renderPaymentComingSoonNote()}
           </article>
         </div>
       </div>
@@ -2382,12 +2545,12 @@ function learningMap() {
         <section class="panel map-path-panel">
           <h2 class="map-section-title">${text("免費入門課程", "Free Foundation Course")}</h2>
           <article class="card map-path-card">
-            <span class="tag free">${text("免費", "Free")}</span>
+            <span class="tag free">${getCourseAccessStatusLabel("free")}</span>
             <h2>${text("免費入門／AI 新手訓練營", "Free Intro / AI Beginner Bootcamp")}</h2>
-            <p><b>${text("核心能力", "Core ability")}：</b>${text("AI 基礎入門", "AI fundamentals")}</p>
+            <p class="map-card-desc">${text("先建立正確的 AI 使用方法，完成可帶走的入門實作成果。", "Build solid AI foundations and finish practical starter outputs you can keep.")}</p>
             <p><b>${text("堂數", "Lessons")}：</b>${freeProgress.total || (typeof FREE_BOOTCAMP !== "undefined" ? FREE_BOOTCAMP.length : 0)} ${text("堂", "lessons")}</p>
             <p><b>${text("最終成果包", "Final package")}：</b>${freePkg ? (state.lang === "zh" ? freePkg.zhTitle : freePkg.enTitle) : text("免費入門成果包", "Free Starter Package")}</p>
-            <p><b>${text("價格", "Price")}：</b>${text("免費", "Free")}</p>
+            ${renderCoursePriceBlock("free", { compact: true, lessonCount: freeProgress.total || 8 })}
             <p>${text("學習進度", "Progress")}：${state.user ? `${freeProgress.completed}/${freeProgress.total}（${freeProgress.percent}%）` : text("登入後顯示個人進度", "Sign in to view personal progress")}</p>
             <div class="package-progress-track"><div class="package-progress-bar" style="width:${state.user ? freeProgress.percent : 0}%"></div></div>
             <div class="btnrow">
@@ -2421,40 +2584,41 @@ function learningMap() {
               ? (progress.completed >= progress.total && progress.total > 0 && pkg
                 ? `openResultPackage('${pkg.id}')`
                 : `openCourse('${course.id}')`)
-              : "setRoute('premium')";
+              : `openCourse('${course.id}')`;
             return `
               ${index === 0 ? "" : `<div class="map-path-arrow">↓</div>`}
               <article class="card map-path-card ${unlocked ? "" : "map-path-card-locked"}">
-                <span class="tag ${unlocked ? "free" : "premiumtag"}">${unlocked ? text("已解鎖", "Unlocked") : text("尚未解鎖", "Locked")}</span>
+                <span class="tag ${unlocked ? "free" : "premiumtag"}">${getCourseAccessStatusLabel(course.id)}</span>
                 <h2>${index + 1}. ${state.lang === "zh" ? course.zhTitle : course.enTitle}</h2>
-                <p><b>${text("核心能力", "Core ability")}：</b>${pkg ? (state.lang === "zh" ? pkg.zhCapability : pkg.enCapability) : (state.lang === "zh" ? (course.zhOutcome || "") : (course.enOutcome || ""))}</p>
+                <p class="map-card-desc">${state.lang === "zh" ? course.zhDesc : course.enDesc}</p>
                 <p><b>${text("堂數", "Lessons")}：</b>${lessonCount} ${text("堂", "lessons")}</p>
                 <p><b>${text("最終成果包", "Final package")}：</b>${pkg ? (state.lang === "zh" ? pkg.zhTitle : pkg.enTitle) : "-"}</p>
-                <p><b>${text("價格", "Price")}：</b>${course.price || "-"}</p>
+                ${renderCoursePriceBlock(course, { compact: true, lessonCount, packageName: pkg ? (state.lang === "zh" ? pkg.zhTitle : pkg.enTitle) : "" })}
                 <p>${text("學習進度", "Progress")}：${progress.completed}/${progress.total}（${progress.percent}%）</p>
                 <div class="package-progress-track"><div class="package-progress-bar" style="width:${progress.percent}%"></div></div>
                 <div class="btnrow">
                   <button class="btn ${unlocked ? "primary" : "secondary"}" onclick="${primaryAction}">${primaryLabel}</button>
                   ${unlocked
                     ? `<button class="btn secondary" onclick="openResultPackage('${pkg ? pkg.id : ""}')">${text("查看成果包", "View Package")}</button>`
-                    : `<a class="btn secondary" href="${course.paymentUrl || "#"}" target="_blank" rel="noopener">${text("解鎖此課程", "Unlock Course")}</a>`
+                    : ""
                   }
                 </div>
+                ${unlocked ? "" : renderPaymentComingSoonNote()}
               </article>
             `;
           }).join("")}
 
           ${allAccess ? `
             <div class="map-path-arrow">↓</div>
-            <article class="card map-path-card">
-              <span class="tag ${hasAllAccessPass() ? "free" : "premiumtag"}">${hasAllAccessPass() ? text("已解鎖", "Unlocked") : "All Access"}</span>
+            <article class="card map-path-card map-all-access-card">
+              <span class="tag ${hasAllAccessPass() ? "free" : "premiumtag"}">${getCourseAccessStatusLabel("all-access")}</span>
               <h2>${state.lang === "zh" ? allAccess.zhTitle : allAccess.enTitle}</h2>
-              <p>${state.lang === "zh" ? allAccess.zhDesc : allAccess.enDesc}</p>
-              <p><b>${text("價格", "Price")}：</b>${allAccess.price}</p>
+              <p class="map-card-desc">${state.lang === "zh" ? allAccess.zhDesc : allAccess.enDesc}</p>
+              ${renderCoursePriceBlock(allAccess, { compact: false, showFacts: false })}
               <div class="btnrow">
                 ${hasAllAccessPass()
                   ? `<button class="btn primary" onclick="setRoute('result-packages')">${text("查看全部成果包", "View All Packages")}</button>`
-                  : `<a class="btn primary" href="${allAccess.paymentUrl || "#"}" target="_blank" rel="noopener">${text("解鎖全站通行證", "Unlock All-Access")}</a>`
+                  : `<button class="btn secondary" onclick="setRoute('premium')">${text("查看課程", "View Course")}</button>`
                 }
               </div>
             </article>
@@ -3239,11 +3403,11 @@ function learning() {
                 <article class="card map-path-card-locked">
                   <span class="tag premiumtag">${text("尚未擁有", "Not owned")}</span>
                   <h3>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h3>
-                  <p>${course.price || ""}</p>
+                  ${renderCoursePriceBlock(course, { compact: true })}
                   <div class="btnrow">
-                    <button class="btn secondary" onclick="setRoute('premium')">${text("查看課程", "View Course")}</button>
-                    <a class="btn primary" href="${course.paymentUrl || "#"}" target="_blank" rel="noopener">${text("解鎖此課程", "Unlock")}</a>
+                    <button class="btn secondary" onclick="openCourse('${course.id}')">${text("查看課程", "View Course")}</button>
                   </div>
+                  ${renderPaymentComingSoonNote()}
                 </article>
               `).join("")}
             </div>
@@ -3306,17 +3470,37 @@ function premium() {
 
   const courseCards = PREMIUM.map(course => {
     const unlocked = hasCourseAccess(course.id);
+    const pkg = getResultPackageByCourseId(course.id);
+    const lessonCount = (course.zhLessons || course.enLessons || []).length;
+    const progress = course.id === "all-access" ? { completed: 0, total: 0 } : courseProgress(course.id);
+    const ctaLabel = unlocked
+      ? (course.id === "all-access"
+        ? text("查看全部成果包", "View All Packages")
+        : (progress.completed > 0
+          ? text("繼續學習", "Continue Learning")
+          : text("開始學習", "Start Learning")))
+      : text("查看課程", "View Course");
+    const ctaAction = unlocked
+      ? (course.id === "all-access"
+        ? "setRoute('result-packages')"
+        : `openCourse('${course.id}')`)
+      : (course.id === "all-access" ? "setRoute('map')" : `openCourse('${course.id}')`);
     return `
       <article class="pricing">
         <span class="tag ${unlocked ? "free" : "premiumtag"}">
-          ${unlocked ? text("已開通", "Unlocked") : (course.id === "all-access" ? "All Access" : "Premium Course")}
+          ${getCourseAccessStatusLabel(course.id)}
         </span>
         <h2>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h2>
         <p>${state.lang === "zh" ? course.zhDesc : course.enDesc}</p>
         <p><b>${L("premium.suitableFor")}：</b>${state.lang === "zh" ? course.zhUser : course.enUser}</p>
         <p><b>${L("premium.outcome")}：</b>${state.lang === "zh" ? course.zhOutcome : course.enOutcome}</p>
         <p><b>${text("完成作品", "Final Product")}：</b>${state.lang === "zh" ? course.zhFinalProduct : course.enFinalProduct}</p>
-        <p class="price">${course.price}</p>
+        ${renderCoursePriceBlock(course, {
+          compact: course.id !== "all-access",
+          showFacts: course.id === "all-access",
+          lessonCount,
+          packageName: pkg ? (state.lang === "zh" ? pkg.zhTitle : pkg.enTitle) : ""
+        })}
 
         <div class="practice">
           <h3>${text("課程內容", "Course Lessons")}</h3>
@@ -3335,11 +3519,8 @@ function premium() {
           </ul>
         </div>
 
-        ${
-          unlocked
-            ? `<button type="button" class="btn primary" onclick="openCourse('${course.id}')">${text("進入已開通課程", "Enter Unlocked Course")}</button>`
-            : `<a class="btn primary" href="${course.paymentUrl}" target="_blank">${L("premium.goPay")}</a>`
-        }
+        <button type="button" class="btn ${unlocked ? "primary" : "secondary"}" onclick="${ctaAction}">${ctaLabel}</button>
+        ${unlocked ? "" : renderPaymentComingSoonNote()}
       </article>
     `;
   }).join("");
@@ -3349,8 +3530,8 @@ function premium() {
       <div class="wrap">
         <h1>${L("premium.title")}</h1>
         <p class="lead">${text(
-          "付費區採用「一個完整課程一個價格」的方式，不是單堂課收費。每個課程包含 10 堂課、實作任務、Prompt 模板與最後成果。全站通行證可解鎖全部課程。",
-          "Premium courses are sold as complete courses, not by individual lessons. Each course includes 10 lessons, practical tasks, prompt templates, and a final product. The All-Access Pass unlocks everything."
+          "付費區採用「一個完整課程一個價格」的方式，不是單堂課收費。每個課程包含 10 堂課、實作任務、Prompt 模板與最後成果。全站通行證可解鎖全部課程。價格以新臺幣一次付費計價，付款功能建置中。",
+          "Premium courses are sold as complete courses, not by individual lessons. Each course includes 10 lessons, practical tasks, prompt templates, and a final product. The All-Access Pass unlocks everything. Prices are one-time TWD payments; payment service is coming soon."
         )}</p>
 
         ${accessBanner}
@@ -3360,9 +3541,10 @@ function premium() {
           <div class="grid three">
             ${PREMIUM.map(course => `
               <article class="card">
-                <span class="tag ${hasCourseAccess(course.id) ? "free" : "premiumtag"}">${hasCourseAccess(course.id) ? text("已開通", "Unlocked") : course.price}</span>
+                <span class="tag ${hasCourseAccess(course.id) ? "free" : "premiumtag"}">${getCourseAccessStatusLabel(course.id)}</span>
                 <h3>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h3>
                 <p>${state.lang === "zh" ? course.zhFinalProduct : course.enFinalProduct}</p>
+                ${renderCoursePriceBlock(course, { compact: true })}
               </article>
             `).join("")}
           </div>
@@ -3380,7 +3562,6 @@ function premium() {
     </main>
   `);
 }
-
 
 function isCreator() {
   return isCreatorAccount();
@@ -3876,6 +4057,35 @@ function getLessonWhyItMatters(detail) {
   return why && typeof why === "object" ? why : null;
 }
 
+function renderLessonDeliverableChecklist(detail) {
+  const list = pickLocalized(detail, "zhDeliverableChecklist", "enDeliverableChecklist", []);
+  if (!Array.isArray(list) || !list.length) return "";
+  return `
+    <section class="lesson-block lesson-deliverable-checklist-block">
+      <h2>${text("完成檢查表", "Completion checklist")}</h2>
+      <p class="lesson-pro-muted">${text("完成前請自行勾選確認（此表不自動完課）。", "Self-check before finishing (this list does not auto-complete the lesson).")}</p>
+      <ul class="lesson-deliverable-checklist">
+        ${list.map(item => `<li><span class="lesson-check-box" aria-hidden="true">□</span><span>${item}</span></li>`).join("")}
+      </ul>
+    </section>
+  `;
+}
+
+function renderLessonNextStep(detail, item, lessonIndex) {
+  const nextHint = pickLocalized(detail, "zhNextStep", "enNextStep", "");
+  const lessons = item ? (state.lang === "zh" ? item.zhLessons : item.enLessons) : [];
+  const nextIndex = Number(lessonIndex) + 1;
+  const nextTitle = lessons && lessons[nextIndex] ? lessons[nextIndex] : "";
+  if (!nextHint && !nextTitle) return "";
+  return `
+    <section class="lesson-block lesson-next-step-block">
+      <h2>${text("下一步", "Next step")}</h2>
+      ${nextHint ? `<p>${nextHint}</p>` : ""}
+      ${nextTitle ? `<p class="lesson-pro-muted">${text("下一堂課", "Next lesson")}：${nextTitle}</p>` : `<p class="lesson-pro-muted">${text("這是本課程最後一堂，完成後可到成果包與大學申請包整理總成果。", "This is the final lesson—finish by organizing outputs in the result package and application kit.")}</p>`}
+    </section>
+  `;
+}
+
 
 function findContinueLessonIndex(courseId) {
   const item = typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === courseId) : null;
@@ -3946,16 +4156,25 @@ function renderCourseHeader(item, progress, meta) {
   const pkgMeta = getCourseResultPackageMeta(item.id);
   const pkgName = state.lang === "zh" ? (pkgMeta.zhName || item.zhFinalProduct) : (pkgMeta.enName || item.enFinalProduct);
   const resultProgress = courseResultPackageProgress(item.id);
+  const continueLabel = progress.completed > 0 && progress.completed < progress.total
+    ? text("繼續學習", "Continue Learning")
+    : text("開始學習", "Start Learning");
 
   return `
     <section class="course-pro-hero">
       <div class="course-pro-hero-top">
-        <button class="btn secondary" onclick="setRoute('premium')">← ${text("回到進階付費", "Back to Premium")}</button>
-        <span class="tag ${unlocked ? "free" : "premiumtag"}">${unlocked ? text("已開通", "Unlocked") : text("尚未解鎖", "Locked")}</span>
+        <button class="btn secondary" onclick="setRoute('map')">← ${text("回到所有課程", "Back to All Courses")}</button>
+        <span class="tag ${unlocked ? "free" : "premiumtag"}">${getCourseAccessStatusLabel(item.id)}</span>
       </div>
       <p class="course-pro-kicker">${capability}</p>
       <h1>${state.lang === "zh" ? item.zhTitle : item.enTitle}</h1>
       <p class="course-pro-lead">${positioning || ""}</p>
+      ${renderCoursePriceBlock(item, {
+        compact: false,
+        showFacts: true,
+        lessonCount,
+        packageName: pkgName || ""
+      })}
       <div class="course-pro-meta-grid">
         <div><span>${text("適合對象", "Who it’s for")}</span><strong>${state.lang === "zh" ? item.zhUser : item.enUser}</strong></div>
         <div><span>${text("難度", "Difficulty")}</span><strong>${difficulty}</strong></div>
@@ -3973,9 +4192,10 @@ function renderCourseHeader(item, progress, meta) {
       </div>
       <div class="btnrow course-pro-cta">
         ${unlocked
-          ? `<button class="btn secondary" onclick="document.getElementById('course-how-to-learn')?.scrollIntoView({behavior:'smooth',block:'start'})">${text("查看學習方法", "See how to learn")}</button>
+          ? `<button class="btn primary" onclick="openLesson(${findContinueLessonIndex(item.id)})">${continueLabel}</button>
+             <button class="btn secondary" onclick="document.getElementById('course-how-to-learn')?.scrollIntoView({behavior:'smooth',block:'start'})">${text("查看學習方法", "See how to learn")}</button>
              <button class="btn secondary" onclick="openCourseResultPackage('${item.id}')">${text("查看成果包", "View Result Package")}</button>`
-          : `<a class="btn primary" href="${item.paymentUrl || "#"}" target="_blank" rel="noopener">${text("解鎖此課程", "Unlock Course")}</a>`
+          : `<button class="btn secondary" onclick="document.getElementById('course-curriculum')?.scrollIntoView({behavior:'smooth',block:'start'})">${text("查看課程", "View Course")}</button>`
         }
       </div>
     </section>
@@ -4582,7 +4802,9 @@ function completeLessonWithChecks(courseId, lessonIndex) {
     }
     return;
   }
-  saveCourseResultEntry(courseId, lessonIndex);
+  if (!saveCourseResultEntry(courseId, lessonIndex)) {
+    return;
+  }
   updateLessonFlowState(courseId, lessonIndex, {
     overviewCompleted: true,
     scenarioCompleted: true,
@@ -4668,9 +4890,11 @@ function renderLessonStageBody(stageId, item, detail, lessonIndex, flow) {
   const gaps = getLessonCompletionGaps(item.id, lessonIndex);
   return `
     ${renderLessonOutput(item.id, lessonIndex, detail)}
+    ${renderLessonDeliverableChecklist(detail)}
     ${renderLessonQuiz(item.id, lessonIndex, detail)}
     ${renderLessonRubric(detail)}
     ${gaps.length ? `<ul class="lesson-completion-gaps">${gaps.map(g => `<li>${g}</li>`).join("")}</ul>` : ""}
+    ${renderLessonNextStep(detail, item, lessonIndex)}
     <div class="lesson-stage-cta">
       <button class="btn primary" type="button" onclick="completeLessonWithChecks('${item.id}', ${lessonIndex})">${text("儲存成果並完成本課", "Save output and complete lesson")}</button>
     </div>
@@ -4866,6 +5090,12 @@ function renderLessonPrompt(detail, courseId, lessonIndex) {
   if (!pack) return "";
   const promptId = `prompt-${courseId}-${lessonIndex}`;
   const example = pickLocalized(detail, "zhExample", "enExample", "") || pack.exampleInput || "";
+  const reminder = pack.revisionReminder
+    || text(
+      "請把 AI 產生的內容改成符合你真實經歷與語氣的版本，不要直接複製送出。",
+      "Revise the AI-generated content to match your real experience and personal voice. Do not submit it without review."
+    );
+  const extensions = Array.isArray(pack.extensions) ? pack.extensions : [];
   return `
     <section class="lesson-block lesson-pro-prompt">
       <h2>${text("Prompt 工作區", "Prompt Workspace")}</h2>
@@ -4894,6 +5124,17 @@ function renderLessonPrompt(detail, courseId, lessonIndex) {
             <p>${pack.expected}</p>
           </details>
         ` : ""}
+        ${extensions.map((ext, extIndex) => {
+          const extId = `${promptId}-ext-${extIndex}`;
+          return `
+            <details class="lesson-accordion">
+              <summary aria-expanded="false">${ext.title || text("延伸 Prompt", "Extension prompt")}</summary>
+              <div class="promptbox" id="${extId}">${ext.body || ""}</div>
+              <button class="btn secondary" type="button" onclick="copyTextById('${extId}')">${text("複製延伸 Prompt", "Copy extension")}</button>
+            </details>
+          `;
+        }).join("")}
+        <p class="lesson-prompt-reminder">${reminder}</p>
       </div>
     </section>
   `;
@@ -5288,7 +5529,7 @@ function renderApplicationKitHubCard(index) {
     ? applicationPackageProgress(false)
     : { completed: 0, total: APPLICATION_PACKAGE_ITEMS.length, percent: 0 };
   const course = typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === "admissions") : null;
-  const price = course ? course.price : "";
+  const price = course ? formatTwdPrice(course.price) : "";
 
   return `
     <article class="card result-package-card ${unlocked && !needsLogin ? "" : "result-package-card-locked"}">
@@ -5300,6 +5541,7 @@ function renderApplicationKitHubCard(index) {
         "整合申請動機、自傳、學習歷程、面試準備與資料檢查工具，協助你完成完整的大學申請成果。",
         "Create a complete university application package with personal statements, learning portfolios, interview preparation, and application checklists."
       )}</p>
+      ${!unlocked && price ? `<p class="course-result-meta">${text("課程售價", "Course Price")}：<span class="price-nowrap">${price}</span> · ${text("一次付費", "One-time payment")}</p>` : ""}
       <p>${text("完成進度", "Progress")}：${needsLogin ? text("登入後顯示", "Sign in to view") : `${progress.completed} / ${progress.total}（${progress.percent}%）`}</p>
       <div class="package-progress-track"><div class="package-progress-bar" style="width:${needsLogin ? 0 : progress.percent}%"></div></div>
       <div class="btnrow">
@@ -5308,10 +5550,10 @@ function renderApplicationKitHubCard(index) {
           : unlocked
           ? `<button class="btn primary" onclick="goApplicationPackage()">${text("開啟申請包", "Open Application Kit")}</button>`
           : `<button class="btn secondary" onclick="goApplicationPackage()">${text("已鎖定", "Locked")}</button>
-             <button class="btn secondary" onclick="setRoute('premium')">${text("查看課程", "View Course")}</button>
-             ${course ? `<a class="btn primary" href="${course.paymentUrl || "#"}" target="_blank" rel="noopener">${text("解鎖此課程", "Unlock Course")} · ${price}</a>` : ""}`
+             <button class="btn secondary" onclick="openCourse('admissions')">${text("查看課程", "View Course")}</button>`
         }
       </div>
+      ${!unlocked && !needsLogin ? renderPaymentComingSoonNote() : ""}
       ${!unlocked && !needsLogin ? `<p class="course-result-meta">${text("價格", "Price")}：${price}</p>` : ""}
     </article>
   `;
@@ -5325,15 +5567,15 @@ function saveCourseResultEntry(courseId, lessonIndex, options = {}) {
       packageId: pkg.id,
       action: "openResultPackage"
     });
-    return;
+    return false;
   }
   if (pkg && !pkg.free && pkg.courseId && !hasCourseAccess(pkg.courseId)) {
     toast(state.lang === "zh" ? "請先解鎖此課程" : "Please unlock this course first");
-    return;
+    return false;
   }
   if (!pkg && courseId !== "free-starter" && !hasCourseAccess(courseId)) {
     toast(state.lang === "zh" ? "請先解鎖此課程" : "Please unlock this course first");
-    return;
+    return false;
   }
 
   const storageKey = pkg ? resultPackageStorageCourseKey(pkg) : courseId;
@@ -5341,6 +5583,10 @@ function saveCourseResultEntry(courseId, lessonIndex, options = {}) {
   const urlEl = document.getElementById(`course-result-url-${storageKey}-${lessonIndex}`);
   const textValue = textEl ? textEl.value : (options.text || "");
   const url = urlEl ? urlEl.value : (options.url || "");
+  if (!String(textValue).trim() && !String(url).trim()) {
+    toast(state.lang === "zh" ? "尚未輸入成果，沒有可儲存的內容" : "Nothing to save yet—add result text or a link first");
+    return false;
+  }
   const store = loadCourseResultPackagesStore();
   const userKey = courseResultPackageUserKey();
   if (!store[userKey]) store[userKey] = {};
@@ -5355,6 +5601,7 @@ function saveCourseResultEntry(courseId, lessonIndex, options = {}) {
   if (state.route === "courseResultPackage" || state.route === "lesson" || state.route === "result-packages") {
     render();
   }
+  return true;
 }
 
 function renderResultPackageHubCard(pkg, index) {
@@ -5366,7 +5613,7 @@ function renderResultPackageHubCard(pkg, index) {
   const course = pkg.courseId && typeof PREMIUM !== "undefined"
     ? PREMIUM.find(p => p.id === pkg.courseId)
     : null;
-  const price = pkg.free ? text("免費", "Free") : (course ? course.price : "");
+  const price = pkg.free ? formatTwdPrice(0) : (course ? formatTwdPrice(course.price) : "");
 
   return `
     <article class="card result-package-card ${unlocked && !needsLogin ? "" : "result-package-card-locked"}">
@@ -5374,6 +5621,7 @@ function renderResultPackageHubCard(pkg, index) {
       <h2>${index}. ${state.lang === "zh" ? pkg.zhTitle : pkg.enTitle}</h2>
       <p><b>${text("所屬課程", "Course")}：</b>${state.lang === "zh" ? pkg.zhCourseName : pkg.enCourseName}</p>
       <p>${state.lang === "zh" ? pkg.zhFinalOutcome : pkg.enFinalOutcome}</p>
+      ${!unlocked && !pkg.free && price ? `<p class="course-result-meta">${text("課程售價", "Course Price")}：<span class="price-nowrap">${price}</span> · ${text("一次付費", "One-time payment")}</p>` : ""}
       <p>${text("完成進度", "Progress")}：${needsLogin ? text("登入後顯示", "Sign in to view") : `${progress.completed} / ${progress.total}（${progress.percent}%）`}</p>
       <div class="package-progress-track"><div class="package-progress-bar" style="width:${needsLogin ? 0 : progress.percent}%"></div></div>
       <div class="btnrow">
@@ -5383,11 +5631,10 @@ function renderResultPackageHubCard(pkg, index) {
           : unlocked
           ? `<button class="btn primary" onclick="openResultPackage('${pkg.id}')">${text("查看成果包", "View Package")}</button>`
           : `<button class="btn secondary" onclick="showResultPackageLockedMessage('${pkg.id}')">${text("已鎖定", "Locked")}</button>
-             <button class="btn secondary" onclick="setRoute('premium')">${text("查看課程", "View Course")}</button>
-             ${course ? `<a class="btn primary" href="${course.paymentUrl || "#"}" target="_blank" rel="noopener">${text("解鎖此課程", "Unlock Course")} · ${price}</a>` : ""}`
+             <button class="btn secondary" onclick="${course ? `openCourse('${course.id}')` : "setRoute('map')"}">${text("查看課程", "View Course")}</button>`
         }
       </div>
-      ${!unlocked && !pkg.free ? `<p class="course-result-meta">${text("價格", "Price")}：${price}</p>` : ""}
+      ${!unlocked && !pkg.free ? renderPaymentComingSoonNote() : ""}
     </article>
   `;
 }
@@ -5623,11 +5870,12 @@ function courseResultPackage() {
               `此成果包包含在「${courseName}」中，解鎖課程後即可使用。`,
               `This package is included in “${courseName}”. Unlock the course to use it.`
             )}</p>
+            ${course ? renderCoursePriceBlock(course, { compact: true }) : ""}
             <div class="btnrow">
-              <button class="btn secondary" onclick="setRoute('premium')">${text("查看課程", "View Course")}</button>
-              ${course ? `<a class="btn primary" href="${course.paymentUrl || "#"}" target="_blank" rel="noopener">${text("解鎖此課程", "Unlock Course")}</a>` : ""}
+              <button class="btn secondary" onclick="${course ? `openCourse('${course.id}')` : "setRoute('map')"}">${text("查看課程", "View Course")}</button>
               <button class="btn secondary" onclick="setRoute('result-packages')">${text("回到成果禮包", "Back to Result Packages")}</button>
             </div>
+            ${renderPaymentComingSoonNote()}
           </section>
         </div>
       </main>
@@ -5710,17 +5958,26 @@ function courseResultPackage() {
 }
 
 const APPLICATION_PACKAGE_ITEMS = [
-  { id: "map", title: "1. 大學申請準備地圖", desc: "整理第一階段、第二階段、備審與面試準備方向。", placeholder: "貼上你第1課完成的大學申請準備地圖..." },
-  { id: "majors", title: "2. 科系探索表", desc: "整理 5 個可能科系與 3 個優先申請科系。", placeholder: "貼上你第2課完成的科系探索表..." },
-  { id: "portfolio", title: "3. 學習歷程素材庫", desc: "整理高中三年的課程成果、活動、競賽、服務與專題。", placeholder: "貼上你第3課完成的學習歷程素材庫..." },
-  { id: "activities", title: "4. 多元表現描述", desc: "放入 3 則用 STAR 架構完成的多元表現。", placeholder: "貼上你第4課完成的多元表現描述..." },
-  { id: "autobiography", title: "5. 學習歷程自述初稿", desc: "整理你的學習主軸、能力成長、申請動機與未來規劃。", placeholder: "貼上你第5課完成的學習歷程自述..." },
-  { id: "majorSpecific", title: "6. 科系專屬備審規劃", desc: "整理目標科系需求與你的素材對照。", placeholder: "貼上你第6課完成的科系專屬備審規劃..." },
-  { id: "interviewBank", title: "7. 面試題庫與回答架構", desc: "整理 20 題面試題與最重要的回答重點。", placeholder: "貼上你第7課完成的面試題庫..." },
-  { id: "mockInterview", title: "8. 模擬面試紀錄", desc: "整理 AI 模擬面試評分與改進清單。", placeholder: "貼上你第8課完成的模擬面試紀錄..." },
-  { id: "advisorPrompt", title: "9. 個人 AI 升學顧問 Prompt", desc: "保存你可以重複使用的個人升學顧問 Prompt。", placeholder: "貼上你第9課完成的個人 AI 升學顧問 Prompt..." },
-  { id: "finalReview", title: "10. 最終總檢查", desc: "整理 AI 對整份申請包的總檢查與最後修改清單。", placeholder: "貼上你第10課完成的總檢查結果..." }
+  { id: "map", title: "1. 大學申請準備地圖", desc: "整理第一階段、第二階段、備審與面試準備方向。", placeholder: "貼上你第1課完成的大學申請準備地圖...", linkedLessonId: "admissions-L1", linkedLessonIndex: 0 },
+  { id: "majors", title: "2. 科系探索表", desc: "整理 5 個可能科系與 3 個優先申請科系。", placeholder: "貼上你第2課完成的科系探索表...", linkedLessonId: "admissions-L2", linkedLessonIndex: 1 },
+  { id: "portfolio", title: "3. 學習歷程素材庫", desc: "整理高中三年的課程成果、活動、競賽、服務與專題。", placeholder: "貼上你第4課完成的學習歷程素材庫...", linkedLessonId: "admissions-L4", linkedLessonIndex: 3 },
+  { id: "activities", title: "4. 多元表現描述", desc: "放入 3 則用 STAR 架構完成的多元表現。", placeholder: "貼上你第5課完成的多元表現描述...", linkedLessonId: "admissions-L5", linkedLessonIndex: 4 },
+  { id: "autobiography", title: "5. 學習歷程自述初稿", desc: "整理你的學習主軸、能力成長、申請動機與未來規劃。", placeholder: "貼上你第6課完成的學習歷程自述與申請動機初稿...", linkedLessonId: "admissions-L6", linkedLessonIndex: 5 },
+  { id: "majorSpecific", title: "6. 科系專屬備審規劃", desc: "整理目標科系需求與你的素材對照。", placeholder: "貼上你第7課完成的科系專屬備審規劃表...", linkedLessonId: "admissions-L7", linkedLessonIndex: 6 },
+  { id: "interviewBank", title: "7. 面試題庫與回答架構", desc: "整理 20 題面試題與最重要的回答重點。", placeholder: "貼上你第8課完成的面試題庫與回答架構...", linkedLessonId: "admissions-L8", linkedLessonIndex: 7 },
+  { id: "mockInterview", title: "8. 模擬面試紀錄", desc: "整理 AI 模擬面試評分與改進清單。", placeholder: "貼上你第9課完成的模擬面試紀錄與改進清單...", linkedLessonId: "admissions-L9", linkedLessonIndex: 8 },
+  { id: "advisorPrompt", title: "9. 個人 AI 升學顧問 Prompt", desc: "保存你可以重複使用的個人升學顧問 Prompt。", placeholder: "貼上你自訂的個人 AI 升學顧問 Prompt（課程成果包未自動對應此欄）...", linkedLessonId: null, linkedLessonIndex: null },
+  { id: "finalReview", title: "10. 最終總檢查", desc: "整理整份申請包的總檢查與最後修改清單。", placeholder: "貼上你第10課完成的完整申請資料檢查與送件清單...", linkedLessonId: "admissions-L10", linkedLessonIndex: 9 }
 ];
+
+/** Compatibility map: admissions lesson outputs ↔ application package slots (manual paste; no second storage). */
+const ADMISSIONS_APPLICATION_PACKAGE_LINKS = APPLICATION_PACKAGE_ITEMS
+  .filter(item => item.linkedLessonId)
+  .map(item => ({
+    packageItemId: item.id,
+    lessonId: item.linkedLessonId,
+    lessonIndex: item.linkedLessonIndex
+  }));
 
 function applicationPackageKey(id) {
   const userPart = state.user && state.user.email ? state.user.email : "guest";
@@ -6223,6 +6480,96 @@ async function startApp() {
   render();
   await initAuth();
   render();
+  runPremiumContentAuditIfDev();
+}
+
+function isLocalDevHost() {
+  try {
+    const host = String(location.hostname || "");
+    return host === "localhost" || host === "127.0.0.1" || host === "::1";
+  } catch (error) {
+    return false;
+  }
+}
+
+function validatePremiumLessonContent(courseId) {
+  const details = (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[courseId])
+    ? PREMIUM_LESSON_DETAILS[courseId]
+    : [];
+  const issues = [];
+  const promptFingerprints = new Map();
+  const outcomeFingerprints = new Map();
+
+  details.forEach((raw, index) => {
+    const detail = normalizePremiumLessonDetail(courseId, raw) || {};
+    const lessonId = raw.id || raw.lessonKey || `${courseId}-L${index + 1}`;
+    const requiredStrings = {
+      title: detail.zhTitle || detail.enTitle,
+      concept: detail.zhConcept || detail.enConcept,
+      outcome: detail.zhOutputName || detail.zhOutcome || detail.enOutcome,
+      prompt: (detail.zhPromptPack && detail.zhPromptPack.body) || detail.zhPrompt,
+      practice: detail.zhPractice || detail.enPractice,
+      nextStep: detail.zhNextStep || detail.enNextStep,
+      estimatedTime: detail.estimatedTime,
+      difficulty: detail.difficulty
+    };
+    Object.keys(requiredStrings).forEach(key => {
+      if (!String(requiredStrings[key] || "").trim()) {
+        issues.push({ lessonId, index, missing: key });
+      }
+    });
+    const objectives = Array.isArray(detail.zhObjectives) ? detail.zhObjectives : [];
+    if (objectives.length < 3) issues.push({ lessonId, index, missing: "objectives(>=3)" });
+    const checklist = Array.isArray(detail.zhDeliverableChecklist) ? detail.zhDeliverableChecklist : [];
+    if (checklist.length < 4) issues.push({ lessonId, index, missing: "checklist(>=4)" });
+    const workflow = Array.isArray(detail.zhWorkflow) ? detail.zhWorkflow : [];
+    const workflowSteps = Array.isArray(detail.zhWorkflowSteps) ? detail.zhWorkflowSteps : [];
+    if (workflow.length < 3 && workflowSteps.length < 3) issues.push({ lessonId, index, missing: "steps(>=3)" });
+    const caseBlocks = detail.zhCaseStudyBlocks || {};
+    if (!caseBlocks.problem || !caseBlocks.wrong || !caseBlocks.right) {
+      issues.push({ lessonId, index, missing: "caseStudyBlocks" });
+    }
+    if (!(detail.enTitle && detail.enConcept && detail.enPromptPack && detail.enPromptPack.body && detail.enObjectives && detail.enObjectives.length)) {
+      issues.push({ lessonId, index, missing: "englishParity" });
+    }
+    const promptKey = String(requiredStrings.prompt || "").replace(/\s+/g, " ").slice(0, 120);
+    if (promptKey) {
+      if (promptFingerprints.has(promptKey)) {
+        issues.push({ lessonId, index, duplicate: "prompt", with: promptFingerprints.get(promptKey) });
+      } else {
+        promptFingerprints.set(promptKey, lessonId);
+      }
+    }
+    const outcomeKey = String(requiredStrings.outcome || "").trim();
+    if (outcomeKey) {
+      if (outcomeFingerprints.has(outcomeKey)) {
+        issues.push({ lessonId, index, duplicate: "outcome", with: outcomeFingerprints.get(outcomeKey) });
+      } else {
+        outcomeFingerprints.set(outcomeKey, lessonId);
+      }
+    }
+  });
+
+  const validCount = details.length - new Set(issues.map(i => i.lessonId)).size;
+  return {
+    courseId,
+    total: details.length,
+    validCount: Math.max(validCount, 0),
+    issues
+  };
+}
+
+function runPremiumContentAuditIfDev() {
+  if (!isLocalDevHost()) return;
+  try {
+    const result = validatePremiumLessonContent("admissions");
+    console.log(`[CONTENT AUDIT] admissions: ${result.validCount}/${result.total} lessons valid`);
+    if (result.issues.length) {
+      console.warn("[CONTENT AUDIT] admissions issues", result.issues);
+    }
+  } catch (error) {
+    console.warn("[CONTENT AUDIT] skipped", error && error.message ? error.message : error);
+  }
 }
 
 addEventListener("DOMContentLoaded", startApp);
