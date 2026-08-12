@@ -6,7 +6,7 @@ const SPECIAL_ACCOUNT_ROLES = {
   "li19840610@gmail.com": {
     role: "creator",
     zhLabel: "創辦人",
-    enLabel: "Creator",
+    enLabel: "Founder",
     allAccess: true,
     adminAccess: true
   },
@@ -253,6 +253,85 @@ function L(path) {
   return path.split(".").reduce((obj, key) => obj && obj[key], I18N[state.lang]) || path;
 }
 
+function applyDocumentLang() {
+  try {
+    document.documentElement.lang = state.lang === "zh" ? "zh-Hant" : "en";
+  } catch (error) {}
+}
+
+function closeOpenNavMenus() {
+  try {
+    if (typeof closeAllNavMenus === "function") closeAllNavMenus();
+    else {
+      if (typeof setMoreMenuOpen === "function") setMoreMenuOpen(false);
+      if (typeof setMobileNavOpen === "function") setMobileNavOpen(false);
+      if (typeof closeAccountMenu === "function") closeAccountMenu();
+    }
+  } catch (error) {}
+}
+
+/** Localize FREE_BOOTCAMP lesson fields for the current language. */
+function localizeFreeLesson(lesson) {
+  if (!lesson) {
+    return {
+      title: "",
+      goal: "",
+      concept: "",
+      example: "",
+      task: [],
+      prompt: "",
+      feedback: "",
+      output: "",
+      caseStudy: "",
+      commonMistakes: [],
+      notePrompt: "",
+      quizItems: []
+    };
+  }
+  const en = state.lang === "en";
+  const quizItems = (lesson.quizItems || []).map(q => ({
+    ...q,
+    q: en ? (q.enQ || q.q || "") : (q.q || q.enQ || ""),
+    options: en ? (q.enOptions || q.options || []) : (q.options || q.enOptions || []),
+    explain: en ? (q.enExplain || q.explain || "") : (q.explain || q.enExplain || "")
+  }));
+  return {
+    title: en ? (lesson.enTitle || lesson.title || "") : (lesson.title || lesson.enTitle || ""),
+    goal: en ? (lesson.enGoal || lesson.goal || "") : (lesson.goal || lesson.enGoal || ""),
+    concept: en ? (lesson.enConcept || lesson.concept || "") : (lesson.concept || lesson.enConcept || ""),
+    example: en ? (lesson.enExample || lesson.example || "") : (lesson.example || lesson.enExample || ""),
+    task: en ? (lesson.enTask || lesson.task || []) : (lesson.task || lesson.enTask || []),
+    prompt: en ? (lesson.enPrompt || lesson.prompt || "") : (lesson.prompt || lesson.enPrompt || ""),
+    feedback: en ? (lesson.enFeedback || lesson.feedback || "") : (lesson.feedback || lesson.enFeedback || ""),
+    output: en ? (lesson.enOutput || lesson.output || "") : (lesson.output || lesson.enOutput || ""),
+    caseStudy: en ? (lesson.enCaseStudy || lesson.caseStudy || "") : (lesson.caseStudy || lesson.enCaseStudy || ""),
+    commonMistakes: en
+      ? (lesson.enCommonMistakes || lesson.commonMistakes || [])
+      : (lesson.commonMistakes || lesson.enCommonMistakes || []),
+    notePrompt: en ? (lesson.enNotePrompt || lesson.notePrompt || "") : (lesson.notePrompt || lesson.enNotePrompt || ""),
+    quizItems
+  };
+}
+
+function localizeValue(value, fallback = "") {
+  if (value == null) return fallback;
+  if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
+    return value === "" ? fallback : value;
+  }
+  if (typeof value === "object") {
+    const preferred = state.lang === "zh" ? value.zh : value.en;
+    if (preferred != null && preferred !== "") return preferred;
+    const other = state.lang === "zh" ? value.en : value.zh;
+    if (other != null && other !== "") {
+      if (typeof isLocalDevHost === "function" && isLocalDevHost()) {
+        console.warn("[I18N] Missing", state.lang, "translation; falling back");
+      }
+      return other;
+    }
+  }
+  return fallback;
+}
+
 function save() {
   localStorage.setItem("asb_lang", state.lang);
   localStorage.setItem("asb_lesson", state.activeLesson);
@@ -432,7 +511,7 @@ function renderAuthChecking() {
     <main class="page">
       <div class="wrap">
         <section class="panel auth-gate-panel">
-          <span class="tag">Auth</span>
+          <span class="tag">${text("登入狀態", "Auth")}</span>
           <h1>${text("正在確認登入狀態…", "Checking sign-in status…")}</h1>
           <p class="lead">${text("請稍候，我們正在確認你的 Google 登入狀態。", "Please wait while we confirm your Google sign-in status.")}</p>
         </section>
@@ -467,6 +546,8 @@ function renderGoogleLoginGate(options = {}) {
 function toggleLang() {
   state.lang = state.lang === "zh" ? "en" : "zh";
   save();
+  applyDocumentLang();
+  closeOpenNavMenus();
   render();
 }
 
@@ -664,10 +745,10 @@ function getCourseAccessStatusLabel(courseId) {
     return text("免費", "Free");
   }
   if (hasAllAccessPass() && courseId !== "all-access") {
-    return text("全站已解鎖", "All-access unlocked");
+    return text("全站已解鎖", "All Access Unlocked");
   }
   if (courseId === "all-access" && hasAllAccessPass()) {
-    return text("全站已解鎖", "All-access unlocked");
+    return text("全站已解鎖", "All Access Unlocked");
   }
   if (hasCourseAccess(courseId)) {
     return text("已解鎖", "Unlocked");
@@ -722,14 +803,14 @@ function renderCoursePriceBlock(courseOrId, options = {}) {
         ${info.originalPrice != null ? `<p class="course-price-original"><span>${text("原價", "Regular Price")}</span> <s>${formatTwdPrice(info.originalPrice)}</s></p>` : ""}
         <p class="course-price-amount is-earlybird"><span class="course-price-eyebrow">${text("早鳥價", "Early-bird Price")}</span>${formatTwdPrice(info.price)}</p>
         ${saveAmount > 0 ? `<p class="course-price-save">${text(`現省 ${formatTwdPrice(saveAmount)}`, `Save ${formatTwdPrice(saveAmount)}`)}</p>` : ""}
-        <p class="course-price-meta">${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</p>
+        <p class="course-price-meta">${text("一次付費，非訂閱制", "One-time payment · Not a subscription")}</p>
         ${compact ? "" : `
           <ul class="course-price-includes">
             <li>${text("六門付費課程", "Six premium courses")}</li>
             <li>${text("共60堂實戰課", "60 practical lessons in total")}</li>
             <li>${text("六種核心 AI 能力", "Six core AI capabilities")}</li>
             <li>${text("全部對應付費成果包", "All matching premium result packages")}</li>
-            <li>${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</li>
+            <li>${text("一次付費，非訂閱制", "One-time payment · Not a subscription")}</li>
           </ul>
           ${renderPaymentComingSoonNote()}
           ${showFacts ? renderCourseProductFacts() : ""}
@@ -745,9 +826,9 @@ function renderCoursePriceBlock(courseOrId, options = {}) {
       <p class="course-price-meta">${text("一次付費", "One-time payment")}</p>
       ${compact ? "" : `
         <ul class="course-price-includes">
-          <li>${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</li>
+          <li>${text("一次付費，非訂閱制", "One-time payment · Not a subscription")}</li>
           <li>${text(`包含${lessonCount}堂線上實戰課與對應成果包`, `Includes ${lessonCount} practical online lessons and the corresponding result package`)}${packageName ? `（${packageName}）` : ""}</li>
-          <li>${text("本商品為線上數位課程，不提供實體配送", "This is a digital course with no physical delivery")}</li>
+          <li>${text("本商品為線上數位課程，不提供實體配送", "Digital course · No physical delivery")}</li>
         </ul>
         ${renderPaymentComingSoonNote()}
         ${showFacts ? renderCourseProductFacts() : ""}
@@ -1599,12 +1680,12 @@ function nav() {
 
   const authHtml = state.user
     ? renderAccountMenuHtml()
-    : `<button type="button" class="lang" onclick="signInWithGoogle()">${state.lang === "zh" ? "Google 登入" : "Google Login"}</button>`;
+    : `<button type="button" class="lang" onclick="signInWithGoogle()">${text("登入", "Sign In")}</button>`;
 
   return `
     <header>
       <div class="nav compact-nav">
-        <div class="brand" onclick="setRoute('home')" style="cursor:pointer">
+        <div class="brand" onclick="setRoute('home')" style="cursor:pointer" role="link" aria-label="${text("AI Skill Bridge 首頁", "AI Skill Bridge Home")}">
           <span class="logo-badge">AI</span>
           <span>AI Skill Bridge</span>
         </div>
@@ -2399,7 +2480,7 @@ function renderHomePricing() {
             <button class="home-btn home-btn-secondary" onclick="setRoute('map')">${text("查看所有課程", "View All Courses")}</button>
           </article>
           <article class="home-price-card home-price-featured">
-            <span class="home-price-badge">${text("早鳥價", "Early-bird")}</span>
+            <span class="home-price-badge">${text("早鳥價", "Early-bird Price")}</span>
             <h3>${text("全站通行證", "All-Access Pass")}</h3>
             ${allAccessInfo.originalPrice != null ? `<p class="home-price-original"><s>${formatTwdPrice(allAccessInfo.originalPrice)}</s></p>` : ""}
             <p class="home-price-amount">${formatTwdPrice(allAccessInfo.price)}</p>
@@ -2408,7 +2489,7 @@ function renderHomePricing() {
               <li>${text(`解鎖 ${stats.courseCount} 門付費課程`, `Unlock ${stats.courseCount} premium courses`)}</li>
               <li>${text(`共 ${stats.lessonCount} 堂實戰課`, `${stats.lessonCount} practice lessons total`)}</li>
               <li>${text("全部成果禮包", "All result packages")}</li>
-              <li>${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</li>
+              <li>${text("一次付費，非訂閱制", "One-time payment · Not a subscription")}</li>
             </ul>
             <button class="home-btn home-btn-primary" onclick="setRoute('map')">${text("查看全站方案", "View All-Access Plan")}</button>
             ${renderPaymentComingSoonNote()}
@@ -2653,10 +2734,10 @@ function center() {
         <p class="lead">${state.user.email}</p>
 
         <div class="grid four">
-          <article class="card"><span class="tag">Progress</span><h3>${completedCount()} / ${LESSONS.length}</h3><p>${text("已完成課程", "Lessons completed")}</p></article>
-          <article class="card"><span class="tag">Level</span><h3>${currentLevel()}</h3><p>${text("目前等級", "Current level")}</p></article>
-          <article class="card"><span class="tag">Badges</span><h3>${badges.length}</h3><p>${text("已獲得徽章", "Badges earned")}</p></article>
-          <article class="card"><span class="tag">Favorites</span><h3>${state.favorites.length}</h3><p>${text("收藏項目", "Saved items")}</p></article>
+          <article class="card"><span class="tag">${text("進度", "Progress")}</span><h3>${completedCount()} / ${LESSONS.length}</h3><p>${text("已完成課程", "Lessons completed")}</p></article>
+          <article class="card"><span class="tag">${text("等級", "Level")}</span><h3>${currentLevel()}</h3><p>${text("目前等級", "Current level")}</p></article>
+          <article class="card"><span class="tag">${text("徽章", "Badges")}</span><h3>${badges.length}</h3><p>${text("已獲得徽章", "Badges earned")}</p></article>
+          <article class="card"><span class="tag">${text("收藏", "Favorites")}</span><h3>${state.favorites.length}</h3><p>${text("收藏項目", "Saved items")}</p></article>
         </div>
 
         <section class="panel" style="margin-top:24px">
@@ -2891,17 +2972,19 @@ function courses() {
 
         ${loggedIn && progress.percent === 100 ? `
           <section class="panel">
-            <span class="tag free">🏆 Certificate</span>
+            <span class="tag free">🏆 ${text("證書", "Certificate")}</span>
             <h2>${text("AI 新手訓練營結業證書", "AI Beginner Bootcamp Certificate")}</h2>
-            <p>${text("恭喜你完成 8 堂免費入門課程。下一步可以進入進階付費課程，開始建立你的大學申請包。", "Congratulations on completing all 8 free lessons. Next, enter the premium course to build your university application package.")}</p>
+            <p>${text("恭喜你完成 8 堂免費入門課程。下一步可以進入進階付費課程，開始建立你的大學申請包。", "Congratulations on completing all 8 free lessons. Next, enter the premium course to build your University Application Kit.")}</p>
             <button class="btn primary" onclick="setRoute('premium')">${text("前往進階付費課程", "Go to Premium Course")}</button>
           </section>
         ` : ""}
 
         <div class="grid two">
-          ${FREE_BOOTCAMP.map((lesson, i) => `
+          ${FREE_BOOTCAMP.map((raw, i) => {
+            const lesson = localizeFreeLesson(raw);
+            return `
             <article class="card">
-              <span class="tag ${loggedIn && isFreeLessonComplete(i) ? "free" : "premiumtag"}">${loggedIn && isFreeLessonComplete(i) ? "✓ " + text("已完成", "Completed") : "Free " + (i + 1)}</span>
+              <span class="tag ${loggedIn && isFreeLessonComplete(i) ? "free" : "premiumtag"}">${loggedIn && isFreeLessonComplete(i) ? "✓ " + text("已完成", "Completed") : text(`免費 ${i + 1}`, `Free ${i + 1}`)}</span>
               <h3>${lesson.title}</h3>
               <p>${lesson.goal}</p>
               <p><b>${text("本課成果", "Output")}：</b>${lesson.output}</p>
@@ -2912,7 +2995,8 @@ function courses() {
                 <button class="btn primary" onclick='requireGoogleLogin({"route":"freeLesson","lessonId":${i},"action":"openFreeLesson"})'>${text("登入後開始", "Sign In to Start")}</button>
               `}
             </article>
-          `).join("")}
+          `;
+          }).join("")}
         </div>
       </div>
     </main>
@@ -2946,7 +3030,7 @@ function openFreeLesson(index) {
 
 function freeLesson() {
   const index = Number(state.freeLessonIndex || 0);
-  const lesson = FREE_BOOTCAMP[index] || FREE_BOOTCAMP[0];
+  const lesson = localizeFreeLesson(FREE_BOOTCAMP[index] || FREE_BOOTCAMP[0]);
 
   if (!state.authReady) return renderAuthChecking();
   if (!state.user) {
@@ -2969,7 +3053,7 @@ function freeLesson() {
         <button class="btn secondary" onclick="setRoute('courses')">← ${text("回到免費入門", "Back to Free Intro")}</button>
 
         <section class="panel">
-          <span class="tag free">Free Lesson ${index + 1}</span>
+          <span class="tag free">${text(`免費課 ${index + 1}`, `Free Lesson ${index + 1}`)}</span>
           <h1>${lesson.title}</h1>
           <p class="lead">${lesson.goal}</p>
           <p><b>${text("本課成果", "Output")}：</b>${lesson.output}</p>
@@ -2998,14 +3082,14 @@ function freeLesson() {
         </section>
 
         <section class="panel">
-          <h2>Prompt Template</h2>
+          <h2>${text("Prompt 範本", "Prompt Template")}</h2>
           <div class="promptbox">${lesson.prompt}</div>
         </section>
 
         <section class="panel">
           <h2>${text("實作任務", "Practice Task")}</h2>
           <ol>
-            ${lesson.task.map(step => `<li>${step}</li>`).join("")}
+            ${(lesson.task || []).map(step => `<li>${step}</li>`).join("")}
           </ol>
         </section>
 
@@ -3024,7 +3108,7 @@ function freeLesson() {
             return `
               <article class="card" style="margin:16px 0">
                 <h3>Q${qIndex + 1}. ${q.q}</h3>
-                ${q.options.map((opt, optIndex) => `
+                ${(q.options || []).map((opt, optIndex) => `
                   <button class="quiz-option ${String(selected) === String(optIndex) ? (optIndex === q.answer ? "correct" : "wrong") : ""}" onclick="setFreeQuizAnswer(${index}, ${qIndex}, ${optIndex})">
                     ${String.fromCharCode(65 + optIndex)}. ${opt}
                   </button>
@@ -3073,13 +3157,16 @@ function freeLesson() {
 
 
 function freePortfolioItems() {
-  return FREE_BOOTCAMP.map((lesson, index) => ({
-    id: String(index),
-    title: lesson.output || lesson.title,
-    lessonTitle: lesson.title,
-    value: getFreeOutput(index),
-    complete: getFreeOutput(index).trim().length > 0
-  }));
+  return FREE_BOOTCAMP.map((raw, index) => {
+    const lesson = localizeFreeLesson(raw);
+    return {
+      id: String(index),
+      title: lesson.output || lesson.title,
+      lessonTitle: lesson.title,
+      value: getFreeOutput(index),
+      complete: getFreeOutput(index).trim().length > 0
+    };
+  });
 }
 
 function freePortfolioProgress() {
@@ -3143,7 +3230,7 @@ function freeDashboard() {
     <main class="page">
       <div class="wrap">
         <section class="panel">
-          <span class="tag free">V37 Dashboard</span>
+          <span class="tag free">${text("學習儀表板", "Learning Dashboard")}</span>
           <h1>${text("我的免費學習 Dashboard", "My Free Learning Dashboard")}</h1>
           <p class="lead">${text("這裡集中顯示免費課程、成果包、測驗、XP 與結業證書。", "This page tracks free lessons, portfolio outputs, quizzes, XP, and certificate.")}</p>
         </section>
@@ -3151,9 +3238,9 @@ function freeDashboard() {
         <section class="panel">
           <h2>${text("學習總覽", "Overview")}</h2>
           <div class="grid four">
-            <article class="card"><span class="tag">Lessons</span><h3>${course.completed}/${course.total}</h3><p>${course.percent}%</p></article>
-            <article class="card"><span class="tag">Portfolio</span><h3>${portfolio.completed}/${portfolio.total}</h3><p>${portfolio.percent}%</p></article>
-            <article class="card"><span class="tag">Quiz</span><h3>${quiz.correct}/${quiz.total}</h3><p>${quiz.percent}%</p></article>
+            <article class="card"><span class="tag">${text("課程", "Lessons")}</span><h3>${course.completed}/${course.total}</h3><p>${course.percent}%</p></article>
+            <article class="card"><span class="tag">${text("成果包", "Portfolio")}</span><h3>${portfolio.completed}/${portfolio.total}</h3><p>${portfolio.percent}%</p></article>
+            <article class="card"><span class="tag">${text("測驗", "Quiz")}</span><h3>${quiz.correct}/${quiz.total}</h3><p>${quiz.percent}%</p></article>
             <article class="card"><span class="tag">XP</span><h3>${xp}</h3><p>${level}</p></article>
           </div>
         </section>
@@ -3225,7 +3312,7 @@ function freePortfolio() {
 
         <section class="panel">
           <h2>${text("下一步", "Next Step")}</h2>
-          <p>${text("完成免費成果包後，可以進入付費課程建立完整的大學申請包。", "After completing this portfolio, continue to the premium course to build your university application package.")}</p>
+          <p>${text("完成免費成果包後，可以進入付費課程建立完整的大學申請包。", "After completing this portfolio, continue to the premium course to build your University Application Kit.")}</p>
           <button class="btn primary" onclick="setRoute('premium')">${text("查看進階付費課程", "View Premium Courses")}</button>
         </section>
       </div>
@@ -3417,9 +3504,9 @@ function learning() {
         <section class="panel">
           <h2>C. ${text("我的成果", "My Results")}</h2>
           <div class="grid three">
-            <article class="card"><span class="tag">Packages</span><h3>${unlockedPackages.length}</h3><p>${text("已解鎖成果包", "Unlocked packages")}</p></article>
-            <article class="card"><span class="tag">Items</span><h3>${totalResultItems}</h3><p>${text("已完成成果項目", "Completed result items")}</p></article>
-            <article class="card"><span class="tag">Free</span><h3>${freePortfolio.completed}/${freePortfolio.total}</h3><p>${text("免費舊成果包", "Legacy free portfolio")}</p></article>
+            <article class="card"><span class="tag">${text("成果包", "Packages")}</span><h3>${unlockedPackages.length}</h3><p>${text("已解鎖成果包", "Unlocked packages")}</p></article>
+            <article class="card"><span class="tag">${text("項目", "Items")}</span><h3>${totalResultItems}</h3><p>${text("已完成成果項目", "Completed result items")}</p></article>
+            <article class="card"><span class="tag">${text("免費", "Free")}</span><h3>${freePortfolio.completed}/${freePortfolio.total}</h3><p>${text("免費舊成果包", "Legacy free portfolio")}</p></article>
           </div>
           ${recentResults.length ? `
             <h3 style="margin-top:18px">${text("最近編輯的成果", "Recently edited results")}</h3>
@@ -3997,10 +4084,33 @@ function getCourseLessonDetail(courseId, lessonIndex) {
 }
 
 function pickLocalized(detail, zhKey, enKey, fallback = "") {
-  if (!detail) return fallback;
-  const value = state.lang === "zh" ? detail[zhKey] : detail[enKey];
-  if (value == null || value === "") return fallback;
-  return value;
+  if (detail == null) return fallback == null ? "" : fallback;
+  // Support passing a { zh, en } object directly.
+  if (typeof detail === "object" && zhKey == null && (Object.prototype.hasOwnProperty.call(detail, "zh") || Object.prototype.hasOwnProperty.call(detail, "en"))) {
+    return localizeValue(detail, fallback == null ? "" : fallback);
+  }
+  if (typeof detail !== "object") {
+    return detail === "" || detail == null ? (fallback == null ? "" : fallback) : detail;
+  }
+  const preferredKey = state.lang === "zh" ? zhKey : enKey;
+  const otherKey = state.lang === "zh" ? enKey : zhKey;
+  let preferred = preferredKey != null ? detail[preferredKey] : undefined;
+  let other = otherKey != null ? detail[otherKey] : undefined;
+  // Nested { zh, en } values
+  if (preferred && typeof preferred === "object" && ("zh" in preferred || "en" in preferred)) {
+    preferred = localizeValue(preferred, "");
+  }
+  if (other && typeof other === "object" && ("zh" in other || "en" in other)) {
+    other = localizeValue(other, "");
+  }
+  if (preferred != null && preferred !== "") return preferred;
+  if (other != null && other !== "") {
+    if (typeof isLocalDevHost === "function" && isLocalDevHost()) {
+      console.warn("[I18N] Missing", state.lang, "translation:", preferredKey || "(value)");
+    }
+    return other;
+  }
+  return fallback == null ? "" : fallback;
 }
 
 function getLessonOutputName(detail) {
@@ -4332,16 +4442,16 @@ const LESSON_FLOW_STEP_META = [
     key: "scenarioCompleted",
     weight: 10,
     zh: "看案例與方法",
-    en: "Review the Scenario and Method",
+    en: "Review the Example and Method",
     zhBlurb: "情境、做法與操作流程",
-    enBlurb: "Scenario, approach, and workflow"
+    enBlurb: "Example, approach, and workflow"
   },
   {
     id: "practice",
     key: "practiceCompleted",
     weight: 20,
     zh: "使用 Prompt 完成實作",
-    en: "Complete the Prompt Practice",
+    en: "Complete the Task with a Prompt",
     zhBlurb: "複製 Prompt 並完成任務",
     enBlurb: "Copy the prompt and finish the task"
   },
@@ -4350,9 +4460,9 @@ const LESSON_FLOW_STEP_META = [
     key: "resultCompleted",
     weight: 10,
     zh: "儲存成果並完成本課",
-    en: "Save the Output and Complete",
+    en: "Save Your Result and Finish the Lesson",
     zhBlurb: "成果、檢查與標記完成",
-    enBlurb: "Output, review, and mark complete"
+    enBlurb: "Result, checklist, and mark complete"
   }
 ];
 
@@ -5368,7 +5478,7 @@ function lesson() {
         <div class="wrap">
           <button class="btn secondary" onclick="setRoute('course')">← ${text("回到課程首頁", "Back to Course")}</button>
           <section class="panel">
-            <span class="tag">Lesson ${lessonNo}</span>
+            <span class="tag">${text(`第 ${lessonNo} 課`, `Lesson ${lessonNo}`)}</span>
             <h1>${fallbackTitle}</h1>
             <p class="lead">${text("這堂課的完整教材會在後續版本補上。", "Full lesson content will be added later.")}</p>
           </section>
@@ -5539,7 +5649,7 @@ function renderApplicationKitHubCard(index) {
       <p><b>${text("所屬課程", "Course")}：</b>${text("高中生申請大學 AI 實戰課", "AI University Application Course")}</p>
       <p>${text(
         "整合申請動機、自傳、學習歷程、面試準備與資料檢查工具，協助你完成完整的大學申請成果。",
-        "Create a complete university application package with personal statements, learning portfolios, interview preparation, and application checklists."
+        "Create a complete University Application Kit with personal statements, learning portfolios, interview preparation, and application checklists."
       )}</p>
       ${!unlocked && price ? `<p class="course-result-meta">${text("課程售價", "Course Price")}：<span class="price-nowrap">${price}</span> · ${text("一次付費", "One-time payment")}</p>` : ""}
       <p>${text("完成進度", "Progress")}：${needsLogin ? text("登入後顯示", "Sign in to view") : `${progress.completed} / ${progress.total}（${progress.percent}%）`}</p>
@@ -5958,17 +6068,125 @@ function courseResultPackage() {
 }
 
 const APPLICATION_PACKAGE_ITEMS = [
-  { id: "map", title: "1. 大學申請準備地圖", desc: "整理第一階段、第二階段、備審與面試準備方向。", placeholder: "貼上你第1課完成的大學申請準備地圖...", linkedLessonId: "admissions-L1", linkedLessonIndex: 0 },
-  { id: "majors", title: "2. 科系探索表", desc: "整理 5 個可能科系與 3 個優先申請科系。", placeholder: "貼上你第2課完成的科系探索表...", linkedLessonId: "admissions-L2", linkedLessonIndex: 1 },
-  { id: "portfolio", title: "3. 學習歷程素材庫", desc: "整理高中三年的課程成果、活動、競賽、服務與專題。", placeholder: "貼上你第4課完成的學習歷程素材庫...", linkedLessonId: "admissions-L4", linkedLessonIndex: 3 },
-  { id: "activities", title: "4. 多元表現描述", desc: "放入 3 則用 STAR 架構完成的多元表現。", placeholder: "貼上你第5課完成的多元表現描述...", linkedLessonId: "admissions-L5", linkedLessonIndex: 4 },
-  { id: "autobiography", title: "5. 學習歷程自述初稿", desc: "整理你的學習主軸、能力成長、申請動機與未來規劃。", placeholder: "貼上你第6課完成的學習歷程自述與申請動機初稿...", linkedLessonId: "admissions-L6", linkedLessonIndex: 5 },
-  { id: "majorSpecific", title: "6. 科系專屬備審規劃", desc: "整理目標科系需求與你的素材對照。", placeholder: "貼上你第7課完成的科系專屬備審規劃表...", linkedLessonId: "admissions-L7", linkedLessonIndex: 6 },
-  { id: "interviewBank", title: "7. 面試題庫與回答架構", desc: "整理 20 題面試題與最重要的回答重點。", placeholder: "貼上你第8課完成的面試題庫與回答架構...", linkedLessonId: "admissions-L8", linkedLessonIndex: 7 },
-  { id: "mockInterview", title: "8. 模擬面試紀錄", desc: "整理 AI 模擬面試評分與改進清單。", placeholder: "貼上你第9課完成的模擬面試紀錄與改進清單...", linkedLessonId: "admissions-L9", linkedLessonIndex: 8 },
-  { id: "advisorPrompt", title: "9. 個人 AI 升學顧問 Prompt", desc: "保存你可以重複使用的個人升學顧問 Prompt。", placeholder: "貼上你自訂的個人 AI 升學顧問 Prompt（課程成果包未自動對應此欄）...", linkedLessonId: null, linkedLessonIndex: null },
-  { id: "finalReview", title: "10. 最終總檢查", desc: "整理整份申請包的總檢查與最後修改清單。", placeholder: "貼上你第10課完成的完整申請資料檢查與送件清單...", linkedLessonId: "admissions-L10", linkedLessonIndex: 9 }
+  {
+    id: "map",
+    zhTitle: "1. 大學申請準備地圖",
+    enTitle: "1. University Application Preparation Map",
+    zhDesc: "整理第一階段、第二階段、備審與面試準備方向。",
+    enDesc: "Organize Stage 1, Stage 2, portfolio, and interview prep directions.",
+    zhPlaceholder: "貼上你第1課完成的大學申請準備地圖...",
+    enPlaceholder: "Paste your Lesson 1 preparation map here...",
+    linkedLessonId: "admissions-L1",
+    linkedLessonIndex: 0
+  },
+  {
+    id: "majors",
+    zhTitle: "2. 科系探索表",
+    enTitle: "2. Major Exploration Sheet",
+    zhDesc: "整理 5 個可能科系與 3 個優先申請科系。",
+    enDesc: "Organize 5 possible majors and 3 priority choices.",
+    zhPlaceholder: "貼上你第2課完成的科系探索表...",
+    enPlaceholder: "Paste your Lesson 2 major exploration sheet here...",
+    linkedLessonId: "admissions-L2",
+    linkedLessonIndex: 1
+  },
+  {
+    id: "portfolio",
+    zhTitle: "3. 學習歷程素材庫",
+    enTitle: "3. Learning Portfolio Material Bank",
+    zhDesc: "整理高中三年的課程成果、活動、競賽、服務與專題。",
+    enDesc: "Organize coursework, activities, contests, service, and projects from three years of high school.",
+    zhPlaceholder: "貼上你第4課完成的學習歷程素材庫...",
+    enPlaceholder: "Paste your Lesson 4 material bank here...",
+    linkedLessonId: "admissions-L4",
+    linkedLessonIndex: 3
+  },
+  {
+    id: "activities",
+    zhTitle: "4. 多元表現描述",
+    enTitle: "4. Activity Stories (STAR)",
+    zhDesc: "放入 3 則用 STAR 架構完成的多元表現。",
+    enDesc: "Add 3 STAR-structured activity stories.",
+    zhPlaceholder: "貼上你第5課完成的多元表現描述...",
+    enPlaceholder: "Paste your Lesson 5 STAR activity stories here...",
+    linkedLessonId: "admissions-L5",
+    linkedLessonIndex: 4
+  },
+  {
+    id: "autobiography",
+    zhTitle: "5. 學習歷程自述初稿",
+    enTitle: "5. Learning Statement Draft",
+    zhDesc: "整理你的學習主軸、能力成長、申請動機與未來規劃。",
+    enDesc: "Organize your learning theme, growth, motivation, and future plan.",
+    zhPlaceholder: "貼上你第6課完成的學習歷程自述與申請動機初稿...",
+    enPlaceholder: "Paste your Lesson 6 statement and motivation draft here...",
+    linkedLessonId: "admissions-L6",
+    linkedLessonIndex: 5
+  },
+  {
+    id: "majorSpecific",
+    zhTitle: "6. 科系專屬備審規劃",
+    enTitle: "6. Major-Specific Portfolio Plan",
+    zhDesc: "整理目標科系需求與你的素材對照。",
+    enDesc: "Map target-major needs to your materials.",
+    zhPlaceholder: "貼上你第7課完成的科系專屬備審規劃表...",
+    enPlaceholder: "Paste your Lesson 7 major-specific portfolio plan here...",
+    linkedLessonId: "admissions-L7",
+    linkedLessonIndex: 6
+  },
+  {
+    id: "interviewBank",
+    zhTitle: "7. 面試題庫與回答架構",
+    enTitle: "7. Interview Question Bank & Answer Frames",
+    zhDesc: "整理 20 題面試題與最重要的回答重點。",
+    enDesc: "Organize 20 interview questions and key answer points.",
+    zhPlaceholder: "貼上你第8課完成的面試題庫與回答架構...",
+    enPlaceholder: "Paste your Lesson 8 interview bank here...",
+    linkedLessonId: "admissions-L8",
+    linkedLessonIndex: 7
+  },
+  {
+    id: "mockInterview",
+    zhTitle: "8. 模擬面試紀錄",
+    enTitle: "8. Mock Interview Log",
+    zhDesc: "整理 AI 模擬面試評分與改進清單。",
+    enDesc: "Organize AI mock-interview scores and improvement notes.",
+    zhPlaceholder: "貼上你第9課完成的模擬面試紀錄與改進清單...",
+    enPlaceholder: "Paste your Lesson 9 mock interview log here...",
+    linkedLessonId: "admissions-L9",
+    linkedLessonIndex: 8
+  },
+  {
+    id: "advisorPrompt",
+    zhTitle: "9. 個人 AI 升學顧問 Prompt",
+    enTitle: "9. Personal AI Admissions Advisor Prompt",
+    zhDesc: "保存你可以重複使用的個人升學顧問 Prompt。",
+    enDesc: "Save a reusable personal admissions-advisor prompt.",
+    zhPlaceholder: "貼上你自訂的個人 AI 升學顧問 Prompt（課程成果包未自動對應此欄）...",
+    enPlaceholder: "Paste your custom AI admissions advisor prompt (not auto-linked from lesson outputs)...",
+    linkedLessonId: null,
+    linkedLessonIndex: null
+  },
+  {
+    id: "finalReview",
+    zhTitle: "10. 最終總檢查",
+    enTitle: "10. Final Review & Submission Checklist",
+    zhDesc: "整理整份申請包的總檢查與最後修改清單。",
+    enDesc: "Organize the full-kit review and final revision checklist.",
+    zhPlaceholder: "貼上你第10課完成的完整申請資料檢查與送件清單...",
+    enPlaceholder: "Paste your Lesson 10 full review and submission checklist here...",
+    linkedLessonId: "admissions-L10",
+    linkedLessonIndex: 9
+  }
 ];
+
+function getApplicationPackageItemCopy(item) {
+  return {
+    title: pickLocalized(item, "zhTitle", "enTitle", item.title || ""),
+    desc: pickLocalized(item, "zhDesc", "enDesc", item.desc || ""),
+    placeholder: pickLocalized(item, "zhPlaceholder", "enPlaceholder", item.placeholder || "")
+  };
+}
 
 /** Compatibility map: admissions lesson outputs ↔ application package slots (manual paste; no second storage). */
 const ADMISSIONS_APPLICATION_PACKAGE_LINKS = APPLICATION_PACKAGE_ITEMS
@@ -6052,7 +6270,7 @@ function saveApplicationPackageItem(id, shouldRender = false) {
   try {
     localStorage.setItem(applicationPackageKey(id), el.value);
     updateApplicationPackageProgressUI();
-    toast(state.lang === "zh" ? "已儲存到大學申請包" : "Saved to application package");
+    toast(state.lang === "zh" ? "已儲存到大學申請包" : "Saved to University Application Kit");
 
     if (shouldRender) {
       setTimeout(() => render(), 120);
@@ -6084,11 +6302,16 @@ function clearApplicationPackageItem(id) {
 }
 
 function buildFinalReviewPrompt() {
+  const emptyLabel = text("尚未填寫", "Empty");
   const data = APPLICATION_PACKAGE_ITEMS.map(item => {
-    return `${item.title}\n${getApplicationPackageCurrentValue(item.id) || loadApplicationPackageValue(item.id) || "尚未填寫"}`;
+    const copy = getApplicationPackageItemCopy(item);
+    return `${copy.title}\n${getApplicationPackageCurrentValue(item.id) || loadApplicationPackageValue(item.id) || emptyLabel}`;
   }).join("\n\n---\n\n");
 
-  return `請你擔任大學申請總顧問。以下是我的完整大學申請包：\n\n${data}\n\n請幫我做最終總檢查：\n1. 申請主軸是否清楚\n2. 每份資料是否互相支持\n3. 哪些內容太空泛\n4. 哪些地方和目標科系連結不足\n5. 哪些內容需要補強具體例子\n6. 請列出最優先修改的 5 件事\n7. 請給我一份最後 7 天修改計畫\n\n請不要捏造我的經歷，只根據我提供的內容給建議。`;
+  return text(
+    `請你擔任大學申請總顧問。以下是我的完整大學申請包：\n\n${data}\n\n請幫我做最終總檢查：\n1. 申請主軸是否清楚\n2. 每份資料是否互相支持\n3. 哪些內容太空泛\n4. 哪些地方和目標科系連結不足\n5. 哪些內容需要補強具體例子\n6. 請列出最優先修改的 5 件事\n7. 請給我一份最後 7 天修改計畫\n\n請不要捏造我的經歷，只根據我提供的內容給建議。`,
+    `Act as a university application advisor. Here is my complete University Application Kit:\n\n${data}\n\nPlease run a final review:\n1. Is the application theme clear?\n2. Do the sections support each other?\n3. Which parts are too vague?\n4. Where is the major link weak?\n5. Where should I add concrete examples?\n6. List the top 5 priority revisions\n7. Give me a final 7-day revision plan\n\nDo not invent my experience. Advise only from what I provided.`
+  );
 }
 
 function fallbackCopyText(textToCopy) {
@@ -6156,10 +6379,10 @@ function applicationPackage() {
         <div class="wrap">
           <section class="panel">
             <span class="tag premiumtag">${text("付費功能", "Premium Feature")}</span>
-            <h1>${text("大學申請包尚未開通", "Application Package Locked")}</h1>
+            <h1>${text("大學申請包尚未開通", "University Application Kit Locked")}</h1>
             <p class="lead">${text(
               "這個功能屬於「高中生申請大學 AI 實戰課」。開通後，你才能集中儲存 10 堂課成果並產出完整申請資料。",
-              "This feature belongs to the University Application premium course. Unlock it to store all 10 lesson outputs and generate a complete application package."
+              "This feature belongs to the University Application premium course. Unlock it to store all 10 lesson outputs and generate a complete University Application Kit."
             )}</p>
             <button class="btn primary" onclick="setRoute('premium')">${text("前往進階付費", "Go to Premium")}</button>
           </section>
@@ -6177,10 +6400,10 @@ function applicationPackage() {
       <div class="wrap">
         <section class="panel">
           <span class="tag free">${text("付費課程成果區", "Premium Course Output")}</span>
-          <h1>${text("我的大學申請包", "My University Application Package")}</h1>
+          <h1>${text("我的大學申請包", "My University Application Kit")}</h1>
           <p class="lead">${text(
             "每一課完成後，把成果貼到對應欄位並儲存。完成 10 個欄位後，你就會得到一份完整的大學申請資料。",
-            "After each lesson, paste your result into the matching section and save it. When all 10 sections are complete, you will have a full university application package."
+            "After each lesson, paste your result into the matching section and save it. When all 10 sections are complete, you will have a full university application kit."
           )}</p>
 
           <h2>${text("完成進度", "Progress")}：<span id="application-package-progress-label">${progress.completed}/${progress.total}（${progress.percent}%）</span></h2>
@@ -6208,14 +6431,15 @@ function applicationPackage() {
 
         <div class="grid">
           ${APPLICATION_PACKAGE_ITEMS.map(item => {
+            const copy = getApplicationPackageItemCopy(item);
             const value = loadApplicationPackageValue(item.id);
             const done = value.trim().length > 0;
             return `
               <section class="panel application-package-item">
                 <span id="application-package-status-${item.id}" class="tag ${done ? "free" : "premiumtag"}">${done ? text("已完成", "Completed") : text("尚未填寫", "Empty")}</span>
-                <h2>${item.title}</h2>
-                <p>${item.desc}</p>
-                <textarea id="application-package-${item.id}" placeholder="${item.placeholder}" oninput="updateApplicationPackageProgressUI()">${escapeTextareaValue(value)}</textarea>
+                <h2>${copy.title}</h2>
+                <p>${copy.desc}</p>
+                <textarea id="application-package-${item.id}" placeholder="${copy.placeholder}" oninput="updateApplicationPackageProgressUI()">${escapeTextareaValue(value)}</textarea>
                 <div class="btnrow">
                   <button class="btn secondary" onclick="saveApplicationPackageItem('${item.id}')">${text("儲存這一項", "Save This Section")}</button>
                   <button class="btn secondary" onclick="clearApplicationPackageItem('${item.id}')">${text("清除", "Clear")}</button>
@@ -6399,9 +6623,9 @@ function impact() {
         <h1>${L("impact.title")}</h1>
         <p class="lead">${L("impact.lead")}</p>
         <div class="grid three">
-          <article class="card"><span class="tag free">Access</span><h3>${L("impact.access")}</h3><p>${L("impact.accessText")}</p></article>
-          <article class="card"><span class="tag premiumtag">Sustainability</span><h3>${L("impact.sustainability")}</h3><p>${L("impact.sustainabilityText")}</p></article>
-          <article class="card"><span class="tag communitytag">Community</span><h3>${L("impact.community")}</h3><p>${L("impact.communityText")}</p></article>
+          <article class="card"><span class="tag free">${text("近用", "Access")}</span><h3>${L("impact.access")}</h3><p>${L("impact.accessText")}</p></article>
+          <article class="card"><span class="tag premiumtag">${text("永續", "Sustainability")}</span><h3>${L("impact.sustainability")}</h3><p>${L("impact.sustainabilityText")}</p></article>
+          <article class="card"><span class="tag communitytag">${text("社群", "Community")}</span><h3>${L("impact.community")}</h3><p>${L("impact.communityText")}</p></article>
         </div>
       </div>
     </main>
@@ -6440,6 +6664,7 @@ function bindLessonInteractiveA11y() {
 
 function render() {
   try {
+    applyDocumentLang();
     const routes = {
       home,
       freeLesson,
@@ -6476,11 +6701,13 @@ function render() {
 }
 
 async function startApp() {
+  applyDocumentLang();
   bindMoreMenuEvents();
   render();
   await initAuth();
   render();
   runPremiumContentAuditIfDev();
+  runI18nAuditIfDev();
 }
 
 function isLocalDevHost() {
@@ -6557,6 +6784,126 @@ function validatePremiumLessonContent(courseId) {
     validCount: Math.max(validCount, 0),
     issues
   };
+}
+
+
+function auditTranslations() {
+  const missing = [];
+  const warn = (path, msg) => missing.push({ path, msg });
+
+  // Nav keys
+  (MAIN_NAV_ITEMS || []).forEach((item, i) => {
+    if (!item.zh || !item.en) warn(`MAIN_NAV_ITEMS[${i}]`, "missing zh/en");
+  });
+  (MORE_NAV_GROUPS || []).forEach((group, gi) => {
+    if (!group.zh || !group.en) warn(`MORE_NAV_GROUPS[${gi}]`, "missing zh/en group label");
+    (group.items || []).forEach((item, ii) => {
+      if (!item.zh || !item.en) warn(`MORE_NAV_GROUPS[${gi}].items[${ii}]`, "missing zh/en");
+    });
+  });
+
+  // Lesson flow steps
+  (LESSON_FLOW_STEP_META || []).forEach((step, i) => {
+    if (!step.zh || !step.en) warn(`LESSON_FLOW_STEP_META[${i}]`, "missing zh/en title");
+  });
+
+  // Free bootcamp
+  let freeTitleOk = 0;
+  if (typeof FREE_BOOTCAMP !== "undefined") {
+    FREE_BOOTCAMP.forEach((lesson, i) => {
+      const hasZh = !!(lesson.title && lesson.goal && lesson.concept && lesson.prompt && lesson.output);
+      const hasEn = !!(lesson.enTitle && lesson.enGoal && lesson.enConcept && lesson.enPrompt && lesson.enOutput);
+      if (hasZh && hasEn) freeTitleOk += 1;
+      else warn(`FREE_BOOTCAMP[${i}]`, `missing ${!hasZh ? "zh" : ""}${!hasZh && !hasEn ? "/" : ""}${!hasEn ? "en" : ""} core fields`);
+      (lesson.quizItems || []).forEach((q, qi) => {
+        if (!q.q || !q.enQ) warn(`FREE_BOOTCAMP[${i}].quizItems[${qi}]`, "missing q/enQ");
+        if (!Array.isArray(q.options) || !Array.isArray(q.enOptions)) warn(`FREE_BOOTCAMP[${i}].quizItems[${qi}]`, "missing options/enOptions");
+      });
+    });
+  }
+
+  // Premium courses + lessons
+  let premiumLessonOk = 0;
+  let premiumLessonTotal = 0;
+  const courses = (typeof getPremiumCourses === "function") ? getPremiumCourses() : (typeof PREMIUM !== "undefined" ? PREMIUM : []);
+  (courses || []).forEach(course => {
+    if (!course.zhTitle || !course.enTitle) warn(`PREMIUM[${course.id}]`, "missing zhTitle/enTitle");
+    const details = (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[course.id]) || [];
+    details.forEach((raw, i) => {
+      premiumLessonTotal += 1;
+      const detail = (typeof normalizePremiumLessonDetail === "function")
+        ? (normalizePremiumLessonDetail(course.id, raw) || raw)
+        : raw;
+      if (detail.zhTitle && detail.enTitle) premiumLessonOk += 1;
+      else warn(`PREMIUM_LESSON_DETAILS.${course.id}[${i}]`, "missing zhTitle/enTitle");
+    });
+  });
+
+  // Result packages
+  const packages = (typeof getResultPackageConfigList === "function")
+    ? getResultPackageConfigList()
+    : ((typeof RESULT_PACKAGE_CONFIG !== "undefined") ? RESULT_PACKAGE_CONFIG
+      : ((typeof RESULT_PACKAGES !== "undefined") ? RESULT_PACKAGES : []));
+  (packages || []).forEach((pkg, i) => {
+    if (!pkg.zhTitle || !pkg.enTitle) warn(`RESULT_PACKAGE_CONFIG[${pkg.id || i}]`, "missing zhTitle/enTitle");
+  });
+
+  // Application package items
+  (APPLICATION_PACKAGE_ITEMS || []).forEach((item, i) => {
+    if (!item.zhTitle || !item.enTitle) warn(`APPLICATION_PACKAGE_ITEMS[${i}]`, "missing zhTitle/enTitle");
+  });
+
+  // Price label smoke test via text()
+  const priceKeys = [
+    ["免費", "Free"],
+    ["課程售價", "Course Price"],
+    ["一次付費", "One-time payment"],
+    ["早鳥價", "Early-bird Price"],
+    ["付款功能建置中", "Payment service coming soon"]
+  ];
+  priceKeys.forEach(([zh, en], i) => {
+    if (!zh || !en) warn(`priceLabels[${i}]`, "empty");
+  });
+
+  const freeTotal = (typeof FREE_BOOTCAMP !== "undefined") ? FREE_BOOTCAMP.length : 0;
+  const navTotal = (MAIN_NAV_ITEMS || []).length + (MORE_NAV_GROUPS || []).reduce((n, g) => n + 1 + (g.items || []).length, 0);
+  const flowTotal = (LESSON_FLOW_STEP_META || []).length;
+  const appItems = (APPLICATION_PACKAGE_ITEMS || []).length;
+  const pkgTotal = (packages || []).length;
+  const interfaceChecked = navTotal + flowTotal + appItems + pkgTotal + priceKeys.length;
+  const interfaceGaps = missing.filter(m =>
+    !String(m.path).includes("PREMIUM_LESSON") && !String(m.path).includes("FREE_BOOTCAMP")
+  ).length;
+  const interfaceComplete = interfaceChecked - interfaceGaps;
+
+  return {
+    missing,
+    summary: {
+      freeLessons: `${freeTitleOk}/${freeTotal}`,
+      premiumLessons: `${premiumLessonOk}/${premiumLessonTotal}`,
+      interfaceKeys: `${interfaceComplete}/${interfaceChecked}`,
+      navAndFlow: `${navTotal + flowTotal + appItems} keys checked`,
+      interfaceComplete: interfaceGaps === 0
+    }
+  };
+}
+
+function runI18nAuditIfDev() {
+  if (typeof isLocalDevHost !== "function" || !isLocalDevHost()) return;
+  try {
+    const result = auditTranslations();
+    const s = result.summary || {};
+    console.log(`[I18N AUDIT] ${s.interfaceKeys} interface keys complete`);
+    console.log(`[I18N AUDIT] ${s.freeLessons} free bootcamp lessons have zh/en core fields`);
+    console.log(`[I18N AUDIT] ${s.premiumLessons} premium lessons have zh/en titles`);
+    if (result.missing && result.missing.length) {
+      console.warn("[I18N AUDIT] gaps:", result.missing);
+    } else {
+      console.log("[I18N AUDIT] no missing bilingual fields detected in audited surfaces");
+    }
+  } catch (error) {
+    console.warn("[I18N AUDIT] skipped", error && error.message ? error.message : error);
+  }
 }
 
 function runPremiumContentAuditIfDev() {

@@ -21,7 +21,14 @@ const FREE_BOOTCAMP = [
           "把難懂答案全部背起來"
         ],
         "answer": 0,
-        "explain": "指定對象和例子，可以讓 AI 重新調整說明方式。"
+        "explain": "指定對象和例子，可以讓 AI 重新調整說明方式。",
+        "enQ": "If an AI explanation is too hard to understand, what should you do?",
+        "enOptions": [
+          "Ask it to re-explain with a simpler audience and examples",
+          "Give up",
+          "Memorize the difficult answer"
+        ],
+        "enExplain": "Specifying the audience and examples helps AI adjust its explanation."
       },
       {
         "q": "AI 最不應該被當成什麼？",
@@ -31,7 +38,14 @@ const FREE_BOOTCAMP = [
           "練習與發想工具"
         ],
         "answer": 1,
-        "explain": "AI 會出錯，重要內容仍需要人判斷與查證。"
+        "explain": "AI 會出錯，重要內容仍需要人判斷與查證。",
+        "enQ": "What should AI never be treated as?",
+        "enOptions": [
+          "A helper for organizing information",
+          "An always-correct authority",
+          "A practice and brainstorming tool"
+        ],
+        "enExplain": "AI can be wrong; important content still needs human judgment and verification."
       },
       {
         "q": "請 AI 用小學生、高中生、長輩三種版本解釋，是在練習什麼？",
@@ -41,7 +55,14 @@ const FREE_BOOTCAMP = [
           "測試網路速度"
         ],
         "answer": 1,
-        "explain": "不同受眾需要不同深度、語氣與例子。"
+        "explain": "不同受眾需要不同深度、語氣與例子。",
+        "enQ": "Asking for elementary, high-school, and elder versions practices what?",
+        "enOptions": [
+          "Making AI write more words",
+          "Adjusting audience and expression",
+          "Testing internet speed"
+        ],
+        "enExplain": "Different audiences need different depth, tone, and examples."
       },
       {
         "q": "學完本課後，最重要的成果是？",
@@ -51,7 +72,14 @@ const FREE_BOOTCAMP = [
           "一篇完全由 AI 代寫的文章"
         ],
         "answer": 0,
-        "explain": "本課目標是整理出你自己的 AI 理解筆記。"
+        "explain": "本課目標是整理出你自己的 AI 理解筆記。",
+        "enQ": "What is the most important outcome of this lesson?",
+        "enOptions": [
+          "An AI understanding note",
+          "A paid receipt",
+          "An article fully written by AI"
+        ],
+        "enExplain": "The goal is to create your own AI understanding note."
       },
       {
         "q": "使用 AI 的第一步通常是？",
@@ -61,7 +89,14 @@ const FREE_BOOTCAMP = [
           "先關掉電腦"
         ],
         "answer": 0,
-        "explain": "清楚需求是 AI 有效回應的基礎。"
+        "explain": "清楚需求是 AI 有效回應的基礎。",
+        "enQ": "What is usually the first step when using AI?",
+        "enOptions": [
+          "Clarify your need",
+          "Copy someone else’s answer",
+          "Turn off the computer"
+        ],
+        "enExplain": "Clear needs are the foundation of useful AI responses."
       }
     ],
     "caseStudy": "情境案例：小安第一次使用 AI，只問「AI 是什麼？」結果得到一大段看不懂的說明。後來他改問：「請用高中生聽得懂的方式，用三個生活例子解釋 AI，最後用一句話總結。」AI 的回答立刻變得清楚很多。這代表 AI 不是不能教，而是你要告訴它要用什麼程度、什麼格式來教。",
@@ -70,7 +105,26 @@ const FREE_BOOTCAMP = [
       "只問一句很短的問題就期待完美答案",
       "沒有要求 AI 用自己聽得懂的方式說明"
     ],
-    "notePrompt": "請寫下：1. 我以前怎麼理解 AI？2. 我現在覺得 AI 最像什麼工具？3. 我會如何向一位完全沒用過 AI 的同學解釋 AI？"
+    "notePrompt": "請寫下：1. 我以前怎麼理解 AI？2. 我現在覺得 AI 最像什麼工具？3. 我會如何向一位完全沒用過 AI 的同學解釋 AI？",
+    "enTitle": "What is AI, really?",
+    "enGoal": "Understand AI, generative AI, and ChatGPT in everyday language.",
+    "enConcept": "AI is not magic, and it is not a full replacement for humans. Think of it as an assistant that can generate text, organize information, and suggest ideas from large amounts of data. The clearer your question, the more useful its help becomes.",
+    "enExample": "Ask AI to explain the same topic at different levels—for example, for an elementary student, a high school student, and a grandparent. Good AI users do not ask only once; they adjust the audience and purpose.",
+    "enTask": [
+      "Ask AI to explain AI for an elementary student, a high school student, and a grandparent.",
+      "Compare which version is clearest.",
+      "Write a ~100-word AI understanding note in your own words."
+    ],
+    "enPrompt": "Please explain what AI is in three ways:\n1. An elementary-student version\n2. A high-school-student version\n3. A grandparent-friendly version\nThen compare the three explanations in a table and summarize 5 key points.",
+    "enFeedback": "Act as an AI beginner teacher. Here is my AI understanding note:\n(paste note)\nPlease check:\n1. Is it clear?\n2. Are there misconceptions?\n3. Which parts are too abstract?\n4. Rewrite it so classmates can understand it more easily.",
+    "enOutput": "My AI Understanding Note",
+    "enCaseStudy": "Case: Xiao An first asked “What is AI?” and got a long, hard-to-read answer. He then asked: “Explain AI for a high school student with three everyday examples, and end with one summary sentence.” The answer became much clearer. AI can teach—you just need to tell it the level and format.",
+    "enCommonMistakes": [
+      "Treating AI as an always-correct teacher",
+      "Asking one short question and expecting a perfect answer",
+      "Not asking AI to explain in a way you can understand"
+    ],
+    "enNotePrompt": "Write: 1) How did I used to understand AI? 2) What kind of tool do I think AI is now? 3) How would I explain AI to a classmate who has never used it?"
   },
   {
     "title": "如何正確問 AI 問題？",
@@ -94,7 +148,14 @@ const FREE_BOOTCAMP = [
           "請擔任簡報教練，幫我為高中同學設計 5 分鐘環保簡報，輸出 3 頁架構與講稿"
         ],
         "answer": 2,
-        "explain": "它包含角色、任務、對象、時間與輸出格式。"
+        "explain": "它包含角色、任務、對象、時間與輸出格式。",
+        "enQ": "Which prompt is most complete?",
+        "enOptions": [
+          "Help me make a presentation",
+          "Give me the answer quickly",
+          "Act as a presentation coach and design a 5-minute eco presentation for high school classmates, with a 3-page structure and script"
+        ],
+        "enExplain": "It includes role, task, audience, time, and output format."
       },
       {
         "q": "好 Prompt 通常包含哪一組？",
@@ -104,7 +165,14 @@ const FREE_BOOTCAMP = [
           "越短越好"
         ],
         "answer": 0,
-        "explain": "這五個元素能讓 AI 更精準完成任務。"
+        "explain": "這五個元素能讓 AI 更精準完成任務。",
+        "enQ": "A good prompt usually includes which set?",
+        "enOptions": [
+          "Role, task, context, format, constraints",
+          "Mood, weather, zodiac sign",
+          "The shorter the better"
+        ],
+        "enExplain": "These five elements help AI complete the task more precisely."
       },
       {
         "q": "如果 AI 回答太空泛，最適合怎麼改？",
@@ -114,7 +182,14 @@ const FREE_BOOTCAMP = [
           "完全照抄"
         ],
         "answer": 0,
-        "explain": "補充條件能改善回答品質。"
+        "explain": "補充條件能改善回答品質。",
+        "enQ": "If AI’s answer is too vague, what should you change?",
+        "enOptions": [
+          "Add context and format requirements",
+          "Delete the question",
+          "Copy everything as-is"
+        ],
+        "enExplain": "Adding conditions improves answer quality."
       },
       {
         "q": "「請你擔任高中英文老師」屬於 Prompt 的哪個元素？",
@@ -124,7 +199,14 @@ const FREE_BOOTCAMP = [
           "輸出格式"
         ],
         "answer": 0,
-        "explain": "這是在設定 AI 的回答角度。"
+        "explain": "這是在設定 AI 的回答角度。",
+        "enQ": "“Act as a high-school English teacher” is which prompt element?",
+        "enOptions": [
+          "Role",
+          "Constraint",
+          "Output format"
+        ],
+        "enExplain": "It sets the angle of AI’s response."
       },
       {
         "q": "「請用表格列出」屬於什麼？",
@@ -134,7 +216,14 @@ const FREE_BOOTCAMP = [
           "登入方式"
         ],
         "answer": 0,
-        "explain": "指定輸出格式能讓答案更好整理。"
+        "explain": "指定輸出格式能讓答案更好整理。",
+        "enQ": "“List it in a table” is what?",
+        "enOptions": [
+          "Output format",
+          "Emotional expression",
+          "Sign-in method"
+        ],
+        "enExplain": "Specifying output format makes answers easier to organize."
       }
     ],
     "caseStudy": "情境案例：小美要做環保報告，她一開始只問「幫我寫報告」。AI 直接產出一篇很普通的文章。後來她改成：「請擔任高中報告教練，幫我規劃 5 分鐘環保簡報，對象是高中生，請輸出開場、三個重點、生活案例與結論。」這次 AI 給出的內容就能直接拿來改成簡報架構。",
@@ -144,7 +233,27 @@ const FREE_BOOTCAMP = [
       "沒有指定輸出格式",
       "沒有說明對象與限制"
     ],
-    "notePrompt": "請寫下：1. 我最常問 AI 的模糊問題是什麼？2. 我如何把它改成好 Prompt？3. 我的 Prompt 還缺少哪個元素？"
+    "notePrompt": "請寫下：1. 我最常問 AI 的模糊問題是什麼？2. 我如何把它改成好 Prompt？3. 我的 Prompt 還缺少哪個元素？",
+    "enTitle": "How to ask AI the right questions?",
+    "enGoal": "Rewrite vague questions into clear, specific, actionable prompts.",
+    "enConcept": "Many people think AI is not useful because their questions are too vague. A good prompt usually includes role, task, context, format, and constraints. You do not need to memorize a formula, but you do need to state your need clearly.",
+    "enExample": "Weak prompt: Help me write a report. Strong prompt: Act as a high-school presentation coach. Help me plan a 5-minute environmental protection presentation for classmates, with opening, three key points, and conclusion, in a natural tone.",
+    "enTask": [
+      "Write one vague question you usually ask AI.",
+      "Rewrite it into a high-quality prompt with role, task, context, format, and constraints.",
+      "Ask AI to score it and suggest improvements."
+    ],
+    "enPrompt": "Act as a prompt coach. I want to rewrite this vague question into a high-quality prompt:\nOriginal question: ______\nPlease rewrite it to include role, task, context, output format, and constraints, and explain why the rewrite is better.",
+    "enFeedback": "Act as a prompt scoring teacher. Here is my rewritten prompt:\n(paste prompt)\nScore clarity, completeness, actionability, constraints, and output format from 1–10 each, and tell me how to reach 90+.",
+    "enOutput": "My First High-Quality Prompt",
+    "enCaseStudy": "Case: Xiao Mei needed an eco report and first asked “Help me write a report.” AI produced a generic article. She then asked for a 5-minute presentation structure for high school students with opening, three points, a life example, and conclusion. That output could become a real slide outline.",
+    "enCommonMistakes": [
+      "Saying “help me write” without stating what is needed",
+      "Not specifying a role",
+      "Not specifying output format",
+      "Not stating audience and constraints"
+    ],
+    "enNotePrompt": "Write: 1) What vague AI question do I ask most often? 2) How did I rewrite it into a good prompt? 3) Which element is still missing?"
   },
   {
     "title": "AI 學習助手：做出讀書計畫",
@@ -169,7 +278,14 @@ const FREE_BOOTCAMP = [
           "朋友的星座"
         ],
         "answer": 0,
-        "explain": "日期與範圍決定讀書計畫的密度和順序。"
+        "explain": "日期與範圍決定讀書計畫的密度和順序。",
+        "enQ": "When asking AI for a study plan, which information matters most?",
+        "enOptions": [
+          "Exam date and scope",
+          "What you had for lunch",
+          "A friend’s zodiac sign"
+        ],
+        "enExplain": "Date and scope determine density and order."
       },
       {
         "q": "AI 排出的讀書計畫太滿時，你應該？",
@@ -179,7 +295,14 @@ const FREE_BOOTCAMP = [
           "直接放棄讀書"
         ],
         "answer": 1,
-        "explain": "計畫必須符合現實才有用。"
+        "explain": "計畫必須符合現實才有用。",
+        "enQ": "If AI’s study plan is too packed, you should?",
+        "enOptions": [
+          "Force yourself until burnout",
+          "Cut and adjust based on real time",
+          "Quit studying"
+        ],
+        "enExplain": "A plan only works if it fits reality."
       },
       {
         "q": "好的讀書計畫應該包含？",
@@ -189,7 +312,14 @@ const FREE_BOOTCAMP = [
           "只有科目名稱"
         ],
         "answer": 0,
-        "explain": "可執行計畫要包含任務與檢查方式。"
+        "explain": "可執行計畫要包含任務與檢查方式。",
+        "enQ": "A good study plan should include?",
+        "enOptions": [
+          "Daily tasks, review methods, and self-tests",
+          "Only a cheer-up sentence",
+          "Only the subject name"
+        ],
+        "enExplain": "Executable plans need tasks and checkpoints."
       },
       {
         "q": "AI 在讀書中最適合扮演什麼角色？",
@@ -199,7 +329,14 @@ const FREE_BOOTCAMP = [
           "改變考試日期的人"
         ],
         "answer": 0,
-        "explain": "AI 可以協助規劃與練習，但不能替你考試。"
+        "explain": "AI 可以協助規劃與練習，但不能替你考試。",
+        "enQ": "What role should AI play in studying?",
+        "enOptions": [
+          "Study coach",
+          "Someone who takes the exam for you",
+          "Someone who changes the exam date"
+        ],
+        "enExplain": "AI can help plan and practice, but cannot take the exam for you."
       },
       {
         "q": "本課成果是什麼？",
@@ -209,7 +346,14 @@ const FREE_BOOTCAMP = [
           "購物清單"
         ],
         "answer": 0,
-        "explain": "本課要產出一份可執行的 AI 讀書計畫。"
+        "explain": "本課要產出一份可執行的 AI 讀書計畫。",
+        "enQ": "What is this lesson’s output?",
+        "enOptions": [
+          "An AI study plan",
+          "A game walkthrough",
+          "A shopping list"
+        ],
+        "enExplain": "You should produce an executable AI study plan."
       }
     ],
     "caseStudy": "情境案例：阿哲段考前很焦慮，只跟 AI 說「幫我讀書」。AI 給出很籠統的建議。後來他補上考試日期、範圍、每天能讀 40 分鐘、最弱的是文法，AI 就幫他排出 7 天計畫。阿哲再把太滿的部分刪掉，變成真正能執行的讀書表。",
@@ -219,7 +363,28 @@ const FREE_BOOTCAMP = [
       "沒有說明弱點",
       "完全照 AI 計畫不做現實調整"
     ],
-    "notePrompt": "請寫下：1. 我最近要準備哪個科目？2. 我每天真正能用多少時間？3. AI 幫我排的計畫哪裡需要改得更實際？"
+    "notePrompt": "請寫下：1. 我最近要準備哪個科目？2. 我每天真正能用多少時間？3. AI 幫我排的計畫哪裡需要改得更實際？",
+    "enTitle": "AI study assistant: build a study plan",
+    "enGoal": "Use AI to break exam content into an actionable study plan.",
+    "enConcept": "AI is great at breaking down learning tasks. Tell it the exam date, subject, scope, daily available time, and weakest units, and it can draft a study plan. The plan must match your real schedule—not an idealized one.",
+    "enExample": "If your English exam is in 7 days, covering 3 vocabulary lessons, 2 readings, and 1 grammar unit, with only 40 minutes a day, AI can schedule what to study, how to review, and how to self-test on the last day.",
+    "enTask": [
+      "Choose an upcoming exam or subject.",
+      "List exam date, scope, daily available time, and weakest unit.",
+      "Ask AI for a 7-day study plan.",
+      "Remove anything that does not fit your real schedule."
+    ],
+    "enPrompt": "Act as my study coach. Subject: ______\nExam date: ______\nExam scope: ______\nDaily available time: ______\nMy weakest area: ______\nCreate a 7-day study plan with daily tasks, review methods, and self-tests.",
+    "enFeedback": "Act as a study-plan reviewer. Here is my AI study plan:\n(paste plan)\nPlease check:\n1. Is it too idealistic?\n2. Are daily tasks clear?\n3. Does it include review and testing?\n4. Which day is overloaded?\n5. Rewrite it into a more executable version.",
+    "enOutput": "My AI Study Plan",
+    "enCaseStudy": "Case: A-Zhe felt anxious before midterms and only said “help me study.” AI gave vague advice. After he added exam date, scope, 40 minutes a day, and grammar as his weak point, AI produced a 7-day plan. He then deleted overloaded parts and made it usable.",
+    "enCommonMistakes": [
+      "Not telling AI the exam date",
+      "Not providing available time",
+      "Not stating weak points",
+      "Following AI’s plan without adjusting to reality"
+    ],
+    "enNotePrompt": "Write: 1) Which subject am I preparing for? 2) How much real daily time do I have? 3) Which parts of AI’s plan need to become more realistic?"
   },
   {
     "title": "AI 整理筆記：把內容變成重點",
@@ -244,7 +409,14 @@ const FREE_BOOTCAMP = [
           "隨便回答"
         ],
         "answer": 0,
-        "explain": "這些格式更符合學習與複習。"
+        "explain": "這些格式更符合學習與複習。",
+        "enQ": "When asking AI to organize notes, which format is best?",
+        "enOptions": [
+          "Key points, keywords, exam questions, review version",
+          "One long unseparated block of text",
+          "Anything random"
+        ],
+        "enExplain": "These formats fit learning and review better."
       },
       {
         "q": "AI 筆記完成後，為什麼要對照原文？",
@@ -254,7 +426,14 @@ const FREE_BOOTCAMP = [
           "讓 AI 生氣"
         ],
         "answer": 0,
-        "explain": "AI 可能漏掉或誤解內容。"
+        "explain": "AI 可能漏掉或誤解內容。",
+        "enQ": "Why check AI notes against the original?",
+        "enOptions": [
+          "To avoid missing or misreading key points",
+          "To make more words",
+          "To make AI angry"
+        ],
+        "enExplain": "AI may omit or misunderstand content."
       },
       {
         "q": "考前 3 分鐘複習版應該？",
@@ -264,7 +443,14 @@ const FREE_BOOTCAMP = [
           "完全沒有重點"
         ],
         "answer": 0,
-        "explain": "考前複習需要高密度重點。"
+        "explain": "考前複習需要高密度重點。",
+        "enQ": "A 3-minute pre-exam review should be?",
+        "enOptions": [
+          "Short, clear, and focused",
+          "As long as possible",
+          "Without any key points"
+        ],
+        "enExplain": "Pre-exam review needs high-density key points."
       },
       {
         "q": "AI 筆記最適合用來？",
@@ -274,7 +460,14 @@ const FREE_BOOTCAMP = [
           "保證考滿分"
         ],
         "answer": 0,
-        "explain": "AI 是輔助工具，不是保證成績的工具。"
+        "explain": "AI 是輔助工具，不是保證成績的工具。",
+        "enQ": "AI notes are best used for?",
+        "enOptions": [
+          "Helping organize and review",
+          "Replacing all classes",
+          "Guaranteeing a perfect score"
+        ],
+        "enExplain": "AI is a helper, not a grade guarantee."
       },
       {
         "q": "本課成果是什麼？",
@@ -284,7 +477,14 @@ const FREE_BOOTCAMP = [
           "旅遊計畫"
         ],
         "answer": 0,
-        "explain": "本課要完成自己的 AI 重點筆記。"
+        "explain": "本課要完成自己的 AI 重點筆記。",
+        "enQ": "What is this lesson’s output?",
+        "enOptions": [
+          "AI key-point notes",
+          "A resume",
+          "A travel plan"
+        ],
+        "enExplain": "You should finish your own AI key-point notes."
       }
     ],
     "caseStudy": "情境案例：小萱把一篇很長的歷史課文貼給 AI，只要求摘要，結果得到一段普通文字。後來她要求 AI 整理成 5 個重點、10 個關鍵詞、3 題可能考題、考前 3 分鐘複習版，筆記立刻變得更適合考前複習。",
@@ -294,7 +494,28 @@ const FREE_BOOTCAMP = [
       "沒有檢查 AI 是否漏掉原文重點",
       "把 AI 筆記當成唯一資料來源"
     ],
-    "notePrompt": "請寫下：1. 我整理的是哪一份資料？2. AI 幫我整理出的三個重點是什麼？3. 我檢查後發現哪裡需要修正？"
+    "notePrompt": "請寫下：1. 我整理的是哪一份資料？2. AI 幫我整理出的三個重點是什麼？3. 我檢查後發現哪裡需要修正？",
+    "enTitle": "AI note organizer: turn content into key points",
+    "enGoal": "Ask AI to organize key points from textbooks, videos, or articles.",
+    "enConcept": "AI can turn long content into key points, tables, text mind maps, and exam-review versions. Remember: AI may miss or misread details, so always check against the original.",
+    "enExample": "Paste a passage and ask for: 5 key points, 3 likely exam questions, 10 keywords, and a 3-minute pre-exam review version. That is more useful for learning than a plain summary.",
+    "enTask": [
+      "Choose a textbook passage, notes, or article.",
+      "Ask AI for key points, keywords, exam questions, and a pre-exam review version.",
+      "Check whether AI missed important content.",
+      "Create your own AI key-point notes."
+    ],
+    "enPrompt": "Act as my note-organizing assistant. Here is the content:\n(paste content)\nPlease organize into:\n1. 5 core points\n2. 10 keywords\n3. 3 possible exam questions\n4. A 3-minute pre-exam review version\n5. Easy-to-miss misconceptions I should watch for",
+    "enFeedback": "Act as a note reviewer. Here are my AI key-point notes:\n(paste notes)\nPlease check:\n1. Are the points clear?\n2. Too long or too short?\n3. Useful for pre-exam review?\n4. Any likely missing content?\n5. Rewrite into a more memorization-friendly version.",
+    "enOutput": "My AI Key-Point Notes",
+    "enCaseStudy": "Case: Xiao Xuan pasted a long history passage and only asked for a summary, getting ordinary text. After requesting 5 points, 10 keywords, 3 exam questions, and a 3-minute review version, the notes became much more useful for exam prep.",
+    "enCommonMistakes": [
+      "Asking only for a summary without a learning purpose",
+      "Not requesting possible exam questions",
+      "Not checking whether AI missed original key points",
+      "Treating AI notes as the only source"
+    ],
+    "enNotePrompt": "Write: 1) What material did I organize? 2) What three key points did AI produce? 3) After checking, what needed correction?"
   },
   {
     "title": "AI 簡報助手：做出 3 頁簡報草稿",
@@ -319,7 +540,14 @@ const FREE_BOOTCAMP = [
           "字體有多花"
         ],
         "answer": 0,
-        "explain": "簡報先有清楚邏輯，再談設計。"
+        "explain": "簡報先有清楚邏輯，再談設計。",
+        "enQ": "What must a presentation clarify first?",
+        "enOptions": [
+          "Theme and logic",
+          "Number of animations",
+          "How fancy the fonts are"
+        ],
+        "enExplain": "Clear logic comes before design."
       },
       {
         "q": "一頁簡報比較適合？",
@@ -329,7 +557,14 @@ const FREE_BOOTCAMP = [
           "完全沒有標題"
         ],
         "answer": 0,
-        "explain": "每頁只放一個主訊息更容易理解。"
+        "explain": "每頁只放一個主訊息更容易理解。",
+        "enQ": "One slide is better with?",
+        "enOptions": [
+          "One core message and a few points",
+          "A full article",
+          "No title at all"
+        ],
+        "enExplain": "One main message per page is easier to understand."
       },
       {
         "q": "AI 可以幫簡報做什麼？",
@@ -339,7 +574,14 @@ const FREE_BOOTCAMP = [
           "保證觀眾都喜歡"
         ],
         "answer": 0,
-        "explain": "AI 適合協助規劃簡報內容與講稿。"
+        "explain": "AI 適合協助規劃簡報內容與講稿。",
+        "enQ": "What can AI help with in presentations?",
+        "enOptions": [
+          "Structure, key points, image ideas, speaking notes",
+          "Presenting for you on stage",
+          "Guaranteeing the audience likes it"
+        ],
+        "enExplain": "AI is good at planning content and scripts."
       },
       {
         "q": "簡報講稿的用途是？",
@@ -349,7 +591,14 @@ const FREE_BOOTCAMP = [
           "取代練習"
         ],
         "answer": 0,
-        "explain": "講稿幫你練習表達，不是拿來塞進投影片。"
+        "explain": "講稿幫你練習表達，不是拿來塞進投影片。",
+        "enQ": "What are speaking notes for?",
+        "enOptions": [
+          "Helping you present",
+          "Filling the slides",
+          "Replacing practice"
+        ],
+        "enExplain": "Scripts support delivery practice, not slide clutter."
       },
       {
         "q": "本課成果是什麼？",
@@ -359,7 +608,14 @@ const FREE_BOOTCAMP = [
           "餐廳菜單"
         ],
         "answer": 0,
-        "explain": "本課要產出 3 頁 AI 簡報草稿。"
+        "explain": "本課要產出 3 頁 AI 簡報草稿。",
+        "enQ": "What is this lesson’s output?",
+        "enOptions": [
+          "An AI presentation draft",
+          "A university application kit",
+          "A restaurant menu"
+        ],
+        "enExplain": "You should produce a 3-page AI presentation draft."
       }
     ],
     "caseStudy": "情境案例：小宇做簡報時，把整篇報告塞進投影片，結果每頁都太滿。後來他請 AI 先規劃 3 頁簡報，每頁只放一個主訊息和三個重點，再請 AI 產生 60 秒講稿，簡報變得更清楚。",
@@ -369,7 +625,28 @@ const FREE_BOOTCAMP = [
       "沒有先確認簡報對象與時間",
       "只追求漂亮，忽略邏輯"
     ],
-    "notePrompt": "請寫下：1. 我的簡報主題是什麼？2. 每頁核心訊息是什麼？3. 哪一頁最需要刪減文字？"
+    "notePrompt": "請寫下：1. 我的簡報主題是什麼？2. 每頁核心訊息是什麼？3. 哪一頁最需要刪減文字？",
+    "enTitle": "AI presentation helper: draft a 3-page deck",
+    "enGoal": "Use AI to build presentation structure—not dump long text onto slides.",
+    "enConcept": "A good presentation has a clear theme, key points, examples, and conclusion. AI can help with structure, page titles, key sentences, and speaking notes.",
+    "enExample": "Theme: my dream major. A 3-page deck can be: Page 1 why I’m interested; Page 2 preparation I’ve done; Page 3 what I want to learn next.",
+    "enTask": [
+      "Choose a presentation topic, such as my dream major.",
+      "Ask AI to plan a 3-page presentation.",
+      "Keep only 3 key points per page.",
+      "Ask AI for a 60-second speaking script."
+    ],
+    "enPrompt": "Act as a presentation coach. My topic is: ______\nAudience: ______\nTime: ______ minutes\nDesign a 3-page presentation. For each page include: title, 3 key points, image suggestions, and speaking notes.",
+    "enFeedback": "Act as a presentation reviewer. Here is my 3-page draft:\n(paste content)\nPlease check:\n1. Is the theme clear?\n2. Is there too much text per page?\n3. Is the order logical?\n4. Which page is weakest?\n5. Rewrite it for a live presentation.",
+    "enOutput": "My First AI Presentation Draft",
+    "enCaseStudy": "Case: Xiao Yu stuffed a whole report into slides and overcrowded every page. After asking AI to plan 3 pages with one main message and three points each, then a 60-second script, the presentation became clearer.",
+    "enCommonMistakes": [
+      "Pasting articles directly onto slides",
+      "Cramming too much text on each page",
+      "Not confirming audience and time first",
+      "Chasing looks while ignoring logic"
+    ],
+    "enNotePrompt": "Write: 1) What is my presentation theme? 2) What is each page’s core message? 3) Which page needs the most text cuts?"
   },
   {
     "title": "AI 職涯探索：找到可能方向",
@@ -394,7 +671,14 @@ const FREE_BOOTCAMP = [
           "今天幾點睡"
         ],
         "answer": 0,
-        "explain": "個人背景越清楚，建議越貼近。"
+        "explain": "個人背景越清楚，建議越貼近。",
+        "enQ": "What does AI need most for career exploration?",
+        "enOptions": [
+          "Your interests, strengths, subjects, and preferences",
+          "Your shoe size",
+          "What time you slept today"
+        ],
+        "enExplain": "Clearer personal context leads to better suggestions."
       },
       {
         "q": "AI 推薦科系後，你應該？",
@@ -404,7 +688,14 @@ const FREE_BOOTCAMP = [
           "完全不理"
         ],
         "answer": 0,
-        "explain": "AI 是探索起點，不是最後答案。"
+        "explain": "AI 是探索起點，不是最後答案。",
+        "enQ": "After AI recommends majors, you should?",
+        "enOptions": [
+          "Research courses and career content",
+          "Accept everything blindly",
+          "Ignore everything"
+        ],
+        "enExplain": "AI is a starting point, not the final answer."
       },
       {
         "q": "哪種推薦比較可靠？",
@@ -414,7 +705,14 @@ const FREE_BOOTCAMP = [
           "只說你一定適合"
         ],
         "answer": 0,
-        "explain": "有理由和能力分析才有參考價值。"
+        "explain": "有理由和能力分析才有參考價值。",
+        "enQ": "Which recommendation is more reliable?",
+        "enOptions": [
+          "One with reasons and required skills",
+          "Only listing popular majors",
+          "Saying you are definitely a fit"
+        ],
+        "enExplain": "Reasons and skill analysis make advice useful."
       },
       {
         "q": "職涯探索最重要的是？",
@@ -424,7 +722,14 @@ const FREE_BOOTCAMP = [
           "只看薪水"
         ],
         "answer": 0,
-        "explain": "探索是逐步查證與理解。"
+        "explain": "探索是逐步查證與理解。",
+        "enQ": "What matters most in career exploration?",
+        "enOptions": [
+          "Forming next verification steps",
+          "Deciding your whole life immediately",
+          "Only looking at salary"
+        ],
+        "enExplain": "Exploration is gradual research and understanding."
       },
       {
         "q": "本課成果是什麼？",
@@ -434,7 +739,14 @@ const FREE_BOOTCAMP = [
           "購物清單"
         ],
         "answer": 0,
-        "explain": "本課要完成一份職涯探索報告。"
+        "explain": "本課要完成一份職涯探索報告。",
+        "enQ": "What is this lesson’s output?",
+        "enOptions": [
+          "A career exploration report",
+          "A midterm score report",
+          "A shopping list"
+        ],
+        "enExplain": "You should complete a career exploration report."
       }
     ],
     "caseStudy": "情境案例：小庭不知道未來想讀什麼，只說「我不知道要做什麼」。AI 回答很籠統。後來她提供興趣、擅長科目、喜歡活動、不喜歡的事，AI 幫她整理出可能科系、職業、需要能力與下一步查證方向。",
@@ -444,7 +756,28 @@ const FREE_BOOTCAMP = [
       "沒有查科系課程內容",
       "只看職業名稱不看實際工作內容"
     ],
-    "notePrompt": "請寫下：1. AI 推薦我的三個方向是什麼？2. 哪個方向我最想深入了解？3. 我下一步要查哪些資料？"
+    "notePrompt": "請寫下：1. AI 推薦我的三個方向是什麼？2. 哪個方向我最想深入了解？3. 我下一步要查哪些資料？",
+    "enTitle": "AI career exploration: find possible directions",
+    "enGoal": "Use AI to explore interests, majors, and career directions at a first-pass level.",
+    "enConcept": "AI cannot decide your future, but it can organize possible directions. Share interests, strong subjects, preferred activities, and things you dislike, then ask for possible majors and careers.",
+    "enExample": "If you like interacting with people, are strong in language arts, and often join service activities, AI may suggest education, psychology, social work, or communication. You still need to research courses and real job contexts.",
+    "enTask": [
+      "Fill in your interests, strengths, preferred subjects, and dislikes.",
+      "Ask AI for 5 possible majors and 5 possible careers.",
+      "Ask AI what skills each direction needs.",
+      "Choose 3 directions to explore further."
+    ],
+    "enPrompt": "Act as a career exploration advisor. My interests: ______\nSubjects I’m good at: ______\nActivities I enjoy: ______\nThings I dislike: ______\nRecommend 5 possible majors and 5 possible careers, with reasons, required skills, and what I should research next.",
+    "enFeedback": "Act as a career exploration teacher. Here is my career exploration report:\n(paste content)\nPlease check:\n1. Are the recommendations reasonable?\n2. Which directions only look suitable on the surface?\n3. What else should I research?\n4. Help me pick the top 3 directions worth deeper exploration.",
+    "enOutput": "My Career Exploration Report",
+    "enCaseStudy": "Case: Xiao Ting only said “I don’t know what to do,” so AI stayed vague. After she shared interests, strengths, activities, and dislikes, AI organized possible majors, careers, required skills, and next research steps.",
+    "enCommonMistakes": [
+      "Asking what you are suited for without sharing context",
+      "Treating AI recommendations as the final answer",
+      "Not researching major course content",
+      "Looking only at job titles, not actual work"
+    ],
+    "enNotePrompt": "Write: 1) What three directions did AI recommend? 2) Which one do I most want to explore? 3) What should I research next?"
   },
   {
     "title": "AI 模擬面試：練習回答問題",
@@ -469,7 +802,14 @@ const FREE_BOOTCAMP = [
           "清楚結構"
         ],
         "answer": 0,
-        "explain": "沒有例子的口號不具說服力。"
+        "explain": "沒有例子的口號不具說服力。",
+        "enQ": "What should interview answers avoid most?",
+        "enOptions": [
+          "Vague slogans",
+          "Concrete examples",
+          "Clear structure"
+        ],
+        "enExplain": "Slogans without examples are not persuasive."
       },
       {
         "q": "AI 模擬面試最好怎麼進行？",
@@ -479,7 +819,14 @@ const FREE_BOOTCAMP = [
           "只看題目不練習"
         ],
         "answer": 0,
-        "explain": "一次一題更接近真實練習。"
+        "explain": "一次一題更接近真實練習。",
+        "enQ": "How should AI mock interviews work best?",
+        "enOptions": [
+          "One question at a time with feedback",
+          "Dump 50 questions without answering",
+          "Only read questions without practicing"
+        ],
+        "enExplain": "One question at a time is closer to real practice."
       },
       {
         "q": "好的面試回答通常包含？",
@@ -489,7 +836,14 @@ const FREE_BOOTCAMP = [
           "完全背稿"
         ],
         "answer": 0,
-        "explain": "具體例子和反思能提升說服力。"
+        "explain": "具體例子和反思能提升說服力。",
+        "enQ": "A good interview answer usually includes?",
+        "enOptions": [
+          "Key points, examples, and reflection",
+          "Only adjectives",
+          "Fully memorized scripts only"
+        ],
+        "enExplain": "Concrete examples and reflection improve persuasiveness."
       },
       {
         "q": "AI 回饋後應該？",
@@ -499,7 +853,14 @@ const FREE_BOOTCAMP = [
           "刪掉問題"
         ],
         "answer": 0,
-        "explain": "回饋的價值在於下一次回答變好。"
+        "explain": "回饋的價值在於下一次回答變好。",
+        "enQ": "After AI feedback, you should?",
+        "enOptions": [
+          "Revise and practice again",
+          "Ignore it completely",
+          "Delete the question"
+        ],
+        "enExplain": "Feedback matters when the next answer improves."
       },
       {
         "q": "本課成果是什麼？",
@@ -509,7 +870,14 @@ const FREE_BOOTCAMP = [
           "課表"
         ],
         "answer": 0,
-        "explain": "本課要產出面試練習紀錄。"
+        "explain": "本課要產出面試練習紀錄。",
+        "enQ": "What is this lesson’s output?",
+        "enOptions": [
+          "An AI interview log",
+          "Travel photos",
+          "A class schedule"
+        ],
+        "enExplain": "You should produce an interview practice log."
       }
     ],
     "caseStudy": "情境案例：小恩面試自我介紹時只說「我很認真、很負責」。AI 面試官提醒她太空泛，請她補上具體例子。她改成說明自己曾負責社團活動排程、遇到延誤如何協調、最後活動順利完成，回答就變得有說服力。",
@@ -519,7 +887,28 @@ const FREE_BOOTCAMP = [
       "回答太長沒有重點",
       "沒有根據回饋修正"
     ],
-    "notePrompt": "請寫下：1. 我最常被 AI 指出的面試問題是什麼？2. 我可以補上的具體例子是什麼？3. 下一次我要練哪一題？"
+    "notePrompt": "請寫下：1. 我最常被 AI 指出的面試問題是什麼？2. 我可以補上的具體例子是什麼？3. 下一次我要練哪一題？",
+    "enTitle": "AI mock interview: practice answering questions",
+    "enGoal": "Use AI for mock interviews to train clarity, logic, and concrete examples.",
+    "enConcept": "Interview practice is not about memorizing answers; it is about explaining your experience clearly. AI can act as a professor, teacher, or manager—ask one question at a time, then give feedback after you answer.",
+    "enExample": "AI asks for a self-introduction. After you answer, it can score clarity, concreteness, logic, and persuasiveness, and point out the strongest and weakest sentences.",
+    "enTask": [
+      "Choose an interview scenario: university professor, club officer, or hiring manager.",
+      "Ask AI to ask one question at a time.",
+      "Complete at least 3 mock answers.",
+      "Organize AI’s improvement suggestions."
+    ],
+    "enPrompt": "Act as an interviewer. Scenario: ______\nAsk me only one question at a time. After I answer, score clarity, concreteness, logic, and persuasiveness from 1–10 and give revision advice. Start with question 1.",
+    "enFeedback": "Act as an interview coach. Here are my answers and AI feedback:\n(paste content)\nPlease summarize:\n1. My most common problems\n2. My most persuasive sentence\n3. Examples I need to strengthen\n4. What to practice in the next mock interview",
+    "enOutput": "My AI Interview Log",
+    "enCaseStudy": "Case: Xiao En’s self-introduction only said “I’m diligent and responsible.” The AI interviewer said it was too vague and asked for examples. She revised with a club scheduling story, how she handled delays, and the successful outcome—much more persuasive.",
+    "enCommonMistakes": [
+      "Only memorizing model answers",
+      "No concrete examples",
+      "Answers that are long and unfocused",
+      "Not revising after feedback"
+    ],
+    "enNotePrompt": "Write: 1) What interview issue does AI point out most often? 2) What concrete example can I add? 3) Which question will I practice next?"
   },
   {
     "title": "AI 專案挑戰：完成一件真實事情",
@@ -544,7 +933,14 @@ const FREE_BOOTCAMP = [
           "讓 AI 捏造內容"
         ],
         "answer": 0,
-        "explain": "專案要有可展示的實際成果。"
+        "explain": "專案要有可展示的實際成果。",
+        "enQ": "What matters most in the AI project challenge?",
+        "enOptions": [
+          "Finishing one concrete deliverable",
+          "Only watching tutorials",
+          "Letting AI invent content"
+        ],
+        "enExplain": "A project needs a real, showable output."
       },
       {
         "q": "專案 Prompt 應包含？",
@@ -554,7 +950,14 @@ const FREE_BOOTCAMP = [
           "沒有任何限制"
         ],
         "answer": 0,
-        "explain": "清楚條件能讓 AI 協助拆解任務。"
+        "explain": "清楚條件能讓 AI 協助拆解任務。",
+        "enQ": "A project prompt should include?",
+        "enOptions": [
+          "Goal, audience, steps, deliverable format, time limit",
+          "Only “I want to do a project”",
+          "No constraints at all"
+        ],
+        "enExplain": "Clear conditions help AI break down the work."
       },
       {
         "q": "第一版成果完成後應該？",
@@ -564,7 +967,14 @@ const FREE_BOOTCAMP = [
           "完全不檢查"
         ],
         "answer": 0,
-        "explain": "修改是讓專案變完整的關鍵。"
+        "explain": "修改是讓專案變完整的關鍵。",
+        "enQ": "After finishing the first version, you should?",
+        "enOptions": [
+          "Ask AI to review and revise",
+          "Stop immediately",
+          "Skip all checking"
+        ],
+        "enExplain": "Revision is how a project becomes complete."
       },
       {
         "q": "好的 AI 專案成果應該？",
@@ -574,7 +984,14 @@ const FREE_BOOTCAMP = [
           "完全沒有目的"
         ],
         "answer": 0,
-        "explain": "成果要有清楚目標和可執行內容。"
+        "explain": "成果要有清楚目標和可執行內容。",
+        "enQ": "A good AI project output should be?",
+        "enOptions": [
+          "Understandable and executable by others",
+          "Only a title",
+          "Without any purpose"
+        ],
+        "enExplain": "Outputs need a clear goal and actionable content."
       },
       {
         "q": "本課成果是什麼？",
@@ -584,7 +1001,14 @@ const FREE_BOOTCAMP = [
           "帳號密碼"
         ],
         "answer": 0,
-        "explain": "本課整合前面能力，完成一個 AI 小專案。"
+        "explain": "本課整合前面能力，完成一個 AI 小專案。",
+        "enQ": "What is this lesson’s output?",
+        "enOptions": [
+          "An AI project output",
+          "Exam answers",
+          "Account passwords"
+        ],
+        "enExplain": "This lesson integrates earlier skills into one AI mini-project."
       }
     ],
     "caseStudy": "情境案例：小杰想用 AI 做一個真實專案，但只說「我要做企劃」。AI 回答很普通。後來他明確寫出專案目標、使用對象、時間限制與成果格式，AI 就能幫他拆解步驟、做第一版草稿，再進行修改。",
@@ -594,9 +1018,31 @@ const FREE_BOOTCAMP = [
       "只問一次就停止",
       "沒有根據 AI 回饋修改"
     ],
-    "notePrompt": "請寫下：1. 我的專案目標是什麼？2. 最終成果要長什麼樣？3. AI 給我的三個修改建議是什麼？"
+    "notePrompt": "請寫下：1. 我的專案目標是什麼？2. 最終成果要長什麼樣？3. AI 給我的三個修改建議是什麼？",
+    "enTitle": "AI project challenge: finish one real thing",
+    "enGoal": "Integrate the first 7 lessons and use AI to complete a small real project.",
+    "enConcept": "Truly using AI means finishing a concrete deliverable—not only asking questions. You might create a presentation, study plan, event proposal, travel plan, career report, or study notes.",
+    "enExample": "Project: plan a class study circle. AI can help with flow, roles, timeline, promo copy, and post-event feedback form. You end with a complete proposal.",
+    "enTask": [
+      "Choose a small project you actually want to finish.",
+      "Ask AI to break down steps and the final deliverable format.",
+      "Complete a first-version project output.",
+      "Ask AI for revision advice and finalize it."
+    ],
+    "enPrompt": "Act as my AI project coach. My small project is: ______\nPlease break down:\n1. Project goal\n2. Steps to complete\n3. Final deliverable format\n4. Timeline\n5. What the first draft should look like\nGuide me step by step.",
+    "enFeedback": "Act as a project reviewer. Here is my AI project output:\n(paste output)\nPlease check:\n1. Is the goal clear?\n2. Is the deliverable complete?\n3. Is it actually executable?\n4. What needs strengthening?\n5. Give me a final revision checklist.",
+    "enOutput": "My AI Project Output",
+    "enCaseStudy": "Case: Xiao Jie only said “I want a proposal,” so AI stayed generic. After he defined the goal, audience, time limit, and deliverable format, AI could break down steps, draft v1, and support revisions.",
+    "enCommonMistakes": [
+      "Not defining the project goal",
+      "Not stating the final deliverable format",
+      "Stopping after one question",
+      "Not revising based on AI feedback"
+    ],
+    "enNotePrompt": "Write: 1) What is my project goal? 2) What should the final output look like? 3) What three revision suggestions did AI give me?"
   }
 ];
+
 
 
 const I18N = {
@@ -1491,7 +1937,7 @@ const PREMIUM = [
     zhDesc: "這門課不是教你用 AI 代寫備審，而是教你用 AI 把自己的經驗整理得更清楚、更有邏輯，讓你在申請大學時能說出自己的方向。",
     enDesc: "This course does not teach students to let AI write applications for them. It teaches students how to use AI to organize their own experience clearly and logically for university applications.",
     zhFinalProduct: "大學申請包",
-    enFinalProduct: "University Application Package",
+    enFinalProduct: "University Application Kit",
     zhLessons: [
       "第1課：認識大學申請流程：AI 能幫什麼、不能幫什麼",
       "第2課：用 AI 盤點興趣與優勢，找出科系方向",
@@ -18477,9 +18923,9 @@ const RESULT_PACKAGE_CONFIG = [
     "zhCapability": "升學申請",
     "enCapability": "University admissions",
     "zhDescription": "集中保存升學申請各課成果，組成完整大學申請包。",
-    "enDescription": "Store every admissions lesson output into one application package.",
+    "enDescription": "Store every admissions lesson output into one University Application Kit.",
     "zhFinalOutcome": "一份完整的大學申請包，包含校系方向、學習歷程、備審架構、自我介紹與面試準備。",
-    "enFinalOutcome": "A complete university application package with major direction, learning portfolio, review structure, self-introduction, and interview prep."
+    "enFinalOutcome": "A complete University Application Kit with major direction, learning portfolio, review structure, self-introduction, and interview prep."
   },
   {
     "id": "pkg-college-learning",
