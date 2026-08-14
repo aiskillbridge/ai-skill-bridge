@@ -4191,7 +4191,7 @@ function renderLessonNextStep(detail, item, lessonIndex) {
     <section class="lesson-block lesson-next-step-block">
       <h2>${text("下一步", "Next step")}</h2>
       ${nextHint ? `<p>${nextHint}</p>` : ""}
-      ${nextTitle ? `<p class="lesson-pro-muted">${text("下一堂課", "Next lesson")}：${nextTitle}</p>` : `<p class="lesson-pro-muted">${text("這是本課程最後一堂，完成後可到成果包與大學申請包整理總成果。", "This is the final lesson—finish by organizing outputs in the result package and application kit.")}</p>`}
+      ${nextTitle ? `<p class="lesson-pro-muted">${text("下一堂課", "Next lesson")}：${nextTitle}</p>` : `<p class="lesson-pro-muted">${text("這是本課程最後一堂，完成後可到成果包整理總成果。", "This is the final lesson—finish by organizing outputs in your result package.")}</p>`}
     </section>
   `;
 }
@@ -6908,15 +6908,17 @@ function runI18nAuditIfDev() {
 
 function runPremiumContentAuditIfDev() {
   if (!isLocalDevHost()) return;
-  try {
-    const result = validatePremiumLessonContent("admissions");
-    console.log(`[CONTENT AUDIT] admissions: ${result.validCount}/${result.total} lessons valid`);
-    if (result.issues.length) {
-      console.warn("[CONTENT AUDIT] admissions issues", result.issues);
+  ["admissions", "college-learning"].forEach(courseId => {
+    try {
+      const result = validatePremiumLessonContent(courseId);
+      console.log(`[CONTENT AUDIT] ${courseId}: ${result.validCount}/${result.total} lessons valid`);
+      if (result.issues.length) {
+        console.warn(`[CONTENT AUDIT] ${courseId} issues`, result.issues);
+      }
+    } catch (error) {
+      console.warn("[CONTENT AUDIT] skipped", courseId, error && error.message ? error.message : error);
     }
-  } catch (error) {
-    console.warn("[CONTENT AUDIT] skipped", error && error.message ? error.message : error);
-  }
+  });
 }
 
 addEventListener("DOMContentLoaded", startApp);
