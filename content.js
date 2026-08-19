@@ -11504,2026 +11504,5215 @@ const PREMIUM_LESSON_DETAILS = {
   }
 ],
   "research-competition": [
-    {
-      "icon": "💡",
-      "title": "把興趣變成可研究的題目",
-      "description": "把現象收成可研究題目：有對象、有問題意識，並先判斷一學期能否完成。",
-      "goal": "產出 3 個可研究題目候選，並選定 1 個寫出問題意識、研究範圍與可行性說明。",
-      "estimatedTime": "55-75 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "專案發想",
-        "需求定義",
-        "價值主張",
-        "Chapter10"
-      ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 9,
-      "chapterZh": "AI 個人專案與作品集",
-      "chapterEn": "AI Personal Projects and Portfolio",
-      "zhTitle": "第1課：把興趣變成可研究的題目",
-      "enTitle": "Lesson 1: Turn interests into researchable topics",
-      "zhValueTip": "把現象收成可研究題目：有對象、有問題意識，並先判斷一學期能否完成。",
-      "enValueTip": "Turn a phenomenon into a researchable topic with a population, rationale, and semester feasibility.",
-      "zhOutcome": "產出 3 個可研究題目候選，並選定 1 個寫出問題意識、研究範圍與可行性說明。",
-      "enOutcome": "Produce three researchable topic candidates and select one with problem rationale, scope, and feasibility.",
-      "zhConcept": "這一課只培養研究能力中的「研究問題形成」。你要練習把日常觀察到的現象，轉成「可研究」的題目：清楚的研究對象、可追問的現象、初步的問題意識，以及對資料來源與時間的可行性判斷。\n\n可研究題目不是口號，也不是「我想做一個系統」。它必須能衍生出研究問題，例如「在什麼條件下、對誰、出現什麼現象、我們如何觀察或測量」。問題意識回答「為什麼這個現象值得被問」；研究範圍回答「這次先看哪一群人、哪一段時間、哪一種情境」；可行性回答「一學期內資料找不找得到、訪不訪得到、分析不分析得完」。\n\nAI 可以幫你把過大的題目收窄、把模糊興趣改寫成可比較的表述，並提醒缺了對象或資料路徑。但題目最終要對齊你的興趣與可取得的真實資料，不能靠 AI 發明田野。本課只做選題與問題形成，不進入產品規格、開發流程或其他非研究任務。",
-      "enConcept": "This lesson builds only research-question formation: turn observed phenomena into researchable topics with a population, a debatable claim, a problem rationale, a bounded scope, and a feasibility check for one semester. AI can narrow overly broad topics and flag missing populations or data paths; you must choose a topic you can actually study with real access. Stay inside topic formation—do not drift into product specs or non-research workflows.",
-      "zhCaseStudy": "傳播系學生一開始寫「我想研究社群媒體」。AI 請他具體化後，他改成三個候選：①大一學生夜間滑短影音時如何判斷健康資訊真偽；②社團幹部用群組協調活動時，訊息過載如何影響決策；③專題小組在截止日期前如何處理版本衝突。他刪掉無法取得受訪者的②，保留①與③，最後選定③，因為可在系上專題課直接訪談、可觀察會議紀錄，一學期內可行。問題意識寫成：版本衝突常被當成「溝通不好」，但缺少對協調機制與時間壓力的描述，值得先釐清現象再談解法。",
-      "enCaseStudy": "A communication student started with “I want to study social media.” After narrowing, three candidates appeared; the student selected version-conflict coordination in project teams because interviewees and meeting traces were accessible within one semester, and wrote a clear problem rationale about coordination under deadline pressure.",
-      "zhWorkflow": [
-        "寫下觀察到的現象與初步興趣",
-        "請 AI 產出候選並標註過大／缺資料／可完成",
-        "人工刪除不可研究與過大題",
-        "為 3 候選補對象、資料路徑、可行性",
-        "選定 1 題寫問題意識與範圍",
-        "安排下一週最小驗證（訪誰／看什麼）"
-      ],
-      "enWorkflow": [
-        "Capture phenomena and interest",
-        "Generate candidates with feasibility tags",
-        "Delete unresearchable/too-broad topics",
-        "Enrich 3 candidates with population and data path",
-        "Select one and write rationale/scope",
-        "Schedule a next-week minimum verification"
-      ],
-      "zhCommonMistakes": [
-        "把「想做一個 App／系統」直接當研究題目",
-        "題目大到沒有對象與時間邊界",
-        "沒有任何可取得的資料或受訪路徑",
-        "把價值判斷（應該／不應該）當成已證實結論",
-        "讓 AI 編造訪談結果來證明題目可行"
-      ],
-      "enCommonMistakes": [
-        "Treating a product idea as a research topic",
-        "Topics with no population or time bound",
-        "No realistic data or interviewee path",
-        "Treating value judgments as proven findings",
-        "Letting AI invent interview results"
-      ],
-      "zhExcellentExample": "高品質成果包含：3 個候選題（各含現象、對象、為何值得問、可能資料來源、紅黃綠可行性）；選定 1 題的問題意識（150–250 字）；研究範圍（對象／時間／情境）；不可做清單；以及「下一週最小驗證」：要訪談誰或要觀察什麼。",
-      "enExcellentExample": "A strong deliverable has three candidates with phenomenon, population, rationale, data path, and feasibility lights; one selected topic with a 150–250-word problem rationale; explicit scope; an out-of-scope list; and a next-week minimum verification step.",
-      "zhPrompt": "請擔任大學專題研究導師。我的興趣領域：【】。我觀察到的現象：【】。我一學期可投入時間：【】。可能找得到的資料或受訪者：【】。\n\n請先問我 5 個澄清問題。確認後輸出：\n1) 5 個可研究題目（各標註：可能過大／資料需求／一學期可行性）\n2) 建議刪除的題目與理由\n3) 建議保留的 3 題比較表（對象／現象／資料路徑／風險）\n4) 幫我把最適合的 1 題改寫成「問題意識」草稿\n5) 列出本課不該做的下一步（例如不要直接下結論）\n\n限制：只討論研究題目形成與可行性；不要改寫成產品功能清單；不要捏造我沒有的資料或受訪者。用繁體中文。",
-      "enPrompt": "Act as a university research advisor. Interest: []. Phenomenon: []. Semester time: []. Accessible data/people: []. Ask 5 clarifying questions, then output 5 researchable topics with size/data/feasibility tags, a keep/drop comparison of 3, one problem-rationale draft, and a list of next steps that should NOT happen yet. Stay in topic formation only; invent no data or interviewees.",
-      "zhCoachPrompt": "請檢查我的研究題目是否可研究、是否過大、問題意識是否清楚，並給出收窄建議。不要幫我編造資料。",
-      "enCoachPrompt": "Review whether my topic is researchable and scoped; suggest narrowing. Invent no data.",
-      "zhFeedbackPrompt": "你是一位大學專題研究導師。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 題目可研究性\n- 問題意識清楚度\n- 範圍是否可完成\n- 資料路徑真實性\n- 是否停留在選題而非跑題\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a university research advisor. Score 1-10 for: Researchability, Clarity of rationale, Scope realism, Data-path realism, Staying on topic formation. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhExample": "過大：「社群媒體對年輕人的影響」。\n收成：「大一學生在夜間使用短影音時，如何決定是否相信健康資訊？常見判斷線索是什麼？」\n為何可研究：有對象（大一）、有情境（夜間短影音）、有可追問行為（判斷線索），可用訪談或短問卷取得資料。",
-      "enExample": "Too broad: “social media effects on youth.” Researchable: “How do first-year students judge health claims in nighttime short videos, and what cues do they use?” Clear population, setting, and collectable evidence.",
-      "zhPractice": "寫下 2 個你最近觀察到的真實現象（各 2–3 句）。；用本課 Prompt 產出 5 個題目並刪除不可研究者。；保留 3 候選，做成比較表。；選定 1 題，手寫問題意識與範圍（不可只貼 AI 原文）。；列出資料來源假設與一項「最小驗證」行動，本週完成。",
-      "enPractice": "Write 2 real phenomena.；Generate 5 topics and drop unresearchable ones.；Keep 3 in a comparison table.；Select 1 and hand-write rationale/scope.；List assumed data sources and one minimum verification action this week.",
-      "zhQuizItems": [
-        {
-          "q": "可研究題目最核心的特徵是？",
-          "options": [
-            "有對象且現象可追問",
-            "只有熱門關鍵字",
-            "先有完整結論"
-          ],
-          "answer": 0,
-          "explain": "要能追問與收集證據。"
-        },
-        {
-          "q": "問題意識主要回答什麼？",
-          "options": [
-            "為什麼這個現象值得被問",
-            "明天要寫幾頁",
-            "要用哪個軟體"
-          ],
-          "answer": 0,
-          "explain": "價值與缺口。"
-        },
-        {
-          "q": "發現題目過大時應優先？",
-          "options": [
-            "收窄對象、情境或時間",
-            "直接做結論",
-            "改成做展示系統"
-          ],
-          "answer": 0,
-          "explain": "先收窄。"
-        },
-        {
-          "q": "可行性檢查至少要看？",
-          "options": [
-            "資料是否取得、時間是否足夠",
-            "題目是否夠酷",
-            "AI 是否喜歡"
-          ],
-          "answer": 0,
-          "explain": "做不做得完。"
-        },
-        {
-          "q": "本課完成時應產出？",
-          "options": [
-            "候選題＋選定理由與範圍",
-            "完整論文終稿",
-            "產品開發時程"
-          ],
-          "answer": 0,
-          "explain": "選題與問題形成。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "可研究題目最核心的特徵是？",
-          "options": [
-            "有對象且現象可追問",
-            "只有熱門關鍵字",
-            "先有完整結論"
-          ],
-          "answer": 0,
-          "explain": "要能追問與收集證據。"
-        },
-        {
-          "q": "問題意識主要回答什麼？",
-          "options": [
-            "為什麼這個現象值得被問",
-            "明天要寫幾頁",
-            "要用哪個軟體"
-          ],
-          "answer": 0,
-          "explain": "價值與缺口。"
-        },
-        {
-          "q": "發現題目過大時應優先？",
-          "options": [
-            "收窄對象、情境或時間",
-            "直接做結論",
-            "改成做展示系統"
-          ],
-          "answer": 0,
-          "explain": "先收窄。"
-        },
-        {
-          "q": "可行性檢查至少要看？",
-          "options": [
-            "資料是否取得、時間是否足夠",
-            "題目是否夠酷",
-            "AI 是否喜歡"
-          ],
-          "answer": 0,
-          "explain": "做不做得完。"
-        },
-        {
-          "q": "本課完成時應產出？",
-          "options": [
-            "候選題＋選定理由與範圍",
-            "完整論文終稿",
-            "產品開發時程"
-          ],
-          "answer": 0,
-          "explain": "選題與問題形成。"
-        }
-      ],
-      "zhNotePrompt": "貼上你選定的題目、問題意識、範圍與可行性燈號。",
-      "enNotePrompt": "Paste your selected topic, rationale, scope, and feasibility lights.",
-      "zhDeliverableChecklist": [
-        "已有 3 個候選題",
-        "每題都有對象與現象",
-        "已寫問題意識",
-        "已寫研究範圍與不可做清單",
-        "已標可行性與最小驗證"
-      ],
-      "enDeliverableChecklist": [
-        "3 candidates listed",
-        "Each has population + phenomenon",
-        "Problem rationale written",
-        "Scope and out-of-scope listed",
-        "Feasibility + minimum verification noted"
-      ],
-      "zhScorecard": [
-        "題目可研究性",
-        "問題意識清楚度",
-        "範圍是否可完成",
-        "資料路徑真實性",
-        "是否停留在選題而非跑題"
-      ],
-      "enScorecard": [
-        "Researchability",
-        "Clarity of rationale",
-        "Scope realism",
-        "Data-path realism",
-        "Staying on topic formation"
-      ],
-      "resources": [
-        {
-          "name": "Notion",
-          "url": "https://www.notion.so",
-          "note": "需求書與發想看板"
-        },
-        {
-          "name": "Figma",
-          "url": "https://www.figma.com",
-          "note": "快速畫使用者情境草圖"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "發想收斂與陳述改寫（禁捏造）"
-        },
-        {
-          "name": "Google Drive",
-          "url": "https://drive.google.com",
-          "note": "存放訪談原話與需求書版本"
-        },
-        {
-          "name": "Canva",
-          "url": "https://www.canva.com",
-          "note": "一頁需求書視覺化（可選）"
-        }
-      ],
-      "challenge": "產出經可行性檢查的一頁需求書，並附「待驗證假設」清單；若無真實訪談，不得寫成已驗證洞察。",
-      "id": "research-competition-L1",
-      "lessonKey": "research-competition-L1"
+  {
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "入門 / Beginner",
+    "zhTitle": "第1課：把興趣變成可研究的題目",
+    "enTitle": "Lesson 1: Turn interests into researchable topics",
+    "zhValueTip": "先說清楚問題，再談 AI 或競賽題目；沒有對象與範圍，就還不能開始搜文獻。",
+    "enValueTip": "Clarify the problem before AI or competition themes. Without a population and scope, do not start a literature search.",
+    "zhOutcome": "研究問題定義表",
+    "enOutcome": "Research Problem Definition",
+    "zhConcept": "這一課只解決「問題還沒說清楚」。可研究題目需要對象、可觀察的現象、範圍，以及你真的碰得到的資料路徑。AI 可以幫你把過大興趣收窄，但不能發明田野、受訪者或社會統計來證明題目值得做。本課成果是研究問題定義表，不是文獻清單，也不是已經完成的研究發現。",
+    "enConcept": "This lesson only solves an unclear problem. A researchable topic needs a population, an observable phenomenon, a scope, and a real data path. AI can narrow a broad interest; it cannot invent fieldwork, participants, or statistics. The deliverable is a Research Problem Definition—not a literature list or findings.",
+    "zhCaseStudy": "傳播系大二生阿凱一開始只寫「我想做校園外送的 AI 題目」。AI 問他：你實際看得到誰、在什麼情境、什麼行為不清楚？他改成：平日 21:00 後、住校且使用外送 App 的學生，如何在「懶得走路」與「預算」之間決定是否下單。不研究什麼：平台後台演算法、外送員勞動條件。可行性黃燈：還沒有訪談對象名單，但可在宿舍樓層做小範圍邀請。他沒有讓 AI 編造「已有 200 份問卷」。",
+    "enCaseStudy": "Kai first wrote “I want an AI topic on campus delivery.” After clarifying who, when, and what decision is unclear, he scoped nighttime dorm students choosing whether to order. Out of scope: platform algorithms and courier labor. Feasibility yellow: no interview list yet, but he can invite on his floor. He did not let AI invent 200 survey responses.",
+    "zhWorkflow": [
+      "寫出現象與可接觸對象",
+      "填對象／核心問題／範圍／不研究什麼",
+      "用主 Prompt 產出定義表",
+      "刪虛構統計",
+      "存成研究問題定義表"
+    ],
+    "enWorkflow": [
+      "Write the phenomenon and accessible people",
+      "Fill population, problem, scope, exclusions",
+      "Run the main prompt",
+      "Remove invented stats",
+      "Save the Research Problem Definition"
+    ],
+    "zhCommonMistakes": [
+      "把做 App 當研究問題",
+      "沒有對象與時間邊界",
+      "讓 AI 虛構研究價值或已完成訪談",
+      "題目大到一學期做不完",
+      "跳過「不研究什麼」"
+    ],
+    "enCommonMistakes": [
+      "Treating an app as a research problem",
+      "No population or time bound",
+      "Letting AI invent importance or interviews",
+      "Too big for one semester",
+      "Skipping exclusions"
+    ],
+    "zhExcellentExample": "六欄完整、無虛構數字、有不研究什麼、黃燈有下一步。",
+    "enExcellentExample": "Six fields complete, no invented numbers, exclusions listed, yellow light has a next step.",
+    "zhPrompt": "你是大學研究問題教練，不是代寫者，也不可幫學生發明研究價值或田野。\n\n我的背景：\n- 年級／科系：[請填寫年級與科系]\n- 觀察到的現象：[請填寫觀察到的現象]\n- 我想研究什麼（草稿）：[請填寫研究問題]\n- 可能接觸到的對象或資料：[請填寫]\n- 一學期可投入時間：[請填寫]\n- 這次是課堂專題／競賽／個人研究：[請填寫]\n\n任務：產出「研究問題定義表」，必須包含：\n1) 我想研究什麼（1 段，禁止空泛的「我想做 AI 題目」）\n2) 為什麼值得研究（只根據我提供的觀察；不得虛構社會重要性或統計）\n3) 目標對象\n4) 核心問題（可追問的現象，不是產品功能清單）\n5) 問題範圍（對象／時間／情境）\n6) 不研究什麼\n7) 可行性燈號：綠／黃／紅，並說明缺了什麼真實資料路徑\n\n輸出格式：表格 + 條列。每個主張旁標「根據你提供的資料」或「需自行查證」。\n不要保證競賽得獎，不要把題目改寫成 App 規格。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+    "enPrompt": "You are a university research-question coach—not a ghostwriter. Do not invent research value or fieldwork.\n\nMy background:\n- Year / major: [Enter year and major]\n- Observed phenomenon: [Enter observed phenomenon]\n- Draft of what I want to study: [Enter research question]\n- People or data I can actually access: [Enter access]\n- Time this semester: [Enter available time]\n- Course project / competition / personal research: [Enter context]\n\nTask: Produce a Research Problem Definition with:\n1) What I want to study (not “I want to do an AI topic”)\n2) Why it may be worth studying (only from my observations; invent no statistics)\n3) Target population\n4) Core problem (a question about a phenomenon, not a product spec)\n5) Scope (who / when / setting)\n6) What I will not study\n7) Feasibility lights green/yellow/red and missing real data paths\n\nFormat: tables plus bullets. Label claims as “based on your input” or “verify yourself”.\nNo prize guarantees; do not rewrite the topic into app features.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+    "zhCoachPrompt": "請檢查我的研究問題定義表是否可研究、範圍是否過大、有沒有虛構統計。不要幫我編造資料。",
+    "enCoachPrompt": "Check whether my Research Problem Definition is researchable and scoped. Invent no data.",
+    "zhFeedbackPrompt": "你是一位大學專題研究導師。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 題目可研究性\n- 問題意識清楚度\n- 範圍是否可完成\n- 資料路徑真實性\n- 是否停留在選題而非跑題\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a university research advisor. Score 1-10 for: Researchability, Clarity of rationale, Scope realism, Data-path realism, Staying on topic formation. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhExample": "過大：「校園外送」。可研究：「平日 21:00 後住宿生如何決定是否使用外送平台？考量預算、距離與同伴時，決策線索是什麼？」不研究：平台原始碼。",
+    "enExample": "Too broad: “campus delivery.” Researchable: “After 21:00, how do dorm students decide whether to order, given budget, distance, and peers?” Out of scope: platform source code.",
+    "zhPractice": "寫 2 個真實現象。；完成定義表六欄。；標可行性。；存成研究問題定義表。",
+    "enPractice": "Write 2 real phenomena.; Complete six fields.; Mark feasibility.; Save the Research Problem Definition.",
+    "zhQuizItems": [
+      {
+        "q": "可研究題目最核心的特徵是？",
+        "options": [
+          "有對象且現象可追問",
+          "只有熱門關鍵字",
+          "先有完整結論"
+        ],
+        "answer": 0,
+        "explain": "要能追問與收集證據。"
+      },
+      {
+        "q": "問題意識主要回答什麼？",
+        "options": [
+          "為什麼這個現象值得被問",
+          "明天要寫幾頁",
+          "要用哪個軟體"
+        ],
+        "answer": 0,
+        "explain": "價值與缺口。"
+      },
+      {
+        "q": "發現題目過大時應優先？",
+        "options": [
+          "收窄對象、情境或時間",
+          "直接做結論",
+          "改成做展示系統"
+        ],
+        "answer": 0,
+        "explain": "先收窄。"
+      },
+      {
+        "q": "可行性檢查至少要看？",
+        "options": [
+          "資料是否取得、時間是否足夠",
+          "題目是否夠酷",
+          "AI 是否喜歡"
+        ],
+        "answer": 0,
+        "explain": "做不做得完。"
+      },
+      {
+        "q": "本課完成時應產出？",
+        "options": [
+          "候選題＋選定理由與範圍",
+          "完整論文終稿",
+          "產品開發時程"
+        ],
+        "answer": 0,
+        "explain": "選題與問題形成。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "可研究題目最核心的特徵是？",
+        "options": [
+          "有對象且現象可追問",
+          "只有熱門關鍵字",
+          "先有完整結論"
+        ],
+        "answer": 0,
+        "explain": "要能追問與收集證據。"
+      },
+      {
+        "q": "問題意識主要回答什麼？",
+        "options": [
+          "為什麼這個現象值得被問",
+          "明天要寫幾頁",
+          "要用哪個軟體"
+        ],
+        "answer": 0,
+        "explain": "價值與缺口。"
+      },
+      {
+        "q": "發現題目過大時應優先？",
+        "options": [
+          "收窄對象、情境或時間",
+          "直接做結論",
+          "改成做展示系統"
+        ],
+        "answer": 0,
+        "explain": "先收窄。"
+      },
+      {
+        "q": "可行性檢查至少要看？",
+        "options": [
+          "資料是否取得、時間是否足夠",
+          "題目是否夠酷",
+          "AI 是否喜歡"
+        ],
+        "answer": 0,
+        "explain": "做不做得完。"
+      },
+      {
+        "q": "本課完成時應產出？",
+        "options": [
+          "候選題＋選定理由與範圍",
+          "完整論文終稿",
+          "產品開發時程"
+        ],
+        "answer": 0,
+        "explain": "選題與問題形成。"
+      }
+    ],
+    "zhNotePrompt": "用 5 行寫：對象、核心問題、範圍、不研究什麼、可行性燈號。",
+    "enNotePrompt": "In 5 lines: population, core problem, scope, exclusions, feasibility light.",
+    "zhDeliverableChecklist": [
+      "已寫我想研究什麼，且不是「做一個 AI 產品」",
+      "已寫對象、核心問題、範圍與不研究什麼",
+      "為什麼值得研究沒有未查證統計",
+      "可行性燈號與資料路徑誠實",
+      "沒有捏造訪談或問卷已經完成",
+      "已存成研究問題定義表"
+    ],
+    "enDeliverableChecklist": [
+      "What I will study is written and is not “build an AI product”",
+      "Population, core problem, scope, and exclusions are filled",
+      "Why-it-matters has no unverified statistics",
+      "Feasibility lights and data paths are honest",
+      "No invented completed interviews or surveys",
+      "Saved as Research Problem Definition"
+    ],
+    "zhScorecard": [
+      "題目可研究性",
+      "問題意識清楚度",
+      "範圍是否可完成",
+      "資料路徑真實性",
+      "是否停留在選題而非跑題"
+    ],
+    "enScorecard": [
+      "Researchability",
+      "Clarity of rationale",
+      "Scope realism",
+      "Data-path realism",
+      "Staying on topic formation"
+    ],
+    "id": "research-competition-L1",
+    "lessonKey": "research-competition-L1",
+    "zhOutputName": "研究問題定義表",
+    "enOutputName": "Research Problem Definition",
+    "zhObjectives": [
+      "把興趣改寫成有對象、有現象的研究問題草稿",
+      "寫出為什麼值得研究，且不虛構統計或社會重要性",
+      "標出問題範圍與不研究什麼",
+      "用綠／黃／紅判斷一學期可行性",
+      "把成果存成「研究問題定義表」"
+    ],
+    "enObjectives": [
+      "Rewrite an interest into a problem with a population and phenomenon",
+      "Explain why it may matter without inventing statistics",
+      "Mark scope and what you will not study",
+      "Rate one-semester feasibility with green/yellow/red",
+      "Save a Research Problem Definition"
+    ],
+    "zhWhyItMatters": {
+      "problem": "很多專題從「我想做 AI 題目」開始，結果沒有對象、沒有可追問的現象，後面文獻與方法都會漂。",
+      "ineffective": "直接請 AI「幫我想十個會得獎的題目」，或把做一個 App 當成研究問題。",
+      "solution": "先寫我想研究什麼、為什麼、對象、核心問題、範圍與不研究什麼，再進入題目設計。"
     },
-    {
-      "icon": "🎯",
-      "title": "縮小範圍，寫出研究問題與假設",
-      "description": "定義目標、範圍、里程碑、依賴與風險備案，用 AI 輔助規劃並由人工審核定案。",
-      "goal": "我的專案計畫一頁紙（目標／里程碑／風險／備案）",
-      "estimatedTime": "60-80 分鐘",
-      "difficulty": "中階",
-      "tags": [
-        "專案規劃",
-        "里程碑",
-        "風險",
-        "Chapter9"
-      ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 8,
-      "chapterZh": "AI 團隊協作與專案管理",
-      "chapterEn": "AI Team Collaboration and Project Management",
-      "zhTitle": "第2課：縮小範圍，寫出研究問題與假設",
-      "enTitle": "Lesson 2: Narrow scope and write research questions and hypotheses",
-      "zhValueTip": "定義目標、範圍、里程碑、依賴與風險備案，用 AI 輔助規劃並由人工審核定案。",
-      "enValueTip": "Define goals, scope, milestones, dependencies, and risk backups—AI assists, humans approve.",
-      "zhOutcome": "我的專案計畫一頁紙（目標／里程碑／風險／備案）",
-      "enOutcome": "My One-Page Project Plan (goals/milestones/risks/backups)",
-      "zhConcept": "專案規劃回答：要完成什麼（目標）、不做什麼（範圍）、交什麼（交付成果）、何時檢查（里程碑）、誰與什麼資源、有何依賴、會出什麼事（風險）與備案。大學生專題常缺「非範圍」：不做問卷第二波、不做 APP 上架等，寫清楚可減少臨時加戲。里程碑應對齊可驗證產出：題目鎖定、文獻完成、初稿、彩排、定稿，而非「大家加油」。依賴關係：倫理審核→問卷上線→分析→寫作。風險例：組員生病、資料取得慢、場地取消、軟體權限。備案要可執行：備援人、縮小範圍、改用二手資料、提前彩排日。專案變更需記錄影響並經 A 角色同意，不可聊天一句就算改範圍。AI 可產出時程草案與風險清單，但時程必須用人審核對齊真實課表與考試週；不可假裝資源充足。完整大學生專案案例：跨系「老年科技使用」專題——目標產出報告＋海報；非範圍不含實機開發；里程碑五個；風險含受訪招募不足→備案改案例分析。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。當分工、會議、任務、規劃與整合形成閉環，換專題也能複製同一套協作作業系統。跨系或競賽情境同樣適用：先對齊目標與責任，再談工具；工具只是載體，紀律才是產能。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。當分工、會議、任務、規劃與整合形成閉環，換專題也能複製同一套協作作業系統。跨系或競賽情境同樣適用：先對齊目標與責任，再談工具；工具只是載體，紀律才是產能。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。當分工、會議、任務、規劃與整合形成閉環，換專題也能複製同一套協作作業系統。跨系或競賽情境同樣適用：先對齊目標與責任，再談工具；工具只是載體，紀律才是產能。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。當分工、會議、任務、規劃與整合形成閉環，換專題也能複製同一套協作作業系統。跨系或競賽情境同樣適用：先對齊目標與責任，再談工具；工具只是載體，紀律才是產能。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。",
-      "enConcept": "Write goals, non-goals, deliverables, milestones, resources, dependencies, risks, and backups. AI drafts; humans validate against real calendars and approve changes explicitly.",
-      "zhCaseStudy": "跨系專題原計畫兩週做 30 人訪談，期中考撞期失敗。重做計畫：里程碑前移招募、風險「招募不足」備案改 3 個深度案例＋文獻。變更紀錄由 A 簽名。最終準時發表，評審肯定範圍取捨清楚。",
-      "enCaseStudy": "An interdisciplinary team survived midterms by moving milestones and activating a recruitment-risk backup with a signed change note.",
-      "zhWorkflow": [
-        "寫目標／非範圍／交付成果",
-        "排里程碑與依賴",
-        "列資源與風險／備案",
-        "請 AI 檢查缺口後人工審核",
-        "鎖定計畫並定義變更流程"
-      ],
-      "enWorkflow": [
-        "Write goals/non-goals/deliverables",
-        "Sequence milestones and dependencies",
-        "List resources, risks, backups",
-        "AI gap-check then human approve",
-        "Lock plan and define change control"
-      ],
-      "zhCommonMistakes": [
-        "只有目標沒有非範圍",
-        "里程碑不可驗證",
-        "無備案",
-        "AI 時程不經課表審核"
-      ],
-      "enCommonMistakes": [
-        "Goals without non-goals",
-        "Unverifiable milestones",
-        "No backups",
-        "AI schedules without calendar checks"
-      ],
-      "zhExcellentExample": "優秀一頁紙：目標清楚、非範圍明確、里程碑可驗、風險有備案、變更需批准。",
-      "enExcellentExample": "A strong one-pager has clear goals/non-goals, testable milestones, backed risks, and change control.",
-      "zhPrompt": "【Prompt 1｜專案一頁紙規劃】\n題目與期限：\n（貼上）\n已知約束（考試／工讀／人數）：\n（貼上）\n請產出：目標、非範圍、交付成果、里程碑、依賴、資源需求。約束不足請先列問題；不要假設我們有無限時間；標註建議與需人工審核項。",
-      "enPrompt": "[Prompt 1 | One-Page Plan] Draft goals, non-goals, deliverables, milestones, deps, resources; ask if constraints are missing; no infinite-time assumptions.",
-      "zhCoachPrompt": "【Prompt 2｜風險與備案分析】\n計畫摘要：\n（貼上）\n請列風險（可能／影響）、預警訊號、備案、誰觸發備案。不要捏造我們沒提到的已發生事故；區分推測與已知事實。",
-      "enCoachPrompt": "[Prompt 2 | Risk & Backup] List likelihood/impact, triggers, backups, and owners; don’t invent incidents; separate speculation from facts.",
-      "zhFeedbackPrompt": "【Prompt 3｜時程與變更審核】\n里程碑表與課表衝突說明：\n（貼上）\n請指出不切實際的日期、建議調整，並給變更申請短模板。不可逕自宣告範圍變更已通過。",
-      "enFeedbackPrompt": "[Prompt 3 | Schedule & Change Review] Flag unrealistic dates and provide a change-request template—do not declare scope changes approved.",
-      "zhExample": "里程碑：4/20 題目鎖定｜4/30 資料完成｜5/7 初稿｜5/12 彩排｜5/15 定稿。｜風險：受訪不足→備案案例分析。",
-      "enExample": "Five verifiable milestones with a recruitment-risk backup to case analysis.",
-      "zhPractice": "寫出專案一頁紙。；完成風險／備案表。；對課表做人工審核。；Challenge：模擬一個風險發生，走一遍備案與變更紀錄，限時 20 分鐘。",
-      "enPractice": "Write the one-pager.；Finish risks/backups.；Human-check against calendars.；Challenge: simulate one risk and run backup+change log in 20 minutes.",
-      "zhQuizItems": [
-        {
-          "q": "專案「非範圍」的用途是？",
-          "options": [
-            "讓報告更長",
-            "明確不做什麼，減少臨時加戲與衝突",
-            "取代目標",
-            "給 AI 自由發揮"
-          ],
-          "answer": 1,
-          "explain": "非範圍保護焦點與時程。"
-        },
-        {
-          "q": "好的里程碑應？",
-          "options": [
-            "只有「大家加油」",
-            "對應可驗證交付物與日期",
-            "越模糊越有彈性",
-            "不需要負責人"
-          ],
-          "answer": 1,
-          "explain": "可驗證才能追蹤。"
-        },
-        {
-          "q": "AI 產出時程後應？",
-          "options": [
-            "直接當最終承諾",
-            "由人工對照真實課表與資源後再定案",
-            "刪除所有風險欄",
-            "禁止寫備案"
-          ],
-          "answer": 1,
-          "explain": "AI 草案需人工審核。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "Non-goals are for:",
-          "options": [
-            "Making papers longer",
-            "Clarifying what you won’t do to reduce scope creep",
-            "Replacing goals",
-            "Letting AI freestyle"
-          ],
-          "answer": 1,
-          "explain": "Non-goals protect focus and schedule."
-        },
-        {
-          "q": "Good milestones should:",
-          "options": [
-            "Only say “try hard”",
-            "Map to verifiable deliverables and dates",
-            "Stay vague for flexibility",
-            "Need no owners"
-          ],
-          "answer": 1,
-          "explain": "Verifiable milestones enable tracking."
-        },
-        {
-          "q": "After AI drafts a schedule you should:",
-          "options": [
-            "Treat it as final commitment",
-            "Human-validate against real calendars/resources then lock",
-            "Delete the risk section",
-            "Forbid backups"
-          ],
-          "answer": 1,
-          "explain": "AI drafts need human approval."
-        }
-      ],
-      "zhNotePrompt": "貼上三個里程碑與兩項風險備案（含觸發條件）。",
-      "enNotePrompt": "Paste three milestones and two risk backups with triggers.",
-      "zhDeliverableChecklist": [
-        "目標與非範圍完成",
-        "里程碑可驗證",
-        "依賴已標",
-        "風險備案齊",
-        "變更流程寫明"
-      ],
-      "enDeliverableChecklist": [
-        "Goals/non-goals done",
-        "Milestones verifiable",
-        "Dependencies marked",
-        "Risk backups ready",
-        "Change process written"
-      ],
-      "zhScorecard": [
-        "範圍清楚",
-        "里程碑可驗",
-        "依賴可見",
-        "備案可執行",
-        "審核定案"
-      ],
-      "enScorecard": [
-        "Clear scope",
-        "Testable milestones",
-        "Visible deps",
-        "Executable backups",
-        "Approved plan"
-      ],
-      "resources": [
-        {
-          "name": "Notion",
-          "url": "https://www.notion.so",
-          "note": "專案一頁紙與里程碑資料庫"
-        },
-        {
-          "name": "Asana",
-          "url": "https://asana.com",
-          "note": "時程與依賴追蹤"
-        },
-        {
-          "name": "ClickUp",
-          "url": "https://clickup.com",
-          "note": "里程碑與風險清單"
-        },
-        {
-          "name": "Google Docs",
-          "url": "https://docs.google.com",
-          "note": "變更紀錄共編"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "規劃草案與風險提問"
-        },
-        {
-          "name": "Trello",
-          "url": "https://trello.com",
-          "note": "把里程碑拆成看板階段"
-        }
-      ],
-      "challenge": "為真實專題完成經全組確認的一頁專案計畫，並至少演練一次「風險→備案→變更紀錄」。",
-      "id": "research-competition-L2",
-      "lessonKey": "research-competition-L2"
+    "enWhyItMatters": {
+      "problem": "Many projects start with “I want an AI topic,” with no population or question, so later sources and methods drift.",
+      "ineffective": "Asking AI for ten prize-winning topics, or treating an app idea as a research problem.",
+      "solution": "Write what you will study, why, who, the core problem, scope, and exclusions before designing questions."
     },
-    {
-      "icon": "📚",
-      "title": "用 AI 協助學術搜尋，找到關鍵文獻與來源",
-      "description": "學會用 Google Scholar 找論文、篩年份、追蹤引用，並建立可深挖的文獻清單與精讀優先順序。",
-      "goal": "我的 Google Scholar 文獻清單（8+ 筆）與精讀三篇計畫",
-      "estimatedTime": "50-70 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "Google Scholar",
-        "文獻搜尋",
-        "引用追蹤",
-        "Chapter2"
+    "zhConceptBlocks": {
+      "principles": [
+        "先定義問題再選工具",
+        "可研究 ≠ 可做產品",
+        "可行性取決於真實資料路徑"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 1,
-      "chapterZh": "AI 資料搜尋與研究",
-      "chapterEn": "AI Source Search and Research",
-      "zhTitle": "第3課：用 AI 協助學術搜尋，找到關鍵文獻與來源",
-      "enTitle": "Lesson 3: Use AI-assisted academic search to find key sources",
-      "zhValueTip": "學會用 Google Scholar 找論文、篩年份、追蹤引用，並建立可深挖的文獻清單與精讀優先順序。",
-      "enValueTip": "Use Google Scholar to find papers, filter by year, follow citations, and build a deep-read bibliography.",
-      "zhOutcome": "我的 Google Scholar 文獻清單（8+ 筆）與精讀三篇計畫",
-      "enOutcome": "My Google Scholar Source List (8+) and Deep-Read Plan for 3 Papers",
-      "zhConcept": "Google Scholar 文獻搜尋不是「搜到越多越好」，而是建立一條能持續加深的文獻路徑。先帶入第 6 課策略卡關鍵字，再用年份篩選、相關文章、被引用次數來擴展。看到一篇關鍵論文時，先讀摘要判斷相關性，再決定是否進入方法與結論；不要一開始就精讀全部。大學生常犯兩個錯：一是只依引用次數排序，忽略題目是否真的對口；二是書目複製不完整，後來引用格式錯誤或張冠李戴。這一課要你完成至少 8 筆文獻清單：每筆含書目要素、一句話重點、與研究問題的關係、疑點、下一步。最後標出 3 篇精讀對象，並說明為何先讀它們（定義清楚、方法可借、情境接近、或爭議關鍵）。完成後你會開始有「研究資料庫」的雛形：不是下載資料夾一團亂，而是可檢索、可排序、可交接給組員的清單。",
-      "enConcept": "Google Scholar literature search is about building a deepen-able path, not maximizing hits. Filter, follow related/cited-by trails, screen abstracts first, and log reasons. Verify bibliographic fields before citing. Your deliverable is an 8+ item list plus a 3-paper deep-read plan.",
-      "zhCaseStudy": "情境案例：心理系阿哲搜 academic stress students 出現海量結果。他加上 Taiwan、university students，並限制近五年，再把結果分成「定義可用／方法可借／情境接近／離題」。他沒有假裝讀完 30 篇，而是先做 10 筆清單，再精讀 3 篇方法段。組會時他能清楚說：這篇提供量表、那篇提供台灣樣本限制、另一篇雖然高引用但研究對象不符大學樣本故先備用。後來引用檢查幾乎沒有書目錯誤，因為他每筆都回原頁核對過。",
-      "enCaseStudy": "Zhe narrowed Scholar results, tagged why each paper mattered, deep-read three methods sections, and avoided citation errors by verifying every bibliographic field.",
-      "zhWorkflow": [
-        "用第6課關鍵字在 Google Scholar 搜尋並設定年份",
-        "挑選至少 8 筆候選，寫選用理由與疑點",
-        "對關鍵論文使用相關文章／被引用追蹤",
-        "核對書目要素，標出 3 篇精讀",
-        "把清單存進研究資料庫（表格或 Zotero）"
+      "terms": [
+        "研究對象",
+        "問題範圍",
+        "不研究什麼",
+        "可行性燈號"
       ],
-      "enWorkflow": [
-        "Search Scholar with Lesson 6 keywords and year filters",
-        "Select 8+ candidates with reasons and doubts",
-        "Follow related/cited-by trails for key papers",
-        "Verify citations and pick 3 deep-reads",
-        "Save the list into your research database"
+      "criteria": [
+        "有對象",
+        "有可追問現象",
+        "有一學期可執行的範圍"
       ],
-      "zhCommonMistakes": [
-        "只看第一頁或只看引用數",
-        "不讀摘要就整篇下載",
-        "書目欄位缺作者／年份／刊物",
-        "把簡報稿、部落格與期刊混成同一可信度"
-      ],
-      "enCommonMistakes": [
-        "Stopping at page one or citation count only",
-        "Downloading full PDFs before screening abstracts",
-        "Missing authors/year/venue in the list",
-        "Treating slides, blogs, and journals as equal"
-      ],
-      "zhExcellentExample": "優秀清單每列都有：作者（年）題名｜來源類型｜相關度｜一句貢獻｜疑點｜下一步。精讀三篇分別對應：定義、方法、爭議，而不是三篇內容重複。",
-      "enExcellentExample": "Each strong row includes citation essentials, type, relevance, one contribution, a doubt, and a next step. The three deep-reads cover definition, method, and debate.",
-      "zhPrompt": "【Prompt 1｜文獻篩選助教】\n請擔任研究助教。我的研究問題：［問題］\n以下是 Google Scholar 找到的題名與摘要（8-12 筆）：\n（貼上）\n請分成高／中／低相關並說明理由；建議先精讀哪 3 篇；指出還缺哪類文獻（理論／方法／在地樣本／反證）。不要編造沒出現在清單中的論文。",
-      "enPrompt": "[Prompt 1 | Screening TA] Sort 8–12 titles/abstracts by relevance, recommend 3 deep-reads, and identify missing source types. Do not invent papers.",
-      "zhCoachPrompt": "【Prompt 2｜引用追蹤教練】\n我的關鍵論文是：［題名／作者／年份］\n請教我如何用 Scholar 的被引用與相關文章往後追，並列出我應記錄的欄位模板。同時提醒我如何避免把二次引用當成自己讀過。",
-      "enCoachPrompt": "[Prompt 2 | Citation Trail Coach] Teach cited-by/related follow-up, a logging template, and how to avoid second-hand citation errors.",
-      "zhFeedbackPrompt": "【Prompt 3｜文獻清單回饋】\n以下是我的 Scholar 文獻清單與精讀計畫：\n（貼上）\n請檢查相關性、理由是否空泛、書目完整性、精讀優先順序是否重疊。給修正建議與可匯入試算表的欄位格式。",
-      "enFeedbackPrompt": "[Prompt 3 | Bibliography Feedback] Check relevance, reason quality, citation completeness, and deep-read priority overlap.",
-      "zhExample": "列表示例：Chen (2022) ...｜期刊｜高相關｜提供學業壓力量表｜疑點：樣本非台灣｜下一步：精讀方法。精讀計畫：A 定義、B 方法、C 反證／限制。",
-      "enExample": "Example row: Chen (2022)... | journal | high | offers a stress scale | doubt: non-Taiwan sample | next: deep-read methods.",
-      "zhPractice": "用策略卡在 Scholar 搜尋並建立 8+ 筆清單。；用 Prompt 1 分類後由你最終裁定。；完成 3 篇精讀計畫。；逐筆核對書目。；Challenge：找 1 篇高引用但離題的論文，寫下為何不進精讀清單。",
-      "enPractice": "Build an 8+ Scholar list.；Screen with Prompt 1.；Make a 3-paper plan.；Verify citations.；Challenge: reject one highly cited off-topic paper.",
-      "zhQuizItems": [
-        {
-          "q": "在 Google Scholar 使用「被引用次數」最合適的目的是？",
-          "options": [
-            "證明該文一定正確無誤",
-            "作為尋找後續相關研究的線索之一",
-            "取代閱讀摘要與方法",
-            "保證可以不查原刊物名"
-          ],
-          "answer": 1,
-          "explain": "引用數是發現後續研究的線索，不是正確性保證。"
-        },
-        {
-          "q": "建立文獻清單時，最不該缺少的資訊是？",
-          "options": [
-            "選用理由、疑點與下一步（精讀／備用／淘汰）",
-            "只貼連結、不寫理由",
-            "只看標題是否吸睛",
-            "只記錄自己喜不喜歡作者名字"
-          ],
-          "answer": 0,
-          "explain": "理由與下一步讓清單可執行，也減少重複勞動。"
-        },
-        {
-          "q": "正式引用前，對 Scholar 結果最必要的動作是？",
-          "options": [
-            "直接複製 AI 產生的 APA",
-            "核對題名、作者、年份、刊物／來源頁",
-            "只保留 PDF 檔名",
-            "完全相信第一頁結果"
-          ],
-          "answer": 1,
-          "explain": "書目要素必須回原資料核對，避免引用錯誤。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "What is the best use of “Cited by” in Google Scholar?",
-          "options": [
-            "Proof the paper is certainly correct",
-            "A clue for finding later related work",
-            "A replacement for reading abstracts and methods",
-            "A reason to skip verifying the venue"
-          ],
-          "answer": 1,
-          "explain": "Citation counts are leads, not truth certificates."
-        },
-        {
-          "q": "What must a literature list include?",
-          "options": [
-            "Selection reason, doubts, and next step",
-            "Links only",
-            "Catchy titles only",
-            "Whether you like the author name"
-          ],
-          "answer": 0,
-          "explain": "Reasons and next steps make the list actionable."
-        },
-        {
-          "q": "Before citing a Scholar result, you should?",
-          "options": [
-            "Paste an AI-generated APA blindly",
-            "Verify title, authors, year, and venue/source page",
-            "Keep only the PDF filename",
-            "Trust page-one results completely"
-          ],
-          "answer": 1,
-          "explain": "Bibliographic details must be verified to avoid citation errors."
-        }
-      ],
-      "zhNotePrompt": "寫下精讀三篇題名，以及各篇分別幫你解決定義、方法還是爭議。",
-      "enNotePrompt": "List your three deep-read papers and whether each helps definition, method, or debate.",
-      "zhDeliverableChecklist": [
-        "完成 8+ 筆清單",
-        "每筆有理由與下一步",
-        "標出 3 篇精讀",
-        "書目要素已核對",
-        "清單已存入研究資料庫"
-      ],
-      "enDeliverableChecklist": [
-        "8+ rows",
-        "Reason/next step each",
-        "3 deep-reads chosen",
-        "Citations verified",
-        "Saved to research database"
-      ],
-      "zhScorecard": [
-        "相關性",
-        "清單完整",
-        "書目正確",
-        "精讀策略",
-        "可交接性"
-      ],
-      "enScorecard": [
-        "Relevance",
-        "Completeness",
-        "Citation accuracy",
-        "Deep-read strategy",
-        "Handoff readiness"
-      ],
-      "resources": [
-        {
-          "name": "Google Scholar",
-          "url": "https://scholar.google.com",
-          "note": "主搜尋與引用追蹤"
-        },
-        {
-          "name": "Semantic Scholar",
-          "url": "https://www.semanticscholar.org",
-          "note": "輔助看相關論文與摘要資訊"
-        },
-        {
-          "name": "arXiv",
-          "url": "https://arxiv.org",
-          "note": "預印本來源（引用前確認版本與是否適合你的學科）"
-        },
-        {
-          "name": "Zotero",
-          "url": "https://www.zotero.org",
-          "note": "把清單升級成可管理的研究資料庫"
-        }
-      ],
-      "challenge": "把你的 8 筆清單整理成表格（或匯入 Zotero），並用篩選功能只顯示「精讀」與「備用」兩類。",
-      "id": "research-competition-L3",
-      "lessonKey": "research-competition-L3"
+      "boundaries": [
+        "避免：把 App 當研究問題",
+        "避免：虛構研究價值",
+        "避免：保證得獎"
+      ]
     },
-    {
-      "icon": "✅",
-      "title": "用 AI 精讀文獻：摘要、比較與查證",
-      "description": "建立驗證清單：檢查幻覺引用、過時資訊、偏誤與利益衝突，並把來源評等回寫到研究資料庫。",
-      "goal": "我的 AI 資訊真偽驗證表與 5 筆來源評等決策",
-      "estimatedTime": "50-70 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "驗證",
-        "幻覺",
-        "引用錯誤",
-        "Chapter2"
+    "enConceptBlocks": {
+      "principles": [
+        "Define the problem before tools",
+        "Researchable ≠ buildable product",
+        "Feasibility depends on real access"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 1,
-      "chapterZh": "AI 資料搜尋與研究",
-      "chapterEn": "AI Source Search and Research",
-      "zhTitle": "第4課：用 AI 精讀文獻：摘要、比較與查證",
-      "enTitle": "Lesson 4: Use AI to closely read sources: summarize, compare, and verify",
-      "zhValueTip": "建立驗證清單：檢查幻覺引用、過時資訊、偏誤與利益衝突，並把來源評等回寫到研究資料庫。",
-      "enValueTip": "Build a verification checklist for hallucinated citations, outdated info, bias, and conflicts—then rate sources in your research database.",
-      "zhOutcome": "我的 AI 資訊真偽驗證表與 5 筆來源評等決策",
-      "enOutcome": "My AI Information Authenticity Checklist and 5 Source Rating Decisions",
-      "zhConcept": "驗證 AI 資訊真偽是 Chapter 2 的閉環能力。前面你學會找資料、搜論文、做深度搜尋與教材研究；若缺少驗證，AI 只會讓錯誤傳播得更快。驗證時至少檢查：1) 書目是否真實存在；2) 作者與刊物是否匹配；3) 證據是否支持該句主張；4) 時效與適用地區；5) 利益衝突與目的；6) 能否被第二來源交叉驗證。大學生高風險場景包括：AI 編造文獻、二次轉述被當成原始研究、把行銷文當政策、把預印本結論講成已定論。實作上建議固定使用驗證表，並在研究資料庫新增欄位：真偽狀態、評等、使用決定、核對日期。完成這一課，你應能對至少 5 筆來源做出高／中／低評等，並明確哪些可引用、哪些僅啟發、哪些淘汰。這會直接降低報告中的引用錯誤，也讓組員可以用同一標準審稿。",
-      "enConcept": "Verifying AI information authenticity closes Chapter 2. Check existence, matching bibliographic fields, evidence fit, currency, conflicts, and corroboration. Rate sources and decide cite / inspire-only / reject to prevent hallucinated and weak citations from entering your paper.",
-      "zhCaseStudy": "情境案例：護理系小容報告初稿有一筆「看起來很專業」的引用，驗證後發現篇名在 Scholar 與出版社都找不到，屬高風險幻覺。她刪除該引用，改用期刊論文與衛福部頁面，並在資料庫標記核對日期。雖然引用變少，但老師回饋「證據乾淨」。此後她規定：任何 AI 給的書目，未核對前不得進正文。",
-      "enCaseStudy": "Xiaorong removed an unfindable AI citation, replaced it with verified journal and ministry sources, and enforced a rule that unverified AI bibliographies never enter the main text.",
-      "zhWorkflow": [
-        "建立真偽驗證表（存在性、書目、證據、時效、衝突、交叉驗證）",
-        "從第7-9課挑 5 筆來源逐項驗證",
-        "標註高／中／低與可引用／僅啟發／淘汰",
-        "修正研究資料庫與正文草稿中的問題引用",
-        "寫下個人「防引用錯誤」三條硬規則"
+      "terms": [
+        "Population",
+        "Scope",
+        "Out of scope",
+        "Feasibility lights"
       ],
-      "enWorkflow": [
-        "Build an authenticity checklist",
-        "Verify 5 sources from Lessons 7–9",
-        "Rate and label cite/inspire/reject",
-        "Fix the research database and draft citations",
-        "Write three hard rules against citation errors"
+      "criteria": [
+        "Has a population",
+        "Has a question about a phenomenon",
+        "One-semester scope"
       ],
-      "zhCommonMistakes": [
-        "因語氣肯定就相信",
-        "不檢查文獻是否真實存在",
-        "忽略利益衝突與過時資料",
-        "AI 摘要與原文不一致仍硬引"
-      ],
-      "enCommonMistakes": [
-        "Trusting confident tone",
-        "Not checking whether a source exists",
-        "Ignoring conflicts and outdated claims",
-        "Citing when the summary diverges from the original"
-      ],
-      "zhExcellentExample": "優秀驗證表每筆都有：核對連結、存在性結果、證據是否支持原句、評等、使用決定、修改後的可引用句子或淘汰理由。",
-      "enExcellentExample": "Each strong row includes the checked link, existence result, evidence fit, rating, use decision, and either a corrected citable sentence or rejection reason.",
-      "zhPrompt": "【Prompt 1｜真偽審核員】\n請擔任研究審核員。研究問題：［問題］\n待驗證內容：［貼上 AI 段落或書目］\n請列出我必須回原資料核對的檢查點，並給高／中／低風險初步判斷。提醒哪些情況可能是幻覺引用。不要宣稱你已在線上替我核對成功，除非我提供了可點開的原頁內容。",
-      "enPrompt": "[Prompt 1 | Authenticity Auditor] Given my research question and AI text/citations, list verification checkpoints and a high/medium/low risk judgment. Do not claim you verified live webpages unless I pasted original content.",
-      "zhCoachPrompt": "【Prompt 2｜引用錯誤診斷】\n以下是我準備放進報告的引用句與書目：\n（貼上）\n請檢查是否有主張過強、書目要素缺失、可能二次引用未標示等問題，並給修正寫法。",
-      "enCoachPrompt": "[Prompt 2 | Citation-Error Diagnosis] Inspect my claim + bibliography for overclaiming, missing fields, or unmarked second-hand citation, then propose a safer rewrite.",
-      "zhFeedbackPrompt": "【Prompt 3｜驗證表回饋】\n以下是我的真偽驗證表與 5 筆評等：\n（貼上）\n請指出評等是否過寬／過嚴、理由是否具體，並給可重用於所有報告的標準模板與三條硬規則。",
-      "enFeedbackPrompt": "[Prompt 3 | Checklist Feedback] Judge rating calibration and reason specificity; provide a reusable template and three hard rules.",
-      "zhExample": "示例：AI 給的篇名在 Scholar 找不到｜高風險｜淘汰；衛福部統計頁核對年份與定義後｜高｜可引用；公司白皮書｜中｜僅啟發產業觀點，不進核心論證。",
-      "enExample": "Example: unfindable AI paper title = high risk/reject; verified ministry stats = high/cite; company white paper = medium/inspire-only.",
-      "zhPractice": "建立驗證表。；驗證 5 筆來源並完成評等。；至少抓出 1 個高風險問題（幻覺／過時／衝突）。；用 Prompt 修訂引用句。；Challenge：向同學用 1 分鐘說明你淘汰的一筆「看起來很真」的資料為何不能用。",
-      "enPractice": "Build the checklist.；Rate 5 sources.；Catch 1 high-risk issue.；Revise citations with prompts.；Challenge: explain one professional-looking rejection in 1 minute.",
-      "zhQuizItems": [
-        {
-          "q": "驗證 AI 資訊真偽時，最不該省略的步驟是？",
-          "options": [
-            "只看語氣是否自信",
-            "回原資料核對書目、證據與脈絡",
-            "只要有圖表就接受",
-            "完全依閱讀次數判斷"
-          ],
-          "answer": 1,
-          "explain": "真偽驗證以原資料為準，不是看 AI 自信程度。"
-        },
-        {
-          "q": "下列哪種情況最像「引用幻覺」風險？",
-          "options": [
-            "AI 給出篇名但原庫找不到對應文獻",
-            "你亲自在 Scholar 打開並核對過的論文",
-            "老師指定教科書頁碼",
-            "你實驗室原始數據紀錄"
-          ],
-          "answer": 0,
-          "explain": "找不到對應文獻的書目是典型幻覺／錯誤引用風險。"
-        },
-        {
-          "q": "把來源標成「僅啟發、不可直接引用」的主要目的是？",
-          "options": [
-            "讓報告看起來資料比較多",
-            "區分思路刺激與可作為證據的資料，降低誤用",
-            "避免做任何查證",
-            "讓 AI 自動負責學術倫理"
-          ],
-          "answer": 1,
-          "explain": "分級使用可避免把弱證據寫進核心論證。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "When verifying AI information, you must not skip?",
-          "options": [
-            "Checking whether the tone sounds confident",
-            "Verifying bibliography, evidence, and context in originals",
-            "Accepting any chart as proof",
-            "Judging only by view counts"
-          ],
-          "answer": 1,
-          "explain": "Originals decide authenticity, not confident tone."
-        },
-        {
-          "q": "Which looks most like a citation-hallucination risk?",
-          "options": [
-            "AI provides a paper title that cannot be found in real databases",
-            "A paper you opened and verified in Scholar",
-            "An assigned textbook page",
-            "Your lab’s raw data log"
-          ],
-          "answer": 0,
-          "explain": "Unfindable citations are a classic hallucination risk."
-        },
-        {
-          "q": "Why mark a source “inspire-only”?",
-          "options": [
-            "To inflate the reference count",
-            "To separate idea sparks from citable evidence and reduce misuse",
-            "To avoid all verification",
-            "To make AI responsible for integrity"
-          ],
-          "answer": 1,
-          "explain": "Use-level labels prevent weak evidence from entering core claims."
-        }
-      ],
-      "zhNotePrompt": "寫下你的三條防引用錯誤硬規則，以及評等最高與最低的來源各一。",
-      "enNotePrompt": "Write three hard anti-citation-error rules and your highest/lowest rated sources.",
-      "zhDeliverableChecklist": [
-        "完成驗證表",
-        "5 筆來源已評等",
-        "高風險引用已處理",
-        "研究資料庫狀態已更新",
-        "寫下三條硬規則"
-      ],
-      "enDeliverableChecklist": [
-        "Checklist complete",
-        "5 sources rated",
-        "High-risk citations handled",
-        "Database statuses updated",
-        "Three hard rules written"
-      ],
-      "zhScorecard": [
-        "驗證完整",
-        "幻覺防範",
-        "評等合理",
-        "引用安全",
-        "可重用"
-      ],
-      "enScorecard": [
-        "Verification coverage",
-        "Hallucination defense",
-        "Rating quality",
-        "Citation safety",
-        "Reusability"
-      ],
-      "resources": [
-        {
-          "name": "Google Scholar",
-          "url": "https://scholar.google.com",
-          "note": "核對文獻是否真實存在與書目是否匹配"
-        },
-        {
-          "name": "Semantic Scholar",
-          "url": "https://www.semanticscholar.org",
-          "note": "交叉檢查論文資訊與相關研究"
-        },
-        {
-          "name": "Perplexity",
-          "url": "https://www.perplexity.ai",
-          "note": "快速找到原站以便對照，仍須人工核對"
-        },
-        {
-          "name": "Google Dataset Search",
-          "url": "https://datasetsearch.research.google.com",
-          "note": "當主張涉及數據時，嘗試找回原始資料集"
-        }
-      ],
-      "challenge": "重審第 7 課清單中的 3 筆來源：若評等改變，更新精讀優先順序，並修正草稿中任何未核對引用。",
-      "id": "research-competition-L4",
-      "lessonKey": "research-competition-L4"
+      "boundaries": [
+        "Avoid: app as research problem",
+        "Avoid: invented importance",
+        "Avoid: prize guarantees"
+      ]
     },
-    {
-      "icon": "📚",
-      "title": "建立文獻筆記與引用格式",
-      "description": "為大綱證據空位建立文獻卡、正確使用 APA 第七版，並用流程避免抄襲與假引用。",
-      "goal": "我的文獻卡組（含 APA7 參考書目）與引用檢查清單",
-      "estimatedTime": "60-80 分鐘",
-      "difficulty": "中階",
-      "tags": [
-        "APA7",
-        "文獻整理",
-        "引用",
-        "反抄襲",
-        "Chapter4"
-      ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 3,
-      "chapterZh": "AI 寫報告",
-      "chapterEn": "AI for Reports",
-      "zhTitle": "第5課：建立文獻筆記與引用格式",
-      "enTitle": "Lesson 5: Build literature notes and citation format",
-      "zhValueTip": "為大綱證據空位建立文獻卡、正確使用 APA 第七版，並用流程避免抄襲與假引用。",
-      "enValueTip": "Build literature cards for outline gaps, apply APA 7th correctly, and use a workflow that prevents plagiarism and fabricated citations.",
-      "zhOutcome": "我的文獻卡組（含 APA7 參考書目）與引用檢查清單",
-      "enOutcome": "My Literature Card Set (with APA7 references) and Citation Checklist",
-      "zhConcept": "文獻工作不是「找很多篇再請 AI 摘要」，而是為大綱的證據空位挑選可防禦來源，並用自己的話做成文獻卡。每張卡建議包含：書目資訊、研究問題、方法、主要發現、對你主張的用途（支持／限制／定義）、可引用的頁碼或段落位置、以及你的一句評價。搜尋可用 Google Scholar、Semantic Scholar、Perplexity 做發現，但正式引用前必須打開原文或出版社頁核對作者、年份、標題、DOI。AI 常會捏造看起來很真的論文，這叫幻覺；任何 AI 給的書目都預設不可信，直到你用 Scholar／Crossref／圖書館資料庫驗證。APA 第七版常見規則：文內引用用作者—年份；參考書目依姓氏字母排序；期刊文章含 DOI（若有）；直接引句要有頁碼；改寫仍要引用。避免抄襲的核心是：思想來自他人就要歸因；即使改寫句型也要引用；連續貼上原文超過合理短引就應使用引號或改為濃縮改寫並引用。AI 可協助把書目轉成 APA 格式草稿，但你要用 Zotero／Mendeley 或 APA Style 官方範例校對。格式錯通常是低分且可避免的損失。閱讀文獻時採「問題導向」：先看摘要與結論是否對應你的證據空位，再決定精讀；不要每篇都精讀到沒時間寫。建議建立來源等級：同儕審查期刊／學術專書 > 官方統計與報告 > 優質二次來源；論壇與無作者通稿預設不進正式論證，除非作業允許。完成文獻卡後，更新大綱：哪些主張已有證據、哪些仍空、是否需縮小 RQ。這樣第19課寫作才不會邊寫邊慌。學術誠信實務：保留你閱讀過的 PDF 或書目連結；不要引用沒讀過的文獻；不要用 AI 產生假訪談或假數據。文內引用與參考書目必須一一對應：有引必列、有列必用。交稿前用清單勾稽，這是第20課定稿的重要一環，但本課就要養成習慣。若中英文混合寫作，仍維持 APA7 一致性；中文作者姓名依老師或系上慣例，不確定就寫進澄清問題，而不是猜。此外，請把本課產出存成 raw 與 final 兩版：raw 保留與 AI 的完整對話或初稿，final 是你校對後可進入下一課的版本，方便追溯與復盤。",
-      "enConcept": "Build literature cards tied to outline evidence gaps, verify every citation against real records, apply APA 7th carefully, and treat AI bibliographies as unverified until checked. Paraphrase with attribution; never invent sources or data.",
-      "zhCaseStudy": "情境案例：心理系小安用 AI 產生八筆「完美 APA 文獻」，其中三筆不存在，被老師標記學術風險。她改流程：每筆先在 Google Scholar 與 Crossref 驗證 DOI，再用 Zotero 產生 APA7，文獻卡只寫自己讀過的五篇。報告分數回升，老師回饋「引用真實且對應論點」。小安把「AI 書目＝待驗證」寫進個人合規清單。",
-      "enCaseStudy": "Xiao An nearly submitted fabricated AI citations. After verifying via Scholar/Crossref and managing APA7 in Zotero, her references became real and useful.",
-      "zhWorkflow": [
-        "依大綱證據空位列出搜尋問題與關鍵詞",
-        "用 Scholar／Semantic Scholar／Perplexity 發現候選並驗證真實性",
-        "精讀後寫文獻卡（用途＋發現＋頁碼線索）",
-        "用 Zotero／Mendeley 產生 APA7，對照 APA Style 官方規則",
-        "更新大綱：已覆蓋／仍缺證據，並做文內—書目對照草稿"
-      ],
-      "enWorkflow": [
-        "List search questions from evidence gaps",
-        "Discover candidates and verify they exist",
-        "Write literature cards after reading",
-        "Generate APA7 via manager + official style checks",
-        "Update outline coverage and draft in-text/reference alignment"
-      ],
-      "zhCommonMistakes": [
-        "引用 AI 捏造或不存在的文獻",
-        "只改寫句型卻不引用",
-        "參考書目與文內引用對不上",
-        "沒讀原文就引用摘要網站的二手轉述當一手"
-      ],
-      "enCommonMistakes": [
-        "Citing fabricated sources",
-        "Paraphrasing without attribution",
-        "Mismatch between in-text and references",
-        "Citing unread sources from second-hand blurbs"
-      ],
-      "zhExcellentExample": "優秀文獻包：5-10 張對應大綱空位的文獻卡、已驗證 DOI／書目、APA7 參考書目、文內引用樣例一段、以及「未讀不引」聲明。",
-      "enExcellentExample": "A strong pack has gap-mapped cards, verified records, APA7 references, a sample in-text paragraph, and an unread-sources ban.",
-      "zhPrompt": "【Prompt 1｜文獻卡工廠（禁止假書目）】\n我的大綱證據空位如下：\n（貼上）\n請為每個空位提出「搜尋問題」與中英文關鍵詞，並告訴我應優先找什麼類型來源（期刊／報告／專書）。\n規則：不要編造任何論文標題、作者、年份或 DOI。若你不確定某篇是否存在，只給搜尋策略，不要給假書目。",
-      "enPrompt": "[Prompt 1 | Literature Card Factory] For each evidence gap, give search questions and keywords only. Do not invent titles, authors, years, or DOIs.",
-      "zhCoachPrompt": "【Prompt 2｜APA 第七版格式校對助理】\n以下是我的參考書目草稿（可能有錯）：\n（貼上）\n請依 APA Style 第七版指出每一筆可能錯誤（作者、年份、標題大小寫、期刊名斜體概念、DOI、標點），並給修正後版本。若資訊不足無法判斷，列出我需回原文確認的欄位。不要新增我沒提供的文獻。",
-      "enCoachPrompt": "[Prompt 2 | APA7 Proof Assistant] Critique and correct my reference list for APA 7th; list missing fields to verify. Do not add new sources.",
-      "zhFeedbackPrompt": "【Prompt 3｜抄襲風險與引用對照檢查】\n大綱主張：\n（貼上）\n文獻卡：\n（貼上）\n一段我改寫的文字：\n（貼上）\n請檢查：改寫是否仍需引用、是否過近原文、主張與文獻用途是否匹配、有無可能的假引用風險描述。給修改建議與一段示範性「正確改寫＋文內引用」但不虛構頁碼；頁碼請標［待填］。",
-      "enFeedbackPrompt": "[Prompt 3 | Plagiarism & Alignment Check] Review my paraphrase and cards for attribution risk and claim-evidence fit; demo a correct paraphrase with [page pending].",
-      "zhExample": "空位：需要「短影音與注意力」的實證。\n文獻卡：Author (Year)… 發現=……；用途=支持 III-A；APA7 書目=……；文內=(Author, Year)。\n驗證：Scholar 找得到＋DOI 在 Crossref 存在。",
-      "enExample": "A card mapped to section III-A, verified on Scholar/Crossref, with APA7 reference and in-text form ready.",
-      "zhPractice": "依 outline 空位搜尋並驗證至少 5 篇真實文獻。；完成文獻卡與 APA7 參考書目。；寫一段含文內引用的改寫練習。；Challenge：故意讓 AI 給你書目後，找出至少 1 筆需淘汰的不實或無法驗證項目，並記錄你的驗證步驟。",
-      "enPractice": "Find and verify ≥5 real sources for outline gaps.；Build cards + APA7 list.；Write one cited paraphrase.；Challenge: catch at least one unverifiable AI bibliography item and log your verification steps.",
-      "zhQuizItems": [
-        {
-          "q": "AI 產生的論文書目應如何處理？",
-          "options": [
-            "直接貼進參考書目",
-            "預設不可信，必須用 Scholar／Crossref 等驗證後才用",
-            "只要格式像 APA 就可以",
-            "越多越好，真假無關"
-          ],
-          "answer": 1,
-          "explain": "AI 可能幻覺出不存在的文獻。"
-        },
-        {
-          "q": "關於 APA 第七版與改寫，下列何者正確？",
-          "options": [
-            "改寫後就不必引用",
-            "改寫仍需引用；直接引句通常需要頁碼",
-            "只有英文報告才要引用",
-            "有參考書目就不必文內引用"
-          ],
-          "answer": 1,
-          "explain": "思想來源要歸因；直接引句需頁碼等資訊。"
-        },
-        {
-          "q": "文獻卡最重要的功能是？",
-          "options": [
-            "收集漂亮封面截圖",
-            "對應大綱證據空位並記錄用途與可追溯資訊",
-            "取代閱讀原文",
-            "讓 AI 自動生成假數據"
-          ],
-          "answer": 1,
-          "explain": "文獻卡是為論證服務的可追溯筆記。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "How should you treat AI-generated bibliography entries?",
-          "options": [
-            "Paste them immediately",
-            "Treat as unverified until checked in Scholar/Crossref etc.",
-            "APA-looking format is enough",
-            "Quantity matters more than existence"
-          ],
-          "answer": 1,
-          "explain": "Models can hallucinate sources."
-        },
-        {
-          "q": "Which statement about APA 7th and paraphrasing is correct?",
-          "options": [
-            "Paraphrase needs no citation",
-            "Paraphrase still needs citation; quotations usually need page numbers",
-            "Only English papers need citations",
-            "A reference list removes need for in-text citations"
-          ],
-          "answer": 1,
-          "explain": "Attribute ideas; quote pages as required."
-        },
-        {
-          "q": "What is the main job of a literature card?",
-          "options": [
-            "Collect cover screenshots",
-            "Map sources to outline gaps with use and provenance",
-            "Replace reading",
-            "Let AI invent data"
-          ],
-          "answer": 1,
-          "explain": "Cards serve argument with traceability."
-        }
-      ],
-      "zhNotePrompt": "列出 5 篇已驗證文獻的 APA7 書目，並標註各支援大綱哪一節。",
-      "enNotePrompt": "List 5 verified APA7 references and map each to an outline section.",
-      "zhDeliverableChecklist": [
-        "至少 5 張文獻卡",
-        "全部來源已驗證存在",
-        "APA7 參考書目已校對",
-        "有一段含文內引用的改寫",
-        "大綱證據覆蓋已更新"
-      ],
-      "enDeliverableChecklist": [
-        "≥5 literature cards",
-        "All sources verified",
-        "APA7 list proofed",
-        "One cited paraphrase written",
-        "Outline coverage updated"
-      ],
-      "zhScorecard": [
-        "真實可驗證",
-        "對應論點",
-        "APA 正確",
-        "改寫合規",
-        "未讀不引"
-      ],
-      "enScorecard": [
-        "Verifiable",
-        "Claim-mapped",
-        "APA accuracy",
-        "Paraphrase compliance",
-        "No unread cites"
-      ],
-      "resources": [
-        {
-          "name": "APA Style",
-          "url": "https://apastyle.apa.org",
-          "note": "APA 第七版官方規則與示例"
-        },
-        {
-          "name": "Google Scholar",
-          "url": "https://scholar.google.com",
-          "note": "搜尋與核對文獻是否存在"
-        },
-        {
-          "name": "Crossref",
-          "url": "https://www.crossref.org",
-          "note": "用 DOI 驗證書目資訊"
-        },
-        {
-          "name": "Zotero",
-          "url": "https://www.zotero.org",
-          "note": "文獻管理與 APA 格式輸出"
-        },
-        {
-          "name": "Mendeley",
-          "url": "https://www.mendeley.com",
-          "note": "替代／並行的文獻管理工具"
-        },
-        {
-          "name": "Semantic Scholar",
-          "url": "https://www.semanticscholar.org",
-          "note": "發現相關研究與引用網絡"
-        }
-      ],
-      "challenge": "完成一份「引用誠實聲明」：列出本報告所有來源的驗證方式（Scholar／DOI／圖書館），並刪除任何你未閱讀全文或核心章節的條目。",
-      "id": "research-competition-L5",
-      "lessonKey": "research-competition-L5"
+    "zhCaseStudyBlocks": {
+      "problem": "大二學生想「研究校園外送平台」，卻說不出研究誰、研究什麼行為。",
+      "wrong": "請 AI 直接產出十個會得獎的 AI 題目，並把「做一個外送 App」當成研究。",
+      "right": "先寫對象（平日晚上使用外送的住宿生）、現象（如何決定是否下單）、範圍與不研究什麼（不研究平台演算法原始碼）。",
+      "result": "一份可進入下一課的研究問題定義表。"
     },
-    {
-      "icon": "🗺️",
-      "title": "整理文獻觀點，建立比較與筆記結構",
-      "description": "把課堂與 PDF 筆記轉成心智圖／知識圖譜：中心問題、分支概念、關係箭頭與複習路徑。",
-      "goal": "我的主題心智圖（含關係說明）與一條 15 分鐘複習路徑",
-      "estimatedTime": "55-75 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "心智圖",
-        "知識圖譜",
-        "結構複習",
-        "Chapter3"
-      ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 2,
-      "chapterZh": "AI 做筆記",
-      "chapterEn": "AI Note-Taking",
-      "zhTitle": "第6課：整理文獻觀點，建立比較與筆記結構",
-      "enTitle": "Lesson 6: Organize source viewpoints into comparison and note structures",
-      "zhValueTip": "把課堂與 PDF 筆記轉成心智圖／知識圖譜：中心問題、分支概念、關係箭頭與複習路徑。",
-      "enValueTip": "Turn class and PDF notes into mind maps/knowledge graphs—central question, branches, relations, and review paths.",
-      "zhOutcome": "我的主題心智圖（含關係說明）與一條 15 分鐘複習路徑",
-      "enOutcome": "My Topic Mind Map (with relation notes) and a 15-Minute Review Path",
-      "zhConcept": "AI 心智圖整理要解決的是「筆記很多但腦中沒有地圖」。條列筆記適合細節，心智圖／知識圖譜適合關係：誰屬於誰、誰導致誰、誰與誰對比、復習時先走哪條路。大學生可先選一個中心問題（不是只放課程名稱），例如「假設檢定何時用哪種檢定？」。再把第11-13課的重點變成節點，用關係詞連起來；例子與公式當葉節點，不要全塞進中心。AI 很適合根據你的筆記草稿提議分支與關係，但必須你來刪錯連、補缺枝。好的心智圖還要附一條 15 分鐘複習路徑：從哪裡開始、經過哪些必經節點、最後做哪三題自測。若你使用 Notion／Obsidian，可以把圖中節點連回筆記頁，形成真正的知識圖譜，而不是一張孤立圖片。當多科同時進行時，心智圖也能當「切換開關」：打開圖就知道這科的主幹，不必每次重掃資料夾。寫報告時，圖譜還能提示概念之間的論證順序，減少段落跳躍。這一課完成後，你會能解釋概念關係，而不只是背定義句子。請把校正後的圖存成 final，並註明對應的課堂／PDF 來源版本，方便考前與組員協作。此外，請把本課成果視為筆記系統的一層：raw 捕捉、AI 整理、你的校对 final，三者分開保存。每次完成後花三分鐘寫下「下次可更快的一步」，讓流程可持續迭代。若與同學協作，只分享 final 與公開允許的資料，不分享含隱私的錄音或未脱敏逐字稿。當你能穩定輸出可追溯、可複習、可回流的筆記，AI 才真正提高學習效率，而不是增加數位堆積。心智圖的中心應是問題或決策，而不是課本封面標題；標題太寬會讓分支失去方向。關係詞請寫清楚：包含、導致、對比、例外、先備於，避免只畫線不寫關係。每個一級分支建議對應一個可複習的子問題；葉節點才放公式、例子與頁碼。若節點超過一屏仍看不完，代表還沒刪；考前圖必須能在十五分鐘走完主路徑。把圖與筆記雙向連結：圖負責地圖，筆記負責細節，兩者缺一不可。組專題時可用同一張圖分工：每人負責一條分支並回流定義，避免各寫各的。月考前只更新易錯與對比分支，不必重畫整張圖，維持知識圖譜的版本連續性。",
-      "enConcept": "Mind maps and lightweight knowledge graphs reveal relations and review paths. Start from a central question, attach nodes from your notes, label relation types, and verify AI-suggested links. Connect nodes back to Notion/Obsidian pages when possible.",
-      "zhCaseStudy": "情境案例：經濟系小芝微積分相關章節一直背公式仍錯。她把「何時用哪個定理」當中心問題，請 AI 依她的課堂筆記草稿生出分支，自己刪掉兩條不符合老師講法的箭頭，補上「適用條件」節點。考前她不重抄筆記，只走自己定的 15 分鐘路徑：條件→定理→反例→兩題。錯題明顯下降。她也在 Obsidian 把節點連回原筆記，之後報告要引用定義時能一路點回去。",
-      "enCaseStudy": "Xiaozhi rebuilt calculus review around “which theorem when,” corrected AI-suggested links, followed a 15-minute path, and linked nodes back to notes for later citation.",
-      "zhWorkflow": [
-        "選定中心問題（可考、可解釋）",
-        "從既有筆記抽出 8-20 個節點",
-        "請 AI 建議分支與關係，再人工校正",
-        "標註關係類型與必經節點",
-        "設計 15 分鐘複習路徑並自測"
-      ],
-      "enWorkflow": [
-        "Choose a central question",
-        "Extract 8–20 nodes from existing notes",
-        "Ask AI for branches/relations, then correct them",
-        "Label relation types and must-pass nodes",
-        "Design a 15-minute review path with self-checks"
-      ],
-      "zhCommonMistakes": [
-        "中心放太寬的課程名",
-        "節點過多變成另一篇長文",
-        "不校正 AI 的錯誤關係",
-        "圖與原始筆記沒有連結"
-      ],
-      "enCommonMistakes": [
-        "Using an overly broad course title as the center",
-        "Too many nodes becoming another essay",
-        "Accepting false AI relations",
-        "Leaving the map unlinked from source notes"
-      ],
-      "zhExcellentExample": "優秀心智圖：中心問題清楚、分支不超過主要路徑、關係有標籤、附複習路徑與 3 題自測；並能指出兩個「易混概念對比」。",
-      "enExcellentExample": "A strong map has a sharp center, labeled relations, a review path, three self-check questions, and at least one contrast pair.",
-      "zhPrompt": "【Prompt 1｜心智圖架構師】\n請依我的筆記草稿設計心智圖文字版（可轉繪圖）。\n中心問題：［填寫］\n筆記：\n（貼上）\n請輸出：中心、一級分支、二級節點、關係標籤（屬於／導致／對比／條件）、以及容易連错的地方警告。不要新增筆記中沒有依據的概念。",
-      "enPrompt": "[Prompt 1 | Mind-Map Architect] Build a text mind map from my notes with relation labels and false-link warnings. Do not invent unsupported concepts.",
-      "zhCoachPrompt": "【Prompt 2｜易混概念對比】\n在我的主題中，請找出 2 組最易混淆的概念對，說明差異、共用條件與一個判別句。並告訴我應放在心智圖的哪兩個節點旁。",
-      "enCoachPrompt": "[Prompt 2 | Contrast Pairs] Find two easy-to-confuse concept pairs, explain differences, and where to place them on the map.",
-      "zhFeedbackPrompt": "【Prompt 3｜心智圖驗收】\n以下是我的心智圖文字版與複習路徑：\n（貼上）\n請評分：中心是否可考、關係是否正確、路徑是否 15 分鐘可走完、是否過載。給精簡版結構。",
-      "enFeedbackPrompt": "[Prompt 3 | Map Review] Score center quality, relation accuracy, 15-minute path fit, and overload; provide a leaner structure.",
-      "zhExample": "中心：何時用獨立樣本 t 檢定？\n分支：前提→統計量→解讀→對比（配對t）→常見錯法；路徑：前提檢查→公式意義→對比→兩題自測。",
-      "enExample": "Center: when to use an independent-samples t-test? Branches: assumptions → statistic → interpretation → contrast with paired t → common errors.",
-      "zhPractice": "選一個你正在學的主題。；用既有筆記抽節點。；AI 產架構後人工校正。；補上易混對比與複習路徑。；Challenge：不看原筆記，只看圖講解 3 分鐘給同學聽，請對方指出跳躍處。",
-      "enPractice": "Pick one topic.；Extract nodes.；Correct an AI draft map.；Add contrasts and a review path.；Challenge: explain for 3 minutes using only the map.",
-      "zhQuizItems": [
-        {
-          "q": "心智圖用在大學筆記時，核心價值是？",
-          "options": [
-            "把字變小、塞更多內容",
-            "呈現概念關係與複習路徑，而不只是條列",
-            "取代所有公式推導",
-            "避免任何細節"
-          ],
-          "answer": 1,
-          "explain": "心智圖強在關係與路徑，不是壓縮字數比賽。"
-        },
-        {
-          "q": "用 AI 產生心智圖後，你最該檢查什麼？",
-          "options": [
-            "顏色是否好看",
-            "分支關係是否符合講義／課堂原意，有無錯誤連結",
-            "能不能直接交作業不改",
-            "節點是否越多越好"
-          ],
-          "answer": 1,
-          "explain": "錯誤關係會讓複習記錯結構。"
-        },
-        {
-          "q": "知識圖譜相對一般清單，多了什麼？",
-          "options": [
-            "只有更長段落",
-            "概念之間的關係類型（如「導致」「屬於」「對比」）",
-            "必須手寫藝術字",
-            "不能連接例子"
-          ],
-          "answer": 1,
-          "explain": "圖譜強調節點與關係類型。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "What is the core value of mind maps for university notes?",
-          "options": [
-            "Shrink text to cram more words",
-            "Show concept relations and a review path, not only a list",
-            "Replace all derivations",
-            "Avoid all details"
-          ],
-          "answer": 1,
-          "explain": "Relations and paths matter most."
-        },
-        {
-          "q": "After AI drafts a mind map, you should mainly check?",
-          "options": [
-            "Whether colors look nice",
-            "Whether relations match the lecture/PDF and no false links exist",
-            "Whether you can submit without edits",
-            "Whether more nodes are always better"
-          ],
-          "answer": 1,
-          "explain": "Wrong links create wrong understanding."
-        },
-        {
-          "q": "Compared with a flat list, a knowledge graph adds?",
-          "options": [
-            "Only longer paragraphs",
-            "Typed relations between concepts (causes, belongs-to, contrasts)",
-            "Mandatory calligraphy",
-            "A ban on examples"
-          ],
-          "answer": 1,
-          "explain": "Graphs encode relation types."
-        }
-      ],
-      "zhNotePrompt": "貼上心智圖文字版、兩組易混概念，以及你的 15 分鐘複習路徑。",
-      "enNotePrompt": "Paste the text map, two contrast pairs, and your 15-minute path.",
-      "zhDeliverableChecklist": [
-        "完成中心問題",
-        "校正後的分支與關係",
-        "至少一組易混對比",
-        "15 分鐘複習路徑",
-        "節點可連回原筆記"
-      ],
-      "enDeliverableChecklist": [
-        "Center set",
-        "Corrected relations",
-        "At least one contrast pair",
-        "15-minute path",
-        "Nodes link back to notes"
-      ],
-      "zhScorecard": [
-        "中心清楚",
-        "關係正確",
-        "可講解",
-        "路徑可行",
-        "與筆記連結"
-      ],
-      "enScorecard": [
-        "Center clarity",
-        "Relation accuracy",
-        "Explainability",
-        "Path feasibility",
-        "Note linking"
-      ],
-      "resources": [
-        {
-          "name": "Obsidian",
-          "url": "https://obsidian.md",
-          "note": "雙向連結與圖譜檢視"
-        },
-        {
-          "name": "Notion",
-          "url": "https://www.notion.so",
-          "note": "用資料庫／頁面連結模擬知識圖譜"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "由筆記生成文字心智圖草稿"
-        },
-        {
-          "name": "Whimsical",
-          "url": "https://whimsical.com",
-          "note": "可快速把文字結構畫成心智圖"
-        }
-      ],
-      "challenge": "把第12課的 PDF 重點卡轉成一張心智圖，刪到只剩考前真正用得到的節點，並寫下你刪除的原則。",
-      "id": "research-competition-L6",
-      "lessonKey": "research-competition-L6"
+    "enCaseStudyBlocks": {
+      "problem": "A sophomore wants to “study campus food-delivery platforms” but cannot say who or what behavior.",
+      "wrong": "Ask AI for ten prize-winning AI topics and treat “build a delivery app” as research.",
+      "right": "Specify population (dorm students ordering at night), phenomenon (how they decide to order), scope, and exclusions (not the platform’s source code).",
+      "result": "A Research Problem Definition ready for the next lesson."
     },
-    {
-      "id": "research-competition-L7",
-      "lessonKey": "research-competition-L7",
-      "zhTitle": "第7課：設計研究方法：問卷、訪談或資料收集架構",
-      "enTitle": "Lesson 7: Design research methods: survey, interview, or data collection",
-      "zhConcept": "這一課屬於研究／專題／競賽能力中的「方法設計」。你要把研究問題拆成子問題，再決定需要什麼證據，最後選擇問卷、訪談或既有資料分析。問卷適合可比較的態度與行為；訪談適合理解動機與脈絡；既有資料適合已有紀錄可分析的情況。\n\n方法說明至少包含：研究問題、選法理由、對象條件、題目或訪綱、預計分析方法、限制與倫理（知情同意、可退出、去識別）。AI 可幫你檢查誘導題、題目是否對齊子問題、選項是否互斥；但不可發明回覆數據，也不可略過倫理。本課產出的是可執行架構，不是已完成的統計結果。",
-      "enConcept": "Design methods from research questions: define evidence needs, then choose survey, interview, or existing records. Document rationale, population, instrument, analysis plan, limits, and ethics. AI can spot leading items and misalignment; it must not invent responses or skip consent.",
-      "zhPrompt": "請擔任研究方法助教。研究問題：【】。子問題：【】。對象：【】。時間限制：【】。\n\n請建議適合的資料收集方法與理由，列出證據需求，草擬問卷或訪綱（每題標註對應子問題），指出可能的誘導題，並提醒知情同意與去識別做法。禁止產生假數據或假訪談逐字稿。用繁體中文。",
-      "enPrompt": "Act as a research-methods TA. Question: []. Sub-questions: []. Population: []. Time: []. Recommend a method, list evidence needs, draft a survey or interview guide mapped to sub-questions, flag leading items, and note consent/de-identification. Invent no data or transcripts.",
-      "zhExample": "問題「角色不清如何影響專題進度」→ 訪談加短問卷。訪綱含：如何分工、衝突何時出現、延遲如何被討論、誰做最終決定。問卷可補「每週有效溝通次數」等可比較題。",
-      "enExample": "For role ambiguity and project delay, combine interviews on coordination moments with a short survey on weekly communication frequency.",
-      "zhPractice": "寫出研究問題與 3 個子問題。；決定方法並寫選法理由。；產出問卷或訪綱初稿並對齊子問題。；刪改誘導題與雙重問題。；補上倫理、限制與試訪計畫，完成方法說明一頁。",
-      "enPractice": "Write the question and 3 sub-questions.；Choose a method with rationale.；Draft the instrument mapped to sub-questions.；Remove leading/double-barreled items.；Add ethics, limits, and a pilot plan.",
-      "zhFeedbackPrompt": "你是一位研究方法助教。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 問題—方法一致性\n- 工具品質\n- 倫理完整度\n- 可執行性\n- 是否禁止假數據\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a research methods TA. Score 1-10 for: Question-method fit, Instrument quality, Ethics completeness, Executability, No fake data. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhQuizItems": [
+    "zhWorkflowSteps": [
+      {
+        "do": "寫下觀察到的現象與你能接觸的人",
+        "why": "沒有真實接觸就無法研究",
+        "input": "日常觀察、課、社團、宿舍",
+        "output": "現象草稿",
+        "check": "是否寫出具體的人與情境"
+      },
+      {
+        "do": "填寫對象、核心問題、範圍、不研究什麼",
+        "why": "範圍不清楚後面全會漂",
+        "input": "現象草稿",
+        "output": "定義表骨架",
+        "check": "能否刪掉至少一項不研究什麼"
+      },
+      {
+        "do": "用主 Prompt 產出定義表",
+        "why": "把模糊興趣收成一頁",
+        "input": "上一步內容",
+        "output": "定義表初稿",
+        "check": "是否含可行性燈號"
+      },
+      {
+        "do": "刪除虛構統計與保證得獎句",
+        "why": "AI 可能發明重要性",
+        "input": "初稿",
+        "output": "已清理版本",
+        "check": "是否沒有未查證數字"
+      },
+      {
+        "do": "存入成果包",
+        "why": "後續課堂沿用",
+        "input": "定稿",
+        "output": "成果包項目",
+        "check": "重新整理後是否還在"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Write the phenomenon and people you can access",
+        "why": "No access means no study",
+        "input": "Daily observation, class, club, dorm",
+        "output": "Phenomenon draft",
+        "check": "Did you name people and a setting?"
+      },
+      {
+        "do": "Fill population, core problem, scope, exclusions",
+        "why": "Unclear scope drifts later work",
+        "input": "Draft",
+        "output": "Definition skeleton",
+        "check": "Can you drop at least one out-of-scope item?"
+      },
+      {
+        "do": "Generate the definition with the main prompt",
+        "why": "Turn a vague interest into one page",
+        "input": "Prior notes",
+        "output": "Draft sheet",
+        "check": "Includes feasibility lights?"
+      },
+      {
+        "do": "Remove invented stats and prize promises",
+        "why": "AI may invent importance",
+        "input": "Draft",
+        "output": "Clean version",
+        "check": "No unverified numbers?"
+      },
+      {
+        "do": "Save to the package",
+        "why": "Later lessons reuse this",
+        "input": "Final",
+        "output": "Package item",
+        "check": "Still there after refresh?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "開始選題前，先把現象收成可研究問題時使用",
+      "fields": [
+        "[請填寫年級與科系]",
+        "[請填寫觀察到的現象]",
+        "[請填寫研究問題]"
+      ],
+      "body": "你是大學研究問題教練，不是代寫者，也不可幫學生發明研究價值或田野。\n\n我的背景：\n- 年級／科系：[請填寫年級與科系]\n- 觀察到的現象：[請填寫觀察到的現象]\n- 我想研究什麼（草稿）：[請填寫研究問題]\n- 可能接觸到的對象或資料：[請填寫]\n- 一學期可投入時間：[請填寫]\n- 這次是課堂專題／競賽／個人研究：[請填寫]\n\n任務：產出「研究問題定義表」，必須包含：\n1) 我想研究什麼（1 段，禁止空泛的「我想做 AI 題目」）\n2) 為什麼值得研究（只根據我提供的觀察；不得虛構社會重要性或統計）\n3) 目標對象\n4) 核心問題（可追問的現象，不是產品功能清單）\n5) 問題範圍（對象／時間／情境）\n6) 不研究什麼\n7) 可行性燈號：綠／黃／紅，並說明缺了什麼真實資料路徑\n\n輸出格式：表格 + 條列。每個主張旁標「根據你提供的資料」或「需自行查證」。\n不要保證競賽得獎，不要把題目改寫成 App 規格。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "expected": "一份含對象、核心問題、範圍、不研究什麼與可行性的定義表",
+      "revisionReminder": "請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "extensions": [
         {
-          "q": "選方法前應先釐清？",
-          "options": [
-            "研究問題與證據需求",
-            "先決定題數越多越好",
-            "先寫結論"
-          ],
-          "answer": 0,
-          "explain": "方法服務問題。"
-        },
-        {
-          "q": "誘導題的問題是？",
-          "options": [
-            "暗示「正確答案」扭曲回答",
-            "讓受訪者更容易理解",
-            "一定提高回收率"
-          ],
-          "answer": 0,
-          "explain": "傷害效度。"
-        },
-        {
-          "q": "倫理至少應包含？",
-          "options": [
-            "知情同意與可退出",
-            "強迫填完所有題",
-            "公開真實姓名才權威"
-          ],
-          "answer": 0,
-          "explain": "保護參與者。"
-        },
-        {
-          "q": "AI 可協助？",
-          "options": [
-            "檢查對齊與誘導題",
-            "直接捏造訪談結果",
-            "略過限制不寫"
-          ],
-          "answer": 0,
-          "explain": "品質檢查。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "方法說明＋工具初稿",
-            "完整統計報告",
-            "已發表論文"
-          ],
-          "answer": 0,
-          "explain": "架構而非結果。"
+          "title": "延伸：範圍過大檢查",
+          "body": "請根據我貼上的研究問題定義表，指出任何過大、缺對象、或缺真實資料路徑的句子，改成可一學期完成的範圍。不要新增我沒寫的現象，也不要虛構訪談已經完成。"
         }
-      ],
-      "enQuizItems": [
-        {
-          "q": "選方法前應先釐清？",
-          "options": [
-            "研究問題與證據需求",
-            "先決定題數越多越好",
-            "先寫結論"
-          ],
-          "answer": 0,
-          "explain": "方法服務問題。"
-        },
-        {
-          "q": "誘導題的問題是？",
-          "options": [
-            "暗示「正確答案」扭曲回答",
-            "讓受訪者更容易理解",
-            "一定提高回收率"
-          ],
-          "answer": 0,
-          "explain": "傷害效度。"
-        },
-        {
-          "q": "倫理至少應包含？",
-          "options": [
-            "知情同意與可退出",
-            "強迫填完所有題",
-            "公開真實姓名才權威"
-          ],
-          "answer": 0,
-          "explain": "保護參與者。"
-        },
-        {
-          "q": "AI 可協助？",
-          "options": [
-            "檢查對齊與誘導題",
-            "直接捏造訪談結果",
-            "略過限制不寫"
-          ],
-          "answer": 0,
-          "explain": "品質檢查。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "方法說明＋工具初稿",
-            "完整統計報告",
-            "已發表論文"
-          ],
-          "answer": 0,
-          "explain": "架構而非結果。"
-        }
-      ],
-      "zhOutcome": "產出一頁研究方法說明，以及一份對齊子問題的問卷或訪談大綱初稿。",
-      "enOutcome": "Produce a one-page methods note plus a survey or interview guide aligned to sub-questions.",
-      "zhValueTip": "把研究問題轉成可執行的問卷或訪談架構，並寫清倫理與限制。",
-      "enValueTip": "Turn research questions into an executable survey or interview plan with ethics and limits.",
-      "zhCaseStudy": "教育系學生研究「同儕回饋是否提升修改意願」。他先寫子問題：誰給回饋、什麼內容、何時修改、何時忽略。方法採「短問卷＋深度訪談」。AI 幫他刪掉「你當然會因為回饋而變得更好，對嗎？」這類誘導題，並把訪綱對齊「何時修改／何時忽略」。倫理段落寫明：自願參與、可跳過敏感題、報告只呈現代號。",
-      "enCaseStudy": "An education student studying peer feedback chose a short survey plus interviews, removed leading items with AI help, aligned the guide to when students revise versus ignore feedback, and documented consent and de-identification.",
-      "zhExcellentExample": "一頁方法說明＋工具初稿：每題對應子問題、對象條件清楚、含前測或試訪計畫、倫理與限制各至少三點。",
-      "enExcellentExample": "One-page methods + instrument draft with each item mapped to a sub-question, clear population, pilot plan, and at least three ethics and three limitation notes.",
-      "zhWorkflow": [
-        "確認研究問題與子問題",
-        "列出證據需求",
-        "選擇方法並寫理由",
-        "草擬工具並對齊子問題",
-        "檢查誘導與雙重問題",
-        "補倫理、限制與試訪"
-      ],
-      "enWorkflow": [
-        "Confirm questions",
-        "List evidence needs",
-        "Choose method with rationale",
-        "Draft instrument mapped to sub-questions",
-        "Check leading items",
-        "Add ethics, limits, pilot"
-      ],
-      "zhCommonMistakes": [
-        "方法與問題無關",
-        "出現誘導題或雙重問題",
-        "用假資料假裝已完成收集",
-        "忽略知情同意與去識別",
-        "題目無法對應任何分析方式"
-      ],
-      "enCommonMistakes": [
-        "Method unrelated to questions",
-        "Leading or double-barreled items",
-        "Fake data as if collected",
-        "Skipping consent/de-identification",
-        "Items that cannot be analyzed"
-      ],
-      "zhDeliverableChecklist": [
-        "方法理由",
-        "工具初稿",
-        "題目對齊子問題",
-        "倫理與限制",
-        "試訪或前測計畫"
-      ],
-      "enDeliverableChecklist": [
-        "Method rationale",
-        "Instrument draft",
-        "Items mapped to sub-questions",
-        "Ethics and limits",
-        "Pilot plan"
-      ],
-      "zhScorecard": [
-        "問題—方法一致性",
-        "工具品質",
-        "倫理完整度",
-        "可執行性",
-        "是否禁止假數據"
-      ],
-      "enScorecard": [
-        "Question-method fit",
-        "Instrument quality",
-        "Ethics completeness",
-        "Executability",
-        "No fake data"
-      ],
-      "zhNotePrompt": "貼上方法說明與問卷／訪綱初稿。",
-      "enNotePrompt": "Paste your methods note and survey/interview draft.",
-      "zhCoachPrompt": "請檢查我的方法是否對齊研究問題，並標出誘導題與缺漏的倫理項目。",
-      "enCoachPrompt": "Check method alignment, leading items, and missing ethics notes.",
-      "title": "設計研究方法：問卷、訪談或資料收集架構",
-      "description": "把研究問題轉成可執行的問卷或訪談架構，並寫清倫理與限制。",
-      "goal": "產出一頁研究方法說明，以及一份對齊子問題的問卷或訪談大綱初稿。"
+      ]
     },
-    {
-      "icon": "✅",
-      "title": "整理分析結果，寫出專題論點結構",
-      "description": "整合組員內容、統一格式語氣引用與視覺，完成最終版並彩排與模擬提問，產出可上台成果。",
-      "goal": "我的整合檢核表＋最終版小組成果（報告／簡報）可發表包",
-      "estimatedTime": "60-90 分鐘",
-      "difficulty": "中階",
-      "tags": [
-        "成果整合",
-        "統一風格",
-        "彩排",
-        "Chapter9"
+    "enPromptPack": {
+      "when": "Use before choosing a topic, to turn a phenomenon into a researchable problem",
+      "fields": [
+        "[Enter year and major]",
+        "[Enter observed phenomenon]",
+        "[Enter research question]"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 8,
-      "chapterZh": "AI 團隊協作與專案管理",
-      "chapterEn": "AI Team Collaboration and Project Management",
-      "zhTitle": "第8課：整理分析結果，寫出專題論點結構",
-      "enTitle": "Lesson 8: Organize findings into a project argument structure",
-      "zhValueTip": "整合組員內容、統一格式語氣引用與視覺，完成最終版並彩排與模擬提問，產出可上台成果。",
-      "enValueTip": "Integrate teammates’ work into one voice and style, finalize, rehearse, and mock instructor Q&A for a stage-ready team deliverable.",
-      "zhOutcome": "我的整合檢核表＋最終版小組成果（報告／簡報）可發表包",
-      "enOutcome": "My Integration Checklist + Final Team Deliverable Pack (report/slides)",
-      "zhConcept": "Chapter 9 收束在「可上台的單一成果」。整合不是把檔案貼在一起，而是統一標題層級、用語、人稱與時態、引用格式、圖表樣式，並補邏輯斷裂、刪重複。流程：凍結各部 raw→統整者依大綱拼接→AI 協助找重複／語氣不一致／斷裂→人工決定保留誰的表述→統一視覺母片→輸出 final→彩排→模擬老師提問。AI 可比較多版段落並建議融合句，但不可擅自當最終決策；衝突觀點要標待討論，不可捏造「全組已同意某結論」。引用與數據必須可追溯到組員來源；缺來源就刪或待補，不可用模型補假文獻。簡報彩排對時長與交接；模擬提問準備方法、限制、分工相關問題（誰做哪部分也要答得出）。完整成果整合流程寫進檢核表：格式、語氣、引用、圖表、頁碼、檔名、權限、備份。連回 Chapter 4／5／8：內容品質、簡報可講性、檔案與溝通規範，在此合併交卷。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。當分工、會議、任務、規劃與整合形成閉環，換專題也能複製同一套協作作業系統。跨系或競賽情境同樣適用：先對齊目標與責任，再談工具；工具只是載體，紀律才是產能。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。當分工、會議、任務、規劃與整合形成閉環，換專題也能複製同一套協作作業系統。跨系或競賽情境同樣適用：先對齊目標與責任，再談工具；工具只是載體，紀律才是產能。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。當分工、會議、任務、規劃與整合形成閉環，換專題也能複製同一套協作作業系統。跨系或競賽情境同樣適用：先對齊目標與責任，再談工具；工具只是載體，紀律才是產能。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。",
-      "enConcept": "Freeze parts, stitch by outline, use AI to flag inconsistency/duplication/gaps, humans resolve voice, unify visuals, finalize, rehearse, and mock Q&A—without inventing consensus or sources.",
-      "zhCaseStudy": "四人報告初拼時出現三種「因此」與兩套 APA。統整者用檢核表＋AI 差異報告，開會表決用語與引用。簡報母片統一後彩排兩次，模擬問到「樣本限制」由研究 R 回答。上台流暢，老師稱像同一組寫的。",
-      "enCaseStudy": "A team used an integration checklist and voted on voice/citations, then rehearsed Q&A so the researcher owned the sampling limit question.",
-      "zhWorkflow": [
-        "收集各部 raw 並凍結版本",
-        "依大綱整合並去重補邏輯",
-        "統一格式／語氣／引用／視覺",
-        "鎖定 final 與備份",
-        "彩排＋模擬提問並修正"
-      ],
-      "enWorkflow": [
-        "Collect and freeze part files",
-        "Integrate by outline; dedupe and fix gaps",
-        "Unify format, voice, citations, visuals",
-        "Lock final + backup",
-        "Rehearse and mock Q&A, then patch"
-      ],
-      "zhCommonMistakes": [
-        "只合併檔案不統一",
-        "AI 假造共識與引用",
-        "不彩排交接",
-        "找不到 final"
-      ],
-      "enCommonMistakes": [
-        "Merge without unification",
-        "AI-faked consensus/citations",
-        "No handoff rehearsal",
-        "Lost final file"
-      ],
-      "zhExcellentExample": "可發表包：單一語氣與格式、引用一致、視覺統一、final 明確、彩排紀錄與 Q&A 卡齊全。",
-      "enExcellentExample": "A stage-ready pack has one voice/format, consistent citations, unified visuals, a clear final, rehearsal notes, and Q&A cards.",
-      "zhPrompt": "【Prompt 1｜多組員文字整合助手】\n大綱：\n（貼上）\n組員段落（標作者）：\n（貼上）\n請指出：重複、矛盾、語氣不一致、邏輯斷裂；給融合建議句並標「建議」。不要刪除原始作者標記；不要捏造全組已決議的結論；資訊不足列待確認。",
-      "enPrompt": "[Prompt 1 | Multi-author Integration] Flag duplication, contradictions, voice drift, and gaps; suggest merges as suggestions only—keep authorship; invent no consensus.",
-      "zhCoachPrompt": "【Prompt 2｜統一語氣與格式／引用】\n目標格式：［APA／系上規定］；目標語氣：［ ］\n問題片段：\n（貼上）\n請給統一規則清單與改寫示例。不要新增未提供的文獻；缺書目標待補。",
-      "enCoachPrompt": "[Prompt 2 | Voice/Format/Citation Unifier] Provide rules and rewrite examples; add no new sources; mark missing bibliography fields.",
-      "zhFeedbackPrompt": "【Prompt 3｜模擬老師提問小組成果】\n成果摘要與分工：\n（貼上）\n請一次一題追問方法、限制、證據、分工。結束給薄弱點清單。禁止要求回答你們文件中不存在且被捏造的數據。",
-      "enFeedbackPrompt": "[Prompt 3 | Instructor Team Q&A] Ask one question at a time on method/limits/evidence/roles; no fabricated data demands.",
-      "zhExample": "矛盾：A 寫「顯著提升」、B 寫「差異不大」→標待討論。｜統一後：報告改為「在樣本限制下呈現上升趨勢，不作過度推論」。",
-      "enExample": "A contradiction flagged for discussion, then resolved into a cautious, scope-honest claim.",
-      "zhPractice": "對真實小組稿跑整合檢核表。；完成統一與 final 鎖定。；彩排並模擬至少 8 題。；Challenge：請組外同學只聽 3 分鐘，問「你們的結論一句話是什麼？」若答不出，回去改主張句。",
-      "enPractice": "Run the integration checklist on a real draft.；Unify and lock final.；Rehearse with ≥8 mock Qs.；Challenge: an outsider must restate your one-sentence conclusion after 3 minutes.",
-      "zhQuizItems": [
+      "body": "You are a university research-question coach—not a ghostwriter. Do not invent research value or fieldwork.\n\nMy background:\n- Year / major: [Enter year and major]\n- Observed phenomenon: [Enter observed phenomenon]\n- Draft of what I want to study: [Enter research question]\n- People or data I can actually access: [Enter access]\n- Time this semester: [Enter available time]\n- Course project / competition / personal research: [Enter context]\n\nTask: Produce a Research Problem Definition with:\n1) What I want to study (not “I want to do an AI topic”)\n2) Why it may be worth studying (only from my observations; invent no statistics)\n3) Target population\n4) Core problem (a question about a phenomenon, not a product spec)\n5) Scope (who / when / setting)\n6) What I will not study\n7) Feasibility lights green/yellow/red and missing real data paths\n\nFormat: tables plus bullets. Label claims as “based on your input” or “verify yourself”.\nNo prize guarantees; do not rewrite the topic into app features.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "expected": "A definition sheet with population, core problem, scope, exclusions, and feasibility",
+      "revisionReminder": "Use the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "extensions": [
         {
-          "q": "小組成果整合最核心的是？",
-          "options": [
-            "把檔案打包成 zip 即可",
-            "統一邏輯、語氣、格式、引用與視覺並鎖定 final",
-            "讓 AI 任意改結論",
-            "每人保留自己的最終版互不相讓"
-          ],
-          "answer": 1,
-          "explain": "整合是單一可發表真相來源。"
-        },
-        {
-          "q": "發現組員結論互相矛盾時應？",
-          "options": [
-            "讓 AI 偷偷改成同一句並假裝原本一致",
-            "標示矛盾並開會決定，記錄決策",
-            "隨機刪掉一人貢獻",
-            "忽略差異直接上台"
-          ],
-          "answer": 1,
-          "explain": "矛盾要透明決策，不造假共識。"
-        },
-        {
-          "q": "模擬老師提問的目的是？",
-          "options": [
-            "刁難組員關係",
-            "壓力測試論證、限制與分工防守",
-            "取代所有內容修正",
-            "練習編造沒做過的方法"
-          ],
-          "answer": 1,
-          "explain": "問答是為防禦真實成果。"
+          "title": "Extension: scope check",
+          "body": "From my Research Problem Definition, flag anything too broad, missing a population, or missing a real data path. Narrow to a one-semester scope. Do not add phenomena I did not write or invent completed interviews."
         }
-      ],
-      "enQuizItems": [
-        {
-          "q": "Core of team deliverable integration?",
-          "options": [
-            "Just zip the files",
-            "Unify logic, voice, format, citations, visuals and lock a final",
-            "Let AI freely change conclusions",
-            "Keep competing finals"
-          ],
-          "answer": 1,
-          "explain": "Integration creates one publishable source of truth."
-        },
-        {
-          "q": "If teammates’ conclusions conflict, you should:",
-          "options": [
-            "Have AI silently rewrite history",
-            "Flag the conflict, decide in meeting, and log it",
-            "Randomly delete one person",
-            "Ignore and present anyway"
-          ],
-          "answer": 1,
-          "explain": "Resolve conflicts transparently."
-        },
-        {
-          "q": "Purpose of mock instructor Q&A?",
-          "options": [
-            "Damage relationships",
-            "Pressure-test argument, limits, and role defense",
-            "Replace all content work",
-            "Practice inventing methods"
-          ],
-          "answer": 1,
-          "explain": "Q&A defends real work."
-        }
-      ],
-      "zhNotePrompt": "列出整合時修掉的 3 類問題（重複／語氣／引用）與 final 檔名。",
-      "enNotePrompt": "List three integration fixes (dupe/voice/citation) and the final filename.",
-      "zhDeliverableChecklist": [
-        "整合檢核全勾",
-        "語氣格式引用統一",
-        "視覺一致",
-        "final 與備份就緒",
-        "彩排與模擬提問完成"
-      ],
-      "enDeliverableChecklist": [
-        "Integration checklist complete",
-        "Voice/format/citations unified",
-        "Visuals consistent",
-        "Final + backup ready",
-        "Rehearsal + mock Q&A done"
-      ],
-      "zhScorecard": [
-        "單一聲音",
-        "邏輯完整",
-        "引用可靠",
-        "可上台",
-        "可防守"
-      ],
-      "enScorecard": [
-        "One voice",
-        "Logical continuity",
-        "Reliable citations",
-        "Stage-ready",
-        "Defendable"
-      ],
-      "resources": [
-        {
-          "name": "Google Docs",
-          "url": "https://docs.google.com",
-          "note": "共編整合與建議模式"
-        },
-        {
-          "name": "Google Drive",
-          "url": "https://drive.google.com",
-          "note": "final 與版本存放"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "去重、語氣差異與模擬提問"
-        },
-        {
-          "name": "NotebookLM",
-          "url": "https://notebooklm.google.com",
-          "note": "對組內來源做 grounded 檢查"
-        },
-        {
-          "name": "Notion",
-          "url": "https://www.notion.so",
-          "note": "整合檢核表與 Q&A 卡"
-        },
-        {
-          "name": "Slack",
-          "url": "https://slack.com",
-          "note": "整合決策與確認串（若團隊使用）"
-        }
-      ],
-      "challenge": "在截止前完成真實小組成果的整合 final，並進行一次完整彩排＋模擬提問；會後更新檢核表與錯漏清單。",
-      "id": "research-competition-L8",
-      "lessonKey": "research-competition-L8"
+      ]
     },
-    {
-      "icon": "⚡",
-      "title": "製作研究／競賽提案簡報",
-      "description": "用 Gamma 依故事線快速生成簡報初稿，再人工改主張、刪灌水、補證據與來源。",
-      "goal": "我的 Gamma 簡報初稿（已對齊架構）＋人工修改清單",
-      "estimatedTime": "55-75 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "Gamma",
-        "AI簡報",
-        "初稿",
-        "Chapter5"
-      ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 4,
-      "chapterZh": "AI 做簡報",
-      "chapterEn": "AI Presentations",
-      "zhTitle": "第9課：製作研究／競賽提案簡報",
-      "enTitle": "Lesson 9: Build research or competition proposal slides",
-      "zhValueTip": "用 Gamma 依故事線快速生成簡報初稿，再人工改主張、刪灌水、補證據與來源。",
-      "enValueTip": "Generate a Gamma first draft from your storyline, then human-edit claims, cut fluff, and add evidence/sources.",
-      "zhOutcome": "我的 Gamma 簡報初稿（已對齊架構）＋人工修改清單",
-      "enOutcome": "My Gamma Draft (structure-aligned) + Human Edit List",
-      "zhConcept": "Gamma 的強項是「從大綱快速長出可編輯簡報」，適合大學生在架構鎖定後加速初稿，而不是從一句模糊主題幻想全套內容。正確輸入是第21課的頁面主張地圖：主訊息、每頁主張、要點、時長、聽眾。錯誤輸入是「幫我做一個很厲害的期末簡報」——輸出往往空泛且難改。生成後立刻做三輪人工：1) 結構是否對齊故事線；2) 每頁是否仍單主張；3) 數據／引用是否真實可追溯。AI 產生的數字預設不可信。把 Gamma 當排版助手：你負責論點與證據，它負責區塊、層次與草稿文案。文案要再壓短，投影片不是講稿。實務技巧：先生成較多頁再刪，比生成太少硬凑更快；但最終頁數必須回到時間預算。善用卡片合併、標題改寫、重點條列。若課程要求 Google Slides／PowerPoint，生成後再匯出或重做關鍵頁，不要假設老師一定接受 Gamma 連結。視覺上先求清楚：對比足夠、字級可遠讀、一頁一個焦點。精緻美化可留到 Canva 課，但不要留到上台前一小時。小組使用時，一人負責在 Gamma 長初稿，全組依修改清單投票刪頁，避免「誰做誰說了算」的灌水頁。完成標準不是「看起來像AI做的很炫」，而是「離題零、超時風險低、主張可講、來源可查」。也請保存產生前的 prompt 與 structure-v1，方便復盤哪種輸入最穩，形成可重複的簡報流水線。遇到 Gamma 自動加的裝飾字或口號，若無法對應證據就刪。大學簡報寧願樸素正確，也不要華麗不實。把每頁講者備註寫上：你要講的 2-3 句，不要把備註寫成全文。這樣第24課寫講稿會更快。若主題涉及敏感數據，先確認能否公開；不能公開就改用示意區間或課堂允許的資料。此外，請把本課產出存成 raw 與 final：raw 保留生成紀錄與草稿，final 是可進入下一課或可上台的版本，方便追溯與組員交接。每次結束寫三行日誌：今天最有效的一步、仍卡關之處、明天第一個行動，並存進 AI Workspace。若與同學協作，先合意分工、檔名與 AI 使用界線；只分享 final，不把未核對數據當定案。當你能重複「架構→生成→美化→講稿→模擬」流水線，換題目也能穩定產出可上台簡報，這才是本章目標。也請收集老師現場回饋，把扣分點寫回下一份簡報規格書的防呆欄，讓系統越用越強。此外，請把本課產出存成 raw 與 final：raw 保留生成紀錄與草稿，final 是可進入下一課或可上台的版本，方便追溯與組員交接。每次結束寫三行日誌：今天最有效的一步、仍卡關之處、明天第一個行動，並存進 AI Workspace。若與同學協作，先合意分工、檔名與 AI 使用界線；只分享 final，不把未核對數據當定案。",
-      "enConcept": "Use Gamma after your claim map is locked. Feed structured inputs, then human-edit for alignment, one claim per slide, and verified evidence. Treat Gamma as a drafting/layout accelerator, not a source of truth.",
-      "zhCaseStudy": "情境案例：資工系阿廷直接對 Gamma 說「做區塊鏈期末報告簡報」，得到很多潮流詞但沒有他們專題的架構。後來他貼上 10 頁主張地圖與 8 分鐘時長，生成後刪 4 頁、改 3 個標題、補 2 張真實實驗圖。助教回饋「終於知道你們做了什麼」。阿廷把「先架構後 Gamma」寫進團隊規範。",
-      "enCaseStudy": "A-Ting’s vague Gamma prompt failed; a claim-map prompt plus human cuts and real figures made the talk clear.",
-      "zhWorkflow": [
-        "準備 structure-v1 與規格時長",
-        "用結構化 prompt 在 Gamma 生成初稿",
-        "對齊故事線：刪／併／改主張句",
-        "清除無來源數據，補真實圖表或標「示意」",
-        "輸出修改清單與可進入美化的草稿"
-      ],
-      "enWorkflow": [
-        "Prep structure-v1 and time limit",
-        "Generate in Gamma with a structured prompt",
-        "Align to storyline: cut/merge/rewrite claims",
-        "Remove unsourced numbers; add real figures",
-        "Save edit list and a beautify-ready draft"
-      ],
-      "zhCommonMistakes": [
-        "用一句空話生成整份簡報",
-        "不檢查 AI 數字與案例",
-        "生成後完全不刪頁",
-        "把投影片寫成微型論文"
-      ],
-      "enCommonMistakes": [
-        "One vague prompt for everything",
-        "Not verifying AI numbers",
-        "Never cutting slides",
-        "Turning slides into mini-papers"
-      ],
-      "zhExcellentExample": "優秀 Gamma 初稿：頁數符合時長、標題即主張、每頁文字可遠讀、無未核對數據、有修改清單記錄刪改理由。",
-      "enExcellentExample": "A strong Gamma draft fits time, uses claim titles, is readable from afar, has no unverified stats, and includes an edit log.",
-      "zhPrompt": "【Prompt 1｜Gamma 生成用結構化說明（可直接貼）】\n請依下列約束生成大學簡報大綱／內容（適合貼到 Gamma）：\n聽眾：［老師／同學］；時長：［N］分鐘；主訊息：［一句］\n頁面地圖：\n（貼上：頁碼｜主張｜要點｜視覺）\n要求：每頁一個主張；文字精簡；不要虛構數據；需要數字處標［待補資料］；結尾含結論與開放問題。",
-      "enPrompt": "[Prompt 1 | Gamma-Ready Structured Brief] Generate slides from my timed claim map; one claim/slide; no invented stats; mark [data needed].",
-      "zhCoachPrompt": "【Prompt 2｜Gamma 初稿瘦身編輯】\n以下是 Gamma 產生的各頁標題與重點：\n（貼上）\n時長：［N］分鐘\n請給刪頁／合併方案、改寫後的主張標題、以及每頁最多保留的 3 個子彈點。指出任何可疑的空泛口号或可能虛構的具體數字。",
-      "enCoachPrompt": "[Prompt 2 | Gamma Draft Slimmer] Propose cuts/merges, rewrite claim titles, cap 3 bullets/slide, and flag fluff or suspicious numbers.",
-      "zhFeedbackPrompt": "【Prompt 3｜初稿驗收】\nstructure-v1：\n（貼上）\n目前簡報頁面：\n（貼上）\n請評分：對齊架構、可講性、遠讀性、誠信風險。列出交到 Canva 前必改的 7 項。",
-      "enFeedbackPrompt": "[Prompt 3 | Draft QA] Score alignment, speakability, readability, integrity risk; list 7 must-fixes before Canva.",
-      "zhExample": "輸入含 P1-P10 主張後，Gamma 初稿 14 頁→刪至 10 頁；將「很多研究顯示提升 80%」改為「［待補資料］／改放自己問卷圖」。",
-      "enExample": "A 14-slide Gamma draft cut to 10; an unverifiable 80% claim replaced with pending data or the team’s own chart.",
-      "zhPractice": "用 structure-v1 在 Gamma 生成初稿。；完成刪頁與主張改寫。；清除或標記所有未核對數字。；Challenge：匯出或截圖 3 頁前後對照，寫下你為何刪／改，準備給組員審查。",
-      "enPractice": "Generate from structure-v1 in Gamma.；Cut and rewrite claims.；Remove/mark unverified numbers.；Challenge: show 3 before/after slides with edit reasons for peer review.",
-      "zhQuizItems": [
-        {
-          "q": "使用 Gamma 較正確的方式是？",
-          "options": [
-            "只給主題一句話，完全信任輸出",
-            "提供故事線與時長約束，生成後人工刪改並核對事實",
-            "生成後立刻上台，不需練習",
-            "把 AI 數字都當成已發表研究"
-          ],
-          "answer": 1,
-          "explain": "Gamma 加速初稿，判斷與核對仍是你的責任。"
-        },
-        {
-          "q": "發現投影片出現無法核對的「提升 73%」應？",
-          "options": [
-            "保留，因為看起來很有說服力",
-            "刪除、改成可追溯資料，或標成待補",
-            "改成更大的百分比",
-            "移到最後一頁就不算問題"
-          ],
-          "answer": 1,
-          "explain": "未核對數據不可上正式簡報。"
-        },
-        {
-          "q": "Gamma 初稿完成後，下一步通常是？",
-          "options": [
-            "對齊架構、瘦身、補證據，再進入美化",
-            "再隨機生成五個風格直到滿意",
-            "把文字加到每頁 200 字",
-            "刪掉所有標題"
-          ],
-          "answer": 0,
-          "explain": "先正確可講，再美化。"
+    "zhPracticeSteps": [
+      {
+        "task": "寫 2 個真實觀察現象（各 2–3 句）",
+        "standard": "必須是你看過的情境，不是 AI 編的",
+        "mistakes": "只寫「AI 很重要」",
+        "check": "有沒有時間、地點、人？"
+      },
+      {
+        "task": "完成定義表六欄",
+        "standard": "六欄皆有內容且有不研究什麼",
+        "mistakes": "六欄只重複同一句口號",
+        "check": "別人能否看出範圍？"
+      },
+      {
+        "task": "標可行性並寫缺什麼資料路徑",
+        "standard": "紅／黃要寫下一步最小行動",
+        "mistakes": "全綠但沒有任何可接觸對象",
+        "check": "一週內能否做最小驗證？"
+      },
+      {
+        "task": "把定稿存成研究問題定義表",
+        "standard": "成果名稱正確",
+        "mistakes": "空白儲存",
+        "check": "重新整理後仍看得到？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Write 2 real observed phenomena",
+        "standard": "Must be situations you saw, not AI fiction",
+        "mistakes": "Only “AI is important”",
+        "check": "Time, place, people?"
+      },
+      {
+        "task": "Complete all six definition fields",
+        "standard": "Includes exclusions",
+        "mistakes": "Slogan repeated six times",
+        "check": "Can a reader see the scope?"
+      },
+      {
+        "task": "Mark feasibility and missing data paths",
+        "standard": "Red/yellow need a next minimum action",
+        "mistakes": "All green with no accessible people",
+        "check": "Can you test something this week?"
+      },
+      {
+        "task": "Save the Research Problem Definition",
+        "standard": "Correct name",
+        "mistakes": "Saving blank text",
+        "check": "Visible after refresh?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "從「我要做 AI 題目」開始",
+        "why": "沒有現象就無法形成問題",
+        "fix": "先寫你觀察到誰、在做什麼、哪裡不清楚"
+      },
+      {
+        "error": "請 AI 保證這題能得獎",
+        "why": "平台沒有評審、也不能預測競賽",
+        "fix": "只檢查問題是否可研究、可取得資料"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Starting from “I want an AI topic”",
+        "why": "No phenomenon means no question",
+        "fix": "Write who you observed, what they do, and what is unclear"
+      },
+      {
+        "error": "Asking AI to guarantee a prize",
+        "why": "This site has no judges and cannot predict contests",
+        "fix": "Only check whether the problem is researchable and accessible"
+      }
+    ],
+    "zhNextStep": "帶著這份定義表進入第 2 課，把主題、問題與（如適用）假設分開寫。不必重寫現象故事。",
+    "enNextStep": "Take this definition into Lesson 2 and separate topic, problem, question, and hypothesis if applicable. You do not need to rewrite the story.",
+    "zhSummary": [
+      "本堂成果：研究問題定義表",
+      "先說清楚問題，再搜文獻",
+      "AI 不可發明田野"
+    ],
+    "enSummary": [
+      "Deliverable: Research Problem Definition",
+      "Clarify the problem before searching",
+      "AI must not invent fieldwork"
+    ],
+    "zhRubric": [
+      {
+        "name": "問題清楚度",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
         }
-      ],
-      "enQuizItems": [
-        {
-          "q": "Best way to use Gamma?",
-          "options": [
-            "One vague sentence, trust the output",
-            "Provide storyline + time, then human-edit and verify facts",
-            "Present immediately with no practice",
-            "Treat AI numbers as published research"
-          ],
-          "answer": 1,
-          "explain": "Gamma drafts; you verify and decide."
-        },
-        {
-          "q": "If a slide shows an unverifiable “+73%”, you should:",
-          "options": [
-            "Keep it for persuasion",
-            "Delete, replace with traceable data, or mark pending",
-            "Make the percentage larger",
-            "Hide it on the last slide"
-          ],
-          "answer": 1,
-          "explain": "Unverified stats do not belong."
-        },
-        {
-          "q": "After a Gamma draft, next step is usually:",
-          "options": [
-            "Align, slim, add evidence, then beautify",
-            "Randomly regenerate styles forever",
-            "Add 200 words per slide",
-            "Remove all titles"
-          ],
-          "answer": 0,
-          "explain": "Correct and speakable before polish."
+      },
+      {
+        "name": "範圍可行性",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
         }
-      ],
-      "zhNotePrompt": "列出你刪掉的頁與理由，以及仍待補的資料項目。",
-      "enNotePrompt": "List deleted slides with reasons and remaining data-to-fill items.",
-      "zhDeliverableChecklist": [
-        "Gamma 初稿已生成",
-        "頁數符合時長",
-        "主張標題已人工改",
-        "無未標記的可疑數據",
-        "修改清單已保存"
-      ],
-      "enDeliverableChecklist": [
-        "Gamma draft created",
-        "Slide count fits time",
-        "Claim titles human-edited",
-        "No unmarked suspicious stats",
-        "Edit list saved"
-      ],
-      "zhScorecard": [
-        "輸入品質",
-        "對齊架構",
-        "可講性",
-        "事實可控",
-        "可交接美化"
-      ],
-      "enScorecard": [
-        "Input quality",
-        "Structure alignment",
-        "Speakability",
-        "Fact control",
-        "Ready to polish"
-      ],
-      "resources": [
-        {
-          "name": "Gamma",
-          "url": "https://gamma.app",
-          "note": "AI 簡報生成與編輯主工具"
-        },
-        {
-          "name": "Google Slides",
-          "url": "https://docs.google.com/presentation/",
-          "note": "若需匯出或重做關鍵頁"
-        },
-        {
-          "name": "Microsoft PowerPoint",
-          "url": "https://www.microsoft.com/powerpoint",
-          "note": "常見繳交格式備援"
-        },
-        {
-          "name": "Tome",
-          "url": "https://tome.app",
-          "note": "可比較另一種 AI 簡報敘事工具"
-        },
-        {
-          "name": "Beautiful.ai",
-          "url": "https://www.beautiful.ai",
-          "note": "自動排版取向的對照學習"
+      },
+      {
+        "name": "資料路徑真實性",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
         }
-      ],
-      "challenge": "用 Gamma 為真實課程產出 8-12 頁初稿；找一位同學計時試講 3 頁，依對方聽不懂處再改標題與子彈點。",
-      "id": "research-competition-L9",
-      "lessonKey": "research-competition-L9"
+      },
+      {
+        "name": "研究誠信",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Problem clarity",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Scope feasibility",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Data-path realism",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Research integrity",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "入門 / Beginner",
+    "zhTitle": "第2課：縮小範圍，寫出研究問題與假設",
+    "enTitle": "Lesson 2: Narrow scope and write research questions and hypotheses",
+    "zhValueTip": "主題、問題、研究問題、假設不是同一件事；AI 不得幫你虛構「這題一定重要」。",
+    "enValueTip": "Topic, problem, research question, and hypothesis are not the same. AI must not invent “this is definitely important.”",
+    "zhOutcome": "研究題目與研究問題畫布",
+    "enOutcome": "Research Question Canvas",
+    "zhConcept": "Topic 是領域標籤，Problem 是現實落差，Research Question 是可回答的問句，Hypothesis 只在你打算檢驗關係時才需要。探索性訪談常常先沒有假說。AI 可以幫你改寫問句結構，但不能宣稱「文獻都證明這題很重要」——除非你貼上已查證的來源。",
+    "enConcept": "Topic is a label, problem is a real-world gap, the research question is answerable, and a hypothesis is only needed if you will test a relationship. Exploratory interviews often start without one. AI may tighten wording; it must not claim “the literature proves this” unless you paste verified sources.",
+    "zhCaseStudy": "阿凱把「外送不健康」當成研究問題。教練指出那是價值判斷。他改成 RQ：在平日 21:00 後，住宿生決定使用外送時，預算、距離、同伴與平台優惠如何進入決策？本次以訪談探索機制，不預設「優惠一定是主因」。任何「研究顯示」都留待第 3–4 課用正式資料庫查證。",
+    "enCaseStudy": "Kai treated “delivery is unhealthy” as a research question. He rewrote an exploratory RQ about how budget, distance, peers, and promotions enter nighttime ordering decisions, without assuming promotions are the main cause. Claims of “studies show” wait for verified databases in later lessons.",
+    "zhWorkflow": [
+      "貼上第1課定義表",
+      "分開四層與子問題",
+      "用 Prompt 改寫可回答問句",
+      "列出推測句",
+      "存成研究題目與研究問題畫布"
+    ],
+    "enWorkflow": [
+      "Paste Lesson 1",
+      "Separate four layers",
+      "Rewrite an answerable question",
+      "List speculation",
+      "Save the canvas"
+    ],
+    "zhCommonMistakes": [
+      "四層混成一句",
+      "價值判斷當 RQ",
+      "強迫探索性研究寫假說",
+      "讓 AI 虛構「文獻證明很重要」",
+      "把期望結果寫進問句"
+    ],
+    "enCommonMistakes": [
+      "Mixing four layers",
+      "Value judgment as RQ",
+      "Forcing a hypothesis",
+      "Invented “literature proves it”",
+      "Putting hoped results into the question"
+    ],
+    "zhExcellentExample": "四層清楚、探索性不硬寫假說、無虛構引用。",
+    "enExcellentExample": "Four layers clear, no forced hypothesis, no fake citations.",
+    "zhPrompt": "你是研究問題設計教練。不可幫學生虛構研究價值、假設結果或已證實結論。\n\n我的研究問題定義表（貼上第 1 課成果）：\n[請貼上來源內容]\n\n目前草稿：\n- Topic（主題）：[請填寫]\n- Problem（待解現象）：[請填寫]\n- Research Question：[請填寫研究問題]\n- 是否需要 Hypothesis：[請填寫是／否與理由]\n\n任務：產出「研究題目與研究問題畫布」，必須清楚分開：\n1) Topic：領域標籤（可較寬）\n2) Problem：現實中不清楚或有落差的現象\n3) Research Question：可回答的問句（誰、什麼情境、什麼關係／機制）\n4) Hypothesis（僅在適用時）：可被證據支持或推翻的陳述；若不適用，寫「本設計不使用假設」與理由\n5) 子問題 2–3 個\n6) 仍屬推測、不得當成結果的句子清單\n\n輸出用表格。不要把「應該推廣某產品」寫成研究問題。不要發明文獻來證明此題重要。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+    "enPrompt": "You are a research-question design coach. Do not invent importance, hypothesized results, or proven conclusions.\n\nMy Research Problem Definition (paste Lesson 1):\n[Paste source content]\n\nCurrent draft:\n- Topic: [Enter topic]\n- Problem: [Enter problem]\n- Research Question: [Enter research question]\n- Hypothesis needed?: [Enter yes/no and why]\n\nTask: Produce a Research Question Canvas that separates:\n1) Topic (broad label)\n2) Problem (unclear phenomenon or gap)\n3) Research Question (answerable: who, setting, relation/mechanism)\n4) Hypothesis only if applicable; otherwise write “no hypothesis” and why\n5) 2–3 sub-questions\n6) A list of sentences that are still speculation and must not be treated as findings\n\nUse a table. Do not turn “we should promote a product” into a research question. Do not invent literature to prove importance.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+    "zhCoachPrompt": "請檢查我的 Topic/Problem/RQ/Hypothesis 是否分開，有沒有把推測當結果。不要虛構文獻。",
+    "enCoachPrompt": "Check my four-layer split and whether speculation is treated as findings. Invent no literature.",
+    "zhFeedbackPrompt": "【Prompt 3｜時程與變更審核】\n里程碑表與課表衝突說明：\n（貼上）\n請指出不切實際的日期、建議調整，並給變更申請短模板。不可逕自宣告範圍變更已通過。",
+    "enFeedbackPrompt": "[Prompt 3 | Schedule & Change Review] Flag unrealistic dates and provide a change-request template—do not declare scope changes approved.",
+    "zhExample": "Topic：校園外送。Problem：夜間決策線索不清楚。RQ：住宿生如何決定是否下單？Hypothesis：本次不使用（探索性）。",
+    "enExample": "Topic: campus delivery. Problem: unclear nighttime decision cues. RQ: How do dorm students decide to order? Hypothesis: not used (exploratory).",
+    "zhPractice": "抽出四層。；寫子問題。；決定假設是否適用。；存畫布。",
+    "enPractice": "Extract four layers.; Write sub-questions.; Decide on hypothesis.; Save the canvas.",
+    "zhQuizItems": [
+      {
+        "q": "專案「非範圍」的用途是？",
+        "options": [
+          "讓報告更長",
+          "明確不做什麼，減少臨時加戲與衝突",
+          "取代目標",
+          "給 AI 自由發揮"
+        ],
+        "answer": 1,
+        "explain": "非範圍保護焦點與時程。"
+      },
+      {
+        "q": "好的里程碑應？",
+        "options": [
+          "只有「大家加油」",
+          "對應可驗證交付物與日期",
+          "越模糊越有彈性",
+          "不需要負責人"
+        ],
+        "answer": 1,
+        "explain": "可驗證才能追蹤。"
+      },
+      {
+        "q": "AI 產出時程後應？",
+        "options": [
+          "直接當最終承諾",
+          "由人工對照真實課表與資源後再定案",
+          "刪除所有風險欄",
+          "禁止寫備案"
+        ],
+        "answer": 1,
+        "explain": "AI 草案需人工審核。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "Non-goals are for:",
+        "options": [
+          "Making papers longer",
+          "Clarifying what you won’t do to reduce scope creep",
+          "Replacing goals",
+          "Letting AI freestyle"
+        ],
+        "answer": 1,
+        "explain": "Non-goals protect focus and schedule."
+      },
+      {
+        "q": "Good milestones should:",
+        "options": [
+          "Only say “try hard”",
+          "Map to verifiable deliverables and dates",
+          "Stay vague for flexibility",
+          "Need no owners"
+        ],
+        "answer": 1,
+        "explain": "Verifiable milestones enable tracking."
+      },
+      {
+        "q": "After AI drafts a schedule you should:",
+        "options": [
+          "Treat it as final commitment",
+          "Human-validate against real calendars/resources then lock",
+          "Delete the risk section",
+          "Forbid backups"
+        ],
+        "answer": 1,
+        "explain": "AI drafts need human approval."
+      }
+    ],
+    "zhNotePrompt": "貼上 Topic、Problem、RQ、Hypothesis（或「不使用」）。",
+    "enNotePrompt": "Paste Topic, Problem, RQ, and hypothesis or “not used.”",
+    "zhDeliverableChecklist": [
+      "Topic / Problem / RQ 已分開",
+      "RQ 可被資料回答，不是口號",
+      "假設適用或不適用已寫理由",
+      "有 2–3 個子問題",
+      "推測句已標示，未當成結果",
+      "沒有未查證的「研究顯示」"
+    ],
+    "enDeliverableChecklist": [
+      "Topic, problem, and RQ are separated",
+      "RQ is answerable, not a slogan",
+      "Hypothesis used or marked N/A with a reason",
+      "2–3 sub-questions written",
+      "Speculation flagged, not treated as findings",
+      "No unverified “studies show”"
+    ],
+    "zhScorecard": [
+      "範圍清楚",
+      "里程碑可驗",
+      "依賴可見",
+      "備案可執行",
+      "審核定案"
+    ],
+    "enScorecard": [
+      "Clear scope",
+      "Testable milestones",
+      "Visible deps",
+      "Executable backups",
+      "Approved plan"
+    ],
+    "id": "research-competition-L2",
+    "lessonKey": "research-competition-L2",
+    "zhOutputName": "研究題目與研究問題畫布",
+    "enOutputName": "Research Question Canvas",
+    "zhObjectives": [
+      "區分 Topic、Problem、Research Question、Hypothesis",
+      "把第 1 課定義收成可回答的研究問題",
+      "判斷本次是否需要假設",
+      "列出仍屬推測、不可當成結果的句子",
+      "存成研究題目與研究問題畫布"
+    ],
+    "enObjectives": [
+      "Separate topic, problem, research question, and hypothesis",
+      "Turn Lesson 1 into an answerable research question",
+      "Decide whether a hypothesis is needed",
+      "List speculation that must not be treated as findings",
+      "Save a Research Question Canvas"
+    ],
+    "zhWhyItMatters": {
+      "problem": "主題很大、問題含糊、研究問題寫成口號時，搜尋詞與方法會對不準。",
+      "ineffective": "請 AI「把題目寫得很學術」，或強迫每個探索性研究都寫假說。",
+      "solution": "用畫布分開四層，並禁止 AI 虛構研究價值。"
     },
-    {
-      "icon": "🎯",
-      "title": "完成研究／專題／競賽專案包的口頭提案準備",
-      "description": "用 AI 模擬老師提問與評分，練習台風、應答與臨場修正，完成可上台發表的大學簡報。",
-      "goal": "我的模擬提問題庫＋應答稿＋上台檢核表（可發表版）",
-      "estimatedTime": "60-80 分鐘",
-      "difficulty": "中階",
-      "tags": [
-        "模擬問答",
-        "台風",
-        "上台檢核",
-        "Chapter5"
+    "enWhyItMatters": {
+      "problem": "A huge topic, a vague problem, or a slogan-as-question misaligns search terms and methods.",
+      "ineffective": "Asking AI to “make it sound academic,” or forcing a hypothesis onto exploratory work.",
+      "solution": "Separate four layers on a canvas and forbid invented importance."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "四層分開寫",
+        "問句必須可被證據回答",
+        "沒有證據前，推測不是結果"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 4,
-      "chapterZh": "AI 做簡報",
-      "chapterEn": "AI Presentations",
-      "zhTitle": "第10課：完成研究／專題／競賽專案包的口頭提案準備",
-      "enTitle": "Lesson 10: Prepare the oral proposal for your research or competition package",
-      "zhValueTip": "用 AI 模擬老師提問與評分，練習台風、應答與臨場修正，完成可上台發表的大學簡報。",
-      "enValueTip": "Use AI to simulate instructor questions and scoring, rehearse delivery and answers, and ship a stage-ready university presentation.",
-      "zhOutcome": "我的模擬提問題庫＋應答稿＋上台檢核表（可發表版）",
-      "enOutcome": "My Mock Q&A Bank + Answer Notes + Stage Checklist (presentation-ready)",
-      "zhConcept": "Chapter 5 的收束不是再加特效，而是讓簡報在壓力下仍站得住：準時、清楚、問答可防禦。用 AI 當模擬老師：依你的投影片與講稿出題，涵蓋定義、方法、證據弱點、限制、替代方案、實作細節。應答技巧：先重述問題、給一句直接答案、再補一個證據或例子、最後確認是否答到點。不懂就誠實說已知範圍與下一步，不要編造。台風檢核：開場眼神、音量、站位不挡畫面、手勢有目的、翻頁節奏、超時警報（剩餘 1 分鐘訊號）。彩排建議至少三次：一次看稿、一次去稿、一次全程錄影。錄影後只改最大的三個問題，避免無限重做。AI 可依評分量表打模擬分，但要你提供量表；沒有量表就用常見維度：內容、結構、視覺、台風、問答。設備應變：離線副本、字體嵌入或PDF備援、點擊器／空白鍵計畫、影片音訊預檢。這些寫進上台檢核表。小組簡報要演練交接：誰導入下一個人、如何接下問答。AI 可模擬「指定某位組員回答」的壓力情境。完成後打包可發表版：final 簡報、講稿／關鍵詞卡、題庫應答、檢核表。這才是大學簡報系統的交付物。把老師現場真問記入題庫，下學期同类報告會越來越穩，形成個人口頭報告資產。也要管理緊張：開場前兩次深呼吸、第一句背熟、把注意力放在聽眾是否理解而非自我評價。若課程允許，簡短披露 AI 使用方式（架構、美化、模擬提問），展現你是掌控者而非代講。當你能在模擬追問下守住主訊息與證據邊界，這份簡報就真正可以上台發表。此外，請把本課產出存成 raw 與 final：raw 保留生成紀錄與草稿，final 是可進入下一課或可上台的版本，方便追溯與組員交接。每次結束寫三行日誌：今天最有效的一步、仍卡關之處、明天第一個行動，並存進 AI Workspace。若與同學協作，先合意分工、檔名與 AI 使用界線；只分享 final，不把未核對數據當定案。當你能重複「架構→生成→美化→講稿→模擬」流水線，換題目也能穩定產出可上台簡報，這才是本章目標。也請收集老師現場回饋，把扣分點寫回下一份簡報規格書的防呆欄，讓系統越用越強。此外，請把本課產出存成 raw 與 final：raw 保留生成紀錄與草稿，final 是可進入下一課或可上台的版本，方便追溯與組員交接。每次結束寫三行日誌：今天最有效的一步、仍卡關之處、明天第一個行動，並存進 AI Workspace。若與同學協作，先合意分工、檔名與 AI 使用界線；只分享 final，不把未核對數據當定案。",
-      "enConcept": "Close Chapter 5 with pressure testing: mock instructor Q&A, delivery checklist, timed rehearsals, and a stage-ready pack. Answer with restate–answer–evidence; never invent. Capture real questions into a reusable bank.",
-      "zhCaseStudy": "情境案例：統計系小組第一次被問「你們的樣本偏誤呢？」全場沉默。他們用 AI 依簡報生成 20 題，準備 8 題核心應答，彩排指定回答者。正式場合同題出現，組員用「重述—限制—未來改善」答完，老師點頭。他們把該題留在題庫置頂。",
-      "enCaseStudy": "A stats team froze on a bias question once; after an AI mock bank and assigned answers, they handled the same question live.",
-      "zhWorkflow": [
-        "匯出 final 簡報與講稿給 AI 產模擬題",
-        "選核心 8-12 題寫應答骨架",
-        "全程計時彩排＋錄影修正三大問題",
-        "完成上台檢核表（內容／設備／台風／問答）",
-        "打包可發表版並做復盤"
+      "terms": [
+        "Topic",
+        "Problem",
+        "Research Question",
+        "Hypothesis"
       ],
-      "enWorkflow": [
-        "Feed final deck/script to AI for mock questions",
-        "Write answer skeletons for 8–12 core items",
-        "Full timed rehearsal + video fixes",
-        "Complete stage checklist",
-        "Pack presentation-ready files and retrospect"
+      "criteria": [
+        "問句含對象與情境",
+        "假設可被推翻或標為不適用",
+        "無虛構文獻支撐"
       ],
-      "zhCommonMistakes": [
-        "只做投影片不練問答",
-        "被問到就編造資料",
-        "從不計時彩排",
-        "沒有設備備援"
+      "boundaries": [
+        "避免：價值判斷當研究問題",
+        "避免：AI 編重要性",
+        "避免：把期望當結論"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Write four layers separately",
+        "Questions must be answerable by evidence",
+        "Speculation is not a finding"
       ],
-      "enCommonMistakes": [
-        "Slides without Q&A practice",
-        "Inventing answers under pressure",
-        "Never timing a full run",
-        "No tech backup"
+      "terms": [
+        "Topic",
+        "Problem",
+        "Research Question",
+        "Hypothesis"
       ],
-      "zhExcellentExample": "可發表包：準時講完的 final 簡報、關鍵詞卡、8+ 題應答、上台檢核全勾、錄影自評三點改進。",
-      "enExcellentExample": "A stage-ready pack: on-time final deck, cue cards, 8+ answers, completed checklist, and three video-based improvements.",
-      "zhPrompt": "【Prompt 1｜模擬老師提問產生器】\n你是嚴格但公平的大學老師。以下是學生簡報大綱／講稿：\n（貼上）\n評分重點：［內容／方法／台風／問答］\n請產生 15 題口頭追問，分類：基礎定義、證據挑戰、限制、實作細節、延伸思考。每題標難度。不要提供長篇標準答案；改為提示學生應涵蓋的要點方向。",
-      "enPrompt": "[Prompt 1 | Mock Instructor Questions] Create 15 categorized follow-ups with difficulty tags and answer-direction hints—not long model answers.",
-      "zhCoachPrompt": "【Prompt 2｜應答骨架教練】\n問題：［貼上 1 題］\n我已知資訊：\n（貼上）\n請幫我寫 40-60 字應答骨架：重述問題→直接答案→一個證據／例子→收束。若資訊不足，教我如何誠實回答並提出補救，禁止編造研究。",
-      "enCoachPrompt": "[Prompt 2 | Answer Skeleton Coach] Build a 40–60 word restate–answer–evidence–close skeleton; if info is missing, coach an honest reply—no fabricated studies.",
-      "zhFeedbackPrompt": "【Prompt 3｜模擬評分與上台檢核】\n評分量表：\n（貼上或用預設五維）\n我的錄影／表現自述：\n（貼上）\n簡報主張：\n（貼上）\n請給模擬分數、最大 3 個扣分點、明天上台前只改這 3 點的行動清單，以及 12 項上台前檢核表。",
-      "enFeedbackPrompt": "[Prompt 3 | Mock Scoring & Stage Checklist] Score my rehearsal notes, list top 3 fixes, and output a 12-item pre-stage checklist.",
-      "zhExample": "Q：你們如何處理樣本偏誤？\nA：重述→我們樣本偏宿舍自願者→直接答：外推需保守→例子：結果當趨勢非全校參數→收束：限制頁有寫，未來可分層抽樣。",
-      "enExample": "A bias question answered with restate, conservative generalization, an example, and a link to the limitations slide.",
-      "zhPractice": "用 Prompt 1 產 15 題並挑 8 題寫應答。；全程錄影彩排一次並只改三大問題。；勾完上台檢核表。；Challenge：請同學或 AI 連續追問 5 題；你必須在每題 40 秒內答完且不編造。",
-      "enPractice": "Generate 15 questions and prepare 8 answers.；Video one full run and fix top 3 issues.；Complete the checklist.；Challenge: face 5 rapid follow-ups in ≤40 seconds each without inventing facts.",
-      "zhQuizItems": [
+      "criteria": [
+        "Question names who and setting",
+        "Hypothesis is falsifiable or marked N/A",
+        "No invented citations"
+      ],
+      "boundaries": [
+        "Avoid: value judgments as questions",
+        "Avoid: AI-invented importance",
+        "Avoid: hopes as conclusions"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "阿凱的主題是「校園外送」，但研究問題寫成「外送對大學生不好」。",
+      "wrong": "請 AI 把句子改得像論文標題，並加上沒查證的「研究顯示 80%」。",
+      "right": "分開：Topic＝校園外送使用；Problem＝夜間下單決策線索不清楚；RQ＝住宿生如何決定；本次先做探索、不寫假說。",
+      "result": "一份四層分開的研究題目與研究問題畫布。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Kai’s topic is campus delivery, but the question is “delivery is bad for students.”",
+      "wrong": "Ask AI to sound like a paper title and add an unverified “studies show 80%.”",
+      "right": "Split topic, problem, and an exploratory RQ with no hypothesis yet.",
+      "result": "A four-layer Research Question Canvas."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "貼上第 1 課定義表",
+        "why": "延續同一題，不另起爐灶",
+        "input": "研究問題定義表",
+        "output": "畫布輸入",
+        "check": "是否同一對象與現象"
+      },
+      {
+        "do": "分開填四層與子問題",
+        "why": "混在一起無法對準方法",
+        "input": "定義表",
+        "output": "四層草稿",
+        "check": "Topic 是否比 RQ 更寬"
+      },
+      {
+        "do": "用主 Prompt 檢查問句",
+        "why": "抓出口號與價值判斷",
+        "input": "四層草稿",
+        "output": "畫布初稿",
+        "check": "RQ 是否可被資料回答"
+      },
+      {
+        "do": "標示推測句",
+        "why": "避免把期望當結果",
+        "input": "初稿",
+        "output": "推測清單",
+        "check": "是否至少標出 1 句不可當結果"
+      },
+      {
+        "do": "存檔",
+        "why": "第 3 課要用 RQ 做搜尋詞",
+        "input": "定稿",
+        "output": "成果包",
+        "check": "刷新後仍在"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Paste Lesson 1",
+        "why": "Stay on the same problem",
+        "input": "Definition",
+        "output": "Canvas input",
+        "check": "Same population and phenomenon?"
+      },
+      {
+        "do": "Fill four layers and sub-questions",
+        "why": "Mixing layers breaks methods later",
+        "input": "Definition",
+        "output": "Four-layer draft",
+        "check": "Is topic broader than the RQ?"
+      },
+      {
+        "do": "Run the main prompt",
+        "why": "Catch slogans and value judgments",
+        "input": "Draft",
+        "output": "Canvas",
+        "check": "Can data answer the RQ?"
+      },
+      {
+        "do": "Flag speculation",
+        "why": "Hopes are not findings",
+        "input": "Draft",
+        "output": "Speculation list",
+        "check": "At least one flagged sentence?"
+      },
+      {
+        "do": "Save",
+        "why": "Lesson 3 needs the RQ for search terms",
+        "input": "Final",
+        "output": "Package",
+        "check": "Still there after refresh?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "已有問題定義，要分開 Topic / Problem / Question / Hypothesis 時使用",
+      "fields": [
+        "[請貼上來源內容]",
+        "[請填寫研究問題]",
+        "[請填寫]"
+      ],
+      "body": "你是研究問題設計教練。不可幫學生虛構研究價值、假設結果或已證實結論。\n\n我的研究問題定義表（貼上第 1 課成果）：\n[請貼上來源內容]\n\n目前草稿：\n- Topic（主題）：[請填寫]\n- Problem（待解現象）：[請填寫]\n- Research Question：[請填寫研究問題]\n- 是否需要 Hypothesis：[請填寫是／否與理由]\n\n任務：產出「研究題目與研究問題畫布」，必須清楚分開：\n1) Topic：領域標籤（可較寬）\n2) Problem：現實中不清楚或有落差的現象\n3) Research Question：可回答的問句（誰、什麼情境、什麼關係／機制）\n4) Hypothesis（僅在適用時）：可被證據支持或推翻的陳述；若不適用，寫「本設計不使用假設」與理由\n5) 子問題 2–3 個\n6) 仍屬推測、不得當成結果的句子清單\n\n輸出用表格。不要把「應該推廣某產品」寫成研究問題。不要發明文獻來證明此題重要。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "expected": "一份分開主題、問題、研究問題與假設（如適用）的畫布",
+      "revisionReminder": "請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "extensions": [
         {
-          "q": "模擬口頭報告最核心的目的是？",
-          "options": [
-            "多背幾句漂亮成語",
-            "在壓力下仍準時、清楚、可防禦地完成發表",
-            "讓 AI 代替你上台",
-            "只練習翻頁動畫"
-          ],
-          "answer": 1,
-          "explain": "壓力測試是為了可上台發表。"
-        },
-        {
-          "q": "被問到不知道的細節時，較佳做法是？",
-          "options": [
-            "立刻編造一篇研究撐場面",
-            "誠實界定已知範圍，給可驗證的下一步",
-            "沉默到老師換題",
-            "指責隊友"
-          ],
-          "answer": 1,
-          "explain": "誠實與邊界感比假答案更專業。"
-        },
-        {
-          "q": "Chapter 5 可發表版通常應包含？",
-          "options": [
-            "只有模板沒有內容",
-            "final 簡報、講稿／關鍵詞卡、題庫應答與上台檢核",
-            "只有 AI 聊天紀錄",
-            "未核對數據的炫圖全集"
-          ],
-          "answer": 1,
-          "explain": "交付物是可上台的完整系統包。"
+          "title": "延伸：假設適用性檢查",
+          "body": "請判斷我的研究問題是否需要假設。若為探索性問題，不要強迫寫假說。不要把期望結果寫成已證實結論。"
         }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when you have a definition and must separate topic, problem, question, and hypothesis",
+      "fields": [
+        "[Paste source content]",
+        "[Enter research question]",
+        "[Enter topic]"
       ],
-      "enQuizItems": [
+      "body": "You are a research-question design coach. Do not invent importance, hypothesized results, or proven conclusions.\n\nMy Research Problem Definition (paste Lesson 1):\n[Paste source content]\n\nCurrent draft:\n- Topic: [Enter topic]\n- Problem: [Enter problem]\n- Research Question: [Enter research question]\n- Hypothesis needed?: [Enter yes/no and why]\n\nTask: Produce a Research Question Canvas that separates:\n1) Topic (broad label)\n2) Problem (unclear phenomenon or gap)\n3) Research Question (answerable: who, setting, relation/mechanism)\n4) Hypothesis only if applicable; otherwise write “no hypothesis” and why\n5) 2–3 sub-questions\n6) A list of sentences that are still speculation and must not be treated as findings\n\nUse a table. Do not turn “we should promote a product” into a research question. Do not invent literature to prove importance.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "expected": "A canvas separating topic, problem, research question, and hypothesis if applicable",
+      "revisionReminder": "Use the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "extensions": [
         {
-          "q": "Main purpose of mock presenting?",
-          "options": [
-            "Memorize ornate idioms",
-            "Stay on time, clear, and defendable under pressure",
-            "Let AI present for you",
-            "Practice animations only"
-          ],
-          "answer": 1,
-          "explain": "Pressure-test for real stage readiness."
-        },
-        {
-          "q": "Best response when you do not know a detail?",
-          "options": [
-            "Invent a study immediately",
-            "Honestly bound what you know and offer a verifiable next step",
-            "Stay silent until the topic changes",
-            "Blame teammates"
-          ],
-          "answer": 1,
-          "explain": "Honesty beats fabrication."
-        },
-        {
-          "q": "A Chapter 5 presentation-ready pack usually includes:",
-          "options": [
-            "Templates with no content",
-            "Final deck, script/cue cards, Q&A notes, and stage checklist",
-            "Only AI chat logs",
-            "Unverified flashy charts"
-          ],
-          "answer": 1,
-          "explain": "Ship the full stage-ready system."
+          "title": "Extension: hypothesis fit",
+          "body": "Decide whether my question needs a hypothesis. If exploratory, do not force one. Do not write hoped-for results as proven findings."
         }
-      ],
-      "zhNotePrompt": "列出 8 題核心追問的應答骨架，並寫下錄影後要改的三件事。",
-      "enNotePrompt": "List 8 answer skeletons and the three fixes from your rehearsal video.",
-      "zhDeliverableChecklist": [
-        "模擬題庫 ≥15 題",
-        "核心應答 ≥8 題",
-        "全程計時彩排完成",
-        "上台檢核表全勾",
-        "可發表版檔案打包"
-      ],
-      "enDeliverableChecklist": [
-        "≥15 mock questions",
-        "≥8 core answers",
-        "Full timed rehearsal done",
-        "Stage checklist complete",
-        "Presentation-ready pack exported"
-      ],
-      "zhScorecard": [
-        "準時",
-        "清楚",
-        "問答防禦",
-        "台風穩定",
-        "應變備援"
-      ],
-      "enScorecard": [
-        "On time",
-        "Clarity",
-        "Q&A defense",
-        "Delivery stability",
-        "Contingency"
-      ],
-      "resources": [
-        {
-          "name": "Google Slides",
-          "url": "https://docs.google.com/presentation/",
-          "note": "上台主檔與講者備註"
-        },
-        {
-          "name": "Microsoft PowerPoint",
-          "url": "https://www.microsoft.com/powerpoint",
-          "note": "演講者檢視與離線備援"
-        },
-        {
-          "name": "Canva",
-          "url": "https://www.canva.com",
-          "note": "最終視覺版簡報"
-        },
-        {
-          "name": "Gamma",
-          "url": "https://gamma.app",
-          "note": "若由此生成，確認 final 已匯出"
-        },
-        {
-          "name": "Beautiful.ai",
-          "url": "https://www.beautiful.ai",
-          "note": "可作為備援或對照版本"
-        },
-        {
-          "name": "Tome",
-          "url": "https://tome.app",
-          "note": "敘事簡報另類彩排素材"
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "從定義表抽出四層",
+        "standard": "每層一句且不互相複製",
+        "mistakes": "四層寫成同一句",
+        "check": "能否向同學講解差異？"
+      },
+      {
+        "task": "寫 2–3 個子問題",
+        "standard": "子問題能對應之後的題目或訪綱",
+        "mistakes": "子問題比 RQ 更空泛",
+        "check": "能否各用一類證據回答？"
+      },
+      {
+        "task": "決定假設是否適用",
+        "standard": "探索性就明確寫不使用",
+        "mistakes": "硬寫無法檢驗的假說",
+        "check": "假說能否被推翻？"
+      },
+      {
+        "task": "存成研究題目與研究問題畫布",
+        "standard": "含推測清單",
+        "mistakes": "空白儲存",
+        "check": "刷新後仍在？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Extract four layers from Lesson 1",
+        "standard": "Each layer distinct",
+        "mistakes": "All four are the same sentence",
+        "check": "Can you explain the difference?"
+      },
+      {
+        "task": "Write 2–3 sub-questions",
+        "standard": "Each can map to later items",
+        "mistakes": "Sub-questions vaguer than the RQ",
+        "check": "Could each be answered by a type of evidence?"
+      },
+      {
+        "task": "Decide on a hypothesis",
+        "standard": "Exploratory work may skip it",
+        "mistakes": "An untestable slogan",
+        "check": "Could evidence overturn it?"
+      },
+      {
+        "task": "Save the Research Question Canvas",
+        "standard": "Includes speculation list",
+        "mistakes": "Blank save",
+        "check": "Visible after refresh?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "RQ 寫成「應該推廣健康外送」",
+        "why": "那是倡議不是問題",
+        "fix": "改成可觀察的決策或行為問句"
+      },
+      {
+        "error": "AI 自行補上研究價值",
+        "why": "未查證來源不可當理由",
+        "fix": "只根據你的觀察；文獻留到查證後再寫"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "RQ as “we should promote healthy delivery”",
+        "why": "Advocacy is not a question",
+        "fix": "Ask about observable decisions or behavior"
+      },
+      {
+        "error": "AI invents importance",
+        "why": "Unverified sources are not reasons",
+        "fix": "Use your observations; add literature only after verification"
+      }
+    ],
+    "zhNextStep": "用這份 RQ 去做第 3 課搜尋策略。先列關鍵字，不要請 AI 直接給「十篇真實論文」。",
+    "enNextStep": "Use this RQ for Lesson 3 search strategy. List keywords first; do not ask AI for “ten real papers.”",
+    "zhSummary": [
+      "本堂成果：研究題目與研究問題畫布",
+      "四層必須分開",
+      "AI 不得虛構研究價值"
+    ],
+    "enSummary": [
+      "Deliverable: Research Question Canvas",
+      "Keep four layers separate",
+      "AI must not invent importance"
+    ],
+    "zhRubric": [
+      {
+        "name": "四層區分",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
         }
+      },
+      {
+        "name": "問句可回答",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "假設使用得當",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "無虛構價值",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Four-layer split",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Answerable question",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Appropriate hypothesis",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "No invented value",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "入門 / Beginner",
+    "zhTitle": "第3課：用 AI 協助學術搜尋，找到關鍵文獻與來源",
+    "enTitle": "Lesson 3: Use AI-assisted academic search to find key sources",
+    "zhValueTip": "AI 協助產生搜尋策略，不能取代 Google Scholar、圖書館或官方資料庫，也不可假裝已經找到真論文。",
+    "enValueTip": "AI helps you plan searches; it does not replace Scholar, libraries, or official databases, and must not pretend it already found real papers.",
+    "zhOutcome": "資料與文獻搜尋策略",
+    "enOutcome": "Research Search Plan",
+    "zhConcept": "搜尋策略包含關鍵字、同義詞、中英詞、來源與篩選標準。原始研究、官方統計、政府資料與原始調查屬 Primary；review 與報導屬 Secondary；AI 生成只能當搜尋與解釋工具。本課不要求你在聊天視窗裡「找到十篇真論文」。",
+    "enConcept": "A search plan includes keywords, synonyms, bilingual queries, sources, and filters. Primary sources include original studies, official statistics, government data, and original surveys. Reviews and news are secondary. AI output is a tool, not evidence. This lesson does not ask chat to “find ten real papers.”",
+    "zhCaseStudy": "高三生小寧的 RQ 是：高中生使用生成式 AI 寫作業時，哪些步驟自己做、哪些交給 AI。她沒有向 AI 要書目，而是列出 keywords：generative AI, homework, self-regulated learning, 高中、作業、學習策略。來源計畫：Google Scholar 與教育部公開資料為主，科技新聞只當 Secondary。查證狀態先全標「未搜尋」，搜到題名後改「已搜尋未核對」，打開原文才改「已核對」。",
+    "enCaseStudy": "Ning’s RQ asks which homework steps students keep versus give to generative AI. She did not request a bibliography from chat. She listed bilingual keywords, planned Scholar plus official education data as primary paths, treated tech news as secondary, and used verification statuses instead of fake DOIs.",
+    "zhWorkflow": [
+      "拆關鍵字與中英詞",
+      "分級來源並寫篩選",
+      "產出搜尋策略",
+      "回正式資料庫搜尋並標狀態",
+      "存成資料與文獻搜尋策略"
+    ],
+    "enWorkflow": [
+      "Build bilingual keywords",
+      "Tier sources and filters",
+      "Generate the plan",
+      "Search a real database and mark status",
+      "Save the Research Search Plan"
+    ],
+    "zhCommonMistakes": [
+      "請 AI 給十篇真論文",
+      "不回資料庫",
+      "把報導當原始研究",
+      "把 AI 文字當證據",
+      "沒有排除標準"
+    ],
+    "enCommonMistakes": [
+      "Asking AI for ten real papers",
+      "Skipping databases",
+      "Treating news as primary",
+      "Using AI text as evidence",
+      "No exclusion criteria"
+    ],
+    "zhExcellentExample": "詞表可執行、三級分清、有自己搜到的題名、無幻覺書目。",
+    "enExcellentExample": "Runnable queries, three tiers, titles you found, no hallucinated bibliography.",
+    "zhPrompt": "你是學術搜尋策略教練。你沒有可靠的即時學術資料庫存取，因此不得輸出「保證真實存在」的論文清單。\n\n我的研究問題：[請填寫研究問題]\n子問題：[請填寫]\n語言能力：中文／英文／兩者：[請填寫]\n我已嘗試的關鍵字：[請填寫]\n我可以使用的來源（圖書館／Google Scholar／政府統計／其他）：[請填寫]\n\n任務：產出「資料與文獻搜尋策略」，包含：\n1) 核心關鍵字與同義詞\n2) 中英文搜尋詞組合（含布林邏輯建議）\n3) 搜尋來源分級：Primary／Original（原始研究、官方統計、政府資料、原始調查）vs Secondary（review、報導、分析文章）vs AI 生成（只可當策略與解釋，不可當證據）\n4) 納入標準與排除標準\n5) 查證狀態欄：未搜尋／已搜尋未核對／已核對原文\n6) 提醒：AI 不能取代正式資料庫搜尋\n\n禁止：列出作者＋年份＋DOI 並暗示你已替我找到真文獻。若提供「可能的搜尋線索」，必須標「未查證，需回資料庫確認」。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+    "enPrompt": "You are an academic search-strategy coach. You do not have reliable live database access, so you must not output a list of papers as “guaranteed real.”\n\nResearch question: [Enter research question]\nSub-questions: [Enter sub-questions]\nLanguages: Chinese / English / both: [Enter languages]\nKeywords already tried: [Enter keywords]\nSources I can use (library / Google Scholar / official statistics / other): [Enter sources]\n\nTask: Produce a Research Search Plan with:\n1) Core keywords and synonyms\n2) Chinese and English query strings (including Boolean suggestions)\n3) Source tiers: primary/original vs secondary vs AI-generated (AI is strategy/explanation only, never evidence)\n4) Inclusion and exclusion criteria\n5) Verification status: not searched / searched-unverified / verified against original\n6) A reminder that AI does not replace database search\n\nForbidden: author+year+DOI lists implied to be real finds. Any “possible lead” must be labeled unverified.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+    "zhCoachPrompt": "請檢查我的搜尋策略是否仍把 AI 當資料庫，來源分級是否清楚。不要給我假書目。",
+    "enCoachPrompt": "Check whether my plan still treats AI as a database. Give no fake bibliography.",
+    "zhFeedbackPrompt": "【Prompt 3｜文獻清單回饋】\n以下是我的 Scholar 文獻清單與精讀計畫：\n（貼上）\n請檢查相關性、理由是否空泛、書目完整性、精讀優先順序是否重疊。給修正建議與可匯入試算表的欄位格式。",
+    "enFeedbackPrompt": "[Prompt 3 | Bibliography Feedback] Check relevance, reason quality, citation completeness, and deep-read priority overlap.",
+    "zhExample": "納入：近五年、與學習行為有關的實證研究。排除：工具廣告、無法取得全文且無法核對的來源。AI 書目＝未查證線索，不是引用。",
+    "enExample": "Include: last five years, empirical studies of learning behavior. Exclude: product ads and unverifiable items. AI bibliographies are unverified leads, not citations.",
+    "zhPractice": "列中英關鍵字。；寫來源分級與篩選。；實際搜尋並標狀態。；存搜尋策略。",
+    "enPractice": "List bilingual keywords.; Write tiers and filters.; Search and mark status.; Save the plan.",
+    "zhQuizItems": [
+      {
+        "q": "在 Google Scholar 使用「被引用次數」最合適的目的是？",
+        "options": [
+          "證明該文一定正確無誤",
+          "作為尋找後續相關研究的線索之一",
+          "取代閱讀摘要與方法",
+          "保證可以不查原刊物名"
+        ],
+        "answer": 1,
+        "explain": "引用數是發現後續研究的線索，不是正確性保證。"
+      },
+      {
+        "q": "建立文獻清單時，最不該缺少的資訊是？",
+        "options": [
+          "選用理由、疑點與下一步（精讀／備用／淘汰）",
+          "只貼連結、不寫理由",
+          "只看標題是否吸睛",
+          "只記錄自己喜不喜歡作者名字"
+        ],
+        "answer": 0,
+        "explain": "理由與下一步讓清單可執行，也減少重複勞動。"
+      },
+      {
+        "q": "正式引用前，對 Scholar 結果最必要的動作是？",
+        "options": [
+          "直接複製 AI 產生的 APA",
+          "核對題名、作者、年份、刊物／來源頁",
+          "只保留 PDF 檔名",
+          "完全相信第一頁結果"
+        ],
+        "answer": 1,
+        "explain": "書目要素必須回原資料核對，避免引用錯誤。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "What is the best use of “Cited by” in Google Scholar?",
+        "options": [
+          "Proof the paper is certainly correct",
+          "A clue for finding later related work",
+          "A replacement for reading abstracts and methods",
+          "A reason to skip verifying the venue"
+        ],
+        "answer": 1,
+        "explain": "Citation counts are leads, not truth certificates."
+      },
+      {
+        "q": "What must a literature list include?",
+        "options": [
+          "Selection reason, doubts, and next step",
+          "Links only",
+          "Catchy titles only",
+          "Whether you like the author name"
+        ],
+        "answer": 0,
+        "explain": "Reasons and next steps make the list actionable."
+      },
+      {
+        "q": "Before citing a Scholar result, you should?",
+        "options": [
+          "Paste an AI-generated APA blindly",
+          "Verify title, authors, year, and venue/source page",
+          "Keep only the PDF filename",
+          "Trust page-one results completely"
+        ],
+        "answer": 1,
+        "explain": "Bibliographic details must be verified to avoid citation errors."
+      }
+    ],
+    "zhNotePrompt": "貼上中英搜尋詞、來源分級、納入排除、目前查證狀態。",
+    "enNotePrompt": "Paste bilingual queries, source tiers, filters, and current verification status.",
+    "zhDeliverableChecklist": [
+      "有關鍵字、同義詞、中英搜尋詞",
+      "有 Primary / Secondary / AI 分級",
+      "有納入與排除標準",
+      "有查證狀態欄",
+      "沒有把 AI 書目當已核對文獻",
+      "註明 AI 不能取代正式資料庫搜尋"
+    ],
+    "enDeliverableChecklist": [
+      "Keywords, synonyms, and bilingual queries",
+      "Primary / secondary / AI tiers",
+      "Inclusion and exclusion criteria",
+      "Verification status column",
+      "AI bibliographies not treated as verified",
+      "States that AI does not replace database search"
+    ],
+    "zhScorecard": [
+      "相關性",
+      "清單完整",
+      "書目正確",
+      "精讀策略",
+      "可交接性"
+    ],
+    "enScorecard": [
+      "Relevance",
+      "Completeness",
+      "Citation accuracy",
+      "Deep-read strategy",
+      "Handoff readiness"
+    ],
+    "id": "research-competition-L3",
+    "lessonKey": "research-competition-L3",
+    "zhOutputName": "資料與文獻搜尋策略",
+    "enOutputName": "Research Search Plan",
+    "zhObjectives": [
+      "為 RQ 列出關鍵字、同義詞與中英搜尋詞",
+      "區分 Primary、Secondary 與 AI 生成內容",
+      "寫出納入／排除標準",
+      "為每條線索標查證狀態",
+      "存成資料與文獻搜尋策略"
+    ],
+    "enObjectives": [
+      "List keywords, synonyms, and bilingual queries for the RQ",
+      "Separate primary, secondary, and AI-generated content",
+      "Write inclusion and exclusion criteria",
+      "Mark verification status on each lead",
+      "Save a Research Search Plan"
+    ],
+    "zhWhyItMatters": {
+      "problem": "直接請 AI「找十篇真正存在的論文」時，常得到無法核對的書目，後面引用會出事。",
+      "ineffective": "把 AI 聊天當資料庫，或不區分原始研究與報導。",
+      "solution": "先做搜尋策略與來源分級，再到正式資料庫搜尋並標記查證狀態。"
+    },
+    "enWhyItMatters": {
+      "problem": "Asking AI for “ten real papers” often yields unverifiable citations.",
+      "ineffective": "Treating chat as a database, or mixing primary studies with news.",
+      "solution": "Build a search plan and source tiers, then search real databases and mark verification."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "AI 產策略，人回資料庫",
+        "來源要分級",
+        "沒核對原文就不能引用"
       ],
-      "challenge": "在正式課程或社團場景完成一次真實上台（或完整模擬教室）：使用本課檢核表，會後寫下老師真問的 3 題並更新題庫。",
-      "id": "research-competition-L10",
-      "lessonKey": "research-competition-L10"
-    }
-  ],
+      "terms": [
+        "Primary / Original",
+        "Secondary",
+        "AI generated",
+        "查證狀態"
+      ],
+      "criteria": [
+        "有中英搜尋詞",
+        "有納入排除標準",
+        "無線上「保證真實」書目"
+      ],
+      "boundaries": [
+        "避免：AI 當證據",
+        "避免：未查證 DOI",
+        "避免：只搜網頁摘要就當精讀"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "AI plans; you search databases",
+        "Tier your sources",
+        "No cite without the original"
+      ],
+      "terms": [
+        "Primary / original",
+        "Secondary",
+        "AI generated",
+        "Verification status"
+      ],
+      "criteria": [
+        "Bilingual queries",
+        "Inclusion/exclusion",
+        "No guaranteed-real bibliography from chat"
+      ],
+      "boundaries": [
+        "Avoid: AI as evidence",
+        "Avoid: unverified DOIs",
+        "Avoid: treating snippets as close reading"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "高中生專題想研究生成式 AI 對學習方式的影響，一開始就請 AI 列出十篇論文。",
+      "wrong": "把 AI 給的作者與 DOI 直接寫進進度報告，沒有回 Google Scholar。",
+      "right": "先做中英關鍵字、納入「學習行為／實證研究」、排除「產品廣告」，再自己搜尋並標未核對／已核對。",
+      "result": "一份可執行的資料與文獻搜尋策略。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "A high-school project on generative AI and study habits asks AI for ten papers first.",
+      "wrong": "Paste AI authors and DOIs into a progress report without Scholar.",
+      "right": "Build bilingual keywords, include empirical learning studies, exclude product ads, then search and mark verification.",
+      "result": "A usable Research Search Plan."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "從 RQ 拆關鍵字與同義詞",
+        "why": "詞不對就搜不到",
+        "input": "研究問題畫布",
+        "output": "詞表",
+        "check": "是否含中英"
+      },
+      {
+        "do": "分級來源與篩選標準",
+        "why": "避免把廣告當文獻",
+        "input": "詞表",
+        "output": "來源計畫",
+        "check": "是否寫出排除標準"
+      },
+      {
+        "do": "用主 Prompt 產出策略表",
+        "why": "補布林邏輯與查證欄",
+        "input": "詞表+來源",
+        "output": "搜尋策略初稿",
+        "check": "是否禁止保證真實書目"
+      },
+      {
+        "do": "到正式資料庫實際搜 1 輪",
+        "why": "AI 不能代替搜尋",
+        "input": "策略表",
+        "output": "題名清單（自己貼）",
+        "check": "是否標查證狀態"
+      },
+      {
+        "do": "存檔",
+        "why": "第 4 課要精讀已核對來源",
+        "input": "定稿",
+        "output": "成果包",
+        "check": "刷新後仍在"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Split keywords from the RQ",
+        "why": "Wrong terms miss sources",
+        "input": "Canvas",
+        "output": "Term list",
+        "check": "Chinese and English?"
+      },
+      {
+        "do": "Tier sources and write filters",
+        "why": "Ads are not literature",
+        "input": "Terms",
+        "output": "Source plan",
+        "check": "Exclusions written?"
+      },
+      {
+        "do": "Generate the plan with the prompt",
+        "why": "Add Boolean and status columns",
+        "input": "Terms+sources",
+        "output": "Plan draft",
+        "check": "No guaranteed bibliography?"
+      },
+      {
+        "do": "Run one real database search",
+        "why": "AI cannot replace search",
+        "input": "Plan",
+        "output": "Title list you pasted",
+        "check": "Statuses marked?"
+      },
+      {
+        "do": "Save",
+        "why": "Lesson 4 needs verified sources",
+        "input": "Final",
+        "output": "Package",
+        "check": "Still there after refresh?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "開始找資料前，先設計搜尋詞與來源分級時使用",
+      "fields": [
+        "[請填寫研究問題]",
+        "[請填寫]",
+        "[請填寫]"
+      ],
+      "body": "你是學術搜尋策略教練。你沒有可靠的即時學術資料庫存取，因此不得輸出「保證真實存在」的論文清單。\n\n我的研究問題：[請填寫研究問題]\n子問題：[請填寫]\n語言能力：中文／英文／兩者：[請填寫]\n我已嘗試的關鍵字：[請填寫]\n我可以使用的來源（圖書館／Google Scholar／政府統計／其他）：[請填寫]\n\n任務：產出「資料與文獻搜尋策略」，包含：\n1) 核心關鍵字與同義詞\n2) 中英文搜尋詞組合（含布林邏輯建議）\n3) 搜尋來源分級：Primary／Original（原始研究、官方統計、政府資料、原始調查）vs Secondary（review、報導、分析文章）vs AI 生成（只可當策略與解釋，不可當證據）\n4) 納入標準與排除標準\n5) 查證狀態欄：未搜尋／已搜尋未核對／已核對原文\n6) 提醒：AI 不能取代正式資料庫搜尋\n\n禁止：列出作者＋年份＋DOI 並暗示你已替我找到真文獻。若提供「可能的搜尋線索」，必須標「未查證，需回資料庫確認」。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "expected": "一份含中英關鍵字、來源、篩選與查證狀態的搜尋策略",
+      "revisionReminder": "請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "extensions": [
+        {
+          "title": "延伸：把寬搜尋收窄",
+          "body": "我的搜尋結果太多。請依我的 RQ 建議更精確的中英詞與排除詞。不要給論文書目。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use before searching, to design queries and source tiers",
+      "fields": [
+        "[Enter research question]",
+        "[Enter sub-questions]",
+        "[Enter keywords]"
+      ],
+      "body": "You are an academic search-strategy coach. You do not have reliable live database access, so you must not output a list of papers as “guaranteed real.”\n\nResearch question: [Enter research question]\nSub-questions: [Enter sub-questions]\nLanguages: Chinese / English / both: [Enter languages]\nKeywords already tried: [Enter keywords]\nSources I can use (library / Google Scholar / official statistics / other): [Enter sources]\n\nTask: Produce a Research Search Plan with:\n1) Core keywords and synonyms\n2) Chinese and English query strings (including Boolean suggestions)\n3) Source tiers: primary/original vs secondary vs AI-generated (AI is strategy/explanation only, never evidence)\n4) Inclusion and exclusion criteria\n5) Verification status: not searched / searched-unverified / verified against original\n6) A reminder that AI does not replace database search\n\nForbidden: author+year+DOI lists implied to be real finds. Any “possible lead” must be labeled unverified.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "expected": "A search plan with bilingual keywords, sources, filters, and verification status",
+      "revisionReminder": "Use the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "extensions": [
+        {
+          "title": "Extension: narrow a noisy search",
+          "body": "My search is too broad. Suggest tighter bilingual terms and exclusions from my RQ. Do not give a bibliography."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "列出中英關鍵字與同義詞",
+        "standard": "每組至少 3 個詞",
+        "mistakes": "只有「AI」一個詞",
+        "check": "能否解釋為何這些詞對準 RQ？"
+      },
+      {
+        "task": "寫來源分級與納入排除",
+        "standard": "三級都有例子",
+        "mistakes": "全部當同等證據",
+        "check": "AI 是否被標成不可當證據？"
+      },
+      {
+        "task": "實際搜尋並填查證狀態",
+        "standard": "至少 5 筆題名是你自己搜到的",
+        "mistakes": "把 AI 清單當已搜尋",
+        "check": "有沒有「已核對原文」？"
+      },
+      {
+        "task": "存成資料與文獻搜尋策略",
+        "standard": "含查證欄",
+        "mistakes": "空白儲存",
+        "check": "刷新後仍在？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "List bilingual keywords and synonyms",
+        "standard": "At least 3 terms per cluster",
+        "mistakes": "Only the word “AI”",
+        "check": "Do terms match the RQ?"
+      },
+      {
+        "task": "Write source tiers and filters",
+        "standard": "An example in each tier",
+        "mistakes": "Treat all sources as equal",
+        "check": "Is AI marked as non-evidence?"
+      },
+      {
+        "task": "Search and fill verification status",
+        "standard": "At least 5 titles you found",
+        "mistakes": "Treating an AI list as searched",
+        "check": "Any “verified against original”?"
+      },
+      {
+        "task": "Save the Research Search Plan",
+        "standard": "Includes status column",
+        "mistakes": "Blank save",
+        "check": "Visible after refresh?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "聊天視窗裡的 DOI 直接引用",
+        "why": "模型會幻覺書目",
+        "fix": "回 Scholar/圖書館打開原文再引用"
+      },
+      {
+        "error": "只搜中文部落格",
+        "why": "可能全是 Secondary 或廣告",
+        "fix": "依策略補原始研究與官方資料"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Citing a DOI from chat",
+        "why": "Models hallucinate bibliographies",
+        "fix": "Open the original in Scholar/library first"
+      },
+      {
+        "error": "Only Chinese blogs",
+        "why": "Often secondary or ads",
+        "fix": "Add primary studies and official data per your plan"
+      }
+    ],
+    "zhNextStep": "選 2–3 筆「已搜尋」來源，在第 4 課做文獻理解表。打不開原文的不要引用。",
+    "enNextStep": "Pick 2–3 searched sources for Lesson 4 notes. Do not cite what you cannot open.",
+    "zhSummary": [
+      "本堂成果：資料與文獻搜尋策略",
+      "AI 產策略不產證據",
+      "必須回正式資料庫"
+    ],
+    "enSummary": [
+      "Deliverable: Research Search Plan",
+      "AI plans, it is not evidence",
+      "Return to real databases"
+    ],
+    "zhRubric": [
+      {
+        "name": "關鍵字品質",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "來源分級",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "篩選標準",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "查證紀律",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Keyword quality",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Source tiers",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Filters",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Verification discipline",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 55 分鐘 / About 55 min",
+    "difficulty": "中階 / Intermediate",
+    "zhTitle": "第4課：用 AI 精讀文獻：摘要、比較與查證",
+    "enTitle": "Lesson 4: Use AI to closely read sources: summarize, compare, and verify",
+    "zhValueTip": "精讀的是你打開過的原文；AI 只能整理你貼上的內容，不能補假作者或假結果。",
+    "enValueTip": "Close-read sources you actually opened. AI may structure what you paste; it must not add fake authors or results.",
+    "zhOutcome": "文獻與來源理解表",
+    "enOutcome": "Source & Literature Review Notes",
+    "zhConcept": "文獻理解表是給「你已經打開的來源」用的。作者、年份、DOI、期刊都必須回正式來源確認。AI 可以幫你結構化段落，但原文沒寫的結果不能出現。Secondary 來源要標成轉述，不能當成你做過實驗。",
+    "enConcept": "These notes are for sources you opened. Author, year, DOI, and journal must be verified. AI may structure paragraphs; it must not add results missing from the original. Mark secondary sources as retellings, not as your experiment.",
+    "zhCaseStudy": "小寧後來只保留她在 Google Scholar 打開的兩篇：一篇問卷研究（Primary）、一篇教育雜誌評論（Secondary）。她把方法與限制抄進理解表，並寫「與我的 RQ 關係：方法參考／對比定義」。AI 曾補一個 p 值，她刪掉，因為原文表格裡沒有該數字。",
+    "enCaseStudy": "Ning kept two opened items: a survey study (primary) and a magazine commentary (secondary). She copied method and limits into the template and noted relevance. She deleted a p-value AI added because it was not in the original table.",
+    "zhWorkflow": [
+      "篩可打開來源",
+      "核對書目",
+      "用 Prompt 填七欄",
+      "寫與 RQ 關係",
+      "存成文獻與來源理解表"
+    ],
+    "enWorkflow": [
+      "Keep openable sources",
+      "Verify bibliography",
+      "Fill seven fields",
+      "Write relevance",
+      "Save the notes"
+    ],
+    "zhCommonMistakes": [
+      "未打開原文",
+      "AI 補作者與 DOI",
+      "把 Secondary 當原始實驗",
+      "結果超出原文",
+      "找不到來源仍引用"
+    ],
+    "enCommonMistakes": [
+      "Not opening the original",
+      "AI-filled authors/DOIs",
+      "Secondary as experiment",
+      "Results beyond the text",
+      "Citing unverifiable items"
+    ],
+    "zhExcellentExample": "兩篇可核對、七欄完整、無加料數字、Secondary 不偽裝成實驗。",
+    "enExcellentExample": "Two verifiable sources, seven fields, no extra numbers, secondary not disguised as an experiment.",
+    "zhPrompt": "你是文獻理解助教。只根據我貼上的來源內容工作，不得補充我沒提供的作者、年份、DOI 或結果。\n\n我的研究問題：[請填寫研究問題]\n來源內容（請貼上你已打開並可核對的原文段落或你的閱讀筆記）：\n[請貼上來源內容]\n我已核對的書目欄位（作者／年份／題名／期刊，核對不了就寫「未核對」）：[請填寫]\n\n任務：產出「文獻與來源理解表」，每個來源包含：\n1) 作者、年份（僅重複我已核對的；未核對就標未核對）\n2) 核心問題\n3) 方法\n4) 結果（只根據貼上內容）\n5) 限制\n6) 與我的研究有何關係（支持／對比／方法參考／不相關）\n7) 來源類型：Primary / Secondary / 其他\n\n若資訊不足，寫「原文未提供」。禁止補全沒出現的統計數字。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+    "enPrompt": "You are a literature-reading TA. Work only from source content I paste. Do not add authors, years, DOIs, or results I did not provide.\n\nResearch question: [Enter research question]\nSource content (paste passages you opened or your reading notes):\n[Paste source content]\nBibliography fields I already verified (author/year/title/journal, or “unverified”): [Enter verified fields]\n\nTask: Produce Source & Literature Review Notes for each source:\n1) Author and year only if I verified them\n2) Core question\n3) Method\n4) Results (from pasted text only)\n5) Limits\n6) Relation to my study (support / contrast / method / unrelated)\n7) Source type: primary / secondary / other\n\nIf missing, write “not in the original.” Do not complete missing statistics.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+    "zhCoachPrompt": "請檢查我的理解表是否出現原文沒有的數字或假書目。只根據我貼的內容。",
+    "enCoachPrompt": "Check my notes for numbers or citations not in what I pasted. Use only my text.",
+    "zhFeedbackPrompt": "【Prompt 3｜驗證表回饋】\n以下是我的真偽驗證表與 5 筆評等：\n（貼上）\n請指出評等是否過寬／過嚴、理由是否具體，並給可重用於所有報告的標準模板與三條硬規則。",
+    "enFeedbackPrompt": "[Prompt 3 | Checklist Feedback] Judge rating calibration and reason specificity; provide a reusable template and three hard rules.",
+    "zhExample": "來源A（Primary）：作者已核對；方法＝問卷；結果只寫原文表格中的數字；限制＝樣本為單一學校。來源B 打不開＝不列入、不引用。",
+    "enExample": "Source A (primary): verified author; survey method; results only from the table; limit = one school. Source B unopenable = drop, do not cite.",
+    "zhPractice": "打開並核對 2 個來源。；填七欄。；標分級與相關性。；存理解表。",
+    "enPractice": "Open and verify 2 sources.; Fill seven fields.; Mark tier and relevance.; Save notes.",
+    "zhQuizItems": [
+      {
+        "q": "驗證 AI 資訊真偽時，最不該省略的步驟是？",
+        "options": [
+          "只看語氣是否自信",
+          "回原資料核對書目、證據與脈絡",
+          "只要有圖表就接受",
+          "完全依閱讀次數判斷"
+        ],
+        "answer": 1,
+        "explain": "真偽驗證以原資料為準，不是看 AI 自信程度。"
+      },
+      {
+        "q": "下列哪種情況最像「引用幻覺」風險？",
+        "options": [
+          "AI 給出篇名但原庫找不到對應文獻",
+          "你亲自在 Scholar 打開並核對過的論文",
+          "老師指定教科書頁碼",
+          "你實驗室原始數據紀錄"
+        ],
+        "answer": 0,
+        "explain": "找不到對應文獻的書目是典型幻覺／錯誤引用風險。"
+      },
+      {
+        "q": "把來源標成「僅啟發、不可直接引用」的主要目的是？",
+        "options": [
+          "讓報告看起來資料比較多",
+          "區分思路刺激與可作為證據的資料，降低誤用",
+          "避免做任何查證",
+          "讓 AI 自動負責學術倫理"
+        ],
+        "answer": 1,
+        "explain": "分級使用可避免把弱證據寫進核心論證。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "When verifying AI information, you must not skip?",
+        "options": [
+          "Checking whether the tone sounds confident",
+          "Verifying bibliography, evidence, and context in originals",
+          "Accepting any chart as proof",
+          "Judging only by view counts"
+        ],
+        "answer": 1,
+        "explain": "Originals decide authenticity, not confident tone."
+      },
+      {
+        "q": "Which looks most like a citation-hallucination risk?",
+        "options": [
+          "AI provides a paper title that cannot be found in real databases",
+          "A paper you opened and verified in Scholar",
+          "An assigned textbook page",
+          "Your lab’s raw data log"
+        ],
+        "answer": 0,
+        "explain": "Unfindable citations are a classic hallucination risk."
+      },
+      {
+        "q": "Why mark a source “inspire-only”?",
+        "options": [
+          "To inflate the reference count",
+          "To separate idea sparks from citable evidence and reduce misuse",
+          "To avoid all verification",
+          "To make AI responsible for integrity"
+        ],
+        "answer": 1,
+        "explain": "Use-level labels prevent weak evidence from entering core claims."
+      }
+    ],
+    "zhNotePrompt": "為每篇來源貼：已核對書目、方法、結果、限制、與 RQ 關係。",
+    "enNotePrompt": "For each source paste verified citation, method, results, limits, and RQ relevance.",
+    "zhDeliverableChecklist": [
+      "至少 2 個來源是自己打開的",
+      "每篇有作者／年份／問題／方法／結果／限制／相關性",
+      "未核對欄位已標明且未引用",
+      "結果沒有超出貼上原文",
+      "已標 Primary 或 Secondary",
+      "找不到原始來源的項目已刪除"
+    ],
+    "enDeliverableChecklist": [
+      "At least 2 sources you opened yourself",
+      "Each has author/year/question/method/results/limits/relevance",
+      "Unverified fields marked and not cited",
+      "Results do not exceed the original",
+      "Primary or secondary tagged",
+      "Unverifiable items removed"
+    ],
+    "zhScorecard": [
+      "驗證完整",
+      "幻覺防範",
+      "評等合理",
+      "引用安全",
+      "可重用"
+    ],
+    "enScorecard": [
+      "Verification coverage",
+      "Hallucination defense",
+      "Rating quality",
+      "Citation safety",
+      "Reusability"
+    ],
+    "id": "research-competition-L4",
+    "lessonKey": "research-competition-L4",
+    "zhOutputName": "文獻與來源理解表",
+    "enOutputName": "Source & Literature Review Notes",
+    "zhObjectives": [
+      "為至少 2 個已打開來源填理解表",
+      "記錄作者、年份、問題、方法、結果、限制",
+      "說明與自己研究的關係",
+      "未核對欄位一律標未核對，不引用",
+      "存成文獻與來源理解表"
+    ],
+    "enObjectives": [
+      "Complete notes for at least 2 opened sources",
+      "Record author, year, question, method, results, limits",
+      "State relevance to your study",
+      "Mark unverified fields and do not cite them",
+      "Save Source & Literature Review Notes"
+    ],
+    "zhWhyItMatters": {
+      "problem": "只讓 AI 摘要網頁碎片，容易把次級轉述當成原始結果，或補上原文沒有的數字。",
+      "ineffective": "沒打開 PDF 就寫「根據某學者」，或請 AI 補全殘缺書目。",
+      "solution": "只貼已核對原文，用固定欄位整理，找不到來源就不引用。"
+    },
+    "enWhyItMatters": {
+      "problem": "AI summaries of snippets turn secondary retellings into “results,” or invent numbers.",
+      "ineffective": "Citing “a scholar” without opening the PDF, or asking AI to complete a broken citation.",
+      "solution": "Paste verified originals into a fixed template; do not cite what you cannot verify."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "先打開原文再摘要",
+        "不足就寫未提供",
+        "相關性要對準自己的 RQ"
+      ],
+      "terms": [
+        "核心問題",
+        "方法",
+        "限制",
+        "與我的研究關係"
+      ],
+      "criteria": [
+        "每篇至少七欄",
+        "未核對不引用",
+        "結果不超出貼上內容"
+      ],
+      "boundaries": [
+        "避免：AI 補 DOI",
+        "避免：把報導當實驗結果",
+        "避免：未讀完就比較十篇"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Open the original first",
+        "Write “not provided” when missing",
+        "Relevance must match your RQ"
+      ],
+      "terms": [
+        "Core question",
+        "Method",
+        "Limits",
+        "Relation to my study"
+      ],
+      "criteria": [
+        "Seven fields per source",
+        "No cite if unverified",
+        "Results stay inside pasted text"
+      ],
+      "boundaries": [
+        "Avoid: AI-filled DOIs",
+        "Avoid: news as experimental results",
+        "Avoid: comparing ten unread papers"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "小寧把 AI 聊天裡的一篇「2023 年某期刊」摘要貼進筆記，其實打不開原文。",
+      "wrong": "請 AI 補作者全名與 DOI，並寫成已精讀。",
+      "right": "刪除無法打開的來源；對兩篇已打開的原文填七欄，並標 Primary/Secondary。",
+      "result": "一份只含可核對來源的文獻與來源理解表。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Ning pasted a chat summary of a “2023 journal article” she could not open.",
+      "wrong": "Ask AI to fill author names and DOI and mark it as close-read.",
+      "right": "Drop unreachable items; complete seven fields on two opened sources; mark primary/secondary.",
+      "result": "Literature notes that only include verifiable sources."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "只選打得開的來源",
+        "why": "打不開就不能精讀",
+        "input": "搜尋策略清單",
+        "output": "2–3 篇可讀名單",
+        "check": "是否能打開全文或可核對段落"
+      },
+      {
+        "do": "核對作者年份題名期刊",
+        "why": "書目錯誤會傳染到報告",
+        "input": "原文首頁",
+        "output": "已核對書目",
+        "check": "未核對是否標明"
+      },
+      {
+        "do": "貼段落用主 Prompt 填表",
+        "why": "結構化但不加料",
+        "input": "原文+RQ",
+        "output": "理解表初稿",
+        "check": "有無原文沒有的數字"
+      },
+      {
+        "do": "寫與自己 RQ 的關係",
+        "why": "避免精讀與題目脫鉤",
+        "input": "理解表",
+        "output": "相關性欄",
+        "check": "能否說支持／對比／方法"
+      },
+      {
+        "do": "存檔",
+        "why": "設計與論證會用到",
+        "input": "定稿",
+        "output": "成果包",
+        "check": "刷新後仍在"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Keep only openable sources",
+        "why": "Unread items are not close-read",
+        "input": "Search list",
+        "output": "2–3 readable items",
+        "check": "Can you open text?"
+      },
+      {
+        "do": "Verify author, year, title, venue",
+        "why": "Bad bibliography spreads",
+        "input": "First page",
+        "output": "Verified citation",
+        "check": "Unverified marked?"
+      },
+      {
+        "do": "Paste passages into the prompt",
+        "why": "Structure without adding facts",
+        "input": "Original+RQ",
+        "output": "Notes draft",
+        "check": "Any numbers not in the original?"
+      },
+      {
+        "do": "Write relevance to your RQ",
+        "why": "Avoid reading off-topic",
+        "input": "Notes",
+        "output": "Relevance field",
+        "check": "Support, contrast, or method?"
+      },
+      {
+        "do": "Save",
+        "why": "Design and argument reuse this",
+        "input": "Final",
+        "output": "Package",
+        "check": "Still there after refresh?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "已打開原文、要整理單篇理解時使用",
+      "fields": [
+        "[請填寫研究問題]",
+        "[請貼上來源內容]",
+        "[請填寫]"
+      ],
+      "body": "你是文獻理解助教。只根據我貼上的來源內容工作，不得補充我沒提供的作者、年份、DOI 或結果。\n\n我的研究問題：[請填寫研究問題]\n來源內容（請貼上你已打開並可核對的原文段落或你的閱讀筆記）：\n[請貼上來源內容]\n我已核對的書目欄位（作者／年份／題名／期刊，核對不了就寫「未核對」）：[請填寫]\n\n任務：產出「文獻與來源理解表」，每個來源包含：\n1) 作者、年份（僅重複我已核對的；未核對就標未核對）\n2) 核心問題\n3) 方法\n4) 結果（只根據貼上內容）\n5) 限制\n6) 與我的研究有何關係（支持／對比／方法參考／不相關）\n7) 來源類型：Primary / Secondary / 其他\n\n若資訊不足，寫「原文未提供」。禁止補全沒出現的統計數字。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "expected": "每篇含作者、問題、方法、結果、限制與相關性的理解表",
+      "revisionReminder": "請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "extensions": [
+        {
+          "title": "延伸：兩篇對照",
+          "body": "請只根據我貼的兩篇筆記做比較表（問題／方法／結果／限制）。不要加入第三篇我不存在的文獻。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use after you opened the original and need structured notes",
+      "fields": [
+        "[Enter research question]",
+        "[Paste source content]",
+        "[Enter verified fields]"
+      ],
+      "body": "You are a literature-reading TA. Work only from source content I paste. Do not add authors, years, DOIs, or results I did not provide.\n\nResearch question: [Enter research question]\nSource content (paste passages you opened or your reading notes):\n[Paste source content]\nBibliography fields I already verified (author/year/title/journal, or “unverified”): [Enter verified fields]\n\nTask: Produce Source & Literature Review Notes for each source:\n1) Author and year only if I verified them\n2) Core question\n3) Method\n4) Results (from pasted text only)\n5) Limits\n6) Relation to my study (support / contrast / method / unrelated)\n7) Source type: primary / secondary / other\n\nIf missing, write “not in the original.” Do not complete missing statistics.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "expected": "Notes per source with author, question, method, results, limits, and relevance",
+      "revisionReminder": "Use the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "extensions": [
+        {
+          "title": "Extension: two-source compare",
+          "body": "Compare only the two notes I paste (question/method/results/limits). Do not add a third source I do not have."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "打開至少 2 個來源並核對書目",
+        "standard": "打不開的刪除",
+        "mistakes": "用 AI 書目充數",
+        "check": "能否指出你在哪裡打開？"
+      },
+      {
+        "task": "填七欄理解表",
+        "standard": "結果不超出原文",
+        "mistakes": "AI 補 p 值",
+        "check": "每一數字能否指回段落？"
+      },
+      {
+        "task": "標 Primary/Secondary 與相關性",
+        "standard": "評論不可當你的實驗結果",
+        "mistakes": "全部標 Primary",
+        "check": "能否向同學解釋分級？"
+      },
+      {
+        "task": "存成文獻與來源理解表",
+        "standard": "含未核對標示",
+        "mistakes": "空白儲存",
+        "check": "刷新後仍在？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Open at least 2 sources and verify citations",
+        "standard": "Drop unopenable items",
+        "mistakes": "Padding with AI bibliography",
+        "check": "Where did you open them?"
+      },
+      {
+        "task": "Fill seven fields",
+        "standard": "Results inside the original",
+        "mistakes": "AI-added p-values",
+        "check": "Can each number be pointed to?"
+      },
+      {
+        "task": "Mark primary/secondary and relevance",
+        "standard": "Commentary is not your experiment",
+        "mistakes": "Everything marked primary",
+        "check": "Can you explain the tier?"
+      },
+      {
+        "task": "Save the notes",
+        "standard": "Includes unverified flags",
+        "mistakes": "Blank save",
+        "check": "Visible after refresh?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "請 AI 補全殘缺引用",
+        "why": "補上的多半無法核對",
+        "fix": "回資料庫重查；查不到就不引用"
+      },
+      {
+        "error": "摘要裡出現原文沒有的因果結論",
+        "why": "模型會過度推論",
+        "fix": "對照原文討論／限制章刪除加料"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Ask AI to complete a broken citation",
+        "why": "Filled fields are often unverifiable",
+        "fix": "Re-search the database; if missing, do not cite"
+      },
+      {
+        "error": "Summary adds causality the paper never claimed",
+        "why": "Models over-infer",
+        "fix": "Delete additions after checking discussion/limits"
+      }
+    ],
+    "zhNextStep": "帶著已核對文獻進入第 5 課，寫研究設計草案。方法文獻也要能指回理解表。",
+    "enNextStep": "Take verified notes into Lesson 5 to draft research design. Method citations must point back to these notes.",
+    "zhSummary": [
+      "本堂成果：文獻與來源理解表",
+      "只整理已打開原文",
+      "查不到就不引用"
+    ],
+    "enSummary": [
+      "Deliverable: Source & Literature Review Notes",
+      "Only opened originals",
+      "Do not cite what you cannot verify"
+    ],
+    "zhRubric": [
+      {
+        "name": "忠於原文",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "欄位完整",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "相關性清楚",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "引用可核對",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Faithful to original",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Complete fields",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Clear relevance",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Citable only if verified",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 55 分鐘 / About 55 min",
+    "difficulty": "中階 / Intermediate",
+    "zhTitle": "第5課：建立文獻筆記與引用格式",
+    "enTitle": "Lesson 5: Build literature notes and citation format",
+    "zhValueTip": "研究設計要能指回已核對文獻；AI 只協助結構化，引用格式錯了就回原文改，不得假造書目。",
+    "enValueTip": "Design must point to verified sources. AI only structures; fix citation format from the original—never invent a bibliography.",
+    "zhOutcome": "研究設計草案",
+    "enOutcome": "Research Design Draft",
+    "zhConcept": "研究設計草案說明你將如何回答 RQ：找誰、用什麼方法、資料從哪來、打算怎麼分析、有何限制與倫理風險。本課同時要求：若提到前人方法，書目必須來自第 4 課已核對筆記。本網站沒有自動倫理審查或自動引用驗證。",
+    "enConcept": "The design draft explains how you will answer the RQ: who, method, data, planned analysis, limits, and ethics. Prior methods you mention must come from Lesson 4 verified notes. This site has no auto ethics review or citation validator.",
+    "zhCaseStudy": "訂閱服務競賽小組把「500 份問卷已回收」從草案刪除。改成：對象＝有使用過至少一種影音或學習訂閱的大學生；方法＝半結構訪談（先）＋ 10 題態度問卷（後）；倫理＝說明可退出、不蒐集學號。文獻只引用他們真正打開的一篇服務品質問卷範例，APA 逗點由他們對照原文修正，沒有交給 AI 發明年份。",
+    "enCaseStudy": "The subscription team deleted “500 surveys returned.” They planned interviews first, then a 10-item attitude survey, with withdrawal and no student-ID collection. They cited one opened questionnaire example and fixed APA punctuation themselves instead of letting AI invent the year.",
+    "zhWorkflow": [
+      "對齊 RQ 與可接觸對象",
+      "選方法並寫理由",
+      "補限制倫理與已核對引用",
+      "用 Prompt 結構化",
+      "存成研究設計草案"
+    ],
+    "enWorkflow": [
+      "Align RQ and access",
+      "Choose method with rationale",
+      "Add limits, ethics, verified citations",
+      "Structure with the prompt",
+      "Save the design draft"
+    ],
+    "zhCommonMistakes": [
+      "把計畫 n 寫成已完成",
+      "假造倫理批准",
+      "引用未核對文獻",
+      "方法與 RQ 脫鉤",
+      "讓 AI 產生假問卷答案"
+    ],
+    "enCommonMistakes": [
+      "Planned n written as completed",
+      "Fake ethics approval",
+      "Unverified citations",
+      "Method off the RQ",
+      "AI-generated survey answers"
+    ],
+    "zhExcellentExample": "方法對準 RQ、n 為計畫、倫理具體、引用可回原文。",
+    "enExcellentExample": "Method matches RQ, n is planned, ethics concrete, citations traceable.",
+    "zhPrompt": "你是研究設計教練。你只能把我提供的問題與方法選擇結構化，不得假造樣本數、回收率、實驗結果或已完成的倫理審查。\n\n我的研究問題：[請填寫研究問題]\n子問題：[請填寫]\n我傾向的方法：[請填寫研究方法]\n可接觸對象或資料：[請填寫]\n時間限制：[請填寫]\n已核對文獻筆記（可選）：[請貼上來源內容]\n\n任務：產出「研究設計草案」，包含：\n1) 研究問題\n2) 對象與抽樣／邀請方式（只根據我能接觸的人；人數寫計畫，不寫假完成數）\n3) 方法與選法理由\n4) 變數或分析焦點（若為質性，寫分析焦點而非假變數）\n5) 資料來源\n6) 預定分析方法（計畫，不是結果）\n7) 限制\n8) 倫理風險（知情同意、可退出、去識別；本平台沒有自動倫理審查）\n9) 引用：僅使用我已核對的來源；沒有則留空並標「待補，不引用」\n\n禁止產生假數據、假 IRB 批准、假問卷回收。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+    "enPrompt": "You are a research-design coach. Structure my question and method choices. Do not invent sample sizes completed, response rates, experimental results, or ethics-board approval.\n\nResearch question: [Enter research question]\nSub-questions: [Enter sub-questions]\nPreferred method: [Enter research method]\nPeople or data I can access: [Enter access]\nTime limit: [Enter time]\nVerified literature notes (optional): [Paste source content]\n\nTask: Produce a Research Design Draft with:\n1) Research question\n2) Population and invitation plan (planned n, not fake completed n)\n3) Method and rationale\n4) Variables or analytic focus\n5) Data sources\n6) Planned analysis (plan, not results)\n7) Limits\n8) Ethics risks (consent, withdrawal, de-identification; this site has no auto ethics review)\n9) Citations only from sources I verified; otherwise “to add, do not cite”\n\nDo not generate fake data, fake IRB approval, or fake survey returns.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+    "zhCoachPrompt": "請檢查我的研究設計是否把計畫寫成結果，引用能否回原文。不要補假文獻。",
+    "enCoachPrompt": "Check whether my design writes plans as results and whether citations trace to originals. Add no fake sources.",
+    "zhFeedbackPrompt": "【Prompt 3｜抄襲風險與引用對照檢查】\n大綱主張：\n（貼上）\n文獻卡：\n（貼上）\n一段我改寫的文字：\n（貼上）\n請檢查：改寫是否仍需引用、是否過近原文、主張與文獻用途是否匹配、有無可能的假引用風險描述。給修改建議與一段示範性「正確改寫＋文內引用」但不虛構頁碼；頁碼請標［待填］。",
+    "enFeedbackPrompt": "[Prompt 3 | Plagiarism & Alignment Check] Review my paraphrase and cards for attribution risk and claim-evidence fit; demo a correct paraphrase with [page pending].",
+    "zhExample": "方法＝訪談＋短問卷；n＝計畫 12 人，不是已完成 12 人；引用格式待對照原文；無 IRB 證書宣稱。",
+    "enExample": "Method = interviews + short survey; n = planned 12, not completed 12; citation format to check against the original; no IRB-certificate claim.",
+    "zhPractice": "寫對象與邀請。；完成方法與分析計畫。；補倫理與已核對引用。；存設計草案。",
+    "enPractice": "Write population and invites.; Finish method and analysis plan.; Add ethics and verified citations.; Save the draft.",
+    "zhQuizItems": [
+      {
+        "q": "AI 產生的論文書目應如何處理？",
+        "options": [
+          "直接貼進參考書目",
+          "預設不可信，必須用 Scholar／Crossref 等驗證後才用",
+          "只要格式像 APA 就可以",
+          "越多越好，真假無關"
+        ],
+        "answer": 1,
+        "explain": "AI 可能幻覺出不存在的文獻。"
+      },
+      {
+        "q": "關於 APA 第七版與改寫，下列何者正確？",
+        "options": [
+          "改寫後就不必引用",
+          "改寫仍需引用；直接引句通常需要頁碼",
+          "只有英文報告才要引用",
+          "有參考書目就不必文內引用"
+        ],
+        "answer": 1,
+        "explain": "思想來源要歸因；直接引句需頁碼等資訊。"
+      },
+      {
+        "q": "文獻卡最重要的功能是？",
+        "options": [
+          "收集漂亮封面截圖",
+          "對應大綱證據空位並記錄用途與可追溯資訊",
+          "取代閱讀原文",
+          "讓 AI 自動生成假數據"
+        ],
+        "answer": 1,
+        "explain": "文獻卡是為論證服務的可追溯筆記。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "How should you treat AI-generated bibliography entries?",
+        "options": [
+          "Paste them immediately",
+          "Treat as unverified until checked in Scholar/Crossref etc.",
+          "APA-looking format is enough",
+          "Quantity matters more than existence"
+        ],
+        "answer": 1,
+        "explain": "Models can hallucinate sources."
+      },
+      {
+        "q": "Which statement about APA 7th and paraphrasing is correct?",
+        "options": [
+          "Paraphrase needs no citation",
+          "Paraphrase still needs citation; quotations usually need page numbers",
+          "Only English papers need citations",
+          "A reference list removes need for in-text citations"
+        ],
+        "answer": 1,
+        "explain": "Attribute ideas; quote pages as required."
+      },
+      {
+        "q": "What is the main job of a literature card?",
+        "options": [
+          "Collect cover screenshots",
+          "Map sources to outline gaps with use and provenance",
+          "Replace reading",
+          "Let AI invent data"
+        ],
+        "answer": 1,
+        "explain": "Cards serve argument with traceability."
+      }
+    ],
+    "zhNotePrompt": "貼上方法、對象計畫、倫理風險、已核對引用清單。",
+    "enNotePrompt": "Paste method, population plan, ethics risks, and verified citation list.",
+    "zhDeliverableChecklist": [
+      "有研究問題、對象、方法、資料來源、分析計畫",
+      "有限制與倫理風險（含同意與可退出）",
+      "人數為計畫而非已完成結果",
+      "引用皆可回已核對來源或標待補",
+      "沒有假數據或假審查",
+      "沒有宣稱本站提供倫理審查或 Turnitin"
+    ],
+    "enDeliverableChecklist": [
+      "Question, population, method, sources, analysis plan",
+      "Limits and ethics risks including consent",
+      "n is planned, not completed",
+      "Citations verified or marked to-add",
+      "No fake data or fake review",
+      "No claim that this site provides ethics review or Turnitin"
+    ],
+    "zhScorecard": [
+      "真實可驗證",
+      "對應論點",
+      "APA 正確",
+      "改寫合規",
+      "未讀不引"
+    ],
+    "enScorecard": [
+      "Verifiable",
+      "Claim-mapped",
+      "APA accuracy",
+      "Paraphrase compliance",
+      "No unread cites"
+    ],
+    "id": "research-competition-L5",
+    "lessonKey": "research-competition-L5",
+    "zhOutputName": "研究設計草案",
+    "enOutputName": "Research Design Draft",
+    "zhObjectives": [
+      "寫出對象、方法、資料來源與分析計畫",
+      "把方法選擇對準 RQ 與子問題",
+      "列出限制與倫理風險",
+      "引用只使用已核對來源並標格式待人工核對",
+      "存成研究設計草案"
+    ],
+    "enObjectives": [
+      "Write population, method, sources, and analysis plan",
+      "Align method with the RQ and sub-questions",
+      "List limits and ethics risks",
+      "Cite only verified sources; mark format for human check",
+      "Save a Research Design Draft"
+    ],
+    "zhWhyItMatters": {
+      "problem": "沒有設計就收集資料，容易題目與證據對不準，或事後用 AI 補假樣本。",
+      "ineffective": "複製一篇論文方法卻改不了對象，或請 AI 產生已完成的 n=300。",
+      "solution": "用草案固定問題、對象、方法、限制與倫理；文獻筆記只提供已核對的方法參考。"
+    },
+    "enWhyItMatters": {
+      "problem": "Collecting data without a design misaligns evidence, or invites fake n from AI.",
+      "ineffective": "Copying another paper’s method you cannot run, or asking AI for n=300 completed.",
+      "solution": "Lock question, population, method, limits, and ethics; literature notes only supply verified method references."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "方法服務問題",
+        "計畫不是結果",
+        "引用必須可回原文"
+      ],
+      "terms": [
+        "對象",
+        "方法",
+        "變數／分析焦點",
+        "倫理風險"
+      ],
+      "criteria": [
+        "選法有理由",
+        "人數是計畫不是完成數",
+        "有限制與同意"
+      ],
+      "boundaries": [
+        "避免：假 IRB",
+        "避免：假回收率",
+        "避免：未核對引用"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Methods serve questions",
+        "A plan is not a result",
+        "Citations must trace to originals"
+      ],
+      "terms": [
+        "Population",
+        "Method",
+        "Variables / focus",
+        "Ethics risks"
+      ],
+      "criteria": [
+        "Rationale for method",
+        "n is planned not completed",
+        "Limits and consent"
+      ],
+      "boundaries": [
+        "Avoid: fake IRB",
+        "Avoid: fake response rates",
+        "Avoid: unverified citations"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "商業競賽團隊想研究「學生訂閱服務需求」，還沒設計就請 AI 寫「我們調查了 500 人」。",
+      "wrong": "把假樣本寫進設計，並用 AI 編造兩篇方法論文支撐。",
+      "right": "寫計畫：方便抽樣校園社團 15 人訪談＋短問卷；n 為目標；引用只留已打開的一篇方法章。",
+      "result": "一份誠實的研究設計草案。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "A business-competition team studying student subscription demand asks AI to write “we surveyed 500 people” before designing.",
+      "wrong": "Put a fake sample in the design and invent two methods papers.",
+      "right": "Plan 15 club interviews plus a short survey; n is a target; cite only one opened methods chapter.",
+      "result": "An honest Research Design Draft."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "對齊 RQ 與可接觸對象",
+        "why": "設計不能建立在虛構樣本",
+        "input": "畫布+定義表",
+        "output": "對象計畫",
+        "check": "是否寫得出邀請管道"
+      },
+      {
+        "do": "選方法並寫理由",
+        "why": "方法要能回答子問題",
+        "input": "子問題",
+        "output": "選法說明",
+        "check": "每子問題是否有證據類型"
+      },
+      {
+        "do": "補限制、倫理、已核對引用",
+        "why": "平台不會自動審查",
+        "input": "方法草稿",
+        "output": "設計草案",
+        "check": "有無假完成數"
+      },
+      {
+        "do": "用主 Prompt 結構化",
+        "why": "檢查缺欄",
+        "input": "草稿",
+        "output": "完整草案",
+        "check": "引用是否皆可回理解表"
+      },
+      {
+        "do": "存檔",
+        "why": "第 6 課分析計畫要沿用",
+        "input": "定稿",
+        "output": "成果包",
+        "check": "刷新後仍在"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Align RQ with accessible people",
+        "why": "Design cannot rest on a fictional sample",
+        "input": "Canvas+definition",
+        "output": "Population plan",
+        "check": "Invitation path written?"
+      },
+      {
+        "do": "Choose a method with rationale",
+        "why": "Method must answer sub-questions",
+        "input": "Sub-questions",
+        "output": "Method note",
+        "check": "Evidence type per sub-question?"
+      },
+      {
+        "do": "Add limits, ethics, verified citations",
+        "why": "The site will not review ethics for you",
+        "input": "Method draft",
+        "output": "Design draft",
+        "check": "Any fake completed n?"
+      },
+      {
+        "do": "Structure with the main prompt",
+        "why": "Catch missing fields",
+        "input": "Draft",
+        "output": "Full draft",
+        "check": "Every citation back to notes?"
+      },
+      {
+        "do": "Save",
+        "why": "Lesson 6 reuses this",
+        "input": "Final",
+        "output": "Package",
+        "check": "Still there after refresh?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "要把 RQ 收成可執行研究設計時使用",
+      "fields": [
+        "[請填寫研究問題]",
+        "[請填寫研究方法]",
+        "[請貼上來源內容]"
+      ],
+      "body": "你是研究設計教練。你只能把我提供的問題與方法選擇結構化，不得假造樣本數、回收率、實驗結果或已完成的倫理審查。\n\n我的研究問題：[請填寫研究問題]\n子問題：[請填寫]\n我傾向的方法：[請填寫研究方法]\n可接觸對象或資料：[請填寫]\n時間限制：[請填寫]\n已核對文獻筆記（可選）：[請貼上來源內容]\n\n任務：產出「研究設計草案」，包含：\n1) 研究問題\n2) 對象與抽樣／邀請方式（只根據我能接觸的人；人數寫計畫，不寫假完成數）\n3) 方法與選法理由\n4) 變數或分析焦點（若為質性，寫分析焦點而非假變數）\n5) 資料來源\n6) 預定分析方法（計畫，不是結果）\n7) 限制\n8) 倫理風險（知情同意、可退出、去識別；本平台沒有自動倫理審查）\n9) 引用：僅使用我已核對的來源；沒有則留空並標「待補，不引用」\n\n禁止產生假數據、假 IRB 批准、假問卷回收。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "expected": "一份含對象、方法、資料、分析計畫、限制與倫理風險的設計草案",
+      "revisionReminder": "請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "extensions": [
+        {
+          "title": "延伸：誘導題／倫理檢查",
+          "body": "請檢查我貼上的訪綱或問卷草稿是否有誘導題、雙重問題，以及知情同意是否缺漏。不要幫我填假回覆。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when turning the RQ into an executable design",
+      "fields": [
+        "[Enter research question]",
+        "[Enter research method]",
+        "[Paste source content]"
+      ],
+      "body": "You are a research-design coach. Structure my question and method choices. Do not invent sample sizes completed, response rates, experimental results, or ethics-board approval.\n\nResearch question: [Enter research question]\nSub-questions: [Enter sub-questions]\nPreferred method: [Enter research method]\nPeople or data I can access: [Enter access]\nTime limit: [Enter time]\nVerified literature notes (optional): [Paste source content]\n\nTask: Produce a Research Design Draft with:\n1) Research question\n2) Population and invitation plan (planned n, not fake completed n)\n3) Method and rationale\n4) Variables or analytic focus\n5) Data sources\n6) Planned analysis (plan, not results)\n7) Limits\n8) Ethics risks (consent, withdrawal, de-identification; this site has no auto ethics review)\n9) Citations only from sources I verified; otherwise “to add, do not cite”\n\nDo not generate fake data, fake IRB approval, or fake survey returns.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "expected": "A design draft with population, method, data, analysis plan, limits, and ethics risks",
+      "revisionReminder": "Use the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "extensions": [
+        {
+          "title": "Extension: leading-item and ethics check",
+          "body": "Check my pasted instrument for leading or double-barreled items and missing consent language. Do not fill fake responses."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "寫對象與邀請方式",
+        "standard": "必須是你能接觸的管道",
+        "mistakes": "寫全國隨機抽樣但你做不到",
+        "check": "下週能發出第一封邀請嗎？"
+      },
+      {
+        "task": "完成方法、資料、分析計畫",
+        "standard": "分析是預定不是結果",
+        "mistakes": "寫出顯著差異但尚未收集資料",
+        "check": "有沒有假 p 值？"
+      },
+      {
+        "task": "寫倫理風險與已核對引用",
+        "standard": "沒有來源就留白",
+        "mistakes": "AI 補兩篇方法文獻",
+        "check": "每筆能否打開原文？"
+      },
+      {
+        "task": "存成研究設計草案",
+        "standard": "九個區塊齊",
+        "mistakes": "空白儲存",
+        "check": "刷新後仍在？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Write population and invitation path",
+        "standard": "Must be a channel you have",
+        "mistakes": "National random sample you cannot run",
+        "check": "Can you send the first invite next week?"
+      },
+      {
+        "task": "Finish method, data, analysis plan",
+        "standard": "Analysis is planned not found",
+        "mistakes": "Writing significant differences with no data",
+        "check": "Any fake p-values?"
+      },
+      {
+        "task": "Write ethics risks and verified citations",
+        "standard": "Leave blank if no source",
+        "mistakes": "AI added two methods papers",
+        "check": "Can you open each original?"
+      },
+      {
+        "task": "Save the Research Design Draft",
+        "standard": "Core blocks present",
+        "mistakes": "Blank save",
+        "check": "Visible after refresh?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "設計裡出現「已證明有效」",
+        "why": "尚未收集資料",
+        "fix": "改成預定步驟與成功標準"
+      },
+      {
+        "error": "APA 由 AI 一次生成",
+        "why": "標點與年份常錯",
+        "fix": "逐筆對照原文首頁"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Design says “already proven effective”",
+        "why": "No data yet",
+        "fix": "Write planned steps and success criteria"
+      },
+      {
+        "error": "APA generated in one shot",
+        "why": "Punctuation and years often wrong",
+        "fix": "Check each item against the first page"
+      }
+    ],
+    "zhNextStep": "用這份設計寫第 6 課資料整理與分析計畫。還沒有資料就不要寫結果。",
+    "enNextStep": "Use this design for Lesson 6’s data analysis plan. Do not write results if you have no data yet.",
+    "zhSummary": [
+      "本堂成果：研究設計草案",
+      "AI 只結構化",
+      "不得假造數據與審查"
+    ],
+    "enSummary": [
+      "Deliverable: Research Design Draft",
+      "AI only structures",
+      "No fake data or reviews"
+    ],
+    "zhRubric": [
+      {
+        "name": "問題方法一致",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "可執行性",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "倫理完整",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "無假數據",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Question-method fit",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Executability",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Ethics completeness",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "No fake data",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "中階 / Intermediate",
+    "zhTitle": "第6課：整理文獻觀點，建立比較與筆記結構",
+    "enTitle": "Lesson 6: Organize source viewpoints into comparison and note structures",
+    "zhValueTip": "先比較你真正擁有的資料與文獻觀點；缺的資料要標缺，不可請 AI 補值。",
+    "enValueTip": "Compare viewpoints and data you actually have. Mark gaps; do not ask AI to fill values.",
+    "zhOutcome": "資料整理與分析計畫",
+    "enOutcome": "Data Analysis Plan",
+    "zhConcept": "資料整理與分析計畫說明你有什麼、缺什麼、怎麼清、問什麼、用什麼方法、預期什麼圖、如何抓錯。文獻比較可以放在「別人怎麼做／發現什麼（已核對）」欄，不能搬進「我的結果」。AI 不得捏造缺失數據。",
+    "enConcept": "The plan states what you have, what you lack, cleaning, questions, methods, planned charts, and error checks. Literature comparison belongs in a verified “others found” column, not in “my results.” AI must not invent missing data.",
+    "zhCaseStudy": "訂閱服務小組把「AI 補 32 筆」從試算表刪除。分析計畫寫：已有＝8 份態度題；未收集＝訪談逐字稿 0；清理＝統一「每月花費」單位；分析問題＝學生最常提到的取消原因類型；預期圖＝長條圖（待有資料再畫）；檢查＝同一人重填。文獻中的產業報告百分比留在 Secondary 欄。",
+    "enCaseStudy": "The team deleted 32 AI-padded rows. The plan listed 8 attitude surveys as existing, zero transcripts, unit cleaning for spend, an analysis question on cancellation reasons, a bar chart to draw later, and a duplicate-response check. Industry-report percentages stayed in the secondary column.",
+    "zhWorkflow": [
+      "盤點已有／未有",
+      "寫清理與檢查",
+      "對準 RQ 規劃分析與圖",
+      "用 Prompt 禁止補假值",
+      "存成資料整理與分析計畫"
+    ],
+    "enWorkflow": [
+      "Inventory have/missing",
+      "Write cleaning and checks",
+      "Plan analysis and charts",
+      "Ban fake fills",
+      "Save the analysis plan"
+    ],
+    "zhCommonMistakes": [
+      "AI 補缺失值",
+      "文獻百分比當自己的結果",
+      "未收集就寫顯著",
+      "不檢查重複與單位",
+      "圖表與 RQ 無關"
+    ],
+    "enCommonMistakes": [
+      "AI-imputed gaps",
+      "Literature % as your results",
+      "Significance with no data",
+      "No duplicate/unit checks",
+      "Charts off the RQ"
+    ],
+    "zhExcellentExample": "兩欄分開、有檢查、圖無假值、文獻不混入結果。",
+    "enExcellentExample": "Two columns, checks present, charts empty of fake values, literature not mixed into results.",
+    "zhPrompt": "你是資料分析計畫教練。不得捏造缺失數據、填補假值、或輸出已完成的統計結果。\n\n我的研究問題：[請填寫研究問題]\n我實際擁有或預計收集的資料（格式、欄位、筆數計畫）：[請填寫]\n研究方法：[請填寫研究方法]\n目前缺漏：[請填寫]\n若有已核對的分析做法筆記：[請貼上來源內容]\n\n任務：產出「資料整理與分析計畫」，包含：\n1) 有哪些資料（已有／尚未收集，分開寫）\n2) 資料格式\n3) 需要清理什麼\n4) 分析問題（對準 RQ）\n5) 分析方法\n6) 預期圖表（圖表類型與要回答的問題；不是假圖數據）\n7) 如何檢查錯誤（重複、缺漏、編碼不一致）\n8) 若資料尚未收集：只輸出計畫，結果欄留空\n\n禁止：幫我填補不存在的問卷答案、訪談逐字稿或實驗數據。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+    "enPrompt": "You are a data-analysis-plan coach. Do not invent missing data, impute fake values, or output completed statistics.\n\nResearch question: [Enter research question]\nData I have or plan to collect (format, fields, planned n): [Enter data]\nMethod: [Enter research method]\nCurrent gaps: [Enter gaps]\nVerified analysis notes if any: [Paste source content]\n\nTask: Produce a Data Analysis Plan with:\n1) What data exist vs not yet collected\n2) Data format\n3) What needs cleaning\n4) Analysis questions aligned to the RQ\n5) Analysis methods\n6) Planned charts (type and question—not fake values)\n7) Error checks (duplicates, missingness, coding drift)\n8) If data are not collected yet: plan only; leave results blank\n\nForbidden: filling nonexistent survey answers, transcripts, or experimental data.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+    "zhCoachPrompt": "請檢查我的分析計畫是否把文獻當自己的結果，或請模型補值。不要幫我填假數據。",
+    "enCoachPrompt": "Check whether my plan treats literature as my results or asks the model to fill values. Fill no fake data.",
+    "zhFeedbackPrompt": "【Prompt 3｜心智圖驗收】\n以下是我的心智圖文字版與複習路徑：\n（貼上）\n請評分：中心是否可考、關係是否正確、路徑是否 15 分鐘可走完、是否過載。給精簡版結構。",
+    "enFeedbackPrompt": "[Prompt 3 | Map Review] Score center quality, relation accuracy, 15-minute path fit, and overload; provide a leaner structure.",
+    "zhExample": "已有：8 份問卷。未有：訪談。預期圖：取消原因長條圖（無數據）。錯誤檢查：重複 Email。",
+    "enExample": "Have: 8 surveys. Missing: interviews. Planned chart: cancellation-reason bars (no values yet). Check: duplicate emails.",
+    "zhPractice": "盤點已有未有。；寫清理與檢查。；規劃分析與圖（無假值）。；存分析計畫。",
+    "enPractice": "Inventory have/missing.; Write cleaning and checks.; Plan analysis and charts without fake values.; Save the plan.",
+    "zhQuizItems": [
+      {
+        "q": "心智圖用在大學筆記時，核心價值是？",
+        "options": [
+          "把字變小、塞更多內容",
+          "呈現概念關係與複習路徑，而不只是條列",
+          "取代所有公式推導",
+          "避免任何細節"
+        ],
+        "answer": 1,
+        "explain": "心智圖強在關係與路徑，不是壓縮字數比賽。"
+      },
+      {
+        "q": "用 AI 產生心智圖後，你最該檢查什麼？",
+        "options": [
+          "顏色是否好看",
+          "分支關係是否符合講義／課堂原意，有無錯誤連結",
+          "能不能直接交作業不改",
+          "節點是否越多越好"
+        ],
+        "answer": 1,
+        "explain": "錯誤關係會讓複習記錯結構。"
+      },
+      {
+        "q": "知識圖譜相對一般清單，多了什麼？",
+        "options": [
+          "只有更長段落",
+          "概念之間的關係類型（如「導致」「屬於」「對比」）",
+          "必須手寫藝術字",
+          "不能連接例子"
+        ],
+        "answer": 1,
+        "explain": "圖譜強調節點與關係類型。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "What is the core value of mind maps for university notes?",
+        "options": [
+          "Shrink text to cram more words",
+          "Show concept relations and a review path, not only a list",
+          "Replace all derivations",
+          "Avoid all details"
+        ],
+        "answer": 1,
+        "explain": "Relations and paths matter most."
+      },
+      {
+        "q": "After AI drafts a mind map, you should mainly check?",
+        "options": [
+          "Whether colors look nice",
+          "Whether relations match the lecture/PDF and no false links exist",
+          "Whether you can submit without edits",
+          "Whether more nodes are always better"
+        ],
+        "answer": 1,
+        "explain": "Wrong links create wrong understanding."
+      },
+      {
+        "q": "Compared with a flat list, a knowledge graph adds?",
+        "options": [
+          "Only longer paragraphs",
+          "Typed relations between concepts (causes, belongs-to, contrasts)",
+          "Mandatory calligraphy",
+          "A ban on examples"
+        ],
+        "answer": 1,
+        "explain": "Graphs encode relation types."
+      }
+    ],
+    "zhNotePrompt": "貼上已有／未有資料、分析問題、檢查方式。",
+    "enNotePrompt": "Paste have/missing data, analysis questions, and checks.",
+    "zhDeliverableChecklist": [
+      "已有資料與尚未收集已分開",
+      "有格式、清理與錯誤檢查",
+      "分析問題對準 RQ",
+      "預期圖表沒有假數據",
+      "沒有請 AI 捏造缺失值",
+      "文獻觀點未寫成自己的結果"
+    ],
+    "enDeliverableChecklist": [
+      "Existing vs not-yet-collected data are split",
+      "Format, cleaning, and error checks included",
+      "Analysis questions match the RQ",
+      "Planned charts have no fake values",
+      "AI did not invent missing values",
+      "Literature not labeled as your results"
+    ],
+    "zhScorecard": [
+      "中心清楚",
+      "關係正確",
+      "可講解",
+      "路徑可行",
+      "與筆記連結"
+    ],
+    "enScorecard": [
+      "Center clarity",
+      "Relation accuracy",
+      "Explainability",
+      "Path feasibility",
+      "Note linking"
+    ],
+    "id": "research-competition-L6",
+    "lessonKey": "research-competition-L6",
+    "zhOutputName": "資料整理與分析計畫",
+    "enOutputName": "Data Analysis Plan",
+    "zhObjectives": [
+      "分開已有資料與尚未收集資料",
+      "寫清理步驟與錯誤檢查",
+      "讓分析問題對準 RQ",
+      "規劃圖表類型但不填假數據",
+      "存成資料整理與分析計畫"
+    ],
+    "enObjectives": [
+      "Separate data you have from data not yet collected",
+      "Write cleaning steps and error checks",
+      "Align analysis questions with the RQ",
+      "Plan chart types without fake values",
+      "Save a Data Analysis Plan"
+    ],
+    "zhWhyItMatters": {
+      "problem": "一有表格就請 AI「直接跑結論」，缺值被補假，文獻觀點也被寫成自己的發現。",
+      "ineffective": "把第 4 課文獻結果與自己未收集的資料混在同一欄「結果」。",
+      "solution": "用分析計畫分開資料來源、清理、分析問題與檢查方式。"
+    },
+    "enWhyItMatters": {
+      "problem": "People ask AI to “run the conclusion” on a half-empty table; gaps get faked and literature is treated as their finding.",
+      "ineffective": "Mixing Lesson 4 results with uncollected data in one “results” column.",
+      "solution": "Use an analysis plan to split sources, cleaning, questions, and checks."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "沒有的資料就標沒有",
+        "文獻觀點 ≠ 你的結果",
+        "先計畫再分析"
+      ],
+      "terms": [
+        "資料格式",
+        "清理",
+        "分析問題",
+        "錯誤檢查"
+      ],
+      "criteria": [
+        "已有／未有分開",
+        "圖表無假值",
+        "對準 RQ"
+      ],
+      "boundaries": [
+        "避免：AI 補缺失",
+        "避免：把文獻當自己的數據",
+        "避免：未收集就寫顯著"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Mark missing as missing",
+        "Literature ≠ your results",
+        "Plan before analyzing"
+      ],
+      "terms": [
+        "Data format",
+        "Cleaning",
+        "Analysis questions",
+        "Error checks"
+      ],
+      "criteria": [
+        "Have/missing split",
+        "Charts without fake values",
+        "Aligned to RQ"
+      ],
+      "boundaries": [
+        "Avoid: AI-filled gaps",
+        "Avoid: literature as your data",
+        "Avoid: significance with no data"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "小組問卷只收回 8 份，有人請 AI 補成 40 份再畫圖。",
+      "wrong": "把補值當成真實填答，並把文獻裡的百分比寫進自己的結果。",
+      "right": "標示 n=8 為已有、目標 n 另列；圖表先空；錯誤檢查含重複與漏答。",
+      "result": "一份誠實的資料整理與分析計畫。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "A team has 8 surveys and asks AI to pad them to 40 before charting.",
+      "wrong": "Treat imputed rows as real answers and copy literature percentages into “our results.”",
+      "right": "Mark n=8 as existing, keep target n separate, leave charts empty, check duplicates and missing items.",
+      "result": "An honest Data Analysis Plan."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "盤點已有與未有資料",
+        "why": "混在一起會造假",
+        "input": "設計草案+檔案",
+        "output": "資料清單",
+        "check": "是否分開兩欄"
+      },
+      {
+        "do": "寫清理與錯誤檢查",
+        "why": "髒資料會帶出假結論",
+        "input": "原始檔",
+        "output": "清理清單",
+        "check": "有無單位與重複檢查"
+      },
+      {
+        "do": "對準 RQ 寫分析問題與圖表類型",
+        "why": "圖要回答問題",
+        "input": "RQ",
+        "output": "分析計畫",
+        "check": "圖中是否已填假數"
+      },
+      {
+        "do": "用主 Prompt 檢查缺漏規則",
+        "why": "禁止補假值",
+        "input": "計畫草稿",
+        "output": "完整計畫",
+        "check": "結果欄是否在無資料時留空"
+      },
+      {
+        "do": "存檔",
+        "why": "第 7 課論證要知道證據邊界",
+        "input": "定稿",
+        "output": "成果包",
+        "check": "刷新後仍在"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Inventory have vs missing",
+        "why": "Mixing invites fraud",
+        "input": "Design+files",
+        "output": "Data list",
+        "check": "Two columns?"
+      },
+      {
+        "do": "Write cleaning and error checks",
+        "why": "Dirty data fake conclusions",
+        "input": "Raw files",
+        "output": "Cleaning list",
+        "check": "Units and duplicates?"
+      },
+      {
+        "do": "Write analysis questions and chart types",
+        "why": "Charts must answer questions",
+        "input": "RQ",
+        "output": "Plan",
+        "check": "Fake numbers in charts?"
+      },
+      {
+        "do": "Run the prompt for missing-data rules",
+        "why": "No fake fills",
+        "input": "Draft",
+        "output": "Full plan",
+        "check": "Results blank if no data?"
+      },
+      {
+        "do": "Save",
+        "why": "Lesson 7 needs evidence bounds",
+        "input": "Final",
+        "output": "Package",
+        "check": "Still there after refresh?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "開始清理或分析前，先寫分析計畫時使用",
+      "fields": [
+        "[請填寫研究問題]",
+        "[請填寫研究方法]",
+        "[請填寫]"
+      ],
+      "body": "你是資料分析計畫教練。不得捏造缺失數據、填補假值、或輸出已完成的統計結果。\n\n我的研究問題：[請填寫研究問題]\n我實際擁有或預計收集的資料（格式、欄位、筆數計畫）：[請填寫]\n研究方法：[請填寫研究方法]\n目前缺漏：[請填寫]\n若有已核對的分析做法筆記：[請貼上來源內容]\n\n任務：產出「資料整理與分析計畫」，包含：\n1) 有哪些資料（已有／尚未收集，分開寫）\n2) 資料格式\n3) 需要清理什麼\n4) 分析問題（對準 RQ）\n5) 分析方法\n6) 預期圖表（圖表類型與要回答的問題；不是假圖數據）\n7) 如何檢查錯誤（重複、缺漏、編碼不一致）\n8) 若資料尚未收集：只輸出計畫，結果欄留空\n\n禁止：幫我填補不存在的問卷答案、訪談逐字稿或實驗數據。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "expected": "一份分開「已有／未收集」、含清理與錯誤檢查的分析計畫",
+      "revisionReminder": "請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "extensions": [
+        {
+          "title": "延伸：缺漏資料怎麼辦",
+          "body": "請根據我貼的欄位清單，列出哪些缺漏必須停止分析、哪些可以標「未知」。不要幫我補假值。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use before cleaning or analyzing, to write the analysis plan",
+      "fields": [
+        "[Enter research question]",
+        "[Enter research method]",
+        "[Enter data]"
+      ],
+      "body": "You are a data-analysis-plan coach. Do not invent missing data, impute fake values, or output completed statistics.\n\nResearch question: [Enter research question]\nData I have or plan to collect (format, fields, planned n): [Enter data]\nMethod: [Enter research method]\nCurrent gaps: [Enter gaps]\nVerified analysis notes if any: [Paste source content]\n\nTask: Produce a Data Analysis Plan with:\n1) What data exist vs not yet collected\n2) Data format\n3) What needs cleaning\n4) Analysis questions aligned to the RQ\n5) Analysis methods\n6) Planned charts (type and question—not fake values)\n7) Error checks (duplicates, missingness, coding drift)\n8) If data are not collected yet: plan only; leave results blank\n\nForbidden: filling nonexistent survey answers, transcripts, or experimental data.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "expected": "An analysis plan that separates existing vs missing data, with cleaning and error checks",
+      "revisionReminder": "Use the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "extensions": [
+        {
+          "title": "Extension: missing-data rules",
+          "body": "From my field list, say which gaps must stop analysis and which can be marked unknown. Do not impute fake values."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "列出已有／未有資料與格式",
+        "standard": "兩欄分開",
+        "mistakes": "把文獻當已有數據",
+        "check": "能否指出檔案位置？"
+      },
+      {
+        "task": "寫清理與錯誤檢查",
+        "standard": "至少 3 項檢查",
+        "mistakes": "沒有檢查就分析",
+        "check": "缺漏時是否停止？"
+      },
+      {
+        "task": "寫分析問題與預期圖（無假值）",
+        "standard": "圖類型對準問題",
+        "mistakes": "圖裡已有 AI 編的百分比",
+        "check": "數字能否指回原始表？"
+      },
+      {
+        "task": "存成資料整理與分析計畫",
+        "standard": "結果欄在無資料時空白",
+        "mistakes": "空白儲存整份",
+        "check": "刷新後仍在？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "List have/missing data and formats",
+        "standard": "Two columns",
+        "mistakes": "Literature as your data",
+        "check": "Can you point to the file?"
+      },
+      {
+        "task": "Write cleaning and error checks",
+        "standard": "At least 3 checks",
+        "mistakes": "Analyze with no checks",
+        "check": "Do you stop when data are missing?"
+      },
+      {
+        "task": "Write analysis questions and chart types without fake values",
+        "standard": "Chart type matches the question",
+        "mistakes": "AI percentages already in the chart",
+        "check": "Can numbers trace to a sheet?"
+      },
+      {
+        "task": "Save the Data Analysis Plan",
+        "standard": "Results blank if no data",
+        "mistakes": "Entirely blank save",
+        "check": "Visible after refresh?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "請 AI 把 8 筆「合理補齊」成 40 筆",
+        "why": "那是捏造參與者",
+        "fix": "維持 n=8 並討論限制"
+      },
+      {
+        "error": "比較表把三篇論文結果合成「本研究發現」",
+        "why": "那是別人的證據",
+        "fix": "標成文獻觀點，自己的結果另欄"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Ask AI to “reasonably pad” 8 rows to 40",
+        "why": "That invents participants",
+        "fix": "Keep n=8 and discuss limits"
+      },
+      {
+        "error": "Merge three papers into “our findings”",
+        "why": "Those are others’ evidence",
+        "fix": "Label as literature; keep your results separate"
+      }
+    ],
+    "zhNextStep": "用分析計畫進入第 7 課，把主張與證據對起來。證據不足就標不足。",
+    "enNextStep": "Take the plan into Lesson 7 and map claims to evidence. If evidence is thin, say so.",
+    "zhSummary": [
+      "本堂成果：資料整理與分析計畫",
+      "缺資料就標缺",
+      "文獻不是你的數據"
+    ],
+    "enSummary": [
+      "Deliverable: Data Analysis Plan",
+      "Mark missing as missing",
+      "Literature is not your data"
+    ],
+    "zhRubric": [
+      {
+        "name": "已有未有分開",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "分析對準 RQ",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "錯誤檢查",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "無捏造數據",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Have vs missing split",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Analysis matches RQ",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Error checks",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "No invented data",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      }
+    ]
+  },
+  {
+    "id": "research-competition-L7",
+    "lessonKey": "research-competition-L7",
+    "zhTitle": "第7課：設計研究方法：問卷、訪談或資料收集架構",
+    "enTitle": "Lesson 7: Design research methods: survey, interview, or data collection",
+    "zhConcept": "即使本課標題強調方法，這一課要把方法收到論證：你的問卷、訪談或既有資料能支持哪一句主張、不能支持哪一句。證據不足時，應寫「尚不足以主張」，而不是請 AI 補一段合理故事。",
+    "enConcept": "Even though the lesson title emphasizes methods, this step maps methods onto argument: which claims your survey, interviews, or records can support—and which they cannot. If evidence is insufficient, write that; do not ask AI for a plausible story.",
+    "zhPrompt": "你是研究論證教練。證據不足時，必須明確寫「不足」，不得把合理推測寫成研究結果。\n\n我的研究問題：[請填寫研究問題]\n我的核心主張草稿：[請填寫]\n我實際擁有的證據（貼資料摘要或已核對文獻筆記）：\n[請貼上來源內容]\n研究方法：[請填寫研究方法]\n已知限制：[請填寫]\n\n任務：產出「研究論證與證據鏈」，包含：\n1) 核心主張（可檢驗）\n2) 支持證據（每條標來源類型：我的資料／已核對文獻／僅推測）\n3) 反例或替代解釋\n4) 限制\n5) 可被質疑的位置\n6) 下一步需要補什麼資料\n7) 必須刪除或降級的句子（把推測當結果者）\n\n禁止：把 AI 的合理推測標成「本研究發現」。沒有資料就不要寫結果。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+    "enPrompt": "You are an argument-mapping coach. When evidence is thin, write “insufficient.” Do not turn plausible speculation into findings.\n\nResearch question: [Enter research question]\nDraft claim: [Enter claim]\nEvidence I actually have (data summary or verified notes):\n[Paste source content]\nMethod: [Enter research method]\nKnown limits: [Enter limits]\n\nTask: Produce an Evidence & Argument Map with:\n1) Core claim (testable)\n2) Supporting evidence (tag: my data / verified literature / speculation only)\n3) Counterexamples or alternative explanations\n4) Limits\n5) Where a critic could attack\n6) What data to collect next\n7) Sentences to delete or downgrade (speculation written as findings)\n\nForbidden: labeling AI speculation as “this study found.” Write no results without data.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+    "zhExample": "主張限縮在樣本內；「多數大學生」改成「本樣本 8 人中的 5 人」；無訪談逐字稿的機制解釋標為推測。",
+    "enExample": "Claim stays inside the sample; “most university students” becomes “5 of 8 in this sample”; mechanism talk without transcripts is speculation.",
+    "zhPractice": "寫可檢驗主張。；標證據類型。；補反例與待補資料。；存證據鏈。",
+    "enPractice": "Write a testable claim.; Tag evidence.; Add counters and next data.; Save the map.",
+    "zhFeedbackPrompt": "你是一位研究方法助教。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 問題—方法一致性\n- 工具品質\n- 倫理完整度\n- 可執行性\n- 是否禁止假數據\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a research methods TA. Score 1-10 for: Question-method fit, Instrument quality, Ethics completeness, Executability, No fake data. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhQuizItems": [
+      {
+        "q": "選方法前應先釐清？",
+        "options": [
+          "研究問題與證據需求",
+          "先決定題數越多越好",
+          "先寫結論"
+        ],
+        "answer": 0,
+        "explain": "方法服務問題。"
+      },
+      {
+        "q": "誘導題的問題是？",
+        "options": [
+          "暗示「正確答案」扭曲回答",
+          "讓受訪者更容易理解",
+          "一定提高回收率"
+        ],
+        "answer": 0,
+        "explain": "傷害效度。"
+      },
+      {
+        "q": "倫理至少應包含？",
+        "options": [
+          "知情同意與可退出",
+          "強迫填完所有題",
+          "公開真實姓名才權威"
+        ],
+        "answer": 0,
+        "explain": "保護參與者。"
+      },
+      {
+        "q": "AI 可協助？",
+        "options": [
+          "檢查對齊與誘導題",
+          "直接捏造訪談結果",
+          "略過限制不寫"
+        ],
+        "answer": 0,
+        "explain": "品質檢查。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "方法說明＋工具初稿",
+          "完整統計報告",
+          "已發表論文"
+        ],
+        "answer": 0,
+        "explain": "架構而非結果。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "選方法前應先釐清？",
+        "options": [
+          "研究問題與證據需求",
+          "先決定題數越多越好",
+          "先寫結論"
+        ],
+        "answer": 0,
+        "explain": "方法服務問題。"
+      },
+      {
+        "q": "誘導題的問題是？",
+        "options": [
+          "暗示「正確答案」扭曲回答",
+          "讓受訪者更容易理解",
+          "一定提高回收率"
+        ],
+        "answer": 0,
+        "explain": "傷害效度。"
+      },
+      {
+        "q": "倫理至少應包含？",
+        "options": [
+          "知情同意與可退出",
+          "強迫填完所有題",
+          "公開真實姓名才權威"
+        ],
+        "answer": 0,
+        "explain": "保護參與者。"
+      },
+      {
+        "q": "AI 可協助？",
+        "options": [
+          "檢查對齊與誘導題",
+          "直接捏造訪談結果",
+          "略過限制不寫"
+        ],
+        "answer": 0,
+        "explain": "品質檢查。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "方法說明＋工具初稿",
+          "完整統計報告",
+          "已發表論文"
+        ],
+        "answer": 0,
+        "explain": "架構而非結果。"
+      }
+    ],
+    "zhOutcome": "研究論證與證據鏈",
+    "enOutcome": "Evidence & Argument Map",
+    "zhValueTip": "方法產出的是證據，不是結論；證據不足時，不把 AI 推測當成研究結果。",
+    "enValueTip": "Methods produce evidence, not conclusions. When evidence is thin, do not treat AI speculation as findings.",
+    "zhCaseStudy": "訂閱小組把「證明有市場」改成主張：「在本社團便利樣本中，取消原因以價格為主」。支持證據：8 份問卷中 5 人勾選價格（我的資料）。反例：2 人勾選「內容不符」。限制：非隨機、n 小。可被質疑：自陳偏差。下一步：補 3 個非社團受訪者。他們拒絕 AI 把 n 寫成 80。",
+    "enCaseStudy": "The team changed “we proved a market” to “in this club convenience sample, price was the most ticked cancellation reason (5 of 8).” Counter: 2 ticked poor content. Limits: non-random, small n. Attack: self-report. Next: 3 non-club interviewees. They refused to let AI write n=80.",
+    "zhExcellentExample": "主張有範圍、證據有類型、有反例、無推測當發現。",
+    "enExcellentExample": "Scoped claim, tagged evidence, a counter, no speculation-as-finding.",
+    "zhWorkflow": [
+      "寫可檢驗主張",
+      "掛證據並標類型",
+      "補反例與限制",
+      "降級過度推論",
+      "存成研究論證與證據鏈"
+    ],
+    "enWorkflow": [
+      "Write a testable claim",
+      "Tag evidence",
+      "Add counters and limits",
+      "Downgrade over-claims",
+      "Save the map"
+    ],
+    "zhCommonMistakes": [
+      "無資料寫證明",
+      "AI 推測當發現",
+      "忽略反例",
+      "把文獻當自己的訪談",
+      "樣本寫成全體"
+    ],
+    "enCommonMistakes": [
+      "Proof with no data",
+      "AI speculation as findings",
+      "Ignoring counters",
+      "Literature as your interviews",
+      "Sample written as population"
+    ],
+    "zhDeliverableChecklist": [
+      "核心主張可檢驗且有範圍",
+      "每條證據已標我的資料／文獻／推測",
+      "有反例或替代解釋",
+      "有限制與可被質疑處",
+      "有下一步要補的資料",
+      "沒有把 AI 推測寫成研究發現"
+    ],
+    "enDeliverableChecklist": [
+      "Claim is testable and scoped",
+      "Evidence tagged as data / literature / speculation",
+      "A counter or alternative is listed",
+      "Limits and attack points included",
+      "Next data named",
+      "AI speculation not written as findings"
+    ],
+    "zhScorecard": [
+      "問題—方法一致性",
+      "工具品質",
+      "倫理完整度",
+      "可執行性",
+      "是否禁止假數據"
+    ],
+    "enScorecard": [
+      "Question-method fit",
+      "Instrument quality",
+      "Ethics completeness",
+      "Executability",
+      "No fake data"
+    ],
+    "zhNotePrompt": "貼上主張、支持證據（含類型）、反例、待補資料。",
+    "enNotePrompt": "Paste claim, tagged evidence, counters, and next data.",
+    "zhCoachPrompt": "請指出我哪些句子超過證據。不要幫我補研究結果。",
+    "enCoachPrompt": "Flag sentences that exceed my evidence. Do not add findings.",
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "中階 / Intermediate",
+    "zhOutputName": "研究論證與證據鏈",
+    "enOutputName": "Evidence & Argument Map",
+    "zhObjectives": [
+      "寫出可檢驗的核心主張",
+      "為每條證據標來源類型",
+      "列出反例、限制與可被質疑處",
+      "標出下一步要補的資料",
+      "存成研究論證與證據鏈"
+    ],
+    "enObjectives": [
+      "Write a testable core claim",
+      "Tag each evidence item by source type",
+      "List counters, limits, and attack points",
+      "Name data still needed",
+      "Save an Evidence & Argument Map"
+    ],
+    "zhWhyItMatters": {
+      "problem": "有方法架構卻把「應該會如此」寫成發現，競賽評審一看就知道超過證據。",
+      "ineffective": "問卷還沒收回就寫「證明學生都需要訂閱」；或把文獻當自己的訪談結果。",
+      "solution": "用證據鏈對齊主張與資料，證據不足就降級措辭。"
+    },
+    "enWhyItMatters": {
+      "problem": "A method exists, but “it should be true” is written as a finding—judges will see the over-claim.",
+      "ineffective": "Writing “students need subscriptions” before surveys return, or treating literature as your interviews.",
+      "solution": "Map claims to data; downgrade wording when evidence is thin."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "主張必須可被證據檢驗",
+        "推測要標推測",
+        "方法服務論證"
+      ],
+      "terms": [
+        "核心主張",
+        "支持證據",
+        "反例",
+        "可被質疑處"
+      ],
+      "criteria": [
+        "每條證據有類型",
+        "有限制",
+        "有待補資料"
+      ],
+      "boundaries": [
+        "避免：AI 推測當發現",
+        "避免：無資料寫證明",
+        "避免：忽略反例"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Claims must be testable",
+        "Label speculation",
+        "Methods serve the argument"
+      ],
+      "terms": [
+        "Core claim",
+        "Supporting evidence",
+        "Counterexample",
+        "Attack point"
+      ],
+      "criteria": [
+        "Each item tagged",
+        "Limits listed",
+        "Next data named"
+      ],
+      "boundaries": [
+        "Avoid: AI speculation as findings",
+        "Avoid: proof with no data",
+        "Avoid: ignoring counters"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "小組訪了 4 人，AI 幫他們寫成「多數學生強烈需要付費訂閱」。",
+      "wrong": "把 4 人便利樣本寫成全體學生的證明。",
+      "right": "主張降級為「這 4 名受訪者提到價格敏感」；列出反例（有人願付費換時間）；待補：更多樣本或不同科系。",
+      "result": "一份不過度推論的研究論證與證據鏈。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "After 4 interviews, AI writes “most students strongly need paid subscriptions.”",
+      "wrong": "Treat a convenience sample of 4 as proof about all students.",
+      "right": "Downgrade to “these 4 interviewees mentioned price sensitivity”; add a counter (someone pays for time); next: more majors.",
+      "result": "An Evidence & Argument Map that does not over-claim."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "寫核心主張（可檢驗）",
+        "why": "口號無法對證據",
+        "input": "RQ+資料",
+        "output": "主張句",
+        "check": "能否被推翻"
+      },
+      {
+        "do": "掛上證據並標類型",
+        "why": "混來源會造假",
+        "input": "分析計畫+理解表",
+        "output": "證據鏈",
+        "check": "有無「僅推測」混入發現"
+      },
+      {
+        "do": "補反例、限制、質疑點",
+        "why": "沒有反例的論證很脆",
+        "input": "證據鏈",
+        "output": "完整圖",
+        "check": "是否寫下一步資料"
+      },
+      {
+        "do": "用主 Prompt 降級過度推論",
+        "why": "抓出證明／多數／顯著等詞",
+        "input": "草稿",
+        "output": "已降級版本",
+        "check": "無資料處是否改為不足"
+      },
+      {
+        "do": "存檔",
+        "why": "第 8 課大綱要沿用主張邊界",
+        "input": "定稿",
+        "output": "成果包",
+        "check": "刷新後仍在"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Write a testable claim",
+        "why": "Slogans cannot meet evidence",
+        "input": "RQ+data",
+        "output": "Claim",
+        "check": "Could it be overturned?"
+      },
+      {
+        "do": "Attach tagged evidence",
+        "why": "Mixing sources hides provenance",
+        "input": "Analysis plan+notes",
+        "output": "Map",
+        "check": "Speculation labeled as finding?"
+      },
+      {
+        "do": "Add counters, limits, attack points",
+        "why": "No counter = brittle",
+        "input": "Map",
+        "output": "Full map",
+        "check": "Next data named?"
+      },
+      {
+        "do": "Downgrade over-claims with the prompt",
+        "why": "Catch prove/most/significant",
+        "input": "Draft",
+        "output": "Downgraded version",
+        "check": "Insufficient where no data?"
+      },
+      {
+        "do": "Save",
+        "why": "Lesson 8 reuses claim bounds",
+        "input": "Final",
+        "output": "Package",
+        "check": "Still there after refresh?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "要把主張與證據對起來、避免超過證據時使用",
+      "fields": [
+        "[請填寫研究問題]",
+        "[請貼上來源內容]",
+        "[請填寫研究方法]"
+      ],
+      "body": "你是研究論證教練。證據不足時，必須明確寫「不足」，不得把合理推測寫成研究結果。\n\n我的研究問題：[請填寫研究問題]\n我的核心主張草稿：[請填寫]\n我實際擁有的證據（貼資料摘要或已核對文獻筆記）：\n[請貼上來源內容]\n研究方法：[請填寫研究方法]\n已知限制：[請填寫]\n\n任務：產出「研究論證與證據鏈」，包含：\n1) 核心主張（可檢驗）\n2) 支持證據（每條標來源類型：我的資料／已核對文獻／僅推測）\n3) 反例或替代解釋\n4) 限制\n5) 可被質疑的位置\n6) 下一步需要補什麼資料\n7) 必須刪除或降級的句子（把推測當結果者）\n\n禁止：把 AI 的合理推測標成「本研究發現」。沒有資料就不要寫結果。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "expected": "一份含主張、證據、反例、限制與待補資料的論證圖",
+      "revisionReminder": "請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "extensions": [
+        {
+          "title": "延伸：降級過度推論",
+          "body": "請把我貼上的段落中，所有超過證據的句子改成「可能／尚不清楚」，並標原句問題。不要新增數據。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when mapping claims to evidence and preventing over-claiming",
+      "fields": [
+        "[Enter research question]",
+        "[Paste source content]",
+        "[Enter research method]"
+      ],
+      "body": "You are an argument-mapping coach. When evidence is thin, write “insufficient.” Do not turn plausible speculation into findings.\n\nResearch question: [Enter research question]\nDraft claim: [Enter claim]\nEvidence I actually have (data summary or verified notes):\n[Paste source content]\nMethod: [Enter research method]\nKnown limits: [Enter limits]\n\nTask: Produce an Evidence & Argument Map with:\n1) Core claim (testable)\n2) Supporting evidence (tag: my data / verified literature / speculation only)\n3) Counterexamples or alternative explanations\n4) Limits\n5) Where a critic could attack\n6) What data to collect next\n7) Sentences to delete or downgrade (speculation written as findings)\n\nForbidden: labeling AI speculation as “this study found.” Write no results without data.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "expected": "A map with claim, evidence, counters, limits, and data still needed",
+      "revisionReminder": "Use the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "extensions": [
+        {
+          "title": "Extension: downgrade over-claims",
+          "body": "Rewrite over-claiming sentences I paste as “possible / still unclear” and name the problem. Add no data."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "寫 1 句可檢驗主張",
+        "standard": "含對象與範圍",
+        "mistakes": "寫成應該／一定",
+        "check": "能否指出會推翻它的資料？"
+      },
+      {
+        "task": "為每條證據標類型",
+        "standard": "我的資料／已核對文獻／推測分開",
+        "mistakes": "全部寫成發現",
+        "check": "有沒有來源？"
+      },
+      {
+        "task": "列出反例與待補資料",
+        "standard": "至少 1 個反例或替代解釋",
+        "mistakes": "只寫支持面",
+        "check": "評審會問什麼？"
+      },
+      {
+        "task": "存成研究論證與證據鏈",
+        "standard": "含降級後的句子",
+        "mistakes": "空白儲存",
+        "check": "刷新後仍在？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Write 1 testable claim",
+        "standard": "Includes who and scope",
+        "mistakes": "Should/must wording",
+        "check": "What data would overturn it?"
+      },
+      {
+        "task": "Tag each evidence item",
+        "standard": "My data / verified literature / speculation",
+        "mistakes": "Everything as a finding",
+        "check": "Is there a source?"
+      },
+      {
+        "task": "List a counter and next data",
+        "standard": "At least one alternative",
+        "mistakes": "Support only",
+        "check": "What would a judge ask?"
+      },
+      {
+        "task": "Save the Evidence & Argument Map",
+        "standard": "Includes downgraded sentences",
+        "mistakes": "Blank save",
+        "check": "Visible after refresh?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "「AI 認為這一定代表市場很大」",
+        "why": "模型沒有你的田野",
+        "fix": "刪除或改為待驗證問題"
+      },
+      {
+        "error": "方法章很完整就當成已有結果",
+        "why": "設計≠發現",
+        "fix": "結果只寫已收集的證據"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "“AI thinks this proves a huge market”",
+        "why": "The model has no fieldwork",
+        "fix": "Delete or turn into a to-test question"
+      },
+      {
+        "error": "A complete methods section treated as results",
+        "why": "Design ≠ findings",
+        "fix": "Results only from collected evidence"
+      }
+    ],
+    "zhNextStep": "用這份主張邊界寫第 8 課報告大綱。沒有的結果章就標「待資料」而不是請 AI 代寫發現。",
+    "enNextStep": "Use these claim bounds for Lesson 8’s outline. Mark missing results as awaiting data instead of asking AI to write findings.",
+    "zhSummary": [
+      "本堂成果：研究論證與證據鏈",
+      "方法服務主張",
+      "不足就寫不足"
+    ],
+    "enSummary": [
+      "Deliverable: Evidence & Argument Map",
+      "Methods serve claims",
+      "Say insufficient when it is"
+    ],
+    "zhRubric": [
+      {
+        "name": "主張可檢驗",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "證據標示誠實",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "有反例與限制",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "無推測當結果",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Testable claim",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Honest evidence tags",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Counters and limits",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "No speculation-as-finding",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "中階 / Intermediate",
+    "zhTitle": "第8課：整理分析結果，寫出專題論點結構",
+    "enTitle": "Lesson 8: Organize findings into a project argument structure",
+    "zhValueTip": "大綱可以先有；結果章只能放已有證據。AI 可搭骨架，不可代寫不存在的發現。",
+    "enValueTip": "You can outline early. The results section may only hold evidence you have. AI may build the skeleton, not fake findings.",
+    "zhOutcome": "研究報告／競賽書面結構",
+    "enOutcome": "Research Report Outline",
+    "zhConcept": "書面結構讓專題或競賽評審看懂你的論證路徑。AI 適合產生標題層級與提醒缺章，不適合填結果。沒有本平台自動產生正式 PDF 或自動投稿功能。",
+    "enConcept": "The outline shows reviewers your argument path. AI can propose headings and missing sections; it must not fill results. This site does not auto-build a formal PDF or submit papers.",
+    "zhCaseStudy": "團隊已有教室垃圾桶分類拍照盤點（他們自己做的），沒有介入實驗。大綱結果只描述盤點類別與數量；討論提出「可作為未來減量實驗的基線」；結論不寫已減少 40%。文獻節只放兩篇已打開的校園永續報告佔位。",
+    "enCaseStudy": "They had a photo inventory of classroom bins they took themselves, and no intervention. Results described categories and counts only. Discussion called it a baseline for a future reduction trial. The conclusion did not claim a 40% cut. Literature slots held two opened campus sustainability reports.",
+    "zhWorkflow": [
+      "排出九段標題",
+      "標真實度與人機分工",
+      "產出大綱子彈",
+      "刪虛構結果",
+      "存成研究報告／競賽書面結構"
+    ],
+    "enWorkflow": [
+      "Order nine headings",
+      "Mark honesty and roles",
+      "Generate outline bullets",
+      "Delete fake results",
+      "Save the outline"
+    ],
+    "zhCommonMistakes": [
+      "AI 代寫結果",
+      "結論超過證據",
+      "文獻當自己的發現",
+      "保證得獎",
+      "沒有限制章"
+    ],
+    "enCommonMistakes": [
+      "AI-written results",
+      "Conclusion exceeds evidence",
+      "Literature as your findings",
+      "Prize guarantees",
+      "No limits section"
+    ],
+    "zhExcellentExample": "九段齊、結果留白誠實、結論不超證據、有人機分工。",
+    "enExcellentExample": "Nine parts, honest empty results, conclusion inside evidence, role split present.",
+    "zhPrompt": "你是研究報告結構教練。可以協助架構，但不得代替學生產生不存在的研究結果。\n\n我的研究問題：[請填寫研究問題]\n證據鏈摘要：[請貼上來源內容]\n研究方法：[請填寫研究方法]\n哪些章節已有真實資料、哪些沒有：[請填寫]\n\n任務：產出「研究報告／競賽書面結構」，包含：\n1) 問題背景\n2) 研究問題\n3) 文獻（只列已核對來源的佔位，沒有就寫待補）\n4) 方法\n5) 分析\n6) 結果（無資料則寫「待資料，不虛構」）\n7) 討論\n8) 限制\n9) 結論（結論不得超過證據鏈）\n10) 各節「我寫／AI 可協助／不可交給 AI」\n\n輸出大綱層級（標題＋每節 2–4 個子彈）。禁止填入假結果段落。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+    "enPrompt": "You are a report-structure coach. You may help outline, but you must not generate nonexistent results.\n\nResearch question: [Enter research question]\nArgument-map summary: [Paste source content]\nMethod: [Enter research method]\nWhich sections have real data and which do not: [Enter status]\n\nTask: Produce a Research Report Outline with:\n1) Background\n2) Research question\n3) Literature (slots only for verified sources; else to-add)\n4) Method\n5) Analysis\n6) Results (“awaiting data, do not invent” if none)\n7) Discussion\n8) Limits\n9) Conclusion (must not exceed the argument map)\n10) Per section: I write / AI may help / must not give to AI\n\nOutput heading levels plus 2–4 bullets each. Do not fill fake results.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+    "zhCoachPrompt": "請檢查我的大綱結果與結論是否虛構。不要幫我寫發現段落。",
+    "enCoachPrompt": "Check whether my outline invents results or conclusions. Do not write findings for me.",
+    "zhFeedbackPrompt": "【Prompt 3｜模擬老師提問小組成果】\n成果摘要與分工：\n（貼上）\n請一次一題追問方法、限制、證據、分工。結束給薄弱點清單。禁止要求回答你們文件中不存在且被捏造的數據。",
+    "enFeedbackPrompt": "[Prompt 3 | Instructor Team Q&A] Ask one question at a time on method/limits/evidence/roles; no fabricated data demands.",
+    "zhExample": "結果：僅盤點數量。結論：基線已建立，減量效果尚未測量。不可交給 AI：結果數字與結論句。",
+    "enExample": "Results: inventory counts only. Conclusion: baseline exists; reduction not measured. Must-not-give-to-AI: result numbers and concluding sentences.",
+    "zhPractice": "寫九段大綱。；標人機分工。；檢查結論不超證據。；存書面結構。",
+    "enPractice": "Write a nine-part outline.; Tag roles.; Check conclusion vs evidence.; Save the outline.",
+    "zhQuizItems": [
+      {
+        "q": "小組成果整合最核心的是？",
+        "options": [
+          "把檔案打包成 zip 即可",
+          "統一邏輯、語氣、格式、引用與視覺並鎖定 final",
+          "讓 AI 任意改結論",
+          "每人保留自己的最終版互不相讓"
+        ],
+        "answer": 1,
+        "explain": "整合是單一可發表真相來源。"
+      },
+      {
+        "q": "發現組員結論互相矛盾時應？",
+        "options": [
+          "讓 AI 偷偷改成同一句並假裝原本一致",
+          "標示矛盾並開會決定，記錄決策",
+          "隨機刪掉一人貢獻",
+          "忽略差異直接上台"
+        ],
+        "answer": 1,
+        "explain": "矛盾要透明決策，不造假共識。"
+      },
+      {
+        "q": "模擬老師提問的目的是？",
+        "options": [
+          "刁難組員關係",
+          "壓力測試論證、限制與分工防守",
+          "取代所有內容修正",
+          "練習編造沒做過的方法"
+        ],
+        "answer": 1,
+        "explain": "問答是為防禦真實成果。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "Core of team deliverable integration?",
+        "options": [
+          "Just zip the files",
+          "Unify logic, voice, format, citations, visuals and lock a final",
+          "Let AI freely change conclusions",
+          "Keep competing finals"
+        ],
+        "answer": 1,
+        "explain": "Integration creates one publishable source of truth."
+      },
+      {
+        "q": "If teammates’ conclusions conflict, you should:",
+        "options": [
+          "Have AI silently rewrite history",
+          "Flag the conflict, decide in meeting, and log it",
+          "Randomly delete one person",
+          "Ignore and present anyway"
+        ],
+        "answer": 1,
+        "explain": "Resolve conflicts transparently."
+      },
+      {
+        "q": "Purpose of mock instructor Q&A?",
+        "options": [
+          "Damage relationships",
+          "Pressure-test argument, limits, and role defense",
+          "Replace all content work",
+          "Practice inventing methods"
+        ],
+        "answer": 1,
+        "explain": "Q&A defends real work."
+      }
+    ],
+    "zhNotePrompt": "貼上九段標題，並註明結果章是已有或待資料。",
+    "enNotePrompt": "Paste nine headings and note whether results exist or await data.",
+    "zhDeliverableChecklist": [
+      "含背景、問題、文獻、方法、分析、結果、討論、限制、結論",
+      "結果章未虛構研究發現",
+      "結論不超過證據鏈",
+      "每節有人／AI／不可交給 AI",
+      "文獻佔位僅已核對或標待補",
+      "沒有保證得獎或自動投稿宣稱"
+    ],
+    "enDeliverableChecklist": [
+      "Background through conclusion present",
+      "Results section does not invent findings",
+      "Conclusion stays inside the argument map",
+      "I / AI / must-not tagged per section",
+      "Literature slots verified or marked to-add",
+      "No prize or auto-submit claims"
+    ],
+    "zhScorecard": [
+      "單一聲音",
+      "邏輯完整",
+      "引用可靠",
+      "可上台",
+      "可防守"
+    ],
+    "enScorecard": [
+      "One voice",
+      "Logical continuity",
+      "Reliable citations",
+      "Stage-ready",
+      "Defendable"
+    ],
+    "id": "research-competition-L8",
+    "lessonKey": "research-competition-L8",
+    "zhOutputName": "研究報告／競賽書面結構",
+    "enOutputName": "Research Report Outline",
+    "zhObjectives": [
+      "排出背景到結論的報告結構",
+      "結果章標示已有或待資料",
+      "結論不超過第 7 課證據鏈",
+      "為每節標人／AI／不可交給 AI",
+      "存成研究報告／競賽書面結構"
+    ],
+    "enObjectives": [
+      "Order the report from background to conclusion",
+      "Mark results as existing or awaiting data",
+      "Keep the conclusion inside Lesson 7’s map",
+      "Tag I / AI / must-not per section",
+      "Save a Research Report Outline"
+    ],
+    "zhWhyItMatters": {
+      "problem": "先請 AI 寫完整報告，結果章充滿沒做過的分析，論點看起來完整但其實是空的。",
+      "ineffective": "把證據鏈丟給 AI 請它「寫得像已完成的論文」。",
+      "solution": "先鎖結構與每節真實度，結果空白就留白。"
+    },
+    "enWhyItMatters": {
+      "problem": "Asking AI for a full report fills results with analyses you never ran.",
+      "ineffective": "Pasting the argument map and asking for a paper that “looks finished.”",
+      "solution": "Lock structure and honesty per section; leave results blank when empty."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "結構先於文采",
+        "結果必須有資料",
+        "結論 ≤ 證據"
+      ],
+      "terms": [
+        "背景",
+        "方法",
+        "結果",
+        "限制"
+      ],
+      "criteria": [
+        "九段都有標題",
+        "結果不虛構",
+        "有人機分工"
+      ],
+      "boundaries": [
+        "避免：AI 代寫發現",
+        "避免：文獻當結果",
+        "避免：保證得獎的結論"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Structure before style",
+        "Results need data",
+        "Conclusion ≤ evidence"
+      ],
+      "terms": [
+        "Background",
+        "Method",
+        "Results",
+        "Limits"
+      ],
+      "criteria": [
+        "Nine headings",
+        "No fake results",
+        "Human/AI split"
+      ],
+      "boundaries": [
+        "Avoid: AI-written findings",
+        "Avoid: literature as results",
+        "Avoid: prize-guaranteeing conclusions"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "永續競賽團隊要寫校園一次性用品報告，AI 直接生成「實驗證明減少 40%」。",
+      "wrong": "把假實驗放進結果與結論。",
+      "right": "結果章寫「待觀察紀錄」；結論只連到已有的盤點資料；限制寫尚未做介入實驗。",
+      "result": "一份誠實的研究報告／競賽書面結構。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "A sustainability team asks AI to write “the experiment proved a 40% reduction” on single-use items.",
+      "wrong": "Put a fake experiment in results and conclusion.",
+      "right": "Results say “observation log pending”; conclusion ties only to an inventory they have; limits say no intervention yet.",
+      "result": "An honest Research Report Outline."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "依九段排出標題",
+        "why": "漏章會在口頭被問倒",
+        "input": "證據鏈",
+        "output": "大綱骨架",
+        "check": "結果章是否獨立"
+      },
+      {
+        "do": "標每節真實度與人機分工",
+        "why": "防止 AI 填空",
+        "input": "骨架",
+        "output": "分工表",
+        "check": "結果是否標待資料"
+      },
+      {
+        "do": "用主 Prompt 產出完整大綱",
+        "why": "補子彈但不補假結果",
+        "input": "分工表",
+        "output": "書面結構",
+        "check": "結論是否超過證據"
+      },
+      {
+        "do": "刪保證得獎與虛構實驗句",
+        "why": "競賽規則通常禁止造假",
+        "input": "大綱",
+        "output": "清理版",
+        "check": "有無 40% 這類無來源數字"
+      },
+      {
+        "do": "存檔",
+        "why": "第 9 課簡報要對齊書面",
+        "input": "定稿",
+        "output": "成果包",
+        "check": "刷新後仍在"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Order nine headings",
+        "why": "Missing sections fail Q&A",
+        "input": "Argument map",
+        "output": "Skeleton",
+        "check": "Results separate?"
+      },
+      {
+        "do": "Mark honesty and human/AI roles",
+        "why": "Stop AI from filling gaps",
+        "input": "Skeleton",
+        "output": "Role table",
+        "check": "Results marked awaiting data?"
+      },
+      {
+        "do": "Generate the outline",
+        "why": "Bullets without fake results",
+        "input": "Roles",
+        "output": "Outline",
+        "check": "Conclusion inside evidence?"
+      },
+      {
+        "do": "Delete prize promises and fake experiments",
+        "why": "Competition rules usually ban fabrication",
+        "input": "Outline",
+        "output": "Clean version",
+        "check": "Sourceless percentages?"
+      },
+      {
+        "do": "Save",
+        "why": "Lesson 9 slides must match",
+        "input": "Final",
+        "output": "Package",
+        "check": "Still there after refresh?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "要組報告或競賽書面大綱、避免 AI 代寫結果時使用",
+      "fields": [
+        "[請填寫研究問題]",
+        "[請貼上來源內容]",
+        "[請填寫研究方法]"
+      ],
+      "body": "你是研究報告結構教練。可以協助架構，但不得代替學生產生不存在的研究結果。\n\n我的研究問題：[請填寫研究問題]\n證據鏈摘要：[請貼上來源內容]\n研究方法：[請填寫研究方法]\n哪些章節已有真實資料、哪些沒有：[請填寫]\n\n任務：產出「研究報告／競賽書面結構」，包含：\n1) 問題背景\n2) 研究問題\n3) 文獻（只列已核對來源的佔位，沒有就寫待補）\n4) 方法\n5) 分析\n6) 結果（無資料則寫「待資料，不虛構」）\n7) 討論\n8) 限制\n9) 結論（結論不得超過證據鏈）\n10) 各節「我寫／AI 可協助／不可交給 AI」\n\n輸出大綱層級（標題＋每節 2–4 個子彈）。禁止填入假結果段落。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "expected": "一份九段結構且結果章不虛構的報告大綱",
+      "revisionReminder": "請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "extensions": [
+        {
+          "title": "延伸：結論是否超過證據",
+          "body": "請對照我的證據鏈，指出大綱結論中任何超過證據的子彈，改成限制或待研究。不要新增結果。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when outlining a report or written competition piece without AI-written results",
+      "fields": [
+        "[Enter research question]",
+        "[Paste source content]",
+        "[Enter research method]"
+      ],
+      "body": "You are a report-structure coach. You may help outline, but you must not generate nonexistent results.\n\nResearch question: [Enter research question]\nArgument-map summary: [Paste source content]\nMethod: [Enter research method]\nWhich sections have real data and which do not: [Enter status]\n\nTask: Produce a Research Report Outline with:\n1) Background\n2) Research question\n3) Literature (slots only for verified sources; else to-add)\n4) Method\n5) Analysis\n6) Results (“awaiting data, do not invent” if none)\n7) Discussion\n8) Limits\n9) Conclusion (must not exceed the argument map)\n10) Per section: I write / AI may help / must not give to AI\n\nOutput heading levels plus 2–4 bullets each. Do not fill fake results.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "expected": "A nine-part outline whose results section is not invented",
+      "revisionReminder": "Use the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "extensions": [
+        {
+          "title": "Extension: conclusion vs evidence",
+          "body": "Compare my argument map and flag outline bullets that exceed evidence. Change them to limits or future work. Add no results."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "寫九段標題與每節子彈",
+        "standard": "結果章不出現未做的實驗",
+        "mistakes": "AI 全文一次生成",
+        "check": "每節能否對回證據鏈？"
+      },
+      {
+        "task": "標人／AI／不可交給 AI",
+        "standard": "結果與結論至少有不可交給 AI",
+        "mistakes": "全部交給 AI",
+        "check": "數字由誰負責？"
+      },
+      {
+        "task": "檢查結論 ≤ 證據",
+        "standard": "超過的改限制",
+        "mistakes": "寫保證得獎",
+        "check": "有無無來源百分比？"
+      },
+      {
+        "task": "存成研究報告／競賽書面結構",
+        "standard": "待資料處留白",
+        "mistakes": "空白儲存",
+        "check": "刷新後仍在？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Write nine headings and bullets",
+        "standard": "No unrun experiments in results",
+        "mistakes": "One-shot full paper from AI",
+        "check": "Does each section map to the argument map?"
+      },
+      {
+        "task": "Tag I / AI / must-not",
+        "standard": "Results and conclusion have a must-not",
+        "mistakes": "Everything to AI",
+        "check": "Who owns the numbers?"
+      },
+      {
+        "task": "Check conclusion ≤ evidence",
+        "standard": "Over-claims become limits",
+        "mistakes": "Prize guarantees",
+        "check": "Sourceless percentages?"
+      },
+      {
+        "task": "Save the Research Report Outline",
+        "standard": "Leave awaiting-data blank",
+        "mistakes": "Blank save",
+        "check": "Visible after refresh?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "結果章由模型寫出完整統計表",
+        "why": "那些數字不存在",
+        "fix": "刪表，改待資料"
+      },
+      {
+        "error": "結論承諾本平台會產出正式 PDF",
+        "why": "功能不存在",
+        "fix": "只承諾你自己匯出的檔案"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Model writes a full stats table in results",
+        "why": "Those numbers do not exist",
+        "fix": "Delete the table; mark awaiting data"
+      },
+      {
+        "error": "Conclusion promises a formal PDF from this site",
+        "why": "That feature does not exist",
+        "fix": "Only promise files you export yourself"
+      }
+    ],
+    "zhNextStep": "把書面結構收成第 9 課簡報與 3／5 分鐘版本。簡報數字必須與大綱一致。",
+    "enNextStep": "Turn the outline into Lesson 9 slides and 3-/5-minute versions. Slide numbers must match the outline.",
+    "zhSummary": [
+      "本堂成果：研究報告／競賽書面結構",
+      "AI 搭骨架",
+      "不代寫發現"
+    ],
+    "enSummary": [
+      "Deliverable: Research Report Outline",
+      "AI builds the skeleton",
+      "It does not write findings"
+    ],
+    "zhRubric": [
+      {
+        "name": "結構完整",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "結果不虛構",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "結論不超證據",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "分工清楚",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Complete structure",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "No fake results",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Conclusion inside evidence",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Clear role split",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "中階 / Intermediate",
+    "zhTitle": "第9課：製作研究／競賽提案簡報",
+    "enTitle": "Lesson 9: Build research or competition proposal slides",
+    "zhValueTip": "簡報是書面結構的短版；3 分鐘與 5 分鐘都要能講限制，不能為了帥而加數字。",
+    "enValueTip": "Slides are a short form of the outline. Both 3- and 5-minute versions must include limits—no extra numbers for show.",
+    "zhOutcome": "競賽簡報與 Pitch 計畫",
+    "enOutcome": "Competition Pitch Deck Plan",
+    "zhConcept": "Pitch 計畫不是保證你會有 Gamma 自動完稿，而是頁面訊息、時長版本與問答準備。洞察若來自文獻或推測必須開口標明。本站不保證競賽得獎，也沒有內建評審。",
+    "enConcept": "The pitch plan is page messages, time versions, and Q&A—not a guaranteed auto-deck from Gamma. Insights from literature or speculation must be labeled when spoken. This site does not guarantee prizes and has no built-in judges.",
+    "zhCaseStudy": "隊伍的 3 分鐘：問題（一次性用品）、洞察（盤點顯示免洗餐具最多—我的資料）、方法（拍照分類）、結果（數量表）、限制（無介入）、下一步（試點一個系學會）。5 分鐘多一頁文獻定義與一頁倫理（同意拍照公共空間）。Q&A 含「如何證明減少？」答案：目前不能證明，這是基線。",
+    "enCaseStudy": "Their 3-minute arc: problem, insight from their inventory, photo-coding method, counts, limits (no intervention), next step (one student-association pilot). The 5-minute added a definition slide and a public-space photo-consent slide. Q&A included “How do you prove reduction?” Answer: we cannot yet; this is a baseline.",
+    "zhWorkflow": [
+      "抽八個訊息塊",
+      "排 3／5 分鐘頁",
+      "寫含不知道的 Q&A",
+      "刪假圖並標洞察來源",
+      "存成競賽簡報與 Pitch 計畫"
+    ],
+    "enWorkflow": [
+      "Extract eight blocks",
+      "Plan 3-/5-minute pages",
+      "Write Q&A including unknowns",
+      "Drop fake charts and tag insights",
+      "Save the pitch plan"
+    ],
+    "zhCommonMistakes": [
+      "簡報多出書面沒有的結果",
+      "3 分鐘刪限制",
+      "Q&A 全編造",
+      "保證得獎",
+      "AI 圖當數據"
+    ],
+    "enCommonMistakes": [
+      "Slides add findings absent from writing",
+      "Dropping limits in 3 minutes",
+      "Invented Q&A answers",
+      "Prize guarantees",
+      "AI art as data"
+    ],
+    "zhExcellentExample": "兩種時長、限制仍在、Q&A 誠實、與大綱數字一致。",
+    "enExcellentExample": "Both durations, limits kept, honest Q&A, numbers match the outline.",
+    "zhPrompt": "你是競賽簡報教練。簡報必須與書面結構一致，不得為了「比較好看」新增研究結果。\n\n我的研究問題：[請填寫研究問題]\n書面結構摘要：[請貼上來源內容]\n聽眾與時長限制：[請填寫]\n已知限制：[請填寫]\n\n任務：產出「競賽簡報與 Pitch 計畫」，包含：\n1) 問題\n2) 洞察（標示來源：我的資料／文獻／推測）\n3) 方法\n4) 證據\n5) 結果（無則明確說尚未收集）\n6) 影響（不保證得獎）\n7) 限制\n8) 下一步\n9) 3 分鐘版本頁面清單\n10) 5 分鐘版本頁面清單\n11) Q&A 可能題 8 題（含你還沒有答案、應誠實說不知道的題）\n\n禁止：為 Pitch 發明圖表數字。本平台沒有自動產生正式簡報檔的保證，也不保證競賽名次。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+    "enPrompt": "You are a competition-pitch coach. Slides must match the written outline. Do not add findings to look stronger.\n\nResearch question: [Enter research question]\nOutline summary: [Paste source content]\nAudience and time limits: [Enter audience]\nKnown limits: [Enter limits]\n\nTask: Produce a Competition Pitch Deck Plan with:\n1) Problem\n2) Insight (tag: my data / literature / speculation)\n3) Method\n4) Evidence\n5) Results (say not yet collected if none)\n6) Impact (no prize guarantee)\n7) Limits\n8) Next step\n9) 3-minute page list\n10) 5-minute page list\n11) 8 likely Q&A questions, including ones you should answer “I don’t know yet”\n\nForbidden: inventing chart numbers for the pitch. This site does not guarantee a slide file or a prize.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+    "zhCoachPrompt": "請檢查我的簡報計畫是否出現書面沒有的數字。不要幫我編造 Q&A 答案。",
+    "enCoachPrompt": "Check for numbers not in my outline. Do not invent Q&A answers.",
+    "zhFeedbackPrompt": "【Prompt 3｜初稿驗收】\nstructure-v1：\n（貼上）\n目前簡報頁面：\n（貼上）\n請評分：對齊架構、可講性、遠讀性、誠信風險。列出交到 Canva 前必改的 7 項。",
+    "enFeedbackPrompt": "[Prompt 3 | Draft QA] Score alignment, speakability, readability, integrity risk; list 7 must-fixes before Canva.",
+    "zhExample": "3 分鐘 6 頁含限制；5 分鐘 10 頁含倫理；Q&A：「效果多大？」→「尚未測量」。",
+    "enExample": "3-minute: 6 pages including limits. 5-minute: 10 including ethics. Q&A: “How big is the effect?” → “Not measured yet.”",
+    "zhPractice": "對齊八塊訊息。；寫 3／5 分鐘頁。；準備含不知道的 Q&A。；存 Pitch 計畫。",
+    "enPractice": "Align eight blocks.; Write 3-/5-minute pages.; Prepare Q&A including unknowns.; Save the pitch plan.",
+    "zhQuizItems": [
+      {
+        "q": "使用 Gamma 較正確的方式是？",
+        "options": [
+          "只給主題一句話，完全信任輸出",
+          "提供故事線與時長約束，生成後人工刪改並核對事實",
+          "生成後立刻上台，不需練習",
+          "把 AI 數字都當成已發表研究"
+        ],
+        "answer": 1,
+        "explain": "Gamma 加速初稿，判斷與核對仍是你的責任。"
+      },
+      {
+        "q": "發現投影片出現無法核對的「提升 73%」應？",
+        "options": [
+          "保留，因為看起來很有說服力",
+          "刪除、改成可追溯資料，或標成待補",
+          "改成更大的百分比",
+          "移到最後一頁就不算問題"
+        ],
+        "answer": 1,
+        "explain": "未核對數據不可上正式簡報。"
+      },
+      {
+        "q": "Gamma 初稿完成後，下一步通常是？",
+        "options": [
+          "對齊架構、瘦身、補證據，再進入美化",
+          "再隨機生成五個風格直到滿意",
+          "把文字加到每頁 200 字",
+          "刪掉所有標題"
+        ],
+        "answer": 0,
+        "explain": "先正確可講，再美化。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "Best way to use Gamma?",
+        "options": [
+          "One vague sentence, trust the output",
+          "Provide storyline + time, then human-edit and verify facts",
+          "Present immediately with no practice",
+          "Treat AI numbers as published research"
+        ],
+        "answer": 1,
+        "explain": "Gamma drafts; you verify and decide."
+      },
+      {
+        "q": "If a slide shows an unverifiable “+73%”, you should:",
+        "options": [
+          "Keep it for persuasion",
+          "Delete, replace with traceable data, or mark pending",
+          "Make the percentage larger",
+          "Hide it on the last slide"
+        ],
+        "answer": 1,
+        "explain": "Unverified stats do not belong."
+      },
+      {
+        "q": "After a Gamma draft, next step is usually:",
+        "options": [
+          "Align, slim, add evidence, then beautify",
+          "Randomly regenerate styles forever",
+          "Add 200 words per slide",
+          "Remove all titles"
+        ],
+        "answer": 0,
+        "explain": "Correct and speakable before polish."
+      }
+    ],
+    "zhNotePrompt": "貼上 3 分鐘頁面、5 分鐘多出的頁、以及一題你會回答「尚不知道」的 Q&A。",
+    "enNotePrompt": "Paste 3-minute pages, extra 5-minute pages, and one Q&A you will answer “I don’t know yet.”",
+    "zhDeliverableChecklist": [
+      "含問題、洞察、方法、證據、結果、影響、限制、下一步",
+      "有 3 分鐘與 5 分鐘頁面清單",
+      "有 Q&A，且含至少 1 題資料不足",
+      "數字與書面結構一致",
+      "沒有為 Pitch 發明圖表",
+      "沒有保證得獎或本站自動出片宣稱"
+    ],
+    "enDeliverableChecklist": [
+      "Problem through next step included",
+      "3- and 5-minute page lists exist",
+      "Q&A includes at least one insufficient-data answer",
+      "Numbers match the outline",
+      "No charts invented for the pitch",
+      "No prize or auto-deck claims"
+    ],
+    "zhScorecard": [
+      "輸入品質",
+      "對齊架構",
+      "可講性",
+      "事實可控",
+      "可交接美化"
+    ],
+    "enScorecard": [
+      "Input quality",
+      "Structure alignment",
+      "Speakability",
+      "Fact control",
+      "Ready to polish"
+    ],
+    "id": "research-competition-L9",
+    "lessonKey": "research-competition-L9",
+    "zhOutputName": "競賽簡報與 Pitch 計畫",
+    "enOutputName": "Competition Pitch Deck Plan",
+    "zhObjectives": [
+      "排出問題到下一步的簡報訊息",
+      "做 3 分鐘與 5 分鐘頁面清單",
+      "準備 Q&A 並標示不知道的題",
+      "確保數字與第 8 課大綱一致",
+      "存成競賽簡報與 Pitch 計畫"
+    ],
+    "enObjectives": [
+      "Sequence pitch messages from problem to next step",
+      "Build 3- and 5-minute page lists",
+      "Prepare Q&A including “I don’t know yet”",
+      "Keep numbers consistent with Lesson 8",
+      "Save a Competition Pitch Deck Plan"
+    ],
+    "zhWhyItMatters": {
+      "problem": "口頭為了打動評審而多講一個「實驗成功」，書面卻沒有，信任會立刻破裂。",
+      "ineffective": "把 AI 生成的精美圖當自己的結果，或省略限制頁。",
+      "solution": "簡報計畫與書面對齊，並準備誠實 Q&A。"
+    },
+    "enWhyItMatters": {
+      "problem": "Adding a spoken “the experiment worked” that is not in the write-up destroys trust.",
+      "ineffective": "Treating AI-pretty charts as results, or dropping the limits slide.",
+      "solution": "Align the deck to the outline and prepare honest Q&A."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "簡報 ≤ 書面證據",
+        "短版也要講限制",
+        "不知道就說不知道"
+      ],
+      "terms": [
+        "3 分鐘版本",
+        "5 分鐘版本",
+        "Q&A",
+        "洞察來源"
+      ],
+      "criteria": [
+        "八個訊息塊齊",
+        "兩種時長",
+        "有誠實不會答的題"
+      ],
+      "boundaries": [
+        "避免：為 Pitch 發明數據",
+        "避免：保證得獎",
+        "避免：省略限制"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Slides ≤ written evidence",
+        "Short versions still include limits",
+        "Say you don’t know"
+      ],
+      "terms": [
+        "3-minute version",
+        "5-minute version",
+        "Q&A",
+        "Insight source"
+      ],
+      "criteria": [
+        "Eight message blocks",
+        "Two durations",
+        "Unanswerable questions flagged"
+      ],
+      "boundaries": [
+        "Avoid: numbers invented for pitch",
+        "Avoid: prize guarantees",
+        "Avoid: dropping limits"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "永續競賽隊在 3 分鐘彩排加了一張「減量 40%」的 AI 圖。",
+      "wrong": "評審問數據來源時無法指回盤點表。",
+      "right": "刪圖；3 分鐘保留問題、方法、盤點證據、限制、下一步；Q&A 預寫「尚未做介入實驗」。",
+      "result": "一份與書面一致的競賽簡報與 Pitch 計畫。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "The sustainability team added an AI chart “40% reduction” in a 3-minute rehearsal.",
+      "wrong": "They could not point to a table when asked.",
+      "right": "Delete the chart; keep problem, method, inventory evidence, limits, next step; pre-write “no intervention yet.”",
+      "result": "A pitch plan that matches the write-up."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "從大綱抽出八個訊息塊",
+        "why": "簡報不能多出新結果",
+        "input": "書面結構",
+        "output": "訊息清單",
+        "check": "是否多了書面沒有的數字"
+      },
+      {
+        "do": "排 3 分鐘與 5 分鐘頁",
+        "why": "短版仍含限制",
+        "input": "訊息清單",
+        "output": "兩份頁面表",
+        "check": "3 分鐘是否超過頁數仍能講完限制"
+      },
+      {
+        "do": "寫 Q&A 含不知道",
+        "why": "評審會打證據邊界",
+        "input": "證據鏈",
+        "output": "問答稿",
+        "check": "有無誠實不會答"
+      },
+      {
+        "do": "用主 Prompt 對齊時長",
+        "why": "刪表演性假圖",
+        "input": "頁面表",
+        "output": "Pitch 計畫",
+        "check": "洞察是否標來源"
+      },
+      {
+        "do": "存檔",
+        "why": "第 10 課總檢查會核對簡報↔報告",
+        "input": "定稿",
+        "output": "成果包",
+        "check": "刷新後仍在"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Extract eight message blocks",
+        "why": "Slides cannot add findings",
+        "input": "Outline",
+        "output": "Message list",
+        "check": "Numbers not in the write-up?"
+      },
+      {
+        "do": "Plan 3- and 5-minute pages",
+        "why": "Short version still has limits",
+        "input": "Messages",
+        "output": "Two page lists",
+        "check": "Can 3 minutes still say limits?"
+      },
+      {
+        "do": "Write Q&A including unknowns",
+        "why": "Judges attack evidence bounds",
+        "input": "Argument map",
+        "output": "Q&A sheet",
+        "check": "Honest “don’t know”?"
+      },
+      {
+        "do": "Align timing with the prompt",
+        "why": "Delete theatrical fake charts",
+        "input": "Pages",
+        "output": "Pitch plan",
+        "check": "Insights sourced?"
+      },
+      {
+        "do": "Save",
+        "why": "Lesson 10 checks slides vs report",
+        "input": "Final",
+        "output": "Package",
+        "check": "Still there after refresh?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "要把書面結構收成 3／5 分鐘簡報與 Q&A 時使用",
+      "fields": [
+        "[請填寫研究問題]",
+        "[請貼上來源內容]",
+        "[請填寫]"
+      ],
+      "body": "你是競賽簡報教練。簡報必須與書面結構一致，不得為了「比較好看」新增研究結果。\n\n我的研究問題：[請填寫研究問題]\n書面結構摘要：[請貼上來源內容]\n聽眾與時長限制：[請填寫]\n已知限制：[請填寫]\n\n任務：產出「競賽簡報與 Pitch 計畫」，包含：\n1) 問題\n2) 洞察（標示來源：我的資料／文獻／推測）\n3) 方法\n4) 證據\n5) 結果（無則明確說尚未收集）\n6) 影響（不保證得獎）\n7) 限制\n8) 下一步\n9) 3 分鐘版本頁面清單\n10) 5 分鐘版本頁面清單\n11) Q&A 可能題 8 題（含你還沒有答案、應誠實說不知道的題）\n\n禁止：為 Pitch 發明圖表數字。本平台沒有自動產生正式簡報檔的保證，也不保證競賽名次。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "expected": "一份含 3／5 分鐘頁面與 Q&A 的 Pitch 計畫",
+      "revisionReminder": "請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "extensions": [
+        {
+          "title": "延伸：Q&A 誠實答案",
+          "body": "請把我列出的評審題分成：可用現有證據回答／必須說資料不足。不要編造答案。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when turning the outline into 3-/5-minute slides and Q&A",
+      "fields": [
+        "[Enter research question]",
+        "[Paste source content]",
+        "[Enter audience]"
+      ],
+      "body": "You are a competition-pitch coach. Slides must match the written outline. Do not add findings to look stronger.\n\nResearch question: [Enter research question]\nOutline summary: [Paste source content]\nAudience and time limits: [Enter audience]\nKnown limits: [Enter limits]\n\nTask: Produce a Competition Pitch Deck Plan with:\n1) Problem\n2) Insight (tag: my data / literature / speculation)\n3) Method\n4) Evidence\n5) Results (say not yet collected if none)\n6) Impact (no prize guarantee)\n7) Limits\n8) Next step\n9) 3-minute page list\n10) 5-minute page list\n11) 8 likely Q&A questions, including ones you should answer “I don’t know yet”\n\nForbidden: inventing chart numbers for the pitch. This site does not guarantee a slide file or a prize.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "expected": "A pitch plan with 3-/5-minute pages and Q&A",
+      "revisionReminder": "Use the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "extensions": [
+        {
+          "title": "Extension: honest Q&A",
+          "body": "Sort my judge questions into answerable-with-current-evidence vs must-say-insufficient. Invent no answers."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "完成八塊訊息並對齊大綱",
+        "standard": "無新數字",
+        "mistakes": "為了帥而加實驗",
+        "check": "每頁能否指回書面？"
+      },
+      {
+        "task": "寫 3 分鐘與 5 分鐘頁面清單",
+        "standard": "短版含限制與下一步",
+        "mistakes": "3 分鐘刪掉限制",
+        "check": "時間內能否講完？"
+      },
+      {
+        "task": "準備 8 題 Q&A（含不知道）",
+        "standard": "至少 1 題答案是資料不足",
+        "mistakes": "全都能講得很好看",
+        "check": "哪題應說不知道？"
+      },
+      {
+        "task": "存成競賽簡報與 Pitch 計畫",
+        "standard": "含兩種時長",
+        "mistakes": "空白儲存",
+        "check": "刷新後仍在？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Finish eight blocks aligned to the outline",
+        "standard": "No new numbers",
+        "mistakes": "Adding an experiment for show",
+        "check": "Can each page point to the write-up?"
+      },
+      {
+        "task": "Write 3- and 5-minute page lists",
+        "standard": "Short version includes limits and next step",
+        "mistakes": "Dropping limits in 3 minutes",
+        "check": "Can you finish on time?"
+      },
+      {
+        "task": "Prepare 8 Q&A items including unknowns",
+        "standard": "At least one “insufficient data”",
+        "mistakes": "Every answer sounds polished",
+        "check": "Which question should you not fake?"
+      },
+      {
+        "task": "Save the Competition Pitch Deck Plan",
+        "standard": "Both durations included",
+        "mistakes": "Blank save",
+        "check": "Visible after refresh?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "封面寫「必勝提案」",
+        "why": "本課不保證名次",
+        "fix": "改成問題與範圍"
+      },
+      {
+        "error": "把 Gamma 草稿數字當已核對",
+        "why": "工具常編造圖表",
+        "fix": "只放你表格裡的數"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Cover says “winning pitch”",
+        "why": "This course does not guarantee placement",
+        "fix": "State the problem and scope"
+      },
+      {
+        "error": "Treat Gamma draft numbers as verified",
+        "why": "Tools often invent charts",
+        "fix": "Only use numbers from your table"
+      }
+    ],
+    "zhNextStep": "進入第 10 課做提交檢查。用前 9 堂成果勾選，不必重打全部內容。",
+    "enNextStep": "Go to Lesson 10’s submission check. Tick prior outputs; do not retype everything.",
+    "zhSummary": [
+      "本堂成果：競賽簡報與 Pitch 計畫",
+      "簡報不得多於書面",
+      "不知道就說不知道"
+    ],
+    "enSummary": [
+      "Deliverable: Competition Pitch Deck Plan",
+      "Slides must not exceed the write-up",
+      "Say you don’t know"
+    ],
+    "zhRubric": [
+      {
+        "name": "與書面一致",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "時間版本完整",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "Q&A 誠實",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "無假數字",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Matches writing",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Time versions complete",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Honest Q&A",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "No fake numbers",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 55 分鐘 / About 55 min",
+    "difficulty": "中階 / Intermediate",
+    "zhTitle": "第10課：完成研究／專題／競賽專案包的口頭提案準備",
+    "enTitle": "Lesson 10: Prepare the oral proposal for your research or competition package",
+    "zhValueTip": "提交檢查是整合前 9 堂，不是重打一遍；未完成就標未完成。",
+    "enValueTip": "The submission check integrates Lessons 1–9; it is not a rewrite. Mark unfinished work as unfinished.",
+    "zhOutcome": "完整研究與競賽提交檢查",
+    "enOutcome": "Final Research & Competition Submission Checklist",
+    "zhConcept": "第 10 課把問題定義、搜尋、文獻、設計、分析、論證、書面與 Pitch 收成提交檢查。你不必重填每一堂的完整表格。本網站沒有 Turnitin、自動引用驗證、自動倫理審查、自動統計引擎或保證得獎。",
+    "enConcept": "Lesson 10 folds definition, search, notes, design, analysis, argument, writing, and pitch into a submission check. You do not re-enter every table. This site has no Turnitin, auto citation check, auto ethics review, auto stats engine, or prize guarantee.",
+    "zhCaseStudy": "永續隊伍沒有重打盤點表。他們勾：問題清楚＝通過；來源分級＝通過；引用核對＝未完成（1 個 DOI 打不開，決定刪除）；方法可解釋＝通過；數據真實＝通過；結論未超證據＝通過；圖表一致＝未完成（刪 AI 圖）；簡報與報告＝修完後再勾；AI 使用＝通過（已在方法章說明）；限制揭露＝通過。本週行動：刪未核對引用與多餘簡報圖，各 15 分鐘。",
+    "enCaseStudy": "They did not retype the inventory. They marked citations unfinished (one DOI would not open—delete it) and chart consistency unfinished (delete the AI chart). This week’s action: 15 minutes each to remove the unverified cite and the extra slide. Other items passed or awaited data.",
+    "zhWorkflow": [
+      "匯入前9堂重點",
+      "十項誠實勾選",
+      "核對簡報與圖表一致性",
+      "列出未完成與本週一行動",
+      "存成完整研究與競賽提交檢查"
+    ],
+    "enWorkflow": [
+      "Import prior highlights",
+      "Tick ten items honestly",
+      "Check slide and chart consistency",
+      "List unfinished work and one action",
+      "Save the final checklist"
+    ],
+    "zhCommonMistakes": [
+      "未完成標完成",
+      "重打全部前課",
+      "宣稱 Turnitin／自動驗證",
+      "保證得獎",
+      "簡報與報告不一致仍送出"
+    ],
+    "enCommonMistakes": [
+      "Marking unfinished as done",
+      "Retyping every prior lesson",
+      "Claiming Turnitin/auto-verify",
+      "Prize guarantees",
+      "Submitting with slide-report mismatch"
+    ],
+    "zhExcellentExample": "十項誠實、未完成列清楚、一週一行動、無平台功能虛構。",
+    "enExcellentExample": "Honest ten items, clear unfinished list, one weekly action, no invented platform features.",
+    "zhPrompt": "你是提交檢查教練。請根據我貼上的前 9 堂成果摘要做總檢查，不要要求我重新輸入全部資料，也不要幫我補齊不存在的結果。\n\n我的研究問題：[請填寫研究問題]\n前課成果摘要（可貼定義表／畫布／搜尋策略／理解表／設計／分析計畫／證據鏈／大綱／Pitch 的重點）：\n[請貼上來源內容]\n競賽或課程提交規則（若有）：[請填寫]\n我仍缺漏的項目：[請填寫]\n\n任務：產出「完整研究與競賽提交檢查」，用通過／未完成／不適用勾選：\n1) 問題是否清楚\n2) 來源是否可信（Primary/Secondary/AI 是否分級）\n3) 引用是否核對\n4) 方法是否可解釋\n5) 數據是否真實（無捏造）\n6) 結論是否超過證據\n7) 圖表是否與資料一致\n8) 簡報是否與報告一致\n9) AI 使用是否符合規則（含課程／競賽／學校規定，以我貼的規則為準）\n10) 是否有未揭露限制\n並輸出：已完成亮點、未完成清單（不要假裝完成）、本週只做 1 個補齊動作。\n\n禁止：把未完成標成完成；禁止宣稱本站已做 Turnitin、自動引用驗證或保證得獎。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+    "enPrompt": "You are a submission-check coach. Use the Lesson 1–9 summaries I paste. Do not demand a full re-entry and do not fill nonexistent results.\n\nResearch question: [Enter research question]\nPrior-lesson highlights (definition, canvas, search plan, notes, design, analysis plan, argument map, outline, pitch):\n[Paste source content]\nCompetition or course submission rules if any: [Enter rules]\nItems I still lack: [Enter gaps]\n\nTask: Produce a Final Research & Competition Submission Checklist with pass / unfinished / N/A for:\n1) Problem clarity\n2) Source trustworthiness (primary/secondary/AI tiers)\n3) Citations verified\n4) Method explainable\n5) Data real (not fabricated)\n6) Conclusion does not exceed evidence\n7) Charts match data\n8) Slides match the report\n9) AI use matches rules I pasted\n10) Limits disclosed\nAlso output: highlights done, unfinished list (do not fake complete), and one catch-up action this week.\n\nForbidden: marking unfinished as done; claiming this site ran Turnitin, auto citation checks, or guaranteed a prize.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+    "zhCoachPrompt": "請根據我貼的摘要指出哪些檢查不應標通過。不要幫我補假結果或宣稱全過。",
+    "enCoachPrompt": "From my summary, say which checks should not be marked pass. Do not add fake results or an all-pass claim.",
+    "zhFeedbackPrompt": "【Prompt 3｜模擬評分與上台檢核】\n評分量表：\n（貼上或用預設五維）\n我的錄影／表現自述：\n（貼上）\n簡報主張：\n（貼上）\n請給模擬分數、最大 3 個扣分點、明天上台前只改這 3 點的行動清單，以及 12 項上台前檢核表。",
+    "enFeedbackPrompt": "[Prompt 3 | Mock Scoring & Stage Checklist] Score my rehearsal notes, list top 3 fixes, and output a 12-item pre-stage checklist.",
+    "zhExample": "十項中兩項未完成（引用、簡報圖）；本週只刪這兩處；不宣稱 Turnitin 或得獎。",
+    "enExample": "Two of ten unfinished (citation, extra slide); this week only those deletions; no Turnitin or prize claim.",
+    "zhPractice": "勾十項檢查。；核對簡報與圖表。；寫本週一行動。；存提交檢查。",
+    "enPractice": "Tick ten checks.; Verify slides and charts.; Write one weekly action.; Save the checklist.",
+    "zhQuizItems": [
+      {
+        "q": "模擬口頭報告最核心的目的是？",
+        "options": [
+          "多背幾句漂亮成語",
+          "在壓力下仍準時、清楚、可防禦地完成發表",
+          "讓 AI 代替你上台",
+          "只練習翻頁動畫"
+        ],
+        "answer": 1,
+        "explain": "壓力測試是為了可上台發表。"
+      },
+      {
+        "q": "被問到不知道的細節時，較佳做法是？",
+        "options": [
+          "立刻編造一篇研究撐場面",
+          "誠實界定已知範圍，給可驗證的下一步",
+          "沉默到老師換題",
+          "指責隊友"
+        ],
+        "answer": 1,
+        "explain": "誠實與邊界感比假答案更專業。"
+      },
+      {
+        "q": "Chapter 5 可發表版通常應包含？",
+        "options": [
+          "只有模板沒有內容",
+          "final 簡報、講稿／關鍵詞卡、題庫應答與上台檢核",
+          "只有 AI 聊天紀錄",
+          "未核對數據的炫圖全集"
+        ],
+        "answer": 1,
+        "explain": "交付物是可上台的完整系統包。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "Main purpose of mock presenting?",
+        "options": [
+          "Memorize ornate idioms",
+          "Stay on time, clear, and defendable under pressure",
+          "Let AI present for you",
+          "Practice animations only"
+        ],
+        "answer": 1,
+        "explain": "Pressure-test for real stage readiness."
+      },
+      {
+        "q": "Best response when you do not know a detail?",
+        "options": [
+          "Invent a study immediately",
+          "Honestly bound what you know and offer a verifiable next step",
+          "Stay silent until the topic changes",
+          "Blame teammates"
+        ],
+        "answer": 1,
+        "explain": "Honesty beats fabrication."
+      },
+      {
+        "q": "A Chapter 5 presentation-ready pack usually includes:",
+        "options": [
+          "Templates with no content",
+          "Final deck, script/cue cards, Q&A notes, and stage checklist",
+          "Only AI chat logs",
+          "Unverified flashy charts"
+        ],
+        "answer": 1,
+        "explain": "Ship the full stage-ready system."
+      }
+    ],
+    "zhNotePrompt": "寫下十項中未完成的項目，以及本週唯一行動。",
+    "enNotePrompt": "Write unfinished items among the ten, plus this week’s single action.",
+    "zhDeliverableChecklist": [
+      "十項皆有通過／未完成／不適用",
+      "未完成項目沒有被標成完成",
+      "沒有要求重打全部前 9 堂全文",
+      "簡報與報告、圖表與資料已核對或列入未完成",
+      "含本週 1 個補齊動作",
+      "沒有 Turnitin、自動驗證、保證得獎或教授批改宣稱"
+    ],
+    "enDeliverableChecklist": [
+      "All ten items are pass / unfinished / N/A",
+      "Unfinished items are not marked complete",
+      "No demand to retype all nine prior lessons",
+      "Slide-report and chart-data checked or listed unfinished",
+      "One weekly catch-up action included",
+      "No Turnitin, auto-verify, prize, or professor-grading claims"
+    ],
+    "zhScorecard": [
+      "準時",
+      "清楚",
+      "問答防禦",
+      "台風穩定",
+      "應變備援"
+    ],
+    "enScorecard": [
+      "On time",
+      "Clarity",
+      "Q&A defense",
+      "Delivery stability",
+      "Contingency"
+    ],
+    "id": "research-competition-L10",
+    "lessonKey": "research-competition-L10",
+    "zhOutputName": "完整研究與競賽提交檢查",
+    "enOutputName": "Final Research & Competition Submission Checklist",
+    "zhObjectives": [
+      "用前 9 堂成果勾選十項提交檢查",
+      "誠實標示未完成，不重打全部資料",
+      "確認簡報與報告、圖表與資料一致",
+      "確認 AI 使用與引用查證",
+      "存成完整研究與競賽提交檢查"
+    ],
+    "enObjectives": [
+      "Tick ten submission checks using Lessons 1–9",
+      "Mark unfinished honestly without retyping everything",
+      "Confirm slides match the report and charts match data",
+      "Confirm AI-use and citation verification",
+      "Save the Final Research & Competition Submission Checklist"
+    ],
+    "zhWhyItMatters": {
+      "problem": "口頭很順但引用未核對、結論超過證據、簡報多了報告沒有的圖，提交風險最高。",
+      "ineffective": "請 AI 寫「我們已完成所有檢查」或宣稱網站幫你做了查重。",
+      "solution": "用十項清單對前 9 堂成果做總整理，缺的就列入本週一個行動。"
+    },
+    "enWhyItMatters": {
+      "problem": "A smooth talk with unverified citations, over-claimed conclusions, or extra slide charts is the highest-risk submission.",
+      "ineffective": "Asking AI to say “all checks passed,” or claiming the site ran originality detection.",
+      "solution": "Run ten checks against prior outputs and pick one weekly catch-up action."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "整合而非重做",
+        "未完成就標未完成",
+        "一致性重於華麗"
+      ],
+      "terms": [
+        "提交檢查",
+        "未完成清單",
+        "簡報↔報告",
+        "AI 使用揭露"
+      ],
+      "criteria": [
+        "十項都有狀態",
+        "有本週單一行動",
+        "無功能虛構"
+      ],
+      "boundaries": [
+        "避免：假裝全過",
+        "避免：Turnitin 宣稱",
+        "避免：保證得獎"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Integrate, don’t redo",
+        "Mark unfinished",
+        "Consistency over polish"
+      ],
+      "terms": [
+        "Submission check",
+        "Unfinished list",
+        "Slides ↔ report",
+        "AI-use disclosure"
+      ],
+      "criteria": [
+        "Ten statuses",
+        "One weekly action",
+        "No invented features"
+      ],
+      "boundaries": [
+        "Avoid: fake all-pass",
+        "Avoid: Turnitin claims",
+        "Avoid: prize guarantees"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "隊伍口頭彩排很順，但第 4 課仍有未核對 DOI，第 9 課簡報多了一張報告沒有的圖。",
+      "wrong": "請 AI 產出「十項全過」的檢查表交差。",
+      "right": "引用核對＝未完成；簡報一致性＝未完成；本週只修這兩項；其餘標通過或待資料。",
+      "result": "一份誠實的完整研究與競賽提交檢查。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Rehearsal is smooth, but Lesson 4 still has unverified DOIs and Lesson 9 has an extra chart.",
+      "wrong": "Ask AI for a ten-item all-pass checklist.",
+      "right": "Citations = unfinished; slide consistency = unfinished; fix only those this week; others pass or await data.",
+      "result": "An honest Final Research & Competition Submission Checklist."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "匯入前 9 堂重點，不重打全文",
+        "why": "避免重複勞動與造假完成",
+        "input": "成果包",
+        "output": "摘要清單",
+        "check": "缺的是否標未完成"
+      },
+      {
+        "do": "十項勾選通過／未完成／不適用",
+        "why": "誠實才能真的提交",
+        "input": "摘要",
+        "output": "檢查表",
+        "check": "有無全過但明顯缺資料"
+      },
+      {
+        "do": "核對簡報↔報告、圖表↔資料",
+        "why": "這兩項最常在口頭翻車",
+        "input": "大綱+Pitch",
+        "output": "一致性註記",
+        "check": "有無多出來的數字"
+      },
+      {
+        "do": "用主 Prompt 產出未完成清單與一週行動",
+        "why": "一次只補一個缺口",
+        "input": "檢查表",
+        "output": "提交檢查",
+        "check": "是否要求重做全部"
+      },
+      {
+        "do": "存檔",
+        "why": "這是本課最終成果",
+        "input": "定稿",
+        "output": "成果包",
+        "check": "刷新後仍在"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Import Lesson 1–9 highlights; no full retype",
+        "why": "Avoid redo labor and fake completion",
+        "input": "Package",
+        "output": "Summary list",
+        "check": "Gaps marked unfinished?"
+      },
+      {
+        "do": "Tick pass / unfinished / N/A on ten items",
+        "why": "Honesty is the submission",
+        "input": "Summary",
+        "output": "Checklist",
+        "check": "All-pass despite missing data?"
+      },
+      {
+        "do": "Check slides↔report and charts↔data",
+        "why": "These fail in Q&A",
+        "input": "Outline+pitch",
+        "output": "Consistency notes",
+        "check": "Extra numbers?"
+      },
+      {
+        "do": "Generate unfinished list and one weekly action",
+        "why": "Fix one gap",
+        "input": "Checklist",
+        "output": "Submission check",
+        "check": "Does it demand a full redo?"
+      },
+      {
+        "do": "Save",
+        "why": "This is the course’s final output",
+        "input": "Final",
+        "output": "Package",
+        "check": "Still there after refresh?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "提交前用前 9 堂成果做總檢查時使用",
+      "fields": [
+        "[請填寫研究問題]",
+        "[請貼上來源內容]",
+        "[請填寫]"
+      ],
+      "body": "你是提交檢查教練。請根據我貼上的前 9 堂成果摘要做總檢查，不要要求我重新輸入全部資料，也不要幫我補齊不存在的結果。\n\n我的研究問題：[請填寫研究問題]\n前課成果摘要（可貼定義表／畫布／搜尋策略／理解表／設計／分析計畫／證據鏈／大綱／Pitch 的重點）：\n[請貼上來源內容]\n競賽或課程提交規則（若有）：[請填寫]\n我仍缺漏的項目：[請填寫]\n\n任務：產出「完整研究與競賽提交檢查」，用通過／未完成／不適用勾選：\n1) 問題是否清楚\n2) 來源是否可信（Primary/Secondary/AI 是否分級）\n3) 引用是否核對\n4) 方法是否可解釋\n5) 數據是否真實（無捏造）\n6) 結論是否超過證據\n7) 圖表是否與資料一致\n8) 簡報是否與報告一致\n9) AI 使用是否符合規則（含課程／競賽／學校規定，以我貼的規則為準）\n10) 是否有未揭露限制\n並輸出：已完成亮點、未完成清單（不要假裝完成）、本週只做 1 個補齊動作。\n\n禁止：把未完成標成完成；禁止宣稱本站已做 Turnitin、自動引用驗證或保證得獎。\n\n請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "expected": "一份十項通過／未完成／不適用的提交檢查與本週單一補齊動作",
+      "revisionReminder": "請將 AI 回答作為研究輔助，不要直接當作研究結果、報告正文或競賽稿提交。重要內容請回到正式來源、原始資料或指導教授／競賽規則查證。\n\nAI 產生的作者、年份、期刊名稱、DOI、研究結果與引用都必須回到正式來源確認。找不到原始來源時，不應引用。\n\n禁止捏造文獻、DOI、作者、統計、訪談、實驗、問卷數據或研究參與者。不得把 AI 推測包裝成研究發現。AI 生成內容不是學術證據本身。",
+      "extensions": [
+        {
+          "title": "延伸：只修一個缺口",
+          "body": "請從我的未完成清單選影響最大的 1 項，寫出今天 30 分鐘行動。不要叫我重做全部 9 堂。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use before submission to check Lessons 1–9 without retyping everything",
+      "fields": [
+        "[Enter research question]",
+        "[Paste source content]",
+        "[Enter rules]"
+      ],
+      "body": "You are a submission-check coach. Use the Lesson 1–9 summaries I paste. Do not demand a full re-entry and do not fill nonexistent results.\n\nResearch question: [Enter research question]\nPrior-lesson highlights (definition, canvas, search plan, notes, design, analysis plan, argument map, outline, pitch):\n[Paste source content]\nCompetition or course submission rules if any: [Enter rules]\nItems I still lack: [Enter gaps]\n\nTask: Produce a Final Research & Competition Submission Checklist with pass / unfinished / N/A for:\n1) Problem clarity\n2) Source trustworthiness (primary/secondary/AI tiers)\n3) Citations verified\n4) Method explainable\n5) Data real (not fabricated)\n6) Conclusion does not exceed evidence\n7) Charts match data\n8) Slides match the report\n9) AI use matches rules I pasted\n10) Limits disclosed\nAlso output: highlights done, unfinished list (do not fake complete), and one catch-up action this week.\n\nForbidden: marking unfinished as done; claiming this site ran Turnitin, auto citation checks, or guaranteed a prize.\n\nUse the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "expected": "A ten-item pass/unfinished/N/A submission check plus one weekly catch-up action",
+      "revisionReminder": "Use the AI response as a research aid, not as findings, report text, or a competition draft to submit. Verify important content against original sources, primary data, or advisor/competition rules.\n\nAny author, year, journal, DOI, result, or citation generated by AI must be verified against the original source. Do not cite a source you cannot verify.\n\nDo not invent literature, DOIs, authors, statistics, interviews, experiments, survey data, or participants. Do not package AI speculation as findings. AI-generated text is not academic evidence.",
+      "extensions": [
+        {
+          "title": "Extension: fix one gap",
+          "body": "Pick the highest-impact unfinished item and write a 30-minute action for today. Do not tell me to redo all 9 lessons."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "貼前 9 堂重點並十項勾選",
+        "standard": "未完成不得改通過",
+        "mistakes": "請 AI 全過",
+        "check": "哪幾項真的缺？"
+      },
+      {
+        "task": "檢查簡報與報告、圖表與資料",
+        "standard": "不一致就列未完成",
+        "mistakes": "口頭多講一個實驗",
+        "check": "評審能否對上書面？"
+      },
+      {
+        "task": "寫本週唯一補齊動作",
+        "standard": "30–60 分鐘可完成",
+        "mistakes": "重做 L1–L9",
+        "check": "明天能否開始？"
+      },
+      {
+        "task": "存成完整研究與競賽提交檢查",
+        "standard": "含未完成清單",
+        "mistakes": "空白儲存",
+        "check": "刷新後仍在？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Paste prior highlights and tick ten items",
+        "standard": "Do not flip unfinished to pass",
+        "mistakes": "Ask AI for all-pass",
+        "check": "Which items are truly missing?"
+      },
+      {
+        "task": "Check slides vs report and charts vs data",
+        "standard": "Mismatches stay unfinished",
+        "mistakes": "Adding an experiment in speech",
+        "check": "Could a judge match the write-up?"
+      },
+      {
+        "task": "Write one weekly catch-up action",
+        "standard": "Doable in 30–60 minutes",
+        "mistakes": "Redo L1–L9",
+        "check": "Can you start tomorrow?"
+      },
+      {
+        "task": "Save the final checklist",
+        "standard": "Includes unfinished list",
+        "mistakes": "Blank save",
+        "check": "Visible after refresh?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "檢查表寫本站已做原創性比對",
+        "why": "功能不存在",
+        "fix": "刪除該句，改為你自己對照原文"
+      },
+      {
+        "error": "把缺文獻寫成已完成精讀",
+        "why": "提交風險",
+        "fix": "維持未完成並刪無法核對引用"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Checklist says this site ran originality detection",
+        "why": "That feature does not exist",
+        "fix": "Delete it; verify originals yourself"
+      },
+      {
+        "error": "Missing literature marked as close-read",
+        "why": "Submission risk",
+        "fix": "Keep unfinished and drop unverifiable cites"
+      }
+    ],
+    "zhNextStep": "把這份檢查存進研究與競賽成果包。從未完成清單的第一項開始補，不必重寫全部前課。",
+    "enNextStep": "Save this check to your research and competition package. Start with the first unfinished item. You do not need to rewrite prior lessons.",
+    "zhSummary": [
+      "本堂成果：完整研究與競賽提交檢查",
+      "整合前 9 堂",
+      "未完成就標未完成"
+    ],
+    "enSummary": [
+      "Deliverable: Final Research & Competition Submission Checklist",
+      "Integrates Lessons 1–9",
+      "Mark unfinished as unfinished"
+    ],
+    "zhRubric": [
+      {
+        "name": "十項檢查誠實",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "未完成未假裝",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "前後一致",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      },
+      {
+        "name": "無平台功能虛構",
+        "levels": {
+          "incomplete": "尚未完成或無法使用",
+          "basic": "有產出但結構不清或未查證",
+          "good": "結構清楚且標示待查證處",
+          "ready": "可納入研究與競賽成果包"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Honest ten checks",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Unfinished not faked",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "Front-to-back consistency",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      },
+      {
+        "name": "No invented platform features",
+        "levels": {
+          "incomplete": "Incomplete or unusable",
+          "basic": "Produced but unclear or unverified",
+          "good": "Clear structure with verification flags",
+          "ready": "Ready for the research and competition package"
+        }
+      }
+    ]
+  }
+],
   "career-internship": [
     {
       "id": "career-internship-L1",
