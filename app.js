@@ -19,6 +19,12 @@ const SPECIAL_ACCOUNT_ROLES = {
   }
 };
 
+/** Public customer support contact (ECPay seller verification). Single source for footer. */
+const BUSINESS_CONTACT = {
+  email: "li19840610@gmail.com",
+  phone: "0933577360"
+};
+
 function normalizeAccountEmail(email) {
   return String(email || "").trim().toLowerCase();
 }
@@ -1741,62 +1747,57 @@ function nav() {
   `;
 }
 
+function renderSiteFooter() {
+  const email = BUSINESS_CONTACT.email;
+  const phone = BUSINESS_CONTACT.phone;
+  return `
+    <footer class="site-footer" role="contentinfo">
+      <div class="wrap site-footer-grid">
+        <div class="site-footer-brand">
+          <strong class="site-footer-name">AI Skill Bridge</strong>
+          <p class="site-footer-tagline">${text(
+            "線上 AI 教育課程與數位學習平台",
+            "Online AI Education & Digital Learning Platform"
+          )}</p>
+        </div>
+        <div class="site-footer-contact">
+          <h2 class="site-footer-heading">${text("聯絡我們", "Contact Us")}</h2>
+          <p class="site-footer-subheading">${text("客服聯絡資訊", "Customer Support")}</p>
+          <p class="site-footer-line">
+            ${text("Email：", "Email: ")}<a href="mailto:${email}" class="site-footer-link">${email}</a>
+          </p>
+          <p class="site-footer-line">
+            ${text("電話：", "Phone: ")}<a href="tel:${phone}" class="site-footer-link">${phone}</a>
+          </p>
+        </div>
+        <div class="site-footer-meta">
+          <p>${text(
+            "商品價格皆以新臺幣（NT$）計價。",
+            "All prices are listed in New Taiwan Dollars (NT$)."
+          )}</p>
+          <p>${text(
+            "本平台提供線上數位課程與數位學習內容，無實體配送。",
+            "This platform provides online digital courses and learning content. No physical delivery is provided."
+          )}</p>
+        </div>
+      </div>
+      <div class="wrap site-footer-bottom">
+        <p>© 2026 AI Skill Bridge</p>
+      </div>
+    </footer>
+  `;
+}
+
 function shell(content) {
   return `
     ${nav()}
     ${content}
-    <footer class="footer">
-      <div class="wrap">
-        <p>© 2026 AI Skill Bridge. ${state.lang === "zh" ? "讓不懂 AI 的人也能開始上手。" : "Helping beginners start using AI."}</p>
-      </div>
-    </footer>
-  `;
-}
-
-function homeFooter() {
-  return `
-    <footer class="home-footer">
-      <div class="wrap home-footer-grid">
-        <div class="home-footer-brand">
-          <div class="home-footer-logo"><span>AI</span> AI Skill Bridge</div>
-          <p>${text(
-            "從學習到創業的 AI 能力養成平台。讓 AI 能力成為每個人都能跨越的橋樑。",
-            "An AI skill platform from learning to entrepreneurship. Making AI ability a bridge anyone can cross."
-          )}</p>
-        </div>
-        <div>
-          <h4>${text("產品", "Product")}</h4>
-          <button type="button" onclick="setRoute('courses')">${text("免費入門", "Free Course")}</button>
-          <button type="button" onclick="setRoute('map')">${text("所有課程", "All Courses")}</button>
-          <button type="button" onclick="setRoute('premium')">${text("進階課程", "Premium Courses")}</button>
-          <button type="button" onclick="setRoute('result-packages')">${text("成果禮包", "Result Packages")}</button>
-        </div>
-        <div>
-          <h4>${text("學習", "Learn")}</h4>
-          <button type="button" onclick="setRoute('learning')">${text("我的學習", "My Learning")}</button>
-          <button type="button" onclick="setRoute('tools')">${text("AI 工具", "AI Tools")}</button>
-          <button type="button" onclick="setRoute('prompts')">${text("Prompt 資源", "Prompt Library")}</button>
-          <button type="button" onclick="setRoute('assessment')">${text("能力測驗", "Assessment")}</button>
-        </div>
-        <div>
-          <h4>${text("品牌", "Brand")}</h4>
-          <button type="button" onclick="setRoute('impact')">${text("社會影響", "Social Impact")}</button>
-          <button type="button" onclick="setRoute('community')">${text("社群與聯絡", "Community & Contact")}</button>
-        </div>
-      </div>
-      <div class="wrap home-footer-bottom">
-        <p>© 2026 AI Skill Bridge</p>
-        <p class="home-footer-tagline">${text(
-          "讓 AI 能力成為每個人都能跨越的橋樑。",
-          "Making AI ability a bridge anyone can cross."
-        )}</p>
-      </div>
-    </footer>
+    ${renderSiteFooter()}
   `;
 }
 
 function homeLandingShell(content) {
-  return `${nav()}${content}${homeFooter()}`;
+  return `${nav()}${content}${renderSiteFooter()}`;
 }
 
 const HOME_CAPABILITY_LABELS = {
