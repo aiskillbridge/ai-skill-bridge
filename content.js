@@ -16714,1989 +16714,5343 @@ const PREMIUM_LESSON_DETAILS = {
   }
 ],
   "career-internship": [
-    {
-      "id": "career-internship-L1",
-      "lessonKey": "career-internship-L1",
-      "zhTitle": "第1課：盤點可寫進履歷的真實經驗與能力證據",
-      "enTitle": "Lesson 1: Inventory real experience and evidence for your resume",
-      "zhConcept": "這一課只服務實習與求職。履歷不是興趣清單，而是「證據清單」：情境、你的角色、行動、可驗證結果、佐證方式。課堂專題、社團、工讀、志工、比賽都可以，前提是你能公開、誠實地說明。\n\nAI 適合幫你分類、追問缺口（缺數字？缺角色？缺結果？）、建議哪幾筆更對職缺；不可發明專案、職稱或業績。先有證據，才有後面的 STAR 改寫與履歷投遞。",
-      "enConcept": "For internships and jobs, build an evidence inventory—situation, role, actions, verifiable results, proof—not a hobby list. AI may classify and probe gaps; it must not invent projects, titles, or metrics.",
-      "zhPrompt": "請擔任求職教練。目標實習／職缺方向：【】。我的真實經歷（可條列，勿替我新增）：【】。\n\n請先追問缺口，再輸出：分類後的證據表（情境／角色／行動／結果／佐證）、建議優先寫進履歷的 5 筆、以及仍缺的資料清單。禁止新增我沒做過的經歷或數字。用繁體中文。",
-      "enPrompt": "Act as a career coach. Target role: []. Real experiences (do not add new ones): []. Probe gaps, then output an evidence table, top 5 resume candidates, and missing-info list. Invent no experiences or numbers.",
-      "zhExample": "「辦過迎新」→ 追問人數、預算、你做的決策、可驗證結果（準點開始、抱怨下降、預算內完成），再決定是否值得寫。",
-      "enExample": "“Organized orientation” becomes useful only after clarifying headcount, budget, your decisions, and a verifiable outcome.",
-      "zhPractice": "鎖定一個目標實習方向。；列出至少 8 筆真實經歷。；用 Prompt 追問並補欄位。；刪除無佐證的形容詞句。；標出最對準的 3 筆並寫下佐證在哪。",
-      "enPractice": "Pick a target internship direction.；List 8+ real experiences.；Probe and complete fields.；Delete unprovable adjectives.；Mark top 3 and where proof lives.",
-      "zhFeedbackPrompt": "你是一位求職教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 真實性\n- 可驗證性\n- 與職缺相關\n- 完整度\n- 優先排序品質\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a career coach. Score 1-10 for: Truthfulness, Verifiability, Role relevance, Completeness, Prioritization. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhQuizItems": [
-        {
-          "q": "履歷底稿本質上是？",
-          "options": [
-            "可驗證證據清單",
-            "興趣愛好大全",
-            "AI 自動編造的成就"
-          ],
-          "answer": 0,
-          "explain": "證據優先。"
-        },
-        {
-          "q": "AI 在本課不可做？",
-          "options": [
-            "發明你沒做過的專案",
-            "追問缺口",
-            "協助分類"
-          ],
-          "answer": 0,
-          "explain": "禁止虛構。"
-        },
-        {
-          "q": "一筆好證據通常含？",
-          "options": [
-            "情境、角色、行動、結果",
-            "只有個性形容詞",
-            "只有社團名稱"
-          ],
-          "answer": 0,
-          "explain": "完整要素。"
-        },
-        {
-          "q": "數字不確定時應？",
-          "options": [
-            "標成待確認，不可瞎填",
-            "請 AI 估一個漂亮數字",
-            "直接刪除所有經歷"
-          ],
-          "answer": 0,
-          "explain": "誠實。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "證據表與 TOP3",
-            "錄取通知",
-            "完整薪資談判腳本"
-          ],
-          "answer": 0,
-          "explain": "底稿。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "履歷底稿本質上是？",
-          "options": [
-            "可驗證證據清單",
-            "興趣愛好大全",
-            "AI 自動編造的成就"
-          ],
-          "answer": 0,
-          "explain": "證據優先。"
-        },
-        {
-          "q": "AI 在本課不可做？",
-          "options": [
-            "發明你沒做過的專案",
-            "追問缺口",
-            "協助分類"
-          ],
-          "answer": 0,
-          "explain": "禁止虛構。"
-        },
-        {
-          "q": "一筆好證據通常含？",
-          "options": [
-            "情境、角色、行動、結果",
-            "只有個性形容詞",
-            "只有社團名稱"
-          ],
-          "answer": 0,
-          "explain": "完整要素。"
-        },
-        {
-          "q": "數字不確定時應？",
-          "options": [
-            "標成待確認，不可瞎填",
-            "請 AI 估一個漂亮數字",
-            "直接刪除所有經歷"
-          ],
-          "answer": 0,
-          "explain": "誠實。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "證據表與 TOP3",
-            "錄取通知",
-            "完整薪資談判腳本"
-          ],
-          "answer": 0,
-          "explain": "底稿。"
-        }
-      ],
-      "zhOutcome": "產出 8–12 筆可驗證經驗證據表，並標出最對準目標實習／職缺的 3 筆。",
-      "enOutcome": "Produce an 8–12 item evidence inventory and highlight the top 3 for your target role.",
-      "zhValueTip": "把真實經歷整理成可驗證的能力證據，作為履歷與面試底稿。",
-      "enValueTip": "Turn real experiences into verifiable evidence for resumes and interviews.",
-      "zhCaseStudy": "資管系學生想投資料實習，起初只寫「會 Python、辦過迎新」。盤點後列出：課程儀表板專題（缺值處理）、系學會活動協調（時程與分工）、工讀客服（回應時效）。AI 追問佐證後，他補上「缺值率由約 12% 降到 3%（作業報告截圖可證）」，刪掉無法說明的空泛「領導力」。",
-      "enCaseStudy": "An IS student targeting a data internship replaced vague claims with a dashboard project, event coordination, and part-time support work—adding a verifiable missing-value improvement and dropping unprovable leadership slogans.",
-      "zhExcellentExample": "證據表含 8–12 筆，欄位齊全；每筆可說清楚角色與結果；標出 3 筆最對職缺；註明哪些數字仍待確認、不可瞎填。",
-      "enExcellentExample": "8–12 complete evidence rows, clear role/result, top 3 marked for the target role, and uncertain metrics flagged rather than invented.",
-      "zhWorkflow": [
-        "鎖定職缺方向",
-        "列出真實經歷",
-        "追問結果與佐證",
-        "刪除無證據項目",
-        "排出優先順序"
-      ],
-      "enWorkflow": [
-        "Lock a target direction",
-        "List real experiences",
-        "Probe results and proof",
-        "Drop unprovable items",
-        "Rank priority"
-      ],
-      "zhCommonMistakes": [
-        "讓 AI 編造業績或職稱",
-        "把興趣當成果",
-        "只用形容詞沒有佐證",
-        "把別人的功勞寫成自己的",
-        "沒有對準任何職缺方向"
-      ],
-      "enCommonMistakes": [
-        "Invented metrics/titles",
-        "Interests as achievements",
-        "Adjectives without proof",
-        "Claiming others’ work",
-        "No target-role focus"
-      ],
-      "zhDeliverableChecklist": [
-        "8 筆以上證據",
-        "結果／佐證欄",
-        "TOP3 標註",
-        "無虛構數字",
-        "對準目標方向"
-      ],
-      "enDeliverableChecklist": [
-        "8+ evidence rows",
-        "Result/proof fields",
-        "Top 3 marked",
-        "No invented numbers",
-        "Aligned to target"
-      ],
-      "zhScorecard": [
-        "真實性",
-        "可驗證性",
-        "與職缺相關",
-        "完整度",
-        "優先排序品質"
-      ],
-      "enScorecard": [
-        "Truthfulness",
-        "Verifiability",
-        "Role relevance",
-        "Completeness",
-        "Prioritization"
-      ],
-      "zhNotePrompt": "貼上你的證據表與 TOP3。",
-      "enNotePrompt": "Paste your evidence table and top 3.",
-      "zhCoachPrompt": "請檢查我的證據是否可驗證、是否對準職缺，並指出仍缺的佐證。不要新增經歷。",
-      "enCoachPrompt": "Check verifiability and role fit; list missing proof. Add no experiences.",
-      "title": "盤點可寫進履歷的真實經驗與能力證據",
-      "description": "把真實經歷整理成可驗證的能力證據，作為履歷與面試底稿。",
-      "goal": "產出 8–12 筆可驗證經驗證據表，並標出最對準目標實習／職缺的 3 筆。"
+  {
+    "id": "career-internship-L1",
+    "lessonKey": "career-internship-L1",
+    "zhTitle": "第1課：盤點可寫進履歷的真實經驗與能力證據",
+    "enTitle": "Lesson 1: Inventory real experience and evidence for your resume",
+    "zhConcept": "履歷不是興趣清單，而是可驗證的證據清單。這一課把「我想找實習」變成職涯目標檔：一句目標、8–12 筆真實經歷（情境、角色、行動、結果、佐證）、TOP3 與仍缺資料。AI 適合分類與追問缺口，不可發明專案、職稱或業績，也不能保證錄取。",
+    "enConcept": "A resume is not a hobby list—it is verifiable evidence. This lesson turns “I want an internship” into a Career Target Profile: one target sentence, 8–12 real rows (situation, role, action, result, proof), top 3, and gaps. AI may classify and probe—it must not invent projects, titles, or metrics, or guarantee offers.",
+    "zhPrompt": "你是求職教練，不是代寫者，也不可保證錄取或幫我自動投遞。\n\n我的背景：\n- 年級／科系：[请填写个人经历]\n- 目標實習／職缺方向：[请填写个人经历]\n- 可公開的真實經歷（課程、社團、工讀、志工、比賽等，勿替我新增）：[请填写个人经历]\n- 目前最大卡關：[请填写个人经历]\n\n任務：幫我產出「職涯目標檔」，必須包含：\n1) 目標職缺一句話描述（含產業／職能／地點偏好，若未提供就標「待確認」）\n2) 8–12 筆真實經歷證據表（情境／我的角色／行動／可驗證結果／佐證在哪）\n3) 與目標最相關的 TOP3 經歷與理由\n4) 仍缺的資料清單（缺數字、缺角色、缺佐證）\n5) 3 條誠信紅線（不虛構經歷、不誇大數字、不把團隊成果寫成個人獨力）\n\n輸出格式：表格 + 條列。禁止新增我沒做過的專案、職稱或業績。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+    "enPrompt": "You are a career coach—not a ghostwriter. Do not guarantee offers or auto-submit applications.\n\nMy background:\n- Year / major: [Enter your real experience]\n- Target internship or role: [Enter your real experience]\n- Real experiences I can share publicly (do not add new ones): [Enter your real experience]\n- Biggest blocker right now: [Enter your real experience]\n\nTask: Produce a “Career Target Profile” with:\n1) One-sentence target role (industry/function/location; mark “to confirm” if missing)\n2) An 8–12 row evidence table (situation / my role / action / verifiable result / proof)\n3) TOP3 experiences for this target and why\n4) Missing-info list (metrics, role clarity, proof)\n5) 3 integrity red lines (no invented work, no inflated numbers, no solo credit for team wins)\n\nOutput: tables plus bullets. Invent no projects, titles, or metrics. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+    "zhExample": "TOP3 範例：系上問卷（可量化回收率）、社團海報（可秀作品連結）、工讀客服（可說高峰應對）— 都附佐證來源。",
+    "enExample": "Top 3 example: department survey (response rate), club poster (portfolio link), part-time support (peak-hour handling)—each with a proof source.",
+    "zhPractice": "鎖定目標方向。；列出 8–12 筆真實經歷。；用 Prompt 追問並補欄位。；標 TOP3 並存成「職涯目標檔」。",
+    "enPractice": "Lock target direction.; List 8–12 real experiences.; Probe and fill fields with the prompt.; Mark top 3 and save the Career Target Profile.",
+    "zhFeedbackPrompt": "你是一位求職教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 真實性\n- 可驗證性\n- 與職缺相關\n- 完整度\n- 優先排序品質\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a career coach. Score 1-10 for: Truthfulness, Verifiability, Role relevance, Completeness, Prioritization. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhQuizItems": [
+      {
+        "q": "履歷底稿本質上是？",
+        "options": [
+          "可驗證證據清單",
+          "興趣愛好大全",
+          "AI 自動編造的成就"
+        ],
+        "answer": 0,
+        "explain": "證據優先。"
+      },
+      {
+        "q": "AI 在本課不可做？",
+        "options": [
+          "發明你沒做過的專案",
+          "追問缺口",
+          "協助分類"
+        ],
+        "answer": 0,
+        "explain": "禁止虛構。"
+      },
+      {
+        "q": "一筆好證據通常含？",
+        "options": [
+          "情境、角色、行動、結果",
+          "只有個性形容詞",
+          "只有社團名稱"
+        ],
+        "answer": 0,
+        "explain": "完整要素。"
+      },
+      {
+        "q": "數字不確定時應？",
+        "options": [
+          "標成待確認，不可瞎填",
+          "請 AI 估一個漂亮數字",
+          "直接刪除所有經歷"
+        ],
+        "answer": 0,
+        "explain": "誠實。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "證據表與 TOP3",
+          "錄取通知",
+          "完整薪資談判腳本"
+        ],
+        "answer": 0,
+        "explain": "底稿。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "履歷底稿本質上是？",
+        "options": [
+          "可驗證證據清單",
+          "興趣愛好大全",
+          "AI 自動編造的成就"
+        ],
+        "answer": 0,
+        "explain": "證據優先。"
+      },
+      {
+        "q": "AI 在本課不可做？",
+        "options": [
+          "發明你沒做過的專案",
+          "追問缺口",
+          "協助分類"
+        ],
+        "answer": 0,
+        "explain": "禁止虛構。"
+      },
+      {
+        "q": "一筆好證據通常含？",
+        "options": [
+          "情境、角色、行動、結果",
+          "只有個性形容詞",
+          "只有社團名稱"
+        ],
+        "answer": 0,
+        "explain": "完整要素。"
+      },
+      {
+        "q": "數字不確定時應？",
+        "options": [
+          "標成待確認，不可瞎填",
+          "請 AI 估一個漂亮數字",
+          "直接刪除所有經歷"
+        ],
+        "answer": 0,
+        "explain": "誠實。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "證據表與 TOP3",
+          "錄取通知",
+          "完整薪資談判腳本"
+        ],
+        "answer": 0,
+        "explain": "底稿。"
+      }
+    ],
+    "zhOutcome": "職涯目標檔",
+    "enOutcome": "Career Target Profile",
+    "zhValueTip": "先有真實證據與目標，再寫履歷；AI 可追問缺口，不可替你發明經歷。",
+    "enValueTip": "Build real evidence and a target before the resume. AI may probe gaps—it must not invent experience.",
+    "zhCaseStudy": "行銷系大三小萱鎖定「數位行銷實習」後，先盤點 10 筆真實經歷：社團海報（Canva）、系上問卷（Google 表單）、咖啡店工讀（高峰時段點餐）。AI 追問後，她補上「問卷回收 186 份、我負責題目設計與催填」，刪掉無法說明的「很有創意」。她標出 TOP3 後，才知道下一步該改寫哪幾則故事。",
+    "enCaseStudy": "Xuan targeting a digital marketing internship inventoried 10 real items—club posters, a department survey, café shifts. After AI probes she added “186 responses; I designed questions and follow-ups,” and dropped unprovable “very creative.” Marking top 3 showed which stories to rewrite next.",
+    "zhExcellentExample": "10 筆證據欄位齊、TOP3 對準數位行銷、不確定數字標待確認、3 條誠信紅線、無虛構。",
+    "enExcellentExample": "10 complete rows, top 3 aligned to digital marketing, pending metrics flagged, 3 integrity red lines, no fiction.",
+    "zhWorkflow": [
+      "鎖定一句目標實習／職缺方向",
+      "列出 8–12 筆真實經歷草稿",
+      "用 Prompt 追問缺口並補欄位",
+      "刪除無佐證形容詞，標 TOP3",
+      "存成「職涯目標檔」"
+    ],
+    "enWorkflow": [
+      "Lock one target internship or role sentence",
+      "Draft 8–12 real experience rows",
+      "Probe gaps with the prompt and fill fields",
+      "Drop unprovable adjectives; mark top 3",
+      "Save the Career Target Profile"
+    ],
+    "zhCommonMistakes": [
+      "讓 AI 編造專案、職稱或業績",
+      "把興趣當成果、只有形容詞沒有佐證",
+      "數字不確定卻瞎填",
+      "把團隊成果寫成個人獨力完成",
+      "沒有對準任何目標職缺方向"
+    ],
+    "enCommonMistakes": [
+      "Letting AI invent projects, titles, or metrics",
+      "Interests as achievements; adjectives without proof",
+      "Inventing numbers when unsure",
+      "Claiming solo credit for team work",
+      "No target-role focus"
+    ],
+    "zhDeliverableChecklist": [
+      "有一句可檢查的目標實習／職缺方向",
+      "8 筆以上真實經歷，欄位含角色、行動、結果、佐證",
+      "已標 TOP3 且理由連到目標",
+      "不確定數字標待確認，無虛構",
+      "有仍缺資料清單",
+      "無錄取保證、無自動投遞宣稱"
+    ],
+    "enDeliverableChecklist": [
+      "One checkable target internship or role sentence",
+      "8+ real rows with role, action, result, proof",
+      "Top 3 marked with reasons tied to target",
+      "Uncertain metrics flagged; nothing invented",
+      "Gap list included",
+      "No hire guarantee or auto-apply claims"
+    ],
+    "zhScorecard": [
+      "真實性",
+      "可驗證性",
+      "與職缺相關",
+      "完整度",
+      "優先排序品質"
+    ],
+    "enScorecard": [
+      "Truthfulness",
+      "Verifiability",
+      "Role relevance",
+      "Completeness",
+      "Prioritization"
+    ],
+    "zhNotePrompt": "貼上你的 TOP3 與仍缺佐證的一筆，寫下明天要補哪個數字或證明。",
+    "enNotePrompt": "Paste your top 3 and one row still missing proof; note which metric or proof you will add tomorrow.",
+    "zhCoachPrompt": "請檢查我的證據是否可驗證、是否對準職缺，並指出仍缺的佐證。不要新增經歷。",
+    "enCoachPrompt": "Check verifiability and role fit; list missing proof. Add no experiences.",
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "入門 / Beginner",
+    "zhOutputName": "職涯目標檔",
+    "enOutputName": "Career Target Profile",
+    "zhObjectives": [
+      "寫出一句可檢查的目標實習／職缺方向",
+      "列出 8–12 筆可公開、可驗證的真實經歷",
+      "為每筆補齊角色、行動、結果與佐證位置",
+      "標出最對準目標的 TOP3 與仍缺資料",
+      "把定稿存成「職涯目標檔」"
+    ],
+    "enObjectives": [
+      "Write one checkable target internship or role",
+      "List 8–12 real, shareable, verifiable experiences",
+      "Complete role, action, result, and proof for each row",
+      "Mark the top 3 for the target and remaining gaps",
+      "Save a Career Target Profile"
+    ],
+    "zhWhyItMatters": {
+      "problem": "沒有目標與證據底稿，履歷容易變成形容詞堆疊或 AI 虛構成就。",
+      "ineffective": "只問「幫我寫一份很厲害的履歷」，沒有真實經歷清單。",
+      "solution": "先盤點真實經歷、追問缺口、排出 TOP3，再進入後續改寫與投遞。"
     },
-    {
-      "id": "career-internship-L2",
-      "lessonKey": "career-internship-L2",
-      "zhTitle": "第2課：用 STAR 把經驗寫成可驗證的成果描述",
-      "enTitle": "Lesson 2: Rewrite experience into verifiable STAR achievement bullets",
-      "zhConcept": "STAR（Situation／Task／Action／Result）把「我做過什麼」變成「我造成什麼可驗證改變」。履歷條目應強調你的行動與結果，而不是團隊口號。AI 可幫你壓縮字數、改成動詞開頭、檢查是否缺 Result；不可替你發明百分比或客戶名稱。\n\n寫完後要能在面試中用同一則故事展開。本課只處理成果描述寫作，不擴寫到與求職無關的長文。",
-      "enConcept": "STAR turns activities into verifiable impact. AI can tighten wording and spot missing results; it must not invent percentages or client names. Write bullets you can also expand in interviews.",
-      "zhPrompt": "請擔任履歷寫作教練。目標職缺：【】。我的真實 STAR 素材：【】。\n\n請改寫成履歷條目（繁中或英文依我指定），每則標註缺了 S/T/A/R 哪一段，並列出不可發明的資訊。禁止新增業績數字。",
-      "enPrompt": "Act as a resume coach. Target role: []. Real STAR material: []. Rewrite bullets, mark missing S/T/A/R, and list facts that must not be invented. Add no metrics.",
-      "zhExample": "弱：提升了社團效率。強：為減少會議拖延，建立議程模板與決議追蹤表，連續四次例會準時結束，任務逾期件數下降。",
-      "enExample": "Weak: improved club efficiency. Strong: introduced agenda templates and decision tracking so four meetings ended on time and overdue tasks fell.",
-      "zhPractice": "選 5 筆證據。；每筆寫完整 STAR。；請 AI 壓縮成履歷條目並人工核對事實。；標出最對職缺的 3 則。；準備一則 60 秒口述版。",
-      "enPractice": "Pick 5 evidence rows.；Write full STAR.；Tighten with AI and fact-check.；Mark top 3.；Prepare a 60-second spoken version.",
-      "zhFeedbackPrompt": "你是一位履歷寫作教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 具體性\n- 結果強度\n- 真實性\n- 職缺對齊\n- 可面試展開\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a resume writing coach. Score 1-10 for: Specificity, Result strength, Truthfulness, Role alignment, Interview expandability. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhQuizItems": [
-        {
-          "q": "STAR 的 R 最該是？",
-          "options": [
-            "可驗證或可說明的結果",
-            "空洞形容詞",
-            "與你無關的團隊口號"
-          ],
-          "answer": 0,
-          "explain": "結果要站得住。"
-        },
-        {
-          "q": "AI 改寫時最危險的是？",
-          "options": [
-            "擅自加入假數據",
-            "幫你縮短句子",
-            "提醒缺了 Task"
-          ],
-          "answer": 0,
-          "explain": "禁止虛構。"
-        },
-        {
-          "q": "履歷條目較佳型態是？",
-          "options": [
-            "動詞開頭＋行動＋結果",
-            "以「我覺得」開頭",
-            "只列社團名稱"
-          ],
-          "answer": 0,
-          "explain": "行動與結果。"
-        },
-        {
-          "q": "寫完條目後應能？",
-          "options": [
-            "在面試用同一故事展開",
-            "永遠背誦不可改",
-            "交給 AI 直接投遞不管"
-          ],
-          "answer": 0,
-          "explain": "條目服務面試。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "STAR 成果描述",
-            "錄取合約",
-            "與職缺無關的長文小説"
-          ],
-          "answer": 0,
-          "explain": "成果描述。"
-        }
+    "enWhyItMatters": {
+      "problem": "Without a target and evidence base, resumes become adjectives or AI fiction.",
+      "ineffective": "Asking AI to “write an impressive resume” with no real inventory.",
+      "solution": "Inventory real work, probe gaps, rank top 3, then move to rewriting and applying."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "證據優先",
+        "目標要可檢查",
+        "誠實勝過華麗"
       ],
-      "enQuizItems": [
-        {
-          "q": "STAR 的 R 最該是？",
-          "options": [
-            "可驗證或可說明的結果",
-            "空洞形容詞",
-            "與你無關的團隊口號"
-          ],
-          "answer": 0,
-          "explain": "結果要站得住。"
-        },
-        {
-          "q": "AI 改寫時最危險的是？",
-          "options": [
-            "擅自加入假數據",
-            "幫你縮短句子",
-            "提醒缺了 Task"
-          ],
-          "answer": 0,
-          "explain": "禁止虛構。"
-        },
-        {
-          "q": "履歷條目較佳型態是？",
-          "options": [
-            "動詞開頭＋行動＋結果",
-            "以「我覺得」開頭",
-            "只列社團名稱"
-          ],
-          "answer": 0,
-          "explain": "行動與結果。"
-        },
-        {
-          "q": "寫完條目後應能？",
-          "options": [
-            "在面試用同一故事展開",
-            "永遠背誦不可改",
-            "交給 AI 直接投遞不管"
-          ],
-          "answer": 0,
-          "explain": "條目服務面試。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "STAR 成果描述",
-            "錄取合約",
-            "與職缺無關的長文小説"
-          ],
-          "answer": 0,
-          "explain": "成果描述。"
-        }
-      ],
-      "zhOutcome": "產出至少 5 則 STAR 成果描述（含可驗證結果），並選出 3 則最對目標職缺。",
-      "enOutcome": "Produce at least five STAR accomplishment bullets with verifiable results, and select the top three for your target role.",
-      "zhValueTip": "用 STAR 把經驗寫成可驗證、可放進履歷與面試的成果描述。",
-      "enValueTip": "Use STAR to turn experiences into verifiable accomplishment bullets for resumes and interviews.",
-      "zhCaseStudy": "學生原句「負責活動很有領導力」。改寫後：S 迎新當日動線混亂；T 需在兩小時內讓 180 人完成報到；A 重排報到關卡並做即時人力調度；R 報到時間由約 40 分鐘降到 15 分鐘，當日無重大抱怨紀錄。面試時他能講出自己做了哪幾個決策。",
-      "enCaseStudy": "“Showed leadership at orientation” became a STAR bullet with a clear bottleneck, actions, and a measurable check-in-time reduction the student could defend in interviews.",
-      "zhExcellentExample": "5 則以上 STAR，動詞開頭、結果可驗證或可說明估算來源；標註對應職缺能力；刪除無法佐證的誇飾。",
-      "enExcellentExample": "Five+ STAR bullets with strong verbs, verifiable or source-noted results, mapped skills, and no unsupported hype.",
-      "zhWorkflow": [
-        "選證據",
-        "寫完整 STAR",
-        "壓縮成條目",
-        "核對事實",
-        "對齊職缺能力"
-      ],
-      "enWorkflow": [
-        "Select evidence",
-        "Write full STAR",
-        "Compress to bullets",
-        "Fact-check",
-        "Map to role skills"
-      ],
-      "zhCommonMistakes": [
-        "只有職務沒有結果",
-        "結果全是感覺沒有可驗證點",
-        "AI 加了假百分比",
-        "把團隊成果全算自己",
-        "條目過長像段落"
-      ],
-      "enCommonMistakes": [
-        "Duties without results",
-        "Feelings instead of proof",
-        "Fake percentages",
-        "Claiming all team credit",
-        "Paragraph-long bullets"
-      ],
-      "zhDeliverableChecklist": [
-        "5 則 STAR",
-        "結果可說明",
-        "無虛構數字",
+      "terms": [
+        "證據表",
         "TOP3",
-        "可口述"
+        "佐證"
       ],
-      "enDeliverableChecklist": [
-        "5 STAR bullets",
-        "Explainable results",
-        "No invented numbers",
+      "criteria": [
+        "8 筆以上",
+        "有 TOP3",
+        "有缺漏清單"
+      ],
+      "boundaries": [
+        "避免：虛構經歷",
+        "避免：保證錄取",
+        "避免：自動投遞"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Evidence first",
+        "Checkable target",
+        "Honesty over hype"
+      ],
+      "terms": [
+        "Evidence table",
         "Top 3",
-        "Speakable"
+        "Proof"
       ],
-      "zhScorecard": [
-        "具體性",
-        "結果強度",
-        "真實性",
-        "職缺對齊",
-        "可面試展開"
+      "criteria": [
+        "8+ rows",
+        "Top 3 marked",
+        "Gap list present"
       ],
-      "enScorecard": [
-        "Specificity",
-        "Result strength",
-        "Truthfulness",
-        "Role alignment",
-        "Interview expandability"
-      ],
-      "zhNotePrompt": "貼上 5 則 STAR 與你的 TOP3。",
-      "enNotePrompt": "Paste five STAR bullets and your top 3.",
-      "zhCoachPrompt": "請評我的 STAR 是否缺結果或過度誇大，並給出改寫，但不要新增數字。",
-      "enCoachPrompt": "Score my STAR bullets for missing results or hype; rewrite without adding numbers.",
-      "title": "用 STAR 把經驗寫成可驗證的成果描述",
-      "description": "用 STAR 把經驗寫成可驗證、可放進履歷與面試的成果描述。",
-      "goal": "產出至少 5 則 STAR 成果描述（含可驗證結果），並選出 3 則最對目標職缺。"
+      "boundaries": [
+        "Avoid: invented work",
+        "Avoid: hire guarantees",
+        "Avoid: auto-apply"
+      ]
     },
-    {
-      "id": "career-internship-L3",
-      "lessonKey": "career-internship-L3",
-      "zhTitle": "第3課：鎖定目標實習／職缺，拆解職缺需求",
-      "enTitle": "Lesson 3: Target internships/roles and decode job requirements",
-      "zhConcept": "投遞前先拆職缺。把 JD 分成必要條件與加分項，再逐條對你的證據。匹配不是感覺，而是「哪一段經歷證明哪一條需求」。缺口要誠實寫，並決定：七天內可補的小型證明（作品截圖、練習題、課程專題說明）vs 需要更長時間的能力。\n\nAI 可協助萃取關鍵字與做成對照表；不可替你假裝已具備未學過的技能。本課服務求職決策，不延伸到其他非求職主題。",
-      "enConcept": "Parse the JD into must-haves and nice-to-haves, map each to evidence, and plan honest gap-closing. AI can extract keywords; it must not claim skills you lack.",
-      "zhPrompt": "請擔任求職策略教練。職缺 JD：【貼上】。我的證據摘要：【】。\n\n請輸出：必要／加分條件、匹配對照表、缺口清單、建議先補的 3 件事、是否建議本週投遞。禁止宣稱我具備未提供證據的技能。",
-      "enPrompt": "Act as a job-search coach. JD: []. Evidence summary: []. Output must/nice lists, match table, gaps, top 3 close-gap actions, and apply-this-week advice. Do not claim skills without evidence.",
-      "zhExample": "JD 寫「熟悉 SQL」→ 對照「課程專題：用 SQL 清理訂單表並輸出摘要」；若只有「上過課」則標為弱匹配，需補作品說明。",
-      "enExample": "“Familiar with SQL” maps to a project that cleaned an orders table; “took a class” alone is weak and needs an artifact.",
-      "zhPractice": "選定 1 個真實職缺。；貼上 JD 做拆解。；完成匹配與缺口表。；寫一週補齊計畫。；做出投遞／暫緩決策並說明理由。",
-      "enPractice": "Pick one real JD.；Break it down.；Complete match/gap table.；Write a one-week plan.；Decide apply vs wait with reasons.",
-      "zhFeedbackPrompt": "你是一位求職策略教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 拆解完整度\n- 證據對齊\n- 缺口誠實度\n- 行動可執行\n- 決策清楚\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a job-search strategy coach. Score 1-10 for: Parse completeness, Evidence alignment, Gap honesty, Actionability, Decision clarity. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhQuizItems": [
-        {
-          "q": "拆 JD 的第一步通常是？",
-          "options": [
-            "分出必要與加分條件",
-            "先寫求職信不管需求",
-            "請 AI 直接說你很適合"
-          ],
-          "answer": 0,
-          "explain": "先結構化需求。"
-        },
-        {
-          "q": "弱匹配應該？",
-          "options": [
-            "標出並計畫補齊",
-            "改成精通",
-            "刪除職缺不看"
-          ],
-          "answer": 0,
-          "explain": "誠實處理。"
-        },
-        {
-          "q": "AI 不可協助你？",
-          "options": [
-            "假裝具備未學技能",
-            "萃取關鍵字",
-            "做對照表"
-          ],
-          "answer": 0,
-          "explain": "禁止造假。"
-        },
-        {
-          "q": "本課核心產出？",
-          "options": [
-            "拆解表與缺口計畫",
-            "錄取後薪資單",
-            "與職缺無關的日記"
-          ],
-          "answer": 0,
-          "explain": "決策底稿。"
-        },
-        {
-          "q": "何時可考慮暫緩投遞？",
-          "options": [
-            "必要條件缺口過大且短期難補",
-            "已經完全匹配",
-            "只是想多改一個標點"
-          ],
-          "answer": 0,
-          "explain": "必要條件優先。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "拆 JD 的第一步通常是？",
-          "options": [
-            "分出必要與加分條件",
-            "先寫求職信不管需求",
-            "請 AI 直接說你很適合"
-          ],
-          "answer": 0,
-          "explain": "先結構化需求。"
-        },
-        {
-          "q": "弱匹配應該？",
-          "options": [
-            "標出並計畫補齊",
-            "改成精通",
-            "刪除職缺不看"
-          ],
-          "answer": 0,
-          "explain": "誠實處理。"
-        },
-        {
-          "q": "AI 不可協助你？",
-          "options": [
-            "假裝具備未學技能",
-            "萃取關鍵字",
-            "做對照表"
-          ],
-          "answer": 0,
-          "explain": "禁止造假。"
-        },
-        {
-          "q": "本課核心產出？",
-          "options": [
-            "拆解表與缺口計畫",
-            "錄取後薪資單",
-            "與職缺無關的日記"
-          ],
-          "answer": 0,
-          "explain": "決策底稿。"
-        },
-        {
-          "q": "何時可考慮暫緩投遞？",
-          "options": [
-            "必要條件缺口過大且短期難補",
-            "已經完全匹配",
-            "只是想多改一個標點"
-          ],
-          "answer": 0,
-          "explain": "必要條件優先。"
-        }
-      ],
-      "zhOutcome": "完成一份職缺拆解表：必要條件、加分項、我的匹配證據、缺口與補齊計畫。",
-      "enOutcome": "Complete a JD breakdown: must-haves, nice-to-haves, match evidence, gaps, and a close-the-gap plan.",
-      "zhValueTip": "鎖定目標實習／職缺，把 JD 拆成能力需求、匹配點與缺口。",
-      "enValueTip": "Target a role and break the JD into required skills, match points, and gaps.",
-      "zhCaseStudy": "學生看中「數據分析實習：SQL、儀表板、溝通」。拆解後：SQL 有課程專題可證；儀表板有作品截圖；溝通可寫系學會協調。缺口是「商業指標解讀」，他安排一週用公開資料做一個指標說明頁，而不是在履歷寫「精通商業策略」。",
-      "enCaseStudy": "For a data internship JD, a student mapped SQL and dashboard proof, then planned a one-week metrics explainer for the business-interpretation gap instead of claiming mastery.",
-      "zhExcellentExample": "拆解表含 JD 原文要點、匹配證據連結、缺口分級、投遞／暫緩決策，以及一週補齊行動。",
-      "enExcellentExample": "A breakdown with JD points, linked evidence, graded gaps, apply/wait decision, and a one-week close-the-gap action.",
-      "zhWorkflow": [
-        "鎖定職缺",
-        "拆必要與加分",
-        "對照證據",
-        "標缺口",
-        "決定投遞或先補"
-      ],
-      "enWorkflow": [
-        "Lock a JD",
-        "Split must/nice",
-        "Map evidence",
-        "Mark gaps",
-        "Decide apply or prep"
-      ],
-      "zhCommonMistakes": [
-        "不看 JD 就投",
-        "把加分項當已精通",
-        "隱瞞明顯缺口",
-        "AI 幫你假裝會某工具",
-        "同時拆 20 個職缺卻都不深入"
-      ],
-      "enCommonMistakes": [
-        "Applying unread",
-        "Treating nice-to-haves as mastery",
-        "Hiding clear gaps",
-        "Faking tools via AI",
-        "Shallow-parsing too many JDs"
-      ],
-      "zhDeliverableChecklist": [
-        "拆解表",
-        "匹配證據",
-        "缺口計畫",
-        "投遞決策",
-        "無虛假技能宣稱"
-      ],
-      "enDeliverableChecklist": [
-        "Breakdown",
-        "Match evidence",
-        "Gap plan",
-        "Apply decision",
-        "No fake skill claims"
-      ],
-      "zhScorecard": [
-        "拆解完整度",
-        "證據對齊",
-        "缺口誠實度",
-        "行動可執行",
-        "決策清楚"
-      ],
-      "enScorecard": [
-        "Parse completeness",
-        "Evidence alignment",
-        "Gap honesty",
-        "Actionability",
-        "Decision clarity"
-      ],
-      "zhNotePrompt": "貼上職缺拆解表與投遞決策。",
-      "enNotePrompt": "Paste your JD breakdown and apply/wait decision.",
-      "zhCoachPrompt": "請檢查我的職缺拆解是否誠實，並指出最危險的誇大匹配。",
-      "enCoachPrompt": "Check honesty of my JD mapping and flag risky overclaims.",
-      "title": "鎖定目標實習／職缺，拆解職缺需求",
-      "description": "鎖定目標實習／職缺，把 JD 拆成能力需求、匹配點與缺口。",
-      "goal": "完成一份職缺拆解表：必要條件、加分項、我的匹配證據、缺口與補齊計畫。"
+    "zhCaseStudyBlocks": {
+      "problem": "行銷系大三小萱想投暑期行銷實習，履歷只有「會 Canva、辦過活動」。",
+      "wrong": "請 AI 直接編 3 個假專案與漂亮數字。",
+      "right": "列出社團海報、系上問卷、工讀客服等真實經歷，追問人數、角色、可驗證結果，標 TOP3。",
+      "result": "一份可接 STAR 與履歷改寫的「職涯目標檔」。"
     },
-    {
-      "icon": "📄",
-      "title": "用 AI 建立並優化履歷（對準職缺，不造假）",
-      "description": "為實習與第一份工作打造可通過 ATS 的履歷：結構、量化成果、關鍵字對齊職缺，並誠實修改。",
-      "goal": "我的目標職缺對齊履歷＋ATS 檢查表＋求職信草稿",
-      "estimatedTime": "60-80 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "履歷",
-        "ATS",
-        "求職信",
-        "Chapter11"
-      ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 10,
-      "chapterZh": "AI 求職與職涯發展",
-      "chapterEn": "AI Job Search and Career Development",
-      "zhTitle": "第4課：用 AI 建立並優化履歷（對準職缺，不造假）",
-      "enTitle": "Lesson 4: Build and refine a resume aligned to the role—without fabricating",
-      "zhValueTip": "為實習與第一份工作打造可通過 ATS 的履歷：結構、量化成果、關鍵字對齊職缺，並誠實修改。",
-      "enValueTip": "Build an ATS-friendly resume for internships and first jobs—structure, quantified impact, keyword alignment—and revise honestly.",
-      "zhOutcome": "我的目標職缺對齊履歷＋ATS 檢查表＋求職信草稿",
-      "enOutcome": "My Role-aligned Resume + ATS Checklist + Cover Letter Draft",
-      "zhConcept": "大學生履歷常寫成「課程清單」：修過什麼、參加過什麼，卻看不出你解決過什麼問題。這一課把履歷當成「對特定職缺的證據包」。先選 1 個目標職缺（實習／新鮮人），拆 JD：必備技能、責任、關鍵字、軟實力訊號。履歷區塊建議：聯絡資訊、一句定位、教育、經歷（實習／專題／社團／工讀）、專案、技能；證書與志工可精簡。每段經歷用動詞開頭＋情境＋行動＋結果；能量化就量化（人數、時間、錯誤率、完賽名次），不能量化就寫可觀察成果，不可捏造。ATS（Applicant Tracking System）友善做法：標準標題、少表格／文字框、關鍵字自然出現、檔名清楚、避免過度圖形。CakeResume／Yourator 模板可用，但最終要對齊 JD。求職信（Cover Letter）補履歷沒說完的動機與匹配點：為何這間公司、為何這個角色、你帶什麼證據。短、具體、可核對。AI 可協助改寫句型、對齊關鍵字、做 ATS 檢查，但必須保留真實經歷；不可發明職稱、績效、證照。事實／潤飾建議要分開。修改流程：raw 經歷清單→對 JD 排序→AI 改寫→你刪假大空→請同學或職涯中心看一眼→定稿 PDF／線上版。與 Chapter 10 作品集銜接：專案條目要能連到 GitHub／網站，說法一致。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。",
-      "enConcept": "Treat the resume as evidence for one target role: parse the JD, quantify real outcomes, stay ATS-friendly, and write a short honest cover letter. AI rewrites; you never invent credentials.",
-      "zhCaseStudy": "情境案例：應屆生小安投「行銷實習」履歷全是社團活動名稱。她對齊 JD 後，把「負責粉專」改成「規劃 8 則貼文檔期，互動率從 X 升到 Y（真實後台數據）」。再用 AI 檢查缺關鍵字「內容企劃／數據觀察」，自然補上。求職信寫為何喜歡該品牌的用戶研究取向。兩週內獲得面試。她把「不可捏造數據」寫進自己的求職規範。",
-      "enCaseStudy": "Xiao An rewrote club fluff into JD-aligned, quantified bullets and landed an interview without inventing metrics.",
-      "zhWorkflow": [
-        "選定目標職缺並拆 JD 關鍵字",
-        "列出真實經歷與可驗證成果",
-        "撰寫／改寫履歷子彈點並做 ATS 檢查",
-        "寫一封對齊的求職信",
-        "請人複閱後定稿"
-      ],
-      "enWorkflow": [
-        "Pick a target role and parse JD keywords",
-        "List real experiences and verifiable outcomes",
-        "Rewrite bullets and run an ATS checklist",
-        "Draft an aligned cover letter",
-        "Peer-review and finalize"
-      ],
-      "zhCommonMistakes": [
-        "一份履歷投所有職缺完全不改",
-        "空泛形容詞無證據",
-        "發明績效與職稱",
-        "花俏排版導致 ATS 難讀"
-      ],
-      "enCommonMistakes": [
-        "One generic resume for all roles",
-        "Adjective fluff without evidence",
-        "Invented titles/metrics",
-        "Fancy layouts that break ATS parsing"
-      ],
-      "zhExcellentExample": "優秀履歷：對準一個 JD、子彈點可驗證、關鍵字自然、ATS 可讀、求職信短而具體、與作品連結一致。",
-      "enExcellentExample": "A strong pack targets one JD, uses verifiable bullets, natural keywords, ATS-readable format, a specific letter, and consistent portfolio links.",
-      "zhPrompt": "【Prompt 1｜職缺分析與履歷對齊】\n目標職缺 JD：\n（貼上）\n我的真實經歷清單：\n（貼上）\n請整理：必備條件、加分條件、關鍵字、我已具備／缺口／可用哪些真實經歷對齊。不可發明我沒有的經歷；缺口請標待補強，不要寫成已具備。",
-      "enPrompt": "[Prompt 1 | JD Alignment] Map must-haves, keywords, and which of my real experiences fit; never invent experience; mark gaps as gaps.",
-      "zhCoachPrompt": "【Prompt 2｜履歷子彈點與 ATS 檢查】\nJD 關鍵字：\n（貼上）\n我的草稿履歷：\n（貼上）\n請改寫為動詞開頭、盡量量化（只能用我提供的數字），並列 ATS 風險（表格、圖示、缺關鍵字）。不要添加假數據；沒有數字就改寫成可觀察成果。",
-      "enCoachPrompt": "[Prompt 2 | Bullets & ATS] Rewrite with verbs and only my numbers; list ATS risks; invent no metrics.",
-      "zhFeedbackPrompt": "【Prompt 3｜求職信與誠實度驗收】\n履歷：\n（貼上）\n求職信：\n（貼上）\nJD：\n（貼上）\n請評分匹配度、具體性、ATS 友善、是否有誇大。指出三處必改。若發現像捏造的內容，明確標出並要求我確認來源。",
-      "enFeedbackPrompt": "[Prompt 3 | Letter & Honesty QA] Score fit, specificity, ATS friendliness, and exaggeration risk; flag anything that looks fabricated.",
-      "zhExample": "Before：負責社團活動。｜After：協調 12 人分工完成迎新，當日報到流程縮短約 20 分鐘（以實際動線計時）。｜求職信：對齊「活動企劃」關鍵字與學習動機。",
-      "enExample": "A vague club line becomes a timed, verifiable operations bullet plus a JD-aligned cover note.",
-      "zhPractice": "選一個真實實習／新鮮人職缺。；完成對齊履歷與 ATS 檢查。；寫求職信一頁內。；Challenge：請同學用 JD 當招聘官，圈出仍空泛的三句並重寫到可追問細節。",
-      "enPractice": "Pick a real internship/new-grad JD.；Finish aligned resume + ATS check.；Write a one-page letter.；Challenge: peer-hire against the JD and rewrite three vague lines.",
-      "zhQuizItems": [
-        {
-          "q": "大學生履歷最該優先對齊的是？",
-          "options": [
-            "盡量塞滿所有社團名稱",
-            "目標職缺的責任與關鍵字，並用真實成果證明",
-            "最花俏的設計模板",
-            "假造的國外實習"
-          ],
-          "answer": 1,
-          "explain": "履歷是職缺證據包，不是活動百科。"
-        },
-        {
-          "q": "ATS 友善做法包含？",
-          "options": [
-            "大量文字框與圖形標題",
-            "清楚標準標題、可選取文字、關鍵字自然出現",
-            "把重要字寫成圖片",
-            "完全不寫技能"
-          ],
-          "answer": 1,
-          "explain": "機器要能解析文字與結構。"
-        },
-        {
-          "q": "使用 AI 改履歷時不可？",
-          "options": [
-            "改寫句型並提示缺口",
-            "發明績效數字與職稱讓履歷更好看",
-            "要求分開事實與建議",
-            "做 ATS 風險檢查"
-          ],
-          "answer": 1,
-          "explain": "不可捏造經歷與數據。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "A student resume should primarily align to:",
-          "options": [
-            "Every club name you ever had",
-            "The target role’s duties/keywords with real proof",
-            "The flashiest template",
-            "A fake overseas internship"
-          ],
-          "answer": 1,
-          "explain": "Resumes are evidence packs for a role."
-        },
-        {
-          "q": "ATS-friendly practice includes:",
-          "options": [
-            "Heavy text boxes and graphic headers",
-            "Clear standard headings, selectable text, natural keywords",
-            "Key words as images only",
-            "Omitting skills entirely"
-          ],
-          "answer": 1,
-          "explain": "Parsers need readable structure and text."
-        },
-        {
-          "q": "When using AI on resumes you must not:",
-          "options": [
-            "Rewrite phrasing and flag gaps",
-            "Invent metrics and titles to look stronger",
-            "Separate facts from suggestions",
-            "Check ATS risks"
-          ],
-          "answer": 1,
-          "explain": "Never fabricate experience."
-        }
-      ],
-      "zhNotePrompt": "貼上目標職缺名稱、三條改寫後子彈點，以及求職信的核心匹配句。",
-      "enNotePrompt": "Paste the target role, three rewritten bullets, and your cover letter’s core match sentence.",
-      "zhDeliverableChecklist": [
-        "JD 關鍵字表完成",
-        "履歷對齊定稿",
-        "ATS 檢查通過",
-        "求職信完成",
-        "無捏造經歷／數據"
-      ],
-      "enDeliverableChecklist": [
-        "JD keyword map done",
-        "Aligned resume finalized",
-        "ATS checklist passed",
-        "Cover letter done",
-        "No invented experience/metrics"
-      ],
-      "zhScorecard": [
-        "職缺對齊",
-        "成果可驗證",
-        "ATS 友善",
-        "求職信具體",
-        "誠實"
-      ],
-      "enScorecard": [
-        "Role alignment",
-        "Verifiable outcomes",
-        "ATS-friendly",
-        "Specific letter",
-        "Honesty"
-      ],
-      "resources": [
-        {
-          "name": "CakeResume",
-          "url": "https://www.cakeresume.com",
-          "note": "履歷模板與投遞常見於台灣新鮮人"
-        },
-        {
-          "name": "Yourator",
-          "url": "https://www.yourator.co",
-          "note": "新創／數位職缺與履歷投遞"
-        },
-        {
-          "name": "104",
-          "url": "https://www.104.com.tw",
-          "note": "職缺 JD 與關鍵字觀察"
-        },
-        {
-          "name": "1111",
-          "url": "https://www.1111.com.tw",
-          "note": "職缺搜尋與履歷投放"
-        },
-        {
-          "name": "Indeed",
-          "url": "https://tw.indeed.com",
-          "note": "跨平台職缺與關鍵字對照"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "句型改寫與 ATS 檢查提示"
-        }
-      ],
-      "challenge": "針對一個真實職缺完成「對齊履歷＋求職信」；用 JD 自評匹配度，並列出仍誠實存在的技能缺口與兩週補強計畫。",
-      "id": "career-internship-L4",
-      "lessonKey": "career-internship-L4"
+    "enCaseStudyBlocks": {
+      "problem": "Marketing junior Xuan targets a summer internship but only lists “Canva, events.”",
+      "wrong": "Ask AI to invent three projects and pretty metrics.",
+      "right": "List real club posters, surveys, and part-time support; probe headcount, role, proof; mark top 3.",
+      "result": "A Career Target Profile ready for STAR and resume work."
     },
-    {
-      "id": "career-internship-L5",
-      "lessonKey": "career-internship-L5",
-      "zhTitle": "第5課：用 AI 撰寫求職信與 Cover Letter",
-      "enTitle": "Lesson 5: Write application emails and cover letters with AI",
-      "zhConcept": "求職信不是履歷重貼，而是回答三件事：為什麼這個角色、為什麼這家組織、你用哪兩三段證據證明你能貢獻。結構建議：開場對準職缺 → 2 個證據段落 → 對組織的具體理解 → 結尾與可面談時間。\n\nAI 可協助組織段落與語氣；所有具體成就必須來自你的證據表。英文信可請 AI 調語氣，但專有名詞與數字要你核對。本課只寫求職信，不擴到其他文件類型。",
-      "enConcept": "A cover letter answers why this role, why this org, and which evidence proves you can contribute. AI may structure tone; every achievement must come from your evidence. Fact-check names and numbers.",
-      "zhPrompt": "請擔任求職信教練。職缺：【】。組織公開資訊：【】。我的真實證據（僅可使用這些）：【】。語言：【中文／英文】。\n\n請先給大綱，再寫初稿。若缺資料，用【待我填寫：…】標出，不要替我發明成就。最後附上自我檢查清單。",
-      "enPrompt": "Act as a cover-letter coach. Role: []. Public org facts: []. My real evidence only: []. Language: []. Outline then draft. Mark gaps as [I will fill: …]; invent no achievements. End with a self-check list.",
-      "zhExample": "弱句「我很有熱忱」。強句「在社團招生中，我把三則貼文做成 A/B 測試，報名完成率由 18% 提升到 27%（後台可證），並據此調整後續內容。」",
-      "enExample": "Weak: “I am passionate.” Strong: a specific A/B test on signup posts with a verifiable conversion lift and what you changed next.",
-      "zhPractice": "選定一個職缺。；列出 2–3 段可用證據。；用 Prompt 產大綱與初稿。；把所有【待我填寫】補成真實資訊。；大聲讀一次，刪除空話與重複履歷逐字重貼。",
-      "enPractice": "Pick one JD.；List 2–3 evidence blocks.；Generate outline+draft.；Fill every marked gap with real info.；Read aloud and cut fluff/resume dumps.",
-      "zhFeedbackPrompt": "你是一位求職信教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 職缺對準\n- 證據強度\n- 具體性\n- 真實性\n- 行動呼籲\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a cover-letter coach. Score 1-10 for: JD fit, Evidence strength, Specificity, Truthfulness, Call to action. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhQuizItems": [
+    "zhWorkflowSteps": [
+      {
+        "do": "寫目標方向",
+        "why": "沒有目標就無法排序",
+        "input": "科系、偏好",
+        "output": "目標一句",
+        "check": "是否具體到職能"
+      },
+      {
+        "do": "列真實經歷",
+        "why": "證據要來自你做過的事",
+        "input": "[请填写个人经历]",
+        "output": "8–12 筆草稿",
+        "check": "是否至少 8 筆"
+      },
+      {
+        "do": "追問缺口",
+        "why": "缺數字或角色就站不住",
+        "input": "草稿",
+        "output": "補齊表",
+        "check": "每筆是否有佐證欄"
+      },
+      {
+        "do": "排 TOP3",
+        "why": "履歷篇幅有限",
+        "input": "完整表",
+        "output": "TOP3+理由",
+        "check": "是否對準目標"
+      },
+      {
+        "do": "存入成果包",
+        "why": "後續課會沿用",
+        "input": "定稿",
+        "output": "職涯目標檔",
+        "check": "有無虛構字句"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Write target direction",
+        "why": "Cannot rank without a target",
+        "input": "Major, preferences",
+        "output": "One sentence",
+        "check": "Specific enough on function"
+      },
+      {
+        "do": "List real experiences",
+        "why": "Evidence must be yours",
+        "input": "[Enter your real experience]",
+        "output": "8–12 draft rows",
+        "check": "At least 8 rows"
+      },
+      {
+        "do": "Probe gaps",
+        "why": "Missing metrics or role fail scrutiny",
+        "input": "Draft",
+        "output": "Completed table",
+        "check": "Proof column for each"
+      },
+      {
+        "do": "Rank top 3",
+        "why": "Resume space is limited",
+        "input": "Full table",
+        "output": "Top 3 + why",
+        "check": "Aligned to target"
+      },
+      {
+        "do": "Save to package",
+        "why": "Later lessons reuse this",
+        "input": "Final",
+        "output": "Career Target Profile",
+        "check": "Any invented wording"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "開始求職前，先釐清目標方向與可寫進履歷的真實證據時使用",
+      "fields": [
+        "[请填写个人经历]"
+      ],
+      "body": "你是求職教練，不是代寫者，也不可保證錄取或幫我自動投遞。\n\n我的背景：\n- 年級／科系：[请填写个人经历]\n- 目標實習／職缺方向：[请填写个人经历]\n- 可公開的真實經歷（課程、社團、工讀、志工、比賽等，勿替我新增）：[请填写个人经历]\n- 目前最大卡關：[请填写个人经历]\n\n任務：幫我產出「職涯目標檔」，必須包含：\n1) 目標職缺一句話描述（含產業／職能／地點偏好，若未提供就標「待確認」）\n2) 8–12 筆真實經歷證據表（情境／我的角色／行動／可驗證結果／佐證在哪）\n3) 與目標最相關的 TOP3 經歷與理由\n4) 仍缺的資料清單（缺數字、缺角色、缺佐證）\n5) 3 條誠信紅線（不虛構經歷、不誇大數字、不把團隊成果寫成個人獨力）\n\n輸出格式：表格 + 條列。禁止新增我沒做過的專案、職稱或業績。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "expected": "一份含目標、證據表、TOP3 與缺漏清單的職涯目標檔",
+      "revisionReminder": "AI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "extensions": [
         {
-          "q": "求職信最該回答？",
-          "options": [
-            "為何此角、為何此處、證據何在",
-            "只重複履歷每一行",
-            "請 AI 決定你的人生目標"
-          ],
-          "answer": 0,
-          "explain": "三角對準。"
-        },
-        {
-          "q": "缺資料時應？",
-          "options": [
-            "標出待填，不發明",
-            "請 AI 編一段漂亮經歷",
-            "直接寄出空白"
-          ],
-          "answer": 0,
-          "explain": "誠實。"
-        },
-        {
-          "q": "與履歷的差別是？",
-          "options": [
-            "強調動機與證據敘事",
-            "完全不提任何證據",
-            "越長越好"
-          ],
-          "answer": 0,
-          "explain": "敘事互補。"
-        },
-        {
-          "q": "海投同一稿的問題？",
-          "options": [
-            "未對準職缺顯得敷衍",
-            "比較省事所以一定更好",
-            "HR 喜歡複製文"
-          ],
-          "answer": 0,
-          "explain": "要客製。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "一封可投遞初稿",
-            "錄取合約",
-            "與求職無關的散文"
-          ],
-          "answer": 0,
-          "explain": "求職信。"
+          "title": "延伸：缺口追問",
+          "body": "根據我貼上的職涯目標檔，只追問仍缺佐證或數字待確認的欄位。不要新增經歷。"
         }
-      ],
-      "enQuizItems": [
-        {
-          "q": "求職信最該回答？",
-          "options": [
-            "為何此角、為何此處、證據何在",
-            "只重複履歷每一行",
-            "請 AI 決定你的人生目標"
-          ],
-          "answer": 0,
-          "explain": "三角對準。"
-        },
-        {
-          "q": "缺資料時應？",
-          "options": [
-            "標出待填，不發明",
-            "請 AI 編一段漂亮經歷",
-            "直接寄出空白"
-          ],
-          "answer": 0,
-          "explain": "誠實。"
-        },
-        {
-          "q": "與履歷的差別是？",
-          "options": [
-            "強調動機與證據敘事",
-            "完全不提任何證據",
-            "越長越好"
-          ],
-          "answer": 0,
-          "explain": "敘事互補。"
-        },
-        {
-          "q": "海投同一稿的問題？",
-          "options": [
-            "未對準職缺顯得敷衍",
-            "比較省事所以一定更好",
-            "HR 喜歡複製文"
-          ],
-          "answer": 0,
-          "explain": "要客製。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "一封可投遞初稿",
-            "錄取合約",
-            "與求職無關的散文"
-          ],
-          "answer": 0,
-          "explain": "求職信。"
-        }
-      ],
-      "zhOutcome": "產出一封對準特定職缺的求職信初稿（含為什麼你、為什麼這裡、證據段落與結尾行動）。",
-      "enOutcome": "Produce one role-specific cover letter draft with fit, motivation, evidence, and a clear close.",
-      "zhValueTip": "用職缺需求與真實證據，寫出可投遞的求職信／Cover Letter 初稿。",
-      "enValueTip": "Write a submittable cover letter draft from the JD and your real evidence.",
-      "zhCaseStudy": "學生投「行銷實習」，第一版全是「我溝通良好」。對照 JD 後改成：一段寫校園活動的內容測試與報名轉換；一段寫他如何整理活動回饋成下檔主題建議；結尾提到該公司最近的校園專案（公開資訊）與他想學習的點。HR 回信邀約面談。",
-      "enCaseStudy": "A marketing-intern letter replaced soft traits with two evidence paragraphs on content tests and feedback synthesis, plus a specific public note about the company’s campus project—leading to an interview invite.",
-      "zhExcellentExample": "一頁內、對準單一職缺、兩段真實證據、沒有空白待填欄位、沒有虛構專案，結尾有明確行動呼籲。",
-      "enExcellentExample": "One page, one JD, two real evidence paragraphs, no blank fields left unfilled, no invented projects, and a clear call to action.",
-      "zhWorkflow": [
-        "鎖定職缺與組織資訊",
-        "選 2–3 證據",
-        "產大綱",
-        "寫初稿並補空白",
-        "對照 JD 自檢"
-      ],
-      "enWorkflow": [
-        "Lock JD and org facts",
-        "Select 2–3 evidence blocks",
-        "Outline",
-        "Draft and fill gaps",
-        "Self-check against JD"
-      ],
-      "zhCommonMistakes": [
-        "履歷逐字貼上",
-        "空話熱忱無證據",
-        "AI 發明實習經歷",
-        "同一封信海投不改",
-        "留下未填的空白標記就送出"
-      ],
-      "enCommonMistakes": [
-        "Resume dump",
-        "Passion with no proof",
-        "Invented experience",
-        "One generic letter for all",
-        "Sending with unfilled brackets"
-      ],
-      "zhDeliverableChecklist": [
-        "對準單一職缺",
-        "兩段證據",
-        "組織具體性",
-        "無虛構",
-        "無未填空白"
-      ],
-      "enDeliverableChecklist": [
-        "One JD focus",
-        "Two evidence paras",
-        "Org specificity",
-        "No fiction",
-        "No unfilled gaps"
-      ],
-      "zhScorecard": [
-        "職缺對準",
-        "證據強度",
-        "具體性",
-        "真實性",
-        "行動呼籲"
-      ],
-      "enScorecard": [
-        "JD fit",
-        "Evidence strength",
-        "Specificity",
-        "Truthfulness",
-        "Call to action"
-      ],
-      "zhNotePrompt": "貼上求職信初稿與你對照 JD 的自評。",
-      "enNotePrompt": "Paste your cover letter draft and JD self-check.",
-      "zhCoachPrompt": "請評我的求職信是否空泛或虚构風險，並標出應改寫的句子。不要新增成就。",
-      "enCoachPrompt": "Critique vagueness or fabrication risk; mark sentences to rewrite. Add no achievements.",
-      "title": "用 AI 撰寫求職信與 Cover Letter",
-      "description": "用職缺需求與真實證據，寫出可投遞的求職信／Cover Letter 初稿。",
-      "goal": "產出一封對準特定職缺的求職信初稿（含為什麼你、為什麼這裡、證據段落與結尾行動）。"
+      ]
     },
-    {
-      "icon": "🗣️",
-      "title": "建立 30 秒／1 分鐘／3 分鐘自我介紹",
-      "description": "寫出 30 秒／90 秒自我介紹與個人故事主線，連結科系、專案、動機與目標職能，避免空話。",
-      "goal": "我的 30 秒與 90 秒自我介紹定稿＋個人故事主線圖",
-      "estimatedTime": "45-70 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "自我介紹",
-        "個人故事",
-        "電梯簡報",
-        "Chapter11"
+    "enPromptPack": {
+      "when": "Use before job search to clarify target role and resume-ready real evidence",
+      "fields": [
+        "[Enter your real experience]"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 10,
-      "chapterZh": "AI 求職與職涯發展",
-      "chapterEn": "AI Job Search and Career Development",
-      "zhTitle": "第6課：建立 30 秒／1 分鐘／3 分鐘自我介紹",
-      "enTitle": "Lesson 6: Build 30-second, 1-minute, and 3-minute self-introductions",
-      "zhValueTip": "寫出 30 秒／90 秒自我介紹與個人故事主線，連結科系、專案、動機與目標職能，避免空話。",
-      "enValueTip": "Craft 30s/90s intros and a personal narrative arc linking major, projects, motivation, and target roles—without fluff.",
-      "zhOutcome": "我的 30 秒與 90 秒自我介紹定稿＋個人故事主線圖",
-      "enOutcome": "My Final 30s/90s Intros + Personal Narrative Map",
-      "zhConcept": "自我介紹是面試與人脈場合的開場作業系統：30 秒抓住「你是誰＋方向＋一個證據」；90 秒補「路徑＋專案＋為何這裡」。個人故事不是悲慘身世競賽，而是可驗證的選擇軌跡：你為何在意某類問題、你做過什麼、你現在求什麼。避免「我是一個樂觀的人」這種無證據形容。結構建議：現在（科系／身分）→轉折或動機→代表行動（專案／實習）→目標職能→收束（為何面談／為何公司）。依場合切換版本：實習面談、社團招新、競賽、中英文。關鍵數字與專案名要說得穩。AI 可幫你壓縮與換說法，但不可改寫成你沒有的精英軌跡；要保留你的語氣，讀出聲來不尬。練習：錄音、計時、刪填充詞、請同學聽完能否複述你的方向。與履歷／LinkedIn 開場一致。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。",
-      "enConcept": "Build timed intros and a verifiable narrative arc from identity → motivation → proof → ask. AI compresses language; never invents an elite backstory or changes your voice beyond recognition.",
-      "zhCaseStudy": "情境案例：小瑜 90 秒自我介紹講到課程表。她改成「資料系＋照顧家庭排程痛點＋做排課工具＋申請分析實習」。30 秒版更短。面試官第一題就接她的專案，節奏變順。",
-      "enCaseStudy": "Xiao Yu replaced a course-list intro with a problem-project-ask arc that interviewers could continue.",
-      "zhWorkflow": [
-        "抽出真實轉折與代表證據",
-        "寫個人故事主線圖",
-        "產出 30／90 秒稿並計時",
-        "AI 精煉但保留語氣與事實",
-        "錄音修正填充詞"
-      ],
-      "enWorkflow": [
-        "Extract real turns and proof",
-        "Map the narrative",
-        "Draft timed 30/90s versions",
-        "AI refine without fake prestige",
-        "Record and cut filler"
-      ],
-      "zhCommonMistakes": [
-        "背誦履歷條列",
-        "無證據個性形容詞",
-        "超時嚴重",
-        "與履歷方向矛盾"
-      ],
-      "enCommonMistakes": [
-        "Reading the resume aloud",
-        "Trait adjectives without proof",
-        "Severe overtime",
-        "Contradicting the resume"
-      ],
-      "zhExcellentExample": "優秀介紹：準時、有方向、有一個可追問證據、收束到目標職能、聽得懂且像本人。",
-      "enExcellentExample": "A strong intro is timed, directional, has one probe-able proof, closes on the target role, and sounds like you.",
-      "zhPrompt": "【Prompt 1｜個人故事主線】\n事實素材（經歷／專案／動機）：\n（貼上）\n目標職能：［ ］\n請整理主線圖：起點、轉折、證據、方向。標註哪句是事實、哪句是你建議的表述。不要添加我沒有的比賽冠軍或名企實習。",
-      "enPrompt": "[Prompt 1 | Narrative Map] Build start/turn/proof/direction from my facts; label facts vs suggested phrasing; invent no prestige.",
-      "zhCoachPrompt": "【Prompt 2｜30 秒／90 秒稿】\n主線圖：\n（貼上）\n場合：［實習面試］\n請寫 30 秒與 90 秒稿，標建議秒數。保持我可朗讀的句子長度；不要改成網紅腔或過度謙卑到沒重點。",
-      "enCoachPrompt": "[Prompt 2 | 30s/90s Scripts] Write timed scripts with speakable sentences; avoid influencer tone or empty over-humility.",
-      "zhFeedbackPrompt": "【Prompt 3｜介紹驗收】\n我的錄音轉寫或講稿：\n（貼上）\n請評：清晰、證據、時間、與職能連結、是否像本人。給刪句建議。不要重寫成另一個人的人生故事。",
-      "enFeedbackPrompt": "[Prompt 3 | Intro QA] Score clarity, proof, timing, role link, and authenticity; suggest cuts—don’t rewrite my biography into someone else’s.",
-      "zhExample": "30秒：我是…關注…因此做了…現在尋找…實習，想把…能力用在…。｜90秒：補一個 STAR 縮短版與為什麼選貴公司的一點觀察。",
-      "enExample": "A 30s identity-problem-proof-ask, expanded to 90s with a mini-STAR and one researched company observation.",
-      "zhPractice": "完成主線圖。；定稿 30／90 秒並錄音。；對齊履歷開場。；Challenge：對陌生人版同學講 30 秒，對方需能複述你的目標職能與代表專案。",
-      "enPractice": "Finish the narrative map.；Finalize and record 30/90s.；Align with resume.；Challenge: a peer must restate your target role and flagship project after 30 seconds.",
-      "zhQuizItems": [
+      "body": "You are a career coach—not a ghostwriter. Do not guarantee offers or auto-submit applications.\n\nMy background:\n- Year / major: [Enter your real experience]\n- Target internship or role: [Enter your real experience]\n- Real experiences I can share publicly (do not add new ones): [Enter your real experience]\n- Biggest blocker right now: [Enter your real experience]\n\nTask: Produce a “Career Target Profile” with:\n1) One-sentence target role (industry/function/location; mark “to confirm” if missing)\n2) An 8–12 row evidence table (situation / my role / action / verifiable result / proof)\n3) TOP3 experiences for this target and why\n4) Missing-info list (metrics, role clarity, proof)\n5) 3 integrity red lines (no invented work, no inflated numbers, no solo credit for team wins)\n\nOutput: tables plus bullets. Invent no projects, titles, or metrics. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "expected": "A profile with target, evidence table, top 3, and gap list",
+      "revisionReminder": "AI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "extensions": [
         {
-          "q": "30 秒自我介紹最該包含？",
-          "options": [
-            "完整課程表",
-            "身分、方向、一個證據、你的請求／目標",
-            "無關笑話三分鐘",
-            "家庭住址"
-          ],
-          "answer": 1,
-          "explain": "短介紹要可接續深聊。"
-        },
-        {
-          "q": "個人故事可信的關鍵是？",
-          "options": [
-            "形容詞越多越好",
-            "選擇軌跡可驗證、有代表行動",
-            "一定要悲慘",
-            "抄網路範本不改"
-          ],
-          "answer": 1,
-          "explain": "可驗證行動建立信任。"
-        },
-        {
-          "q": "AI 幫寫自我介紹時應？",
-          "options": [
-            "可改成你沒有的精英履歷",
-            "精煉語言但保留事實與你的語氣",
-            "越長越好",
-            "刪掉所有證據"
-          ],
-          "answer": 1,
-          "explain": "精煉而非造假。"
+          "title": "Extension: gap probe",
+          "body": "From my profile, ask only about rows still missing proof or pending metrics. Add no experiences."
         }
-      ],
-      "enQuizItems": [
-        {
-          "q": "A 30s intro should include:",
-          "options": [
-            "Full course list",
-            "Identity, direction, one proof, and your ask/goal",
-            "Three minutes of jokes",
-            "Home address"
-          ],
-          "answer": 1,
-          "explain": "Short intros should enable deeper follow-up."
-        },
-        {
-          "q": "Credible personal stories need:",
-          "options": [
-            "Maximum adjectives",
-            "A verifiable arc with representative actions",
-            "Mandatory tragedy",
-            "Unedited internet templates"
-          ],
-          "answer": 1,
-          "explain": "Verifiable actions build trust."
-        },
-        {
-          "q": "When AI helps with intros it should:",
-          "options": [
-            "Invent an elite resume",
-            "Tighten language while keeping facts and your voice",
-            "Be as long as possible",
-            "Remove all proof"
-          ],
-          "answer": 1,
-          "explain": "Refine, don’t fabricate."
-        }
-      ],
-      "zhNotePrompt": "貼上 30 秒定稿全文，並標出其中的「證據句」。",
-      "enNotePrompt": "Paste your final 30s script and mark the proof sentence.",
-      "zhDeliverableChecklist": [
-        "主線圖完成",
-        "30 秒定稿",
-        "90 秒定稿",
-        "錄音計時達標",
-        "與履歷一致"
-      ],
-      "enDeliverableChecklist": [
-        "Narrative map done",
-        "30s final",
-        "90s final",
-        "Timed recording OK",
-        "Resume-aligned"
-      ],
-      "zhScorecard": [
-        "準時",
-        "有方向",
-        "有證據",
-        "像本人",
-        "可接續"
-      ],
-      "enScorecard": [
-        "On time",
-        "Directional",
-        "Proof present",
-        "Sounds like you",
-        "Continuable"
-      ],
-      "resources": [
-        {
-          "name": "LinkedIn",
-          "url": "https://www.linkedin.com",
-          "note": "About 與介紹互相對齊"
-        },
-        {
-          "name": "CakeResume",
-          "url": "https://www.cakeresume.com",
-          "note": "履歷摘要句可複用到介紹"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "壓縮與多場合版本"
-        },
-        {
-          "name": "Indeed",
-          "url": "https://tw.indeed.com",
-          "note": "從 JD 語言微調介紹關鍵字"
-        },
-        {
-          "name": "Yourator",
-          "url": "https://www.yourator.co",
-          "note": "目標產業用語參考"
-        }
-      ],
-      "challenge": "產出可上台的 30／90 秒介紹錄音；請兩位同學回饋「方向是否一秒聽懂」，並迭代一版。",
-      "id": "career-internship-L6",
-      "lessonKey": "career-internship-L6"
+      ]
     },
-    {
-      "icon": "💼",
-      "title": "用 AI 經營 LinkedIn 個人品牌檔案",
-      "description": "建立清楚的 LinkedIn 定位、關鍵字、精選專案與發文節奏，讓實習與新鮮人形象可被搜尋與信任。",
-      "goal": "我的 LinkedIn 個人品牌一頁（Headline／About／精選／發文計畫）",
-      "estimatedTime": "55-75 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "LinkedIn",
-        "個人品牌",
-        "關鍵字",
-        "Chapter11"
-      ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 10,
-      "chapterZh": "AI 求職與職涯發展",
-      "chapterEn": "AI Job Search and Career Development",
-      "zhTitle": "第7課：用 AI 經營 LinkedIn 個人品牌檔案",
-      "enTitle": "Lesson 7: Use AI to strengthen your LinkedIn professional profile",
-      "zhValueTip": "建立清楚的 LinkedIn 定位、關鍵字、精選專案與發文節奏，讓實習與新鮮人形象可被搜尋與信任。",
-      "enValueTip": "Build a searchable, trustworthy LinkedIn presence—headline, about, featured projects, and a sustainable posting cadence—for internships and new-grad roles.",
-      "zhOutcome": "我的 LinkedIn 個人品牌一頁（Headline／About／精選／發文計畫）",
-      "enOutcome": "My LinkedIn Brand One-Pager (Headline/About/Featured/Posting Plan)",
-      "zhConcept": "LinkedIn 對大學生不是晒生活，而是「可搜尋的專業 入口」：招聘與人資常先看 Headline、About、經歷與精選。Headline 不要只寫「學生」：可用「科系｜目標職能｜關鍵能力｜代表專案關鍵字」。About 用短段落：你是誰、你解決過什麼、你正在尋找什麼、如何聯絡。個人品牌＝定位＋證據＋一致性。履歷、作品集、LinkedIn 的職稱與成果說法要一致；不可一邊寫幹部一邊在網上找不到證據。關鍵字來自目標 JD 與產業用語，自然分布在 Headline、技能、專案描述。精選區放作品集／GitHub／文章，不要放無關迷因。發文節奏要可持續：每週 1 則學習筆記、專案進度、活動觀察即可；品質與真實高於頻率。AI 可幫你改寫，但不可虛構實習或推薦。互動：關注目標公司與校友、對貼文留有內容的留言、訊息禮貌且短。冷訊息要說明為何聯繫、你做過什麼、請求是否具體。與 104／Yourator／CakeResume 並行：LinkedIn 偏品牌與人脈，本地平台偏投遞；角色不同，資料仍要一致。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。",
-      "enConcept": "Craft a searchable LinkedIn entry point with a strong headline/about, consistent evidence, featured work, and sustainable honest posts. AI edits copy; never invent jobs or endorsements.",
-      "zhCaseStudy": "情境案例：小哲 LinkedIn 空白，履歷卻很滿。他補上 Headline「資料系｜分析實習｜SQL／視覺化｜校園數據專題」，About 寫三個真實專案，精選連作品集。兩週發兩則專案反思，校友轉介一個面試機會。他拒絕 AI 建議的「前 Fortune 500 實習」捏造，品牌反而更穩。",
-      "enCaseStudy": "Xiao Zhe filled a blank LinkedIn with an honest keyword headline and featured projects, earning a referral without fake prestige.",
-      "zhWorkflow": [
-        "定義目標讀者與定位句",
-        "寫 Headline／About／技能關鍵字",
-        "上架精選專案與一致經歷",
-        "訂兩週發文計畫（真實內容）",
-        "檢查全網說法一致性"
-      ],
-      "enWorkflow": [
-        "Define audience and positioning",
-        "Write Headline/About/skills keywords",
-        "Feature projects and align experience",
-        "Plan two weeks of honest posts",
-        "Audit consistency across channels"
-      ],
-      "zhCommonMistakes": [
-        "Headline 只有「學生」",
-        "履歷與 LinkedIn 互相矛盾",
-        "發文灌水或造假",
-        "精選區空或放無關內容"
-      ],
-      "enCommonMistakes": [
-        "Headline = “Student” only",
-        "Resume/LinkedIn contradictions",
-        "Spammy or fake posts",
-        "Empty/irrelevant Featured"
-      ],
-      "zhExcellentExample": "優秀主頁：定位可搜、About 有證據、精選可點、關鍵字自然、發文真實、與履歷一致。",
-      "enExcellentExample": "A strong profile is searchable, evidence-based, featured, keyword-natural, honestly active, and resume-consistent.",
-      "zhPrompt": "【Prompt 1｜Headline 與 About 撰寫】\n目標職能：［ ］；真實技能與專案：\n（貼上）\n請給 3 版 Headline 與 1 版 About（中英可各一需求）。只用我提供的事實；不要添加未有的公司經歷；建議與事實分開標示。",
-      "enPrompt": "[Prompt 1 | Headline & About] Provide 3 headlines and one About from my facts only; invent no employers; label suggestions.",
-      "zhCoachPrompt": "【Prompt 2｜關鍵字與精選區規劃】\n目標 JD 關鍵字：\n（貼上）\n我可公開的作品連結：\n（貼上）\n請建議技能排序、精選區配置與專案描述短句。沒有的作品不要建議假裝已完成。",
-      "enCoachPrompt": "[Prompt 2 | Keywords & Featured] Suggest skill order and Featured setup from real links; don’t pretend unfinished work is live.",
-      "zhFeedbackPrompt": "【Prompt 3｜個人品牌一致性檢查】\n履歷摘要：\n（貼上）\nLinkedIn 文案：\n（貼上）\n請找出口徑不一致、誇大、缺證據處，給修改清單。不要為了「高級感」建議捏造頭銜。",
-      "enFeedbackPrompt": "[Prompt 3 | Brand Consistency] Flag mismatches, exaggeration, and missing proof; never suggest fake titles for prestige.",
-      "zhExample": "Headline：資訊管理｜產品實習意向｜研究使用者流程與原型｜校園 App 專題。｜精選：作品集／GitHub／一篇專案反思。",
-      "enExample": "A searchable headline plus Featured links to portfolio, GitHub, and one honest project reflection.",
-      "zhPractice": "完成 Headline／About。；上架至少 2 個精選。；規劃兩週真實發文。；Challenge：請目標科系學長姐或同學用「是否想點進來」評你的主頁，並改一版。",
-      "enPractice": "Finish Headline/About.；Feature ≥2 items.；Plan two weeks of real posts.；Challenge: get a peer “would I click?” review and revise once.",
-      "zhQuizItems": [
-        {
-          "q": "大學生 LinkedIn Headline 較佳做法是？",
-          "options": [
-            "只寫「學生」",
-            "含目標職能與可搜尋關鍵能力／專案訊號",
-            "複製名人語錄",
-            "留白等別人猜"
-          ],
-          "answer": 1,
-          "explain": "Headline 要可搜尋且說明方向。"
-        },
-        {
-          "q": "個人品牌一致性指的是？",
-          "options": [
-            "每個平台講法都可以互相打架",
-            "履歷、作品集、LinkedIn 的事實與成果說法一致",
-            "越誇大越有品牌",
-            "不需要證據"
-          ],
-          "answer": 1,
-          "explain": "一致性建立信任。"
-        },
-        {
-          "q": "發文經營應避免？",
-          "options": [
-            "分享真實專案學習",
-            "捏造實習與成就換讚",
-            "低頻但有內容",
-            "與產業相關的觀察"
-          ],
-          "answer": 1,
-          "explain": "造假會摧毀品牌。"
+    "zhPracticeSteps": [
+      {
+        "task": "列出 8 筆以上真實經歷",
+        "standard": "每筆可公開、可說清楚角色",
+        "mistakes": "把興趣當成果",
+        "check": "能否指出佐證在哪？"
+      },
+      {
+        "task": "補齊結果與佐證",
+        "standard": "不確定數字標待確認",
+        "mistakes": "請 AI 估漂亮數字",
+        "check": "面試時能否說得出口？"
+      },
+      {
+        "task": "標 TOP3 與缺漏",
+        "standard": "理由連到目標職缺",
+        "mistakes": "只憑感覺排序",
+        "check": "TOP3 是否最值得寫？"
+      },
+      {
+        "task": "存入成果包",
+        "standard": "名稱正確、無虛構",
+        "mistakes": "空白儲存",
+        "check": "重新整理後仍看得到？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "List 8+ real experiences",
+        "standard": "Each shareable with clear role",
+        "mistakes": "Interests as achievements",
+        "check": "Can you name the proof?"
+      },
+      {
+        "task": "Complete results and proof",
+        "standard": "Flag uncertain metrics",
+        "mistakes": "Ask AI to guess numbers",
+        "check": "Could you say this in an interview?"
+      },
+      {
+        "task": "Mark top 3 and gaps",
+        "standard": "Reasons tie to target role",
+        "mistakes": "Rank by gut feel only",
+        "check": "Are top 3 the best resume bets?"
+      },
+      {
+        "task": "Save to package",
+        "standard": "Correct name; no fiction",
+        "mistakes": "Save blank",
+        "check": "Still visible after refresh?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "把「會用 AI」當成履歷亮點",
+        "why": "雇主要看你做了什麼",
+        "fix": "改成具體專案、行動與結果"
+      },
+      {
+        "error": "一次貼身分證或完整住址",
+        "why": "有隱私與資安風險",
+        "fix": "只提供可公開的經歷摘要"
+      },
+      {
+        "error": "TOP3 全是社團、沒有職能相關",
+        "why": "對準度低",
+        "fix": "依目標職缺重排優先順序"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Listing “uses AI” as the main achievement",
+        "why": "Employers want what you did",
+        "fix": "Replace with project, action, result"
+      },
+      {
+        "error": "Pasting ID or full home address",
+        "why": "Privacy and security risk",
+        "fix": "Share only public experience summaries"
+      },
+      {
+        "error": "Top 3 are all clubs, none role-relevant",
+        "why": "Weak alignment",
+        "fix": "Reorder by target role fit"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "完整度",
+        "levels": {
+          "incomplete": "缺主要區塊",
+          "basic": "只有口號",
+          "good": "有證據表與 TOP3",
+          "ready": "含缺漏與紅線"
         }
-      ],
-      "enQuizItems": [
-        {
-          "q": "Best student LinkedIn headline approach?",
-          "options": [
-            "Only “Student”",
-            "Include target function and searchable skills/project signals",
-            "Celebrity quotes",
-            "Leave it blank"
-          ],
-          "answer": 1,
-          "explain": "Headlines should be searchable and directional."
-        },
-        {
-          "q": "Brand consistency means:",
-          "options": [
-            "Contradict yourself across platforms",
-            "Keep facts/outcomes aligned across resume, portfolio, LinkedIn",
-            "Exaggerate more",
-            "Skip evidence"
-          ],
-          "answer": 1,
-          "explain": "Consistency builds trust."
-        },
-        {
-          "q": "Posting should avoid:",
-          "options": [
-            "Real project learning",
-            "Fabricating internships for engagement",
-            "Lower frequency with substance",
-            "Industry observations"
-          ],
-          "answer": 1,
-          "explain": "Fabrication destroys brand."
+      },
+      {
+        "name": "真實性",
+        "levels": {
+          "incomplete": "含虛構經歷",
+          "basic": "多處不可查",
+          "good": "大致可核對",
+          "ready": "每筆可說清佐證"
         }
+      },
+      {
+        "name": "對準度",
+        "levels": {
+          "incomplete": "無目標",
+          "basic": "目標空泛",
+          "good": "TOP3 有理由",
+          "ready": "與職缺高度相關"
+        }
+      },
+      {
+        "name": "可用性",
+        "levels": {
+          "incomplete": "無法接下一課",
+          "basic": "需大改",
+          "good": "可改 STAR",
+          "ready": "可直接挑 TOP3 改寫"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Completeness",
+        "levels": {
+          "incomplete": "Missing blocks",
+          "basic": "Slogans only",
+          "good": "Table and top 3",
+          "ready": "Includes gaps and red lines"
+        }
+      },
+      {
+        "name": "Truthfulness",
+        "levels": {
+          "incomplete": "Invented work",
+          "basic": "Hard to verify",
+          "good": "Mostly checkable",
+          "ready": "Proof for each row"
+        }
+      },
+      {
+        "name": "Alignment",
+        "levels": {
+          "incomplete": "No target",
+          "basic": "Vague target",
+          "good": "Top 3 justified",
+          "ready": "Strong role fit"
+        }
+      },
+      {
+        "name": "Usability",
+        "levels": {
+          "incomplete": "Cannot feed next lesson",
+          "basic": "Needs rewrite",
+          "good": "Ready for STAR",
+          "ready": "Top 3 ready to rewrite"
+        }
+      }
+    ],
+    "zhNextStep": "下一堂會用職缺需求拆解表，對照 STAR 框架看 JD 要什麼證據。",
+    "enNextStep": "Next, build a Job Description Analysis and map JD needs to STAR-ready evidence.",
+    "zhSummary": [
+      "本堂成果：職涯目標檔",
+      "先有真實證據，再寫履歷。",
+      "AI 只整理，不發明。"
+    ],
+    "enSummary": [
+      "Deliverable: Career Target Profile",
+      "Real evidence before the resume.",
+      "AI organizes—it does not invent."
+    ]
+  },
+  {
+    "id": "career-internship-L2",
+    "lessonKey": "career-internship-L2",
+    "zhTitle": "第2課：用 STAR 把經驗寫成可驗證的成果描述",
+    "enTitle": "Lesson 2: Rewrite experience into verifiable STAR achievement bullets",
+    "zhConcept": "STAR 不只是寫履歷的格式，也是讀 JD 的透鏡：每一項需求都該對應一則可驗證故事。這一課產出職缺需求拆解表—必備／加分、關鍵字、隱性期待、STAR 對照與投遞前核對清單。轉貼 JD 必須回官方招募頁確認薪資、地點與截止日；AI 不可保證錄取或代投。",
+    "enConcept": "STAR is not only a resume format—it is a lens for reading JDs: each need should map to verifiable evidence. This lesson builds a Job Description Analysis: must/nice-to-have, keywords, inferred expectations, STAR mapping, and a pre-apply checklist. Reposted JDs must be verified on the official page; AI cannot guarantee offers or apply for you.",
+    "zhPrompt": "你是求職策略教練，不是代投履歷工具。不可保證錄取，也不可代替我去官方頁面確認職缺。\n\n目標職缺資訊（若來自轉貼，我會自行回官方頁核對）：[請貼上職缺內容]\n我的職涯目標檔摘要（勿新增我沒有的經歷）：[请填写个人经历]\n\n任務：產出「職缺需求拆解表」，必須包含：\n1) 必備條件 vs 加分條件（各至少 3 項，不確定就標「需回官方 JD 確認」）\n2) 關鍵技能／工具／交付物關鍵字\n3) 隱性期待（溝通、跨部門、時程、品質等，僅根據 JD 推論並標「推論」）\n4) 用 STAR 框架對照：JD 每一項需求可對應我哪一則真實故事（缺故事就標缺口）\n5) 投遞前核對清單：提醒回原始招募頁確認薪資、地點、截止日、必備文件\n\n輸出格式：表格 + 條列。不要新增我沒做過的 STAR 素材。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+    "enPrompt": "You are a job-search strategy coach—not an auto-apply tool. Do not guarantee offers or verify postings for me.\n\nTarget role info (I will verify on the official page if pasted): [Paste the job description]\nMy Career Target Profile summary (add no experiences I lack): [Enter your real experience]\n\nTask: Produce a “Job Description Analysis” with:\n1) Must-have vs nice-to-have (3+ each; mark “verify on official JD” if unsure)\n2) Key skills/tools/deliverable keywords\n3) Implicit expectations (communication, cross-team, timeline, quality—label as “inferred”)\n4) STAR mapping: which real story covers each JD need (mark gaps if none)\n5) Pre-apply checklist: verify pay, location, deadline, required docs on the original posting\n\nOutput: tables plus bullets. Invent no STAR material. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+    "zhExample": "必備：React 基礎 → 對應 Todo 專題 STAR；缺口：B2B 客戶溝通 → 標「待補工讀或專題故事」。",
+    "enExample": "Must: React basics → Todo project STAR; gap: B2B communication → mark “need part-time or project story.”",
+    "zhPractice": "貼 JD 與目標檔摘要。；產出必備／加分與 STAR 對照。；回官方頁核對。；存成「職缺需求拆解表」。",
+    "enPractice": "Paste JD and profile summary.; Produce must/nice and STAR mapping.; Verify on official page.; Save the Job Description Analysis.",
+    "zhFeedbackPrompt": "你是一位履歷寫作教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 具體性\n- 結果強度\n- 真實性\n- 職缺對齊\n- 可面試展開\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a resume writing coach. Score 1-10 for: Specificity, Result strength, Truthfulness, Role alignment, Interview expandability. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhQuizItems": [
+      {
+        "q": "STAR 的 R 最該是？",
+        "options": [
+          "可驗證或可說明的結果",
+          "空洞形容詞",
+          "與你無關的團隊口號"
+        ],
+        "answer": 0,
+        "explain": "結果要站得住。"
+      },
+      {
+        "q": "AI 改寫時最危險的是？",
+        "options": [
+          "擅自加入假數據",
+          "幫你縮短句子",
+          "提醒缺了 Task"
+        ],
+        "answer": 0,
+        "explain": "禁止虛構。"
+      },
+      {
+        "q": "履歷條目較佳型態是？",
+        "options": [
+          "動詞開頭＋行動＋結果",
+          "以「我覺得」開頭",
+          "只列社團名稱"
+        ],
+        "answer": 0,
+        "explain": "行動與結果。"
+      },
+      {
+        "q": "寫完條目後應能？",
+        "options": [
+          "在面試用同一故事展開",
+          "永遠背誦不可改",
+          "交給 AI 直接投遞不管"
+        ],
+        "answer": 0,
+        "explain": "條目服務面試。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "STAR 成果描述",
+          "錄取合約",
+          "與職缺無關的長文小説"
+        ],
+        "answer": 0,
+        "explain": "成果描述。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "STAR 的 R 最該是？",
+        "options": [
+          "可驗證或可說明的結果",
+          "空洞形容詞",
+          "與你無關的團隊口號"
+        ],
+        "answer": 0,
+        "explain": "結果要站得住。"
+      },
+      {
+        "q": "AI 改寫時最危險的是？",
+        "options": [
+          "擅自加入假數據",
+          "幫你縮短句子",
+          "提醒缺了 Task"
+        ],
+        "answer": 0,
+        "explain": "禁止虛構。"
+      },
+      {
+        "q": "履歷條目較佳型態是？",
+        "options": [
+          "動詞開頭＋行動＋結果",
+          "以「我覺得」開頭",
+          "只列社團名稱"
+        ],
+        "answer": 0,
+        "explain": "行動與結果。"
+      },
+      {
+        "q": "寫完條目後應能？",
+        "options": [
+          "在面試用同一故事展開",
+          "永遠背誦不可改",
+          "交給 AI 直接投遞不管"
+        ],
+        "answer": 0,
+        "explain": "條目服務面試。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "STAR 成果描述",
+          "錄取合約",
+          "與職缺無關的長文小説"
+        ],
+        "answer": 0,
+        "explain": "成果描述。"
+      }
+    ],
+    "zhOutcome": "職缺需求拆解表",
+    "enOutcome": "Job Description Analysis",
+    "zhValueTip": "JD 以官方頁為準；AI 可拆解需求，但投遞前你要自己核對真偽與截止日。",
+    "enValueTip": "Treat the official posting as source of truth. AI may analyze needs—you must verify details before applying.",
+    "zhCaseStudy": "資工系阿凱鎖定一間新創的前端實習。他先貼轉貼 JD，請 AI 拆出必備（React、Git、RWD）與加分（Figma 協作）。對照職涯目標檔後，發現「跨部門溝通」缺故事，但「Todo App 專題」可對應元件化與 Git 流程。他依核對清單回官方頁，發現截止日比轉貼晚一週，避免錯過投遞。",
+    "enCaseStudy": "Kai targeted a startup frontend intern role. AI split must-haves (React, Git, RWD) and nice-to-haves (Figma). Mapping his profile showed a gap on cross-team communication but a strong Todo project for components and Git. The checklist sent him to the official page where the deadline was a week later than the repost.",
+    "zhExcellentExample": "必備／加分清楚、關鍵字可貼履歷、STAR 缺口誠實、官方核對清單已勾、無代投宣稱。",
+    "enExcellentExample": "Clear must/nice split, resume-ready keywords, honest STAR gaps, checklist ticked, no auto-apply claims.",
+    "zhWorkflow": [
+      "取得 JD（轉貼亦可，但標記來源）",
+      "貼 JD 與職涯目標檔摘要",
+      "產出必備／加分與關鍵字",
+      "STAR 對照並標缺口",
+      "回官方頁核對後存檔"
+    ],
+    "enWorkflow": [
+      "Get the JD (repost OK—note the source)",
+      "Paste JD and Career Target Profile summary",
+      "Produce must/nice-to-have and keywords",
+      "STAR-map and flag gaps",
+      "Verify on official page and save"
+    ],
+    "zhCommonMistakes": [
+      "只看轉貼 JD 不核對官方頁",
+      "把推論當成 JD 明文要求",
+      "STAR 對照硬湊不存在的專案",
+      "忽略截止日或必備文件",
+      "請 AI 保證錄取或代投"
+    ],
+    "enCommonMistakes": [
+      "Applying from reposts without official verification",
+      "Treating inferences as explicit JD requirements",
+      "Forcing STAR matches with fake projects",
+      "Missing deadlines or required documents",
+      "Asking AI for guarantees or auto-apply"
+    ],
+    "zhDeliverableChecklist": [
+      "必備與加分條件各至少 3 項",
+      "有關鍵技能／工具／交付物關鍵字",
+      "STAR 對照表誠實標缺口",
+      "有投遞前回官方頁核對清單",
+      "不確定處標需確認，無虛構故事",
+      "無錄取保證、無自動投遞宣稱"
+    ],
+    "enDeliverableChecklist": [
+      "At least 3 must-haves and 3 nice-to-haves",
+      "Key skills/tools/deliverable keywords listed",
+      "STAR mapping with honest gaps",
+      "Pre-apply official-page verification checklist",
+      "Uncertainties labeled; no invented stories",
+      "No hire guarantee or auto-apply claims"
+    ],
+    "zhScorecard": [
+      "具體性",
+      "結果強度",
+      "真實性",
+      "職缺對齊",
+      "可面試展開"
+    ],
+    "enScorecard": [
+      "Specificity",
+      "Result strength",
+      "Truthfulness",
+      "Role alignment",
+      "Interview expandability"
+    ],
+    "zhNotePrompt": "寫下你回官方頁要核對的 3 個欄位，以及 STAR 對照表裡最大的一個缺口。",
+    "enNotePrompt": "Note 3 fields you will verify on the official page and the biggest gap in your STAR mapping.",
+    "zhCoachPrompt": "請評我的 STAR 是否缺結果或過度誇大，並給出改寫，但不要新增數字。",
+    "enCoachPrompt": "Score my STAR bullets for missing results or hype; rewrite without adding numbers.",
+    "estimatedTime": "約 45 分鐘 / About 45 min",
+    "difficulty": "入門 / Beginner",
+    "zhOutputName": "職缺需求拆解表",
+    "enOutputName": "Job Description Analysis",
+    "zhObjectives": [
+      "把 JD 拆成必備條件與加分條件",
+      "萃取關鍵技能、工具與交付物關鍵字",
+      "用 STAR 對照每項需求與我的真實故事",
+      "標出證據缺口與需回官方頁確認的欄位",
+      "存成「職缺需求拆解表」"
+    ],
+    "enObjectives": [
+      "Split the JD into must-haves and nice-to-haves",
+      "Extract key skills, tools, and deliverable keywords",
+      "Map each need to a real STAR story",
+      "Flag evidence gaps and fields to verify on the official page",
+      "Save a Job Description Analysis"
+    ],
+    "zhWhyItMatters": {
+      "problem": "只看職缺標題就投，履歷常對不到真正需求，也可能被過期或轉貼 JD 誤導。",
+      "ineffective": "請 AI「幫我寫對這份 JD 的履歷」卻沒先拆解 JD。",
+      "solution": "拆解 JD、對照 STAR 證據、列出官方頁核對清單，再進入素材庫與履歷改寫。"
+    },
+    "enWhyItMatters": {
+      "problem": "Applying from the title alone misses real needs and stale reposted JDs.",
+      "ineffective": "Asking AI to “tailor my resume” without analyzing the JD first.",
+      "solution": "Break down the JD, map STAR evidence, list official-page checks, then build materials."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "官方 JD 為準",
+        "需求先於改寫",
+        "STAR 對照缺口"
       ],
-      "zhNotePrompt": "貼上最終 Headline、About 前 5 行，以及精選區兩個連結名稱。",
-      "enNotePrompt": "Paste final Headline, first 5 About lines, and two Featured item names.",
-      "zhDeliverableChecklist": [
-        "Headline／About 完成",
-        "關鍵字已布局",
-        "精選區可用",
-        "發文計畫兩週",
-        "與履歷一致"
+      "terms": [
+        "必備條件",
+        "加分條件",
+        "STAR 對照"
       ],
-      "enDeliverableChecklist": [
-        "Headline/About done",
-        "Keywords placed",
-        "Featured live",
-        "Two-week posting plan",
-        "Resume-consistent"
+      "criteria": [
+        "必備／加分各 3+",
+        "有關鍵字",
+        "有核對清單"
       ],
-      "zhScorecard": [
-        "可搜尋",
-        "有證據",
+      "boundaries": [
+        "避免：不核對就投",
+        "避免：虛構對應故事",
+        "避免：自動投遞"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Official JD wins",
+        "Needs before rewriting",
+        "STAR gap mapping"
+      ],
+      "terms": [
+        "Must-have",
+        "Nice-to-have",
+        "STAR mapping"
+      ],
+      "criteria": [
+        "3+ must/nice each",
+        "Keywords listed",
+        "Verification checklist"
+      ],
+      "boundaries": [
+        "Avoid: apply without verify",
+        "Avoid: invented stories",
+        "Avoid: auto-apply"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "資工系阿凱在社團群組看到「前端實習」轉貼，沒核對就準備投。",
+      "wrong": "直接請 AI 依轉貼 JD 寫履歷，未回 104／官方頁確認。",
+      "right": "拆解 React、Git、RWD 等必備，對照他的 Todo 專題 STAR，標缺口，並列官方頁核對項。",
+      "result": "知道要補哪則故事、投遞前要確認哪些欄位。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "CS student Kai saw a reposted “frontend intern” JD and almost applied blind.",
+      "wrong": "Ask AI to tailor a resume from the repost without checking the official page.",
+      "right": "Break down React/Git/RWD must-haves, map his Todo project STAR, flag gaps, list verify items.",
+      "result": "Clear on which story to strengthen and what to confirm before applying."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "貼 JD 與目標摘要",
+        "why": "AI 需要兩邊對照",
+        "input": "[請貼上職缺內容]",
+        "output": "輸入包",
+        "check": "是否標明轉貼"
+      },
+      {
+        "do": "拆必備與加分",
+        "why": "改履歷前先看需求",
+        "input": "JD 全文",
+        "output": "需求表",
+        "check": "各至少 3 項"
+      },
+      {
+        "do": "萃取關鍵字",
+        "why": "ATS 與人資會掃",
+        "input": "需求表",
+        "output": "關鍵字清單",
+        "check": "是否含工具名"
+      },
+      {
+        "do": "STAR 對照",
+        "why": "每需求要有故事或缺口",
+        "input": "職涯目標檔",
+        "output": "對照表",
+        "check": "缺口是否誠實標示"
+      },
+      {
+        "do": "官方頁核對",
+        "why": "轉貼可能過期",
+        "input": "核對清單",
+        "output": "已確認欄位",
+        "check": "截止日是否核對"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Paste JD and profile summary",
+        "why": "AI needs both sides",
+        "input": "[Paste the job description]",
+        "output": "Input pack",
+        "check": "Repost noted"
+      },
+      {
+        "do": "Split must vs nice",
+        "why": "Needs before rewriting",
+        "input": "Full JD",
+        "output": "Requirements table",
+        "check": "3+ each"
+      },
+      {
+        "do": "Extract keywords",
+        "why": "ATS and recruiters scan",
+        "input": "Requirements",
+        "output": "Keyword list",
+        "check": "Tools named"
+      },
+      {
+        "do": "STAR mapping",
+        "why": "Story or gap per need",
+        "input": "Career Target Profile",
+        "output": "Mapping table",
+        "check": "Gaps flagged honestly"
+      },
+      {
+        "do": "Verify official page",
+        "why": "Reposts go stale",
+        "input": "Checklist",
+        "output": "Confirmed fields",
+        "check": "Deadline checked"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "鎖定一份 JD 後，先拆解需求並對照 STAR 證據再改履歷時使用",
+      "fields": [
+        "[請貼上職缺內容]",
+        "[请填写个人经历]"
+      ],
+      "body": "你是求職策略教練，不是代投履歷工具。不可保證錄取，也不可代替我去官方頁面確認職缺。\n\n目標職缺資訊（若來自轉貼，我會自行回官方頁核對）：[請貼上職缺內容]\n我的職涯目標檔摘要（勿新增我沒有的經歷）：[请填写个人经历]\n\n任務：產出「職缺需求拆解表」，必須包含：\n1) 必備條件 vs 加分條件（各至少 3 項，不確定就標「需回官方 JD 確認」）\n2) 關鍵技能／工具／交付物關鍵字\n3) 隱性期待（溝通、跨部門、時程、品質等，僅根據 JD 推論並標「推論」）\n4) 用 STAR 框架對照：JD 每一項需求可對應我哪一則真實故事（缺故事就標缺口）\n5) 投遞前核對清單：提醒回原始招募頁確認薪資、地點、截止日、必備文件\n\n輸出格式：表格 + 條列。不要新增我沒做過的 STAR 素材。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "expected": "一份含必備／加分、關鍵字、STAR 對照與官方頁核對清單的職缺需求拆解表",
+      "revisionReminder": "AI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "extensions": [
+        {
+          "title": "延伸：JD 真偽檢查",
+          "body": "根據我貼的 JD，列出應回官方頁確認的 5 個欄位（公司名、職稱、地點、薪資、截止日）。不要幫我投遞。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use after picking a posting to break down needs and map STAR evidence before rewriting the resume",
+      "fields": [
+        "[Paste the job description]",
+        "[Enter your real experience]"
+      ],
+      "body": "You are a job-search strategy coach—not an auto-apply tool. Do not guarantee offers or verify postings for me.\n\nTarget role info (I will verify on the official page if pasted): [Paste the job description]\nMy Career Target Profile summary (add no experiences I lack): [Enter your real experience]\n\nTask: Produce a “Job Description Analysis” with:\n1) Must-have vs nice-to-have (3+ each; mark “verify on official JD” if unsure)\n2) Key skills/tools/deliverable keywords\n3) Implicit expectations (communication, cross-team, timeline, quality—label as “inferred”)\n4) STAR mapping: which real story covers each JD need (mark gaps if none)\n5) Pre-apply checklist: verify pay, location, deadline, required docs on the original posting\n\nOutput: tables plus bullets. Invent no STAR material. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "expected": "An analysis with must/nice-to-have, keywords, STAR mapping, and official-page checklist",
+      "revisionReminder": "AI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "extensions": [
+        {
+          "title": "Extension: posting verification",
+          "body": "From my JD paste, list 5 fields to confirm on the official page (company, title, location, pay, deadline). Do not apply for me."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "貼完整 JD",
+        "standard": "含資格、职责、加分",
+        "mistakes": "只有職缺標題",
+        "check": "能否拆出必備？"
+      },
+      {
+        "task": "STAR 對照誠實",
+        "standard": "缺故事就標缺口",
+        "mistakes": "硬湊假專案",
+        "check": "面試能否展開？"
+      },
+      {
+        "task": "回官方頁核對",
+        "standard": "截止日、地點、文件",
+        "mistakes": "只看轉貼就投",
+        "check": "5 項是否勾完？"
+      },
+      {
+        "task": "存檔",
+        "standard": "名稱正確",
+        "mistakes": "未存",
+        "check": "下堂履歷能否引用？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Paste full JD",
+        "standard": "Qualifications, duties, nice-to-have",
+        "mistakes": "Title only",
+        "check": "Can you list must-haves?"
+      },
+      {
+        "task": "Honest STAR mapping",
+        "standard": "Mark gaps",
+        "mistakes": "Force fake projects",
+        "check": "Could you expand in interview?"
+      },
+      {
+        "task": "Verify official page",
+        "standard": "Deadline, location, docs",
+        "mistakes": "Apply from repost only",
+        "check": "All 5 checks done?"
+      },
+      {
+        "task": "Save",
+        "standard": "Correct name",
+        "mistakes": "Not saved",
+        "check": "Can resume lesson cite this?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "把「熟悉 AI 工具」當必備",
+        "why": "可能是推論非明文",
+        "fix": "回 JD 原文標「推論」或刪除"
+      },
+      {
+        "error": "對照表全填滿、沒有缺口",
+        "why": "面試會被追問穿幫",
+        "fix": "誠實標待補故事"
+      },
+      {
+        "error": "未核對公司名就投",
+        "why": "可能釣魚或過期職缺",
+        "fix": "官方頁確認後再投"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Treating “AI tools” as must-have",
+        "why": "May be inference not text",
+        "fix": "Label inference or remove"
+      },
+      {
+        "error": "Mapping table with zero gaps",
+        "why": "Interview will probe holes",
+        "fix": "Flag stories still needed"
+      },
+      {
+        "error": "Applying without verifying company",
+        "why": "Stale or scam postings",
+        "fix": "Confirm on official page first"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "完整度",
+        "levels": {
+          "incomplete": "缺必備／加分",
+          "basic": "只有關鍵字",
+          "good": "有 STAR 對照",
+          "ready": "含官方核對清單"
+        }
+      },
+      {
+        "name": "準確性",
+        "levels": {
+          "incomplete": "把推論當明文",
+          "basic": "多處需確認",
+          "good": "大致對 JD",
+          "ready": "不確定處已標"
+        }
+      },
+      {
+        "name": "誠實度",
+        "levels": {
+          "incomplete": "虛構對應",
+          "basic": "硬湊故事",
+          "good": "缺口有標",
+          "ready": "無假專案"
+        }
+      },
+      {
+        "name": "可用性",
+        "levels": {
+          "incomplete": "無法接履歷課",
+          "basic": "需重拆",
+          "good": "可挑關鍵字",
+          "ready": "可直接改履歷"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Completeness",
+        "levels": {
+          "incomplete": "Missing must/nice",
+          "basic": "Keywords only",
+          "good": "STAR mapping present",
+          "ready": "Official checklist included"
+        }
+      },
+      {
+        "name": "Accuracy",
+        "levels": {
+          "incomplete": "Inferences as facts",
+          "basic": "Many unverified",
+          "good": "Mostly matches JD",
+          "ready": "Uncertainties labeled"
+        }
+      },
+      {
+        "name": "Honesty",
+        "levels": {
+          "incomplete": "Invented matches",
+          "basic": "Forced stories",
+          "good": "Gaps flagged",
+          "ready": "No fake projects"
+        }
+      },
+      {
+        "name": "Usability",
+        "levels": {
+          "incomplete": "Cannot feed resume lesson",
+          "basic": "Needs redo",
+          "good": "Keywords usable",
+          "ready": "Ready for resume tailoring"
+        }
+      }
+    ],
+    "zhNextStep": "下一堂會把對照後的 STAR 素材整理成「個人能力與經歷素材庫」。",
+    "enNextStep": "Next, organize mapped STAR material into a Career Evidence Bank.",
+    "zhSummary": [
+      "本堂成果：職缺需求拆解表",
+      "JD 以官方頁為準。",
+      "STAR 對照後再改履歷。"
+    ],
+    "enSummary": [
+      "Deliverable: Job Description Analysis",
+      "Official posting is source of truth.",
+      "Map STAR before rewriting the resume."
+    ]
+  },
+  {
+    "id": "career-internship-L3",
+    "lessonKey": "career-internship-L3",
+    "zhTitle": "第3課：鎖定目標實習／職缺，拆解職缺需求",
+    "enTitle": "Lesson 3: Target internships/roles and decode job requirements",
+    "zhConcept": "鎖定目標職缺後，要把散落的經歷變成可重複使用的 STAR 素材庫。每則含情境、任務、行動、結果，再壓成履歷 bullet，並標註對應 JD 哪一項需求。AI 可協助壓字與指出缺 Result，不可發明百分比、客戶名稱或你把團隊成果寫成独力完成。",
+    "enConcept": "After locking a target role, turn scattered experience into a reusable Career Evidence Bank. Each card has situation, task, action, result, then one resume bullet tagged to a JD need. AI may tighten wording and flag missing Results—it must not invent metrics, client names, or solo credit for team wins.",
+    "zhPrompt": "你是履歷 STAR 教練，不是代寫者。不可新增我沒做過的經歷、百分比或客戶名稱。\n\n目標職缺需求拆解表摘要：[請貼上職缺內容]\n我的真實經歷與 TOP3（勿替我新增）：[请填写个人经历]\n\n任務：產出「個人能力與經歷素材庫」，必須包含：\n1) 5–8 則完整 STAR 卡片（S/T/A/R 各段，缺段標示）\n2) 每則壓縮成 1 條履歷 bullet（動詞開頭，禁止假數字）\n3) 標註每則對應 JD 哪一項必備／加分\n4) 最對職缺的 TOP3 bullets 與 60 秒口述提示（不是背稿）\n5) 不可發明清單：列出 AI 絕對不能替我加的資訊\n\n輸出格式：表格 + 條列。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+    "enPrompt": "You are a resume STAR coach—not a ghostwriter. Do not add experiences, percentages, or client names I lack.\n\nJob Description Analysis summary: [Paste the job description]\nMy real experiences and top 3 (add nothing new): [Enter your real experience]\n\nTask: Produce a “Career Evidence Bank” with:\n1) 5–8 full STAR cards (mark any missing S/T/A/R segment)\n2) One resume bullet per card (verb-led; no fake numbers)\n3) Which JD must-have/nice-to-have each card covers\n4) Top 3 bullets for the role plus 60-second talk prompts (not a memorized script)\n5) Do-not-invent list: facts AI must never add for me\n\nOutput: tables plus bullets. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+    "zhExample": "弱：協助辦活動。強：為降低現場動線混亂，設計分區與志工動線表，200 人活動準時開場（系學會紀錄可證）。",
+    "enExample": "Weak: helped with events. Strong: designed zones and volunteer flow for a 200-person event that started on time (student-association records).",
+    "zhPractice": "挑 5–8 則寫 STAR。；壓成 bullets 並對照 JD。；選 TOP3。；存成「個人能力與經歷素材庫」。",
+    "enPractice": "Pick 5–8 and write STAR.; Compress to bullets and map to JD.; Choose top 3.; Save the Career Evidence Bank.",
+    "zhFeedbackPrompt": "你是一位求職策略教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 拆解完整度\n- 證據對齊\n- 缺口誠實度\n- 行動可執行\n- 決策清楚\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a job-search strategy coach. Score 1-10 for: Parse completeness, Evidence alignment, Gap honesty, Actionability, Decision clarity. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhQuizItems": [
+      {
+        "q": "拆 JD 的第一步通常是？",
+        "options": [
+          "分出必要與加分條件",
+          "先寫求職信不管需求",
+          "請 AI 直接說你很適合"
+        ],
+        "answer": 0,
+        "explain": "先結構化需求。"
+      },
+      {
+        "q": "弱匹配應該？",
+        "options": [
+          "標出並計畫補齊",
+          "改成精通",
+          "刪除職缺不看"
+        ],
+        "answer": 0,
+        "explain": "誠實處理。"
+      },
+      {
+        "q": "AI 不可協助你？",
+        "options": [
+          "假裝具備未學技能",
+          "萃取關鍵字",
+          "做對照表"
+        ],
+        "answer": 0,
+        "explain": "禁止造假。"
+      },
+      {
+        "q": "本課核心產出？",
+        "options": [
+          "拆解表與缺口計畫",
+          "錄取後薪資單",
+          "與職缺無關的日記"
+        ],
+        "answer": 0,
+        "explain": "決策底稿。"
+      },
+      {
+        "q": "何時可考慮暫緩投遞？",
+        "options": [
+          "必要條件缺口過大且短期難補",
+          "已經完全匹配",
+          "只是想多改一個標點"
+        ],
+        "answer": 0,
+        "explain": "必要條件優先。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "拆 JD 的第一步通常是？",
+        "options": [
+          "分出必要與加分條件",
+          "先寫求職信不管需求",
+          "請 AI 直接說你很適合"
+        ],
+        "answer": 0,
+        "explain": "先結構化需求。"
+      },
+      {
+        "q": "弱匹配應該？",
+        "options": [
+          "標出並計畫補齊",
+          "改成精通",
+          "刪除職缺不看"
+        ],
+        "answer": 0,
+        "explain": "誠實處理。"
+      },
+      {
+        "q": "AI 不可協助你？",
+        "options": [
+          "假裝具備未學技能",
+          "萃取關鍵字",
+          "做對照表"
+        ],
+        "answer": 0,
+        "explain": "禁止造假。"
+      },
+      {
+        "q": "本課核心產出？",
+        "options": [
+          "拆解表與缺口計畫",
+          "錄取後薪資單",
+          "與職缺無關的日記"
+        ],
+        "answer": 0,
+        "explain": "決策底稿。"
+      },
+      {
+        "q": "何時可考慮暫緩投遞？",
+        "options": [
+          "必要條件缺口過大且短期難補",
+          "已經完全匹配",
+          "只是想多改一個標點"
+        ],
+        "answer": 0,
+        "explain": "必要條件優先。"
+      }
+    ],
+    "zhOutcome": "個人能力與經歷素材庫",
+    "enOutcome": "Career Evidence Bank",
+    "zhValueTip": "STAR 把活動變成果；AI 可壓字與查缺段，不可發明業績。",
+    "enValueTip": "STAR turns activities into outcomes. AI may tighten wording and spot gaps—it must not invent metrics.",
+    "zhCaseStudy": "企管系小杰對照電商 JD，把工讀「協助上架」寫成 STAR：旺季每週核对 30 個 SKU 描述與價格、建立錯誤清單給主管，上架錯誤件數下降（數字待主管確認）。社團募款活動則標「團隊成果，我負責文宣與現場動線」。TOP3 對準 JD 的「細心、跨部門、數據核对」。",
+    "enCaseStudy": "Jie mapped e-commerce JD needs. Part-time listing work became STAR: weekly checks on 30 SKUs, error list to supervisor, fewer listing mistakes (metric pending confirmation). Club fundraising tagged as team outcome with his role in copy and flow. Top 3 aligned to careful, cross-team, data-check needs.",
+    "zhExcellentExample": "6 則 STAR 齊、bullets 動詞開頭、JD 必備覆蓋 4/5、TOP3 明確、不可發明清單、無假業績。",
+    "enExcellentExample": "Six complete STAR cards, verb-led bullets, 4/5 must-haves covered, clear top 3, do-not-invent list, no fake metrics.",
+    "zhWorkflow": [
+      "從職涯目標檔挑 5–8 則",
+      "寫完整 STAR 並標缺段",
+      "壓成 bullets 並對照 JD",
+      "選 TOP3 與口述提示",
+      "存成素材庫"
+    ],
+    "enWorkflow": [
+      "Pick 5–8 rows from Career Target Profile",
+      "Write full STAR; mark missing segments",
+      "Compress to bullets; map to JD",
+      "Choose top 3 and talk prompts",
+      "Save the evidence bank"
+    ],
+    "zhCommonMistakes": [
+      "STAR 缺 Result 仍硬寫履歷",
+      "擅自加入假百分比或客戶名",
+      "團隊成果寫成個人独力",
+      "bullets 以「我覺得」開頭",
+      "沒有對照 JD 需求"
+    ],
+    "enCommonMistakes": [
+      "Resume bullets without STAR Results",
+      "Invented percentages or client names",
+      "Team wins written as solo work",
+      "Bullets starting with “I think”",
+      "No JD mapping"
+    ],
+    "zhDeliverableChecklist": [
+      "5–8 則完整 STAR 卡片，缺段有標示",
+      "每則 1 條履歷 bullet，無假數字",
+      "每則對應 JD 必備或加分項",
+      "有 TOP3 bullets 與 60 秒口述提示",
+      "有不可發明清單",
+      "無錄取保證宣稱"
+    ],
+    "enDeliverableChecklist": [
+      "5–8 STAR cards with missing segments flagged",
+      "One resume bullet each; no fake numbers",
+      "Each mapped to a JD must-have or nice-to-have",
+      "Top 3 bullets and 60-second talk prompts",
+      "Do-not-invent list included",
+      "No hire guarantee claims"
+    ],
+    "zhScorecard": [
+      "拆解完整度",
+      "證據對齊",
+      "缺口誠實度",
+      "行動可執行",
+      "決策清楚"
+    ],
+    "enScorecard": [
+      "Parse completeness",
+      "Evidence alignment",
+      "Gap honesty",
+      "Actionability",
+      "Decision clarity"
+    ],
+    "zhNotePrompt": "貼一則 STAR 與對應 bullet，寫下面試時你會用哪個數字或證明。",
+    "enNotePrompt": "Paste one STAR and bullet; note which metric or proof you will use in the interview.",
+    "zhCoachPrompt": "請檢查我的職缺拆解是否誠實，並指出最危險的誇大匹配。",
+    "enCoachPrompt": "Check honesty of my JD mapping and flag risky overclaims.",
+    "estimatedTime": "約 55 分鐘 / About 55 min",
+    "difficulty": "進階 / Intermediate",
+    "zhOutputName": "個人能力與經歷素材庫",
+    "enOutputName": "Career Evidence Bank",
+    "zhObjectives": [
+      "為 5–8 則真實經歷寫完整 STAR",
+      "每則壓成 1 條動詞開頭的履歷 bullet",
+      "標註每則對應 JD 必備或加分項",
+      "選出 TOP3 bullets 與 60 秒口述提示",
+      "存成「個人能力與經歷素材庫」"
+    ],
+    "enObjectives": [
+      "Write full STAR for 5–8 real experiences",
+      "Compress each into one verb-led resume bullet",
+      "Tag each card to a JD must-have or nice-to-have",
+      "Pick top 3 bullets and 60-second talk prompts",
+      "Save a Career Evidence Bank"
+    ],
+    "zhWhyItMatters": {
+      "problem": "有證據卻寫成「參與、協助」空話，面試也展開不了。",
+      "ineffective": "只列活動名稱，沒有 STAR 與 JD 對應。",
+      "solution": "建立 STAR 素材庫、壓成 bullets、對照 JD，再進入履歷排版。"
+    },
+    "enWhyItMatters": {
+      "problem": "Real work stays vague—“participated, assisted”—and fails in interviews.",
+      "ineffective": "Listing activity names without STAR or JD mapping.",
+      "solution": "Build a STAR bank, compress to bullets, map to the JD, then format the resume."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "行動與結果優先",
+        "一則故事多用途",
+        "缺段要標示"
+      ],
+      "terms": [
+        "STAR 卡片",
+        "bullet",
+        "不可發明清單"
+      ],
+      "criteria": [
+        "5–8 則 STAR",
+        "有 TOP3",
+        "有 JD 對應"
+      ],
+      "boundaries": [
+        "避免：假百分比",
+        "避免：假客戶名",
+        "避免：團隊口號當個人成果"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Action and result first",
+        "One story, many uses",
+        "Mark missing segments"
+      ],
+      "terms": [
+        "STAR card",
+        "Bullet",
+        "Do-not-invent list"
+      ],
+      "criteria": [
+        "5–8 STAR cards",
+        "Top 3 present",
+        "JD mapping"
+      ],
+      "boundaries": [
+        "Avoid: fake percentages",
+        "Avoid: fake clients",
+        "Avoid: team slogans as solo wins"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "企管系學生小杰鎖定「電商營運實習」，有社團與工讀但寫不出成果句。",
+      "wrong": "請 AI 加入「業績成長 300%」等假數字。",
+      "right": "把「協助上架」改 STAR：負責 30 SKU 資料核对、錯誤率下降（可對工讀主管確認）。",
+      "result": "5 則 STAR 卡片 + TOP3 bullets 可直接貼履歷。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Business major Jie targets e-commerce ops but cannot write outcome lines.",
+      "wrong": "Ask AI to add “300% growth” fake metrics.",
+      "right": "STAR the listing work: owned 30-SKU data checks; error rate down (confirmable with supervisor).",
+      "result": "Five STAR cards and top 3 bullets ready for the resume."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "挑 5–8 則",
+        "why": "素材庫要精不要散",
+        "input": "職涯目標檔",
+        "output": "候選清單",
+        "check": "是否對準 JD"
+      },
+      {
+        "do": "寫 STAR",
+        "why": "面試要能展開",
+        "input": "[请填写个人经历]",
+        "output": "STAR 卡片",
+        "check": "每段是否齊或標缺"
+      },
+      {
+        "do": "壓 bullet",
+        "why": "履歷要動詞+結果",
+        "input": "STAR",
+        "output": "bullets",
+        "check": "有無假數字"
+      },
+      {
+        "do": "對照 JD",
+        "why": "每 bullet 有歸屬",
+        "input": "需求拆解表",
+        "output": "對照欄",
+        "check": "必備是否覆蓋"
+      },
+      {
+        "do": "存檔",
+        "why": "L4 履歷會用",
+        "input": "定稿",
+        "output": "素材庫",
+        "check": "有不可發明清單"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Pick 5–8 stories",
+        "why": "Bank should stay focused",
+        "input": "Career Target Profile",
+        "output": "Candidate list",
+        "check": "JD-aligned"
+      },
+      {
+        "do": "Write STAR",
+        "why": "Must expand in interview",
+        "input": "[Enter your real experience]",
+        "output": "STAR cards",
+        "check": "Segments complete or flagged"
+      },
+      {
+        "do": "Compress bullets",
+        "why": "Verb + outcome",
+        "input": "STAR",
+        "output": "Bullets",
+        "check": "No fake numbers"
+      },
+      {
+        "do": "Map to JD",
+        "why": "Each bullet tagged",
+        "input": "JD analysis",
+        "output": "Mapping column",
+        "check": "Must-haves covered"
+      },
+      {
+        "do": "Save",
+        "why": "Resume lesson uses this",
+        "input": "Final",
+        "output": "Evidence bank",
+        "check": "Do-not-invent list present"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "JD 已拆解後，把真實經歷整理成 STAR 素材庫與履歷 bullets 時使用",
+      "fields": [
+        "[請貼上職缺內容]",
+        "[请填写个人经历]"
+      ],
+      "body": "你是履歷 STAR 教練，不是代寫者。不可新增我沒做過的經歷、百分比或客戶名稱。\n\n目標職缺需求拆解表摘要：[請貼上職缺內容]\n我的真實經歷與 TOP3（勿替我新增）：[请填写个人经历]\n\n任務：產出「個人能力與經歷素材庫」，必須包含：\n1) 5–8 則完整 STAR 卡片（S/T/A/R 各段，缺段標示）\n2) 每則壓縮成 1 條履歷 bullet（動詞開頭，禁止假數字）\n3) 標註每則對應 JD 哪一項必備／加分\n4) 最對職缺的 TOP3 bullets 與 60 秒口述提示（不是背稿）\n5) 不可發明清單：列出 AI 絕對不能替我加的資訊\n\n輸出格式：表格 + 條列。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "expected": "一份含 STAR 卡片、履歷 bullets、JD 對應與不可發明清單的素材庫",
+      "revisionReminder": "AI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "extensions": [
+        {
+          "title": "延伸：缺 Result 檢查",
+          "body": "檢查我貼上的 STAR 卡片，指出缺 Result 或無法驗證的句子，建議改成可面試展開的說法。不要加數字。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use after JD analysis to build STAR cards and resume bullets from real experience",
+      "fields": [
+        "[Paste the job description]",
+        "[Enter your real experience]"
+      ],
+      "body": "You are a resume STAR coach—not a ghostwriter. Do not add experiences, percentages, or client names I lack.\n\nJob Description Analysis summary: [Paste the job description]\nMy real experiences and top 3 (add nothing new): [Enter your real experience]\n\nTask: Produce a “Career Evidence Bank” with:\n1) 5–8 full STAR cards (mark any missing S/T/A/R segment)\n2) One resume bullet per card (verb-led; no fake numbers)\n3) Which JD must-have/nice-to-have each card covers\n4) Top 3 bullets for the role plus 60-second talk prompts (not a memorized script)\n5) Do-not-invent list: facts AI must never add for me\n\nOutput: tables plus bullets. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "expected": "A bank with STAR cards, bullets, JD mapping, and do-not-invent list",
+      "revisionReminder": "AI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "extensions": [
+        {
+          "title": "Extension: missing Result check",
+          "body": "Review my STAR cards; flag missing Results or unverifiable lines. Suggest interview-ready wording. Add no numbers."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "5–8 則 STAR 完整",
+        "standard": "缺段標示",
+        "mistakes": "只有活動名",
+        "check": "能否面試展開 60 秒？"
+      },
+      {
+        "task": "bullets 無假數字",
+        "standard": "不確定標待確認",
+        "mistakes": "AI 估百分比",
+        "check": "主管能否佐證？"
+      },
+      {
+        "task": "JD 對應",
+        "standard": "每則有必備或加分",
+        "mistakes": "對照表空白",
+        "check": "必備覆蓋幾項？"
+      },
+      {
+        "task": "存檔",
+        "standard": "含不可發明清單",
+        "mistakes": "未存",
+        "check": "L4 能否直接引用？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "5–8 complete STAR cards",
+        "standard": "Flag missing segments",
+        "mistakes": "Activity names only",
+        "check": "60-second expand ready?"
+      },
+      {
+        "task": "Bullets without fake numbers",
+        "standard": "Flag pending metrics",
+        "mistakes": "AI-guessed percentages",
+        "check": "Supervisor can confirm?"
+      },
+      {
+        "task": "JD mapping",
+        "standard": "Each tagged must/nice",
+        "mistakes": "Empty mapping",
+        "check": "How many must-haves covered?"
+      },
+      {
+        "task": "Save",
+        "standard": "Includes do-not-invent list",
+        "mistakes": "Not saved",
+        "check": "Can L4 cite directly?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "60 秒口述寫成逐字稿",
+        "why": "面試像背稿",
+        "fix": "改為 3 個提示點讓自己說"
+      },
+      {
+        "error": "每則 STAR 都塞進履歷",
+        "why": "版面雜亂",
+        "fix": "只留 TOP3–5 對準 JD"
+      },
+      {
+        "error": "Result 用形容詞代替數字",
+        "why": "無法驗證",
+        "fix": "改可核對結果或標待確認"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "60-second script as word-for-word memo",
+        "why": "Sounds memorized",
+        "fix": "Use 3 talk prompts instead"
+      },
+      {
+        "error": "Every STAR on the resume",
+        "why": "Cluttered layout",
+        "fix": "Keep top 3–5 for the JD"
+      },
+      {
+        "error": "Adjectives instead of results",
+        "why": "Not verifiable",
+        "fix": "Use checkable outcomes or flag pending"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "完整度",
+        "levels": {
+          "incomplete": "少於 5 則",
+          "basic": "缺 STAR 段",
+          "good": "5–8 則齊",
+          "ready": "含 JD 對照與 TOP3"
+        }
+      },
+      {
+        "name": "真實性",
+        "levels": {
+          "incomplete": "含假數字",
+          "basic": "多處不可查",
+          "good": "可核對",
+          "ready": "不可發明清單完整"
+        }
+      },
+      {
+        "name": "履歷可用性",
+        "levels": {
+          "incomplete": "空話 bullet",
+          "basic": "需大改",
+          "good": "動詞+結果",
+          "ready": "可直接貼 L4"
+        }
+      },
+      {
+        "name": "面試可用性",
+        "levels": {
+          "incomplete": "無法展開",
+          "basic": "只有 bullet",
+          "good": "有口述提示",
+          "ready": "60 秒可說"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Completeness",
+        "levels": {
+          "incomplete": "Under 5 cards",
+          "basic": "Missing STAR parts",
+          "good": "5–8 complete",
+          "ready": "JD map and top 3"
+        }
+      },
+      {
+        "name": "Truthfulness",
+        "levels": {
+          "incomplete": "Fake numbers",
+          "basic": "Hard to verify",
+          "good": "Checkable",
+          "ready": "Do-not-invent list complete"
+        }
+      },
+      {
+        "name": "Resume readiness",
+        "levels": {
+          "incomplete": "Vague bullets",
+          "basic": "Needs rewrite",
+          "good": "Verb + result",
+          "ready": "Ready for L4"
+        }
+      },
+      {
+        "name": "Interview readiness",
+        "levels": {
+          "incomplete": "Cannot expand",
+          "basic": "Bullets only",
+          "good": "Talk prompts",
+          "ready": "60-second ready"
+        }
+      }
+    ],
+    "zhNextStep": "下一堂會用素材庫 TOP3 產出「對準職缺履歷稿」。",
+    "enNextStep": "Next, turn top 3 from the bank into a Targeted Resume Draft.",
+    "zhSummary": [
+      "本堂成果：個人能力與經歷素材庫",
+      "STAR 是履歷與面試共用底稿。",
+      "禁止假數字與假客戶。"
+    ],
+    "enSummary": [
+      "Deliverable: Career Evidence Bank",
+      "STAR feeds resume and interview.",
+      "No fake metrics or clients."
+    ]
+  },
+  {
+    "estimatedTime": "約 60 分鐘 / About 60 min",
+    "difficulty": "進階 / Intermediate",
+    "zhTitle": "第4課：用 AI 建立並優化履歷（對準職缺，不造假）",
+    "enTitle": "Lesson 4: Build and refine a resume aligned to the role—without fabricating",
+    "zhValueTip": "履歷只寫能面試證明的內容；不可為對關鍵字而假造技能或數字。",
+    "enValueTip": "Resume only what you can prove in an interview—never fake skills or numbers for keywords.",
+    "zhOutcome": "對準職缺履歷稿",
+    "enOutcome": "Targeted Resume Draft",
+    "zhConcept": "履歷優化不是變漂亮，而是對準單一 JD 且每一行都站得住。這一課從素材庫 TOP bullets 出發，調整區塊、嵌入關鍵字、誠實列出技能，並刪除誇大句。不可新增不存在的公司、專案、技能、證照或數字，也不能保證錄取或自動投遞。",
+    "enConcept": "Resume optimization is not decoration—it is aligning to one JD where every line holds up. This lesson starts from bank top bullets, adjusts sections, embeds keywords, lists skills honestly, and cuts hype. Do not add fake companies, projects, skills, credentials, or numbers—or promise offers or auto-apply.",
+    "zhCaseStudy": "資工系阿凱對照前端 JD，把履歷從兩頁縮成一頁：摘要呼應「元件化與協作」、經歷只留 Todo 專題與系學會網站、技能刪掉未碰過的 Kubernetes。AI 建議把「熟悉團隊開發」改成「Git feature branch 與 PR 流程（課堂專題）」。他依誠信檢查表確認無假公司、假實習。",
+    "enCaseStudy": "Kai aligned to a frontend JD and cut two pages to one: summary on components and collaboration, experience limited to Todo and student-site projects, skills dropped unused Kubernetes. AI replaced “team development savvy” with “Git feature branches and PRs (course project).” Integrity checklist confirmed no fake employers or internships.",
+    "zhWorkflow": [
+      "貼 JD、素材庫與現有履歷",
+      "規劃區塊與 TOP 經歷",
+      "嵌入關鍵字、調整技能欄",
+      "刪改誇大句並做誠信檢查",
+      "存成對準職缺履歷稿"
+    ],
+    "enWorkflow": [
+      "Paste JD, bank, and current resume",
+      "Plan sections and top experiences",
+      "Embed keywords; adjust skills",
+      "Cut hype; run integrity check",
+      "Save Targeted Resume Draft"
+    ],
+    "zhCommonMistakes": [
+      "為關鍵字假造技能或證照",
+      "新增不存在的實習或專案",
+      "數字或百分比無來源",
+      "一份履歷投全部職缺卻稱「完全對準」",
+      "貼完整身分證或銀行資料進 Prompt"
+    ],
+    "enCommonMistakes": [
+      "Fake skills or credentials for keywords",
+      "Invented internships or projects",
+      "Metrics with no source",
+      "One resume for every role yet called “fully tailored”",
+      "Pasting ID or banking data into prompts"
+    ],
+    "zhExcellentExample": "一頁結構、JD 關鍵字自然、技能可 defend、誠信檢查全過、敏感資料已遮蔽。",
+    "enExcellentExample": "One-page structure, natural JD keywords, defensible skills, integrity check passed, sensitive data redacted.",
+    "zhPrompt": "你是履歷顧問，不是代寫造假者。不可新增不存在的公司、專案、技能、證照或數字。\n\n目標 JD 摘要：[請貼上職缺內容]\n個人能力與經歷素材庫（TOP3 bullets，勿新增）：[请填写个人经历]\n目前履歷（可遮蔽電話住址）：[请贴上目前履历]\n\n任務：產出「對準職缺履歷稿」修訂建議與定稿結構，必須包含：\n1) 履歷區塊建議（摘要／技能／經歷／專題／其他）與取捨理由\n2) 對準 JD 關鍵字的 TOP3–5 經歷段落（只用素材庫 bullets，缺就標缺口）\n3) 技能區：只列我確實會且能面試證明的（不確定標「待加強」）\n4) 刪除或改寫誇大／無佐證句子清單\n5) 履歷誠信檢查表（無假職稱、假專案、假數字）\n\n輸出格式：區塊標題 + 條列 + 修訂前後對照。不要保證錄取。不要自動投遞。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+    "enPrompt": "You are a resume advisor—not a fraud ghostwriter. Do not add companies, projects, skills, credentials, or numbers I lack.\n\nTarget JD summary: [Paste the job description]\nCareer Evidence Bank (top 3 bullets; add nothing): [Enter your real experience]\nCurrent resume (redact phone/address): [Paste your current resume]\n\nTask: Produce a “Targeted Resume Draft” structure and revision plan with:\n1) Section plan (summary/skills/experience/projects/other) with keep/cut reasons\n2) Top 3–5 experience blocks aligned to JD keywords (bank bullets only; mark gaps)\n3) Skills: only what I can prove in an interview (mark “needs strengthening” if unsure)\n4) List lines to delete or rewrite (hype or no proof)\n5) Resume integrity checklist (no fake titles, projects, or numbers)\n\nOutput: section headers, bullets, before/after pairs. No hire guarantees. No auto-apply.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+    "zhCoachPrompt": "【Prompt 2｜履歷子彈點與 ATS 檢查】\nJD 關鍵字：\n（貼上）\n我的草稿履歷：\n（貼上）\n請改寫為動詞開頭、盡量量化（只能用我提供的數字），並列 ATS 風險（表格、圖示、缺關鍵字）。不要添加假數據；沒有數字就改寫成可觀察成果。",
+    "enCoachPrompt": "[Prompt 2 | Bullets & ATS] Rewrite with verbs and only my numbers; list ATS risks; invent no metrics.",
+    "zhFeedbackPrompt": "【Prompt 3｜求職信與誠實度驗收】\n履歷：\n（貼上）\n求職信：\n（貼上）\nJD：\n（貼上）\n請評分匹配度、具體性、ATS 友善、是否有誇大。指出三處必改。若發現像捏造的內容，明確標出並要求我確認來源。",
+    "enFeedbackPrompt": "[Prompt 3 | Letter & Honesty QA] Score fit, specificity, ATS friendliness, and exaggeration risk; flag anything that looks fabricated.",
+    "zhExample": "修訂前：熟悉各種前端框架。修訂後：以 React 完成 Todo App（元件拆分、Git PR 流程）— 對應 JD「React 基礎」。",
+    "enExample": "Before: familiar with many frontend frameworks. After: built Todo App in React (components, Git PR flow)—matches JD “React basics.”",
+    "zhPractice": "貼 JD、素材庫與舊履歷。；產出區塊與 TOP 經歷。；調整技能並刪誇大句。；存成「對準職缺履歷稿」。",
+    "enPractice": "Paste JD, bank, and old resume.; Produce sections and top experiences.; Adjust skills and cut hype.; Save the Targeted Resume Draft.",
+    "zhQuizItems": [
+      {
+        "q": "大學生履歷最該優先對齊的是？",
+        "options": [
+          "盡量塞滿所有社團名稱",
+          "目標職缺的責任與關鍵字，並用真實成果證明",
+          "最花俏的設計模板",
+          "假造的國外實習"
+        ],
+        "answer": 1,
+        "explain": "履歷是職缺證據包，不是活動百科。"
+      },
+      {
+        "q": "ATS 友善做法包含？",
+        "options": [
+          "大量文字框與圖形標題",
+          "清楚標準標題、可選取文字、關鍵字自然出現",
+          "把重要字寫成圖片",
+          "完全不寫技能"
+        ],
+        "answer": 1,
+        "explain": "機器要能解析文字與結構。"
+      },
+      {
+        "q": "使用 AI 改履歷時不可？",
+        "options": [
+          "改寫句型並提示缺口",
+          "發明績效數字與職稱讓履歷更好看",
+          "要求分開事實與建議",
+          "做 ATS 風險檢查"
+        ],
+        "answer": 1,
+        "explain": "不可捏造經歷與數據。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "A student resume should primarily align to:",
+        "options": [
+          "Every club name you ever had",
+          "The target role’s duties/keywords with real proof",
+          "The flashiest template",
+          "A fake overseas internship"
+        ],
+        "answer": 1,
+        "explain": "Resumes are evidence packs for a role."
+      },
+      {
+        "q": "ATS-friendly practice includes:",
+        "options": [
+          "Heavy text boxes and graphic headers",
+          "Clear standard headings, selectable text, natural keywords",
+          "Key words as images only",
+          "Omitting skills entirely"
+        ],
+        "answer": 1,
+        "explain": "Parsers need readable structure and text."
+      },
+      {
+        "q": "When using AI on resumes you must not:",
+        "options": [
+          "Rewrite phrasing and flag gaps",
+          "Invent metrics and titles to look stronger",
+          "Separate facts from suggestions",
+          "Check ATS risks"
+        ],
+        "answer": 1,
+        "explain": "Never fabricate experience."
+      }
+    ],
+    "zhNotePrompt": "貼履歷摘要段，寫下你刪掉的一句誇大話與原因。",
+    "enNotePrompt": "Paste your summary; note one hype line you cut and why.",
+    "zhDeliverableChecklist": [
+      "有履歷區塊結構與取捨理由",
+      "TOP3–5 經歷來自素材庫，無假專案",
+      "技能欄只列可證明能力，不確定標待加強",
+      "已刪改誇大或無佐證句子",
+      "履歷誠信檢查表 5 項通過",
+      "無錄取保證、無自動投遞宣稱"
+    ],
+    "enDeliverableChecklist": [
+      "Section plan with keep/cut reasons",
+      "Top 3–5 experiences from bank; no fake projects",
+      "Skills provable; unsure marked strengthening",
+      "Hype and unprovable lines removed or rewritten",
+      "Five-item resume integrity check passed",
+      "No hire guarantee or auto-apply claims"
+    ],
+    "zhScorecard": [
+      "職缺對齊",
+      "成果可驗證",
+      "ATS 友善",
+      "求職信具體",
+      "誠實"
+    ],
+    "enScorecard": [
+      "Role alignment",
+      "Verifiable outcomes",
+      "ATS-friendly",
+      "Specific letter",
+      "Honesty"
+    ],
+    "id": "career-internship-L4",
+    "lessonKey": "career-internship-L4",
+    "zhOutputName": "對準職缺履歷稿",
+    "enOutputName": "Targeted Resume Draft",
+    "zhObjectives": [
+      "依 JD 決定履歷區塊與取捨",
+      "放入 TOP3–5 對準 bullets，不新增假經歷",
+      "技能區只列可證明能力",
+      "刪改誇大或無佐證句子",
+      "存成「對準職缺履歷稿」"
+    ],
+    "enObjectives": [
+      "Plan resume sections and cuts from the JD",
+      "Place top 3–5 aligned bullets without invented work",
+      "List only provable skills",
+      "Remove or rewrite hype and unprovable lines",
+      "Save a Targeted Resume Draft"
+    ],
+    "zhWhyItMatters": {
+      "problem": "為塞關鍵字而假造技能或數字，面試一追問就穿幫，也有誠信風險。",
+      "ineffective": "請 AI「幫我寫一份完美履歷」從零生成全部內容。",
+      "solution": "只用素材庫 bullets 對準 JD，技能誠實取捨，並做誠信檢查。"
+    },
+    "enWhyItMatters": {
+      "problem": "Keyword-stuffing with fake skills or numbers fails in interviews and risks integrity.",
+      "ineffective": "Asking AI to generate a “perfect resume” from scratch.",
+      "solution": "Use bank bullets only, align to JD, choose skills honestly, run integrity checks."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "對準 JD 不造假",
+        "能證明才寫",
+        "一版履歷一職缺"
+      ],
+      "terms": [
+        "TOP bullets",
+        "技能取捨",
+        "誠信檢查"
+      ],
+      "criteria": [
+        "有區塊結構",
+        "JD 關鍵字自然嵌入",
+        "無假技能"
+      ],
+      "boundaries": [
+        "避免：假公司假專案",
+        "避免：假證照",
+        "避免：保證錄取"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Align without fraud",
+        "Write only what you can prove",
+        "One resume per role"
+      ],
+      "terms": [
+        "Top bullets",
+        "Skill triage",
+        "Integrity check"
+      ],
+      "criteria": [
+        "Section structure",
+        "Natural JD keywords",
+        "No fake skills"
+      ],
+      "boundaries": [
+        "Avoid: fake companies/projects",
+        "Avoid: fake credentials",
+        "Avoid: guarantees"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "資工系阿凱投前端實習，舊履歷技能欄列了沒用過的 Docker 與 AWS。",
+      "wrong": "請 AI 保留假技能以「對關鍵字」。",
+      "right": "改列 React、Git、RWD 專題，Docker 標「待加強」，刪無專案支撐的雲端證照。",
+      "result": "一頁對準 JD 且面試能 defend 的履歷稿。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Kai’s old resume listed Docker and AWS he never used.",
+      "wrong": "Keep fake skills “for keywords.”",
+      "right": "Lead with React, Git, RWD project; mark Docker “needs strengthening”; drop unsupported cloud badges.",
+      "result": "One-page JD-aligned resume he can defend in interview."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "匯入三份輸入",
+        "why": "對準需要 JD+素材+舊履歷",
+        "input": "[请贴上目前履历]",
+        "output": "輸入包",
+        "check": "敏感資料是否遮蔽"
+      },
+      {
+        "do": "規劃區塊",
+        "why": "一職缺一版本",
+        "input": "JD+素材庫",
+        "output": "結構大綱",
+        "check": "是否過長"
+      },
+      {
+        "do": "放 TOP bullets",
+        "why": "只用素材庫",
+        "input": "TOP3–5",
+        "output": "經歷段",
+        "check": "有無新增假專案"
+      },
+      {
+        "do": "技能誠實取捨",
+        "why": "面試要能 demo",
+        "input": "自評",
+        "output": "技能欄",
+        "check": "不確定是否標待加強"
+      },
+      {
+        "do": "誠信檢查存檔",
+        "why": "防造假",
+        "input": "定稿",
+        "output": "履歷稿",
+        "check": "5 項檢查是否全過"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Import three inputs",
+        "why": "Alignment needs JD+bank+old resume",
+        "input": "[Paste your current resume]",
+        "output": "Input pack",
+        "check": "Sensitive data redacted"
+      },
+      {
+        "do": "Plan sections",
+        "why": "One role, one version",
+        "input": "JD+bank",
+        "output": "Outline",
+        "check": "Too long"
+      },
+      {
+        "do": "Place top bullets",
+        "why": "Bank only",
+        "input": "Top 3–5",
+        "output": "Experience block",
+        "check": "Any fake projects added"
+      },
+      {
+        "do": "Honest skills",
+        "why": "Must survive interview",
+        "input": "Self-assessment",
+        "output": "Skills block",
+        "check": "Unsure marked strengthening"
+      },
+      {
+        "do": "Integrity check and save",
+        "why": "Anti-fraud",
+        "input": "Final",
+        "output": "Resume draft",
+        "check": "All 5 checks passed"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "已有 STAR 素材庫，要產出對準單一 JD 的履歷稿時使用",
+      "fields": [
+        "[請貼上職缺內容]",
+        "[请填写个人经历]",
+        "[请贴上目前履历]"
+      ],
+      "body": "你是履歷顧問，不是代寫造假者。不可新增不存在的公司、專案、技能、證照或數字。\n\n目標 JD 摘要：[請貼上職缺內容]\n個人能力與經歷素材庫（TOP3 bullets，勿新增）：[请填写个人经历]\n目前履歷（可遮蔽電話住址）：[请贴上目前履历]\n\n任務：產出「對準職缺履歷稿」修訂建議與定稿結構，必須包含：\n1) 履歷區塊建議（摘要／技能／經歷／專題／其他）與取捨理由\n2) 對準 JD 關鍵字的 TOP3–5 經歷段落（只用素材庫 bullets，缺就標缺口）\n3) 技能區：只列我確實會且能面試證明的（不確定標「待加強」）\n4) 刪除或改寫誇大／無佐證句子清單\n5) 履歷誠信檢查表（無假職稱、假專案、假數字）\n\n輸出格式：區塊標題 + 條列 + 修訂前後對照。不要保證錄取。不要自動投遞。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "expected": "一份含區塊結構、TOP 經歷、技能取捨與誠信檢查的對準職缺履歷稿",
+      "revisionReminder": "AI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "extensions": [
+        {
+          "title": "延伸：誇大句檢查",
+          "body": "掃描我貼上的履歷段落，列出可能無法面試證明的形容詞或數字，建議改寫或刪除。不要新增內容。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when you have a STAR bank and need one JD-targeted resume draft",
+      "fields": [
+        "[Paste the job description]",
+        "[Enter your real experience]",
+        "[Paste your current resume]"
+      ],
+      "body": "You are a resume advisor—not a fraud ghostwriter. Do not add companies, projects, skills, credentials, or numbers I lack.\n\nTarget JD summary: [Paste the job description]\nCareer Evidence Bank (top 3 bullets; add nothing): [Enter your real experience]\nCurrent resume (redact phone/address): [Paste your current resume]\n\nTask: Produce a “Targeted Resume Draft” structure and revision plan with:\n1) Section plan (summary/skills/experience/projects/other) with keep/cut reasons\n2) Top 3–5 experience blocks aligned to JD keywords (bank bullets only; mark gaps)\n3) Skills: only what I can prove in an interview (mark “needs strengthening” if unsure)\n4) List lines to delete or rewrite (hype or no proof)\n5) Resume integrity checklist (no fake titles, projects, or numbers)\n\nOutput: section headers, bullets, before/after pairs. No hire guarantees. No auto-apply.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "expected": "A draft with section plan, top experiences, skill choices, and integrity checks",
+      "revisionReminder": "AI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "extensions": [
+        {
+          "title": "Extension: hype scan",
+          "body": "Scan my resume lines for adjectives or numbers I may fail to prove in interview. Suggest rewrite or cut. Add nothing new."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "貼 JD+素材+舊履歷",
+        "standard": "三者齊",
+        "mistakes": "只有 JD",
+        "check": "能否對照關鍵字？"
+      },
+      {
+        "task": "經歷只用素材庫",
+        "standard": "無新假專案",
+        "mistakes": "AI 生全新經歷",
+        "check": "每行能否面試 defend？"
+      },
+      {
+        "task": "技能可證明",
+        "standard": "不確定標待加強",
+        "mistakes": "堆滿工具名",
+        "check": "被追問會穿幫嗎？"
+      },
+      {
+        "task": "誠信檢查後存檔",
+        "standard": "5 項全勾",
+        "mistakes": "跳過檢查",
+        "check": "有無假數字？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Paste JD+bank+resume",
+        "standard": "All three present",
+        "mistakes": "JD only",
+        "check": "Can you map keywords?"
+      },
+      {
+        "task": "Experience from bank only",
+        "standard": "No new fake projects",
+        "mistakes": "AI-invented roles",
+        "check": "Can you defend each line?"
+      },
+      {
+        "task": "Provable skills",
+        "standard": "Unsure marked strengthening",
+        "mistakes": "Tool name stuffing",
+        "check": "Would follow-up questions fail?"
+      },
+      {
+        "task": "Save after integrity check",
+        "standard": "All 5 ticks",
+        "mistakes": "Skipped check",
+        "check": "Any fake numbers?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "摘要寫成空泛個性描述",
+        "why": "HR 掃不到 JD 關鍵字",
+        "fix": "改 2 句職能+證據"
+      },
+      {
+        "error": "把課堂作業寫成「上線產品」",
+        "why": "誠信與面試風險",
+        "fix": "標明課堂專題與你的貢獻"
+      },
+      {
+        "error": "履歷超過一頁仍全留",
+        "why": "重點被淹沒",
+        "fix": "依 JD 只留 TOP3–5"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Summary is pure personality fluff",
+        "why": "HR misses JD keywords",
+        "fix": "Two lines: function + evidence"
+      },
+      {
+        "error": "Coursework labeled “shipped product”",
+        "why": "Integrity and interview risk",
+        "fix": "Label course project and your role"
+      },
+      {
+        "error": "Two pages with everything kept",
+        "why": "Buried highlights",
+        "fix": "Keep top 3–5 for this JD"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "對準度",
+        "levels": {
+          "incomplete": "無 JD 對照",
+          "basic": "關鍵字硬塞",
+          "good": "TOP 經歷對準",
+          "ready": "自然嵌入關鍵字"
+        }
+      },
+      {
+        "name": "誠實度",
+        "levels": {
+          "incomplete": "含假技能",
+          "basic": "多處誇大",
+          "good": "可 defend",
+          "ready": "誠信檢查全過"
+        }
+      },
+      {
+        "name": "結構",
+        "levels": {
+          "incomplete": "雜亂",
+          "basic": "缺區塊",
+          "good": "一頁清楚",
+          "ready": "HR 10 秒可掃"
+        }
+      },
+      {
+        "name": "可用性",
+        "levels": {
+          "incomplete": "無法接求職信",
+          "basic": "需重寫",
+          "good": "可寫 cover",
+          "ready": "可投遞前再核對"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Alignment",
+        "levels": {
+          "incomplete": "No JD map",
+          "basic": "Keyword stuffing",
+          "good": "Top experiences aligned",
+          "ready": "Natural keyword embed"
+        }
+      },
+      {
+        "name": "Honesty",
+        "levels": {
+          "incomplete": "Fake skills",
+          "basic": "Multiple hype lines",
+          "good": "Defensible",
+          "ready": "Integrity check passed"
+        }
+      },
+      {
+        "name": "Structure",
+        "levels": {
+          "incomplete": "Messy",
+          "basic": "Missing sections",
+          "good": "Clear one-pager",
+          "ready": "HR 10-second scan"
+        }
+      },
+      {
+        "name": "Usability",
+        "levels": {
+          "incomplete": "Cannot feed cover letter",
+          "basic": "Needs rewrite",
+          "good": "Cover-ready",
+          "ready": "Ready for pre-apply verify"
+        }
+      }
+    ],
+    "zhNextStep": "下一堂會用這份履歷稿撰寫「求職信與自我介紹稿」。",
+    "enNextStep": "Next, draft a Cover Letter / Personal Introduction from this resume.",
+    "zhSummary": [
+      "本堂成果：對準職缺履歷稿",
+      "只寫能證明的。",
+      "禁止假技能假數字。"
+    ],
+    "enSummary": [
+      "Deliverable: Targeted Resume Draft",
+      "Write only what you can prove.",
+      "No fake skills or numbers."
+    ]
+  },
+  {
+    "id": "career-internship-L5",
+    "lessonKey": "career-internship-L5",
+    "zhTitle": "第5課：用 AI 撰寫求職信與 Cover Letter",
+    "enTitle": "Lesson 5: Write application emails and cover letters with AI",
+    "zhConcept": "求職信說明「為何是你、為何是這家公司」，必須與履歷同一套真實故事。這一課產出求職信結構、30 秒自我介紹骨架（提示句而非逐字稿）、一致性檢查與去 AI 腔清單。不可新增經歷、不可保證錄取；寄信前自行 proofread，沒有一鍵代寄功能。",
+    "enConcept": "A cover letter explains why you and why this company—it must share the resume’s true stories. This lesson produces letter structure, a 30-second intro skeleton (prompts not a script), consistency checks, and de-AI edits. Add no experiences or guarantees; proofread and send yourself—no one-click send.",
+    "zhPrompt": "你是求職信教練，不是代寫者。不可新增不存在的經歷，也不可保證錄取或代寄 email。\n\n目標 JD 摘要：[請貼上職缺內容]\n對準職缺履歷稿重點（勿新增）：[请贴上目前履历]\n我想強調的 1–2 則真實故事：[请填写个人经历]\n\n任務：產出「求職信與自我介紹稿」含：\n1) 150–250 字（或 120–180 words）求職信／Cover Letter 結構：開頭為何投這份、中段 2 則證據、結尾行動（不含自動寄信）\n2) 30 秒自我介紹骨架（3 句提示，非逐字稿）\n3) 與履歷一致性檢查：姓名、目標職稱、關鍵故事是否一致\n4) 需人工刪改的 AI 腔與誇大句清單\n5) 提醒：寄信前自行 proofread，平台不提供一鍵代寄\n\n輸出格式：分段 + 條列。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+    "enPrompt": "You are a cover-letter coach—not a ghostwriter. Do not add experiences, guarantee offers, or send email for me.\n\nTarget JD summary: [Paste the job description]\nTargeted Resume Draft highlights (add nothing): [Paste your current resume]\n1–2 real stories to emphasize: [Enter your real experience]\n\nTask: Produce a “Cover Letter / Personal Introduction Draft” with:\n1) 150–250 Chinese chars (or 120–180 English words) structure: why this role, 2 evidence paragraphs, closing action (no auto-send)\n2) 30-second intro skeleton (3 talk prompts, not a script)\n3) Consistency check vs resume: name, target title, key stories\n4) List of AI-tone or hype lines to edit manually\n5) Reminder: proofread before sending; this platform does not one-click send\n\nOutput: sections plus bullets. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+    "zhExample": "中段範例：在系上問卷專案中，我負責題目設計與催填，186 份回收讓我練習數據整理— 對應 JD「細心與執行力」。",
+    "enExample": "Body example: on the department survey I owned question design and follow-ups—186 responses built my data-handling proof for JD “attention to execution.”",
+    "zhPractice": "貼 JD 與履歷。；選 2 則故事產出求職信。；寫 30 秒骨架。；檢查一致性並存檔。",
+    "enPractice": "Paste JD and resume.; Pick two stories for the letter.; Write 30-second skeleton.; Check consistency and save.",
+    "zhFeedbackPrompt": "你是一位求職信教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 職缺對準\n- 證據強度\n- 具體性\n- 真實性\n- 行動呼籲\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a cover-letter coach. Score 1-10 for: JD fit, Evidence strength, Specificity, Truthfulness, Call to action. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhQuizItems": [
+      {
+        "q": "求職信最該回答？",
+        "options": [
+          "為何此角、為何此處、證據何在",
+          "只重複履歷每一行",
+          "請 AI 決定你的人生目標"
+        ],
+        "answer": 0,
+        "explain": "三角對準。"
+      },
+      {
+        "q": "缺資料時應？",
+        "options": [
+          "標出待填，不發明",
+          "請 AI 編一段漂亮經歷",
+          "直接寄出空白"
+        ],
+        "answer": 0,
+        "explain": "誠實。"
+      },
+      {
+        "q": "與履歷的差別是？",
+        "options": [
+          "強調動機與證據敘事",
+          "完全不提任何證據",
+          "越長越好"
+        ],
+        "answer": 0,
+        "explain": "敘事互補。"
+      },
+      {
+        "q": "海投同一稿的問題？",
+        "options": [
+          "未對準職缺顯得敷衍",
+          "比較省事所以一定更好",
+          "HR 喜歡複製文"
+        ],
+        "answer": 0,
+        "explain": "要客製。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "一封可投遞初稿",
+          "錄取合約",
+          "與求職無關的散文"
+        ],
+        "answer": 0,
+        "explain": "求職信。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "求職信最該回答？",
+        "options": [
+          "為何此角、為何此處、證據何在",
+          "只重複履歷每一行",
+          "請 AI 決定你的人生目標"
+        ],
+        "answer": 0,
+        "explain": "三角對準。"
+      },
+      {
+        "q": "缺資料時應？",
+        "options": [
+          "標出待填，不發明",
+          "請 AI 編一段漂亮經歷",
+          "直接寄出空白"
+        ],
+        "answer": 0,
+        "explain": "誠實。"
+      },
+      {
+        "q": "與履歷的差別是？",
+        "options": [
+          "強調動機與證據敘事",
+          "完全不提任何證據",
+          "越長越好"
+        ],
+        "answer": 0,
+        "explain": "敘事互補。"
+      },
+      {
+        "q": "海投同一稿的問題？",
+        "options": [
+          "未對準職缺顯得敷衍",
+          "比較省事所以一定更好",
+          "HR 喜歡複製文"
+        ],
+        "answer": 0,
+        "explain": "要客製。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "一封可投遞初稿",
+          "錄取合約",
+          "與求職無關的散文"
+        ],
+        "answer": 0,
+        "explain": "求職信。"
+      }
+    ],
+    "zhOutcome": "求職信與自我介紹稿",
+    "enOutcome": "Cover Letter / Personal Introduction Draft",
+    "zhValueTip": "求職信是履歷的延伸，不是另一份假履歷；寄信前自己 proofread。",
+    "enValueTip": "The cover letter extends the resume—it is not a second fake resume. Proofread before you send.",
+    "zhCaseStudy": "行銷系小萱投內容行銷實習，求職信開頭寫明為何對該品牌內容策略有興趣（依 JD），中段用問卷回收與海報專案兩則 STAR，結尾寫「已附履歷，期待面談」— 未宣稱平台代寄。她另用 3 句提示練 30 秒自我介紹，避免背稿感。",
+    "enCaseStudy": "Xuan applied for content marketing: opening tied to the brand strategy from the JD, body with survey and poster STAR stories, closing “resume attached—happy to talk.” No auto-send claims. Three talk prompts practiced a 30-second intro without sounding memorized.",
+    "zhExcellentExample": "結構清楚、2 則 STAR、與履歷一致、30 秒骨架、自行寄送提醒、無代寄宣稱。",
+    "enExcellentExample": "Clear structure, two STAR proofs, resume-aligned, 30-second skeleton, self-send reminder, no auto-send claims.",
+    "zhWorkflow": [
+      "貼 JD 與履歷重點",
+      "選 2 則真實故事",
+      "產出求職信結構與 30 秒骨架",
+      "一致性檢查與去 AI 腔",
+      "存檔並自行寄送"
+    ],
+    "enWorkflow": [
+      "Paste JD and resume highlights",
+      "Pick two real stories",
+      "Produce letter structure and 30-second skeleton",
+      "Consistency check and de-AI edit",
+      "Save and send yourself"
+    ],
+    "zhCommonMistakes": [
+      "求職信與履歷故事矛盾",
+      "整段 AI 文字未改就寄",
+      "30 秒寫成逐字稿背誦",
+      "新增履歷沒有的假成就",
+      "以為平台會自動寄 email"
+    ],
+    "enCommonMistakes": [
+      "Cover contradicts resume stories",
+      "Sending unedited AI text",
+      "30-second word-for-word script",
+      "Fake achievements not on resume",
+      "Assuming platform auto-sends email"
+    ],
+    "zhDeliverableChecklist": [
+      "有求職信結構（為何投、2 證據、結尾）",
+      "2 則故事來自真實經歷，無新增",
+      "有 30 秒自我介紹骨架（非逐字稿）",
+      "與履歷一致性檢查通過",
+      "已標需人工去 AI 腔的句子",
+      "無錄取保證、無自動寄 email 宣稱"
+    ],
+    "enDeliverableChecklist": [
+      "Cover structure (why role, 2 proofs, close)",
+      "Two stories from real experience; nothing added",
+      "30-second intro skeleton (not a script)",
+      "Resume consistency check passed",
+      "AI-tone lines flagged for manual edit",
+      "No hire guarantee or auto-send email claims"
+    ],
+    "zhScorecard": [
+      "職缺對準",
+      "證據強度",
+      "具體性",
+      "真實性",
+      "行動呼籲"
+    ],
+    "enScorecard": [
+      "JD fit",
+      "Evidence strength",
+      "Specificity",
+      "Truthfulness",
+      "Call to action"
+    ],
+    "zhNotePrompt": "寫下求職信裡你最滿意的一句證據句，以及你要改掉的一句 AI 腔。",
+    "enNotePrompt": "Note your best evidence sentence and one AI-sounding line you will rewrite.",
+    "zhCoachPrompt": "請評我的求職信是否空泛或虚构風險，並標出應改寫的句子。不要新增成就。",
+    "enCoachPrompt": "Critique vagueness or fabrication risk; mark sentences to rewrite. Add no achievements.",
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "進階 / Intermediate",
+    "zhOutputName": "求職信與自我介紹稿",
+    "enOutputName": "Cover Letter / Personal Introduction Draft",
+    "zhObjectives": [
+      "寫出對準 JD 的求職信結構",
+      "用 2 則真實故事支撐中段",
+      "產出 30 秒自我介紹骨架（非背稿）",
+      "檢查與履歷一致性",
+      "存成「求職信與自我介紹稿」"
+    ],
+    "enObjectives": [
+      "Write a JD-aligned cover letter structure",
+      "Support the body with two real stories",
+      "Produce a 30-second intro skeleton (not memorized)",
+      "Check consistency with the resume",
+      "Save a Cover Letter / Personal Introduction Draft"
+    ],
+    "zhWhyItMatters": {
+      "problem": "求職信若與履歷矛盾或充滿 AI 腔，HR 會降低信任。",
+      "ineffective": "請 AI 寫一封通用信並一鍵寄出（本平台也不提供代寄）。",
+      "solution": "結構化求職信、2 則證據、一致性檢查、人工去 AI 腔後自行寄送。"
+    },
+    "enWhyItMatters": {
+      "problem": "Cover letters that contradict the resume or sound like AI reduce trust.",
+      "ineffective": "Generic AI letter plus one-click send (not offered here anyway).",
+      "solution": "Structured letter, two proofs, consistency check, de-AI edit, then you send yourself."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "與履歷一致",
+        "兩則證據足夠",
+        "自己寄信"
+      ],
+      "terms": [
+        "Cover Letter",
+        "30 秒骨架",
+        "一致性檢查"
+      ],
+      "criteria": [
+        "有結構",
+        "有 2 則故事",
+        "無代寄宣稱"
+      ],
+      "boundaries": [
+        "避免：假故事",
+        "避免：保證錄取",
+        "避免：自動寄 email"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Match resume",
+        "Two proofs enough",
+        "You send it"
+      ],
+      "terms": [
+        "Cover letter",
+        "30-second skeleton",
+        "Consistency check"
+      ],
+      "criteria": [
+        "Structure present",
+        "Two stories",
+        "No auto-send claims"
+      ],
+      "boundaries": [
+        "Avoid: fake stories",
+        "Avoid: guarantees",
+        "Avoid: auto-send email"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "行銷系小萱寫 Cover Letter 時複製 AI 客套話，與履歷專題名稱不一致。",
+      "wrong": "整段貼上未改，並以為平台會代寄。",
+      "right": "開頭點公司＋職缺，中段 2 則問卷與海報 STAR，結尾自己寄並 proofread。",
+      "result": "一封信 + 30 秒骨架與履歷一致。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Xuan’s cover letter was AI boilerplate and mismatched project names on the resume.",
+      "wrong": "Paste unchanged and assume auto-send.",
+      "right": "Open with company+role, two STAR stories, close with self-send and proofread.",
+      "result": "One letter plus 30-second skeleton aligned with resume."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "匯入 JD+履歷",
+        "why": "信要對準同一職缺",
+        "input": "[请贴上目前履历]",
+        "output": "輸入包",
+        "check": "職稱是否一致"
+      },
+      {
+        "do": "選 2 則故事",
+        "why": "中段只要證據",
+        "input": "[请填写个人经历]",
+        "output": "故事對",
+        "check": "是否來自素材庫"
+      },
+      {
+        "do": "產出結構",
+        "why": "150–250 字框架",
+        "input": "Prompt",
+        "output": "求職信草稿",
+        "check": "有無代寄用詞"
+      },
+      {
+        "do": "一致性檢查",
+        "why": "防矛盾",
+        "input": "草稿+履歷",
+        "output": "檢查表",
+        "check": "專案名是否相同"
+      },
+      {
+        "do": "人工修訂存檔",
+        "why": "去 AI 腔",
+        "input": "定稿",
+        "output": "稿件",
+        "check": "是否標自行寄送"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Import JD+resume",
+        "why": "Same role target",
+        "input": "[Paste your current resume]",
+        "output": "Input pack",
+        "check": "Titles match"
+      },
+      {
+        "do": "Pick two stories",
+        "why": "Body needs proof",
+        "input": "[Enter your real experience]",
+        "output": "Story pair",
+        "check": "From evidence bank"
+      },
+      {
+        "do": "Produce structure",
+        "why": "150–250 char frame",
+        "input": "Prompt",
+        "output": "Letter draft",
+        "check": "No auto-send wording"
+      },
+      {
+        "do": "Consistency check",
+        "why": "Prevent contradictions",
+        "input": "Draft+resume",
+        "output": "Checklist",
+        "check": "Project names match"
+      },
+      {
+        "do": "Edit and save",
+        "why": "De-AI tone",
+        "input": "Final",
+        "output": "Draft pack",
+        "check": "Self-send noted"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "履歷已定稿，要寫求職信與短自我介紹時使用",
+      "fields": [
+        "[請貼上職缺內容]",
+        "[请贴上目前履历]",
+        "[请填写个人经历]"
+      ],
+      "body": "你是求職信教練，不是代寫者。不可新增不存在的經歷，也不可保證錄取或代寄 email。\n\n目標 JD 摘要：[請貼上職缺內容]\n對準職缺履歷稿重點（勿新增）：[请贴上目前履历]\n我想強調的 1–2 則真實故事：[请填写个人经历]\n\n任務：產出「求職信與自我介紹稿」含：\n1) 150–250 字（或 120–180 words）求職信／Cover Letter 結構：開頭為何投這份、中段 2 則證據、結尾行動（不含自動寄信）\n2) 30 秒自我介紹骨架（3 句提示，非逐字稿）\n3) 與履歷一致性檢查：姓名、目標職稱、關鍵故事是否一致\n4) 需人工刪改的 AI 腔與誇大句清單\n5) 提醒：寄信前自行 proofread，平台不提供一鍵代寄\n\n輸出格式：分段 + 條列。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "expected": "一份含求職信結構、30 秒骨架、一致性檢查與人工修訂提示的稿件",
+      "revisionReminder": "AI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "extensions": [
+        {
+          "title": "延伸：去 AI 腔",
+          "body": "把我貼上的求職信段落改成更像我本人會寫的語氣，保留事實不變。不要新增經歷。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when the resume is set and you need a cover letter and short intro",
+      "fields": [
+        "[Paste the job description]",
+        "[Paste your current resume]",
+        "[Enter your real experience]"
+      ],
+      "body": "You are a cover-letter coach—not a ghostwriter. Do not add experiences, guarantee offers, or send email for me.\n\nTarget JD summary: [Paste the job description]\nTargeted Resume Draft highlights (add nothing): [Paste your current resume]\n1–2 real stories to emphasize: [Enter your real experience]\n\nTask: Produce a “Cover Letter / Personal Introduction Draft” with:\n1) 150–250 Chinese chars (or 120–180 English words) structure: why this role, 2 evidence paragraphs, closing action (no auto-send)\n2) 30-second intro skeleton (3 talk prompts, not a script)\n3) Consistency check vs resume: name, target title, key stories\n4) List of AI-tone or hype lines to edit manually\n5) Reminder: proofread before sending; this platform does not one-click send\n\nOutput: sections plus bullets. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "expected": "A draft with cover structure, 30-second skeleton, consistency check, and edit notes",
+      "revisionReminder": "AI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "extensions": [
+        {
+          "title": "Extension: de-AI tone",
+          "body": "Rewrite my cover paragraphs in my voice; keep facts unchanged. Add no experiences."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "求職信有結構",
+        "standard": "為何投、2 證據、結尾",
+        "mistakes": "只有客套",
+        "check": "HR 能否看到證據？"
+      },
+      {
+        "task": "30 秒是骨架",
+        "standard": "3 提示句",
+        "mistakes": "逐字稿背誦",
+        "check": "像聊天嗎？"
+      },
+      {
+        "task": "與履歷一致",
+        "standard": "專案名、職稱相同",
+        "mistakes": "故事矛盾",
+        "check": "一致性表是否全勾？"
+      },
+      {
+        "task": "自行寄送",
+        "standard": "無代寄宣稱",
+        "mistakes": "以為一鍵寄出",
+        "check": "proofread 了嗎？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Letter structured",
+        "standard": "Why role, 2 proofs, close",
+        "mistakes": "Boilerplate only",
+        "check": "Can HR see evidence?"
+      },
+      {
+        "task": "30-second skeleton",
+        "standard": "3 prompts",
+        "mistakes": "Word-for-word script",
+        "check": "Conversational"
+      },
+      {
+        "task": "Matches resume",
+        "standard": "Same projects and titles",
+        "mistakes": "Contradictory stories",
+        "check": "Consistency all ticked?"
+      },
+      {
+        "task": "Self-send",
+        "standard": "No auto-send claims",
+        "mistakes": "Assumed one-click send",
+        "check": "Proofread done?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "開頭只寫「我對貴公司很有熱誠」",
+        "why": "沒有對準 JD",
+        "fix": "改點名職缺+一項具體原因"
+      },
+      {
+        "error": "Cover 重複貼整份履歷",
+        "why": "HR 不會再看",
+        "fix": "只留 2 則最深的故事"
+      },
+      {
+        "error": "結尾寫「請平台代寄」",
+        "why": "功能不存在",
+        "fix": "改「已附履歷，期待聯繫」"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Opening is only “great passion for your company”",
+        "why": "Not JD-specific",
+        "fix": "Name role + one concrete reason"
+      },
+      {
+        "error": "Cover repeats full resume",
+        "why": "HR will skip",
+        "fix": "Keep two deepest stories only"
+      },
+      {
+        "error": "Closing asks platform to send",
+        "why": "Feature does not exist",
+        "fix": "Use “resume attached—happy to connect”"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "對準度",
+        "levels": {
+          "incomplete": "通用信",
+          "basic": "少量 JD",
+          "good": "2 則對準故事",
+          "ready": "開頭結尾都對準"
+        }
+      },
+      {
+        "name": "一致性",
+        "levels": {
+          "incomplete": "與履歷矛盾",
+          "basic": "多處不一致",
+          "good": "大致一致",
+          "ready": "專案名完全一致"
+        }
+      },
+      {
+        "name": "真實性",
+        "levels": {
+          "incomplete": "假故事",
+          "basic": "誇大",
+          "good": "可 defend",
+          "ready": "無新增經歷"
+        }
+      },
+      {
+        "name": "可用性",
+        "levels": {
+          "incomplete": "AI 腔重",
+          "basic": "需重寫",
+          "good": "改後可寄",
+          "ready": "30 秒可練"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Alignment",
+        "levels": {
+          "incomplete": "Generic letter",
+          "basic": "Light JD touch",
+          "good": "Two aligned stories",
+          "ready": "Opening and close aligned"
+        }
+      },
+      {
+        "name": "Consistency",
+        "levels": {
+          "incomplete": "Contradicts resume",
+          "basic": "Several mismatches",
+          "good": "Mostly aligned",
+          "ready": "Project names match"
+        }
+      },
+      {
+        "name": "Truthfulness",
+        "levels": {
+          "incomplete": "Fake stories",
+          "basic": "Hype",
+          "good": "Defensible",
+          "ready": "No new experiences"
+        }
+      },
+      {
+        "name": "Usability",
+        "levels": {
+          "incomplete": "Heavy AI tone",
+          "basic": "Needs rewrite",
+          "good": "Sendable after edit",
+          "ready": "30-second practicable"
+        }
+      }
+    ],
+    "zhNextStep": "下一堂會把故事整理成「作品集故事卡」，支援面試與作品連結。",
+    "enNextStep": "Next, turn stories into Portfolio Story Cards for interviews and links.",
+    "zhSummary": [
+      "本堂成果：求職信與自我介紹稿",
+      "與履歷同一套真實故事。",
+      "寄信前自己 proofread。"
+    ],
+    "enSummary": [
+      "Deliverable: Cover Letter / Personal Introduction Draft",
+      "Same true stories as the resume.",
+      "Proofread before you send."
+    ]
+  },
+  {
+    "estimatedTime": "約 55 分鐘 / About 55 min",
+    "difficulty": "進階 / Intermediate",
+    "zhTitle": "第6課：建立 30 秒／1 分鐘／3 分鐘自我介紹",
+    "enTitle": "Lesson 6: Build 30-second, 1-minute, and 3-minute self-introductions",
+    "zhValueTip": "作品集故事卡連結證據與面試長度；團隊專案必須誠實標示分工。",
+    "enValueTip": "Story cards link proof to interview lengths—label team vs your contribution honestly.",
+    "zhOutcome": "作品集故事卡",
+    "enOutcome": "Portfolio Story Cards",
+    "zhConcept": "30 秒、1 分鐘、3 分鐘自我介紹不是三份背稿，而是同一批故事的不同深度。作品集故事卡把專題變成可展示單位：角色、STAR、連結或缺連結說明，以及三種長度提示。團隊專案必須標示「我負責哪一段」，不可Claim 独力完成，也不可假造作品連結。",
+    "enConcept": "30-second, 1-minute, and 3-minute intros are not three scripts—they are depths of the same stories. Portfolio Story Cards make projects showable: role, STAR, link or gap note, and three length prompts. Team work must label what you owned—never claim solo credit or fake portfolio URLs.",
+    "zhCaseStudy": "設計系小芸為 UI 實習做 4 張故事卡：系上 APP Redesign（團隊，她負責 wireframe）、個人 Canva 海報（独力）、GitHub 靜態頁（独力）。每卡有 30s 電梯版與 3m 深度版提示。她刪掉「獨力完成整個 APP」改為「負責 IA 與 wireframe，後端由組員完成」。",
+    "enCaseStudy": "Yun built four cards for a UI internship: department APP redesign (team—IAs/wireframes), solo Canva poster, solo GitHub page. Each has 30s elevator and 3m deep prompts. She replaced “built entire APP alone” with “owned IA/wireframes; backend by teammate.”",
+    "zhWorkflow": [
+      "選 3–5 個可公開專題",
+      "寫故事卡與團隊標示",
+      "加 30s/1m/3m 提示",
+      "缺連結寫補救計畫",
+      "存成作品集故事卡"
+    ],
+    "enWorkflow": [
+      "Pick 3–5 shareable projects",
+      "Write cards and team labels",
+      "Add 30s/1m/3m prompts",
+      "Remediation if links missing",
+      "Save Portfolio Story Cards"
+    ],
+    "zhCommonMistakes": [
+      "團隊專案Claim 独力完成",
+      "假造 GitHub／Behance 連結",
+      "30s/1m/3m 寫成逐字背稿",
+      "無連結也無補救計畫",
+      "故事與履歷專題名不一致"
+    ],
+    "enCommonMistakes": [
+      "Solo claims on team projects",
+      "Fake GitHub/Behance links",
+      "30s/1m/3m as word-for-word scripts",
+      "No links and no remediation",
+      "Story names mismatch resume"
+    ],
+    "zhExcellentExample": "4 卡、分工清楚、三長度提示、1 缺連結有補救、無假 URL、與履歷一致。",
+    "enExcellentExample": "Four cards, clear credit, three length prompts, one gap remediated, no fake URLs, resume-aligned.",
+    "zhPrompt": "你是作品集與面試故事教練。不可把團隊專案寫成個人独力完成，也不可新增不存在的作品連結。\n\n我的 30s/1m/3m 自我介紹需求：[请填写个人经历]\n素材庫 STAR 與 TOP3（勿新增）：[请填写个人经历]\n現有作品連結（GitHub、Behance、Canva 等，可留空）：[请填写个人经历]\n\n任務：產出「作品集故事卡」含：\n1) 3–5 張故事卡（專案名／我的角色／團隊 vs 個人貢獻／STAR 摘要／證明連結或缺連結說明）\n2) 每張卡配 30s、1m、3m 三種長度的「提示大綱」（不是完整背稿）\n3) 團隊專案誠實標示：哪些是團隊成果、哪些是我負責\n4) 缺作品集時的補救計畫（不可假造連結）\n5) 面試展開時不可Claim 独力完成檢查表\n\n輸出格式：卡片表格 + 條列。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+    "enPrompt": "You are a portfolio and interview-story coach. Do not claim team projects as solo work or add fake links.\n\nMy 30s/1m/3m intro needs: [Enter your real experience]\nBank STAR and top 3 (add nothing): [Enter your real experience]\nExisting work links (GitHub, Behance, Canva; may be empty): [Enter your real experience]\n\nTask: Produce “Portfolio Story Cards” with:\n1) 3–5 cards (project / my role / team vs my contribution / STAR summary / proof link or gap note)\n2) Per card: 30s, 1m, 3m prompt outlines (not full scripts)\n3) Honest team labels: team outcome vs my owned parts\n4) Remediation plan if portfolio links are missing (no fake URLs)\n5) Do-not-claim-solo checklist for interviews\n\nOutput: card table plus bullets. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+    "zhCoachPrompt": "【Prompt 2｜30 秒／90 秒稿】\n主線圖：\n（貼上）\n場合：［實習面試］\n請寫 30 秒與 90 秒稿，標建議秒數。保持我可朗讀的句子長度；不要改成網紅腔或過度謙卑到沒重點。",
+    "enCoachPrompt": "[Prompt 2 | 30s/90s Scripts] Write timed scripts with speakable sentences; avoid influencer tone or empty over-humility.",
+    "zhFeedbackPrompt": "【Prompt 3｜介紹驗收】\n我的錄音轉寫或講稿：\n（貼上）\n請評：清晰、證據、時間、與職能連結、是否像本人。給刪句建議。不要重寫成另一個人的人生故事。",
+    "enFeedbackPrompt": "[Prompt 3 | Intro QA] Score clarity, proof, timing, role link, and authenticity; suggest cuts—don’t rewrite my biography into someone else’s.",
+    "zhExample": "團隊案卡片：「系上 APP Redesign｜團隊 4 人｜我：wireframe 與可用性測試｜證明：Figma 連結（教授課堂公開）」。",
+    "enExample": "Team card: “Dept APP redesign | team of 4 | me: wireframes + usability tests | proof: Figma link (class-public).”",
+    "zhPractice": "選 3–5 專題寫故事卡。；標團隊分工。；加 30s/1m/3m 提示。；存成「作品集故事卡」。",
+    "enPractice": "Pick 3–5 projects for cards.; Label team credit.; Add 30s/1m/3m prompts.; Save Portfolio Story Cards.",
+    "zhQuizItems": [
+      {
+        "q": "30 秒自我介紹最該包含？",
+        "options": [
+          "完整課程表",
+          "身分、方向、一個證據、你的請求／目標",
+          "無關笑話三分鐘",
+          "家庭住址"
+        ],
+        "answer": 1,
+        "explain": "短介紹要可接續深聊。"
+      },
+      {
+        "q": "個人故事可信的關鍵是？",
+        "options": [
+          "形容詞越多越好",
+          "選擇軌跡可驗證、有代表行動",
+          "一定要悲慘",
+          "抄網路範本不改"
+        ],
+        "answer": 1,
+        "explain": "可驗證行動建立信任。"
+      },
+      {
+        "q": "AI 幫寫自我介紹時應？",
+        "options": [
+          "可改成你沒有的精英履歷",
+          "精煉語言但保留事實與你的語氣",
+          "越長越好",
+          "刪掉所有證據"
+        ],
+        "answer": 1,
+        "explain": "精煉而非造假。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "A 30s intro should include:",
+        "options": [
+          "Full course list",
+          "Identity, direction, one proof, and your ask/goal",
+          "Three minutes of jokes",
+          "Home address"
+        ],
+        "answer": 1,
+        "explain": "Short intros should enable deeper follow-up."
+      },
+      {
+        "q": "Credible personal stories need:",
+        "options": [
+          "Maximum adjectives",
+          "A verifiable arc with representative actions",
+          "Mandatory tragedy",
+          "Unedited internet templates"
+        ],
+        "answer": 1,
+        "explain": "Verifiable actions build trust."
+      },
+      {
+        "q": "When AI helps with intros it should:",
+        "options": [
+          "Invent an elite resume",
+          "Tighten language while keeping facts and your voice",
+          "Be as long as possible",
+          "Remove all proof"
+        ],
+        "answer": 1,
+        "explain": "Refine, don’t fabricate."
+      }
+    ],
+    "zhNotePrompt": "選一張團隊故事卡，寫下你負責的一句話與不能说的独力Claim。",
+    "enNotePrompt": "Pick one team card; write your owned sentence and the solo claim you must not make.",
+    "zhDeliverableChecklist": [
+      "3–5 張故事卡含 STAR 與角色",
+      "每卡有 30s/1m/3m 提示大綱（非背稿）",
+      "團隊專案誠實標示個人貢獻",
+      "證明連結有效或缺連結有補救計畫",
+      "有不可 Claim 独力完成檢查表",
+      "無假連結、無錄取保證"
+    ],
+    "enDeliverableChecklist": [
+      "3–5 cards with STAR and role",
+      "30s/1m/3m prompt outlines per card (not scripts)",
+      "Team projects label personal contribution",
+      "Valid proof links or remediation plan",
+      "Do-not-claim-solo checklist included",
+      "No fake links or hire guarantees"
+    ],
+    "zhScorecard": [
+      "準時",
+      "有方向",
+      "有證據",
+      "像本人",
+      "可接續"
+    ],
+    "enScorecard": [
+      "On time",
+      "Directional",
+      "Proof present",
+      "Sounds like you",
+      "Continuable"
+    ],
+    "id": "career-internship-L6",
+    "lessonKey": "career-internship-L6",
+    "zhOutputName": "作品集故事卡",
+    "enOutputName": "Portfolio Story Cards",
+    "zhObjectives": [
+      "為 3–5 個真實專題建立故事卡",
+      "每卡寫 30s/1m/3m 提示大綱",
+      "誠實區分團隊與個人貢獻",
+      "缺連結時寫補救計畫而非假連結",
+      "存成「作品集故事卡」"
+    ],
+    "enObjectives": [
+      "Build story cards for 3–5 real projects",
+      "Write 30s/1m/3m prompt outlines per card",
+      "Separate team outcomes from your contribution",
+      "Plan remediation instead of fake links if missing",
+      "Save Portfolio Story Cards"
+    ],
+    "zhWhyItMatters": {
+      "problem": "面試常問「Show me」卻只有口頭描述，或把團隊作品說成自己独做。",
+      "ineffective": "背 3 分鐘逐字稿或貼假 GitHub 連結。",
+      "solution": "故事卡連結證據、三種長度提示、團隊誠實標示。"
+    },
+    "enWhyItMatters": {
+      "problem": "Interviews ask “show me” but you only narrate—or claim solo credit for team work.",
+      "ineffective": "Memorized 3-minute scripts or fake GitHub links.",
+      "solution": "Cards link proof, three length prompts, honest team labels."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "證據可連結",
+        "長度分層",
+        "團隊誠實"
+      ],
+      "terms": [
+        "故事卡",
+        "30s/1m/3m",
+        "團隊 vs 個人"
+      ],
+      "criteria": [
+        "3–5 卡",
+        "三長度提示",
+        "無假連結"
+      ],
+      "boundaries": [
+        "避免：独力Claim 團隊案",
+        "避免：假 URL",
+        "避免：完美背稿"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Link proof",
+        "Layer lengths",
+        "Honest team credit"
+      ],
+      "terms": [
+        "Story card",
+        "30s/1m/3m",
+        "Team vs self"
+      ],
+      "criteria": [
+        "3–5 cards",
+        "Three length prompts",
+        "No fake URLs"
+      ],
+      "boundaries": [
+        "Avoid: solo team claims",
+        "Avoid: fake URLs",
+        "Avoid: perfect scripts"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "設計系學生小芸面試被問 Behance 作品，她口頭描述卻無連結，還說「整個品牌是我做的」。",
+      "wrong": "請 AI 生成假 Behance 連結與 3 分鐘背稿。",
+      "right": "故事卡標團隊品牌案、她負責視覺與 mockup；補救計畫是下週上傳 3 件課堂作品 PDF。",
+      "result": "面試可誠實展示分工與補件計畫。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Design student Yun had no Behance link and claimed the whole brand solo.",
+      "wrong": "Fake Behance URL and 3-minute memorized script.",
+      "right": "Card labels team brand work and her visual/mockup role; remediation uploads 3 course PDFs next week.",
+      "result": "Honest division of credit plus remediation plan."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "選專題",
+        "why": "3–5 張可面試講",
+        "input": "素材庫",
+        "output": "專題清單",
+        "check": "是否可公開"
+      },
+      {
+        "do": "寫卡+分工",
+        "why": "團隊案要誠實",
+        "input": "STAR",
+        "output": "故事卡",
+        "check": "独力Claim 已刪"
+      },
+      {
+        "do": "三長度提示",
+        "why": "非背稿",
+        "input": "每卡",
+        "output": "30/1m/3m",
+        "check": "是提示不是全文"
+      },
+      {
+        "do": "連結或補救",
+        "why": "無假 URL",
+        "input": "連結狀態",
+        "output": "證明欄",
+        "check": "缺連結有計畫"
+      },
+      {
+        "do": "存檔",
+        "why": "L7 面試用",
+        "input": "定稿",
+        "output": "故事卡",
+        "check": "檢查表全過"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Pick projects",
+        "why": "3–5 interview-ready",
+        "input": "Bank",
+        "output": "Project list",
+        "check": "Shareable"
+      },
+      {
+        "do": "Cards + credit",
+        "why": "Honest on teams",
+        "input": "STAR",
+        "output": "Story cards",
+        "check": "Solo claims removed"
+      },
+      {
+        "do": "Three lengths",
+        "why": "Not scripts",
+        "input": "Per card",
+        "output": "30s/1m/3m",
+        "check": "Prompts not full text"
+      },
+      {
+        "do": "Link or remediate",
+        "why": "No fake URLs",
+        "input": "Link status",
+        "output": "Proof column",
+        "check": "Gap plan if missing"
+      },
+      {
+        "do": "Save",
+        "why": "L7 interview uses",
+        "input": "Final",
+        "output": "Story cards",
+        "check": "Checklist passed"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "要把自我介紹與專題變成可展示、可面試展開的故事卡時使用",
+      "fields": [
+        "[请填写个人经历]"
+      ],
+      "body": "你是作品集與面試故事教練。不可把團隊專案寫成個人独力完成，也不可新增不存在的作品連結。\n\n我的 30s/1m/3m 自我介紹需求：[请填写个人经历]\n素材庫 STAR 與 TOP3（勿新增）：[请填写个人经历]\n現有作品連結（GitHub、Behance、Canva 等，可留空）：[请填写个人经历]\n\n任務：產出「作品集故事卡」含：\n1) 3–5 張故事卡（專案名／我的角色／團隊 vs 個人貢獻／STAR 摘要／證明連結或缺連結說明）\n2) 每張卡配 30s、1m、3m 三種長度的「提示大綱」（不是完整背稿）\n3) 團隊專案誠實標示：哪些是團隊成果、哪些是我負責\n4) 缺作品集時的補救計畫（不可假造連結）\n5) 面試展開時不可Claim 独力完成檢查表\n\n輸出格式：卡片表格 + 條列。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "expected": "一份含故事卡、三種長度提示、團隊誠實標示與缺連結補救的作品集故事卡",
+      "revisionReminder": "AI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "extensions": [
+        {
+          "title": "延伸：團隊貢獻檢查",
+          "body": "檢查我貼上的故事卡，指出任何把團隊寫成独力的句子並改寫。不要新增專案。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use to turn intros and projects into showable interview story cards",
+      "fields": [
+        "[Enter your real experience]"
+      ],
+      "body": "You are a portfolio and interview-story coach. Do not claim team projects as solo work or add fake links.\n\nMy 30s/1m/3m intro needs: [Enter your real experience]\nBank STAR and top 3 (add nothing): [Enter your real experience]\nExisting work links (GitHub, Behance, Canva; may be empty): [Enter your real experience]\n\nTask: Produce “Portfolio Story Cards” with:\n1) 3–5 cards (project / my role / team vs my contribution / STAR summary / proof link or gap note)\n2) Per card: 30s, 1m, 3m prompt outlines (not full scripts)\n3) Honest team labels: team outcome vs my owned parts\n4) Remediation plan if portfolio links are missing (no fake URLs)\n5) Do-not-claim-solo checklist for interviews\n\nOutput: card table plus bullets. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "expected": "Story cards with three lengths, honest team labels, and gap remediation",
+      "revisionReminder": "AI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "extensions": [
+        {
+          "title": "Extension: team credit check",
+          "body": "Review my cards; fix any solo claims on team work. Add no projects."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "3–5 張故事卡",
+        "standard": "含角色與 STAR",
+        "mistakes": "只有截圖無說明",
+        "check": "30s 能講完嗎？"
+      },
+      {
+        "task": "團隊誠實",
+        "standard": "我負責段具體",
+        "mistakes": "整案独力",
+        "check": "隊友會同意嗎？"
+      },
+      {
+        "task": "三長度是提示",
+        "standard": "非全文背稿",
+        "mistakes": "3m 逐字稿",
+        "check": "像對話嗎？"
+      },
+      {
+        "task": "無假連結",
+        "standard": "缺則補救計畫",
+        "mistakes": "AI 生 URL",
+        "check": "連結打開有效嗎？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "3–5 story cards",
+        "standard": "Role and STAR included",
+        "mistakes": "Screenshots only",
+        "check": "30s doable?"
+      },
+      {
+        "task": "Honest team credit",
+        "standard": "Specific owned parts",
+        "mistakes": "Whole project solo",
+        "check": "Would teammates agree?"
+      },
+      {
+        "task": "Lengths are prompts",
+        "standard": "Not full scripts",
+        "mistakes": "3m word-for-word",
+        "check": "Conversational?"
+      },
+      {
+        "task": "No fake links",
+        "standard": "Remediation if missing",
+        "mistakes": "AI-generated URL",
+        "check": "Links actually open?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "3 分鐘版寫滿形容詞",
+        "why": "面試像背稿",
+        "fix": "改 5 個提示點+1 個數字"
+      },
+      {
+        "error": "個人作業標成「客戶專案」",
+        "why": "誠信風險",
+        "fix": "標明課堂／社團／工讀"
+      },
+      {
+        "error": "故事卡超過 7 張",
+        "why": "抓不到重點",
+        "fix": "只留 TOP3–5"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "3-minute card full of adjectives",
+        "why": "Sounds memorized",
+        "fix": "Five prompts + one metric"
+      },
+      {
+        "error": "Coursework labeled “client project”",
+        "why": "Integrity risk",
+        "fix": "Label course/club/part-time"
+      },
+      {
+        "error": "More than seven cards",
+        "why": "No focus",
+        "fix": "Keep top 3–5"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "完整度",
+        "levels": {
+          "incomplete": "少於 3 卡",
+          "basic": "缺長度提示",
+          "good": "3–5 卡齊",
+          "ready": "含補救或連結"
+        }
+      },
+      {
+        "name": "誠實度",
+        "levels": {
+          "incomplete": "独力Claim 團隊",
+          "basic": "分工模糊",
+          "good": "分工清楚",
+          "ready": "檢查表全過"
+        }
+      },
+      {
+        "name": "面試可用",
+        "levels": {
+          "incomplete": "無法 30s",
+          "basic": "只有連結",
+          "good": "三長度可練",
+          "ready": "可 Show me"
+        }
+      },
+      {
+        "name": "一致性",
+        "levels": {
+          "incomplete": "與履歷矛盾",
+          "basic": "名稱不一",
+          "good": "一致",
+          "ready": "與求職信呼應"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Completeness",
+        "levels": {
+          "incomplete": "Under 3 cards",
+          "basic": "Missing lengths",
+          "good": "3–5 complete",
+          "ready": "Links or remediation"
+        }
+      },
+      {
+        "name": "Honesty",
+        "levels": {
+          "incomplete": "Solo team claims",
+          "basic": "Vague roles",
+          "good": "Clear credit",
+          "ready": "Checklist passed"
+        }
+      },
+      {
+        "name": "Interview ready",
+        "levels": {
+          "incomplete": "No 30s path",
+          "basic": "Links only",
+          "good": "Three lengths practicable",
+          "ready": "Show-me ready"
+        }
+      },
+      {
+        "name": "Consistency",
+        "levels": {
+          "incomplete": "Contradicts resume",
+          "basic": "Name mismatches",
+          "good": "Aligned",
+          "ready": "Matches cover letter"
+        }
+      }
+    ],
+    "zhNextStep": "下一堂會依故事卡與 JD 建立「面試題庫」。",
+    "enNextStep": "Next, build an Interview Question Bank from cards and the JD.",
+    "zhSummary": [
+      "本堂成果：作品集故事卡",
+      "團隊專案不可Claim 独力。",
+      "提示大綱，不是背稿。"
+    ],
+    "enSummary": [
+      "Deliverable: Portfolio Story Cards",
+      "Never claim solo on team work.",
+      "Prompt outlines—not scripts."
+    ]
+  },
+  {
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "進階 / Intermediate",
+    "zhTitle": "第7課：用 AI 經營 LinkedIn 個人品牌檔案",
+    "enTitle": "Lesson 7: Use AI to strengthen your LinkedIn professional profile",
+    "zhValueTip": "面試題庫給骨架與故事對應，不是 AI 完美背稿；LinkedIn 應與履歷一致。",
+    "enValueTip": "The question bank gives skeletons and story maps—not AI-perfect scripts. LinkedIn should match the resume.",
+    "zhOutcome": "面試題庫",
+    "enOutcome": "Interview Question Bank",
+    "zhConcept": "經營 LinkedIn 是讓線上資料與履歷一致，不是另一套假人設。面試題庫從 JD 與故事卡出發：15 題分類、每題 STAR 骨架與故事編號、高風險題誠實策略。AI 不可產出完美背稿答案；你要用自己的話在面試當下展開。",
+    "enConcept": "LinkedIn maintenance means online info matches the resume—not a fake persona. The Interview Question Bank starts from the JD and story cards: 15 categorized questions, STAR skeletons with story IDs, honest high-risk strategies. AI must not produce perfect memorized answers—you expand live in your own words.",
+    "zhCaseStudy": "資工阿凱建立 15 題題庫：behavioral 5、職能 5、公司 3、逆問 2。每題標「故事卡 #2 Todo 專題」等提示點。高風險「為何還沒實習」策略：誠實 + 課堂專題證據 + 本季求職計畫。他同步 LinkedIn 技能欄與履歷，刪掉未碰過的「全端」自稱。",
+    "enCaseStudy": "Kai built 15 questions: 5 behavioral, 5 role, 3 company, 2 for them. Each tags prompts like “story card #2 Todo project.” High-risk “no internship yet”: honest + course evidence + this-season plan. He synced LinkedIn skills with the resume and dropped unproven “full-stack” claims.",
+    "zhWorkflow": [
+      "貼 JD 與故事卡摘要",
+      "產出 15 題分類題庫",
+      "每題寫 STAR 骨架與故事對應",
+      "加高風險策略與 LinkedIn 一致性",
+      "存成面試題庫"
+    ],
+    "enWorkflow": [
+      "Paste JD and story card summary",
+      "Generate 15 categorized questions",
+      "Write STAR skeletons and story maps",
+      "Add high-risk strategies and LinkedIn sync",
+      "Save Interview Question Bank"
+    ],
+    "zhCommonMistakes": [
+      "把 AI 骨架當逐字稿背",
+      "LinkedIn 與履歷技能矛盾",
+      "高風險題用假故事填",
+      "沒有逆問準備",
+      "題目與 JD 無關"
+    ],
+    "enCommonMistakes": [
+      "Memorizing AI skeletons word-for-word",
+      "LinkedIn skills contradict resume",
+      "Fake stories for high-risk questions",
+      "No questions-for-them prep",
+      "Questions unrelated to JD"
+    ],
+    "zhExcellentExample": "15 題、骨架+故事 ID、高風險誠實、LinkedIn 已同步、無背稿、無假實習。",
+    "enExcellentExample": "15 questions, skeletons + story IDs, honest high-risk, LinkedIn synced, no scripts, no fake internship.",
+    "zhPrompt": "你是面試準備教練，不是代答者。不可寫完美背稿答案，也不可新增不存在的經歷。\n\n目標 JD 摘要：[請貼上職缺內容]\n作品集故事卡摘要（勿新增）：[请填写个人经历]\nLinkedIn 或個人簡介重點（可留空，僅作一致性參考）：[请填写个人经历]\n\n任務：產出「面試題庫」含：\n1) 15 題常見題（含 behavioral、職能、公司/產業、逆問）分類表\n2) 每題「回答骨架」：STAR 提示點 + 可引用的故事卡編號（不是完整答案）\n3) 3 題高風險題（缺經驗、離職、失敗）的誠實回答策略\n4) 與 LinkedIn／履歷一致性提醒（若資訊矛盾要標出）\n5) 禁止完美背稿提醒：面試要用自己的話展開\n\n輸出格式：表格 + 條列。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+    "enPrompt": "You are an interview-prep coach—not an answer ghostwriter. Do not write perfect memorized scripts or add experiences.\n\nTarget JD summary: [Paste the job description]\nPortfolio Story Cards summary (add nothing): [Enter your real experience]\nLinkedIn or bio highlights (optional; consistency only): [Enter your real experience]\n\nTask: Produce an “Interview Question Bank” with:\n1) 15 common questions (behavioral, role, company/industry, questions for them) in categories\n2) Per question: answer skeleton—STAR prompts + story card IDs (not full answers)\n3) Three high-risk questions (gap, leaving, failure) with honest strategies\n4) LinkedIn/resume consistency flags if contradictions appear\n5) No perfect-script reminder: expand in your own words live\n\nOutput: table plus bullets. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+    "zhCoachPrompt": "【Prompt 2｜關鍵字與精選區規劃】\n目標 JD 關鍵字：\n（貼上）\n我可公開的作品連結：\n（貼上）\n請建議技能排序、精選區配置與專案描述短句。沒有的作品不要建議假裝已完成。",
+    "enCoachPrompt": "[Prompt 2 | Keywords & Featured] Suggest skill order and Featured setup from real links; don’t pretend unfinished work is live.",
+    "zhFeedbackPrompt": "【Prompt 3｜個人品牌一致性檢查】\n履歷摘要：\n（貼上）\nLinkedIn 文案：\n（貼上）\n請找出口徑不一致、誇大、缺證據處，給修改清單。不要為了「高級感」建議捏造頭銜。",
+    "enFeedbackPrompt": "[Prompt 3 | Brand Consistency] Flag mismatches, exaggeration, and missing proof; never suggest fake titles for prestige.",
+    "zhExample": "題：描述一次合作困難。骨架：S 系上 APP 分工｜T 時程衝突｜A 我提 daily standup｜R 準時交付｜故事卡 #1（非背稿全文）。",
+    "enExample": "Q: Describe a collaboration challenge. Skeleton: S dept APP roles | T timeline clash | A proposed daily standup | R on-time delivery | card #1 (not full script).",
+    "zhPractice": "貼 JD 與故事卡。；產 15 題與骨架。；寫高風險策略。；存成「面試題庫」。",
+    "enPractice": "Paste JD and story cards.; Generate 15 questions and skeletons.; Write high-risk strategies.; Save the Interview Question Bank.",
+    "zhQuizItems": [
+      {
+        "q": "大學生 LinkedIn Headline 較佳做法是？",
+        "options": [
+          "只寫「學生」",
+          "含目標職能與可搜尋關鍵能力／專案訊號",
+          "複製名人語錄",
+          "留白等別人猜"
+        ],
+        "answer": 1,
+        "explain": "Headline 要可搜尋且說明方向。"
+      },
+      {
+        "q": "個人品牌一致性指的是？",
+        "options": [
+          "每個平台講法都可以互相打架",
+          "履歷、作品集、LinkedIn 的事實與成果說法一致",
+          "越誇大越有品牌",
+          "不需要證據"
+        ],
+        "answer": 1,
+        "explain": "一致性建立信任。"
+      },
+      {
+        "q": "發文經營應避免？",
+        "options": [
+          "分享真實專案學習",
+          "捏造實習與成就換讚",
+          "低頻但有內容",
+          "與產業相關的觀察"
+        ],
+        "answer": 1,
+        "explain": "造假會摧毀品牌。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "Best student LinkedIn headline approach?",
+        "options": [
+          "Only “Student”",
+          "Include target function and searchable skills/project signals",
+          "Celebrity quotes",
+          "Leave it blank"
+        ],
+        "answer": 1,
+        "explain": "Headlines should be searchable and directional."
+      },
+      {
+        "q": "Brand consistency means:",
+        "options": [
+          "Contradict yourself across platforms",
+          "Keep facts/outcomes aligned across resume, portfolio, LinkedIn",
+          "Exaggerate more",
+          "Skip evidence"
+        ],
+        "answer": 1,
+        "explain": "Consistency builds trust."
+      },
+      {
+        "q": "Posting should avoid:",
+        "options": [
+          "Real project learning",
+          "Fabricating internships for engagement",
+          "Lower frequency with substance",
+          "Industry observations"
+        ],
+        "answer": 1,
+        "explain": "Fabrication destroys brand."
+      }
+    ],
+    "zhNotePrompt": "選一題高風險題，寫下你的誠實策略一句話（不要背稿全文）。",
+    "enNotePrompt": "Pick one high-risk question; write one honest strategy sentence—not a full script.",
+    "zhDeliverableChecklist": [
+      "15 題分類（behavioral、職能、公司、逆問）",
+      "每題有 STAR 骨架與故事卡對應",
+      "3 題高風險有誠實策略",
+      "LinkedIn／履歷一致性已檢查",
+      "明確標示「非完美背稿」",
+      "無假經歷、無錄取保證"
+    ],
+    "enDeliverableChecklist": [
+      "15 questions in behavioral, role, company, questions-for-them",
+      "STAR skeleton and story card per question",
+      "Three high-risk honest strategies",
+      "LinkedIn/resume consistency checked",
+      "Marked as not perfect memorized scripts",
+      "No fake experience or hire guarantees"
+    ],
+    "zhScorecard": [
+      "可搜尋",
+      "有證據",
+      "一致性",
+      "精選有效",
+      "發文真實"
+    ],
+    "enScorecard": [
+      "Searchable",
+      "Evidence-based",
+      "Consistent",
+      "Featured useful",
+      "Honest activity"
+    ],
+    "id": "career-internship-L7",
+    "lessonKey": "career-internship-L7",
+    "zhOutputName": "面試題庫",
+    "enOutputName": "Interview Question Bank",
+    "zhObjectives": [
+      "建立 15 題分類面試題庫",
+      "每題對應 STAR 骨架與故事卡",
+      "寫 3 題高風險題誠實策略",
+      "檢查 LinkedIn／履歷一致性",
+      "存成「面試題庫」"
+    ],
+    "enObjectives": [
+      "Build a categorized bank of 15 questions",
+      "Map each to STAR skeletons and story cards",
+      "Write honest strategies for 3 high-risk questions",
+      "Check LinkedIn/resume consistency",
+      "Save an Interview Question Bank"
+    ],
+    "zhWhyItMatters": {
+      "problem": "沒有題庫就臨場亂答，或背 AI 完美稿一追問就穿幫。",
+      "ineffective": "請 AI 寫 15 題完整標準答案逐字背。",
+      "solution": "題庫 + 骨架 + 故事卡對應 + 高風險誠實策略。"
+    },
+    "enWhyItMatters": {
+      "problem": "Without a bank you ramble—or memorize AI scripts that fail follow-ups.",
+      "ineffective": "Ask AI for 15 full standard answers to memorize.",
+      "solution": "Bank + skeletons + story mapping + honest high-risk strategies."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "骨架優於背稿",
+        "故事可重用",
+        "高風險要誠實"
+      ],
+      "terms": [
+        "behavioral",
+        "逆問",
+        "高風險題"
+      ],
+      "criteria": [
+        "15 題",
+        "有骨架",
+        "有故事對應"
+      ],
+      "boundaries": [
+        "避免：完美背稿",
+        "避免：假經歷",
+        "避免：保證錄取"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Skeletons over scripts",
+        "Reuse stories",
+        "Honest on risky questions"
+      ],
+      "terms": [
+        "Behavioral",
+        "Questions for them",
+        "High-risk items"
+      ],
+      "criteria": [
+        "15 questions",
+        "Skeletons present",
+        "Story mapping"
+      ],
+      "boundaries": [
+        "Avoid: perfect scripts",
+        "Avoid: fake experience",
+        "Avoid: guarantees"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "資工阿凱 LinkedIn 寫「全端工程師」，履歷卻投前端實習，面試題毫無準備。",
+      "wrong": "請 AI 寫 15 題完整答案背誦。",
+      "right": "題庫對準前端 JD，每題連 Todo 故事卡，LinkedIn 改與履歷一致，高風險題「缺實習」誠實說課堂專題。",
+      "result": "15 題骨架可練，非背稿。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Kai’s LinkedIn said “full-stack” while applying frontend intern with zero prep.",
+      "wrong": "Fifteen full AI answers to memorize.",
+      "right": "Bank aligned to frontend JD, Todo card per question, LinkedIn synced, honest gap answer on no internship yet.",
+      "result": "Fifteen practicable skeletons—not scripts."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "匯入 JD+故事卡",
+        "why": "題要對準職缺",
+        "input": "[請貼上職缺內容]",
+        "output": "輸入包",
+        "check": "故事卡編號清楚"
+      },
+      {
+        "do": "產 15 題",
+        "why": "含逆問",
+        "input": "Prompt",
+        "output": "題庫表",
+        "check": "是否分 4 類"
+      },
+      {
+        "do": "寫骨架",
+        "why": "非完整答案",
+        "input": "每題",
+        "output": "STAR 提示",
+        "check": "有故事卡 ID"
+      },
+      {
+        "do": "高風險 3 題",
+        "why": "誠實策略",
+        "input": "缺口",
+        "output": "策略段",
+        "check": "無假經歷"
+      },
+      {
+        "do": "一致性+存檔",
+        "why": "LinkedIn=履歷",
+        "input": "定稿",
+        "output": "題庫",
+        "check": "無背稿宣稱"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Import JD+cards",
+        "why": "Questions match role",
+        "input": "[Paste the job description]",
+        "output": "Input pack",
+        "check": "Card IDs clear"
+      },
+      {
+        "do": "Generate 15",
+        "why": "Include questions for them",
+        "input": "Prompt",
+        "output": "Bank table",
+        "check": "Four categories"
+      },
+      {
+        "do": "Write skeletons",
+        "why": "Not full answers",
+        "input": "Per question",
+        "output": "STAR prompts",
+        "check": "Story card IDs"
+      },
+      {
+        "do": "Three high-risk",
+        "why": "Honest strategies",
+        "input": "Gaps",
+        "output": "Strategy block",
+        "check": "No fake experience"
+      },
+      {
+        "do": "Sync and save",
+        "why": "LinkedIn=resume",
+        "input": "Final",
+        "output": "Question bank",
+        "check": "No script claims"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "履歷與故事卡就緒，要建立面試題庫與回答骨架時使用",
+      "fields": [
+        "[請貼上職缺內容]",
+        "[请填写个人经历]"
+      ],
+      "body": "你是面試準備教練，不是代答者。不可寫完美背稿答案，也不可新增不存在的經歷。\n\n目標 JD 摘要：[請貼上職缺內容]\n作品集故事卡摘要（勿新增）：[请填写个人经历]\nLinkedIn 或個人簡介重點（可留空，僅作一致性參考）：[请填写个人经历]\n\n任務：產出「面試題庫」含：\n1) 15 題常見題（含 behavioral、職能、公司/產業、逆問）分類表\n2) 每題「回答骨架」：STAR 提示點 + 可引用的故事卡編號（不是完整答案）\n3) 3 題高風險題（缺經驗、離職、失敗）的誠實回答策略\n4) 與 LinkedIn／履歷一致性提醒（若資訊矛盾要標出）\n5) 禁止完美背稿提醒：面試要用自己的話展開\n\n輸出格式：表格 + 條列。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "expected": "一份含 15 題、回答骨架、高風險策略與一致性提醒的面試題庫",
+      "revisionReminder": "AI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "extensions": [
+        {
+          "title": "延伸：追問題",
+          "body": "針對我貼上的 3 題，各生成 2 個面試官可能追問，並給提示點（不要完整答案）。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when resume and story cards are ready to build question bank and skeletons",
+      "fields": [
+        "[Paste the job description]",
+        "[Enter your real experience]"
+      ],
+      "body": "You are an interview-prep coach—not an answer ghostwriter. Do not write perfect memorized scripts or add experiences.\n\nTarget JD summary: [Paste the job description]\nPortfolio Story Cards summary (add nothing): [Enter your real experience]\nLinkedIn or bio highlights (optional; consistency only): [Enter your real experience]\n\nTask: Produce an “Interview Question Bank” with:\n1) 15 common questions (behavioral, role, company/industry, questions for them) in categories\n2) Per question: answer skeleton—STAR prompts + story card IDs (not full answers)\n3) Three high-risk questions (gap, leaving, failure) with honest strategies\n4) LinkedIn/resume consistency flags if contradictions appear\n5) No perfect-script reminder: expand in your own words live\n\nOutput: table plus bullets. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "expected": "A bank with 15 questions, skeletons, high-risk strategies, and consistency flags",
+      "revisionReminder": "AI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "extensions": [
+        {
+          "title": "Extension: follow-ups",
+          "body": "For 3 questions I paste, generate 2 likely follow-ups each with talk prompts—not full answers."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "15 題分類",
+        "standard": "4 類皆有",
+        "mistakes": "只有 behavioral",
+        "check": "逆問有了嗎？"
+      },
+      {
+        "task": "骨架非背稿",
+        "standard": "STAR 提示+故事 ID",
+        "mistakes": "完整答案",
+        "check": "能用自己的話說？"
+      },
+      {
+        "task": "高風險誠實",
+        "standard": "不編假實習",
+        "mistakes": "假故事填缺口",
+        "check": "策略能 defend？"
+      },
+      {
+        "task": "LinkedIn 一致",
+        "standard": "與履歷同技能",
+        "mistakes": "人設矛盾",
+        "check": "矛盾是否標出？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "15 categorized",
+        "standard": "All four types",
+        "mistakes": "Behavioral only",
+        "check": "Questions for them included?"
+      },
+      {
+        "task": "Skeletons not scripts",
+        "standard": "STAR prompts + story ID",
+        "mistakes": "Full answers",
+        "check": "Can you say it live?"
+      },
+      {
+        "task": "Honest high-risk",
+        "standard": "No fake internship",
+        "mistakes": "Fake story fills gap",
+        "check": "Strategy defensible?"
+      },
+      {
+        "task": "LinkedIn aligned",
+        "standard": "Same skills as resume",
+        "mistakes": "Persona mismatch",
+        "check": "Contradictions flagged?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "每題用不同假故事",
+        "why": "面試追問穿幫",
+        "fix": "重用 3–5 張故事卡"
+      },
+      {
+        "error": "逆問問薪資福利優先",
+        "why": "早期印象差",
+        "fix": "改問團隊、成長、實習內容"
+      },
+      {
+        "error": "忽略「為什麼離開」誠實",
+        "why": "信任下降",
+        "fix": "簡短事實+學習不骂前雇主"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Different fake story per question",
+        "why": "Follow-ups expose holes",
+        "fix": "Reuse 3–5 story cards"
+      },
+      {
+        "error": "Salary/benefits as only questions for them",
+        "why": "Weak early impression",
+        "fix": "Ask team, growth, intern scope"
+      },
+      {
+        "error": "Dishonest exit story",
+        "why": "Trust drops",
+        "fix": "Brief facts + learning; no employer bashing"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "完整度",
+        "levels": {
+          "incomplete": "少於 10 題",
+          "basic": "缺逆問",
+          "good": "15 題齊",
+          "ready": "含高風險 3 題"
+        }
+      },
+      {
+        "name": "可用性",
+        "levels": {
+          "incomplete": "完整背稿",
+          "basic": "骨架模糊",
+          "good": "可練習",
+          "ready": "追問可應對"
+        }
+      },
+      {
+        "name": "誠實度",
+        "levels": {
+          "incomplete": "假故事",
+          "basic": "誇大",
+          "good": "缺口策略誠實",
+          "ready": "與履歷一致"
+        }
+      },
+      {
+        "name": "對準度",
+        "levels": {
+          "incomplete": "通用題",
+          "basic": "部分 JD",
+          "good": "職能題對準",
+          "ready": "公司題有研究"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Completeness",
+        "levels": {
+          "incomplete": "Under 10",
+          "basic": "Missing questions for them",
+          "good": "15 complete",
+          "ready": "Three high-risk included"
+        }
+      },
+      {
+        "name": "Usability",
+        "levels": {
+          "incomplete": "Full scripts",
+          "basic": "Vague skeletons",
+          "good": "Practicable",
+          "ready": "Follow-up ready"
+        }
+      },
+      {
+        "name": "Honesty",
+        "levels": {
+          "incomplete": "Fake stories",
+          "basic": "Hype",
+          "good": "Honest gap strategies",
+          "ready": "Resume-aligned"
+        }
+      },
+      {
+        "name": "Alignment",
+        "levels": {
+          "incomplete": "Generic only",
+          "basic": "Partial JD",
+          "good": "Role questions aligned",
+          "ready": "Company research shown"
+        }
+      }
+    ],
+    "zhNextStep": "下一堂會用題庫做「模擬面試改善紀錄」。",
+    "enNextStep": "Next, run a mock interview and save a Mock Interview Improvement Log.",
+    "zhSummary": [
+      "本堂成果：面試題庫",
+      "骨架可練，不是背稿。",
+      "LinkedIn 與履歷要一致。"
+    ],
+    "enSummary": [
+      "Deliverable: Interview Question Bank",
+      "Practice skeletons—not scripts.",
+      "Keep LinkedIn aligned with resume."
+    ]
+  },
+  {
+    "estimatedTime": "約 60 分鐘 / About 60 min",
+    "difficulty": "進階 / Intermediate",
+    "zhTitle": "第8課：整理作品集架構，證明你做過什麼",
+    "enTitle": "Lesson 8: Structure a portfolio that proves what you have done",
+    "zhValueTip": "模擬面試要記錄自己的話與改善點；不要用 AI 完美答案取代練習。",
+    "enValueTip": "Mock interviews log your own words and fixes—do not replace practice with AI-perfect answers.",
+    "zhOutcome": "模擬面試改善紀錄",
+    "enOutcome": "Mock Interview Improvement Log",
+    "zhConcept": "整理作品集不只是連結，還要能在面試講清楚。模擬面試改善紀錄記錄你用自己話回答的 5 題：評分、改善提示、追問練習與下輪計畫。AI 不可給完美逐字稿讓你背；要練的是證據、時間與誠實度，不是表演 AI 文。",
+    "enConcept": "Portfolio work must be explainable live—not just linked. The Mock Interview Improvement Log captures five answers in your words: scores, improvement prompts, follow-up practice, and next-round plan. AI must not give perfect scripts to memorize—practice evidence, timing, and honesty—not performing AI prose.",
+    "zhCaseStudy": "企管小杰選 5 題模擬：自我介紹、團隊衝突、數據案例、為何投這家、逆問。他錄音後貼摘要，AI 評「團隊衝突」證據弱、超時 40 秒。改善提示：加故事卡 #1 的 standup 細節、刪開場客套。下輪計畫只練 2 題 + 追問，禁止背新 AI 稿。",
+    "enCaseStudy": "Jie mocked five questions: intro, team conflict, data example, why this company, questions for them. From summaries AI scored weak proof and +40s on conflict. Fixes: add standup detail from card #1, cut opening fluff. Next round: two questions + follow-ups only—no new AI scripts.",
+    "zhWorkflow": [
+      "從題庫選 5 題",
+      "用自己話回答並記摘要",
+      "貼摘要取得評分與改善提示",
+      "練追問一輪",
+      "存成模擬面試改善紀錄"
+    ],
+    "enWorkflow": [
+      "Pick 5 from the bank",
+      "Answer aloud and summarize",
+      "Paste summaries for scores and prompts",
+      "Practice one follow-up round",
+      "Save Mock Interview Improvement Log"
+    ],
+    "zhCommonMistakes": [
+      "貼 AI 完美答案當模擬結果",
+      "不練追問",
+      "評分全給自己 5 分",
+      "改善計畫空泛「多練」",
+      "模擬時新增假故事"
+    ],
+    "enCommonMistakes": [
+      "Pasting AI-perfect answers as mock results",
+      "Skipping follow-up practice",
+      "Self-scoring everything 5/5",
+      "Vague plan “practice more”",
+      "Inventing stories during mocks"
+    ],
+    "zhExcellentExample": "5 題本人摘要、評分誠實、改善具體、追問練過、下輪 2 題計畫、無 AI 背稿。",
+    "enExcellentExample": "Five personal summaries, honest scores, concrete fixes, follow-ups practiced, two-question next plan, no AI scripts.",
+    "zhPrompt": "你是模擬面試教練，不是代答者。不可產出完美逐字稿答案讓我背誦，也不可新增經歷。\n\n面試題庫（我選 5 題模擬）：[请填写个人经历]\n我的口頭回答摘要（自己的話，可粗糙）：[请填写个人经历]\n作品集故事卡編號對照：[请填写个人经历]\n\n任務：產出「模擬面試改善紀錄」含：\n1) 5 題模擬：每題評估（清晰度、證據、時間、誠實度）1–5 分 + 一句評語\n2) 每題「改善提示」3 點（如何用自己的話補證據、縮短、加 STAR 段）\n3) 追問模擬：每題 1 個可能追問 + 回答提示（不是標準答案）\n4) 本輪最大問題 TOP3 與下輪練習計畫\n5) 禁止完美 AI 背稿提醒\n\n輸出格式：表格 + 條列。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+    "enPrompt": "You are a mock-interview coach—not an answer ghostwriter. Do not produce perfect scripts to memorize or add experiences.\n\nQuestion bank (5 questions I practiced): [Enter your real experience]\nMy spoken answer summaries (my words, rough OK): [Enter your real experience]\nStory card ID map: [Enter your real experience]\n\nTask: Produce a “Mock Interview Improvement Log” with:\n1) Five mocks: score clarity/evidence/time/honesty 1–5 each + one-line note\n2) Three improvement prompts per question (add proof in your words, tighten, add STAR segment)\n3) One likely follow-up per question + talk prompt (not a standard answer)\n4) Top 3 issues this round and next-round practice plan\n5) Reminder: no perfect AI memorized scripts\n\nOutput: table plus bullets. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+    "zhCoachPrompt": "【Prompt 2｜3 分鐘／5 分鐘講稿】\n代表專案事實：\n（貼上）\n請寫 3 分鐘與 5 分鐘講稿，標時間分配。只用我提供的成果；沒有的部分用「尚未驗證」而非編造。",
+    "enCoachPrompt": "[Prompt 2 | 3/5-min Scripts] Write timed scripts from my facts; mark unverified parts instead of inventing.",
+    "zhFeedbackPrompt": "【Prompt 3｜模擬評審提問】\n請扮演嚴格但公平的評審，依我的作品摘要一次一題提問。結束指出防守薄弱處。禁止要求我回答捏造數據；若摘要缺資訊，改問我如何補證據。",
+    "enFeedbackPrompt": "[Prompt 3 | Mock Jury] Ask one question at a time; probe weak defenses; never demand fabricated numbers—ask how I’d gather evidence instead.",
+    "zhExample": "評語：證據 2/5—缺具體數字；改善：補「186 份問卷」；追問提示：「你如何催填？」→ 提 LINE 提醒與系學會群組。",
+    "enExample": "Note: evidence 2/5—missing metric; fix: add “186 survey responses”; follow-up “how did you chase?” → LINE reminders and student group.",
+    "zhPractice": "選 5 題口頭模擬。；貼摘要取得評分。；練追問。；存成「模擬面試改善紀錄」。",
+    "enPractice": "Mock five questions aloud.; Paste summaries for scores.; Practice follow-ups.; Save the Mock Interview Improvement Log.",
+    "zhQuizItems": [
+      {
+        "q": "作品集篩選的原則較接近？",
+        "options": [
+          "全部塞進去顯得很多",
+          "優先保留故事完整且成果可說明的專案",
+          "只留 Logo 設計不管問題",
+          "未完成的也全寫成已上線"
+        ],
+        "answer": 1,
+        "explain": "質與故事完整度優先於數量。"
+      },
+      {
+        "q": "發表時提到成果應？",
+        "options": [
+          "為了氣勢可以編數據",
+          "只陳述可追溯的真實成果或明確標示未驗證",
+          "拒絕回答任何限制",
+          "把別人的專案講成自己的"
+        ],
+        "answer": 1,
+        "explain": "誠實與可追溯是底線。"
+      },
+      {
+        "q": "模擬評審提問的主要目的是？",
+        "options": [
+          "練習與評審吵架",
+          "壓力測試論證、驗證與限制說明",
+          "背誦假答題",
+          "避免做任何修改"
+        ],
+        "answer": 1,
+        "explain": "問答是為了讓發表可防守並改善。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "Portfolio curation should prioritize:",
+        "options": [
+          "Including everything",
+          "Story-complete projects with explainable outcomes",
+          "Logos only",
+          "Marking unfinished work as shipped"
+        ],
+        "answer": 1,
+        "explain": "Quality and completeness beat quantity."
+      },
+      {
+        "q": "When stating outcomes you should:",
+        "options": [
+          "Invent numbers for impact",
+          "Use traceable facts or explicitly mark unverified",
+          "Refuse all limits",
+          "Claim others’ work"
+        ],
+        "answer": 1,
+        "explain": "Honesty and traceability are non-negotiable."
+      },
+      {
+        "q": "Mock jury Q&A is mainly to:",
+        "options": [
+          "Practice arguing",
+          "Pressure-test argument, validation, and limits",
+          "Memorize fake answers",
+          "Avoid revisions"
+        ],
+        "answer": 1,
+        "explain": "Q&A improves defendability."
+      }
+    ],
+    "zhNotePrompt": "寫下本輪最弱一題與下輪只改的一個證據細節。",
+    "enNotePrompt": "Note your weakest question and one proof detail you will add next round.",
+    "zhDeliverableChecklist": [
+      "5 題模擬皆為自己的話摘要",
+      "每題有清晰度、證據、時間、誠實度評分",
+      "每題 3 點改善提示",
+      "每題 1 追問 + 提示（非標準答案）",
+      "有 TOP3 問題與下輪練習計畫",
+      "無完美 AI 背稿、無錄取保證"
+    ],
+    "enDeliverableChecklist": [
+      "Five mocks logged in your own words",
+      "Scores for clarity, evidence, timing, honesty each",
+      "Three improvement prompts per question",
+      "One follow-up + prompt per question (not standard answer)",
+      "Top 3 issues and next-round plan",
+      "No perfect AI scripts or hire guarantees"
+    ],
+    "zhScorecard": [
+      "精選品質",
+      "故事完整",
+      "成果誠實",
+      "發表準時",
+      "問答可防守"
+    ],
+    "enScorecard": [
+      "Curation quality",
+      "Complete stories",
+      "Honest outcomes",
+      "On-time delivery",
+      "Defendable Q&A"
+    ],
+    "id": "career-internship-L8",
+    "lessonKey": "career-internship-L8",
+    "zhOutputName": "模擬面試改善紀錄",
+    "enOutputName": "Mock Interview Improvement Log",
+    "zhObjectives": [
+      "完成 5 題口頭模擬並記摘要",
+      "為每題評分並寫改善提示",
+      "練 1 輪追問提示",
+      "列出 TOP3 問題與下輪計畫",
+      "存成「模擬面試改善紀錄」"
+    ],
+    "enObjectives": [
+      "Run five spoken mocks and log summaries",
+      "Score each and write improvement prompts",
+      "Practice one round of follow-up prompts",
+      "List top 3 issues and next-round plan",
+      "Save a Mock Interview Improvement Log"
+    ],
+    "zhWhyItMatters": {
+      "problem": "只背 AI 完美答案，追問或換題就卡住，也不像本人。",
+      "ineffective": "請 AI 直接給 5 題標準答案複製。",
+      "solution": "用自己的話模擬、記錄、評分、改善提示，再練一輪。"
+    },
+    "enWhyItMatters": {
+      "problem": "Memorizing AI-perfect answers fails on follow-ups and sounds unlike you.",
+      "ineffective": "Ask AI for five standard answers to copy.",
+      "solution": "Mock in your words, log, score, improve, then practice again."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "自己的話",
+        "改善可迭代",
+        "追問要練"
+      ],
+      "terms": [
+        "模擬紀錄",
+        "改善提示",
+        "追問"
+      ],
+      "criteria": [
+        "5 題",
+        "有評分",
+        "有下輪計畫"
+      ],
+      "boundaries": [
+        "避免：完美背稿",
+        "避免：AI 代答",
+        "避免：假故事"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Your own words",
+        "Iterate improvements",
+        "Practice follow-ups"
+      ],
+      "terms": [
+        "Mock log",
+        "Improvement prompts",
+        "Follow-up"
+      ],
+      "criteria": [
+        "Five questions",
+        "Scored",
+        "Next-round plan"
+      ],
+      "boundaries": [
+        "Avoid: perfect scripts",
+        "Avoid: AI answering for you",
+        "Avoid: fake stories"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "企管小杰模擬「最大失敗」題，直接貼 AI 完美故事，追問細節答不出。",
+      "wrong": "請 AI 重寫成更完美的背稿。",
+      "right": "用自己話重答，紀錄卡殼處，改善提示補一個可驗證細節，再模擬追問。",
+      "result": "下輪回答縮短 30 秒且證據具體。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Jie pasted an AI “biggest failure” script and failed follow-up details.",
+      "wrong": "Ask AI for an even more perfect script.",
+      "right": "Re-answer in his words, log stalls, add one verifiable detail, mock follow-up.",
+      "result": "Next round 30 seconds shorter with concrete proof."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "選 5 題",
+        "why": "含 1 題高風險",
+        "input": "題庫",
+        "output": "模擬清單",
+        "check": "是否口頭練過"
+      },
+      {
+        "do": "口頭+摘要",
+        "why": "用自己的話",
+        "input": "錄音/筆記",
+        "output": "5 段摘要",
+        "check": "非 AI 全文"
+      },
+      {
+        "do": "評分改善",
+        "why": "找證據與時間",
+        "input": "摘要",
+        "output": "紀錄表",
+        "check": "每題 3 改善點"
+      },
+      {
+        "do": "追問一輪",
+        "why": "防背稿失效",
+        "input": "改善後重答",
+        "output": "追問紀錄",
+        "check": "非標準答案"
+      },
+      {
+        "do": "下輪計畫存檔",
+        "why": "可迭代",
+        "input": "TOP3 問題",
+        "output": "改善紀錄",
+        "check": "無完美背稿"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Pick five",
+        "why": "Include one high-risk",
+        "input": "Bank",
+        "output": "Mock list",
+        "check": "Spoken practice done"
+      },
+      {
+        "do": "Speak and summarize",
+        "why": "Your words",
+        "input": "Recording/notes",
+        "output": "Five summaries",
+        "check": "Not full AI text"
+      },
+      {
+        "do": "Score and improve",
+        "why": "Evidence and timing",
+        "input": "Summaries",
+        "output": "Log table",
+        "check": "Three prompts each"
+      },
+      {
+        "do": "Follow-up round",
+        "why": "Scripts fail here",
+        "input": "Re-answer",
+        "output": "Follow-up log",
+        "check": "Not standard answers"
+      },
+      {
+        "do": "Next plan and save",
+        "why": "Iterable",
+        "input": "Top 3 issues",
+        "output": "Improvement log",
+        "check": "No perfect scripts"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "已練習面試題後，要記錄表現並取得改善提示時使用",
+      "fields": [
+        "[请填写个人经历]"
+      ],
+      "body": "你是模擬面試教練，不是代答者。不可產出完美逐字稿答案讓我背誦，也不可新增經歷。\n\n面試題庫（我選 5 題模擬）：[请填写个人经历]\n我的口頭回答摘要（自己的話，可粗糙）：[请填写个人经历]\n作品集故事卡編號對照：[请填写个人经历]\n\n任務：產出「模擬面試改善紀錄」含：\n1) 5 題模擬：每題評估（清晰度、證據、時間、誠實度）1–5 分 + 一句評語\n2) 每題「改善提示」3 點（如何用自己的話補證據、縮短、加 STAR 段）\n3) 追問模擬：每題 1 個可能追問 + 回答提示（不是標準答案）\n4) 本輪最大問題 TOP3 與下輪練習計畫\n5) 禁止完美 AI 背稿提醒\n\n輸出格式：表格 + 條列。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "expected": "一份含 5 題評分、改善提示、追問模擬與下輪計畫的模擬面試改善紀錄",
+      "revisionReminder": "AI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "extensions": [
+        {
+          "title": "延伸：時間控制",
+          "body": "依我貼的 5 段回答，估算各段是否超時，建議刪哪 2 句（不要重寫全文）。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use after practicing bank questions to log performance and get improvement prompts",
+      "fields": [
+        "[Enter your real experience]"
+      ],
+      "body": "You are a mock-interview coach—not an answer ghostwriter. Do not produce perfect scripts to memorize or add experiences.\n\nQuestion bank (5 questions I practiced): [Enter your real experience]\nMy spoken answer summaries (my words, rough OK): [Enter your real experience]\nStory card ID map: [Enter your real experience]\n\nTask: Produce a “Mock Interview Improvement Log” with:\n1) Five mocks: score clarity/evidence/time/honesty 1–5 each + one-line note\n2) Three improvement prompts per question (add proof in your words, tighten, add STAR segment)\n3) One likely follow-up per question + talk prompt (not a standard answer)\n4) Top 3 issues this round and next-round practice plan\n5) Reminder: no perfect AI memorized scripts\n\nOutput: table plus bullets. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "expected": "A log with five scored mocks, improvement prompts, follow-ups, and next-round plan",
+      "revisionReminder": "AI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "extensions": [
+        {
+          "title": "Extension: timing",
+          "body": "From my 5 answers, flag overtime and suggest two lines to cut—do not rewrite full answers."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "5 題自己答",
+        "standard": "摘要非 AI 稿",
+        "mistakes": "貼 AI 完美答案",
+        "check": "聽起來像你嗎？"
+      },
+      {
+        "task": "評分誠實",
+        "standard": "證據時間都要",
+        "mistakes": "只看好評",
+        "check": "最弱題是哪題？"
+      },
+      {
+        "task": "改善後重練",
+        "standard": "只改 2 點",
+        "mistakes": "整段換 AI 稿",
+        "check": "時間縮短了嗎？"
+      },
+      {
+        "task": "存檔+下輪",
+        "standard": "TOP3 具體",
+        "mistakes": "沒計畫",
+        "check": "下輪練幾題？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Answer five yourself",
+        "standard": "Summaries not AI scripts",
+        "mistakes": "Paste AI perfect answers",
+        "check": "Sound like you?"
+      },
+      {
+        "task": "Score honestly",
+        "standard": "Evidence and timing",
+        "mistakes": "Only praise",
+        "check": "Weakest question?"
+      },
+      {
+        "task": "Re-practice fixes",
+        "standard": "Change two things",
+        "mistakes": "Replace whole answer with AI",
+        "check": "Shorter now?"
+      },
+      {
+        "task": "Save and plan next",
+        "standard": "Concrete top 3",
+        "mistakes": "No plan",
+        "check": "How many next round?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "只模擬不錄音",
+        "why": "不知道自己超時",
+        "fix": "手機錄 60 秒限時"
+      },
+      {
+        "error": "改善=換 AI 新稿",
+        "why": "仍不像本人",
+        "fix": "只加 1 個證據細節"
+      },
+      {
+        "error": "忽略誠實度評分",
+        "why": "高風險題翻車",
+        "fix": "缺口策略寫進紀錄"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Mock without recording",
+        "why": "No sense of overtime",
+        "fix": "Record with 60s cap"
+      },
+      {
+        "error": "Improvement = new AI script",
+        "why": "Still not your voice",
+        "fix": "Add one proof detail only"
+      },
+      {
+        "error": "Ignoring honesty score",
+        "why": "High-risk fails live",
+        "fix": "Log gap strategy"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "完整度",
+        "levels": {
+          "incomplete": "少於 5 題",
+          "basic": "缺追問",
+          "good": "5 題+追問",
+          "ready": "含下輪計畫"
+        }
+      },
+      {
+        "name": "誠實度",
+        "levels": {
+          "incomplete": "AI 代答",
+          "basic": "摘要非本人",
+          "good": "本人摘要",
+          "ready": "無新假故事"
+        }
+      },
+      {
+        "name": "改善品質",
+        "levels": {
+          "incomplete": "空泛",
+          "basic": "只改措辭",
+          "good": "證據+時間",
+          "ready": "可執行下輪"
+        }
+      },
+      {
+        "name": "面試準備度",
+        "levels": {
+          "incomplete": "仍靠背稿",
+          "basic": "略進步",
+          "good": "追問可應",
+          "ready": "接近實戰"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Completeness",
+        "levels": {
+          "incomplete": "Under five",
+          "basic": "No follow-ups",
+          "good": "Five + follow-ups",
+          "ready": "Next plan included"
+        }
+      },
+      {
+        "name": "Honesty",
+        "levels": {
+          "incomplete": "AI answered",
+          "basic": "Not your summary",
+          "good": "Your summaries",
+          "ready": "No new fake stories"
+        }
+      },
+      {
+        "name": "Improvement quality",
+        "levels": {
+          "incomplete": "Vague",
+          "basic": "Wording only",
+          "good": "Evidence + timing",
+          "ready": "Actionable next round"
+        }
+      },
+      {
+        "name": "Interview readiness",
+        "levels": {
+          "incomplete": "Still scripted",
+          "basic": "Slight gain",
+          "good": "Follow-ups OK",
+          "ready": "Near live-ready"
+        }
+      }
+    ],
+    "zhNextStep": "下一堂會建立「求職申請追蹤表」管理投遞節奏。",
+    "enNextStep": "Next, build a Job Application Tracker for your apply rhythm.",
+    "zhSummary": [
+      "本堂成果：模擬面試改善紀錄",
+      "練自己的話，不是背 AI。",
+      "追問比完美稿重要。"
+    ],
+    "enSummary": [
+      "Deliverable: Mock Interview Improvement Log",
+      "Practice your words—not AI.",
+      "Follow-ups beat perfect scripts."
+    ]
+  },
+  {
+    "estimatedTime": "約 40 分鐘 / About 40 min",
+    "difficulty": "入門 / Beginner",
+    "zhTitle": "第9課：建立面試題庫，做企業模擬面試與修正",
+    "enTitle": "Lesson 9: Build interview banks and run employer-style mock interviews",
+    "zhValueTip": "追蹤表幫你排節奏；follow-up 需自行寄信，平台沒有自動寄送功能。",
+    "enValueTip": "The tracker sets rhythm—follow-ups are self-sent; this platform has no auto-email feature.",
+    "zhOutcome": "求職申請追蹤表",
+    "enOutcome": "Job Application Tracker",
+    "zhConcept": "面試題庫練完後，求職進入「節奏管理」：追蹤多家職缺、截止日、文件版本與 follow-up。這一課產出求職申請追蹤表與本週 TOP3 優先序。平台不提供一鍵投遞或自動寄 email；follow-up 模板僅供你自行寄送前修改。",
+    "enConcept": "After interview prep comes rhythm: track roles, deadlines, doc versions, and follow-ups. This lesson builds a Job Application Tracker and weekly top 3 priorities. No one-click apply or auto-email here—follow-up skeletons are for you to edit and send yourself.",
+    "zhCaseStudy": "小萱把 6 家行銷實習列入追蹤表：A 公司截止最近排第一，履歷用 v2-內容行銷、求職信已對準；B 公司來源不明標「待核對官方頁」。follow-up 模板寫「投遞一週後禮貌詢問進度—自行寄送」。她刪掉「請平台代寄」錯誤期待。",
+    "enCaseStudy": "Xuan tracked six marketing internships: Company A first by deadline with resume v2-content and tailored cover; Company B flagged “verify official page.” Follow-up skeleton: “one week after apply, polite status ask—self-send.” She dropped any “platform sends for me” assumption.",
+    "zhWorkflow": [
+      "列出追蹤中職缺與文件狀態",
+      "用 Prompt 產出追蹤表與 TOP3",
+      "每列設檢查與 follow-up 日",
+      "過期或不明來源回官方頁",
+      "存成求職申請追蹤表"
+    ],
+    "enWorkflow": [
+      "List tracked roles and doc status",
+      "Generate tracker and top 3 with prompt",
+      "Set checks and follow-up dates per row",
+      "Verify stale or unclear sources officially",
+      "Save Job Application Tracker"
+    ],
+    "zhCommonMistakes": [
+      "以為平台會自動寄 follow-up",
+      "履歷版本不分職缺混用",
+      "忽略截止日與官方連結",
+      "追蹤 20 家卻無優先序",
+      "投遞前未做誠信與一致性檢查"
+    ],
+    "enCommonMistakes": [
+      "Assuming platform auto-sends follow-up",
+      "One resume version for every different role",
+      "Missing deadlines and official links",
+      "Tracking 20 with no priority",
+      "Skipping integrity and consistency checks before apply"
+    ],
+    "zhExcellentExample": "6 列完整、TOP3 合理、版本標 v2、follow-up 自行寄、過期已標、無自動化宣稱。",
+    "enExcellentExample": "Six complete rows, realistic top 3, version v2 labeled, self-send follow-up, stale flagged, no automation claims.",
+    "zhPrompt": "你是求職流程教練，不是自動投遞或代寄 email 工具。不可保證錄取，也不可代替我送出申請。\n\n目前追蹤中的職缺（公司、職稱、來源、截止日，可表格）：[請貼上職缺內容]\n已準備文件狀態（履歷、求職信、故事卡、題庫）：[请填写个人经历]\n本週可投入時間：[请填写个人经历]\n\n任務：產出「求職申請追蹤表」含：\n1) 追蹤表欄位：公司／職稱／來源／官方連結／截止日／狀態／履歷版本／follow-up 日期\n2) 本週投遞優先序 TOP3 與理由（對準度、截止、準備度）\n3) 每筆投遞前檢查：官方頁已核對、文件一致、無假資訊\n4) follow-up 提醒模板（文字骨架，註明需自行寄送—平台無自動寄信）\n5) 拒絕自動化宣稱：無一鍵投遞、無代寄 email\n\n輸出格式：表格 + 條列。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+    "enPrompt": "You are an application-workflow coach—not auto-apply or email-send automation. Do not guarantee offers or submit for me.\n\nRoles I am tracking (company, title, source, deadline): [Paste the job description]\nDocument readiness (resume, cover, story cards, bank): [Enter your real experience]\nHours I can invest this week: [Enter your real experience]\n\nTask: Produce a “Job Application Tracker” with:\n1) Tracker columns: company/title/source/official link/deadline/status/resume version/follow-up date\n2) This week’s top 3 apply priorities and why (fit, deadline, readiness)\n3) Pre-submit check per row: official page verified, docs consistent, no fake info\n4) Follow-up reminder skeleton (note: you send yourself—no auto-send on this platform)\n5) No automation claims: no one-click apply, no auto-email\n\nOutput: table plus bullets. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+    "zhCoachPrompt": "【Prompt 2｜公司研究與職缺分析】\n公司／職缺資料：\n（貼上）\n我的背景：\n（貼上）\n請整理：公司做什麼、職位為何存在、我可能被問的匹配點與風險點。標註資訊來源不足處；不要捏造財報或獎項。",
+    "enCoachPrompt": "[Prompt 2 | Company & Role Research] Summarize what they do, why the role exists, match points and risks; invent no awards/financials.",
+    "zhFeedbackPrompt": "【Prompt 3｜一對一模擬面試】\n請扮演面試官，一次一題，依我的履歷與職缺追問。結束給：結構、具體度、誠信風險、時間控制評語與改進清單。禁止要求我承認沒做過的經歷。",
+    "enFeedbackPrompt": "[Prompt 3 | 1:1 Mock Interview] Ask one question at a time with follow-ups; debrief structure/specificity/integrity/timing—never force fake admissions of undone work.",
+    "zhExample": "列：A 新創｜內容實習｜104｜官方連結｜3/15｜準備投｜履歷 v2｜follow-up 3/22（自行寄）。",
+    "enExample": "Row: Startup A | content intern | job board | official link | Mar 15 | ready | resume v2 | follow-up Mar 22 (self-send).",
+    "zhPractice": "列出追蹤職缺。；產出表與 TOP3。；設 follow-up 與檢查。；存成「求職申請追蹤表」。",
+    "enPractice": "List tracked roles.; Produce table and top 3.; Set follow-ups and checks.; Save the Job Application Tracker.",
+    "zhQuizItems": [
+      {
+        "q": "STAR 中最常被追問、也最該說清楚的是？",
+        "options": [
+          "天氣如何",
+          "你實際採取的 Action 與邊界",
+          "只講結果數字即可",
+          "抄同學的故事"
+        ],
+        "answer": 1,
+        "explain": "面試官要聽你做了什麼。"
+      },
+      {
+        "q": "模擬面試的價值是？",
+        "options": [
+          "背標準答案不思考",
+          "在追問下檢查故事是否真實可防守並改進",
+          "練習說謊",
+          "取代公司研究"
+        ],
+        "answer": 1,
+        "explain": "壓力測試真實故事。"
+      },
+      {
+        "q": "公司研究時應避免？",
+        "options": [
+          "整理產品與職位存在理由",
+          "捏造公司獎項與內幕當成事實",
+          "準備反問",
+          "對照自己的匹配點"
+        ],
+        "answer": 1,
+        "explain": "不可捏造公司資訊。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "In STAR, interviewers most probe:",
+        "options": [
+          "The weather",
+          "Your actual Actions and ownership boundaries",
+          "Results numbers only",
+          "A classmate’s story"
+        ],
+        "answer": 1,
+        "explain": "They need your actions."
+      },
+      {
+        "q": "Mock interviews help you:",
+        "options": [
+          "Memorize without thinking",
+          "Test whether stories survive follow-ups and improve",
+          "Practice lying",
+          "Skip company research"
+        ],
+        "answer": 1,
+        "explain": "Pressure-test real stories."
+      },
+      {
+        "q": "Company research should avoid:",
+        "options": [
+          "Summarizing product and role purpose",
+          "Inventing awards/insider claims as facts",
+          "Preparing reverse questions",
+          "Mapping your fit"
+        ],
+        "answer": 1,
+        "explain": "Don’t fabricate company facts."
+      }
+    ],
+    "zhNotePrompt": "寫下本週 TOP1 投遞日與 follow-up 自行寄送的日期。",
+    "enNotePrompt": "Note your top-1 apply day and self-send follow-up date.",
+    "zhDeliverableChecklist": [
+      "追蹤表含公司、職稱、來源、官方連結、截止日、狀態、履歷版本",
+      "本週投遞 TOP3 與理由",
+      "每列有投遞前檢查（官方頁、一致性、無假資訊）",
+      "有 follow-up 模板並註明自行寄送",
+      "過期或不明來源已標待核對",
+      "無一鍵投遞、無自動寄 email、無錄取保證宣稱"
+    ],
+    "enDeliverableChecklist": [
+      "Tracker with company, title, source, official link, deadline, status, resume version",
+      "This week’s top 3 priorities with reasons",
+      "Pre-submit check per row (official page, consistency, no fake info)",
+      "Follow-up skeleton marked self-send",
+      "Stale or unclear sources flagged for verification",
+      "No one-click apply, auto-email, or hire guarantee claims"
+    ],
+    "zhScorecard": [
+      "故事真實",
+      "STAR 清楚",
+      "經得起追問",
+      "公司理解",
+      "可改進"
+    ],
+    "enScorecard": [
+      "Real stories",
+      "Clear STAR",
+      "Probe-proof",
+      "Company sense",
+      "Improvable"
+    ],
+    "id": "career-internship-L9",
+    "lessonKey": "career-internship-L9",
+    "zhOutputName": "求職申請追蹤表",
+    "enOutputName": "Job Application Tracker",
+    "zhObjectives": [
+      "建立多職缺追蹤表欄位",
+      "排本週投遞 TOP3 優先序",
+      "每筆設投遞前檢查與 follow-up 日",
+      "寫 follow-up 文字骨架（自行寄送）",
+      "存成「求職申請追蹤表」"
+    ],
+    "enObjectives": [
+      "Build tracker columns for multiple roles",
+      "Rank this week’s top 3 apply priorities",
+      "Set pre-submit checks and follow-up dates per row",
+      "Draft follow-up skeleton (self-send)",
+      "Save a Job Application Tracker"
+    ],
+    "zhWhyItMatters": {
+      "problem": "同時投很多家卻漏截止、文件版本混亂，或以為平台會代寄。",
+      "ineffective": "請 AI「幫我自動投 20 家」或「一鍵寄 follow-up」。",
+      "solution": "追蹤表 + 優先序 + 官方頁檢查 + 自行寄送的 follow-up 模板。"
+    },
+    "enWhyItMatters": {
+      "problem": "Spraying applications loses deadlines, mixes doc versions, or assumes auto-send.",
+      "ineffective": "Ask AI to “auto-apply to 20 companies” or one-click follow-up email.",
+      "solution": "Tracker + priorities + official checks + self-send follow-up skeleton."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "優先序>數量",
+        "官方頁為準",
+        "自己寄信"
+      ],
+      "terms": [
+        "追蹤表",
+        "follow-up",
+        "履歷版本"
+      ],
+      "criteria": [
+        "欄位齊",
+        "TOP3",
+        "檢查表"
+      ],
+      "boundaries": [
+        "避免：自動投遞",
+        "避免：代寄 email",
+        "避免：保證錄取"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Priority over volume",
+        "Official page wins",
+        "You send mail"
+      ],
+      "terms": [
+        "Tracker",
+        "Follow-up",
+        "Resume version"
+      ],
+      "criteria": [
+        "Columns complete",
+        "Top 3",
+        "Checklist"
+      ],
+      "boundaries": [
+        "Avoid: auto-apply",
+        "Avoid: auto-email",
+        "Avoid: guarantees"
+      ]
+    },
+    "zhCaseStudyBlocks": {
+      "problem": "小萱同時追 8 家，履歷版本混用、兩家過期 JD 仍準備投。",
+      "wrong": "請 AI 自動寄 follow-up 給全部 HR。",
+      "right": "追蹤表標狀態、履歷 v2-行銷、TOP3 依截止排序，過期列回官方頁確認。",
+      "result": "本週只投 3 家且文件一致。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Xuan tracked eight roles, mixed resume versions, two expired JDs still queued.",
+      "wrong": "Auto-send follow-up to all HR via AI.",
+      "right": "Tracker marks status, resume v2-marketing, top 3 by deadline, stale rows verified.",
+      "result": "Three quality applies this week with consistent docs."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "匯入職缺清單",
+        "why": "追蹤需要完整欄位",
+        "input": "[請貼上職缺內容]",
+        "output": "原始表",
+        "check": "截止日是否有"
+      },
+      {
+        "do": "排 TOP3",
+        "why": "本週可完成",
+        "input": "時間+準備度",
+        "output": "優先序",
+        "check": "是否超過 3 家"
+      },
+      {
+        "do": "設檢查與版本",
+        "why": "防文件混用",
+        "input": "履歷/信",
+        "output": "每列檢查",
+        "check": "版本號是否標"
+      },
+      {
+        "do": "follow-up 模板",
+        "why": "自行寄送",
+        "input": "投遞日",
+        "output": "文字骨架",
+        "check": "無自動寄信宣稱"
+      },
+      {
+        "do": "存檔",
+        "why": "L10 整合用",
+        "input": "定稿",
+        "output": "追蹤表",
+        "check": "過期列已標"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Import role list",
+        "why": "Tracker needs full columns",
+        "input": "[Paste the job description]",
+        "output": "Raw table",
+        "check": "Deadlines present"
+      },
+      {
+        "do": "Rank top 3",
+        "why": "Doable this week",
+        "input": "Time + readiness",
+        "output": "Priority list",
+        "check": "Not more than three"
+      },
+      {
+        "do": "Checks and versions",
+        "why": "Prevent doc mix-ups",
+        "input": "Resume/cover",
+        "output": "Per-row checks",
+        "check": "Version labels"
+      },
+      {
+        "do": "Follow-up skeleton",
+        "why": "Self-send",
+        "input": "Apply date",
+        "output": "Text skeleton",
+        "check": "No auto-send claims"
+      },
+      {
+        "do": "Save",
+        "why": "L10 integration",
+        "input": "Final",
+        "output": "Tracker",
+        "check": "Stale rows flagged"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "多份職缺同步準備，要排優先序與追蹤投遞狀態時使用",
+      "fields": [
+        "[請貼上職缺內容]",
+        "[请填写个人经历]"
+      ],
+      "body": "你是求職流程教練，不是自動投遞或代寄 email 工具。不可保證錄取，也不可代替我送出申請。\n\n目前追蹤中的職缺（公司、職稱、來源、截止日，可表格）：[請貼上職缺內容]\n已準備文件狀態（履歷、求職信、故事卡、題庫）：[请填写个人经历]\n本週可投入時間：[请填写个人经历]\n\n任務：產出「求職申請追蹤表」含：\n1) 追蹤表欄位：公司／職稱／來源／官方連結／截止日／狀態／履歷版本／follow-up 日期\n2) 本週投遞優先序 TOP3 與理由（對準度、截止、準備度）\n3) 每筆投遞前檢查：官方頁已核對、文件一致、無假資訊\n4) follow-up 提醒模板（文字骨架，註明需自行寄送—平台無自動寄信）\n5) 拒絕自動化宣稱：無一鍵投遞、無代寄 email\n\n輸出格式：表格 + 條列。不要保證錄取。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "expected": "一份含追蹤欄位、本週 TOP3、投遞檢查與 follow-up 模板的求職申請追蹤表",
+      "revisionReminder": "AI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "extensions": [
+        {
+          "title": "延伸：過期職缺",
+          "body": "檢查我貼上的追蹤表，標示可能已過期或來源不明的列，建議回官方頁確認。不要代投。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when juggling multiple roles to prioritize and track application status",
+      "fields": [
+        "[Paste the job description]",
+        "[Enter your real experience]"
+      ],
+      "body": "You are an application-workflow coach—not auto-apply or email-send automation. Do not guarantee offers or submit for me.\n\nRoles I am tracking (company, title, source, deadline): [Paste the job description]\nDocument readiness (resume, cover, story cards, bank): [Enter your real experience]\nHours I can invest this week: [Enter your real experience]\n\nTask: Produce a “Job Application Tracker” with:\n1) Tracker columns: company/title/source/official link/deadline/status/resume version/follow-up date\n2) This week’s top 3 apply priorities and why (fit, deadline, readiness)\n3) Pre-submit check per row: official page verified, docs consistent, no fake info\n4) Follow-up reminder skeleton (note: you send yourself—no auto-send on this platform)\n5) No automation claims: no one-click apply, no auto-email\n\nOutput: table plus bullets. No hire guarantees.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "expected": "A tracker with columns, weekly top 3, pre-submit checks, and follow-up skeleton",
+      "revisionReminder": "AI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "extensions": [
+        {
+          "title": "Extension: stale postings",
+          "body": "From my tracker, flag likely expired or unclear-source rows; verify on official pages. Do not apply for me."
+        }
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "追蹤表欄位齊",
+        "standard": "含官方連結",
+        "mistakes": "只有公司名",
+        "check": "截止日可排序？"
+      },
+      {
+        "task": "TOP3 合理",
+        "standard": "本週做得到",
+        "mistakes": "排 10 家",
+        "check": "文件都準備好？"
+      },
+      {
+        "task": "無自動投遞",
+        "standard": "follow-up 標自行寄",
+        "mistakes": "寫一鍵寄出",
+        "check": "模板可改嗎？"
+      },
+      {
+        "task": "過期已標",
+        "standard": "回官方頁",
+        "mistakes": "仍投過期",
+        "check": "來源不明有核對？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Tracker columns complete",
+        "standard": "Official links included",
+        "mistakes": "Company names only",
+        "check": "Sortable deadlines?"
+      },
+      {
+        "task": "Top 3 realistic",
+        "standard": "Achievable this week",
+        "mistakes": "Ten priorities",
+        "check": "Docs ready for each?"
+      },
+      {
+        "task": "No auto-apply",
+        "standard": "Follow-up marked self-send",
+        "mistakes": "One-click send wording",
+        "check": "Skeleton editable?"
+      },
+      {
+        "task": "Stale flagged",
+        "standard": "Official verify",
+        "mistakes": "Still applying expired",
+        "check": "Unclear sources checked?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "follow-up 太頻繁像 spam",
+        "why": "HR 反感",
+        "fix": "投遞 7–10 工作天後一封"
+      },
+      {
+        "error": "狀態欄從不更新",
+        "why": "重複投或漏投",
+        "fix": "每週五更新狀態"
+      },
+      {
+        "error": "TOP3 含文件未就緒的",
+        "why": "倉促投遞品質差",
+        "fix": "先補文件再排程"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Follow-up too frequent = spam",
+        "why": "HR annoyance",
+        "fix": "One note 7–10 business days after"
+      },
+      {
+        "error": "Status never updated",
+        "why": "Duplicate or missed applies",
+        "fix": "Update statuses every Friday"
+      },
+      {
+        "error": "Top 3 includes unreadied docs",
+        "why": "Rushed low-quality applies",
+        "fix": "Finish docs before scheduling"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "完整度",
+        "levels": {
+          "incomplete": "缺欄位",
+          "basic": "無 TOP3",
+          "good": "表+TOP3+模板",
+          "ready": "含檢查清單"
+        }
+      },
+      {
+        "name": "可用性",
+        "levels": {
+          "incomplete": "無法排序",
+          "basic": "截止日亂",
+          "good": "可排程",
+          "ready": "本週可執行"
+        }
+      },
+      {
+        "name": "誠實合規",
+        "levels": {
+          "incomplete": "自動投遞宣稱",
+          "basic": "模糊",
+          "good": "自行寄送清楚",
+          "ready": "無保證錄取"
+        }
+      },
+      {
+        "name": "品質",
+        "levels": {
+          "incomplete": "追蹤過多無重點",
+          "basic": "略散",
+          "good": "TOP3 對準",
+          "ready": "文件版本清楚"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Completeness",
+        "levels": {
+          "incomplete": "Missing columns",
+          "basic": "No top 3",
+          "good": "Table+top3+template",
+          "ready": "Checklist included"
+        }
+      },
+      {
+        "name": "Usability",
+        "levels": {
+          "incomplete": "Cannot sort",
+          "basic": "Messy deadlines",
+          "good": "Schedulable",
+          "ready": "Executable this week"
+        }
+      },
+      {
+        "name": "Compliance",
+        "levels": {
+          "incomplete": "Auto-apply claims",
+          "basic": "Vague",
+          "good": "Self-send clear",
+          "ready": "No hire guarantees"
+        }
+      },
+      {
+        "name": "Quality",
+        "levels": {
+          "incomplete": "Too many unfocused",
+          "basic": "Somewhat scattered",
+          "good": "Top 3 aligned",
+          "ready": "Clear doc versions"
+        }
+      }
+    ],
+    "zhNextStep": "下一堂會整合 L1–L9 產出「完整求職申請包檢查」。",
+    "enNextStep": "Next, integrate L1–L9 into a Final Career Application Kit check.",
+    "zhSummary": [
+      "本堂成果：求職申請追蹤表",
+      "自己寄 follow-up。",
+      "平台不自動投遞。"
+    ],
+    "enSummary": [
+      "Deliverable: Job Application Tracker",
+      "You send follow-ups yourself.",
+      "No auto-apply on this platform."
+    ]
+  },
+  {
+    "estimatedTime": "約 45 分鐘 / About 45 min",
+    "difficulty": "入門 / Beginner",
+    "zhTitle": "第10課：整合完成「求職與實習申請包」與投遞節奏",
+    "enTitle": "Lesson 10: Complete your career package and application rhythm",
+    "zhValueTip": "整合 L1–L9 摘要即可，不必重打全部；投遞前跑一輪總檢查。",
+    "enValueTip": "Integrate L1–L9 summaries—no full re-entry. Run the master check before applying.",
+    "zhOutcome": "完整求職申請包檢查",
+    "enOutcome": "Final Career Application Kit",
+    "zhConcept": "整合完成求職與實習申請包，不是重寫九堂作業，而是貼各堂摘要做有無清單、跨文件一致性（目標、專案名、技能、故事）、投遞前總檢查與缺漏 TOP3。不可保證錄取，不可自動投遞；缺的堂次標「尚未完成」即可。",
+    "enConcept": "Completing the career application kit is not retyping nine lessons—it is pasting summaries for a have/missing inventory, cross-doc consistency (target, projects, skills, stories), pre-submit master check, and top 3 gaps. No guarantees or auto-apply; mark unfinished lessons honestly.",
+    "zhCaseStudy": "阿凱貼 L1–L9 各 3–5 行摘要：L1 目標前端、L4 履歷 v3、L9 追蹤 3 家。整合後發現 L5 求職信專案名與 L6 故事卡 #2 不一致。總檢查表勾官方 JD、隱私遮蔽、無假技能。本週行動：修專案名一致 + 投 TOP1 + 練 L7 兩題。未完成的 L8 標待補，不要求重打 L1–L7。",
+    "enCaseStudy": "Kai pasted 3–5 line summaries for L1–L9: L1 frontend target, L4 resume v3, L9 three tracked roles. Integration caught L5 cover vs L6 card #2 project name mismatch. Master check ticked official JD, privacy redaction, no fake skills. This week: fix name sync + apply top 1 + practice two L7 questions. Missing L8 marked to add—no L1–L7 re-entry.",
+    "zhWorkflow": [
+      "從成果包複製 L1–L9 摘要",
+      "用 Prompt 產九項清單與一致性檢查",
+      "跑投遞前總檢查表",
+      "排缺漏 TOP3 與本週行動",
+      "存成完整求職申請包檢查"
+    ],
+    "enWorkflow": [
+      "Copy L1–L9 summaries from the package",
+      "Generate nine-item inventory and consistency audit",
+      "Run pre-submit master checklist",
+      "Set top 3 gaps and weekly actions",
+      "Save Final Career Application Kit check"
+    ],
+    "zhCommonMistakes": [
+      "要求重打 L1–L9 全部原文",
+      "缺堂假裝已完成",
+      "忽略跨文件矛盾",
+      "宣稱包投必中",
+      "總檢查表跳過隱私與官方 JD"
+    ],
+    "enCommonMistakes": [
+      "Demanding full re-entry of all nine lessons",
+      "Pretending missing lessons are done",
+      "Ignoring cross-document contradictions",
+      "Claiming guaranteed offers",
+      "Skipping privacy and official JD on master check"
+    ],
+    "zhExcellentExample": "九項有無清楚、1 矛盾已排修、總檢查全勾、TOP3 最小修、本週各 1 行動、無保證宣稱。",
+    "enExcellentExample": "Clear nine-item status, one mismatch scheduled, master check complete, minimal top 3 fixes, one action each, no guarantee claims.",
+    "zhPrompt": "你是求職整合教練。不可要求我重打 L1–L9 全部原文，也不可保證錄取或提供自動投遞。\n\n請用我貼上的各堂摘要（缺則標「尚未完成」）整合，不要叫我重填全部：\n- L1 職涯目標檔摘要：[请填写个人经历]\n- L2 職缺需求拆解表摘要：[請貼上職缺內容]\n- L3 個人能力與經歷素材庫摘要：[请填写个人经历]\n- L4 對準職缺履歷稿摘要：[请贴上目前履历]\n- L5 求職信與自我介紹稿摘要：[请填写个人经历]\n- L6 作品集故事卡摘要：[请填写个人经历]\n- L7 面試題庫摘要：[请填写个人经历]\n- L8 模擬面試改善紀錄摘要：[请填写个人经历]\n- L9 求職申請追蹤表摘要：[请填写个人经历]\n\n任務：產出「完整求職申請包檢查」含：\n1) 九項成果清單（有／缺／待補一句摘要）— 整合不重寫\n2) 跨文件一致性檢查：目標、專案名、技能、故事是否矛盾\n3) 投遞前總檢查表（官方 JD、誠信、隱私遮蔽、文件版本）\n4) 缺漏優先修 TOP3（只補摘要層級，不要求重打前 9 堂）\n5) 本週投遞節奏與面試準備各 1 行動\n\n輸出格式：勾選表 + 條列。不要保證錄取。不要自動投遞。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+    "enPrompt": "You are an application-integration coach. Do not ask me to retype all of L1–L9 or guarantee offers or auto-apply.\n\nIntegrate the summaries I paste (mark “not finished” if missing)—do not make me re-enter everything:\n- L1 Career Target Profile: [Enter your real experience]\n- L2 Job Description Analysis: [Paste the job description]\n- L3 Career Evidence Bank: [Enter your real experience]\n- L4 Targeted Resume Draft: [Paste your current resume]\n- L5 Cover Letter / Intro: [Enter your real experience]\n- L6 Portfolio Story Cards: [Enter your real experience]\n- L7 Interview Question Bank: [Enter your real experience]\n- L8 Mock Interview Log: [Enter your real experience]\n- L9 Application Tracker: [Enter your real experience]\n\nTask: Produce a “Final Career Application Kit” check with:\n1) Nine-item inventory (have / missing / one-line gap)—integrate, don’t rewrite\n2) Cross-doc consistency: target, project names, skills, stories\n3) Pre-submit master checklist (official JD, integrity, privacy redaction, doc version)\n4) Top 3 gap fixes (summary level only—no full re-entry of prior lessons)\n5) One action each for this week’s apply rhythm and interview prep\n\nOutput: tick list plus bullets. No hire guarantees. No auto-apply.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+    "zhCoachPrompt": "【Prompt 2｜職缺與公司分析】\nJD 與公司公開資訊：\n（貼上）\n我的履歷重點：\n（貼上）\n請輸出：匹配分數理由、缺口、面談可能問題、風險訊號。資訊不足標待確認；不要編造薪資帶或裁員內幕。",
+    "enCoachPrompt": "[Prompt 2 | Role & Company Analysis] Score fit with reasons, gaps, likely questions, risks; invent no salary bands or insider layoff claims.",
+    "zhFeedbackPrompt": "【Prompt 3｜Offer 比較與職涯草案】\nOffer A/B 事實：\n（貼上）\n我的優先權重：\n（貼上）\n請做加權比較，並給一年職涯草案（技能／角色／檢視點）。標示哪些是建議；不要替我做最終決定口吻的強迫選擇。",
+    "enFeedbackPrompt": "[Prompt 3 | Offer Compare & Career Draft] Weighted comparison plus a 1-year draft with checkpoints; keep recommendations labeled—don’t force the decision.",
+    "zhExample": "缺漏 TOP3：① L8 模擬紀錄補 2 題 ② L5/L6 專案名統一 ③ L9 TOP1 回官方頁核對截止日。",
+    "enExample": "Top 3 gaps: ① add two L8 mocks ② unify L5/L6 project names ③ verify L9 top-1 deadline on official page.",
+    "zhPractice": "複製 L1–L9 摘要。；產九項清單與一致性檢查。；跑總檢查表。；存成「完整求職申請包檢查」。",
+    "enPractice": "Copy L1–L9 summaries.; Generate inventory and consistency audit.; Run master checklist.; Save the Final Career Application Kit check.",
+    "zhQuizItems": [
+      {
+        "q": "求職策略較健康的做法是？",
+        "options": [
+          "無記錄海投",
+          "目標角色＋管道組合＋週節奏＋追蹤複盤",
+          "只投一家等到天荒地老",
+          "完全交給 AI 自動決定人生"
+        ],
+        "answer": 1,
+        "explain": "求職要用可管理的系統。"
+      },
+      {
+        "q": "比較 Offer 時應？",
+        "options": [
+          "只看簽約獎金",
+          "用加權檢視學習、生活、方向與薪酬等多重因素",
+          "忽略合約",
+          "聽信單一匿名貼文定案"
+        ],
+        "answer": 1,
+        "explain": "多重標準比單一數字穩。"
+      },
+      {
+        "q": "AI 做公司／職缺分析時不可？",
+        "options": [
+          "整理公開資訊與匹配缺口",
+          "捏造薪資帶與內幕當事實",
+          "列出待確認問題",
+          "建議可能面試題"
+        ],
+        "answer": 1,
+        "explain": "不可把臆測寫成事實。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "A healthier job-search approach is:",
+        "options": [
+          "Blind mass apply with no log",
+          "Target roles + channel mix + weekly cadence + tracked review",
+          "Apply to one place forever",
+          "Let AI decide your life automatically"
+        ],
+        "answer": 1,
+        "explain": "Treat search as a manageable system."
+      },
+      {
+        "q": "When comparing offers you should:",
+        "options": [
+          "Only look at signing bonus",
+          "Weight learning, life, direction, and pay",
+          "Ignore the contract",
+          "Decide from one anonymous post"
+        ],
+        "answer": 1,
+        "explain": "Multiple criteria beat a single number."
+      },
+      {
+        "q": "AI company/role analysis must not:",
+        "options": [
+          "Summarize public info and gaps",
+          "Invent salary bands/insider claims as facts",
+          "List pending questions",
+          "Suggest likely interview questions"
+        ],
+        "answer": 1,
+        "explain": "Don’t present speculation as fact."
+      }
+    ],
+    "zhNotePrompt": "寫下你明天要做的 1 個投遞行動與 1 個面試練習行動。",
+    "enNotePrompt": "Write tomorrow’s one apply action and one interview-practice action.",
+    "zhDeliverableChecklist": [
+      "L1–L9 九項有無與一句摘要（缺的標尚未完成）",
+      "跨文件一致性檢查完成，矛盾有標",
+      "投遞前總檢查表含官方 JD、誠信、隱私、版本",
+      "缺漏修復 TOP3，不要求重打前 9 堂",
+      "本週投遞與面試準備各 1 具體行動",
+      "無錄取保證、無自動投遞宣稱"
+    ],
+    "enDeliverableChecklist": [
+      "L1–L9 inventory with one-line summaries (missing marked unfinished)",
+      "Cross-document consistency audit with contradictions flagged",
+      "Pre-submit master checklist: official JD, integrity, privacy, version",
+      "Top 3 gap fixes without retyping all nine lessons",
+      "One concrete action each for apply rhythm and interview prep this week",
+      "No hire guarantee or auto-apply claims"
+    ],
+    "zhScorecard": [
+      "可執行",
+      "可追蹤",
+      "分析有據",
+      "決策有權重",
+      "職涯可檢視"
+    ],
+    "enScorecard": [
+      "Executable",
+      "Trackable",
+      "Grounded analysis",
+      "Weighted decisions",
+      "Reviewable career plan"
+    ],
+    "id": "career-internship-L10",
+    "lessonKey": "career-internship-L10",
+    "zhOutputName": "完整求職申請包檢查",
+    "enOutputName": "Final Career Application Kit",
+    "zhObjectives": [
+      "匯總 L1–L9 九項成果有無與摘要",
+      "做跨文件一致性檢查",
+      "完成投遞前總檢查表",
+      "排缺漏修復 TOP3（不重打前課）",
+      "存成「完整求職申請包檢查」"
+    ],
+    "enObjectives": [
+      "Inventory L1–L9 with have/missing summaries",
+      "Run cross-document consistency audit",
+      "Complete pre-submit master checklist",
+      "Prioritize top 3 gap fixes without retyping prior lessons",
+      "Save a Final Career Application Kit check"
+    ],
+    "zhWhyItMatters": {
+      "problem": "九份檔案分散，投遞前才發現履歷與求職信矛盾或缺模擬面試紀錄。",
+      "ineffective": "要求重打 L1–L9 全部原文，或宣稱「包投必中」。",
+      "solution": "只貼摘要整合、一致性檢查、總檢查表、TOP3 缺漏修復。"
+    },
+    "enWhyItMatters": {
+      "problem": "Nine files scattered—you find resume/cover mismatches or missing mock logs at apply time.",
+      "ineffective": "Retype all of L1–L9 or claim “guaranteed offers.”",
+      "solution": "Paste summaries, consistency audit, master checklist, top 3 gap fixes."
+    },
+    "zhConceptBlocks": {
+      "principles": [
+        "整合不重寫",
+        "一致性優先",
+        "投遞前總檢查"
+      ],
+      "terms": [
+        "九項清單",
         "一致性",
-        "精選有效",
-        "發文真實"
+        "總檢查表"
       ],
-      "enScorecard": [
-        "Searchable",
-        "Evidence-based",
-        "Consistent",
-        "Featured useful",
-        "Honest activity"
+      "criteria": [
+        "九項有無清楚",
+        "矛盾已標",
+        "本週行動各 1"
       ],
-      "resources": [
-        {
-          "name": "LinkedIn",
-          "url": "https://www.linkedin.com",
-          "note": "個人品牌與人脈主場"
-        },
-        {
-          "name": "CakeResume",
-          "url": "https://www.cakeresume.com",
-          "note": "可與 LinkedIn 互相導流的履歷頁"
-        },
-        {
-          "name": "Yourator",
-          "url": "https://www.yourator.co",
-          "note": "關注目標新創動態"
-        },
-        {
-          "name": "Glassdoor",
-          "url": "https://www.glassdoor.com",
-          "note": "公司評價與面試經驗參考（需自行判斷）"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "文案改寫與關鍵字建議"
-        }
-      ],
-      "challenge": "在一週內完成 LinkedIn 主頁升級（Headline／About／精選），並發布一則不造假的專案或學習貼文。",
-      "id": "career-internship-L7",
-      "lessonKey": "career-internship-L7"
+      "boundaries": [
+        "避免：重填全部",
+        "避免：保證錄取",
+        "避免：自動投遞"
+      ]
     },
-    {
-      "icon": "🏆",
-      "title": "整理作品集架構，證明你做過什麼",
-      "description": "篩選與排序專案、故事化呈現、整理 README／PDF／網站，準備 3／5 分鐘發表與模擬評審提問。",
-      "goal": "我的最終作品集包（精選專案＋3／5分鐘講稿＋模擬問答紀錄）",
-      "estimatedTime": "60-90 分鐘",
-      "difficulty": "中階",
-      "tags": [
-        "作品集",
-        "發表",
-        "評審模擬",
-        "Chapter10"
+    "enConceptBlocks": {
+      "principles": [
+        "Integrate don’t rewrite",
+        "Consistency first",
+        "Master check before apply"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 9,
-      "chapterZh": "AI 個人專案與作品集",
-      "chapterEn": "AI Personal Projects and Portfolio",
-      "zhTitle": "第8課：整理作品集架構，證明你做過什麼",
-      "enTitle": "Lesson 8: Structure a portfolio that proves what you have done",
-      "zhValueTip": "篩選與排序專案、故事化呈現、整理 README／PDF／網站，準備 3／5 分鐘發表與模擬評審提問。",
-      "enValueTip": "Curate and order projects, storytell outcomes, polish README/PDF/site, and prep 3/5-minute talks plus mock jury Q&A.",
-      "zhOutcome": "我的最終作品集包（精選專案＋3／5分鐘講稿＋模擬問答紀錄）",
-      "enOutcome": "My Final Portfolio Pack (curated projects + 3/5-min scripts + mock Q&A log)",
-      "zhConcept": "最終發表不是把所有作業塞進資料夾。先篩選：只留能說明「問題—方法—成果—反思」的專案；課堂練習若無故事可當技能證明附件。排序：代表作第一，其次展現廣度或成長。每個專案故事化：問題、角色、方法、成果、影響、反思；有真實數據才放，沒有就用可觀察成果（完成流程、錯誤減少的描述需有依據）。交付物形態可並存：網站作品集、作品集 PDF、GitHub README、Demo 截圖／短片。彼此主張一致，不可一個說已上線一個說還在做。3 分鐘介紹抓主線；5 分鐘加方法與限制。模擬評審提問：為何這問題、為何這方案、如何驗證、若重來會改什麼、個資如何處理。接受回饋：分辨事實錯誤、表達不清、範圍建議；改下一版並記錄。不可為了討好評審而事後捏造成果。完整最終發表流程：鎖定精選→統一文案→更新 README／網站／PDF→錄 3 分鐘→模擬提問→修改→正式發表。Chapter 10 閉環：發想→MVP→GitHub→網站→發表。連到求職時，你賣的是可驗證的解決問題能力。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可公開或可繳交且狀態誠實的版本。每次結束寫三行：今天釐清的問題、仍待驗證的假設、下一個可演示的最小步驟。作品集與 GitHub 上的完成度必須一致；不要用 AI 把未完成項目寫成已完成，也不要捏造數據或訪談。當發想、MVP、版本紀錄、網站與發表形成閉環，你換專題也能重複同一套個人專案系統。求職或競賽場合同樣適用：先講清楚問題與證據，再談技術細節；誠實的限制說明往往比誇大更加分。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可公開或可繳交且狀態誠實的版本。每次結束寫三行：今天釐清的問題、仍待驗證的假設、下一個可演示的最小步驟。作品集與 GitHub 上的完成度必須一致；不要用 AI 把未完成項目寫成已完成，也不要捏造數據或訪談。當發想、MVP、版本紀錄、網站與發表形成閉環，你換專題也能重複同一套個人專案系統。求職或競賽場合同樣適用：先講清楚問題與證據，再談技術細節；誠實的限制說明往往比誇大更加分。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可公開或可繳交且狀態誠實的版本。每次結束寫三行：今天釐清的問題、仍待驗證的假設、下一個可演示的最小步驟。作品集與 GitHub 上的完成度必須一致；不要用 AI 把未完成項目寫成已完成，也不要捏造數據或訪談。當發想、MVP、版本紀錄、網站與發表形成閉環，你換專題也能重複同一套個人專案系統。求職或競賽場合同樣適用：先講清楚問題與證據，再談技術細節；誠實的限制說明往往比誇大更加分。",
-      "enConcept": "Curate story-complete projects, keep artifacts consistent, prepare timed talks, run mock jury Q&A, and revise from feedback—without inventing outcomes to impress.",
-      "zhCaseStudy": "完整最終發表流程：小恩期末展前有 6 個半成品。她只留 2 個完整故事專案，PDF 與網站一致，3 分鐘只講排課助手。模擬評審問「如何驗證」，她拿出 3 人測試觀察筆記（真實）。正式發表被問同樣問題時答得穩。會後依回饋補限制頁，不補假數據。",
-      "enCaseStudy": "Xiao En curated two complete stories, aligned PDF/site, practiced a 3-minute talk with real test notes, then improved limits—not fake metrics.",
-      "zhWorkflow": [
-        "篩選與排序專案",
-        "統一故事結構與真實成果表述",
-        "更新 README／網站／PDF／Demo",
-        "寫 3／5 分鐘講稿並計時",
-        "模擬評審提問後修正再發表"
+      "terms": [
+        "Nine-item inventory",
+        "Consistency",
+        "Master checklist"
       ],
-      "enWorkflow": [
-        "Curate and order projects",
-        "Unify story structure with true outcomes",
-        "Update README/site/PDF/demo",
-        "Write and time 3/5-minute scripts",
-        "Mock jury Q&A, revise, then present"
+      "criteria": [
+        "Clear have/missing",
+        "Contradictions flagged",
+        "One action each this week"
       ],
-      "zhCommonMistakes": [
-        "作品過多且無故事",
-        "各檔案說法不一致",
-        "捏造數據應對評審",
-        "不計時導致超時"
-      ],
-      "enCommonMistakes": [
-        "Too many story-less projects",
-        "Inconsistent artifacts",
-        "Inventing metrics for judges",
-        "No timing practice"
-      ],
-      "zhExcellentExample": "優秀發表包：精選清楚、故事完整、成果誠實、多載體一致、講稿準時、問答可防守。",
-      "enExcellentExample": "A strong pack is curated, story-complete, honest, consistent across artifacts, timed, and defendable in Q&A.",
-      "zhPrompt": "【Prompt 1｜作品集篩選與專案介紹】\n我的專案列表（完成度與真實成果）：\n（貼上）\n目標場合：［課程發表／競賽／面試］\n請建議精選與排序，並為代表作寫「問題—角色—方法—成果—反思」介紹。不可把未完成寫成完成；不可發明數據；缺成果就建議如何誠實描述進行中。",
-      "enPrompt": "[Prompt 1 | Curation & Writeups] Recommend selection/order and a problem-role-method-outcome-reflection writeup from true status only—no invented metrics.",
-      "zhCoachPrompt": "【Prompt 2｜3 分鐘／5 分鐘講稿】\n代表專案事實：\n（貼上）\n請寫 3 分鐘與 5 分鐘講稿，標時間分配。只用我提供的成果；沒有的部分用「尚未驗證」而非編造。",
-      "enCoachPrompt": "[Prompt 2 | 3/5-min Scripts] Write timed scripts from my facts; mark unverified parts instead of inventing.",
-      "zhFeedbackPrompt": "【Prompt 3｜模擬評審提問】\n請扮演嚴格但公平的評審，依我的作品摘要一次一題提問。結束指出防守薄弱處。禁止要求我回答捏造數據；若摘要缺資訊，改問我如何補證據。",
-      "enFeedbackPrompt": "[Prompt 3 | Mock Jury] Ask one question at a time; probe weak defenses; never demand fabricated numbers—ask how I’d gather evidence instead.",
-      "zhExample": "3分鐘：30秒問題→60秒方法→60秒演示成果→30秒反思限制。｜評審Q：如何驗證？｜A：3名目標使用者觀察任務完成時間（附筆記日期）。",
-      "enExample": "A timed 3-minute arc and a verification answer grounded in dated observation notes—not invented KPIs.",
-      "zhPractice": "完成精選與排序。；統一網站／PDF／README。；練 3／5 分鐘並模擬提問。；Challenge：正式或模擬發表一次，收集 3 則回饋並更新作品集一頁內容（不造假）。",
-      "enPractice": "Curate/order.；Align site/PDF/README.；Rehearse 3/5-min + mock Q&A.；Challenge: present once, gather 3 feedbacks, update one portfolio page without fabricating.",
-      "zhQuizItems": [
-        {
-          "q": "作品集篩選的原則較接近？",
-          "options": [
-            "全部塞進去顯得很多",
-            "優先保留故事完整且成果可說明的專案",
-            "只留 Logo 設計不管問題",
-            "未完成的也全寫成已上線"
-          ],
-          "answer": 1,
-          "explain": "質與故事完整度優先於數量。"
-        },
-        {
-          "q": "發表時提到成果應？",
-          "options": [
-            "為了氣勢可以編數據",
-            "只陳述可追溯的真實成果或明確標示未驗證",
-            "拒絕回答任何限制",
-            "把別人的專案講成自己的"
-          ],
-          "answer": 1,
-          "explain": "誠實與可追溯是底線。"
-        },
-        {
-          "q": "模擬評審提問的主要目的是？",
-          "options": [
-            "練習與評審吵架",
-            "壓力測試論證、驗證與限制說明",
-            "背誦假答題",
-            "避免做任何修改"
-          ],
-          "answer": 1,
-          "explain": "問答是為了讓發表可防守並改善。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "Portfolio curation should prioritize:",
-          "options": [
-            "Including everything",
-            "Story-complete projects with explainable outcomes",
-            "Logos only",
-            "Marking unfinished work as shipped"
-          ],
-          "answer": 1,
-          "explain": "Quality and completeness beat quantity."
-        },
-        {
-          "q": "When stating outcomes you should:",
-          "options": [
-            "Invent numbers for impact",
-            "Use traceable facts or explicitly mark unverified",
-            "Refuse all limits",
-            "Claim others’ work"
-          ],
-          "answer": 1,
-          "explain": "Honesty and traceability are non-negotiable."
-        },
-        {
-          "q": "Mock jury Q&A is mainly to:",
-          "options": [
-            "Practice arguing",
-            "Pressure-test argument, validation, and limits",
-            "Memorize fake answers",
-            "Avoid revisions"
-          ],
-          "answer": 1,
-          "explain": "Q&A improves defendability."
-        }
-      ],
-      "zhNotePrompt": "貼上精選專案排序、3 分鐘講稿大綱，以及兩題模擬問答要點。",
-      "enNotePrompt": "Paste curated order, a 3-minute outline, and two mock Q&A points.",
-      "zhDeliverableChecklist": [
-        "精選與排序完成",
-        "多載體文案一致",
-        "3／5 分鐘講稿可準時",
-        "模擬提問完成",
-        "回饋已轉成修改（誠實）"
-      ],
-      "enDeliverableChecklist": [
-        "Curation done",
-        "Artifacts consistent",
-        "Timed 3/5-min scripts ready",
-        "Mock Q&A done",
-        "Feedback turned into honest edits"
-      ],
-      "zhScorecard": [
-        "精選品質",
-        "故事完整",
-        "成果誠實",
-        "發表準時",
-        "問答可防守"
-      ],
-      "enScorecard": [
-        "Curation quality",
-        "Complete stories",
-        "Honest outcomes",
-        "On-time delivery",
-        "Defendable Q&A"
-      ],
-      "resources": [
-        {
-          "name": "GitHub",
-          "url": "https://github.com",
-          "note": "README 與專案最終狀態"
-        },
-        {
-          "name": "Notion",
-          "url": "https://www.notion.so",
-          "note": "講稿與問答卡"
-        },
-        {
-          "name": "Canva",
-          "url": "https://www.canva.com",
-          "note": "作品集 PDF／簡報"
-        },
-        {
-          "name": "Google Drive",
-          "url": "https://drive.google.com",
-          "note": "發表檔與錄影備份"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "講稿精煉與模擬評審"
-        },
-        {
-          "name": "Dribbble",
-          "url": "https://dribbble.com",
-          "note": "視覺呈現參考（勿抄襲）"
-        },
-        {
-          "name": "Behance",
-          "url": "https://www.behance.net",
-          "note": "專案故事排版參考"
-        }
-      ],
-      "challenge": "完成最終作品集包並進行一次 5 分鐘發表（課程／社團／自我錄影皆可）；附模擬評審 5 題答題要點與會後修改清單。",
-      "id": "career-internship-L8",
-      "lessonKey": "career-internship-L8"
+      "boundaries": [
+        "Avoid: full re-entry",
+        "Avoid: guarantees",
+        "Avoid: auto-apply"
+      ]
     },
-    {
-      "icon": "🎙️",
-      "title": "建立面試題庫，做企業模擬面試與修正",
-      "description": "用 STAR 結構化回答行為面試，進行 AI 模擬面試與公司研究，整理改進清單。",
-      "goal": "我的 STAR 題庫＋一場模擬面試紀錄＋改進清單",
-      "estimatedTime": "60-80 分鐘",
-      "difficulty": "中階",
-      "tags": [
-        "面試",
-        "STAR",
-        "模擬面試",
-        "Chapter11"
-      ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 10,
-      "chapterZh": "AI 求職與職涯發展",
-      "chapterEn": "AI Job Search and Career Development",
-      "zhTitle": "第9課：建立面試題庫，做企業模擬面試與修正",
-      "enTitle": "Lesson 9: Build interview banks and run employer-style mock interviews",
-      "zhValueTip": "用 STAR 結構化回答行為面試，進行 AI 模擬面試與公司研究，整理改進清單。",
-      "enValueTip": "Use STAR for behavioral answers, run AI mock interviews with company research, and build an improvement list.",
-      "zhOutcome": "我的 STAR 題庫＋一場模擬面試紀錄＋改進清單",
-      "enOutcome": "My STAR Story Bank + One Mock Interview Log + Improvement List",
-      "zhConcept": "實習與第一份工作面試常考：動機、行為事件、專案深挖、基本職能題、反問。行為題用 STAR：Situation 情境、Task 任務、Action 你做的（重點）、Result 結果與學習。準備 5-8 個真實故事覆蓋：衝突、失敗、領導、數據、期限、團隊。故事必須可被追問細節；不可用電影情節或別人的功勞。公司研究：產品／服務、近期消息、職位為何存在、你能貢獻什麼。Glassdoor／官網／LinkedIn 員工貼文可參考，但評價要交叉判斷，勿整段背誦負評。AI 模擬面試：一次一題、要求追問、結束給回饋（結構、具體、長度、誠信風險）。錄音重聽比只看文字更準。回答技巧：先一句結論再展開；不懂就誠實說已知範圍；數字只講得出口的。反問準備 3 題關於團隊成功標準與新人期待。AI 可扮演面試官與幫你壓縮 STAR，但不可幫你編造故事；缺細節要你補，而不是自動腦補英雄旅程。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。",
-      "enConcept": "Build a real STAR story bank, research the company, run mock interviews with follow-ups, and improve from recordings. AI plays interviewer; never invents your stories.",
-      "zhCaseStudy": "情境案例：小禾面試常講很散。她準備 6 個 STAR，AI 模擬追問「你的 Action 裡哪一步是你做的」。她刪掉把隊友功勞講成自己的句子，改成清楚分工。正式面試同一題過關。",
-      "enCaseStudy": "Xiao He tightened STAR ownership under mock follow-ups and survived the real behavioral round.",
-      "zhWorkflow": [
-        "研究公司與職缺成功樣貌",
-        "建立 5-8 個真實 STAR 卡片",
-        "AI 模擬面試並錄音",
-        "整理改進清單並重答弱題",
-        "準備 3 個反問題"
-      ],
-      "enWorkflow": [
-        "Research company and role success signals",
-        "Build 5–8 real STAR cards",
-        "Run AI mock interview with recording",
-        "Improve weak answers",
-        "Prep three thoughtful questions"
-      ],
-      "zhCommonMistakes": [
-        "只有結論沒有 Action",
-        "偷換功勞",
-        "背稿像機器人",
-        "不研究公司"
-      ],
-      "enCommonMistakes": [
-        "Results without Actions",
-        "Stolen credit",
-        "Robotic memorization",
-        "No company research"
-      ],
-      "zhExcellentExample": "優秀準備：故事真實可追問、STAR 完整、模擬有回饋、公司研究具體、反問有水準。",
-      "enExcellentExample": "Strong prep has probe-proof stories, full STAR, feedback from mocks, concrete research, and smart reverse questions.",
-      "zhPrompt": "【Prompt 1｜STAR 故事教練】\n職缺：［ ］\n我的真實事件草稿：\n（貼上）\n請幫我整理成 STAR，並追問 5 個面試官可能問的細節。不要替我編造沒寫的行動或數據；缺資訊列待我補充。",
-      "enPrompt": "[Prompt 1 | STAR Coach] Structure my real event as STAR and ask 5 follow-ups; invent no actions or numbers.",
-      "zhCoachPrompt": "【Prompt 2｜公司研究與職缺分析】\n公司／職缺資料：\n（貼上）\n我的背景：\n（貼上）\n請整理：公司做什麼、職位為何存在、我可能被問的匹配點與風險點。標註資訊來源不足處；不要捏造財報或獎項。",
-      "enCoachPrompt": "[Prompt 2 | Company & Role Research] Summarize what they do, why the role exists, match points and risks; invent no awards/financials.",
-      "zhFeedbackPrompt": "【Prompt 3｜一對一模擬面試】\n請扮演面試官，一次一題，依我的履歷與職缺追問。結束給：結構、具體度、誠信風險、時間控制評語與改進清單。禁止要求我承認沒做過的經歷。",
-      "enFeedbackPrompt": "[Prompt 3 | 1:1 Mock Interview] Ask one question at a time with follow-ups; debrief structure/specificity/integrity/timing—never force fake admissions of undone work.",
-      "zhExample": "S：專題前一週組員失聯。｜T：準時交原型。｜A：我重切範圍、每日站會、接手關鍵頁。｜R：如期演示，事後建立失聯 SLA。",
-      "enExample": "A ownership-heavy STAR about saving a prototype deadline after a teammate went dark.",
-      "zhPractice": "完成公司研究一頁。；寫滿 STAR 卡。；模擬面試 20-30 分鐘。；Challenge：重錄弱題到你能在 90 秒內講完且經得起兩個追問。",
-      "enPractice": "Write one-page company research.；Fill STAR cards.；Mock 20–30 minutes.；Challenge: re-record a weak answer to fit 90 seconds with two follow-ups.",
-      "zhQuizItems": [
-        {
-          "q": "STAR 中最常被追問、也最該說清楚的是？",
-          "options": [
-            "天氣如何",
-            "你實際採取的 Action 與邊界",
-            "只講結果數字即可",
-            "抄同學的故事"
-          ],
-          "answer": 1,
-          "explain": "面試官要聽你做了什麼。"
-        },
-        {
-          "q": "模擬面試的價值是？",
-          "options": [
-            "背標準答案不思考",
-            "在追問下檢查故事是否真實可防守並改進",
-            "練習說謊",
-            "取代公司研究"
-          ],
-          "answer": 1,
-          "explain": "壓力測試真實故事。"
-        },
-        {
-          "q": "公司研究時應避免？",
-          "options": [
-            "整理產品與職位存在理由",
-            "捏造公司獎項與內幕當成事實",
-            "準備反問",
-            "對照自己的匹配點"
-          ],
-          "answer": 1,
-          "explain": "不可捏造公司資訊。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "In STAR, interviewers most probe:",
-          "options": [
-            "The weather",
-            "Your actual Actions and ownership boundaries",
-            "Results numbers only",
-            "A classmate’s story"
-          ],
-          "answer": 1,
-          "explain": "They need your actions."
-        },
-        {
-          "q": "Mock interviews help you:",
-          "options": [
-            "Memorize without thinking",
-            "Test whether stories survive follow-ups and improve",
-            "Practice lying",
-            "Skip company research"
-          ],
-          "answer": 1,
-          "explain": "Pressure-test real stories."
-        },
-        {
-          "q": "Company research should avoid:",
-          "options": [
-            "Summarizing product and role purpose",
-            "Inventing awards/insider claims as facts",
-            "Preparing reverse questions",
-            "Mapping your fit"
-          ],
-          "answer": 1,
-          "explain": "Don’t fabricate company facts."
-        }
-      ],
-      "zhNotePrompt": "貼上兩個 STAR 的 Action 句，以及模擬面試改進清單前三項。",
-      "enNotePrompt": "Paste Action lines from two STARs and your top three mock-interview improvements.",
-      "zhDeliverableChecklist": [
-        "公司研究完成",
-        "STAR 卡 ≥5",
-        "模擬面試完成",
-        "改進清單成文",
-        "反問準備 3 題"
-      ],
-      "enDeliverableChecklist": [
-        "Company research done",
-        "≥5 STAR cards",
-        "Mock interview done",
-        "Improvement list written",
-        "3 reverse questions ready"
-      ],
-      "zhScorecard": [
-        "故事真實",
-        "STAR 清楚",
-        "經得起追問",
-        "公司理解",
-        "可改進"
-      ],
-      "enScorecard": [
-        "Real stories",
-        "Clear STAR",
-        "Probe-proof",
-        "Company sense",
-        "Improvable"
-      ],
-      "resources": [
-        {
-          "name": "LinkedIn",
-          "url": "https://www.linkedin.com",
-          "note": "公司與員工動態研究"
-        },
-        {
-          "name": "Glassdoor",
-          "url": "https://www.glassdoor.com",
-          "note": "面試經驗參考（需判斷）"
-        },
-        {
-          "name": "104",
-          "url": "https://www.104.com.tw",
-          "note": "職缺條件與公司頁"
-        },
-        {
-          "name": "Yourator",
-          "url": "https://www.yourator.co",
-          "note": "新創職缺與團隊介紹"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "STAR 整理與模擬面試"
-        }
-      ],
-      "challenge": "針對一個真實投遞職缺完成一場 25 分鐘模擬面試（含追問），並交出改進前後對照的一題 STAR。",
-      "id": "career-internship-L9",
-      "lessonKey": "career-internship-L9"
+    "zhCaseStudyBlocks": {
+      "problem": "阿凱要投前端實習，履歷寫 React 但 LinkedIn 仍寫全端，L8 模擬紀錄缺失。",
+      "wrong": "請 AI 重生成全部九份文件。",
+      "right": "貼九堂摘要，標 L8 缺、LinkedIn 矛盾，TOP3 修：同步 LinkedIn、補 2 題模擬、核對 JD 官方頁。",
+      "result": "一頁可投遞前勾選的總檢查。"
     },
-    {
-      "icon": "🗺️",
-      "title": "整合完成「求職與實習申請包」與投遞節奏",
-      "description": "建立求職管道與週節奏、用 AI 做職缺與公司分析、比較 Offer，並做近／中期職涯規劃。",
-      "goal": "我的 8 週求職作戰計畫＋職缺追蹤表＋Offer 比較表＋一年職涯草案",
-      "estimatedTime": "60-80 分鐘",
-      "difficulty": "中階",
-      "tags": [
-        "求職策略",
-        "Offer",
-        "職涯規劃",
-        "Chapter11"
+    "enCaseStudyBlocks": {
+      "problem": "Kai applies frontend but LinkedIn still says full-stack and L8 mock log missing.",
+      "wrong": "Regenerate all nine deliverables with AI.",
+      "right": "Paste summaries, flag missing L8 and LinkedIn mismatch; top 3: sync LinkedIn, two mock questions, verify official JD.",
+      "result": "One-page pre-apply master check."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "複製摘要",
+        "why": "整合不重寫",
+        "input": "成果包",
+        "output": "九段摘要",
+        "check": "缺的標尚未完成"
+      },
+      {
+        "do": "九項清單",
+        "why": "一眼看齊套",
+        "input": "摘要",
+        "output": "有無表",
+        "check": "是否 9 項皆有"
+      },
+      {
+        "do": "一致性檢查",
+        "why": "防矛盾",
+        "input": "跨文件",
+        "output": "矛盾清單",
+        "check": "專案名是否同"
+      },
+      {
+        "do": "總檢查+TOP3",
+        "why": "投遞前最後關",
+        "input": "檢查表",
+        "output": "TOP3 修復",
+        "check": "不要求重打前課"
+      },
+      {
+        "do": "本週行動存檔",
+        "why": "可執行",
+        "input": "TOP1 職缺",
+        "output": "各 1 行動",
+        "check": "無保證錄取"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Copy summaries",
+        "why": "Integrate don’t rewrite",
+        "input": "Package",
+        "output": "Nine summaries",
+        "check": "Missing marked unfinished"
+      },
+      {
+        "do": "Nine-item inventory",
+        "why": "See completeness",
+        "input": "Summaries",
+        "output": "Have/missing table",
+        "check": "All nine addressed"
+      },
+      {
+        "do": "Consistency audit",
+        "why": "Prevent contradictions",
+        "input": "Cross-docs",
+        "output": "Mismatch list",
+        "check": "Project names match"
+      },
+      {
+        "do": "Master check + top 3",
+        "why": "Last gate before apply",
+        "input": "Checklist",
+        "output": "Top 3 fixes",
+        "check": "No full re-entry"
+      },
+      {
+        "do": "Weekly actions and save",
+        "why": "Executable",
+        "input": "Top 1 role",
+        "output": "One action each",
+        "check": "No hire guarantees"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "九堂成果已分散，要整合檢查並排本週投遞與面試行動時使用",
+      "fields": [
+        "[请填写个人经历]",
+        "[請貼上職缺內容]",
+        "[请贴上目前履历]"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 10,
-      "chapterZh": "AI 求職與職涯發展",
-      "chapterEn": "AI Job Search and Career Development",
-      "zhTitle": "第10課：整合完成「求職與實習申請包」與投遞節奏",
-      "enTitle": "Lesson 10: Complete your career package and application rhythm",
-      "zhValueTip": "建立求職管道與週節奏、用 AI 做職缺與公司分析、比較 Offer，並做近／中期職涯規劃。",
-      "enValueTip": "Build channels and weekly cadence, analyze roles/companies with AI, compare offers, and draft near/mid-term career plans.",
-      "zhOutcome": "我的 8 週求職作戰計畫＋職缺追蹤表＋Offer 比較表＋一年職涯草案",
-      "enOutcome": "My 8-Week Job Search Plan + Pipeline Tracker + Offer Scorecard + 1-Year Career Draft",
-      "zhConcept": "求職是專案不是情緒：要有目標角色、管道組合、每週產出（投遞數、連結數、模擬面試）、追蹤狀態與複盤。管道：104／1111／Indeed／Yourator／CakeResume／LinkedIn／內推／職涯中心。不同管道投遞節奏不同，但履歷版本要可追溯。AI 協助職缺分析：把 JD 轉成你的匹配分數、缺口、該強調的專案。公司研究：營運方式與產品定位、團隊、文化訊號、風險（過勞傳聞需多方查證）。Offer 比較不只看月薪：學習曲線、導師、遠距、加班文化、合約、地點、與長期方向契合。做加權表，避免只被簽約獎金帶走。職涯規劃分層：未來 3 個月（實習／作品）、1 年（技能與角色）、3 年（方向假設）。方向可改，但每季要有可驗證行動。求職信與追蹤信也是策略的一部分：投遞後合理追蹤，不轟炸。拒絕與接受都要專業短訊。AI 可排程與做比較表，但不可替你決定人生，也不可捏造公司內部薪資帶；資訊不足要標示。Chapter 11 閉環：履歷→品牌→面試→介紹→策略。連回作品集，你賣的是可轉移能力與證據。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。履歷、LinkedIn、面試故事與作品集必須一致；不要用 AI 捏造經歷、績效、面試或 Offer。當履歷、品牌、面試、介紹與策略形成閉環，你換產業也能重複同一套求職作業系統。第一份工作的目標往往是可學習的環境與可驗證成長；把選擇標準寫下來，比臨時被數字帶走更穩。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可投遞或可公開且事實正確的版本。每次求職行動後寫三行：投了什麼、學到什麼、下次改什麼；讓策略可迭代而不是情緒海投。",
-      "enConcept": "Run job search as a project with channels, weekly metrics, JD/company analysis, weighted offer comparison, and layered career horizons. AI assists analysis; you decide—and never invent salary bands or offers.",
-      "zhCaseStudy": "情境案例：小恩海投 80 封無回音。她改成每週 8 封高對齊＋3 則人脈訊息＋1 次模擬面試，用追蹤表管理。兩個 Offer 用加權表比較學習與生活，選了薪資略低但有導師的團隊。一季後技能成長驗證了選擇。",
-      "enCaseStudy": "Xiao En replaced mass-apply chaos with a measured pipeline and a weighted offer choice favoring mentorship.",
-      "zhWorkflow": [
-        "定義目標角色與非目標",
-        "建立管道與 8 週節奏",
-        "用追蹤表管理職缺狀態",
-        "做公司／職缺分析與 Offer 比較模板",
-        "寫一年職涯草案與每季檢視點"
-      ],
-      "enWorkflow": [
-        "Define target and non-target roles",
-        "Set channels and an 8-week cadence",
-        "Track applications in a pipeline",
-        "Build analysis and offer-comparison templates",
-        "Draft a 1-year plan with quarterly checkpoints"
-      ],
-      "zhCommonMistakes": [
-        "海投無追蹤",
-        "只看薪資忽略學習與健康",
-        "職涯計畫 pen 空話無行動",
-        "聽信單一網路薪資傳聞"
-      ],
-      "enCommonMistakes": [
-        "Mass apply with no tracking",
-        "Salary-only decisions",
-        "Vague career wishes without actions",
-        "Trusting one unverified salary rumor"
-      ],
-      "zhExcellentExample": "優秀策略：目標清楚、週節奏可執行、追蹤完整、分析有據、Offer 有加權、職涯有檢視點。",
-      "enExcellentExample": "A strong strategy has clear targets, executable weekly cadence, full tracking, grounded analysis, weighted offers, and checkpoints.",
-      "zhPrompt": "【Prompt 1｜8 週求職作戰計畫】\n目標角色：［ ］；每週可投入時數：［ ］；已有管道：\n（貼上）\n請排 8 週計畫（投遞、作品、面試練習、人脈），標假設與需我確認的限制。不要假設我每天有 8 小時；不要捏造內推機會。",
-      "enPrompt": "[Prompt 1 | 8-Week Search Plan] Build a plan for apply/build/practice/network under my real hours; invent no referrals; ask if constraints are missing.",
-      "zhCoachPrompt": "【Prompt 2｜職缺與公司分析】\nJD 與公司公開資訊：\n（貼上）\n我的履歷重點：\n（貼上）\n請輸出：匹配分數理由、缺口、面談可能問題、風險訊號。資訊不足標待確認；不要編造薪資帶或裁員內幕。",
-      "enCoachPrompt": "[Prompt 2 | Role & Company Analysis] Score fit with reasons, gaps, likely questions, risks; invent no salary bands or insider layoff claims.",
-      "zhFeedbackPrompt": "【Prompt 3｜Offer 比較與職涯草案】\nOffer A/B 事實：\n（貼上）\n我的優先權重：\n（貼上）\n請做加權比較，並給一年職涯草案（技能／角色／檢視點）。標示哪些是建議；不要替我做最終決定口吻的強迫選擇。",
-      "enFeedbackPrompt": "[Prompt 3 | Offer Compare & Career Draft] Weighted comparison plus a 1-year draft with checkpoints; keep recommendations labeled—don’t force the decision.",
-      "zhExample": "週節奏：8 封高對齊投遞＋2 封追蹤＋1 次模擬面試。｜Offer 表：學習 0.3／薪酬 0.25／生活 0.25／方向 0.2。",
-      "enExample": "A weekly pipeline cadence plus a weighted offer scorecard across learning, pay, life, and direction.",
-      "zhPractice": "完成 8 週計畫與追蹤表。；分析兩個真實職缺。；建立 Offer 比較表。；Challenge：用一週實際執行計畫，複盤投遞回覆率，並調整下週數字（不造假）。",
-      "enPractice": "Finish 8-week plan + tracker.；Analyze two real roles.；Build offer scorecard.；Challenge: execute one real week, review reply rate, adjust next week’s numbers honestly.",
-      "zhQuizItems": [
+      "body": "你是求職整合教練。不可要求我重打 L1–L9 全部原文，也不可保證錄取或提供自動投遞。\n\n請用我貼上的各堂摘要（缺則標「尚未完成」）整合，不要叫我重填全部：\n- L1 職涯目標檔摘要：[请填写个人经历]\n- L2 職缺需求拆解表摘要：[請貼上職缺內容]\n- L3 個人能力與經歷素材庫摘要：[请填写个人经历]\n- L4 對準職缺履歷稿摘要：[请贴上目前履历]\n- L5 求職信與自我介紹稿摘要：[请填写个人经历]\n- L6 作品集故事卡摘要：[请填写个人经历]\n- L7 面試題庫摘要：[请填写个人经历]\n- L8 模擬面試改善紀錄摘要：[请填写个人经历]\n- L9 求職申請追蹤表摘要：[请填写个人经历]\n\n任務：產出「完整求職申請包檢查」含：\n1) 九項成果清單（有／缺／待補一句摘要）— 整合不重寫\n2) 跨文件一致性檢查：目標、專案名、技能、故事是否矛盾\n3) 投遞前總檢查表（官方 JD、誠信、隱私遮蔽、文件版本）\n4) 缺漏優先修 TOP3（只補摘要層級，不要求重打前 9 堂）\n5) 本週投遞節奏與面試準備各 1 行動\n\n輸出格式：勾選表 + 條列。不要保證錄取。不要自動投遞。\n\nAI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "expected": "一份含九項清單、一致性檢查、總檢查表與缺漏 TOP3 的完整求職申請包檢查",
+      "revisionReminder": "AI 只能協助整理與表達你真實的經歷。履歷、求職信與面試回答不得加入不存在的經歷、技能或成果。\n\n請勿貼身分證號、護照、銀行資訊、完整住址、私人電話、帳密或公司機密。分析履歷前可先遮蔽敏感資料。",
+      "extensions": [
         {
-          "q": "求職策略較健康的做法是？",
-          "options": [
-            "無記錄海投",
-            "目標角色＋管道組合＋週節奏＋追蹤複盤",
-            "只投一家等到天荒地老",
-            "完全交給 AI 自動決定人生"
-          ],
-          "answer": 1,
-          "explain": "求職要用可管理的系統。"
-        },
-        {
-          "q": "比較 Offer 時應？",
-          "options": [
-            "只看簽約獎金",
-            "用加權檢視學習、生活、方向與薪酬等多重因素",
-            "忽略合約",
-            "聽信單一匿名貼文定案"
-          ],
-          "answer": 1,
-          "explain": "多重標準比單一數字穩。"
-        },
-        {
-          "q": "AI 做公司／職缺分析時不可？",
-          "options": [
-            "整理公開資訊與匹配缺口",
-            "捏造薪資帶與內幕當事實",
-            "列出待確認問題",
-            "建議可能面試題"
-          ],
-          "answer": 1,
-          "explain": "不可把臆測寫成事實。"
+          "title": "延伸：只修最大矛盾",
+          "body": "從我貼的摘要中找出 1 個最大跨文件矛盾，建議最小修改（不要重寫全部）。"
         }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when nine deliverables exist separately to integrate, check, and plan weekly actions",
+      "fields": [
+        "[Enter your real experience]",
+        "[Paste the job description]",
+        "[Paste your current resume]"
       ],
-      "enQuizItems": [
+      "body": "You are an application-integration coach. Do not ask me to retype all of L1–L9 or guarantee offers or auto-apply.\n\nIntegrate the summaries I paste (mark “not finished” if missing)—do not make me re-enter everything:\n- L1 Career Target Profile: [Enter your real experience]\n- L2 Job Description Analysis: [Paste the job description]\n- L3 Career Evidence Bank: [Enter your real experience]\n- L4 Targeted Resume Draft: [Paste your current resume]\n- L5 Cover Letter / Intro: [Enter your real experience]\n- L6 Portfolio Story Cards: [Enter your real experience]\n- L7 Interview Question Bank: [Enter your real experience]\n- L8 Mock Interview Log: [Enter your real experience]\n- L9 Application Tracker: [Enter your real experience]\n\nTask: Produce a “Final Career Application Kit” check with:\n1) Nine-item inventory (have / missing / one-line gap)—integrate, don’t rewrite\n2) Cross-doc consistency: target, project names, skills, stories\n3) Pre-submit master checklist (official JD, integrity, privacy redaction, doc version)\n4) Top 3 gap fixes (summary level only—no full re-entry of prior lessons)\n5) One action each for this week’s apply rhythm and interview prep\n\nOutput: tick list plus bullets. No hire guarantees. No auto-apply.\n\nAI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "expected": "A kit check with nine-item inventory, consistency audit, master checklist, and top 3 gaps",
+      "revisionReminder": "AI should only help organize and communicate your real experience. Do not add experience, skills, achievements, or credentials that you do not actually have.\n\nDo not paste ID numbers, passport, banking info, full home address, private phone, passwords, or company secrets. Redact sensitive data before resume analysis.",
+      "extensions": [
         {
-          "q": "A healthier job-search approach is:",
-          "options": [
-            "Blind mass apply with no log",
-            "Target roles + channel mix + weekly cadence + tracked review",
-            "Apply to one place forever",
-            "Let AI decide your life automatically"
-          ],
-          "answer": 1,
-          "explain": "Treat search as a manageable system."
-        },
-        {
-          "q": "When comparing offers you should:",
-          "options": [
-            "Only look at signing bonus",
-            "Weight learning, life, direction, and pay",
-            "Ignore the contract",
-            "Decide from one anonymous post"
-          ],
-          "answer": 1,
-          "explain": "Multiple criteria beat a single number."
-        },
-        {
-          "q": "AI company/role analysis must not:",
-          "options": [
-            "Summarize public info and gaps",
-            "Invent salary bands/insider claims as facts",
-            "List pending questions",
-            "Suggest likely interview questions"
-          ],
-          "answer": 1,
-          "explain": "Don’t present speculation as fact."
+          "title": "Extension: fix biggest mismatch",
+          "body": "From my summaries, find the biggest cross-doc contradiction and suggest the smallest fix—no full rewrite."
         }
-      ],
-      "zhNotePrompt": "貼上 8 週計畫的第一週任務，以及 Offer 比較的權重設定。",
-      "enNotePrompt": "Paste week-1 tasks from your 8-week plan and your offer-comparison weights.",
-      "zhDeliverableChecklist": [
-        "8 週計畫完成",
-        "職缺追蹤表可用",
-        "至少兩職缺分析",
-        "Offer 比較表完成",
-        "一年職涯草案含檢視點"
-      ],
-      "enDeliverableChecklist": [
-        "8-week plan done",
-        "Pipeline tracker ready",
-        "≥2 role analyses",
-        "Offer scorecard done",
-        "1-year draft with checkpoints"
-      ],
-      "zhScorecard": [
-        "可執行",
-        "可追蹤",
-        "分析有據",
-        "決策有權重",
-        "職涯可檢視"
-      ],
-      "enScorecard": [
-        "Executable",
-        "Trackable",
-        "Grounded analysis",
-        "Weighted decisions",
-        "Reviewable career plan"
-      ],
-      "resources": [
-        {
-          "name": "104",
-          "url": "https://www.104.com.tw",
-          "note": "主力職缺與公司頁"
-        },
-        {
-          "name": "1111",
-          "url": "https://www.1111.com.tw",
-          "note": "職缺管道之一"
-        },
-        {
-          "name": "Yourator",
-          "url": "https://www.yourator.co",
-          "note": "新創求職與團隊資訊"
-        },
-        {
-          "name": "CakeResume",
-          "url": "https://www.cakeresume.com",
-          "note": "投遞與履歷曝光"
-        },
-        {
-          "name": "LinkedIn",
-          "url": "https://www.linkedin.com",
-          "note": "人脈與公司研究"
-        },
-        {
-          "name": "Indeed",
-          "url": "https://tw.indeed.com",
-          "note": "職缺彙整與關鍵字"
-        },
-        {
-          "name": "Glassdoor",
-          "url": "https://www.glassdoor.com",
-          "note": "薪資／文化參考（需多方查證）"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "計畫、分析與 Offer 表輔助"
+      ]
+    },
+    "zhPracticeSteps": [
+      {
+        "task": "貼摘要非全文",
+        "standard": "缺的標尚未完成",
+        "mistakes": "重打九堂",
+        "check": "是否省時？"
+      },
+      {
+        "task": "一致性",
+        "standard": "目標技能故事同",
+        "mistakes": "矛盾未標",
+        "check": "最大矛盾是哪？"
+      },
+      {
+        "task": "總檢查全勾",
+        "standard": "誠信隱私官方 JD",
+        "mistakes": "跳過檢查",
+        "check": "能安心投 TOP1？"
+      },
+      {
+        "task": "本週各 1 行動",
+        "standard": "投遞+面試",
+        "mistakes": "空泛計畫",
+        "check": "明天能開始？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Summaries not full re-entry",
+        "standard": "Missing marked unfinished",
+        "mistakes": "Retype all nine",
+        "check": "Time saved?"
+      },
+      {
+        "task": "Consistency",
+        "standard": "Target/skills/stories align",
+        "mistakes": "Contradictions ignored",
+        "check": "Biggest mismatch?"
+      },
+      {
+        "task": "Master check all ticked",
+        "standard": "Integrity privacy official JD",
+        "mistakes": "Skipped check",
+        "check": "Ready for top 1?"
+      },
+      {
+        "task": "One action each this week",
+        "standard": "Apply + interview",
+        "mistakes": "Vague plan",
+        "check": "Start tomorrow?"
+      }
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "整合變成大Rewrite",
+        "why": "耗時且易引入新假資訊",
+        "fix": "只修 TOP3 最小矛盾"
+      },
+      {
+        "error": "本週行動列 10 項",
+        "why": "無法執行",
+        "fix": "投遞+面試各 1 項"
+      },
+      {
+        "error": "未標尚未完成的堂次",
+        "why": "以為齊套其實缺模擬",
+        "fix": "誠實標缺再排補"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Integration becomes full rewrite",
+        "why": "Slow and new fiction risk",
+        "fix": "Fix top 3 smallest mismatches"
+      },
+      {
+        "error": "Ten actions this week",
+        "why": "Not executable",
+        "fix": "One apply + one interview action"
+      },
+      {
+        "error": "Unmarked unfinished lessons",
+        "why": "False completeness",
+        "fix": "Mark gaps then schedule fixes"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "完整度",
+        "levels": {
+          "incomplete": "缺多項未標",
+          "basic": "只列 5 項",
+          "good": "九項有無清楚",
+          "ready": "缺漏 TOP3"
         }
-      ],
-      "challenge": "建立並使用職缺追蹤表至少追蹤 10 筆真實投遞／意向；完成一份書面 Offer 比較模板（即使尚無 Offer 也用兩個假想情境練習權重，並標示為模擬）。",
-      "id": "career-internship-L10",
-      "lessonKey": "career-internship-L10"
-    }
-  ],
+      },
+      {
+        "name": "一致性",
+        "levels": {
+          "incomplete": "多處矛盾",
+          "basic": "部分一致",
+          "good": "矛盾已標",
+          "ready": "TOP 矛盾已排修"
+        }
+      },
+      {
+        "name": "可用性",
+        "levels": {
+          "incomplete": "無法投遞",
+          "basic": "需大整合",
+          "good": "總檢查可勾",
+          "ready": "本週可執行"
+        }
+      },
+      {
+        "name": "誠信合規",
+        "levels": {
+          "incomplete": "保證錄取",
+          "basic": "自動投遞",
+          "good": "誠信檢查過",
+          "ready": "無不實宣稱"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Completeness",
+        "levels": {
+          "incomplete": "Many unmarked gaps",
+          "basic": "Only five items",
+          "good": "Clear nine-item status",
+          "ready": "Top 3 gaps set"
+        }
+      },
+      {
+        "name": "Consistency",
+        "levels": {
+          "incomplete": "Multiple contradictions",
+          "basic": "Partial alignment",
+          "good": "Contradictions flagged",
+          "ready": "Top mismatch scheduled"
+        }
+      },
+      {
+        "name": "Usability",
+        "levels": {
+          "incomplete": "Not apply-ready",
+          "basic": "Needs heavy merge",
+          "good": "Master check tickable",
+          "ready": "Executable this week"
+        }
+      },
+      {
+        "name": "Integrity",
+        "levels": {
+          "incomplete": "Guaranteed offers",
+          "basic": "Auto-apply claims",
+          "good": "Integrity check passed",
+          "ready": "No false claims"
+        }
+      }
+    ],
+    "zhNextStep": "依 TOP3 缺漏與本週行動開始實際投遞；每投一家更新 L9 追蹤表。",
+    "enNextStep": "Execute top 3 gaps and weekly actions; update the L9 tracker after each apply.",
+    "zhSummary": [
+      "本堂成果：完整求職申請包檢查",
+      "整合摘要，不重打九堂。",
+      "投遞前跑總檢查。"
+    ],
+    "enSummary": [
+      "Deliverable: Final Career Application Kit",
+      "Integrate summaries—don’t retype nine lessons.",
+      "Run the master check before applying."
+    ]
+  }
+],
   "workplace-productivity": [
     {
       "id": "workplace-productivity-L1",
