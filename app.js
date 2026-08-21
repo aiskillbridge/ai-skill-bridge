@@ -6909,7 +6909,7 @@ function runI18nAuditIfDev() {
 
 function runPremiumContentAuditIfDev() {
   if (!isLocalDevHost()) return;
-  ["admissions", "college-learning", "research-competition", "career-internship", "workplace-productivity"].forEach(courseId => {
+  ["admissions", "college-learning", "research-competition", "career-internship", "workplace-productivity", "startup-automation"].forEach(courseId => {
     try {
       const result = validatePremiumLessonContent(courseId);
       console.log(`[CONTENT AUDIT] ${courseId}: ${result.validCount}/${result.total} lessons valid`);

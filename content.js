@@ -27162,1931 +27162,5339 @@ const PREMIUM_LESSON_DETAILS = {
   }
 ],
   "startup-automation": [
-    {
-      "id": "startup-automation-L1",
-      "lessonKey": "startup-automation-L1",
-      "zhTitle": "第1課：用 AI 定義真實問題與市場機會",
-      "enTitle": "Lesson 1: Use AI to define a real problem and market opportunity",
-      "zhConcept": "創業從問題開始，不是從技術展示開始。寫清楚：目標使用者是誰、在什麼情境痛、現在怎麼湊合、你的切入點為何可能更好。AI 可幫你把觀察整理成問題陳述並設計驗證；不可捏造訪談結論或市場規模數字。\n\n本課只做問題與機會定義，為後續使用者訪談與商業模式鋪路。",
-      "enConcept": "Startups begin with a problem statement: who, context, current alternatives, and why your wedge might win. AI can structure observations and suggest tests; it must not invent interview findings or market figures.",
-      "zhPrompt": "請擔任創業教練。我觀察到的現象：【】。我以為的使用者：【】。我目前沒有的證據：【】。\n\n請幫我寫問題定義、列出關鍵假設、設計最小驗證，並指出我哪裡可能在自嗨。禁止編造市場規模與假訪談。",
-      "enPrompt": "Act as a startup coach. Phenomenon: []. Assumed user: []. Missing evidence: []. Write a problem definition, key hypotheses, and a minimum test; call out possible self-deception. Invent no market size or interviews.",
-      "zhExample": "弱：「大家都需要 AI」。強：「大學社團排班者在活動前 3 天，平均每場花 2 小時手動改班，錯誤成本是現場缺人。」",
-      "enExample": "Weak: everyone needs AI. Strong: club schedulers spend ~2 hours manually fixing shifts in the final 3 days, with no-show risk.",
-      "zhPractice": "寫下觀察。；完成問題一頁。；列出 5 個假設。；設計本週最小驗證。；刪除「不做清單」裡的功能幻想。",
-      "enPractice": "Write observations.；Finish the problem one-pager.；List 5 hypotheses.；Design this week’s minimum test.；Cut feature fantasies via a not-doing list.",
-      "zhFeedbackPrompt": "你是一位創業教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 問題具體性\n- 使用者清楚\n- 可驗證\n- 誠實度\n- 是否聚焦創業問題\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a startup coach. Score 1-10 for: Specificity, User clarity, Testability, Honesty, Startup-problem focus. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhQuizItems": [
-        {
-          "q": "創業起點應是？",
-          "options": [
-            "可驗證的真實問題",
-            "先做華麗功能",
-            "先寫完整財報"
-          ],
-          "answer": 0,
-          "explain": "問題先行。"
-        },
-        {
-          "q": "最小驗證的目的？",
-          "options": [
-            "用最小成本檢驗假設",
-            "證明你很忙",
-            "取代所有訪談"
-          ],
-          "answer": 0,
-          "explain": "檢驗。"
-        },
-        {
-          "q": "AI 不可？",
-          "options": [
-            "捏造市場規模",
-            "整理問題陳述",
-            "設計驗證問題"
-          ],
-          "answer": 0,
-          "explain": "禁假數據。"
-        },
-        {
-          "q": "「不做清單」有助於？",
-          "options": [
-            "避免功能膨脹",
-            "讓計畫越做越大",
-            "逃避使用者"
-          ],
-          "answer": 0,
-          "explain": "聚焦。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "問題定義一頁",
-            "無關長信",
-            "無關申請包"
-          ],
-          "answer": 0,
-          "explain": "創業問題。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "創業起點應是？",
-          "options": [
-            "可驗證的真實問題",
-            "先做華麗功能",
-            "先寫完整財報"
-          ],
-          "answer": 0,
-          "explain": "問題先行。"
-        },
-        {
-          "q": "最小驗證的目的？",
-          "options": [
-            "用最小成本檢驗假設",
-            "證明你很忙",
-            "取代所有訪談"
-          ],
-          "answer": 0,
-          "explain": "檢驗。"
-        },
-        {
-          "q": "AI 不可？",
-          "options": [
-            "捏造市場規模",
-            "整理問題陳述",
-            "設計驗證問題"
-          ],
-          "answer": 0,
-          "explain": "禁假數據。"
-        },
-        {
-          "q": "「不做清單」有助於？",
-          "options": [
-            "避免功能膨脹",
-            "讓計畫越做越大",
-            "逃避使用者"
-          ],
-          "answer": 0,
-          "explain": "聚焦。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "問題定義一頁",
-            "無關長信",
-            "無關申請包"
-          ],
-          "answer": 0,
-          "explain": "創業問題。"
-        }
-      ],
-      "zhOutcome": "產出問題定義一頁：誰有痛、痛多久、現有替代方案、為何現在可做、最小驗證。",
-      "enOutcome": "Produce a one-page problem definition: who hurts, how often, current alternatives, why now, and a minimum test.",
-      "zhValueTip": "用證據定義真實問題與市場機會，而不是先發明功能。",
-      "enValueTip": "Define a real problem and market opportunity with evidence—before inventing features.",
-      "zhCaseStudy": "兩位學生想做「全能校園 App」。收斂後問題改成：社團幹部在活動前 72 小時，用試算表＋群組訊息協調班次，常發生漏人。現有替代是人工表格。最小驗證：訪談 8 位幹部，看他們是否願意為「班次衝突自動提醒」付費或至少持續使用。",
-      "enCaseStudy": "An “everything campus app” narrowed to club officers coordinating shifts 72 hours before events via spreadsheets and chats—validated by interviewing eight officers about conflict reminders.",
-      "zhExcellentExample": "問題一頁含使用者、情境、頻率、代價、替代方案、假設、最小驗證與「不做清單」。",
-      "enExcellentExample": "One-pager with user, context, frequency, cost, alternatives, hypotheses, minimum test, and a not-doing list.",
-      "zhWorkflow": [
-        "記錄現象",
-        "寫問題陳述",
-        "列假設",
-        "設計最小驗證",
-        "明確不做什么"
-      ],
-      "enWorkflow": [
-        "Capture phenomenon",
-        "Write problem statement",
-        "List hypotheses",
-        "Design minimum test",
-        "Define not-doing"
-      ],
-      "zhCommonMistakes": [
-        "先做功能再找問題",
-        "捏造市場數字",
-        "把朋友客套當需求",
-        "問題大到無法驗證",
-        "不做最小驗證就開發"
-      ],
-      "enCommonMistakes": [
-        "Features before problem",
-        "Fake market numbers",
-        "Polite friends as demand",
-        "Untestably broad problems",
-        "Building before a minimum test"
-      ],
-      "zhDeliverableChecklist": [
-        "問題一頁",
-        "假設清單",
-        "最小驗證",
-        "不做清單",
-        "無假數據"
-      ],
-      "enDeliverableChecklist": [
-        "Problem one-pager",
-        "Hypotheses",
-        "Minimum test",
-        "Not-doing list",
-        "No fake data"
-      ],
-      "zhScorecard": [
-        "問題具體性",
-        "使用者清楚",
-        "可驗證",
-        "誠實度",
-        "是否聚焦創業問題"
-      ],
-      "enScorecard": [
-        "Specificity",
-        "User clarity",
-        "Testability",
-        "Honesty",
-        "Startup-problem focus"
-      ],
-      "zhNotePrompt": "貼上問題定義一頁與最小驗證計畫。",
-      "enNotePrompt": "Paste your problem one-pager and minimum test plan.",
-      "zhCoachPrompt": "請挑戰我的問題定義是否夠具體、是否可驗證，並指出自嗨之處。",
-      "enCoachPrompt": "Challenge whether my problem is specific and testable; call out self-deception.",
-      "title": "用 AI 定義真實問題與市場機會",
-      "description": "用證據定義真實問題與市場機會，而不是先發明功能。",
-      "goal": "產出問題定義一頁：誰有痛、痛多久、現有替代方案、為何現在可做、最小驗證。"
+  {
+    "id": "startup-automation-L1",
+    "lessonKey": "startup-automation-L1",
+    "zhTitle": "第1課：用 AI 定義真實問題與市場機會",
+    "enTitle": "Lesson 1: Use AI to define a real problem and market opportunity",
+    "zhConcept": "創業第一步不是寫商業計畫，而是把模糊痛點寫成可檢查的「問題與市場機會定義」：誰痛、何時痛、現在怎麼湊合、為何可能值得做、為何現在不做某些方向。AI 可幫你整理結構與提問，但不可捏造訪談人數、問卷結果、TAM/SAM/SOM 或投資人意見。數字沒有來源就標「示意／假設」或「需實地驗證」。",
+    "enConcept": "Startup step one is not a full business plan—it is a checkable Problem & Opportunity Definition: who hurts, when, how they cope, why it might be worth doing, and what you will not pursue now. AI can structure and question; it must not invent interview counts, surveys, TAM/SAM/SOM, or investor opinions. Label unsourced numbers as illustrative/assumptions or needs field validation.",
+    "zhPrompt": "你是創業驗證教練，協助把「模糊痛點」整理成可檢查的問題與市場機會定義。不可捏造訪談人數、問卷結果、TAM/SAM/SOM、競爭者營收或投資人意見；未知數字一律標「示意／假設」或「需實地驗證」。\n\n我的背景：\n- 我想解決的問題：[請填寫問題]\n- 目標使用者（角色，非真實個資）：[請填寫目標使用者]\n- 我目前觀察到的流程／現況：[請填寫目前流程]\n- 限制條件（時間、預算、技能、合規）：[請填寫限制條件]\n- 已去除敏感資訊的補充筆記：[請貼上已去除敏感資訊的內容]\n\n任務：產出「問題與市場機會定義」，必須包含：\n1) 問題一句話（可被否證，避免空泛「大家都很忙」）\n2) 誰痛、何時痛、現在怎麼湊合（現況）\n3) 機會假設（為何值得做，標示：觀察／假設／需驗證）\n4) 非機會清單（為什麼現在不做某些方向）\n5) 最小驗證方式（訪談／試作／觀察，不含假數據）\n6) 需人工確認項（至少 3 項）\n7) 風險與隱私提醒（不可自動付款／簽約／刪資料）\n\n輸出格式：表格 + 條列。不要宣稱已驗證市場規模。不要說本平台已串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+    "enPrompt": "You are a startup validation coach who turns vague pain into a checkable problem and market-opportunity definition. Do not invent interview counts, survey results, TAM/SAM/SOM, competitor revenue, or investor opinions. Label unknown numbers as illustrative/assumptions or “needs field validation.”\n\nMy context:\n- Problem I want to solve: [Enter problem]\n- Target user (role, no real PII): [Enter target user]\n- Current process / status quo: [Enter current process]\n- Constraints (time, budget, skills, compliance): [Enter constraints]\n- Sanitized extra notes: [Paste sanitized content]\n\nTask: Produce a “Problem & Opportunity Definition” with:\n1) One falsifiable problem statement (not vague “everyone is busy”)\n2) Who hurts, when, and how they cope today\n3) Opportunity hypothesis (why worth pursuing—label observation / assumption / needs validation)\n4) Non-opportunity list (what you will not pursue now)\n5) Minimal validation path (interview / prototype / observation—no fake data)\n6) Human-confirmation items (at least 3)\n7) Risk and privacy notes (no auto-pay / auto-sign / auto-delete)\n\nFormat: tables + bullets. Do not claim validated market size. Do not claim this platform integrates Zapier/Make/n8n/Gmail/LINE/ECPay/CRM.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+    "zhExample": "問題：宿舍門禁後團購難集合；目標使用者：夜貓族學生（虛構角色）；目前流程：LINE 群組亂喊誰去拿；限制：兩人團隊、本學期無金流串接。",
+    "enExample": "Problem: hard to consolidate group orders after dorm curfew; target user: night-owl students (fictional role); current process: chaotic group chat; constraints: two-person team, no payment integration this term.",
+    "zhPractice": "選定一個真實創業／專案痛點並去敏。；完成問題一句話、機會假設與非機會清單。；用主 Prompt 產出定義並刪假數字。；存成「問題與市場機會定義」。",
+    "enPractice": "Pick one real sanitized startup/project pain.; Finish problem sentence, hypotheses, and non-opportunities.; Run the main prompt and delete fake numbers.; Save the Problem & Opportunity Definition.",
+    "zhFeedbackPrompt": "你是一位創業教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 問題具體性\n- 使用者清楚\n- 可驗證\n- 誠實度\n- 是否聚焦創業問題\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a startup coach. Score 1-10 for: Specificity, User clarity, Testability, Honesty, Startup-problem focus. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhQuizItems": [
+      {
+        "q": "創業起點應是？",
+        "options": [
+          "可驗證的真實問題",
+          "先做華麗功能",
+          "先寫完整財報"
+        ],
+        "answer": 0,
+        "explain": "問題先行。"
+      },
+      {
+        "q": "最小驗證的目的？",
+        "options": [
+          "用最小成本檢驗假設",
+          "證明你很忙",
+          "取代所有訪談"
+        ],
+        "answer": 0,
+        "explain": "檢驗。"
+      },
+      {
+        "q": "AI 不可？",
+        "options": [
+          "捏造市場規模",
+          "整理問題陳述",
+          "設計驗證問題"
+        ],
+        "answer": 0,
+        "explain": "禁假數據。"
+      },
+      {
+        "q": "「不做清單」有助於？",
+        "options": [
+          "避免功能膨脹",
+          "讓計畫越做越大",
+          "逃避使用者"
+        ],
+        "answer": 0,
+        "explain": "聚焦。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "問題定義一頁",
+          "無關長信",
+          "無關申請包"
+        ],
+        "answer": 0,
+        "explain": "創業問題。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "創業起點應是？",
+        "options": [
+          "可驗證的真實問題",
+          "先做華麗功能",
+          "先寫完整財報"
+        ],
+        "answer": 0,
+        "explain": "問題先行。"
+      },
+      {
+        "q": "最小驗證的目的？",
+        "options": [
+          "用最小成本檢驗假設",
+          "證明你很忙",
+          "取代所有訪談"
+        ],
+        "answer": 0,
+        "explain": "檢驗。"
+      },
+      {
+        "q": "AI 不可？",
+        "options": [
+          "捏造市場規模",
+          "整理問題陳述",
+          "設計驗證問題"
+        ],
+        "answer": 0,
+        "explain": "禁假數據。"
+      },
+      {
+        "q": "「不做清單」有助於？",
+        "options": [
+          "避免功能膨脹",
+          "讓計畫越做越大",
+          "逃避使用者"
+        ],
+        "answer": 0,
+        "explain": "聚焦。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "問題定義一頁",
+          "無關長信",
+          "無關申請包"
+        ],
+        "answer": 0,
+        "explain": "創業問題。"
+      }
+    ],
+    "zhOutcome": "問題與市場機會定義",
+    "enOutcome": "Problem & Opportunity Definition",
+    "zhValueTip": "先定義可檢查的問題，再談市場；沒有來源的數字一律標示意／假設。",
+    "enValueTip": "Define a checkable problem before “market.” Label unsourced numbers as illustrative/assumptions.",
+    "zhCaseStudy": "校園外送互助「小班送」兩位同學想做 App，先請 AI「給完整市場報告」，得到假的訪談 200 人與 TAM。他們改成：問題＝「宿舍門禁後團購難集合」、使用者＝夜貓族學生、現況＝群組亂喊、限制＝兩人無金流串接。請 AI 只整理定義並標需驗證。他們刪掉假數字，改成週末觀察 3 次團購群組（不記真實姓名），第一次有可檢查的問題定義。",
+    "enCaseStudy": "Campus delivery helper “DormRun” founders asked AI for a full market report and got fake 200 interviews and TAM. They reframed: problem = “hard to consolidate group orders after dorm curfew,” user = night-owl students, status quo = chaotic group chat, constraint = two people, no payment integration. AI only structured the definition and flagged validation needs. They deleted fake numbers and planned three anonymized group-chat observations—first checkable problem definition.",
+    "zhExcellentExample": "含：可否證問題、使用者與現況、標示的機會假設、非機會清單、最小驗證、至少 3 個需確認項、無假市場數字。",
+    "enExcellentExample": "Includes falsifiable problem, user and status quo, labeled hypotheses, non-opportunities, minimal validation, 3+ confirmation items, no fake market numbers.",
+    "zhWorkflow": [
+      "寫下問題、目標使用者、目前流程與限制條件（去敏）",
+      "標出哪些是觀察、哪些是假設",
+      "用本課 Prompt 產出定義初稿",
+      "刪除捏造的訪談／市場數字，補上需驗證標記",
+      "存成「問題與市場機會定義」"
+    ],
+    "enWorkflow": [
+      "Write problem, target user, current process, and constraints (sanitized)",
+      "Mark observations vs assumptions",
+      "Generate a draft with this lesson’s prompt",
+      "Delete invented interviews/market numbers; add validation flags",
+      "Save the Problem & Opportunity Definition"
+    ],
+    "zhCommonMistakes": [
+      "讓 AI 編造訪談人數或問卷結果",
+      "把 TAM/SAM/SOM 當已驗證事實",
+      "問題寫成無法否證的口號",
+      "未去敏就貼客戶／同學真實資料",
+      "宣稱平台已串接金流或自動化工具"
+    ],
+    "enCommonMistakes": [
+      "Letting AI invent interview or survey counts",
+      "Treating TAM/SAM/SOM as validated fact",
+      "Slogan-like problems that cannot be falsified",
+      "Pasting real classmate/customer data without sanitizing",
+      "Claiming the platform integrates payments or automation tools"
+    ],
+    "zhDeliverableChecklist": [
+      "已寫出可否證的問題一句話",
+      "已描述目標使用者、痛點時機與現況湊合",
+      "機會假設已標觀察／假設／需驗證",
+      "已有非機會清單與最小驗證方式",
+      "無捏造訪談／TAM／投資人意見",
+      "已去敏且未宣稱自動串接金流或自動化工具"
+    ],
+    "enDeliverableChecklist": [
+      "Falsifiable problem sentence written",
+      "Target user, timing, and workaround described",
+      "Hypotheses labeled observation/assumption/needs validation",
+      "Non-opportunity list and minimal validation present",
+      "No invented interviews/TAM/investor opinions",
+      "Sanitized; no auto-integration claims for payments or automation tools"
+    ],
+    "zhScorecard": [
+      "問題具體性",
+      "使用者清楚",
+      "可驗證",
+      "誠實度",
+      "是否聚焦創業問題"
+    ],
+    "enScorecard": [
+      "Specificity",
+      "User clarity",
+      "Testability",
+      "Honesty",
+      "Startup-problem focus"
+    ],
+    "zhNotePrompt": "用自己的話寫：你的問題一句話、一個必須實地驗證的假設、以及你絕不用 AI 捏造的 2 類數字。",
+    "enNotePrompt": "In your own words: your problem sentence, one hypothesis that must be field-validated, and 2 number types you will never invent with AI.",
+    "zhCoachPrompt": "請挑戰我的問題定義是否夠具體、是否可驗證，並指出自嗨之處。",
+    "enCoachPrompt": "Challenge whether my problem is specific and testable; call out self-deception.",
+    "zhWhyItMatters": {
+      "problem": "點子一模糊，就容易拿 AI 生成的假市場數據替換真實觀察。",
+      "ineffective": "只問「幫我算 TAM」或「證明這一定會火」。",
+      "solution": "先寫問題、使用者、現況與限制，再用 Prompt 產出定義，並強制標假設與驗證方式。"
     },
-    {
-      "id": "startup-automation-L2",
-      "lessonKey": "startup-automation-L2",
-      "zhTitle": "第2課：分析目標使用者與痛點，設計訪談問題",
-      "enTitle": "Lesson 2: Analyze target users and design interview questions",
-      "zhConcept": "在創業早期，訪談是為了理解情境與現有解法，不是推銷你的点子。好問題問行為與故事：「上次發生時你怎麼做？」而不是「你會不會用我的 App？」。AI 可幫你把痛點轉成訪綱並標記誘導題；不可寫假訪談紀錄。",
-      "enConcept": "Early interviews learn context and current workarounds—not pitch your idea. Ask behavior stories, not “Would you use my app?” AI can draft guides and flag leading questions; it must not fabricate transcripts.",
-      "zhPrompt": "請擔任使用者研究教練。問題假設：【】。目標使用者假設：【】。\n\n請產出訪談目標、招募條件、8–12 題訪綱（標誘導風險）、每題追問，以及訪談後整理模板。禁止生成假訪談回答。",
-      "enPrompt": "Act as a user-research coach. Problem hypothesis: []. User hypothesis: []. Produce goals, recruiting criteria, 8–12 questions with leading-risk tags and probes, plus a notes template. Invent no answers.",
-      "zhExample": "弱問「你覺得我們的智慧排班很棒吧？」。強問「上一次排班出錯時，你第一個做了什麼？結果如何？」",
-      "enExample": "Weak: isn’t our smart scheduler great? Strong: last time a schedule broke, what did you do first, and what happened?",
-      "zhPractice": "寫使用者假設。；產出訪綱。；刪誘導題。；實際訪 3 人（可線上）。；用模板整理，更新痛點假設。",
-      "enPractice": "Write user hypotheses.；Draft the guide.；Remove leading items.；Interview 3 people.；Synthesize and update pain hypotheses.",
-      "zhFeedbackPrompt": "你是一位使用者研究教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 問題品質\n- 非誘導\n- 可執行\n- 洞見更新\n- 創業使用者焦點\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a user-research coach. Score 1-10 for: Question quality, Non-leading, Executability, Insight updates, User focus. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhQuizItems": [
-        {
-          "q": "早期訪談目的是？",
-          "options": [
-            "理解行為與現有解法",
-            "當場成交",
-            "收集假好評"
-          ],
-          "answer": 0,
-          "explain": "學習。"
-        },
-        {
-          "q": "較好的問題型態？",
-          "options": [
-            "上次你怎麼做",
-            "你會買嗎（誘導）",
-            "我們很棒吧"
-          ],
-          "answer": 0,
-          "explain": "行為故事。"
-        },
-        {
-          "q": "AI 不可？",
-          "options": [
-            "捏造逐字稿",
-            "標記誘導題",
-            "整理訪綱"
-          ],
-          "answer": 0,
-          "explain": "禁假資料。"
-        },
-        {
-          "q": "訪完最重要？",
-          "options": [
-            "更新痛點假設",
-            "立刻寫完整程式",
-            "忽略矛盾資訊"
-          ],
-          "answer": 0,
-          "explain": "學習迴路。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "訪綱與痛點假設",
-            "財報",
-            "無關講義"
-          ],
-          "answer": 0,
-          "explain": "使用者研究。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "早期訪談目的是？",
-          "options": [
-            "理解行為與現有解法",
-            "當場成交",
-            "收集假好評"
-          ],
-          "answer": 0,
-          "explain": "學習。"
-        },
-        {
-          "q": "較好的問題型態？",
-          "options": [
-            "上次你怎麼做",
-            "你會買嗎（誘導）",
-            "我們很棒吧"
-          ],
-          "answer": 0,
-          "explain": "行為故事。"
-        },
-        {
-          "q": "AI 不可？",
-          "options": [
-            "捏造逐字稿",
-            "標記誘導題",
-            "整理訪綱"
-          ],
-          "answer": 0,
-          "explain": "禁假資料。"
-        },
-        {
-          "q": "訪完最重要？",
-          "options": [
-            "更新痛點假設",
-            "立刻寫完整程式",
-            "忽略矛盾資訊"
-          ],
-          "answer": 0,
-          "explain": "學習迴路。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "訪綱與痛點假設",
-            "財報",
-            "無關講義"
-          ],
-          "answer": 0,
-          "explain": "使用者研究。"
-        }
-      ],
-      "zhOutcome": "產出使用者假設畫像、痛點假設，以及 8–12 題訪談大綱（含追問）。",
-      "enOutcome": "Produce a provisional user persona, pain hypotheses, and an 8–12 question interview guide with probes.",
-      "zhValueTip": "分析目標使用者與痛點，設計可執行的訪談問題。",
-      "enValueTip": "Analyze target users and pains, then design executable interview questions.",
-      "zhCaseStudy": "團隊假設「學生買二手書很痛」。訪綱改問上次買書流程、花多久、在哪卡住、如何決定信任賣家。8 次訪談後發現真正痛點常是「面交時間協調」而非「找不到書」，產品方向因此修正。",
-      "enCaseStudy": "Interviews about used textbooks revealed meetup coordination—not discovery—as the frequent pain, redirecting the product.",
-      "zhExcellentExample": "畫像標明假設；訪綱含冰破、情境、行為、現有解法、代價、收尾；每題有追問；含招募條件與記錄方式。",
-      "enExcellentExample": "Persona marked as hypothesis; guide covers opener, context, behavior, workarounds, costs, close; probes; recruiting criteria; note-taking method.",
-      "zhWorkflow": [
-        "寫使用者假設",
-        "設計訪綱",
-        "檢查誘導",
-        "進行訪談",
-        "整理洞見"
-      ],
-      "enWorkflow": [
-        "Draft user hypothesis",
-        "Design guide",
-        "Check leading items",
-        "Interview",
-        "Synthesize insights"
-      ],
-      "zhCommonMistakes": [
-        "一開場就推銷產品",
-        "只問會不會用",
-        "誘導題",
-        "假造訪談紀錄",
-        "訪完不整理假設"
-      ],
-      "enCommonMistakes": [
-        "Pitching first",
-        "Only asking would-you-use",
-        "Leading questions",
-        "Fake transcripts",
-        "No synthesis"
-      ],
-      "zhDeliverableChecklist": [
-        "畫像假設",
-        "訪綱",
-        "追問",
-        "招募條件",
-        "整理模板"
-      ],
-      "enDeliverableChecklist": [
-        "Persona hypothesis",
-        "Guide",
-        "Probes",
-        "Recruiting",
-        "Synthesis template"
-      ],
-      "zhScorecard": [
-        "問題品質",
-        "非誘導",
-        "可執行",
-        "洞見更新",
-        "創業使用者焦點"
-      ],
-      "enScorecard": [
-        "Question quality",
-        "Non-leading",
-        "Executability",
-        "Insight updates",
-        "User focus"
-      ],
-      "zhNotePrompt": "貼上訪綱與至少一次訪談整理。",
-      "enNotePrompt": "Paste your guide and at least one interview synthesis.",
-      "zhCoachPrompt": "請檢查訪綱是否誘導或太像問卷推銷，並改寫成行為問題。",
-      "enCoachPrompt": "Check for leading or pitchy questions and rewrite toward behavior stories.",
-      "title": "分析目標使用者與痛點，設計訪談問題",
-      "description": "分析目標使用者與痛點，設計可執行的訪談問題。",
-      "goal": "產出使用者假設畫像、痛點假設，以及 8–12 題訪談大綱（含追問）。"
+    "enWhyItMatters": {
+      "problem": "Vague ideas invite AI-generated fake market numbers replacing real observation.",
+      "ineffective": "Only asking “compute TAM” or “prove this will succeed.”",
+      "solution": "Write problem, user, status quo, and constraints first; generate a definition with labeled assumptions and a validation path."
     },
-    {
-      "id": "startup-automation-L3",
-      "lessonKey": "startup-automation-L3",
-      "zhTitle": "第3課：建立商業模式草稿：誰付錢、為何付錢",
-      "enTitle": "Lesson 3: Draft a business model: who pays and why",
-      "zhConcept": "商業模式回答「誰以什麼理由付錢」。學生創業常卡在免費愛用但無人付費。先寫清：付費者是否等於使用者、價值何時發生、競品／替代如何收費、你的第一筆錢可能從哪來。AI 可幫你列出模式選項與假設；不可編造營收預測當事實。",
-      "enConcept": "A model states who pays and why. Separate users from payers, timing of value, alternatives’ pricing, and a first-revenue path. AI can list options and hypotheses—not fabricated forecasts as facts.",
-      "zhPrompt": "請擔任商業模式教練。問題：【】。使用者：【】。可能付費者：【】。現有替代：【】。\n\n請提出 2–3 種收費構想、付費動機、關鍵假設與最小驗證。禁止把虛構營收當已發生事實。",
-      "enPrompt": "Act as a business-model coach. Problem: []. User: []. Possible payer: []. Alternatives: []. Propose 2–3 pricing ideas, willingness-to-pay rationale, hypotheses, and minimum tests. Treat no invented revenue as fact.",
-      "zhExample": "弱：「靠廣告月入十萬」。強：「系學會每學期付 N 元取得衝突提醒與出勤匯出；若 10 個社團中有 3 個願意預購才進入開發。」",
-      "enExample": "Weak: ads will make $10k/month. Strong: associations pay per semester for conflict alerts and attendance export—build only if 3/10 prepay interest.",
-      "zhPractice": "寫付費者與使用者是否同一人。；草擬 2 種收費。；列出成本粗項。；設計付費驗證。；更新「還不知道」清單。",
-      "enPractice": "Clarify user vs payer.；Draft 2 pricing ideas.；List rough costs.；Design a payment test.；Update unknown list.",
-      "zhFeedbackPrompt": "你是一位商業模式教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 清楚度\n- 付費邏輯\n- 可驗證\n- 誠實\n- 創業焦點\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a business-model coach. Score 1-10 for: Clarity, Payment logic, Testability, Honesty, Startup focus. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhQuizItems": [
-        {
-          "q": "商業模式核心問題？",
-          "options": [
-            "誰為何付錢",
-            "Logo 好不好看",
-            "程式用什麼語言"
-          ],
-          "answer": 0,
-          "explain": "付費邏輯。"
-        },
-        {
-          "q": "使用者與付費者？",
-          "options": [
-            "可能不同，要分開寫",
-            "永遠同一人",
-            "不重要"
-          ],
-          "answer": 0,
-          "explain": "常分離。"
-        },
-        {
-          "q": "營收預測應？",
-          "options": [
-            "標成假設待驗證",
-            "當已發生事實",
-            "完全不談錢"
-          ],
-          "answer": 0,
-          "explain": "假設。"
-        },
-        {
-          "q": "最小驗證可包含？",
-          "options": [
-            "預購意向或小額付費測試",
-            "直接宣稱市佔第一",
-            "不做就上線"
-          ],
-          "answer": 0,
-          "explain": "真實驗證。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "模式草稿",
-            "無關文件包",
-            "無關文件包"
-          ],
-          "answer": 0,
-          "explain": "商業模式。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "商業模式核心問題？",
-          "options": [
-            "誰為何付錢",
-            "Logo 好不好看",
-            "程式用什麼語言"
-          ],
-          "answer": 0,
-          "explain": "付費邏輯。"
-        },
-        {
-          "q": "使用者與付費者？",
-          "options": [
-            "可能不同，要分開寫",
-            "永遠同一人",
-            "不重要"
-          ],
-          "answer": 0,
-          "explain": "常分離。"
-        },
-        {
-          "q": "營收預測應？",
-          "options": [
-            "標成假設待驗證",
-            "當已發生事實",
-            "完全不談錢"
-          ],
-          "answer": 0,
-          "explain": "假設。"
-        },
-        {
-          "q": "最小驗證可包含？",
-          "options": [
-            "預購意向或小額付費測試",
-            "直接宣稱市佔第一",
-            "不做就上線"
-          ],
-          "answer": 0,
-          "explain": "真實驗證。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "模式草稿",
-            "無關文件包",
-            "無關文件包"
-          ],
-          "answer": 0,
-          "explain": "商業模式。"
-        }
-      ],
-      "zhOutcome": "產出商業模式草稿：客群、價值主張、付費動機、收入假設、成本粗估與待驗證點。",
-      "enOutcome": "Produce a business-model draft: segment, value proposition, willingness-to-pay rationale, revenue hypothesis, rough costs, and open questions.",
-      "zhValueTip": "草稿化誰付錢、為何付錢、你如何交付價值。",
-      "enValueTip": "Draft who pays, why they pay, and how you deliver value.",
-      "zhCaseStudy": "工具幫社團排班，使用者是幹部，但付費可能是系學會預算。團隊改成「學期方案＋管理後台」，先用預購意向驗證，而不是宣稱上線三個月營收破百萬。",
-      "enCaseStudy": "A scheduling tool’s users were officers while payers might be student associations—so the team tested a semester plan with admin value via purchase intent, not fantasy revenue.",
-      "zhExcellentExample": "一頁模式含客群、價值、收費點、替代方案、成本粗項、關鍵假設與驗證方式。",
-      "enExcellentExample": "One-pager covering segment, value, charge point, alternatives, rough costs, key hypotheses, and how to test them.",
-      "zhWorkflow": [
-        "區分使用者與付費者",
-        "寫價值主張",
-        "草擬收費",
-        "列假設",
-        "設計驗證"
-      ],
-      "enWorkflow": [
-        "Separate user/payer",
-        "Write value prop",
-        "Draft pricing",
-        "List hypotheses",
-        "Design tests"
-      ],
-      "zhCommonMistakes": [
-        "免費使用者＝付費者的錯誤預設",
-        "虛構營收曲線",
-        "不看替代方案",
-        "成本完全不估",
-        "用商業模式逃避做驗證"
-      ],
-      "enCommonMistakes": [
-        "Assuming users pay",
-        "Fake revenue curves",
-        "Ignoring alternatives",
-        "Zero cost thinking",
-        "Using the canvas to avoid tests"
-      ],
-      "zhDeliverableChecklist": [
-        "客群",
-        "價值",
-        "收費構想",
-        "假設",
-        "驗證"
-      ],
-      "enDeliverableChecklist": [
-        "Segment",
-        "Value",
-        "Pricing idea",
-        "Hypotheses",
-        "Test"
-      ],
-      "zhScorecard": [
-        "清楚度",
-        "付費邏輯",
-        "可驗證",
-        "誠實",
-        "創業焦點"
-      ],
-      "enScorecard": [
-        "Clarity",
-        "Payment logic",
-        "Testability",
-        "Honesty",
-        "Startup focus"
-      ],
-      "zhNotePrompt": "貼上商業模式草稿與驗證計畫。",
-      "enNotePrompt": "Paste your business-model draft and test plan.",
-      "zhCoachPrompt": "請挑戰我的付費假設是否薄弱，並建議更小的驗證。",
-      "enCoachPrompt": "Challenge weak willingness-to-pay assumptions and suggest a smaller test.",
-      "title": "建立商業模式草稿：誰付錢、為何付錢",
-      "description": "草稿化誰付錢、為何付錢、你如何交付價值。",
-      "goal": "產出商業模式草稿：客群、價值主張、付費動機、收入假設、成本粗估與待驗證點。"
+    "zhObjectives": [
+      "把一個真實痛點寫成可否證的問題一句話",
+      "描述目標使用者、痛點時機與現況湊合方式",
+      "列出機會假設並標觀察／假設／需驗證",
+      "寫出非機會清單與最小驗證方式",
+      "存成「問題與市場機會定義」"
+    ],
+    "enObjectives": [
+      "Rewrite one real pain into a falsifiable problem sentence",
+      "Describe target user, when it hurts, and current workaround",
+      "List opportunity hypotheses labeled observation/assumption/needs validation",
+      "Write a non-opportunity list and minimal validation path",
+      "Save a Problem & Opportunity Definition"
+    ],
+    "estimatedTime": "約 45 分鐘 / About 45 min",
+    "difficulty": "入門 / Beginner",
+    "zhOutputName": "問題與市場機會定義",
+    "enOutputName": "Problem & Opportunity Definition",
+    "zhCaseStudyBlocks": {
+      "problem": "小團隊有痛點直覺，但沒有可檢查的問題定義。",
+      "wrong": "請 AI 產出含假訪談與 TAM 的市場報告。",
+      "right": "寫問題、使用者、現況與限制，標假設與驗證。",
+      "result": "一份誠實的「問題與市場機會定義」。"
     },
-    {
-      "icon": "🧱",
-      "title": "規劃 MVP：最小可驗證產品與功能取捨",
-      "description": "把需求收成 MVP：必要／非必要功能、MoSCoW 優先序、使用者流程、里程碑、風險、測試與成功指標。",
-      "goal": "我的 MVP 計畫書（功能優先序／流程／里程碑／成功指標）",
-      "estimatedTime": "60-80 分鐘",
-      "difficulty": "中階",
-      "tags": [
-        "MVP",
-        "MoSCoW",
-        "里程碑",
-        "Chapter10"
-      ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 9,
-      "chapterZh": "AI 個人專案與作品集",
-      "chapterEn": "AI Personal Projects and Portfolio",
-      "zhTitle": "第4課：規劃 MVP：最小可驗證產品與功能取捨",
-      "enTitle": "Lesson 4: Plan an MVP with minimal validation and feature tradeoffs",
-      "zhValueTip": "把需求收成 MVP：必要／非必要功能、MoSCoW 優先序、使用者流程、里程碑、風險、測試與成功指標。",
-      "enValueTip": "Turn the brief into an MVP with Must/Should/Could/Won’t, user flows, milestones, risks, tests, and success metrics.",
-      "zhOutcome": "我的 MVP 計畫書（功能優先序／流程／里程碑／成功指標）",
-      "enOutcome": "My MVP Plan (priorities/flows/milestones/success metrics)",
-      "zhConcept": "MVP（Minimum Viable Product）是「能驗證核心價值的最小可演示版本」，不是簡陋交差，也不是完整產品。先列功能，再用 MoSCoW：Must（沒有就不算解決問題）、Should（重要可下一版）、Could（加分）、Won't（本輪明確不做）。必要功能對齊價值主張；非必要常是登入系統、華麗動畫、多主題、完整後台——對大學生時程通常是 Won't。使用者流程用 5-8 步寫「從進入到完成核心任務」；每步對應畫面或操作。功能拆解成可完成的工作包，排入里程碑與時程。風險：資料取得、API 額度、技術不會、時間被期中考吃掉。每項風險要有備案（改手動、改靜態示意、縮小 Must）。測試方式：自己走完流程、找 2-3 位目標使用者觀察（可非正式）、檢查成功指標。成功指標必須可觀察：完成任務人數、錯誤次數、時間，不可捏造。AI 可協助拆功能與排程，但不可把 Won't 寫成已完成，不可發明測試結果。完整 MVP 案例：排課衝突檢查——Must：輸入課表＋規則檢查＋衝突列表；Should：匯出；Could：美化；Won't：自動搶課。里程碑：規則表→原型→3 人測試→演示。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可公開或可繳交且狀態誠實的版本。每次結束寫三行：今天釐清的問題、仍待驗證的假設、下一個可演示的最小步驟。作品集與 GitHub 上的完成度必須一致；不要用 AI 把未完成項目寫成已完成，也不要捏造數據或訪談。當發想、MVP、版本紀錄、網站與發表形成閉環，你換專題也能重複同一套個人專案系統。展示產品時同樣適用：先講清楚問題與證據，再談技術細節；誠實的限制說明往往比誇大更加分。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可公開或可繳交且狀態誠實的版本。每次結束寫三行：今天釐清的問題、仍待驗證的假設、下一個可演示的最小步驟。作品集與 GitHub 上的完成度必須一致；不要用 AI 把未完成項目寫成已完成，也不要捏造數據或訪談。當發想、MVP、版本紀錄、網站與發表形成閉環，你換專題也能重複同一套個人專案系統。展示產品時同樣適用：先講清楚問題與證據，再談技術細節；誠實的限制說明往往比誇大更加分。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可公開或可繳交且狀態誠實的版本。每次結束寫三行：今天釐清的問題、仍待驗證的假設、下一個可演示的最小步驟。作品集與 GitHub 上的完成度必須一致；不要用 AI 把未完成項目寫成已完成，也不要捏造數據或訪談。當發想、MVP、版本紀錄、網站與發表形成閉環，你換專題也能重複同一套個人專案系統。展示產品時同樣適用：先講清楚問題與證據，再談技術細節；誠實的限制說明往往比誇大更加分。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可公開或可繳交且狀態誠實的版本。每次結束寫三行：今天釐清的問題、仍待驗證的假設、下一個可演示的最小步驟。作品集與 GitHub 上的完成度必須一致；不要用 AI 把未完成項目寫成已完成，也不要捏造數據或訪談。",
-      "enConcept": "Define Must/Should/Could/Won’t, map a short user flow, schedule milestones, list risks/backups, and define observable success metrics. AI plans; you never mark unfinished work as done or invent test results.",
-      "zhCaseStudy": "完整 MVP 規劃案例：設計系學生想做「校園失物平台」。第一版含聊天、地圖、積分。收成 MVP 後 Must 只留發布／搜尋／聯絡方式表單；Won't 含即時聊天。兩週內上線靜態＋表單演示，使用者測試發現標題關鍵字最重要，於是調整 Should。作品集寫得出「為何不做聊天」的取捨，評審反而加分。",
-      "enCaseStudy": "A lost-and-found idea survived by cutting chat/map/points from Must, shipping a testable post/search/contact MVP.",
-      "zhWorkflow": [
-        "從需求書列出功能候選",
-        "用 MoSCoW 分級並寫 Won't",
-        "畫使用者流程與功能拆解",
-        "排里程碑／風險／測試／成功指標",
-        "請 AI 檢查範圍膨脹，人工鎖定 MVP"
-      ],
-      "enWorkflow": [
-        "List feature candidates from the brief",
-        "Apply MoSCoW including Won’t",
-        "Draft user flow and work packages",
-        "Add milestones, risks, tests, metrics",
-        "AI scope-check; human lock the MVP"
-      ],
-      "zhCommonMistakes": [
-        "MVP＝全部功能做一半",
-        "沒有 Won't",
-        "成功指標靠感覺",
-        "把計畫寫成已完成成果"
-      ],
-      "enCommonMistakes": [
-        "Half-building everything",
-        "No Won’t list",
-        "Vibes-only success",
-        "Writing plans as shipped outcomes"
-      ],
-      "zhExcellentExample": "優秀 MVP 計畫：Must 極少且對齊價值、流程可走完、里程碑可驗、風險有備案、指標可觀察、未完成不裝完成。",
-      "enExcellentExample": "A strong MVP plan has few Musts tied to value, a completable flow, testable milestones, backed risks, observable metrics, and honest status.",
-      "zhPrompt": "【Prompt 1｜MVP 與 MoSCoW】\n需求書：\n（貼上）\n可用天數：［ ］\n請提出 Must／Should／Could／Won't，並解釋每個 Must 如何服務價值主張。不要把理想完整版當成 MVP；標示建議；若時間明顯不夠，提出刪减方案而非假裝做得到。",
-      "enPrompt": "[Prompt 1 | MVP MoSCoW] Propose Must/Should/Could/Won’t tied to value; don’t pretend a full product fits the days available.",
-      "zhCoachPrompt": "【Prompt 2｜使用者流程、里程碑與成功指標】\nMust 功能：\n（貼上）\n請輸出：8 步內使用者流程、功能拆解、里程碑時程、測試方式、成功指標。指標必須可觀察；不可捏造基線數據；缺少測量方式就列待確認。",
-      "enCoachPrompt": "[Prompt 2 | Flow, Milestones, Metrics] Produce ≤8-step flow, breakdown, milestones, tests, observable metrics—no invented baselines.",
-      "zhFeedbackPrompt": "【Prompt 3｜風險與範圍膨脹檢查】\nMVP 計畫：\n（貼上）\n請指出範圍膨脹、高風險項、測試缺口，並給備案。不要把未做功能寫成已完成；區分事實計畫與推測。",
-      "enFeedbackPrompt": "[Prompt 3 | Scope & Risk QA] Flag creep, risks, and test gaps with backups; never describe unfinished features as done.",
-      "zhExample": "Must：衝突檢查。｜Won't：自動搶課。｜流程：貼課表→選規則→看衝突→匯出。｜成功指標：3/3 測試者能在 10 分鐘內找出真實衝堂。",
-      "enExample": "A conflict-checker MVP with a clear Won’t, short flow, and an observable 10-minute success metric.",
-      "zhPractice": "完成 MoSCoW 表。；畫使用者流程與里程碑。；定義測試與成功指標。；Challenge：刪掉至少兩個你很想做但非 Must 的功能，寫下刪除理由以保護時程。",
-      "enPractice": "Finish MoSCoW.；Draw flow and milestones.；Define tests/metrics.；Challenge: cut ≥2 tempting non-Must features and justify the cuts.",
-      "zhQuizItems": [
-        {
-          "q": "MVP 的正確理解是？",
-          "options": [
-            "把所有功能都做一點點",
-            "用最小集合驗證核心價值且可演示",
-            "一定要上線百萬用戶",
-            "沒有成功指標也沒關係"
-          ],
-          "answer": 1,
-          "explain": "MVP 是可驗證核心價值的最小版本。"
-        },
-        {
-          "q": "MoSCoW 中 Won't 的作用是？",
-          "options": [
-            "永遠不做任何改進",
-            "本輪明確不做，防止範圍膨脹",
-            "可隨便忽略",
-            "表示功能已完成"
-          ],
-          "answer": 1,
-          "explain": "Won't 保護焦點與時程。"
-        },
-        {
-          "q": "成功指標應？",
-          "options": [
-            "用捏造的成長曲線美化",
-            "可觀察、可在測試中檢查",
-            "越模糊越好聽",
-            "由 AI 保證達標"
-          ],
-          "answer": 1,
-          "explain": "指標必須可觀察且誠實。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "MVP means:",
-          "options": [
-            "Building a bit of everything",
-            "The smallest demoable set that validates core value",
-            "Must reach a million users",
-            "Metrics optional"
-          ],
-          "answer": 1,
-          "explain": "MVP validates core value minimally."
-        },
-        {
-          "q": "Won’t in MoSCoW is for:",
-          "options": [
-            "Never improving again",
-            "Explicitly excluding items this round to stop creep",
-            "Ignoring freely",
-            "Marking features done"
-          ],
-          "answer": 1,
-          "explain": "Won’t protects focus."
-        },
-        {
-          "q": "Success metrics should be:",
-          "options": [
-            "Fabricated growth curves",
-            "Observable and checkable in tests",
-            "As vague as possible",
-            "AI-guaranteed"
-          ],
-          "answer": 1,
-          "explain": "Metrics must be observable and honest."
-        }
-      ],
-      "zhNotePrompt": "列出 Must 三項、Won't 兩項，以及一個可觀察成功指標。",
-      "enNotePrompt": "List three Musts, two Won’ts, and one observable success metric.",
-      "zhDeliverableChecklist": [
-        "MoSCoW 完成",
-        "使用者流程可走完",
-        "里程碑含日期",
-        "風險備案齊",
-        "成功指標可觀察"
-      ],
-      "enDeliverableChecklist": [
-        "MoSCoW done",
-        "Completable user flow",
-        "Dated milestones",
-        "Risk backups ready",
-        "Observable metrics set"
-      ],
-      "zhScorecard": [
-        "Must 對齊價值",
-        "範圍受控",
-        "流程清楚",
-        "可測試",
-        "狀態誠實"
-      ],
-      "enScorecard": [
-        "Musts fit value",
-        "Scope controlled",
-        "Clear flow",
-        "Testable",
-        "Honest status"
-      ],
-      "resources": [
-        {
-          "name": "Notion",
-          "url": "https://www.notion.so",
-          "note": "MVP 計畫與里程碑"
-        },
-        {
-          "name": "Figma",
-          "url": "https://www.figma.com",
-          "note": "使用者流程與畫面草圖"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "MoSCoW 與風險提問"
-        },
-        {
-          "name": "Google Drive",
-          "url": "https://drive.google.com",
-          "note": "計畫書版本管理"
-        },
-        {
-          "name": "Canva",
-          "url": "https://www.canva.com",
-          "note": "一頁 MVP 海報（可選）"
-        }
-      ],
-      "challenge": "鎖定一份兩週可完成的 MVP 計畫：含 MoSCoW、流程、里程碑與成功指標；請同學檢查是否仍有範圍膨脹。",
-      "id": "startup-automation-L4",
-      "lessonKey": "startup-automation-L4"
+    "enCaseStudyBlocks": {
+      "problem": "A small team has intuition but no checkable problem definition.",
+      "wrong": "Ask AI for a market report with fake interviews and TAM.",
+      "right": "Write problem, user, status quo, constraints; label assumptions and validation.",
+      "result": "An honest Problem & Opportunity Definition."
     },
-    {
-      "id": "startup-automation-L5",
-      "lessonKey": "startup-automation-L5",
-      "zhTitle": "第5課：用 AI 拆解產品規格與開發任務",
-      "enTitle": "Lesson 5: Use AI to break down product specs and build tasks",
-      "zhConcept": "規格把「問題」變成「這週能做完的交付」。寫使用者故事、成功標準、非目標，再拆成可估計的任務。AI 可幫你拆任務與找遺漏；不可把未驗證的大功能塞進 MVP。工具可用來管理任務，但本課焦點是產品規格能力，不是工具操作教學本身。",
-      "enConcept": "Specs turn problems into shippable weekly delivery: stories, success criteria, non-goals, and estimable tasks. AI can split work and spot gaps; it must not inflate the MVP with unvalidated features.",
-      "zhPrompt": "請擔任產品規格教練。已驗證問題：【】。目標使用者：【】。本週可用工時：【】。\n\n請輸出 MVP 範圍、非目標、使用者故事、任務拆解與完成定義，並指出過大項目。不要加入未驗證的大功能。",
-      "enPrompt": "Act as a product-spec coach. Validated problem: []. User: []. Hours this week: []. Output MVP scope, non-goals, stories, tasks, done definitions; flag oversized items. Add no unvalidated mega-features.",
-      "zhExample": "弱：「做完整平台」。強：「社團管理員可上傳班次表，系統標出同一人同一時段重複班次，並匯出 CSV。」",
-      "enExample": "Weak: build the full platform. Strong: admin uploads shifts, system flags same-person overlaps, export CSV.",
-      "zhPractice": "寫 MVP 一頁。；列出非目標。；拆 8–15 個任務。；標完成定義。；刪掉本週做不完的項目。",
-      "enPractice": "Write MVP one-pager.；List non-goals.；Split 8–15 tasks.；Add done definitions.；Cut what won’t fit this week.",
-      "zhFeedbackPrompt": "你是一位產品規格教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 範圍紀律\n- 可交付性\n- 清楚度\n- 任務品質\n- 產品焦點\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a product spec coach. Score 1-10 for: Scope discipline, Shipability, Clarity, Task quality, Product focus. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhQuizItems": [
+    "zhWorkflowSteps": [
+      {
+        "do": "收集去敏事實",
+        "why": "沒有事實就只能空想",
+        "input": "問題／使用者／流程／限制",
+        "output": "事實清單",
+        "check": "是否含未驗證項"
+      },
+      {
+        "do": "寫可否證問題",
+        "why": "空泛問題無法驗證",
+        "input": "痛點描述",
+        "output": "問題一句話",
+        "check": "能否被否證？"
+      },
+      {
+        "do": "用 Prompt 整理機會",
+        "why": "把直覺變成結構",
+        "input": "上一步資料",
+        "output": "定義初稿",
+        "check": "是否標假設來源"
+      },
+      {
+        "do": "清除假證據",
+        "why": "避免假信心",
+        "input": "初稿",
+        "output": "已清理版",
+        "check": "有無假訪談／TAM"
+      },
+      {
+        "do": "存入成果包",
+        "why": "後續課堂沿用",
+        "input": "定稿",
+        "output": "成果項目",
+        "check": "驗證路徑是否具體"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Gather sanitized facts",
+        "why": "No facts means fantasy",
+        "input": "Problem/user/process/constraints",
+        "output": "Fact list",
+        "check": "Unknowns marked"
+      },
+      {
+        "do": "Write a falsifiable problem",
+        "why": "Vague problems cannot be tested",
+        "input": "Pain notes",
+        "output": "One problem sentence",
+        "check": "Could it be disproved?"
+      },
+      {
+        "do": "Structure opportunity with prompt",
+        "why": "Turn intuition into structure",
+        "input": "Prior notes",
+        "output": "Draft definition",
+        "check": "Assumptions labeled"
+      },
+      {
+        "do": "Remove fake evidence",
+        "why": "Avoid false confidence",
+        "input": "Draft",
+        "output": "Clean version",
+        "check": "No fake interviews/TAM"
+      },
+      {
+        "do": "Save to package",
+        "why": "Later lessons reuse this",
+        "input": "Final",
+        "output": "Package entry",
+        "check": "Validation path concrete"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "填問題與使用者",
+        "standard": "角色清楚、無真實個資",
+        "mistakes": "貼真實電話／學號",
+        "check": "是否已去敏？"
+      },
+      {
+        "task": "寫現況與限制",
+        "standard": "限制具體可檢查",
+        "mistakes": "空喊「資源無限」",
+        "check": "限制是否寫出？"
+      },
+      {
+        "task": "產出並清理",
+        "standard": "無捏造訪談／TAM",
+        "mistakes": "接受假市場報告",
+        "check": "是否標示意／假設？"
+      },
+      {
+        "task": "存檔",
+        "standard": "成果名稱正確",
+        "mistakes": "空白儲存",
+        "check": "重新整理後仍在？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Enter problem and user",
+        "standard": "Clear role, no real PII",
+        "mistakes": "Paste real phone/ID",
+        "check": "Sanitized?"
+      },
+      {
+        "task": "Write status quo and constraints",
+        "standard": "Constraints checkable",
+        "mistakes": "Claim unlimited resources",
+        "check": "Constraints listed?"
+      },
+      {
+        "task": "Generate and clean",
+        "standard": "No invented interviews/TAM",
+        "mistakes": "Accept fake market report",
+        "check": "Illustrative labels present?"
+      },
+      {
+        "task": "Save",
+        "standard": "Correct deliverable name",
+        "mistakes": "Saving blank",
+        "check": "Still visible after refresh?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "創業點子還很模糊、只剩一句「好像有機會」時使用",
+      "fields": [
+        "[請填寫問題]",
+        "[請填寫目標使用者]",
+        "[請填寫目前流程]",
+        "[請填寫限制條件]"
+      ],
+      "body": "你是創業驗證教練，協助把「模糊痛點」整理成可檢查的問題與市場機會定義。不可捏造訪談人數、問卷結果、TAM/SAM/SOM、競爭者營收或投資人意見；未知數字一律標「示意／假設」或「需實地驗證」。\n\n我的背景：\n- 我想解決的問題：[請填寫問題]\n- 目標使用者（角色，非真實個資）：[請填寫目標使用者]\n- 我目前觀察到的流程／現況：[請填寫目前流程]\n- 限制條件（時間、預算、技能、合規）：[請填寫限制條件]\n- 已去除敏感資訊的補充筆記：[請貼上已去除敏感資訊的內容]\n\n任務：產出「問題與市場機會定義」，必須包含：\n1) 問題一句話（可被否證，避免空泛「大家都很忙」）\n2) 誰痛、何時痛、現在怎麼湊合（現況）\n3) 機會假設（為何值得做，標示：觀察／假設／需驗證）\n4) 非機會清單（為什麼現在不做某些方向）\n5) 最小驗證方式（訪談／試作／觀察，不含假數據）\n6) 需人工確認項（至少 3 項）\n7) 風險與隱私提醒（不可自動付款／簽約／刪資料）\n\n輸出格式：表格 + 條列。不要宣稱已驗證市場規模。不要說本平台已串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "expected": "一份可檢查、標清假設與驗證方式的問題與市場機會定義",
+      "revisionReminder": "請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "extensions": [
         {
-          "q": "MVP 規格最該有？",
-          "options": [
-            "範圍、非目標與完成定義",
-            "只有靈感關鍵字",
-            "完整財報"
-          ],
-          "answer": 0,
-          "explain": "可交付。"
-        },
-        {
-          "q": "未驗證大功能應？",
-          "options": [
-            "放入非目標",
-            "硬塞進本週",
-            "假裝已做完"
-          ],
-          "answer": 0,
-          "explain": "紀律。"
-        },
-        {
-          "q": "任務需要？",
-          "options": [
-            "完成定義",
-            "只有動詞",
-            "越多越好無優先"
-          ],
-          "answer": 0,
-          "explain": "可檢核。"
-        },
-        {
-          "q": "AI 適合？",
-          "options": [
-            "拆任務與找遺漏",
-            "決定市場一定成功",
-            "自動宣稱已上線"
-          ],
-          "answer": 0,
-          "explain": "拆解輔助。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "規格＋任務表",
-            "無關長信",
-            "無關申請包資料"
-          ],
-          "answer": 0,
-          "explain": "產品拆解。"
+          "title": "延伸：把機會假設改成可否證問題",
+          "body": "根據我貼上的定義，把每個機會假設改寫成「如果……則……；若否，我們會放棄／轉向」。不要新增訪談人數或市場規模數字。"
         }
-      ],
-      "enQuizItems": [
-        {
-          "q": "MVP 規格最該有？",
-          "options": [
-            "範圍、非目標與完成定義",
-            "只有靈感關鍵字",
-            "完整財報"
-          ],
-          "answer": 0,
-          "explain": "可交付。"
-        },
-        {
-          "q": "未驗證大功能應？",
-          "options": [
-            "放入非目標",
-            "硬塞進本週",
-            "假裝已做完"
-          ],
-          "answer": 0,
-          "explain": "紀律。"
-        },
-        {
-          "q": "任務需要？",
-          "options": [
-            "完成定義",
-            "只有動詞",
-            "越多越好無優先"
-          ],
-          "answer": 0,
-          "explain": "可檢核。"
-        },
-        {
-          "q": "AI 適合？",
-          "options": [
-            "拆任務與找遺漏",
-            "決定市場一定成功",
-            "自動宣稱已上線"
-          ],
-          "answer": 0,
-          "explain": "拆解輔助。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "規格＋任務表",
-            "無關長信",
-            "無關申請包資料"
-          ],
-          "answer": 0,
-          "explain": "產品拆解。"
-        }
-      ],
-      "zhOutcome": "產出 MVP 規格一頁：使用者故事、範圍內／外、任務拆解與完成定義。",
-      "enOutcome": "Produce a one-page MVP spec: user stories, in/out of scope, task breakdown, and done definitions.",
-      "zhValueTip": "把驗證過的問題拆成產品規格與可開發任務，而不是功能願望清單。",
-      "enValueTip": "Turn a validated problem into a product spec and buildable tasks—not a wish list.",
-      "zhCaseStudy": "排班痛點驗證後，MVP 只做「衝突提醒＋匯出表」，不做聊天、支付、AI 自動排班。任務拆成：資料欄位、衝突規則、通知文案、匯出。每項有完成定義，一週後真的可給 3 個社團試用。",
-      "enCaseStudy": "After validation, the MVP shipped conflict alerts and export only—no chat, payments, or auto-scheduling—with clear done definitions and a three-club trial.",
-      "zhExcellentExample": "規格含故事、成功標準、非目標、任務表、依賴、風險；每項任務有完成定義與負責人。",
-      "enExcellentExample": "Spec with stories, success criteria, non-goals, tasks, dependencies, risks; each task has a done definition and owner.",
-      "zhWorkflow": [
-        "確認已驗證問題",
-        "定義 MVP 與非目標",
-        "寫使用者故事",
-        "拆任務與完成定義",
-        "排本週可交付"
-      ],
-      "enWorkflow": [
-        "Confirm validated problem",
-        "Define MVP/non-goals",
-        "Write stories",
-        "Split tasks + done defs",
-        "Schedule weekly ship"
-      ],
-      "zhCommonMistakes": [
-        "願望清單當規格",
-        "沒有非目標",
-        "任務無法完成定義",
-        "塞入未驗證功能",
-        "不做本週可交付切割"
-      ],
-      "enCommonMistakes": [
-        "Wish lists as specs",
-        "No non-goals",
-        "Tasks without done defs",
-        "Unvalidated feature creep",
-        "No weekly ship cut"
-      ],
-      "zhDeliverableChecklist": [
-        "MVP 範圍",
-        "非目標",
-        "故事",
-        "任務表",
-        "完成定義"
-      ],
-      "enDeliverableChecklist": [
-        "MVP scope",
-        "Non-goals",
-        "Stories",
-        "Task table",
-        "Done definitions"
-      ],
-      "zhScorecard": [
-        "範圍紀律",
-        "可交付性",
-        "清楚度",
-        "任務品質",
-        "產品焦點"
-      ],
-      "enScorecard": [
-        "Scope discipline",
-        "Shipability",
-        "Clarity",
-        "Task quality",
-        "Product focus"
-      ],
-      "zhNotePrompt": "貼上 MVP 規格與任務表。",
-      "enNotePrompt": "Paste your MVP spec and task table.",
-      "zhCoachPrompt": "請檢查規格是否過大，並幫我砍到本週可交付。",
-      "enCoachPrompt": "Check whether the spec is oversized and cut it to a weekly ship.",
-      "title": "用 AI 拆解產品規格與開發任務",
-      "description": "把驗證過的問題拆成產品規格與可開發任務，而不是功能願望清單。",
-      "goal": "產出 MVP 規格一頁：使用者故事、範圍內／外、任務拆解與完成定義。"
+      ]
     },
-    {
-      "icon": "🐙",
-      "title": "用 GitHub 與版本思維管理產品迭代",
-      "description": "用簡化 GitHub 流程管理專案：Repo、Commit、Branch、PR、Issue、README、截圖與 Demo，清楚記錄真實進度。",
-      "goal": "我的 GitHub 專案庫（README＋基本版本紀錄＋Issue／里程碑對應）",
-      "estimatedTime": "60-80 分鐘",
-      "difficulty": "中階",
-      "tags": [
-        "GitHub",
-        "README",
-        "版本控管",
-        "Chapter10"
+    "enPromptPack": {
+      "when": "Use when a startup idea is still a vague “maybe there’s an opportunity”",
+      "fields": [
+        "[Enter problem]",
+        "[Enter target user]",
+        "[Enter current process]",
+        "[Enter constraints]"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 9,
-      "chapterZh": "AI 個人專案與作品集",
-      "chapterEn": "AI Personal Projects and Portfolio",
-      "zhTitle": "第6課：用 GitHub 與版本思維管理產品迭代",
-      "enTitle": "Lesson 6: Manage product iteration with GitHub and version thinking",
-      "zhValueTip": "用簡化 GitHub 流程管理專案：Repo、Commit、Branch、PR、Issue、README、截圖與 Demo，清楚記錄真實進度。",
-      "enValueTip": "Manage the project with a beginner-friendly GitHub workflow—repo, commits, branches, PRs, issues, README, screenshots, and demos—without overcomplicating Git.",
-      "zhOutcome": "我的 GitHub 專案庫（README＋基本版本紀錄＋Issue／里程碑對應）",
-      "enOutcome": "My GitHub Repo (README + basic history + issues mapped to milestones)",
-      "zhConcept": "GitHub 對大學生作品集的價值是「可追溯的誠實紀錄」：別人看得到你如何一步步做，而不是只丟最終 zip。基本概念：Repository 專案容器；Commit 是一次可說明的變更快照；Branch 用來分開嘗試；Pull Request 用於合併與說明；Issue 追蹤任務與 bug。初學者簡化工作流程（避免過度複雜）：main 保持可演示；日常在 feature 小分支開發；完成一小塊就 commit；用 PR 合回 main；用 Issue 對應 MVP 的 Must 項。不必一開始就上 rebasing、submodule、複雜 monorepo。先做到：有意義的 commit message、檔名清楚、README 能讓陌生人 3 分鐘懂如何執行。README 建議含：專案一句話、問題與對象、功能（標示已完成／未完成）、安裝或開啟方式、截圖／Demo 連結、時程與反思連結、授權與聯絡。版本紀錄不要造假：未完成功能寫在 Roadmap，不要寫成 Done。截圖與 Demo 必須來自真實畫面。AI 可幫你起草 README 與 commit 說明，但不可捏造星數、下載量、測試通過率或從未做過的功能。完整 GitHub 案例：排課助手 repo——Issues 對應 Must、每完成檢查規則就 commit、README 含 3 張截圖與「Won't：自動搶課」、Demo 用短影片連結。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可公開或可繳交且狀態誠實的版本。每次結束寫三行：今天釐清的問題、仍待驗證的假設、下一個可演示的最小步驟。作品集與 GitHub 上的完成度必須一致；不要用 AI 把未完成項目寫成已完成，也不要捏造數據或訪談。當發想、MVP、版本紀錄、網站與發表形成閉環，你換專題也能重複同一套個人專案系統。展示產品時同樣適用：先講清楚問題與證據，再談技術細節；誠實的限制說明往往比誇大更加分。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可公開或可繳交且狀態誠實的版本。每次結束寫三行：今天釐清的問題、仍待驗證的假設、下一個可演示的最小步驟。作品集與 GitHub 上的完成度必須一致；不要用 AI 把未完成項目寫成已完成，也不要捏造數據或訪談。當發想、MVP、版本紀錄、網站與發表形成閉環，你換專題也能重複同一套個人專案系統。展示產品時同樣適用：先講清楚問題與證據，再談技術細節；誠實的限制說明往往比誇大更加分。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可公開或可繳交且狀態誠實的版本。每次結束寫三行：今天釐清的問題、仍待驗證的假設、下一個可演示的最小步驟。作品集與 GitHub 上的完成度必須一致；不要用 AI 把未完成項目寫成已完成，也不要捏造數據或訪談。當發想、MVP、版本紀錄、網站與發表形成閉環，你換專題也能重複同一套個人專案系統。展示產品時同樣適用：先講清楚問題與證據，再談技術細節；誠實的限制說明往往比誇大更加分。此外，請把本課產出存成 raw／final：raw 保留草稿與 AI 對話，final 是可公開或可繳交且狀態誠實的版本。每次結束寫三行：今天釐清的問題、仍待驗證的假設、下一個可演示的最小步驟。作品集與 GitHub 上的完成度必須一致；不要用 AI 把未完成項目寫成已完成，也不要捏造數據或訪談。當發想、MVP、版本紀錄、網站與發表形成閉環，你換專題也能重複同一套個人專案系統。展示產品時同樣適用：先講清楚問題與證據，再談技術細節；誠實的限制說明往往比誇大更加分。",
-      "enConcept": "Use a simple main/feature/PR/issue workflow, write an honest README with screenshots/demo, and keep commits meaningful. AI may draft docs; never invent metrics or completed features.",
-      "zhCaseStudy": "完整 GitHub 專案案例：小安以前交作業只傳壓縮檔。改用 GitHub 後，老師能從 commit 看到她如何修衝突規則 bug。第一次 README 把未做的登入寫成完成，同學一跑就爆；她修正為清楚標「未實作」，並補截圖。產品演示因此更可信：過程可見、範圍誠實。",
-      "enCaseStudy": "Xiao An replaced zip submissions with an honest GitHub history and a README that stopped claiming unfinished login as done.",
-      "zhWorkflow": [
-        "建立 Repo 與清楚資料夾／檔名",
-        "用 Issue 對應 MVP Must",
-        "小步 commit＋簡短 PR 說明",
-        "撰寫誠實 README 與截圖／Demo",
-        "檢查未完成項是否被誤標完成"
-      ],
-      "enWorkflow": [
-        "Create repo with clear naming",
-        "Map issues to MVP Musts",
-        "Small commits + simple PRs",
-        "Write honest README with screenshots/demo",
-        "Audit that unfinished work isn’t marked done"
-      ],
-      "zhCommonMistakes": [
-        "巨大 commit 無說明",
-        "README 吹噓未做功能",
-        "過度複雜分支策略",
-        "捏造星數與下載數據"
-      ],
-      "enCommonMistakes": [
-        "Huge unexplained commits",
-        "README claims unfinished features",
-        "Overcomplicated branching",
-        "Fake stars/downloads"
-      ],
-      "zhExcellentExample": "優秀 repo：可運行說明清楚、commit 可讀、Issue 對齊里程碑、README 區分完成／未完成、截圖真實。",
-      "enExcellentExample": "A strong repo runs from the README, has readable commits, milestone-linked issues, honest done/todo, and real screenshots.",
-      "zhPrompt": "【Prompt 1｜README 撰寫教練（禁吹噓）】\n專案事實（已完成／未完成分開）：\n（貼上）\n技術與開啟方式：\n（貼上）\n請起草 README 結構與文案。未完成必須放 Roadmap，不可寫成已完成。不要捏造 Demo 數據、星數或用戶數；缺截圖就列待補。",
-      "enPrompt": "[Prompt 1 | README Coach] Draft README from true done/todo lists; never mark unfinished as done; invent no stars/users; list missing screenshots.",
-      "zhCoachPrompt": "【Prompt 2｜Commit／Issue 版本紀錄整理】\n我的變更摘要或 git log：\n（貼上）\n里程碑：\n（貼上）\n請建議 commit message 風格、Issue 標題，以及版本紀錄（Changelog）草稿。只根據我提供的變更；不要添加我沒做的修復。",
-      "enCoachPrompt": "[Prompt 2 | Commit/Issue History] Suggest commit/issue style and a changelog from my provided changes only—no invented fixes.",
-      "zhFeedbackPrompt": "【Prompt 3｜Repo 誠實度檢查】\nREADME 與功能清單：\n（貼上）\n請找出可能「未完成卻寫成完成」的句子，給修正寫法。並檢查檔名／資料夾是否清楚。不要為了好看而建議造假。",
-      "enFeedbackPrompt": "[Prompt 3 | Repo Honesty QA] Find overclaimed features and unclear naming; suggest truthful wording—never recommend faking polish metrics.",
-      "zhExample": "README：一句話問題→Must 功能（已完成打勾）→Won't→如何執行→截圖→Issue #3 對應衝突規則。｜Commit：fix: detect overlapping sessions。",
-      "enExample": "An honest README with checked Musts, explicit Won’t, run steps, screenshots, and a meaningful commit message.",
-      "zhPractice": "建立或整理真實專案 Repo。；寫誠實 README＋至少 2 張截圖。；用 Issue 對應 Must。；Challenge：請同學只看 README 在 10 分鐘內跑起 Demo；卡住的步驟立刻改文件。",
-      "enPractice": "Create/clean a real repo.；Write honest README + ≥2 screenshots.；Map issues to Musts.；Challenge: a classmate must run the demo from README alone in 10 minutes.",
-      "zhQuizItems": [
+      "body": "You are a startup validation coach who turns vague pain into a checkable problem and market-opportunity definition. Do not invent interview counts, survey results, TAM/SAM/SOM, competitor revenue, or investor opinions. Label unknown numbers as illustrative/assumptions or “needs field validation.”\n\nMy context:\n- Problem I want to solve: [Enter problem]\n- Target user (role, no real PII): [Enter target user]\n- Current process / status quo: [Enter current process]\n- Constraints (time, budget, skills, compliance): [Enter constraints]\n- Sanitized extra notes: [Paste sanitized content]\n\nTask: Produce a “Problem & Opportunity Definition” with:\n1) One falsifiable problem statement (not vague “everyone is busy”)\n2) Who hurts, when, and how they cope today\n3) Opportunity hypothesis (why worth pursuing—label observation / assumption / needs validation)\n4) Non-opportunity list (what you will not pursue now)\n5) Minimal validation path (interview / prototype / observation—no fake data)\n6) Human-confirmation items (at least 3)\n7) Risk and privacy notes (no auto-pay / auto-sign / auto-delete)\n\nFormat: tables + bullets. Do not claim validated market size. Do not claim this platform integrates Zapier/Make/n8n/Gmail/LINE/ECPay/CRM.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "expected": "A checkable Problem & Opportunity Definition with labeled assumptions and validation path",
+      "revisionReminder": "Remove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "extensions": [
         {
-          "q": "大學生使用 GitHub 最核心的作品集價值是？",
-          "options": [
-            "刷假星數",
-            "留下可追溯且誠實的製作過程與說明",
-            "隱藏所有失敗",
-            "只上傳最終 zip 更專業"
-          ],
-          "answer": 1,
-          "explain": "過程可見與誠實說明建立信任。"
-        },
-        {
-          "q": "初學者較建議的流程是？",
-          "options": [
-            "一開始就上極複雜 Git 工作流",
-            "main 可演示＋小分支＋小步 commit＋PR＋Issue",
-            "從不寫 README",
-            "把所有檔塞一個資料夾無名 commit"
-          ],
-          "answer": 1,
-          "explain": "簡化流程就夠用且可維護。"
-        },
-        {
-          "q": "README 提到未做功能時應？",
-          "options": [
-            "寫成已經上線完成",
-            "放到 Roadmap／未完成並誠實標示",
-            "刪除所有說明",
-            "捏造測試報告"
-          ],
-          "answer": 1,
-          "explain": "未完成必須標示，不可裝完成。"
+          "title": "Extension: make hypotheses falsifiable",
+          "body": "Rewrite each opportunity hypothesis as “If… then…; if not, we stop/pivot.” Do not invent interview counts or market-size numbers."
         }
-      ],
-      "enQuizItems": [
-        {
-          "q": "Core portfolio value of GitHub for students?",
-          "options": [
-            "Fake stars",
-            "A traceable, honest build history and docs",
-            "Hiding all failures",
-            "Only final zips look professional"
-          ],
-          "answer": 1,
-          "explain": "Visibility and honesty build trust."
-        },
-        {
-          "q": "Beginner-friendly workflow is:",
-          "options": [
-            "Start with extreme Git complexity",
-            "Demoable main + small branches + small commits + PRs + issues",
-            "Never write a README",
-            "One unnamed mega-commit"
-          ],
-          "answer": 1,
-          "explain": "Simple workflows are enough and maintainable."
-        },
-        {
-          "q": "Unfinished features in README should be:",
-          "options": [
-            "Described as already shipped",
-            "Listed in Roadmap/todo honestly",
-            "Deleted entirely",
-            "Backed by fake test reports"
-          ],
-          "answer": 1,
-          "explain": "Mark unfinished work clearly."
-        }
-      ],
-      "zhNotePrompt": "貼上 README 的「已完成／未完成」兩段，以及一則你最滿意的 commit message。",
-      "enNotePrompt": "Paste README done/todo sections and your best commit message.",
-      "zhDeliverableChecklist": [
-        "Repo 可存取",
-        "README 誠實完整",
-        "至少數次有意義 commit",
-        "Issue 對齊 Must",
-        "截圖或 Demo 真實"
-      ],
-      "enDeliverableChecklist": [
-        "Repo accessible",
-        "Honest complete README",
-        "Meaningful commits present",
-        "Issues map to Musts",
-        "Real screenshots/demo"
-      ],
-      "zhScorecard": [
-        "可運行說明",
-        "紀錄可讀",
-        "範圍誠實",
-        "結構清楚",
-        "可演示"
-      ],
-      "enScorecard": [
-        "Runnable docs",
-        "Readable history",
-        "Honest scope",
-        "Clear structure",
-        "Demoable"
-      ],
-      "resources": [
-        {
-          "name": "GitHub",
-          "url": "https://github.com",
-          "note": "建立 Repo、Issue、PR"
-        },
-        {
-          "name": "GitHub Docs",
-          "url": "https://docs.github.com",
-          "note": "官方入門與流程說明"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "README／commit 文案草稿"
-        },
-        {
-          "name": "Google Drive",
-          "url": "https://drive.google.com",
-          "note": "放置較大 Demo 影片備援"
-        },
-        {
-          "name": "Notion",
-          "url": "https://www.notion.so",
-          "note": "開發日誌連結到 Repo"
-        }
-      ],
-      "challenge": "讓你的 MVP 專案在 GitHub 上可被同學依 README 啟動；補齊誠實的完成／未完成清單與至少兩張真實截圖。",
-      "id": "startup-automation-L6",
-      "lessonKey": "startup-automation-L6"
+      ]
     },
-    {
-      "id": "startup-automation-L7",
-      "lessonKey": "startup-automation-L7",
-      "zhTitle": "第7課：設計 Pitch Deck：讓別人聽懂你的生意",
-      "enTitle": "Lesson 7: Design a pitch deck that makes the business clear",
-      "zhConcept": "Pitch 是說清楚生意，不是堆特效。常見結構：問題 → 解法 → 為什麼是現在 → 產品 → 進展／驗證 → 模式 → 團隊 → 需求（Ask）。每一頁一句話主張＋證據。AI 可幫你壓成講點；不可編造用戶數或營收。",
-      "enConcept": "A pitch explains the business: problem, solution, why now, product, traction, model, team, ask—one claim plus evidence per slide. AI can tighten talking points; it must not invent users or revenue.",
-      "zhPrompt": "請擔任 Pitch 教練。問題：【】。解法：【】。真實進展：【】。本次 Ask：【】。\n\n請輸出 8–10 頁大綱、每頁一句主張、講點與可能被追問的問題。禁止新增未提供的數據。",
-      "enPrompt": "Act as a pitch coach. Problem: []. Solution: []. Real traction: []. Ask: []. Output 8–10 slides with one claim and talk track each, plus likely questions. Add no unprovided metrics.",
-      "zhExample": "弱頁「我們很有熱忱」。強頁「問題：社團排班在活動前 72 小時平均手動改班 2 小時；證據：8 訪談。」",
-      "enExample": "Weak: we are passionate. Strong: problem slide with a quantified pain and interview evidence.",
-      "zhPractice": "寫 8–10 頁大綱。；每頁加一句主張與證據。；刪假數據。；練習 3 分鐘口述。；準備 5 題 Q&A。",
-      "enPractice": "Outline 8–10 slides.；Add claim+evidence each.；Remove fake metrics.；Rehearse 3 minutes.；Prep 5 Q&A.",
-      "zhFeedbackPrompt": "你是一位Pitch 教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 清晰\n- 證據\n- 節奏\n- 誠實\n- Ask\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a pitch coach. Score 1-10 for: Clarity, Evidence, Pacing, Honesty, Ask. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhQuizItems": [
-        {
-          "q": "Pitch 核心是？",
-          "options": [
-            "讓人聽懂生意與進展",
-            "堆最多特效",
-            "回避 Ask"
-          ],
-          "answer": 0,
-          "explain": "說清楚。"
-        },
-        {
-          "q": "進展頁應放？",
-          "options": [
-            "可驗證的真實證據",
-            "虛構下載量",
-            "無關截圖牆"
-          ],
-          "answer": 0,
-          "explain": "真實。"
-        },
-        {
-          "q": "Ask 應？",
-          "options": [
-            "明確具體",
-            "越模糊越好",
-            "完全不提"
-          ],
-          "answer": 0,
-          "explain": "清楚。"
-        },
-        {
-          "q": "AI 可協助？",
-          "options": [
-            "壓縮講點",
-            "發明營收",
-            "代替你演練"
-          ],
-          "answer": 0,
-          "explain": "講點。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "架構＋講點",
-            "上櫃書",
-            "無關長文"
-          ],
-          "answer": 0,
-          "explain": "Pitch。"
-        }
+    "zhNextStep": "下一堂把目標使用者與痛點寫成可檢查的需求假設，並設計訪談問題（不捏造訪談結果）。",
+    "enNextStep": "Next, turn the target user and pain into a need hypothesis and interview questions—without inventing interview results.",
+    "zhConceptBlocks": {
+      "principles": [
+        "先定義可檢查問題",
+        "假設必須可標示",
+        "沒有證據就不捏造"
       ],
-      "enQuizItems": [
-        {
-          "q": "Pitch 核心是？",
-          "options": [
-            "讓人聽懂生意與進展",
-            "堆最多特效",
-            "回避 Ask"
-          ],
-          "answer": 0,
-          "explain": "說清楚。"
-        },
-        {
-          "q": "進展頁應放？",
-          "options": [
-            "可驗證的真實證據",
-            "虛構下載量",
-            "無關截圖牆"
-          ],
-          "answer": 0,
-          "explain": "真實。"
-        },
-        {
-          "q": "Ask 應？",
-          "options": [
-            "明確具體",
-            "越模糊越好",
-            "完全不提"
-          ],
-          "answer": 0,
-          "explain": "清楚。"
-        },
-        {
-          "q": "AI 可協助？",
-          "options": [
-            "壓縮講點",
-            "發明營收",
-            "代替你演練"
-          ],
-          "answer": 0,
-          "explain": "講點。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "架構＋講點",
-            "上櫃書",
-            "無關長文"
-          ],
-          "answer": 0,
-          "explain": "Pitch。"
-        }
+      "terms": [
+        "可否證問題",
+        "機會假設",
+        "需實地驗證"
       ],
-      "zhOutcome": "產出 8–10 頁 Pitch 架構與講點（問題、解法、市場、產品、進展、團隊、需求）。",
-      "enOutcome": "Produce an 8–10 slide pitch outline with talking points (problem, solution, market, product, traction, team, ask).",
-      "zhValueTip": "設計 Pitch Deck：讓別人在短時間聽懂問題、解法、進展與需求。",
-      "enValueTip": "Design a pitch deck so others quickly grasp problem, solution, traction, and ask.",
-      "zhCaseStudy": "團隊第一版 20 頁全是功能截圖。改成 9 頁後，投資人／老師先問驗證與 Ask。他們把「8 次訪談洞見＋3 個社團試用」放在進展頁，把還沒做的支付移出核心故事。",
-      "enCaseStudy": "A 20-slide feature tour became 9 slides; traction highlighted eight interviews and three club trials, and unbuilt payments left the core story.",
-      "zhExcellentExample": "每頁一句主張、證據來源、講者 20 秒講點；Ask 明確；無假數據；附 Q&A 預備。",
-      "enExcellentExample": "One claim, evidence source, and 20-second talk track per slide; clear ask; no fake metrics; Q&A prep.",
-      "zhWorkflow": [
-        "定故事主線",
-        "列頁級結構",
-        "補證據",
-        "壓成講點",
-        "演練 Q&A"
+      "criteria": [
+        "有問題一句話",
+        "有使用者與現況",
+        "有驗證路徑"
       ],
-      "enWorkflow": [
-        "Set narrative spine",
-        "List slide structure",
-        "Add evidence",
-        "Tighten talk tracks",
-        "Rehearse Q&A"
-      ],
-      "zhCommonMistakes": [
-        "功能導覽當故事",
-        "假用戶數",
-        "Ask 不清楚",
-        "太長無人記住",
-        "不敢講限制"
-      ],
-      "enCommonMistakes": [
-        "Feature tour as story",
-        "Fake user counts",
-        "Unclear ask",
-        "Too long to remember",
-        "Hiding limitations"
-      ],
-      "zhDeliverableChecklist": [
-        "頁級大綱",
-        "每頁主張",
-        "真實進展",
-        "清楚 Ask",
-        "Q&A"
-      ],
-      "enDeliverableChecklist": [
-        "Slide outline",
-        "Claims",
-        "Real traction",
-        "Clear ask",
-        "Q&A"
-      ],
-      "zhScorecard": [
-        "清晰",
-        "證據",
-        "節奏",
-        "誠實",
-        "Ask"
-      ],
-      "enScorecard": [
-        "Clarity",
-        "Evidence",
-        "Pacing",
-        "Honesty",
-        "Ask"
-      ],
-      "zhNotePrompt": "貼上 Pitch 大綱與 3 分鐘講稿要點。",
-      "enNotePrompt": "Paste your pitch outline and 3-minute talk points.",
-      "zhCoachPrompt": "請評我的 Pitch 是否太功能導向，並幫我改成問題—解法—進展結構。",
-      "enCoachPrompt": "Critique feature-heavy pitching and reshape to problem–solution–traction.",
-      "title": "設計 Pitch Deck：讓別人聽懂你的生意",
-      "description": "設計 Pitch Deck：讓別人在短時間聽懂問題、解法、進展與需求。",
-      "goal": "產出 8–10 頁 Pitch 架構與講點（問題、解法、市場、產品、進展、團隊、需求）。"
+      "boundaries": [
+        "避免：假訪談數據",
+        "避免：假 TAM",
+        "避免：自動付款承諾"
+      ]
     },
-    {
-      "id": "startup-automation-L8",
-      "lessonKey": "startup-automation-L8",
-      "zhTitle": "第8課：建立自動化思維：把重複工作變成流程",
-      "enTitle": "Lesson 8: Build automation thinking: turn repeat work into workflows",
-      "zhConcept": "自動化服務創業與產品運作中的重複工作，例如蒐集表單、通知、彙整。先畫流程再選工具。關鍵是：觸發是什麼、哪些步驟可自動、哪裡必須人工核對、失敗怎麼辦。AI 可幫你畫步驟與檢查點；不可在未理解流程時直接「全自動無人看」。",
-      "enConcept": "Automate repetitive startup operations after mapping trigger, auto steps, human checks, and failures. AI can draft the map; do not go fully unattended before you understand the flow.",
-      "zhPrompt": "請擔任自動化教練。重複工作描述：【】。目前耗時：【】。風險點：【】。\n\n請輸出流程草圖、建議自動化段落、必須人工的關卡、失敗處理與成功定義。不要建議處理違法資料的作法。",
-      "enPrompt": "Act as an automation coach. Repetitive work: []. Time cost: []. Risks: []. Output a flow sketch, automatable segments, human gates, failure handling, and success definition. Suggest nothing illegal for data handling.",
-      "zhExample": "弱：「全部自動隨便寄」。強：「觸發＝新表單；自動＝回覆＋建列；人工＝24h 內審核；失敗＝通知負責人並暫停開通。」",
-      "enExample": "Weak: auto-email everything. Strong: trigger=new form; auto=ack+row; human=review in 24h; failure=alert owner and block provisioning.",
-      "zhPractice": "選一個重複工作。；畫出現況。；標可自動／必人工。；補失敗分支。；定義成功並小範圍試跑。",
-      "enPractice": "Pick repetitive work.；Map current state.；Mark auto vs human.；Add failure branches.；Define success and pilot small.",
-      "zhFeedbackPrompt": "你是一位自動化教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 清楚度\n- 風險控制\n- 可測\n- 節省潛力\n- 創業營運焦點\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a automation coach. Score 1-10 for: Clarity, Risk control, Testability, Savings potential, Ops focus. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhQuizItems": [
-        {
-          "q": "自動化前應先？",
-          "options": [
-            "畫清流程與人工關卡",
-            "直接全自動",
-            "不管失敗"
-          ],
-          "answer": 0,
-          "explain": "先理解。"
-        },
-        {
-          "q": "失敗處理重要因為？",
-          "options": [
-            "避免靜默出錯",
-            "讓流程更酷",
-            "可以省略成功定義"
-          ],
-          "answer": 0,
-          "explain": "可靠。"
-        },
-        {
-          "q": "適合先自動的是？",
-          "options": [
-            "高頻重複低風險步驟",
-            "高風險一次決策",
-            "完全無規律危機"
-          ],
-          "answer": 0,
-          "explain": "重複性。"
-        },
-        {
-          "q": "AI 適合？",
-          "options": [
-            "整理流程草圖",
-            "保證零錯誤無人看管",
-            "取代所有責任"
-          ],
-          "answer": 0,
-          "explain": "設計輔助。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "流程草圖",
-            "完整財報",
-            "無關文件"
-          ],
-          "answer": 0,
-          "explain": "自動化草圖。"
+    "enConceptBlocks": {
+      "principles": [
+        "Define a checkable problem first",
+        "Label assumptions",
+        "Never invent evidence"
+      ],
+      "terms": [
+        "Falsifiable problem",
+        "Opportunity hypothesis",
+        "Needs field validation"
+      ],
+      "criteria": [
+        "Problem sentence",
+        "User + status quo",
+        "Validation path"
+      ],
+      "boundaries": [
+        "Avoid: fake interviews",
+        "Avoid: fake TAM",
+        "Avoid: auto-pay promises"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：問題與市場機會定義",
+      "機會要標假設，不能假裝已驗證。",
+      "AI 整理結構，不取代真實觀察。"
+    ],
+    "enSummary": [
+      "Deliverable: Problem & Opportunity Definition",
+      "Label opportunity as hypothesis—not validated fact.",
+      "AI structures; it does not replace observation."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "把 AI 寫的市場規模當成已驗證",
+        "why": "造成假信心與錯誤決策",
+        "fix": "一律標示意／假設或刪除"
+      },
+      {
+        "error": "問題寫成「大家都很需要」",
+        "why": "無法驗證也無法取捨",
+        "fix": "改成誰／何時／現況湊合方式"
+      },
+      {
+        "error": "跳過限制條件直接談機會",
+        "why": "計畫不可執行",
+        "fix": "先寫時間預算技能合規限制"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Treating AI market size as validated",
+        "why": "Creates false confidence",
+        "fix": "Label illustrative or delete"
+      },
+      {
+        "error": "Problem as “everyone needs this”",
+        "why": "Cannot validate or prioritize",
+        "fix": "Rewrite who/when/current workaround"
+      },
+      {
+        "error": "Skipping constraints",
+        "why": "Plan is not executable",
+        "fix": "List time/budget/skills/compliance first"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "清晰度",
+        "levels": {
+          "incomplete": "問題空泛",
+          "basic": "有角色但不可否證",
+          "good": "問題可檢查",
+          "ready": "含非機會與驗證路徑"
         }
-      ],
-      "enQuizItems": [
-        {
-          "q": "自動化前應先？",
-          "options": [
-            "畫清流程與人工關卡",
-            "直接全自動",
-            "不管失敗"
-          ],
-          "answer": 0,
-          "explain": "先理解。"
-        },
-        {
-          "q": "失敗處理重要因為？",
-          "options": [
-            "避免靜默出錯",
-            "讓流程更酷",
-            "可以省略成功定義"
-          ],
-          "answer": 0,
-          "explain": "可靠。"
-        },
-        {
-          "q": "適合先自動的是？",
-          "options": [
-            "高頻重複低風險步驟",
-            "高風險一次決策",
-            "完全無規律危機"
-          ],
-          "answer": 0,
-          "explain": "重複性。"
-        },
-        {
-          "q": "AI 適合？",
-          "options": [
-            "整理流程草圖",
-            "保證零錯誤無人看管",
-            "取代所有責任"
-          ],
-          "answer": 0,
-          "explain": "設計輔助。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "流程草圖",
-            "完整財報",
-            "無關文件"
-          ],
-          "answer": 0,
-          "explain": "自動化草圖。"
+      },
+      {
+        "name": "誠實度",
+        "levels": {
+          "incomplete": "捏造訪談／TAM",
+          "basic": "假設未標示",
+          "good": "假設與觀察分開",
+          "ready": "未知皆標需驗證"
         }
+      },
+      {
+        "name": "可執行度",
+        "levels": {
+          "incomplete": "不知下一步",
+          "basic": "驗證方式空泛",
+          "good": "有最小驗證",
+          "ready": "含限制與風險"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Clarity",
+        "levels": {
+          "incomplete": "Vague problem",
+          "basic": "Role present but not falsifiable",
+          "good": "Checkable problem",
+          "ready": "Non-opportunities + validation"
+        }
+      },
+      {
+        "name": "Honesty",
+        "levels": {
+          "incomplete": "Invented interviews/TAM",
+          "basic": "Unlabeled assumptions",
+          "good": "Assumptions vs observations split",
+          "ready": "Unknowns flagged"
+        }
+      },
+      {
+        "name": "Actionability",
+        "levels": {
+          "incomplete": "No next step",
+          "basic": "Vague validation",
+          "good": "Minimal validation present",
+          "ready": "Constraints + risks included"
+        }
+      }
+    ]
+  },
+  {
+    "id": "startup-automation-L2",
+    "lessonKey": "startup-automation-L2",
+    "zhTitle": "第2課：分析目標使用者與痛點，設計訪談問題",
+    "enTitle": "Lesson 2: Analyze target users and design interview questions",
+    "zhConcept": "「目標使用者」不是人口統計口號，而是可對話的角色情境；「需求假設」必須寫成可被訪談否證的句子。AI 可幫你設計問題與紀錄欄位，但不可捏造訪談人數、客戶原話或問卷結果。尚未訪談＝待驗證，不是已驗證。",
+    "enConcept": "A target user is a conversational role context—not a demographic slogan. A need hypothesis must be falsifiable by interviews. AI can design questions and log fields; it must not invent interview counts, quotes, or survey results. Not interviewed yet = to validate, not validated.",
+    "zhPrompt": "你是使用者研究教練，協助把目標使用者與痛點整理成「需求假設」與訪談問題設計。不可捏造已完成的訪談人數、問卷結果、客戶原話或轉換率；尚未訪談就標「待驗證」。\n\n我的背景：\n- 問題（可沿用 L1）：[請填寫問題]\n- 目標使用者：[請填寫目標使用者]\n- 我目前觀察到的流程：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- 我已有的觀察（去敏，沒有就寫「尚無」）：[請填寫]\n\n任務：產出「目標使用者與需求假設」，包含：\n1) 使用者角色卡（動機、情境、限制；禁止真實姓名／電話）\n2) 痛點 → 需求假設（格式：我們相信…因為…；若錯，我們會…）\n3) 訪談大綱 8–10 題（開放式，不誘導「你一定很需要吧」）\n4) 訪談紀錄欄位模板（同意、去敏摘要、引用標示意）\n5) 什麼不算驗證（例如：朋友客氣說讚）\n6) 需人工確認項（至少 3 項）\n\n限制：不要產生假訪談逐字稿。不要鼓勵自動寄信／自動加好友。本平台未串接 Gmail／LINE／CRM。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+    "enPrompt": "You are a user-research coach who turns target users and pains into a Need Hypothesis and interview design. Do not invent completed interview counts, survey results, customer quotes, or conversion rates. If not yet interviewed, label “to validate.”\n\nMy context:\n- Problem (may reuse L1): [Enter problem]\n- Target user: [Enter target user]\n- Current process: [Enter current process]\n- Constraints: [Enter constraints]\n- Observations so far (sanitized, or “none yet”): [Enter]\n\nTask: Produce a “Target User & Need Hypothesis” with:\n1) User role card (motivation, context, constraints; no real names/phones)\n2) Pain → need hypothesis (We believe… because…; if wrong, we will…)\n3) Interview outline of 8–10 open questions (no leading “you must need this”)\n4) Interview log field template (consent, sanitized summary, illustrative quotes labeled)\n5) What does NOT count as validation (e.g., polite friend praise)\n6) Human-confirmation items (at least 3)\n\nLimits: Do not generate fake interview transcripts. Do not encourage auto-email or auto-adding contacts. This platform does not integrate Gmail/LINE/CRM.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+    "zhExample": "問題：接案報價來回漏項；目標使用者：設計系接案新手；目前流程：用聊天軟體一段段改價；限制：每週只能訪談 2 人、紀錄必須去敏。",
+    "enExample": "Problem: quoting back-and-forth misses items; target user: design-student freelancers; current process: chat-based price edits; constraints: max 2 interviews/week, sanitized notes only.",
+    "zhPractice": "完成去敏角色卡與需求假設。；寫 8–10 題開放式訪談大綱。；用主 Prompt 檢查並刪假結論。；存成「目標使用者與需求假設」。",
+    "enPractice": "Finish sanitized role card and need hypothesis.; Write 8–10 open interview questions.; Run the main prompt and delete fake conclusions.; Save Target User & Need Hypothesis.",
+    "zhFeedbackPrompt": "你是一位使用者研究教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 問題品質\n- 非誘導\n- 可執行\n- 洞見更新\n- 創業使用者焦點\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a user-research coach. Score 1-10 for: Question quality, Non-leading, Executability, Insight updates, User focus. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhQuizItems": [
+      {
+        "q": "早期訪談目的是？",
+        "options": [
+          "理解行為與現有解法",
+          "當場成交",
+          "收集假好評"
+        ],
+        "answer": 0,
+        "explain": "學習。"
+      },
+      {
+        "q": "較好的問題型態？",
+        "options": [
+          "上次你怎麼做",
+          "你會買嗎（誘導）",
+          "我們很棒吧"
+        ],
+        "answer": 0,
+        "explain": "行為故事。"
+      },
+      {
+        "q": "AI 不可？",
+        "options": [
+          "捏造逐字稿",
+          "標記誘導題",
+          "整理訪綱"
+        ],
+        "answer": 0,
+        "explain": "禁假資料。"
+      },
+      {
+        "q": "訪完最重要？",
+        "options": [
+          "更新痛點假設",
+          "立刻寫完整程式",
+          "忽略矛盾資訊"
+        ],
+        "answer": 0,
+        "explain": "學習迴路。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "訪綱與痛點假設",
+          "財報",
+          "無關講義"
+        ],
+        "answer": 0,
+        "explain": "使用者研究。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "早期訪談目的是？",
+        "options": [
+          "理解行為與現有解法",
+          "當場成交",
+          "收集假好評"
+        ],
+        "answer": 0,
+        "explain": "學習。"
+      },
+      {
+        "q": "較好的問題型態？",
+        "options": [
+          "上次你怎麼做",
+          "你會買嗎（誘導）",
+          "我們很棒吧"
+        ],
+        "answer": 0,
+        "explain": "行為故事。"
+      },
+      {
+        "q": "AI 不可？",
+        "options": [
+          "捏造逐字稿",
+          "標記誘導題",
+          "整理訪綱"
+        ],
+        "answer": 0,
+        "explain": "禁假資料。"
+      },
+      {
+        "q": "訪完最重要？",
+        "options": [
+          "更新痛點假設",
+          "立刻寫完整程式",
+          "忽略矛盾資訊"
+        ],
+        "answer": 0,
+        "explain": "學習迴路。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "訪綱與痛點假設",
+          "財報",
+          "無關講義"
+        ],
+        "answer": 0,
+        "explain": "使用者研究。"
+      }
+    ],
+    "zhOutcome": "目標使用者與需求假設",
+    "enOutcome": "Target User & Need Hypothesis",
+    "zhValueTip": "先假設、再訪談；AI 幫你問對問題，不替你編造答案。",
+    "enValueTip": "Hypothesize first, interview second. AI helps you ask—not invent answers.",
+    "zhCaseStudy": "自由接案報價助手「報價兔」想服務設計系學生。創辦人先請 AI 寫「10 位客戶訪談結論」，全是假原話。改成角色卡＝接案新手、痛點＝報價來回耗時、需求假設＝「若有檢查清單可減少漏項」。訪談題改成「上次報價最卡的一步是什麼」。他們約 3 位同學（虛構化紀錄、取得同意），沒有一次把 AI 草稿當真實逐字稿。",
+    "enCaseStudy": "Freelance quoting bot “QuoteBunny” targeted design students. The founder first asked AI for “10 interview conclusions” full of fake quotes. They rebuilt a role card (newbie freelancers), pain (quote back-and-forth), hypothesis (“a checklist reduces missed items”), and open questions (“What was the stickiest step last time?”). They spoke with three classmates (consent + anonymized notes) and never treated AI drafts as real transcripts.",
+    "zhExcellentExample": "含：角色卡、可否證需求假設、8–10 開放題、紀錄模板、什麼不算驗證、無假結論。",
+    "enExcellentExample": "Includes role card, falsifiable need hypothesis, 8–10 open questions, log template, what-does-not-count, no fake conclusions.",
+    "zhWorkflow": [
+      "沿用 L1 問題，寫出目標使用者與目前流程（去敏）",
+      "把痛點改寫成需求假設（因為／若錯則）",
+      "用 Prompt 產出訪談大綱與紀錄模板",
+      "刪除任何假結論／假原話",
+      "存成「目標使用者與需求假設」"
+    ],
+    "enWorkflow": [
+      "Reuse L1 problem; write target user and current process (sanitized)",
+      "Rewrite pain as a need hypothesis (because / if wrong)",
+      "Generate interview outline and log template with the prompt",
+      "Delete any fake conclusions/quotes",
+      "Save Target User & Need Hypothesis"
+    ],
+    "zhCommonMistakes": [
+      "請 AI 產生假訪談逐字稿",
+      "誘導題逼出「我需要你的產品」",
+      "把朋友稱讚當市場驗證",
+      "紀錄未去敏含真實聯絡方式",
+      "宣稱可自動大量寄信或加 LINE 好友"
+    ],
+    "enCommonMistakes": [
+      "Asking AI for fake interview transcripts",
+      "Leading questions that force “I need your product”",
+      "Treating friend praise as market validation",
+      "Logs with real contact info unsanitized",
+      "Claiming auto mass-email or auto-adding LINE friends"
+    ],
+    "zhDeliverableChecklist": [
+      "已完成去敏使用者角色卡",
+      "需求假設含因為／若錯則",
+      "已有 8–10 題開放式訪談大綱",
+      "已有訪談紀錄模板與什麼不算驗證",
+      "無假訪談結論或假原話",
+      "未宣稱自動寄信／CRM 串接"
+    ],
+    "enDeliverableChecklist": [
+      "Sanitized user role card completed",
+      "Need hypothesis includes because / if-wrong",
+      "8–10 open interview questions present",
+      "Interview log template and non-validation list present",
+      "No fake interview conclusions or quotes",
+      "No auto-email / CRM integration claims"
+    ],
+    "zhScorecard": [
+      "問題品質",
+      "非誘導",
+      "可執行",
+      "洞見更新",
+      "創業使用者焦點"
+    ],
+    "enScorecard": [
+      "Question quality",
+      "Non-leading",
+      "Executability",
+      "Insight updates",
+      "User focus"
+    ],
+    "zhNotePrompt": "寫下你的需求假設一句話、一題你最想問的開放題、以及你不會把什麼誤會成驗證。",
+    "enNotePrompt": "Write your need hypothesis in one sentence, one open question you most want to ask, and one thing you will not mistake for validation.",
+    "zhCoachPrompt": "請檢查訪綱是否誘導或太像問卷推銷，並改寫成行為問題。",
+    "enCoachPrompt": "Check for leading or pitchy questions and rewrite toward behavior stories.",
+    "zhWhyItMatters": {
+      "problem": "沒有訪談設計就請 AI「總結用戶需求」，會得到假共識。",
+      "ineffective": "只問「用戶一定想要什麼功能」。",
+      "solution": "先寫角色卡與需求假設，再用開放式訪談題去驗證，結論留给真實對話。"
+    },
+    "enWhyItMatters": {
+      "problem": "Asking AI to “summarize user needs” without interview design yields fake consensus.",
+      "ineffective": "Only asking “what features will users definitely want.”",
+      "solution": "Write a role card and need hypothesis, then validate with open interview questions—conclusions come from real talks."
+    },
+    "zhObjectives": [
+      "完成一張去敏的使用者角色卡",
+      "寫出可否證的需求假設（因為／若錯則）",
+      "設計 8–10 題開放式訪談大綱",
+      "建立訪談紀錄欄位與「什麼不算驗證」",
+      "存成「目標使用者與需求假設」"
+    ],
+    "enObjectives": [
+      "Complete one sanitized user role card",
+      "Write a falsifiable need hypothesis (because / if wrong)",
+      "Design an 8–10 open interview outline",
+      "Build interview log fields and “what does not count”",
+      "Save Target User & Need Hypothesis"
+    ],
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "入門 / Beginner",
+    "zhOutputName": "目標使用者與需求假設",
+    "enOutputName": "Target User & Need Hypothesis",
+    "zhCaseStudyBlocks": {
+      "problem": "想做報價工具，但只有想像中的用戶。",
+      "wrong": "請 AI 直接產出訪談結論與假原話。",
+      "right": "寫角色卡、需求假設與開放式訪談題。",
+      "result": "可執行的「目標使用者與需求假設」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Wants a quoting tool but only imagined users.",
+      "wrong": "Ask AI for interview conclusions and fake quotes.",
+      "right": "Write role card, need hypothesis, and open questions.",
+      "result": "An actionable Target User & Need Hypothesis."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "寫角色卡",
+        "why": "沒有具體角色就無法訪談",
+        "input": "目標使用者描述",
+        "output": "角色卡",
+        "check": "有無真實個資"
+      },
+      {
+        "do": "寫需求假設",
+        "why": "口號無法否證",
+        "input": "痛點筆記",
+        "output": "假設句",
+        "check": "是否含若錯則"
+      },
+      {
+        "do": "設計訪談題",
+        "why": "誘導題製造假需求",
+        "input": "假設句",
+        "output": "8–10 題",
+        "check": "是否開放式"
+      },
+      {
+        "do": "建紀錄模板",
+        "why": "沒有欄位易事後編造",
+        "input": "大綱",
+        "output": "紀錄表",
+        "check": "有同意／去敏欄"
+      },
+      {
+        "do": "存檔清理",
+        "why": "避免假證據混入",
+        "input": "初稿",
+        "output": "定稿",
+        "check": "有無假逐字稿"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Write role card",
+        "why": "No role means no interview focus",
+        "input": "Target user notes",
+        "output": "Role card",
+        "check": "Any real PII?"
+      },
+      {
+        "do": "Write need hypothesis",
+        "why": "Slogans are not falsifiable",
+        "input": "Pain notes",
+        "output": "Hypothesis sentence",
+        "check": "If-wrong clause?"
+      },
+      {
+        "do": "Design questions",
+        "why": "Leading questions fake demand",
+        "input": "Hypothesis",
+        "output": "8–10 questions",
+        "check": "Open-ended?"
+      },
+      {
+        "do": "Build log template",
+        "why": "No fields invite later invention",
+        "input": "Outline",
+        "output": "Log sheet",
+        "check": "Consent/sanitize fields"
+      },
+      {
+        "do": "Save and clean",
+        "why": "Keep fake evidence out",
+        "input": "Draft",
+        "output": "Final",
+        "check": "No fake transcripts"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "角色卡",
+        "standard": "動機／情境／限制齊",
+        "mistakes": "寫真實姓名電話",
+        "check": "是否去敏？"
+      },
+      {
+        "task": "需求假設",
+        "standard": "含因為與若錯則",
+        "mistakes": "只寫「用戶很需要」",
+        "check": "可否否證？"
+      },
+      {
+        "task": "訪談大綱",
+        "standard": "開放式且不誘導",
+        "mistakes": "全是是非題",
+        "check": "題數是否 8–10？"
+      },
+      {
+        "task": "存檔",
+        "standard": "含非驗證清單",
+        "mistakes": "空白結論當已驗證",
+        "check": "是否標待驗證？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Role card",
+        "standard": "Motivation/context/constraints",
+        "mistakes": "Real name/phone",
+        "check": "Sanitized?"
+      },
+      {
+        "task": "Need hypothesis",
+        "standard": "Because + if-wrong",
+        "mistakes": "Only “users need this”",
+        "check": "Falsifiable?"
+      },
+      {
+        "task": "Interview outline",
+        "standard": "Open, not leading",
+        "mistakes": "All yes/no",
+        "check": "8–10 questions?"
+      },
+      {
+        "task": "Save",
+        "standard": "Non-validation list included",
+        "mistakes": "Blank conclusions as validated",
+        "check": "Marked to-validate?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "要設計訪談卻怕問出誘導題或假造結果時使用",
+      "fields": [
+        "[請填寫問題]",
+        "[請填寫目標使用者]",
+        "[請填寫目前流程]",
+        "[請填寫限制條件]"
       ],
-      "zhOutcome": "產出一張自動化流程草圖：觸發、步驟、人工關卡、失敗處理與成功定義。",
-      "enOutcome": "Produce an automation flow sketch: trigger, steps, human checkpoints, failure handling, and success definition.",
-      "zhValueTip": "建立自動化思維：把重複工作變成可檢查的流程。",
-      "enValueTip": "Build automation thinking: turn repetitive work into checkable flows.",
-      "zhCaseStudy": "團隊每次試用申請都手動回信。流程改成：表單提交 → 自動回覆時程 → 人工審核資格 → 通過才開通。失敗時通知負責人。一週節省數小時且減少漏回。",
-      "enCaseStudy": "Trial requests moved from manual replies to form → auto ack → human review → provision, with failure alerts—saving hours and missed replies.",
-      "zhExcellentExample": "流程圖含觸發、系統步驟、人工關卡、資料欄位、失敗分支、成功定義與回滾方式。",
-      "enExcellentExample": "Flow with trigger, system steps, human gates, fields, failure branches, success definition, and rollback.",
-      "zhWorkflow": [
-        "選重複工作",
-        "畫現況",
-        "切自動／人工",
-        "設計失敗處理",
-        "小範圍試跑"
+      "body": "你是使用者研究教練，協助把目標使用者與痛點整理成「需求假設」與訪談問題設計。不可捏造已完成的訪談人數、問卷結果、客戶原話或轉換率；尚未訪談就標「待驗證」。\n\n我的背景：\n- 問題（可沿用 L1）：[請填寫問題]\n- 目標使用者：[請填寫目標使用者]\n- 我目前觀察到的流程：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- 我已有的觀察（去敏，沒有就寫「尚無」）：[請填寫]\n\n任務：產出「目標使用者與需求假設」，包含：\n1) 使用者角色卡（動機、情境、限制；禁止真實姓名／電話）\n2) 痛點 → 需求假設（格式：我們相信…因為…；若錯，我們會…）\n3) 訪談大綱 8–10 題（開放式，不誘導「你一定很需要吧」）\n4) 訪談紀錄欄位模板（同意、去敏摘要、引用標示意）\n5) 什麼不算驗證（例如：朋友客氣說讚）\n6) 需人工確認項（至少 3 項）\n\n限制：不要產生假訪談逐字稿。不要鼓勵自動寄信／自動加好友。本平台未串接 Gmail／LINE／CRM。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "expected": "含角色卡、需求假設與訪談大綱的使用者研究包",
+      "revisionReminder": "請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "extensions": [
+        {
+          "title": "延伸：把誘導題改成開放題",
+          "body": "檢查我貼上的訪談題，標出誘導與是非題，改成開放式。不要替我填寫受訪者答案。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when designing interviews and you fear leading questions or invented results",
+      "fields": [
+        "[Enter problem]",
+        "[Enter target user]",
+        "[Enter current process]",
+        "[Enter constraints]"
       ],
-      "enWorkflow": [
-        "Pick repetitive work",
-        "Map current",
-        "Split auto/human",
-        "Design failures",
-        "Small pilot"
+      "body": "You are a user-research coach who turns target users and pains into a Need Hypothesis and interview design. Do not invent completed interview counts, survey results, customer quotes, or conversion rates. If not yet interviewed, label “to validate.”\n\nMy context:\n- Problem (may reuse L1): [Enter problem]\n- Target user: [Enter target user]\n- Current process: [Enter current process]\n- Constraints: [Enter constraints]\n- Observations so far (sanitized, or “none yet”): [Enter]\n\nTask: Produce a “Target User & Need Hypothesis” with:\n1) User role card (motivation, context, constraints; no real names/phones)\n2) Pain → need hypothesis (We believe… because…; if wrong, we will…)\n3) Interview outline of 8–10 open questions (no leading “you must need this”)\n4) Interview log field template (consent, sanitized summary, illustrative quotes labeled)\n5) What does NOT count as validation (e.g., polite friend praise)\n6) Human-confirmation items (at least 3)\n\nLimits: Do not generate fake interview transcripts. Do not encourage auto-email or auto-adding contacts. This platform does not integrate Gmail/LINE/CRM.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "expected": "A user-research pack with role card, need hypothesis, and interview outline",
+      "revisionReminder": "Remove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "extensions": [
+        {
+          "title": "Extension: rewrite leading questions",
+          "body": "Review my interview questions; flag leading/yes-no items and rewrite as open questions. Do not invent respondent answers."
+        }
+      ]
+    },
+    "zhNextStep": "下一堂用已釐清的使用者與問題，起草「誰付錢、為何付錢」的商業模式草稿（數字標示意）。",
+    "enNextStep": "Next, draft a business model of who pays and why—label numbers as illustrative.",
+    "zhConceptBlocks": {
+      "principles": [
+        "假設先於結論",
+        "開放題優先",
+        "沒有訪談就沒有原話"
       ],
-      "zhCommonMistakes": [
-        "無人工關卡就全自動",
-        "失敗無人知",
-        "自動化錯誤流程",
-        "不計成功定義",
-        "一次自動所有部門"
+      "terms": [
+        "需求假設",
+        "角色卡",
+        "待驗證"
       ],
-      "enCommonMistakes": [
-        "Full auto with no human gate",
-        "Silent failures",
-        "Automating a bad process",
-        "No success definition",
-        "Boiling the ocean"
+      "criteria": [
+        "有假設句",
+        "有訪談題",
+        "有紀錄欄"
       ],
-      "zhDeliverableChecklist": [
-        "流程草圖",
+      "boundaries": [
+        "避免：假逐字稿",
+        "避免：誘導題",
+        "避免：自動寄信"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Hypothesis before conclusion",
+        "Open questions first",
+        "No interview, no quotes"
+      ],
+      "terms": [
+        "Need hypothesis",
+        "Role card",
+        "To validate"
+      ],
+      "criteria": [
+        "Hypothesis sentence",
+        "Interview questions",
+        "Log fields"
+      ],
+      "boundaries": [
+        "Avoid: fake transcripts",
+        "Avoid: leading questions",
+        "Avoid: auto-email"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：目標使用者與需求假設",
+      "訪談題是工具，假結論不是證據。",
+      "去敏與同意是基本門檻。"
+    ],
+    "enSummary": [
+      "Deliverable: Target User & Need Hypothesis",
+      "Questions are tools; fake conclusions are not evidence.",
+      "Sanitization and consent are the baseline."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "請 AI 直接寫「訪談結論」",
+        "why": "沒有真實對話就無結論",
+        "fix": "只產出問題與假設，結論待填"
+      },
+      {
+        "error": "誘導受訪者說需要你的產品",
+        "why": "得到假需求",
+        "fix": "改成開放式情境題"
+      },
+      {
+        "error": "把朋友客氣稱讚當驗證",
+        "why": "偏誤極大",
+        "fix": "寫入「什麼不算驗證」"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Asking AI for “interview conclusions”",
+        "why": "No real talk, no conclusion",
+        "fix": "Only questions + hypotheses; conclusions TBD"
+      },
+      {
+        "error": "Leading users to say they need your product",
+        "why": "Fake demand",
+        "fix": "Use open situational questions"
+      },
+      {
+        "error": "Treating polite friend praise as validation",
+        "why": "High bias",
+        "fix": "List “what does not count”"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "假設品質",
+        "levels": {
+          "incomplete": "只有口號",
+          "basic": "有假設但不可否證",
+          "good": "有因為／若錯則",
+          "ready": "含非驗證清單"
+        }
+      },
+      {
+        "name": "訪談設計",
+        "levels": {
+          "incomplete": "全是誘導題",
+          "basic": "題目可用但不夠開放",
+          "good": "8–10 開放題",
+          "ready": "含紀錄模板"
+        }
+      },
+      {
+        "name": "隱私與誠實",
+        "levels": {
+          "incomplete": "含真實個資或假逐字稿",
+          "basic": "去敏不足",
+          "good": "無假結論",
+          "ready": "同意與去敏欄齊全"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Hypothesis quality",
+        "levels": {
+          "incomplete": "Slogan only",
+          "basic": "Hypothesis not falsifiable",
+          "good": "Because / if-wrong present",
+          "ready": "Non-validation list included"
+        }
+      },
+      {
+        "name": "Interview design",
+        "levels": {
+          "incomplete": "All leading",
+          "basic": "Usable but not open enough",
+          "good": "8–10 open questions",
+          "ready": "Log template included"
+        }
+      },
+      {
+        "name": "Privacy & honesty",
+        "levels": {
+          "incomplete": "Real PII or fake transcripts",
+          "basic": "Weak sanitization",
+          "good": "No fake conclusions",
+          "ready": "Consent + sanitize fields"
+        }
+      }
+    ]
+  },
+  {
+    "id": "startup-automation-L3",
+    "lessonKey": "startup-automation-L3",
+    "zhTitle": "第3課：建立商業模式草稿：誰付錢、為何付錢",
+    "enTitle": "Lesson 3: Draft a business model: who pays and why",
+    "zhConcept": "商業模式草稿回答兩件事：誰付錢、為何付錢。使用者與付費者可能不同。AI 可幫你列收入選項與假設，但不可捏造營收、成本、轉換率或投資人意向。現階段避免把「自動扣款／自動簽約」當預設；高風險金錢動作必須人工確認。",
+    "enConcept": "A business model draft answers who pays and why. User and payer may differ. AI can list revenue options and assumptions; it must not invent revenue, costs, conversion, or investor interest. Do not default to auto-charge/auto-sign; high-risk money actions need human confirmation.",
+    "zhPrompt": "你是商業模式教練，協助起草「誰付錢、為何付錢」的商業模式草稿。不可捏造營收、成本、轉換率、客戶數或投資人意向；所有數字標「示意／假設」。\n\n我的背景：\n- 問題：[請填寫問題]\n- 目標使用者（使用者未必等於付費者）：[請填寫目標使用者]\n- 目前流程／價值如何傳遞：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- 我傾向的收費直覺（可改）：[請填寫]\n\n任務：產出「商業模式草稿」，包含：\n1) 價值主張（對使用者／對付費者分開寫，若不同）\n2) 付費者是誰、為何現在願意付錢（假設，待驗證）\n3) 收入方式選項 2–3 種（訂閱／單次／抽成等）與取捨\n4) 成本結構粗分（只列類別，數字示意）\n5) 關鍵假設與否證訊號\n6) 不做清單（例如：現階段不做自動扣款）\n7) 需人工確認項（至少 3 項）\n\n限制：不要設計無監督自動付款或自動簽約。不要宣稱本平台串接 ECPay／金流／CRM。工具名若提到僅作概念例子。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+    "enPrompt": "You are a business-model coach drafting “who pays and why.” Do not invent revenue, costs, conversion rates, customer counts, or investor interest. Label all numbers illustrative/assumptions.\n\nMy context:\n- Problem: [Enter problem]\n- Target user (user may ≠ payer): [Enter target user]\n- Current process / how value is delivered: [Enter current process]\n- Constraints: [Enter constraints]\n- Pricing intuition (changeable): [Enter]\n\nTask: Produce a “Business Model Draft” with:\n1) Value proposition (separate user vs payer if different)\n2) Who pays and why they might pay now (hypothesis, to validate)\n3) 2–3 revenue options (subscription / one-time / take-rate) with tradeoffs\n4) Cost structure categories (categories only; numbers illustrative)\n5) Key assumptions and disconfirming signals\n6) Won’t-do list (e.g., no unsupervised auto-charging yet)\n7) Human-confirmation items (at least 3)\n\nLimits: Do not design unsupervised auto-pay or auto-signing. Do not claim this platform integrates ECPay/payments/CRM. Tool names, if any, are conceptual examples only.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+    "zhExample": "問題：社團資源分散難找；目標使用者：社員；付費者假設：幹部月費；目前流程：手動整理連結；限制：本學期不做金流串接。",
+    "enExample": "Problem: club resources are scattered; target user: members; payer hypothesis: officers’ monthly fee; current process: manual link curation; constraints: no payment integration this term.",
+    "zhPractice": "分開寫使用者與付費者。；比較 2–3 種收入方式。；用主 Prompt 產出草稿並刪假營收。；存成「商業模式草稿」。",
+    "enPractice": "Separate user and payer.; Compare 2–3 revenue options.; Run the main prompt and delete fake revenue.; Save the Business Model Draft.",
+    "zhFeedbackPrompt": "你是一位商業模式教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 清楚度\n- 付費邏輯\n- 可驗證\n- 誠實\n- 創業焦點\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a business-model coach. Score 1-10 for: Clarity, Payment logic, Testability, Honesty, Startup focus. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhQuizItems": [
+      {
+        "q": "商業模式核心問題？",
+        "options": [
+          "誰為何付錢",
+          "Logo 好不好看",
+          "程式用什麼語言"
+        ],
+        "answer": 0,
+        "explain": "付費邏輯。"
+      },
+      {
+        "q": "使用者與付費者？",
+        "options": [
+          "可能不同，要分開寫",
+          "永遠同一人",
+          "不重要"
+        ],
+        "answer": 0,
+        "explain": "常分離。"
+      },
+      {
+        "q": "營收預測應？",
+        "options": [
+          "標成假設待驗證",
+          "當已發生事實",
+          "完全不談錢"
+        ],
+        "answer": 0,
+        "explain": "假設。"
+      },
+      {
+        "q": "最小驗證可包含？",
+        "options": [
+          "預購意向或小額付費測試",
+          "直接宣稱市佔第一",
+          "不做就上線"
+        ],
+        "answer": 0,
+        "explain": "真實驗證。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "模式草稿",
+          "無關文件包",
+          "無關文件包"
+        ],
+        "answer": 0,
+        "explain": "商業模式。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "商業模式核心問題？",
+        "options": [
+          "誰為何付錢",
+          "Logo 好不好看",
+          "程式用什麼語言"
+        ],
+        "answer": 0,
+        "explain": "付費邏輯。"
+      },
+      {
+        "q": "使用者與付費者？",
+        "options": [
+          "可能不同，要分開寫",
+          "永遠同一人",
+          "不重要"
+        ],
+        "answer": 0,
+        "explain": "常分離。"
+      },
+      {
+        "q": "營收預測應？",
+        "options": [
+          "標成假設待驗證",
+          "當已發生事實",
+          "完全不談錢"
+        ],
+        "answer": 0,
+        "explain": "假設。"
+      },
+      {
+        "q": "最小驗證可包含？",
+        "options": [
+          "預購意向或小額付費測試",
+          "直接宣稱市佔第一",
+          "不做就上線"
+        ],
+        "answer": 0,
+        "explain": "真實驗證。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "模式草稿",
+          "無關文件包",
+          "無關文件包"
+        ],
+        "answer": 0,
+        "explain": "商業模式。"
+      }
+    ],
+    "zhOutcome": "商業模式草稿",
+    "enOutcome": "Business Model Draft",
+    "zhValueTip": "先想清楚誰付錢；營收數字沒有來源就只標示意，绝不當承諾。",
+    "enValueTip": "Clarify who pays first. Unsourced revenue figures stay illustrative—never promises.",
+    "zhCaseStudy": "學生訂閱社團「週刊匣」提供精選學習資源。他們差点讓 AI 寫「第一年 50 萬營收」。改成：使用者＝想省篩選時間的學生、付費者＝願意付小額月費的社團幹部（假設）、收入選項＝月訂／學期票／免費+打賞。成本只列類別（內容時間、工具費示意）。不做清單寫「不做自動扣款、不做自動簽約」。",
+    "enCaseStudy": "Student subscription club “WeekBox” almost let AI invent “NT$500k year-one revenue.” They rewrote: users = students who want curated learning links; payers = club officers willing to pay a small monthly fee (hypothesis); revenue options = monthly / semester pass / free+tips. Costs listed as categories only. Won’t-do: no auto-charge, no auto-sign.",
+    "zhExcellentExample": "含：價值主張、付費者假設、2–3 收入選項取捨、示意成本類別、否證訊號、不做清單。",
+    "enExcellentExample": "Includes value prop, payer hypothesis, 2–3 revenue tradeoffs, illustrative cost categories, disconfirming signals, won’t-do list.",
+    "zhWorkflow": [
+      "寫清問題、使用者、目前價值傳遞流程與限制",
+      "分開使用者與付費者，寫付費假設",
+      "用 Prompt 產出收入選項與成本類別（示意）",
+      "刪假營收，補上否證訊號與不做清單",
+      "存成「商業模式草稿」"
+    ],
+    "enWorkflow": [
+      "Write problem, user, value-delivery process, and constraints",
+      "Separate user and payer; write pay hypothesis",
+      "Generate revenue options and cost categories (illustrative)",
+      "Delete fake revenue; add disconfirming signals and won’t-dos",
+      "Save the Business Model Draft"
+    ],
+    "zhCommonMistakes": [
+      "捏造營收、轉換率或投資人意向",
+      "未檢查就把使用者當付費者",
+      "把示意價格寫成已驗證願付價格",
+      "預設自動扣款或自動簽約",
+      "宣稱平台已串接 ECPay／金流"
+    ],
+    "enCommonMistakes": [
+      "Inventing revenue, conversion, or investor interest",
+      "Assuming user = payer without checking",
+      "Writing illustrative prices as validated WTP",
+      "Defaulting to auto-charge or auto-sign",
+      "Claiming ECPay/payment integration on this platform"
+    ],
+    "zhDeliverableChecklist": [
+      "已分開使用者與付費者（若不同）",
+      "已寫付費假設與 2–3 種收入取捨",
+      "成本僅列類別且數字標示意",
+      "已有關鍵假設與否證訊號",
+      "不做清單含禁止無監督自動扣款／簽約",
+      "無假營收／轉換率／投資人意見"
+    ],
+    "enDeliverableChecklist": [
+      "User and payer separated when different",
+      "Pay hypothesis and 2–3 revenue tradeoffs written",
+      "Cost categories only; numbers labeled illustrative",
+      "Key assumptions and disconfirming signals present",
+      "Won’t-do bans unsupervised auto-charge/sign",
+      "No fake revenue/conversion/investor opinions"
+    ],
+    "zhScorecard": [
+      "清楚度",
+      "付費邏輯",
+      "可驗證",
+      "誠實",
+      "創業焦點"
+    ],
+    "enScorecard": [
+      "Clarity",
+      "Payment logic",
+      "Testability",
+      "Honesty",
+      "Startup focus"
+    ],
+    "zhNotePrompt": "用自己的話寫：誰付錢、為何付錢、一個否證訊號、以及你不做的一種收費自動化。",
+    "enNotePrompt": "In your own words: who pays, why, one disconfirming signal, and one payment automation you will not do.",
+    "zhCoachPrompt": "請挑戰我的付費假設是否薄弱，並建議更小的驗證。",
+    "enCoachPrompt": "Challenge weak willingness-to-pay assumptions and suggest a smaller test.",
+    "zhWhyItMatters": {
+      "problem": "只有痛點沒有付費邏輯，專案容易做成「很忙的義工」。",
+      "ineffective": "請 AI「預估第一年營收」並當成計畫。",
+      "solution": "分開使用者與付費者，列出收入選項與否證訊號，數字一律示意。"
+    },
+    "enWhyItMatters": {
+      "problem": "Pain without a payer logic becomes busy volunteer work.",
+      "ineffective": "Asking AI to “forecast year-one revenue” and treating it as a plan.",
+      "solution": "Separate user and payer, list revenue options and disconfirming signals, label numbers illustrative."
+    },
+    "zhObjectives": [
+      "分開描述使用者與付費者（若不同）",
+      "寫出為何現在願意付錢的假設",
+      "比較 2–3 種收入方式與取捨",
+      "列出關鍵假設、否證訊號與不做清單",
+      "存成「商業模式草稿」"
+    ],
+    "enObjectives": [
+      "Describe user vs payer separately when they differ",
+      "Write a why-pay-now hypothesis",
+      "Compare 2–3 revenue options and tradeoffs",
+      "List key assumptions, disconfirming signals, and won’t-dos",
+      "Save a Business Model Draft"
+    ],
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "中階 / Intermediate",
+    "zhOutputName": "商業模式草稿",
+    "enOutputName": "Business Model Draft",
+    "zhCaseStudyBlocks": {
+      "problem": "有內容點子，但付費邏輯不清。",
+      "wrong": "用 AI 捏造營收與轉換率當計畫。",
+      "right": "分開使用者／付費者，列選項與否證訊號。",
+      "result": "誠實的「商業模式草稿」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Content idea exists; payer logic does not.",
+      "wrong": "Invent revenue and conversion as a plan.",
+      "right": "Separate user/payer; list options and disconfirming signals.",
+      "result": "An honest Business Model Draft."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "釐清價值傳遞",
+        "why": "不知道價值就無法談錢",
+        "input": "目前流程",
+        "output": "價值描述",
+        "check": "是否具體"
+      },
+      {
+        "do": "分開使用者／付費者",
+        "why": "混為一談易錯模式",
+        "input": "角色筆記",
+        "output": "兩邊描述",
+        "check": "是否分開"
+      },
+      {
+        "do": "列收入選項",
+        "why": "單一想法缺取捨",
+        "input": "付費假設",
+        "output": "2–3 選項",
+        "check": "有無取捨"
+      },
+      {
+        "do": "標示意數字",
+        "why": "避免假精確",
+        "input": "草稿",
+        "output": "標註版",
+        "check": "是否標示意"
+      },
+      {
+        "do": "寫不做與風險",
+        "why": "避免高風險自動化",
+        "input": "定稿前",
+        "output": "不做清單",
+        "check": "有無禁止自動扣款"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Clarify value delivery",
+        "why": "No value story, no pricing",
+        "input": "Current process",
+        "output": "Value description",
+        "check": "Concrete?"
+      },
+      {
+        "do": "Split user/payer",
+        "why": "Mixing them breaks models",
+        "input": "Role notes",
+        "output": "Two descriptions",
+        "check": "Separated?"
+      },
+      {
+        "do": "List revenue options",
+        "why": "One idea lacks tradeoffs",
+        "input": "Pay hypothesis",
+        "output": "2–3 options",
+        "check": "Tradeoffs present"
+      },
+      {
+        "do": "Label illustrative numbers",
+        "why": "Avoid false precision",
+        "input": "Draft",
+        "output": "Labeled version",
+        "check": "Illustrative marks"
+      },
+      {
+        "do": "Write won’t-dos and risks",
+        "why": "Avoid high-risk automation",
+        "input": "Pre-final",
+        "output": "Won’t-do list",
+        "check": "Auto-charge banned"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "付費者假設",
+        "standard": "為何現在付錢寫清楚",
+        "mistakes": "空喊一定會火",
+        "check": "是否標待驗證？"
+      },
+      {
+        "task": "收入選項",
+        "standard": "至少兩種含取捨",
+        "mistakes": "只抄競品價格當事實",
+        "check": "取捨是否寫出？"
+      },
+      {
+        "task": "成本類別",
+        "standard": "只列類別、數字示意",
+        "mistakes": "捏造精確損益表",
+        "check": "是否標示意？"
+      },
+      {
+        "task": "不做清單",
+        "standard": "含禁止自動扣款／簽約",
+        "mistakes": "設計無監督扣款",
+        "check": "風險是否寫明？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Payer hypothesis",
+        "standard": "Why pay now is clear",
+        "mistakes": "Claim guaranteed success",
+        "check": "Marked to-validate?"
+      },
+      {
+        "task": "Revenue options",
+        "standard": "≥2 with tradeoffs",
+        "mistakes": "Copy competitor prices as fact",
+        "check": "Tradeoffs written?"
+      },
+      {
+        "task": "Cost categories",
+        "standard": "Categories only; numbers illustrative",
+        "mistakes": "Invent precise P&L",
+        "check": "Illustrative labels?"
+      },
+      {
+        "task": "Won’t-do list",
+        "standard": "Bans auto-charge/sign",
+        "mistakes": "Design unsupervised charging",
+        "check": "Risks stated?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "知道有人痛，但說不清誰付錢、為何付錢時使用",
+      "fields": [
+        "[請填寫問題]",
+        "[請填寫目標使用者]",
+        "[請填寫目前流程]",
+        "[請填寫限制條件]"
+      ],
+      "body": "你是商業模式教練，協助起草「誰付錢、為何付錢」的商業模式草稿。不可捏造營收、成本、轉換率、客戶數或投資人意向；所有數字標「示意／假設」。\n\n我的背景：\n- 問題：[請填寫問題]\n- 目標使用者（使用者未必等於付費者）：[請填寫目標使用者]\n- 目前流程／價值如何傳遞：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- 我傾向的收費直覺（可改）：[請填寫]\n\n任務：產出「商業模式草稿」，包含：\n1) 價值主張（對使用者／對付費者分開寫，若不同）\n2) 付費者是誰、為何現在願意付錢（假設，待驗證）\n3) 收入方式選項 2–3 種（訂閱／單次／抽成等）與取捨\n4) 成本結構粗分（只列類別，數字示意）\n5) 關鍵假設與否證訊號\n6) 不做清單（例如：現階段不做自動扣款）\n7) 需人工確認項（至少 3 項）\n\n限制：不要設計無監督自動付款或自動簽約。不要宣稱本平台串接 ECPay／金流／CRM。工具名若提到僅作概念例子。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "expected": "一份標清假設、含付費者與收入選項的商業模式草稿",
+      "revisionReminder": "請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "extensions": [
+        {
+          "title": "延伸：壓力測試付費假設",
+          "body": "針對我的付費假設，列出 5 個可能否證的訊號與下一步小實驗。不要捏造願付價格調查結果。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when pain is clear but who pays and why is not",
+      "fields": [
+        "[Enter problem]",
+        "[Enter target user]",
+        "[Enter current process]",
+        "[Enter constraints]"
+      ],
+      "body": "You are a business-model coach drafting “who pays and why.” Do not invent revenue, costs, conversion rates, customer counts, or investor interest. Label all numbers illustrative/assumptions.\n\nMy context:\n- Problem: [Enter problem]\n- Target user (user may ≠ payer): [Enter target user]\n- Current process / how value is delivered: [Enter current process]\n- Constraints: [Enter constraints]\n- Pricing intuition (changeable): [Enter]\n\nTask: Produce a “Business Model Draft” with:\n1) Value proposition (separate user vs payer if different)\n2) Who pays and why they might pay now (hypothesis, to validate)\n3) 2–3 revenue options (subscription / one-time / take-rate) with tradeoffs\n4) Cost structure categories (categories only; numbers illustrative)\n5) Key assumptions and disconfirming signals\n6) Won’t-do list (e.g., no unsupervised auto-charging yet)\n7) Human-confirmation items (at least 3)\n\nLimits: Do not design unsupervised auto-pay or auto-signing. Do not claim this platform integrates ECPay/payments/CRM. Tool names, if any, are conceptual examples only.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "expected": "A Business Model Draft with labeled assumptions, payer, and revenue options",
+      "revisionReminder": "Remove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "extensions": [
+        {
+          "title": "Extension: stress-test willingness-to-pay",
+          "body": "List 5 disconfirming signals and a small next experiment for my payer hypothesis. Do not invent WTP survey results."
+        }
+      ]
+    },
+    "zhNextStep": "下一堂把商業模式收斂成可驗證的 MVP 規劃：最小功能與明確取捨。",
+    "enNextStep": "Next, converge the model into an MVP plan with minimal features and clear tradeoffs.",
+    "zhConceptBlocks": {
+      "principles": [
+        "誰付錢優先於功能清單",
+        "數字標示意",
+        "高風險金錢動作需人工"
+      ],
+      "terms": [
+        "付費者",
+        "收入選項",
+        "否證訊號"
+      ],
+      "criteria": [
+        "有付費邏輯",
+        "有取捨",
+        "有不做清單"
+      ],
+      "boundaries": [
+        "避免：假營收",
+        "避免：自動扣款",
+        "避免：假投資人意向"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Payer logic before feature lists",
+        "Label numbers illustrative",
+        "Human gate for money risk"
+      ],
+      "terms": [
+        "Payer",
+        "Revenue options",
+        "Disconfirming signal"
+      ],
+      "criteria": [
+        "Pay logic",
+        "Tradeoffs",
+        "Won’t-do list"
+      ],
+      "boundaries": [
+        "Avoid: fake revenue",
+        "Avoid: auto-charge",
+        "Avoid: fake investor interest"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：商業模式草稿",
+      "先回答誰付錢、為何付錢。",
+      "示意數字不是承諾，自動扣款不是預設。"
+    ],
+    "enSummary": [
+      "Deliverable: Business Model Draft",
+      "Answer who pays and why first.",
+      "Illustrative numbers are not promises; auto-charge is not the default."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "把 AI 估的月收當承諾",
+        "why": "誤導自己與他人",
+        "fix": "全部標示意／假設"
+      },
+      {
+        "error": "使用者＝付費者卻未檢查",
+        "why": "模式可能錯",
+        "fix": "分開寫使用者與付費者"
+      },
+      {
+        "error": "設計自動扣款當預設",
+        "why": "高風險且越權",
+        "fix": "改為人工確認後收款"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Treating AI monthly revenue as a promise",
+        "why": "Misleads you and others",
+        "fix": "Label all illustrative/assumptions"
+      },
+      {
+        "error": "Assuming user = payer unchecked",
+        "why": "Model may be wrong",
+        "fix": "Separate user and payer"
+      },
+      {
+        "error": "Defaulting to auto-charging",
+        "why": "High risk and overreach",
+        "fix": "Collect only after human confirmation"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "結構完整",
+        "levels": {
+          "incomplete": "缺付費者",
+          "basic": "有收入點但無取捨",
+          "good": "使用者／付費者分開",
+          "ready": "含不做清單與否證訊號"
+        }
+      },
+      {
+        "name": "數字誠實",
+        "levels": {
+          "incomplete": "假營收／轉換率",
+          "basic": "數字未標示",
+          "good": "標示意",
+          "ready": "假設可被否證"
+        }
+      },
+      {
+        "name": "風險意識",
+        "levels": {
+          "incomplete": "鼓勵自動付款簽約",
+          "basic": "風險未提",
+          "good": "有人工確認",
+          "ready": "明確禁止無監督高風險操作"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Completeness",
+        "levels": {
+          "incomplete": "Missing payer",
+          "basic": "Revenue ideas without tradeoffs",
+          "good": "User/payer separated",
+          "ready": "Won’t-do + disconfirming signals"
+        }
+      },
+      {
+        "name": "Number honesty",
+        "levels": {
+          "incomplete": "Fake revenue/conversion",
+          "basic": "Unlabeled numbers",
+          "good": "Illustrative labels",
+          "ready": "Falsifiable assumptions"
+        }
+      },
+      {
+        "name": "Risk awareness",
+        "levels": {
+          "incomplete": "Encourages auto-pay/sign",
+          "basic": "Risks omitted",
+          "good": "Human confirmation present",
+          "ready": "Explicit ban on unsupervised high-risk actions"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 55 分鐘 / About 55 min",
+    "difficulty": "中階 / Intermediate",
+    "zhTitle": "第4課：規劃 MVP：最小可驗證產品與功能取捨",
+    "enTitle": "Lesson 4: Plan an MVP with minimal validation and feature tradeoffs",
+    "zhValueTip": "先驗證學習，再談完整產品；手動也可以是 MVP。",
+    "enValueTip": "Validate learning before building a full product. Manual can still be an MVP.",
+    "zhOutcome": "MVP 規劃表",
+    "enOutcome": "MVP Plan",
+    "zhConcept": "MVP 是「最小可驗證」，不是「最小完整產品」。先鎖定唯一驗證目標，再用 Must／Should／Won’t 做取捨；手動 Concierge 也算 MVP。AI 可幫你砍範圍，但不可捏造使用人數或上線成績，也不可把高風險自動化塞進第一版。",
+    "enConcept": "MVP means minimum viable validation—not a tiny full product. Lock one validation goal, then trade off with Must/Should/Won’t; concierge/manual counts. AI can help cut scope; it must not invent user counts or launch results, or sneak high-risk automation into v1.",
+    "zhCaseStudy": "校園外送互助想做完整 App＋自動派單。他們把驗證目標改成「本週用表單收集 10 次匿名需求並完成 5 次人工媒合」。Must＝表單＋群組通知模板；Won’t＝自動付款、自動派單、地圖追蹤。成功訊號＝媒合完成率與回報「是否比較省事」，而非假下載量。",
+    "enCaseStudy": "Campus delivery helper almost built a full app with auto-dispatch. They reset the goal to “collect 10 anonymized requests via form and complete 5 manual matches this week.” Must = form + chat notification template; Won’t = auto-pay, auto-dispatch, live map. Success = match completion and “was this easier?”—not fake download counts.",
+    "zhWorkflow": [
+      "寫下要驗證的假設、使用者、目前手動流程與限制",
+      "鎖定唯一驗證目標",
+      "用 Prompt 產出 Must／Should／Won’t 與一週步驟",
+      "刪除膨脹功能與假 KPI",
+      "存成「MVP 規劃表」"
+    ],
+    "enWorkflow": [
+      "Write hypothesis, user, current manual process, and constraints",
+      "Lock one validation goal",
+      "Generate Must/Should/Won’t and one-week steps with the prompt",
+      "Delete scope bloat and fake KPIs",
+      "Save the MVP Plan"
+    ],
+    "zhCommonMistakes": [
+      "把完整功能清單當 MVP",
+      "捏造下載量或轉換率當目標",
+      "Won’t 清單空白導致範圍膨脹",
+      "第一版就做自動付款或自動刪資料",
+      "宣稱要用平台一鍵串接 Zapier／Make／n8n"
+    ],
+    "enCommonMistakes": [
+      "Treating a full feature list as MVP",
+      "Inventing downloads or conversion as goals",
+      "Empty Won’t list causing scope creep",
+      "Shipping auto-pay or auto-delete in v1",
+      "Claiming one-click Zapier/Make/n8n via this platform"
+    ],
+    "zhExcellentExample": "含：單一驗證目標、Must/Should/Won’t 理由、手動路徑、可觀察訊號、一週步驟、風險與人工確認。",
+    "enExcellentExample": "Includes single validation goal, Must/Should/Won’t with reasons, manual path, observable signals, one-week steps, risks and human confirmation.",
+    "zhPrompt": "你是 MVP 教練，協助規劃「最小可驗證產品」與功能取捨。不可把願望清單當 MVP，不可捏造使用人數、轉換率或上線成績。\n\n我的背景：\n- 要驗證的問題／假設：[請填寫問題]\n- 目標使用者：[請填寫目標使用者]\n- 目前手動流程（可用人工代替自動化）：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- 我想做但不確定是否必要的功能：[請填寫]\n\n任務：產出「MVP 規劃表」，包含：\n1) 本週／本階段唯一驗證目標（一句可檢查）\n2) Must／Should／Won’t 功能表（每項說明為何）\n3) 手動版路徑（Concierce／表格／表單亦可）\n4) 成功／失敗訊號（不含假 KPI）\n5) 一週實驗步驟\n6) 風險：資料、金錢、法律（禁止自動刪資料、自動付款）\n7) 需人工確認項（至少 3 項）\n\n限制：MVP 可以很醜、很手動；不要為了「看起來像完整產品」而膨脹範圍。本平台未串接 Zapier／Make／n8n。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+    "enPrompt": "You are an MVP coach planning a minimum viable product and feature tradeoffs. Do not treat a wish list as an MVP. Do not invent user counts, conversion rates, or launch results.\n\nMy context:\n- Problem/hypothesis to validate: [Enter problem]\n- Target user: [Enter target user]\n- Current manual process (humans may replace automation): [Enter current process]\n- Constraints: [Enter constraints]\n- Features I want but may not need: [Enter]\n\nTask: Produce an “MVP Plan” with:\n1) Single validation goal for this stage (one checkable sentence)\n2) Must / Should / Won’t feature table (why for each)\n3) Manual path (concierge / spreadsheet / form is fine)\n4) Success/fail signals (no fake KPIs)\n5) One-week experiment steps\n6) Risks: data, money, legal (ban auto-delete and auto-pay)\n7) Human-confirmation items (at least 3)\n\nLimits: MVP can be ugly and manual; do not inflate scope to look like a full product. This platform does not integrate Zapier/Make/n8n.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+    "zhCoachPrompt": "【Prompt 2｜使用者流程、里程碑與成功指標】\nMust 功能：\n（貼上）\n請輸出：8 步內使用者流程、功能拆解、里程碑時程、測試方式、成功指標。指標必須可觀察；不可捏造基線數據；缺少測量方式就列待確認。",
+    "enCoachPrompt": "[Prompt 2 | Flow, Milestones, Metrics] Produce ≤8-step flow, breakdown, milestones, tests, observable metrics—no invented baselines.",
+    "zhFeedbackPrompt": "【Prompt 3｜風險與範圍膨脹檢查】\nMVP 計畫：\n（貼上）\n請指出範圍膨脹、高風險項、測試缺口，並給備案。不要把未做功能寫成已完成；區分事實計畫與推測。",
+    "enFeedbackPrompt": "[Prompt 3 | Scope & Risk QA] Flag creep, risks, and test gaps with backups; never describe unfinished features as done.",
+    "zhExample": "問題：宿舍團購難集合；目標使用者：夜貓族學生；目前流程：群組人工喊單；限制：兩人、7 天、不做金流。",
+    "enExample": "Problem: dorm group orders hard to consolidate; target user: night-owl students; current process: manual chat calls; constraints: two people, 7 days, no payments.",
+    "zhPractice": "寫唯一驗證目標與 Must／Should／Won’t。；設計手動路徑與成功／失敗訊號。；用主 Prompt 產出規劃表並砍範圍。；存成「MVP 規劃表」。",
+    "enPractice": "Write one validation goal and Must/Should/Won’t.; Design manual path and success/fail signals.; Run the main prompt and cut scope.; Save the MVP Plan.",
+    "zhQuizItems": [
+      {
+        "q": "MVP 的正確理解是？",
+        "options": [
+          "把所有功能都做一點點",
+          "用最小集合驗證核心價值且可演示",
+          "一定要上線百萬用戶",
+          "沒有成功指標也沒關係"
+        ],
+        "answer": 1,
+        "explain": "MVP 是可驗證核心價值的最小版本。"
+      },
+      {
+        "q": "MoSCoW 中 Won't 的作用是？",
+        "options": [
+          "永遠不做任何改進",
+          "本輪明確不做，防止範圍膨脹",
+          "可隨便忽略",
+          "表示功能已完成"
+        ],
+        "answer": 1,
+        "explain": "Won't 保護焦點與時程。"
+      },
+      {
+        "q": "成功指標應？",
+        "options": [
+          "用捏造的成長曲線美化",
+          "可觀察、可在測試中檢查",
+          "越模糊越好聽",
+          "由 AI 保證達標"
+        ],
+        "answer": 1,
+        "explain": "指標必須可觀察且誠實。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "MVP means:",
+        "options": [
+          "Building a bit of everything",
+          "The smallest demoable set that validates core value",
+          "Must reach a million users",
+          "Metrics optional"
+        ],
+        "answer": 1,
+        "explain": "MVP validates core value minimally."
+      },
+      {
+        "q": "Won’t in MoSCoW is for:",
+        "options": [
+          "Never improving again",
+          "Explicitly excluding items this round to stop creep",
+          "Ignoring freely",
+          "Marking features done"
+        ],
+        "answer": 1,
+        "explain": "Won’t protects focus."
+      },
+      {
+        "q": "Success metrics should be:",
+        "options": [
+          "Fabricated growth curves",
+          "Observable and checkable in tests",
+          "As vague as possible",
+          "AI-guaranteed"
+        ],
+        "answer": 1,
+        "explain": "Metrics must be observable and honest."
+      }
+    ],
+    "zhNotePrompt": "寫下你的唯一驗證目標、本週 Must 三項、以及明確 Won’t 的一項高風險自動化。",
+    "enNotePrompt": "Write your single validation goal, three Must items this week, and one high-risk automation you explicitly Won’t do.",
+    "zhDeliverableChecklist": [
+      "已寫出單一可檢查驗證目標",
+      "Must／Should／Won’t 皆有理由",
+      "已設計手動版路徑",
+      "成功／失敗訊號可觀察",
+      "已有一週實驗步驟與風險欄",
+      "未包含無監督自動付款／刪資料或假上線成績"
+    ],
+    "enDeliverableChecklist": [
+      "Single checkable validation goal written",
+      "Must/Should/Won’t each have reasons",
+      "Manual path designed",
+      "Observable success/fail signals present",
+      "One-week experiment steps and risks included",
+      "No unsupervised auto-pay/delete or fake launch metrics"
+    ],
+    "zhScorecard": [
+      "Must 對齊價值",
+      "範圍受控",
+      "流程清楚",
+      "可測試",
+      "狀態誠實"
+    ],
+    "enScorecard": [
+      "Musts fit value",
+      "Scope controlled",
+      "Clear flow",
+      "Testable",
+      "Honest status"
+    ],
+    "id": "startup-automation-L4",
+    "lessonKey": "startup-automation-L4",
+    "zhWhyItMatters": {
+      "problem": "範圍一膨脹，驗證還沒開始就耗盡時間。",
+      "ineffective": "請 AI「規劃完整產品路線圖」當第一週任務。",
+      "solution": "寫單一驗證目標、功能取捨、手動路徑與一週實驗步驟。"
+    },
+    "enWhyItMatters": {
+      "problem": "Scope creep burns time before any validation starts.",
+      "ineffective": "Asking AI for a full product roadmap as week-one work.",
+      "solution": "Write one validation goal, feature tradeoffs, a manual path, and one-week experiment steps."
+    },
+    "zhObjectives": [
+      "寫出本階段唯一可檢查驗證目標",
+      "完成 Must／Should／Won’t 與理由",
+      "設計手動版路徑與一週實驗步驟",
+      "定義成功／失敗訊號（行為可觀察）",
+      "存成「MVP 規劃表」"
+    ],
+    "enObjectives": [
+      "Write one checkable validation goal for this stage",
+      "Complete Must/Should/Won’t with reasons",
+      "Design a manual path and one-week experiment steps",
+      "Define observable success/fail signals",
+      "Save an MVP Plan"
+    ],
+    "zhOutputName": "MVP 規劃表",
+    "enOutputName": "MVP Plan",
+    "zhCaseStudyBlocks": {
+      "problem": "想一次做完整自動化產品。",
+      "wrong": "把願望清單當 MVP。",
+      "right": "單一驗證目標＋手動路徑＋Won’t 清單。",
+      "result": "可執行的「MVP 規劃表」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Wants a fully automated product at once.",
+      "wrong": "Treat a wish list as the MVP.",
+      "right": "One validation goal + manual path + Won’t list.",
+      "result": "An actionable MVP Plan."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "鎖定驗證目標",
+        "why": "多目標等於無目標",
+        "input": "假設句",
+        "output": "單一目標",
+        "check": "能否一週內檢查"
+      },
+      {
+        "do": "切 Must/Should/Won’t",
+        "why": "沒有 Won’t 會膨脹",
+        "input": "功能清單",
+        "output": "取捨表",
+        "check": "每項有理由"
+      },
+      {
+        "do": "設計手動路徑",
+        "why": "過早自動化浪費",
+        "input": "目前流程",
+        "output": "Concierge 步驟",
+        "check": "能否人工完成"
+      },
+      {
+        "do": "定義訊號",
+        "why": "感覺無法決策",
+        "input": "目標",
+        "output": "成功／失敗訊號",
+        "check": "是否可觀察"
+      },
+      {
+        "do": "排一週實驗",
+        "why": "沒有日程就不發生",
+        "input": "步驟草稿",
+        "output": "日程表",
+        "check": "風險是否標出"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Lock validation goal",
+        "why": "Many goals = no goal",
+        "input": "Hypothesis",
+        "output": "Single goal",
+        "check": "Checkable in a week?"
+      },
+      {
+        "do": "Split Must/Should/Won’t",
+        "why": "No Won’t means creep",
+        "input": "Feature list",
+        "output": "Tradeoff table",
+        "check": "Reason per item"
+      },
+      {
+        "do": "Design manual path",
+        "why": "Early automation wastes effort",
+        "input": "Current process",
+        "output": "Concierge steps",
+        "check": "Doable by hand?"
+      },
+      {
+        "do": "Define signals",
+        "why": "Feelings are not decisions",
+        "input": "Goal",
+        "output": "Success/fail signals",
+        "check": "Observable?"
+      },
+      {
+        "do": "Schedule one-week experiment",
+        "why": "No schedule = no learning",
+        "input": "Step draft",
+        "output": "Calendar",
+        "check": "Risks marked"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "驗證目標",
+        "standard": "一句可檢查",
+        "mistakes": "寫完整產品願景",
+        "check": "是否單一？"
+      },
+      {
+        "task": "取捨表",
+        "standard": "Won’t 至少 3 項",
+        "mistakes": "全部都是 Must",
+        "check": "理由是否清楚？"
+      },
+      {
+        "task": "一週步驟",
+        "standard": "每天可執行",
+        "mistakes": "只有上線大爆炸",
+        "check": "能否本週完成？"
+      },
+      {
+        "task": "風險欄",
+        "standard": "禁自動付款刪資料",
+        "mistakes": "忽略金錢／個資風險",
+        "check": "是否寫出？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Validation goal",
+        "standard": "One checkable sentence",
+        "mistakes": "Full product vision",
+        "check": "Single?"
+      },
+      {
+        "task": "Tradeoff table",
+        "standard": "≥3 Won’t items",
+        "mistakes": "Everything is Must",
+        "check": "Reasons clear?"
+      },
+      {
+        "task": "One-week steps",
+        "standard": "Daily actionable",
+        "mistakes": "Only a big launch bang",
+        "check": "Doable this week?"
+      },
+      {
+        "task": "Risk column",
+        "standard": "Ban auto-pay/delete",
+        "mistakes": "Ignore money/PII risks",
+        "check": "Stated?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "功能越加越多、不知最小可驗證範圍時使用",
+      "fields": [
+        "[請填寫問題]",
+        "[請填寫目標使用者]",
+        "[請填寫目前流程]",
+        "[請填寫限制條件]"
+      ],
+      "body": "你是 MVP 教練，協助規劃「最小可驗證產品」與功能取捨。不可把願望清單當 MVP，不可捏造使用人數、轉換率或上線成績。\n\n我的背景：\n- 要驗證的問題／假設：[請填寫問題]\n- 目標使用者：[請填寫目標使用者]\n- 目前手動流程（可用人工代替自動化）：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- 我想做但不確定是否必要的功能：[請填寫]\n\n任務：產出「MVP 規劃表」，包含：\n1) 本週／本階段唯一驗證目標（一句可檢查）\n2) Must／Should／Won’t 功能表（每項說明為何）\n3) 手動版路徑（Concierce／表格／表單亦可）\n4) 成功／失敗訊號（不含假 KPI）\n5) 一週實驗步驟\n6) 風險：資料、金錢、法律（禁止自動刪資料、自動付款）\n7) 需人工確認項（至少 3 項）\n\n限制：MVP 可以很醜、很手動；不要為了「看起來像完整產品」而膨脹範圍。本平台未串接 Zapier／Make／n8n。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "expected": "一份含 Must/Should/Won’t 與一週實驗的 MVP 規劃表",
+      "revisionReminder": "請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "extensions": [
+        {
+          "title": "延伸：把 Should 再砍一刀",
+          "body": "檢查我的 Should 清單，挑出可延後的 3 項並說明不影響本階段驗證的理由。不要新增我沒寫的功能。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when features keep growing and the minimum validation scope is unclear",
+      "fields": [
+        "[Enter problem]",
+        "[Enter target user]",
+        "[Enter current process]",
+        "[Enter constraints]"
+      ],
+      "body": "You are an MVP coach planning a minimum viable product and feature tradeoffs. Do not treat a wish list as an MVP. Do not invent user counts, conversion rates, or launch results.\n\nMy context:\n- Problem/hypothesis to validate: [Enter problem]\n- Target user: [Enter target user]\n- Current manual process (humans may replace automation): [Enter current process]\n- Constraints: [Enter constraints]\n- Features I want but may not need: [Enter]\n\nTask: Produce an “MVP Plan” with:\n1) Single validation goal for this stage (one checkable sentence)\n2) Must / Should / Won’t feature table (why for each)\n3) Manual path (concierge / spreadsheet / form is fine)\n4) Success/fail signals (no fake KPIs)\n5) One-week experiment steps\n6) Risks: data, money, legal (ban auto-delete and auto-pay)\n7) Human-confirmation items (at least 3)\n\nLimits: MVP can be ugly and manual; do not inflate scope to look like a full product. This platform does not integrate Zapier/Make/n8n.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "expected": "An MVP Plan with Must/Should/Won’t and a one-week experiment",
+      "revisionReminder": "Remove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "extensions": [
+        {
+          "title": "Extension: cut Should again",
+          "body": "Review my Should list; pick 3 deferrable items and explain why they do not block this stage’s validation. Do not add features I did not list."
+        }
+      ]
+    },
+    "zhNextStep": "下一堂把 MVP 背後的產品／服務流程畫成流程圖，方便拆任務與找自動化機會。",
+    "enNextStep": "Next, map the product/service process behind the MVP so you can break down tasks and spot automation opportunities.",
+    "zhConceptBlocks": {
+      "principles": [
+        "最小可驗證",
+        "手動優先於過早自動化",
+        "Won’t 與 Must 同等重要"
+      ],
+      "terms": [
+        "Must/Should/Won’t",
+        "Concierge",
+        "驗證訊號"
+      ],
+      "criteria": [
+        "單一目標",
+        "取捨表",
+        "一週步驟"
+      ],
+      "boundaries": [
+        "避免：願望清單",
+        "避免：假 KPI",
+        "避免：高風險自動化"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Minimum viable validation",
+        "Manual before premature automation",
+        "Won’t equals Must in importance"
+      ],
+      "terms": [
+        "Must/Should/Won’t",
+        "Concierge",
+        "Validation signal"
+      ],
+      "criteria": [
+        "Single goal",
+        "Tradeoff table",
+        "One-week steps"
+      ],
+      "boundaries": [
+        "Avoid: wish lists",
+        "Avoid: fake KPIs",
+        "Avoid: high-risk automation"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：MVP 規劃表",
+      "先驗證，再擴充。",
+      "手動路徑合法，假 KPI 不合法。"
+    ],
+    "enSummary": [
+      "Deliverable: MVP Plan",
+      "Validate before expanding.",
+      "Manual paths are valid; fake KPIs are not."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "把完整 App 當 MVP",
+        "why": "驗證太慢成本太高",
+        "fix": "先做手動／表格版"
+      },
+      {
+        "error": "成功標準寫「很多人喜歡」",
+        "why": "無法判斷",
+        "fix": "改成可觀察行為訊號"
+      },
+      {
+        "error": "Won’t 清單空白",
+        "why": "範圍會膨脹",
+        "fix": "明確寫本階段不做什麼"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Treating a full app as MVP",
+        "why": "Too slow and costly",
+        "fix": "Start with manual/spreadsheet"
+      },
+      {
+        "error": "Success = “many people like it”",
+        "why": "Unjudgeable",
+        "fix": "Use observable behavior signals"
+      },
+      {
+        "error": "Empty Won’t list",
+        "why": "Scope creeps",
+        "fix": "Explicitly list what this stage will not do"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "聚焦",
+        "levels": {
+          "incomplete": "願望清單",
+          "basic": "有 Must 但仍過大",
+          "good": "單一驗證目標清楚",
+          "ready": "Must/Should/Won’t 齊且理由充分"
+        }
+      },
+      {
+        "name": "可驗證",
+        "levels": {
+          "incomplete": "無成功失敗訊號",
+          "basic": "訊號空泛",
+          "good": "行為可觀察",
+          "ready": "含一週步驟"
+        }
+      },
+      {
+        "name": "風險控制",
+        "levels": {
+          "incomplete": "含自動付款刪資料",
+          "basic": "風險未提",
+          "good": "有人工把關",
+          "ready": "風險與不做項明確"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Focus",
+        "levels": {
+          "incomplete": "Wish list",
+          "basic": "Must still too large",
+          "good": "Single validation goal clear",
+          "ready": "Must/Should/Won’t with reasons"
+        }
+      },
+      {
+        "name": "Testability",
+        "levels": {
+          "incomplete": "No success/fail signals",
+          "basic": "Vague signals",
+          "good": "Observable behaviors",
+          "ready": "One-week steps included"
+        }
+      },
+      {
+        "name": "Risk control",
+        "levels": {
+          "incomplete": "Includes auto-pay/delete",
+          "basic": "Risks omitted",
+          "good": "Human gates present",
+          "ready": "Risks and won’t-dos clear"
+        }
+      }
+    ]
+  },
+  {
+    "id": "startup-automation-L5",
+    "lessonKey": "startup-automation-L5",
+    "zhTitle": "第5課：用 AI 拆解產品規格與開發任務",
+    "enTitle": "Lesson 5: Use AI to break down product specs and build tasks",
+    "zhConcept": "產品規格與開發任務之前，先有「產品／服務流程圖」：誰觸發、誰處理、產出什麼、例外怎麼辦。AI 可協助拆步驟與標 AI／人工界線，但不可宣稱流程已串接外部自動化工具，也不可把高風險動作設成無監督自動執行。",
+    "enConcept": "Before specs and build tasks, draw a Business Process Map: who triggers, who handles, what is produced, and how exceptions work. AI can split steps and mark AI/human boundaries; it must not claim external automation integrations or set high-risk actions as unsupervised automatic.",
+    "zhPrompt": "你是流程設計教練，協助把產品／服務運作拆成「產品／服務流程圖」（也可對應規格與任務拆解）。不可捏造實際工時、人數或系統已上線功能。\n\n我的背景：\n- 問題／服務目標：[請填寫問題]\n- 目標使用者：[請填寫目標使用者]\n- 目前端到端流程：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- MVP 範圍摘要（可沿用 L4）：[請填寫]\n\n任務：產出「產品／服務流程圖」文字版，包含：\n1) 泳道：使用者／團隊／工具（工具僅概念，不宣稱已串接）\n2) 步驟 6–12 步（觸發 → 處理 → 輸出 → 例外）\n3) 每步：輸入、輸出、負責人、是否可 AI 輔助、是否必須人工\n4) 瓶頸與等待點\n5) 對應可拆解的開發／營運任務清單（示意）\n6) 需人工確認項（至少 3 項）\n\n限制：不要把流程寫成已自動串接 Zapier／Make／n8n／Gmail／LINE。不要加入自動付款或自動刪資料步驟。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+    "enPrompt": "You are a process-design coach mapping product/service operations into a Business Process Map (also useful for specs and task breakdown). Do not invent actual hours, headcount, or shipped system features.\n\nMy context:\n- Problem / service goal: [Enter problem]\n- Target user: [Enter target user]\n- Current end-to-end process: [Enter current process]\n- Constraints: [Enter constraints]\n- MVP scope summary (may reuse L4): [Enter]\n\nTask: Produce a text “Business Process Map” with:\n1) Lanes: user / team / tools (tools conceptual—no integration claims)\n2) 6–12 steps (trigger → process → output → exceptions)\n3) Per step: input, output, owner, AI-assistable?, must-human?\n4) Bottlenecks and wait points\n5) Corresponding build/ops task list (illustrative)\n6) Human-confirmation items (at least 3)\n\nLimits: Do not write the flow as if Zapier/Make/n8n/Gmail/LINE are already integrated. Do not add auto-pay or auto-delete steps.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+    "zhExample": "問題：報價來回漏項；目標使用者：接案新手；目前流程：聊天改價；限制：手動傳送、不做金流。",
+    "enExample": "Problem: quote back-and-forth misses items; target user: newbie freelancers; current process: chat price edits; constraints: manual send, no payments.",
+    "zhPractice": "畫出 6–12 步含泳道的流程。；為每步標 AI／人工與例外。；用主 Prompt 補瓶頸與任務清單。；存成「產品／服務流程圖」。",
+    "enPractice": "Draw a 6–12 step map with lanes.; Mark AI/human and exceptions per step.; Run the main prompt for bottlenecks and tasks.; Save the Business Process Map.",
+    "zhFeedbackPrompt": "你是一位產品規格教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 範圍紀律\n- 可交付性\n- 清楚度\n- 任務品質\n- 產品焦點\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a product spec coach. Score 1-10 for: Scope discipline, Shipability, Clarity, Task quality, Product focus. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhQuizItems": [
+      {
+        "q": "MVP 規格最該有？",
+        "options": [
+          "範圍、非目標與完成定義",
+          "只有靈感關鍵字",
+          "完整財報"
+        ],
+        "answer": 0,
+        "explain": "可交付。"
+      },
+      {
+        "q": "未驗證大功能應？",
+        "options": [
+          "放入非目標",
+          "硬塞進本週",
+          "假裝已做完"
+        ],
+        "answer": 0,
+        "explain": "紀律。"
+      },
+      {
+        "q": "任務需要？",
+        "options": [
+          "完成定義",
+          "只有動詞",
+          "越多越好無優先"
+        ],
+        "answer": 0,
+        "explain": "可檢核。"
+      },
+      {
+        "q": "AI 適合？",
+        "options": [
+          "拆任務與找遺漏",
+          "決定市場一定成功",
+          "自動宣稱已上線"
+        ],
+        "answer": 0,
+        "explain": "拆解輔助。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "規格＋任務表",
+          "無關長信",
+          "無關申請包資料"
+        ],
+        "answer": 0,
+        "explain": "產品拆解。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "MVP 規格最該有？",
+        "options": [
+          "範圍、非目標與完成定義",
+          "只有靈感關鍵字",
+          "完整財報"
+        ],
+        "answer": 0,
+        "explain": "可交付。"
+      },
+      {
+        "q": "未驗證大功能應？",
+        "options": [
+          "放入非目標",
+          "硬塞進本週",
+          "假裝已做完"
+        ],
+        "answer": 0,
+        "explain": "紀律。"
+      },
+      {
+        "q": "任務需要？",
+        "options": [
+          "完成定義",
+          "只有動詞",
+          "越多越好無優先"
+        ],
+        "answer": 0,
+        "explain": "可檢核。"
+      },
+      {
+        "q": "AI 適合？",
+        "options": [
+          "拆任務與找遺漏",
+          "決定市場一定成功",
+          "自動宣稱已上線"
+        ],
+        "answer": 0,
+        "explain": "拆解輔助。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "規格＋任務表",
+          "無關長信",
+          "無關申請包資料"
+        ],
+        "answer": 0,
+        "explain": "產品拆解。"
+      }
+    ],
+    "zhOutcome": "產品／服務流程圖",
+    "enOutcome": "Business Process Map",
+    "zhValueTip": "先看見流程，再拆規格；AI 輔助草稿，高風險步驟必須人工。",
+    "enValueTip": "See the process before specs. AI assists drafts; high-risk steps stay human.",
+    "zhCaseStudy": "報價兔要把「規格拆任務」前，先畫流程：學生貼需求 → 去敏 → AI 產報價草稿 → 人工改價 → 手動傳送。他們標「改價與傳送」必須人工，例外＝資料不足就回問。任務清單對應：表單欄位、草稿 Prompt、檢查表。沒有寫「已串接 Make 自動寄出」。",
+    "enCaseStudy": "Before “spec into tickets,” QuoteBunny mapped: student pastes brief → sanitize → AI draft quote → human price edit → manual send. Price edit and send were must-human; exception = ask again if incomplete. Tasks mapped to form fields, draft prompt, checklist—no “Make auto-sends already.”",
+    "zhExcellentExample": "含：泳道、6–12 步、輸入輸出、AI／人工、例外、瓶頸、對應任務清單。",
+    "enExcellentExample": "Includes lanes, 6–12 steps, I/O, AI/human marks, exceptions, bottlenecks, mapped task list.",
+    "zhWorkflow": [
+      "寫下服務目標、使用者、目前端到端流程與 MVP 範圍",
+      "列出泳道與主路徑步驟",
+      "用 Prompt 補例外、瓶頸與 AI／人工標記",
+      "對應任務清單並刪除假串接宣稱",
+      "存成「產品／服務流程圖」"
+    ],
+    "enWorkflow": [
+      "Write service goal, user, current end-to-end process, and MVP scope",
+      "List lanes and main-path steps",
+      "Add exceptions, bottlenecks, and AI/human marks with the prompt",
+      "Map task list and remove fake integration claims",
+      "Save the Business Process Map"
+    ],
+    "zhCommonMistakes": [
+      "把流程寫成已串接 Zapier／Make／n8n",
+      "缺少例外與負責人",
+      "每步都交給 AI 或 Agent 無監督執行",
+      "捏造工時與人數",
+      "加入自動付款或自動刪資料步驟"
+    ],
+    "enCommonMistakes": [
+      "Writing the flow as if Zapier/Make/n8n are integrated",
+      "Missing exceptions and owners",
+      "Giving every step to unsupervised AI/agents",
+      "Inventing hours and headcount",
+      "Adding auto-pay or auto-delete steps"
+    ],
+    "zhDeliverableChecklist": [
+      "已有使用者／團隊／工具泳道",
+      "端到端 6–12 步含例外",
+      "每步有輸入輸出、負責人、AI／人工標記",
+      "已標瓶頸與對應任務清單",
+      "無假串接或假工時",
+      "無自動付款／自動刪資料步驟"
+    ],
+    "enDeliverableChecklist": [
+      "User/team/tool lanes present",
+      "6–12 end-to-end steps with exceptions",
+      "Per-step I/O, owner, AI/human marks",
+      "Bottlenecks and mapped task list present",
+      "No fake integrations or fake hours",
+      "No auto-pay / auto-delete steps"
+    ],
+    "zhScorecard": [
+      "範圍紀律",
+      "可交付性",
+      "清楚度",
+      "任務品質",
+      "產品焦點"
+    ],
+    "enScorecard": [
+      "Scope discipline",
+      "Shipability",
+      "Clarity",
+      "Task quality",
+      "Product focus"
+    ],
+    "zhNotePrompt": "寫下流程中最慢的一步、你允許 AI 輔助的一步、以及絕不能自動執行的一步。",
+    "enNotePrompt": "Write the slowest step, one step AI may assist, and one step that must never run automatically.",
+    "zhCoachPrompt": "請檢查規格是否過大，並幫我砍到本週可交付。",
+    "enCoachPrompt": "Check whether the spec is oversized and cut it to a weekly ship.",
+    "zhWhyItMatters": {
+      "problem": "沒有流程圖就拆任務，容易漏例外與責任人。",
+      "ineffective": "直接請 AI「列出全部開發 ticket」。",
+      "solution": "先畫端到端流程與泳道，再對應可指派任務，並標必須人工步驟。"
+    },
+    "enWhyItMatters": {
+      "problem": "Splitting tasks without a process map misses exceptions and owners.",
+      "ineffective": "Asking AI to “list all engineering tickets” immediately.",
+      "solution": "Map end-to-end flow and lanes first, then assignable tasks, with must-human steps marked."
+    },
+    "zhObjectives": [
+      "畫出使用者／團隊／工具泳道",
+      "寫出 6–12 步含例外的端到端流程",
+      "為每步標輸入輸出、負責人、AI／人工",
+      "找出瓶頸並對應任務清單",
+      "存成「產品／服務流程圖」"
+    ],
+    "enObjectives": [
+      "Draw user/team/tool lanes",
+      "Write a 6–12 step end-to-end flow with exceptions",
+      "Mark I/O, owner, AI/human per step",
+      "Find bottlenecks and map a task list",
+      "Save a Business Process Map"
+    ],
+    "estimatedTime": "約 55 分鐘 / About 55 min",
+    "difficulty": "中階 / Intermediate",
+    "zhOutputName": "產品／服務流程圖",
+    "enOutputName": "Business Process Map",
+    "zhCaseStudyBlocks": {
+      "problem": "想拆開發任務，但端到端流程不清。",
+      "wrong": "直接生成假工時的完整 ticket 牆。",
+      "right": "先畫泳道流程並標 AI／人工與例外。",
+      "result": "可施工的「產品／服務流程圖」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Wants build tasks but end-to-end flow is unclear.",
+      "wrong": "Generate a ticket wall with fake hours.",
+      "right": "Map lanes, mark AI/human and exceptions first.",
+      "result": "A buildable Business Process Map."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "界定範圍",
+        "why": "範圍不清流程會爆炸",
+        "input": "MVP 摘要",
+        "output": "範圍句",
+        "check": "是否對齊 L4"
+      },
+      {
+        "do": "畫主路徑",
+        "why": "沒有主路徑無法談例外",
+        "input": "目前流程",
+        "output": "6–12 步",
+        "check": "有無觸發與輸出"
+      },
+      {
+        "do": "標泳道與責任",
+        "why": "無人負責等於事故",
+        "input": "步驟",
+        "output": "負責人欄",
+        "check": "每步有人嗎"
+      },
+      {
+        "do": "標 AI／人工",
+        "why": "避免全自動幻想",
+        "input": "步驟",
+        "output": "界線表",
+        "check": "高風險是否人工"
+      },
+      {
+        "do": "拆任務",
+        "why": "流程要能施工",
+        "input": "定稿流程",
+        "output": "任務清單",
+        "check": "任務可否指派"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Bound scope",
+        "why": "Unbounded maps explode",
+        "input": "MVP summary",
+        "output": "Scope sentence",
+        "check": "Aligned to L4?"
+      },
+      {
+        "do": "Draw main path",
+        "why": "No main path, no exceptions",
+        "input": "Current process",
+        "output": "6–12 steps",
+        "check": "Trigger and output?"
+      },
+      {
+        "do": "Mark lanes and owners",
+        "why": "No owner = incidents",
+        "input": "Steps",
+        "output": "Owner column",
+        "check": "Owner each step?"
+      },
+      {
+        "do": "Mark AI/human",
+        "why": "Avoid full-auto fantasy",
+        "input": "Steps",
+        "output": "Boundary table",
+        "check": "High-risk human?"
+      },
+      {
+        "do": "Split tasks",
+        "why": "Process must be buildable",
+        "input": "Final map",
+        "output": "Task list",
+        "check": "Assignable?"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "主路徑",
+        "standard": "含觸發與輸出",
+        "mistakes": "只有功能名詞堆疊",
+        "check": "步驟是否可跟隨？"
+      },
+      {
+        "task": "例外",
+        "standard": "至少一條例外",
+        "mistakes": "假設從不失敗",
+        "check": "例外是否寫出？"
+      },
+      {
+        "task": "界線",
+        "standard": "高風險必須人工",
+        "mistakes": "全部自動",
+        "check": "付款／刪資料是否排除？"
+      },
+      {
+        "task": "任務對應",
+        "standard": "可指派",
+        "mistakes": "假工時精確到分鐘",
+        "check": "是否標示意？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Main path",
+        "standard": "Trigger + output",
+        "mistakes": "Noun pile of features",
+        "check": "Followable steps?"
+      },
+      {
+        "task": "Exceptions",
+        "standard": "≥1 exception path",
+        "mistakes": "Assume never fails",
+        "check": "Exceptions written?"
+      },
+      {
+        "task": "Boundaries",
+        "standard": "High-risk must-human",
+        "mistakes": "Everything automatic",
+        "check": "Pay/delete excluded?"
+      },
+      {
+        "task": "Task mapping",
+        "standard": "Assignable",
+        "mistakes": "Fake minute-level hours",
+        "check": "Illustrative labels?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "要把規格與任務拆清楚、先看見端到端流程時使用",
+      "fields": [
+        "[請填寫問題]",
+        "[請填寫目標使用者]",
+        "[請填寫目前流程]",
+        "[請填寫限制條件]"
+      ],
+      "body": "你是流程設計教練，協助把產品／服務運作拆成「產品／服務流程圖」（也可對應規格與任務拆解）。不可捏造實際工時、人數或系統已上線功能。\n\n我的背景：\n- 問題／服務目標：[請填寫問題]\n- 目標使用者：[請填寫目標使用者]\n- 目前端到端流程：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- MVP 範圍摘要（可沿用 L4）：[請填寫]\n\n任務：產出「產品／服務流程圖」文字版，包含：\n1) 泳道：使用者／團隊／工具（工具僅概念，不宣稱已串接）\n2) 步驟 6–12 步（觸發 → 處理 → 輸出 → 例外）\n3) 每步：輸入、輸出、負責人、是否可 AI 輔助、是否必須人工\n4) 瓶頸與等待點\n5) 對應可拆解的開發／營運任務清單（示意）\n6) 需人工確認項（至少 3 項）\n\n限制：不要把流程寫成已自動串接 Zapier／Make／n8n／Gmail／LINE。不要加入自動付款或自動刪資料步驟。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "expected": "含泳道、步驟、AI／人工界線與任務清單的流程圖",
+      "revisionReminder": "請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "extensions": [
+        {
+          "title": "延伸：標出可 AI 輔助的 3 步",
+          "body": "在我的流程圖中只標 3 步最適合 AI 輔助草稿的地方，並寫必須人工確認的輸出。不要新增自動付款步驟。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when specs/tasks feel fuzzy and you need the end-to-end process visible first",
+      "fields": [
+        "[Enter problem]",
+        "[Enter target user]",
+        "[Enter current process]",
+        "[Enter constraints]"
+      ],
+      "body": "You are a process-design coach mapping product/service operations into a Business Process Map (also useful for specs and task breakdown). Do not invent actual hours, headcount, or shipped system features.\n\nMy context:\n- Problem / service goal: [Enter problem]\n- Target user: [Enter target user]\n- Current end-to-end process: [Enter current process]\n- Constraints: [Enter constraints]\n- MVP scope summary (may reuse L4): [Enter]\n\nTask: Produce a text “Business Process Map” with:\n1) Lanes: user / team / tools (tools conceptual—no integration claims)\n2) 6–12 steps (trigger → process → output → exceptions)\n3) Per step: input, output, owner, AI-assistable?, must-human?\n4) Bottlenecks and wait points\n5) Corresponding build/ops task list (illustrative)\n6) Human-confirmation items (at least 3)\n\nLimits: Do not write the flow as if Zapier/Make/n8n/Gmail/LINE are already integrated. Do not add auto-pay or auto-delete steps.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "expected": "A process map with lanes, steps, AI/human boundaries, and a task list",
+      "revisionReminder": "Remove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "extensions": [
+        {
+          "title": "Extension: mark 3 AI-assist steps",
+          "body": "On my map, mark only 3 steps best for AI-assisted drafting and state must-human outputs. Do not add auto-pay steps."
+        }
+      ]
+    },
+    "zhNextStep": "下一堂用版本思維把流程迭代做成可重複的 AI 輔助工作流（仍手動把關）。",
+    "enNextStep": "Next, use version thinking to turn iteration into a repeatable AI-assisted workflow—still with human gates.",
+    "zhConceptBlocks": {
+      "principles": [
+        "流程先於票券",
+        "例外與主路徑同等重要",
+        "高風險步驟必須人工"
+      ],
+      "terms": [
+        "泳道",
+        "瓶頸",
+        "必須人工"
+      ],
+      "criteria": [
+        "有步驟",
+        "有界線",
+        "有任務對應"
+      ],
+      "boundaries": [
+        "避免：假串接",
+        "避免：無監督全自動",
+        "避免：假工時"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Process before tickets",
+        "Exceptions equal main path",
+        "High-risk steps must-human"
+      ],
+      "terms": [
+        "Lane",
+        "Bottleneck",
+        "Must-human"
+      ],
+      "criteria": [
+        "Steps present",
+        "Boundaries present",
+        "Tasks mapped"
+      ],
+      "boundaries": [
+        "Avoid: fake integrations",
+        "Avoid: unsupervised full auto",
+        "Avoid: fake hours"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：產品／服務流程圖",
+      "流程圖是規格與任務的地圖。",
+      "工具名是例子，不是已串接事實。"
+    ],
+    "enSummary": [
+      "Deliverable: Business Process Map",
+      "The map guides specs and tasks.",
+      "Tool names are examples—not integration facts."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "流程寫成已全自動上線",
+        "why": "造成假進度",
+        "fix": "標示現況為手動／構想"
+      },
+      {
+        "error": "沒有例外路徑",
+        "why": "一出錯就崩潰",
+        "fix": "每條主路徑至少一個例外"
+      },
+      {
+        "error": "每步都說交給 AI",
+        "why": "責任消失",
+        "fix": "強制標必須人工步驟"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Writing the flow as fully automated live",
+        "why": "Fake progress",
+        "fix": "Label current state as manual/concept"
+      },
+      {
+        "error": "No exception paths",
+        "why": "Breaks on first error",
+        "fix": "At least one exception per main path"
+      },
+      {
+        "error": "Every step “give to AI”",
+        "why": "Responsibility disappears",
+        "fix": "Force must-human steps"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "完整度",
+        "levels": {
+          "incomplete": "步驟過少或缺泳道",
+          "basic": "有步驟但缺輸入輸出",
+          "good": "6–12 步含例外",
+          "ready": "含瓶頸與任務清單"
+        }
+      },
+      {
+        "name": "界線清晰",
+        "levels": {
+          "incomplete": "AI／人工混為一談",
+          "basic": "界線模糊",
+          "good": "每步有標記",
+          "ready": "高風險步強制人工"
+        }
+      },
+      {
+        "name": "可施工性",
+        "levels": {
+          "incomplete": "無法拆任務",
+          "basic": "任務空泛",
+          "good": "任務可指派",
+          "ready": "對應 MVP 範圍"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Completeness",
+        "levels": {
+          "incomplete": "Too few steps or no lanes",
+          "basic": "Steps without I/O",
+          "good": "6–12 steps with exceptions",
+          "ready": "Bottlenecks + task list"
+        }
+      },
+      {
+        "name": "Boundary clarity",
+        "levels": {
+          "incomplete": "AI/human mixed",
+          "basic": "Fuzzy marks",
+          "good": "Per-step marks",
+          "ready": "High-risk steps must-human"
+        }
+      },
+      {
+        "name": "Buildability",
+        "levels": {
+          "incomplete": "Cannot split tasks",
+          "basic": "Vague tasks",
+          "good": "Assignable tasks",
+          "ready": "Maps to MVP scope"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "中階 / Intermediate",
+    "zhTitle": "第6課：用 GitHub 與版本思維管理產品迭代",
+    "enTitle": "Lesson 6: Manage product iteration with GitHub and version thinking",
+    "zhValueTip": "小步、可回滾、人工合併；AI 加速草稿，不自動上線。",
+    "enValueTip": "Small steps, rollback, human merges. AI speeds drafts—it does not auto-ship.",
+    "zhOutcome": "AI 輔助工作流",
+    "enOutcome": "AI-Assisted Workflow",
+    "zhConcept": "GitHub 與版本思維的核心是：小步變更、可回顧、可回滾。AI 輔助工作流把草稿、檢查與差異摘要交給 AI，但合併決策、對外發布、金錢與個資必須人工。「Agent」≠ 無監督自動上線。",
+    "enConcept": "GitHub and version thinking mean small changes, review, and rollback. An AI-assisted workflow gives AI drafting, checks, and diff summaries—but merge decisions, external publish, money, and PII stay human. “Agent” ≠ unsupervised production.",
+    "zhCaseStudy": "週刊匣用文件版本號 v0.3→v0.4：本週只改「精選標準檢查表」。AI 幫忙摘要差異與列檢查項，幹部人工決定是否發布到社員頻道。他們拒絕「Agent 自動每夜發文」，因為無法回滾錯誤資訊。",
+    "enCaseStudy": "WeekBox used doc versions v0.3→v0.4 and changed only the “curation checklist” this week. AI summarized diffs and listed checks; officers decided whether to publish to the member channel. They refused an “agent posts every night” idea—bad info would be hard to roll back.",
+    "zhWorkflow": [
+      "描述目前迭代流程與痛點（去敏）",
+      "訂版本節奏與本週只改一項",
+      "用 Prompt 產出 AI／人工界線與回顧模板",
+      "刪除無監督自動發布／合併構想",
+      "存成「AI 輔助工作流」"
+    ],
+    "enWorkflow": [
+      "Describe current iteration process and pain (sanitized)",
+      "Set version cadence and one change this week",
+      "Generate AI/human boundaries and review template with the prompt",
+      "Remove unsupervised auto-publish/merge ideas",
+      "Save the AI-Assisted Workflow"
+    ],
+    "zhCommonMistakes": [
+      "把 Agent 當無監督自動上線系統",
+      "設計自動 merge 到主分支",
+      "一次改太多無法回滾",
+      "捏造迭代成效百分比",
+      "宣稱平台會操作你的 GitHub"
+    ],
+    "enCommonMistakes": [
+      "Treating agents as unsupervised production systems",
+      "Designing auto-merge to main",
+      "Changing too much to roll back",
+      "Inventing iteration success percentages",
+      "Claiming this platform operates your GitHub"
+    ],
+    "zhExcellentExample": "含：版本節奏、變更類型、AI／人工界線、回顧模板、回滾原則、本週只改一項。",
+    "enExcellentExample": "Includes version cadence, change types, AI/human boundaries, review template, rollback principles, one weekly change.",
+    "zhPrompt": "你是迭代與工作流教練，協助用「版本思維」（類似 Git 的變更、回顧、可回溯）設計「AI 輔助工作流」。不可把 Agent 說成可無監督上線；不可捏造迭代成效數據。\n\n我的背景：\n- 問題／產品目標：[請填寫問題]\n- 目標使用者：[請填寫目標使用者]\n- 目前迭代／協作流程：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- 我使用的版本習慣（例如：文件版本號、Git commit 訊息習慣，沒有就寫「尚在建立」）：[請填寫]\n\n任務：產出「AI 輔助工作流」，包含：\n1) 版本節奏（多久一次小版本／回顧）\n2) 變更類型：內容／流程／Prompt／自動化構想（分開）\n3) AI 可輔助的環節（草稿、檢查清單、差異摘要）\n4) 必須人工的環節（合併決策、對外發布、金錢與個資）\n5) 回顧模板：做了什麼、學到什麼、下版只改什麼\n6) 「回滾」原則（出錯時回到上一版）\n7) 需人工確認項（至少 3 項）\n\n限制：GitHub／Git 僅作版本思維比喻與可選工具；本平台不替你操作 repo。不要設計自動合併到 main、自動付款或自動刪資料。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+    "enPrompt": "You are an iteration and workflow coach designing an “AI-Assisted Workflow” with version thinking (change, review, rollback—Git-like). Do not portray agents as unsupervised production systems. Do not invent iteration performance metrics.\n\nMy context:\n- Problem / product goal: [Enter problem]\n- Target user: [Enter target user]\n- Current iteration / collaboration process: [Enter current process]\n- Constraints: [Enter constraints]\n- Version habits (e.g., doc versioning, commit message habits, or “still forming”): [Enter]\n\nTask: Produce an “AI-Assisted Workflow” with:\n1) Version cadence (how often small versions / reviews)\n2) Change types: content / process / prompt / automation idea (separated)\n3) Where AI may help (drafts, checklists, diff summaries)\n4) Where humans must act (merge decisions, external publish, money and PII)\n5) Review template: what shipped, what learned, what next version changes only\n6) Rollback principles (return to previous version on failure)\n7) Human-confirmation items (at least 3)\n\nLimits: GitHub/Git are version-thinking metaphors and optional tools; this platform does not operate your repo. Do not design auto-merge to main, auto-pay, or auto-delete.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+    "zhCoachPrompt": "【Prompt 2｜Commit／Issue 版本紀錄整理】\n我的變更摘要或 git log：\n（貼上）\n里程碑：\n（貼上）\n請建議 commit message 風格、Issue 標題，以及版本紀錄（Changelog）草稿。只根據我提供的變更；不要添加我沒做的修復。",
+    "enCoachPrompt": "[Prompt 2 | Commit/Issue History] Suggest commit/issue style and a changelog from my provided changes only—no invented fixes.",
+    "zhFeedbackPrompt": "【Prompt 3｜Repo 誠實度檢查】\nREADME 與功能清單：\n（貼上）\n請找出可能「未完成卻寫成完成」的句子，給修正寫法。並檢查檔名／資料夾是否清楚。不要為了好看而建議造假。",
+    "enFeedbackPrompt": "[Prompt 3 | Repo Honesty QA] Find overclaimed features and unclear naming; suggest truthful wording—never recommend faking polish metrics.",
+    "zhExample": "問題：內容品質不穩；目標使用者：社員；目前流程：臨時貼連結；限制：每週一次人工發布、不用自動發文。",
+    "enExample": "Problem: content quality unstable; target user: members; current process: ad-hoc link pasting; constraints: weekly human publish, no auto-posting.",
+    "zhPractice": "訂小步節奏與本週只改一項。；分開 AI 輔助與必須人工。；用主 Prompt 產出工作流並刪無監督自動上線。；存成「AI 輔助工作流」。",
+    "enPractice": "Set small-step cadence and one weekly change.; Separate AI-assist vs must-human.; Run the main prompt and remove unsupervised auto-ship.; Save the AI-Assisted Workflow.",
+    "zhQuizItems": [
+      {
+        "q": "大學生使用 GitHub 最核心的作品集價值是？",
+        "options": [
+          "刷假星數",
+          "留下可追溯且誠實的製作過程與說明",
+          "隱藏所有失敗",
+          "只上傳最終 zip 更專業"
+        ],
+        "answer": 1,
+        "explain": "過程可見與誠實說明建立信任。"
+      },
+      {
+        "q": "初學者較建議的流程是？",
+        "options": [
+          "一開始就上極複雜 Git 工作流",
+          "main 可演示＋小分支＋小步 commit＋PR＋Issue",
+          "從不寫 README",
+          "把所有檔塞一個資料夾無名 commit"
+        ],
+        "answer": 1,
+        "explain": "簡化流程就夠用且可維護。"
+      },
+      {
+        "q": "README 提到未做功能時應？",
+        "options": [
+          "寫成已經上線完成",
+          "放到 Roadmap／未完成並誠實標示",
+          "刪除所有說明",
+          "捏造測試報告"
+        ],
+        "answer": 1,
+        "explain": "未完成必須標示，不可裝完成。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "Core portfolio value of GitHub for students?",
+        "options": [
+          "Fake stars",
+          "A traceable, honest build history and docs",
+          "Hiding all failures",
+          "Only final zips look professional"
+        ],
+        "answer": 1,
+        "explain": "Visibility and honesty build trust."
+      },
+      {
+        "q": "Beginner-friendly workflow is:",
+        "options": [
+          "Start with extreme Git complexity",
+          "Demoable main + small branches + small commits + PRs + issues",
+          "Never write a README",
+          "One unnamed mega-commit"
+        ],
+        "answer": 1,
+        "explain": "Simple workflows are enough and maintainable."
+      },
+      {
+        "q": "Unfinished features in README should be:",
+        "options": [
+          "Described as already shipped",
+          "Listed in Roadmap/todo honestly",
+          "Deleted entirely",
+          "Backed by fake test reports"
+        ],
+        "answer": 1,
+        "explain": "Mark unfinished work clearly."
+      }
+    ],
+    "zhNotePrompt": "寫下你的版本節奏、本週只改的一項、以及一個必須人工按下去的動作。",
+    "enNotePrompt": "Write your version cadence, the one change this week, and one action that must stay a human click.",
+    "zhDeliverableChecklist": [
+      "已訂小步版本節奏",
+      "已分開 AI 輔助與必須人工環節",
+      "已有回顧模板與回滾原則",
+      "本週只改一項已寫明",
+      "無自動 merge／無監督發布設計",
+      "無假迭代成效數據或平台操作 GitHub 宣稱"
+    ],
+    "enDeliverableChecklist": [
+      "Small-step version cadence set",
+      "AI-assist vs must-human separated",
+      "Review template and rollback principles present",
+      "One weekly change stated",
+      "No auto-merge / unsupervised publish design",
+      "No fake iteration metrics or platform-operates-GitHub claims"
+    ],
+    "zhScorecard": [
+      "可運行說明",
+      "紀錄可讀",
+      "範圍誠實",
+      "結構清楚",
+      "可演示"
+    ],
+    "enScorecard": [
+      "Runnable docs",
+      "Readable history",
+      "Honest scope",
+      "Clear structure",
+      "Demoable"
+    ],
+    "id": "startup-automation-L6",
+    "lessonKey": "startup-automation-L6",
+    "zhWhyItMatters": {
+      "problem": "沒有版本節奏，AI 產出會覆蓋上一版且無法回顧。",
+      "ineffective": "整包丟給 Agent「自動迭代到成功」。",
+      "solution": "訂小步節奏、AI／人工界線、回顧與回滾原則。"
+    },
+    "enWhyItMatters": {
+      "problem": "Without version cadence, AI output overwrites prior work with no review trail.",
+      "ineffective": "Dumping everything to an agent to “auto-iterate until success.”",
+      "solution": "Set small-step cadence, AI/human boundaries, review and rollback rules."
+    },
+    "zhObjectives": [
+      "訂出小步版本節奏與變更類型",
+      "分開 AI 可輔助與必須人工環節",
+      "建立回顧模板與回滾原則",
+      "寫下本週只改的一項重點",
+      "存成「AI 輔助工作流」"
+    ],
+    "enObjectives": [
+      "Set small-step version cadence and change types",
+      "Separate AI-assist from must-human steps",
+      "Build a review template and rollback principles",
+      "Name the one focus change for this week",
+      "Save an AI-Assisted Workflow"
+    ],
+    "zhOutputName": "AI 輔助工作流",
+    "enOutputName": "AI-Assisted Workflow",
+    "zhCaseStudyBlocks": {
+      "problem": "迭代靠感覺，AI 一改就覆寫。",
+      "wrong": "讓 Agent 無監督自動發布。",
+      "right": "小步版本＋AI 草稿＋人工合併／發布。",
+      "result": "可重複的「AI 輔助工作流」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Iteration by vibe; AI overwrites freely.",
+      "wrong": "Let an agent publish unsupervised.",
+      "right": "Small versions + AI drafts + human merge/publish.",
+      "result": "A repeatable AI-Assisted Workflow."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "盤點現況",
+        "why": "不知卡在哪就無法設計",
+        "input": "目前流程",
+        "output": "痛點列表",
+        "check": "是否去敏"
+      },
+      {
+        "do": "訂節奏",
+        "why": "過大版本無法回滾",
+        "input": "限制條件",
+        "output": "節奏表",
+        "check": "是否小步"
+      },
+      {
+        "do": "畫 AI／人工",
+        "why": "避免無監督幻想",
+        "input": "步驟",
+        "output": "界線表",
+        "check": "發布是否人工"
+      },
+      {
+        "do": "寫回顧模板",
+        "why": "沒有學習就白做",
+        "input": "模板欄位",
+        "output": "回顧表",
+        "check": "是否含下版一項"
+      },
+      {
+        "do": "定回滾原則",
+        "why": "出錯要有退路",
+        "input": "原則草稿",
+        "output": "回滾規則",
+        "check": "能否指出上一版"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Inventory current state",
+        "why": "Cannot design without the stuck point",
+        "input": "Current process",
+        "output": "Pain list",
+        "check": "Sanitized?"
+      },
+      {
+        "do": "Set cadence",
+        "why": "Huge versions cannot roll back",
+        "input": "Constraints",
+        "output": "Cadence table",
+        "check": "Small steps?"
+      },
+      {
+        "do": "Draw AI/human",
+        "why": "Avoid unsupervised fantasy",
+        "input": "Steps",
+        "output": "Boundary table",
+        "check": "Publish human?"
+      },
+      {
+        "do": "Write review template",
+        "why": "No learning = wasted work",
+        "input": "Template fields",
+        "output": "Review sheet",
+        "check": "Next-one-change?"
+      },
+      {
+        "do": "Define rollback",
+        "why": "Failures need an exit",
+        "input": "Principle draft",
+        "output": "Rollback rules",
+        "check": "Prior version clear?"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "節奏",
+        "standard": "可每週重複",
+        "mistakes": "一次大翻修",
+        "check": "能否回滾？"
+      },
+      {
+        "task": "界線",
+        "standard": "發布／金錢／個資人工",
+        "mistakes": "Agent 全自動",
+        "check": "是否寫明？"
+      },
+      {
+        "task": "回顧",
+        "standard": "有學到什麼欄",
+        "mistakes": "只貼成效假數據",
+        "check": "有無捏造？"
+      },
+      {
+        "task": "存檔",
+        "standard": "名稱正確",
+        "mistakes": "空白流程",
+        "check": "他人能否照做？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Cadence",
+        "standard": "Weekly repeatable",
+        "mistakes": "One big rewrite",
+        "check": "Rollback possible?"
+      },
+      {
+        "task": "Boundaries",
+        "standard": "Publish/money/PII human",
+        "mistakes": "Fully automatic agent",
+        "check": "Stated?"
+      },
+      {
+        "task": "Review",
+        "standard": "Learned column present",
+        "mistakes": "Only fake metrics",
+        "check": "Any invention?"
+      },
+      {
+        "task": "Save",
+        "standard": "Correct name",
+        "mistakes": "Blank flow",
+        "check": "Could someone else follow?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "迭代混亂、不知道 AI 該插手哪一段時使用",
+      "fields": [
+        "[請填寫問題]",
+        "[請填寫目標使用者]",
+        "[請填寫目前流程]",
+        "[請填寫限制條件]"
+      ],
+      "body": "你是迭代與工作流教練，協助用「版本思維」（類似 Git 的變更、回顧、可回溯）設計「AI 輔助工作流」。不可把 Agent 說成可無監督上線；不可捏造迭代成效數據。\n\n我的背景：\n- 問題／產品目標：[請填寫問題]\n- 目標使用者：[請填寫目標使用者]\n- 目前迭代／協作流程：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- 我使用的版本習慣（例如：文件版本號、Git commit 訊息習慣，沒有就寫「尚在建立」）：[請填寫]\n\n任務：產出「AI 輔助工作流」，包含：\n1) 版本節奏（多久一次小版本／回顧）\n2) 變更類型：內容／流程／Prompt／自動化構想（分開）\n3) AI 可輔助的環節（草稿、檢查清單、差異摘要）\n4) 必須人工的環節（合併決策、對外發布、金錢與個資）\n5) 回顧模板：做了什麼、學到什麼、下版只改什麼\n6) 「回滾」原則（出錯時回到上一版）\n7) 需人工確認項（至少 3 項）\n\n限制：GitHub／Git 僅作版本思維比喻與可選工具；本平台不替你操作 repo。不要設計自動合併到 main、自動付款或自動刪資料。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "expected": "含版本節奏、AI／人工界線與回顧模板的工作流",
+      "revisionReminder": "請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "extensions": [
+        {
+          "title": "延伸：寫一則版本回顧",
+          "body": "用我提供的本週變更（去敏），填一則回顧：做了什麼／學到什麼／下版只改一項。不要捏造成效百分比。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when iteration is chaotic and you are unsure where AI should help",
+      "fields": [
+        "[Enter problem]",
+        "[Enter target user]",
+        "[Enter current process]",
+        "[Enter constraints]"
+      ],
+      "body": "You are an iteration and workflow coach designing an “AI-Assisted Workflow” with version thinking (change, review, rollback—Git-like). Do not portray agents as unsupervised production systems. Do not invent iteration performance metrics.\n\nMy context:\n- Problem / product goal: [Enter problem]\n- Target user: [Enter target user]\n- Current iteration / collaboration process: [Enter current process]\n- Constraints: [Enter constraints]\n- Version habits (e.g., doc versioning, commit message habits, or “still forming”): [Enter]\n\nTask: Produce an “AI-Assisted Workflow” with:\n1) Version cadence (how often small versions / reviews)\n2) Change types: content / process / prompt / automation idea (separated)\n3) Where AI may help (drafts, checklists, diff summaries)\n4) Where humans must act (merge decisions, external publish, money and PII)\n5) Review template: what shipped, what learned, what next version changes only\n6) Rollback principles (return to previous version on failure)\n7) Human-confirmation items (at least 3)\n\nLimits: GitHub/Git are version-thinking metaphors and optional tools; this platform does not operate your repo. Do not design auto-merge to main, auto-pay, or auto-delete.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "expected": "A workflow with version cadence, AI/human boundaries, and a review template",
+      "revisionReminder": "Remove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "extensions": [
+        {
+          "title": "Extension: write one version review",
+          "body": "Using my sanitized weekly changes, fill one review: shipped / learned / next version changes only one thing. Do not invent performance percentages."
+        }
+      ]
+    },
+    "zhNextStep": "下一堂用自動化機會評估矩陣，找出哪些重複步驟值得流程化（仍非無監督）。",
+    "enNextStep": "Next, use an automation opportunity matrix to see which repeat steps deserve processization—still not unsupervised.",
+    "zhConceptBlocks": {
+      "principles": [
+        "小步可回滾",
+        "人工合併與發布",
+        "Agent 不是無人看管系統"
+      ],
+      "terms": [
+        "版本節奏",
+        "回顧模板",
+        "回滾"
+      ],
+      "criteria": [
+        "有節奏",
+        "有界線",
+        "有回顧"
+      ],
+      "boundaries": [
+        "避免：自動 merge",
+        "避免：無監督發布",
+        "避免：假成效"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Small steps with rollback",
+        "Human merge and publish",
+        "Agent ≠ unattended system"
+      ],
+      "terms": [
+        "Version cadence",
+        "Review template",
+        "Rollback"
+      ],
+      "criteria": [
+        "Cadence present",
+        "Boundaries present",
+        "Review present"
+      ],
+      "boundaries": [
+        "Avoid: auto-merge",
+        "Avoid: unsupervised publish",
+        "Avoid: fake metrics"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：AI 輔助工作流",
+      "版本思維讓 AI 幫忙而不失控。",
+      "回顧與回滾比一次做完美重要。"
+    ],
+    "enSummary": [
+      "Deliverable: AI-Assisted Workflow",
+      "Version thinking lets AI help without losing control.",
+      "Review and rollback beat one-shot perfection."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "把 AI 當自動 merge 機器人",
+        "why": "破壞可控版本",
+        "fix": "合併必須人工"
+      },
+      {
+        "error": "一次改太多無法回滾",
+        "why": "出錯不知退哪版",
+        "fix": "每版只改少數項"
+      },
+      {
+        "error": "用假數據證明迭代成功",
+        "why": "錯誤學習",
+        "fix": "只記錄可觀察事實"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Treating AI as auto-merge bot",
+        "why": "Breaks controlled versions",
+        "fix": "Merges stay human"
+      },
+      {
+        "error": "Changing too much to roll back",
+        "why": "Failure has no safe prior",
+        "fix": "Change few items per version"
+      },
+      {
+        "error": "Fake metrics to prove iteration worked",
+        "why": "False learning",
+        "fix": "Log observable facts only"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "節奏",
+        "levels": {
+          "incomplete": "無版本概念",
+          "basic": "有版本但過大",
+          "good": "小步節奏清楚",
+          "ready": "含回滾原則"
+        }
+      },
+      {
+        "name": "界線",
+        "levels": {
+          "incomplete": "AI 無監督執行",
+          "basic": "界線不清",
+          "good": "AI／人工分開",
+          "ready": "發布／金錢／個資必人工"
+        }
+      },
+      {
+        "name": "可學習性",
+        "levels": {
+          "incomplete": "無回顧",
+          "basic": "回顧空泛",
+          "good": "有模板",
+          "ready": "下版只改一項原則"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Cadence",
+        "levels": {
+          "incomplete": "No version idea",
+          "basic": "Versions too large",
+          "good": "Small-step cadence clear",
+          "ready": "Rollback principles included"
+        }
+      },
+      {
+        "name": "Boundaries",
+        "levels": {
+          "incomplete": "Unsupervised AI execution",
+          "basic": "Fuzzy boundaries",
+          "good": "AI/human split",
+          "ready": "Publish/money/PII must-human"
+        }
+      },
+      {
+        "name": "Learnability",
+        "levels": {
+          "incomplete": "No review",
+          "basic": "Vague review",
+          "good": "Template present",
+          "ready": "Next version changes only one thing"
+        }
+      }
+    ]
+  },
+  {
+    "id": "startup-automation-L7",
+    "lessonKey": "startup-automation-L7",
+    "zhTitle": "第7課：設計 Pitch Deck：讓別人聽懂你的生意",
+    "enTitle": "Lesson 7: Design a pitch deck that makes the business clear",
+    "zhConcept": "好的 Pitch 先讓人听懂生意；自動化機會評估矩陣則回答「先半自動哪一步」。用頻率、痛感、規則清晰度與風險打分，高優先項採 AI 草稿＋人工確認。Zapier／Make／n8n 只是概念例子，本平台未串接。禁止用假 ROI、假市場規模當說服材料。",
+    "enConcept": "A clear pitch helps outsiders understand the business; an Automation Opportunity Matrix answers which step to semi-automate first. Score frequency, pain, rule clarity, and risk; high-priority items use AI draft + human confirm. Zapier/Make/n8n are conceptual examples only—this platform does not integrate them. No fake ROI or market size as persuasion.",
+    "zhPrompt": "你是自動化機會教練，協助把「讓別人聽懂你的生意」轉成可溝通的「自動化機會評估矩陣」：哪些步驟重複、值不值得流程化。不可捏造節省時數、ROI 或客戶需求強度；數字標示意。\n\n我的背景：\n- 生意／專案一句話：[請填寫問題]\n- 目標使用者：[請填寫目標使用者]\n- 目前主要營運流程：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- 我想對外說明的重點（可含 pitch 對象角色，非真實個資）：[請填寫]\n\n任務：產出「自動化機會評估矩陣」，包含：\n1) 生意故事三句（問題 → 做法 → 價值；給外人听懂）\n2) 流程步驟清單（沿用或精簡）\n3) 矩陣欄位：頻率、痛感、規則清晰度、風險、人工必要性、優先級（高／中／低）\n4) 每個高優先項：建議的「半自動」做法（AI 草稿＋人工確認），工具名僅概念例子（如 Zapier／Make／n8n）\n5) 明確排除：自動付款、自動簽約、自動刪資料、無監督 Agent\n6) 對外說明用的一頁重點（非完整假 Pitch 財務）\n7) 需人工確認項（至少 3 項）\n\n限制：本平台未串接任何自動化或金流工具。不要捏造市場規模或投資人興趣。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+    "enPrompt": "You are an automation-opportunity coach turning “make the business understandable” into an Automation Opportunity Matrix: which steps repeat and deserve processization. Do not invent hours saved, ROI, or demand intensity; label numbers illustrative.\n\nMy context:\n- Business/project in one line: [Enter problem]\n- Target user: [Enter target user]\n- Current main ops process: [Enter current process]\n- Constraints: [Enter constraints]\n- What you want outsiders to understand (pitch audience role OK, no real PII): [Enter]\n\nTask: Produce an “Automation Opportunity Matrix” with:\n1) Three-sentence business story (problem → approach → value) outsiders can grasp\n2) Process step list (reuse or simplify)\n3) Matrix columns: frequency, pain, rule clarity, risk, must-human, priority (H/M/L)\n4) For each high-priority item: a semi-auto approach (AI draft + human confirm); tool names conceptual only (e.g., Zapier/Make/n8n)\n5) Explicit exclusions: auto-pay, auto-sign, auto-delete, unsupervised agents\n6) One-pager talking points for outsiders (not fake pitch financials)\n7) Human-confirmation items (at least 3)\n\nLimits: This platform integrates no automation or payment tools. Do not invent market size or investor interest.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+    "zhExample": "生意：宿舍團購媒合；目標使用者：夜貓族學生；目前流程：表單＋人工配對；限制：不做金流自動扣款；對外對象：社團幹部。",
+    "enExample": "Business: dorm order matching; target user: night-owl students; current process: form + manual match; constraints: no auto-charge; audience: club officers.",
+    "zhPractice": "寫三句生意故事。；完成評估矩陣與高優先半自動方案。；用主 Prompt 檢查並刪假 ROI。；存成「自動化機會評估矩陣」。",
+    "enPractice": "Write the three-sentence story.; Finish matrix and high-priority semi-auto plans.; Run the main prompt and delete fake ROI.; Save the Automation Opportunity Matrix.",
+    "zhFeedbackPrompt": "你是一位Pitch 教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 清晰\n- 證據\n- 節奏\n- 誠實\n- Ask\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a pitch coach. Score 1-10 for: Clarity, Evidence, Pacing, Honesty, Ask. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhQuizItems": [
+      {
+        "q": "Pitch 核心是？",
+        "options": [
+          "讓人聽懂生意與進展",
+          "堆最多特效",
+          "回避 Ask"
+        ],
+        "answer": 0,
+        "explain": "說清楚。"
+      },
+      {
+        "q": "進展頁應放？",
+        "options": [
+          "可驗證的真實證據",
+          "虛構下載量",
+          "無關截圖牆"
+        ],
+        "answer": 0,
+        "explain": "真實。"
+      },
+      {
+        "q": "Ask 應？",
+        "options": [
+          "明確具體",
+          "越模糊越好",
+          "完全不提"
+        ],
+        "answer": 0,
+        "explain": "清楚。"
+      },
+      {
+        "q": "AI 可協助？",
+        "options": [
+          "壓縮講點",
+          "發明營收",
+          "代替你演練"
+        ],
+        "answer": 0,
+        "explain": "講點。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "架構＋講點",
+          "上櫃書",
+          "無關長文"
+        ],
+        "answer": 0,
+        "explain": "Pitch。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "Pitch 核心是？",
+        "options": [
+          "讓人聽懂生意與進展",
+          "堆最多特效",
+          "回避 Ask"
+        ],
+        "answer": 0,
+        "explain": "說清楚。"
+      },
+      {
+        "q": "進展頁應放？",
+        "options": [
+          "可驗證的真實證據",
+          "虛構下載量",
+          "無關截圖牆"
+        ],
+        "answer": 0,
+        "explain": "真實。"
+      },
+      {
+        "q": "Ask 應？",
+        "options": [
+          "明確具體",
+          "越模糊越好",
+          "完全不提"
+        ],
+        "answer": 0,
+        "explain": "清楚。"
+      },
+      {
+        "q": "AI 可協助？",
+        "options": [
+          "壓縮講點",
+          "發明營收",
+          "代替你演練"
+        ],
+        "answer": 0,
+        "explain": "講點。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "架構＋講點",
+          "上櫃書",
+          "無關長文"
+        ],
+        "answer": 0,
+        "explain": "Pitch。"
+      }
+    ],
+    "zhOutcome": "自動化機會評估矩陣",
+    "enOutcome": "Automation Opportunity Matrix",
+    "zhValueTip": "先讓人听懂，再談半自動；優先序靠風險與頻率，不靠假 ROI。",
+    "enValueTip": "Make it understandable before semi-automating. Prioritize by risk and frequency—not fake ROI.",
+    "zhCaseStudy": "小班送要向社團幹部說明生意：問題是門禁後團購亂、做法是表單＋人工媒合、價值是少踩點。矩陣把「整理需求」標高優先半自動，「收款」標高風險排除自動。對外商談一頁只講故事與優先序，不放假 TAM。",
+    "enCaseStudy": "DormRun explained to club officers: problem = chaotic post-curfew orders; approach = form + manual match; value = fewer trips. Matrix marked “request cleanup” high-priority semi-auto and “payments” high-risk excluded from auto. The one-pager told story and priorities—no fake TAM.",
+    "zhExcellentExample": "含：三句故事、完整矩陣、高優先半自動方案、排除清單、一頁重點、無假財務數字。",
+    "enExcellentExample": "Includes three-sentence story, full matrix, high-priority semi-auto plans, exclusions, one-pager, no fake financials.",
+    "zhWorkflow": [
+      "寫生意一句話、使用者、目前流程與限制",
+      "寫三句故事並列出步驟",
+      "用 Prompt 產出評估矩陣與半自動方案",
+      "刪假 ROI／假市場數字，補上排除清單",
+      "存成「自動化機會評估矩陣」"
+    ],
+    "enWorkflow": [
+      "Write one-line business, user, current process, and constraints",
+      "Write three-sentence story and list steps",
+      "Generate matrix and semi-auto plans with the prompt",
+      "Delete fake ROI/market numbers; add exclusion list",
+      "Save the Automation Opportunity Matrix"
+    ],
+    "zhCommonMistakes": [
+      "用假 ROI／TAM 當 Pitch 主軸",
+      "所有步驟都標高優先",
+      "把工具名說成平台已串接",
+      "鼓勵自動付款／簽約／刪資料",
+      "把 Agent 當無監督全自動員工"
+    ],
+    "enCommonMistakes": [
+      "Using fake ROI/TAM as the pitch core",
+      "Marking every step high priority",
+      "Claiming tool names as platform integrations",
+      "Encouraging auto-pay/sign/delete",
+      "Treating agents as unsupervised full-auto staff"
+    ],
+    "zhDeliverableChecklist": [
+      "已有外人听得懂的三句生意故事",
+      "評估矩陣含頻率、痛感、風險與優先級",
+      "高優先項有半自動（AI＋人工）方案",
+      "已列出排除的高風險自動化",
+      "一頁重點無假 TAM／ROI／投資人意向",
+      "工具名僅概念例子，無平台串接宣稱"
+    ],
+    "enDeliverableChecklist": [
+      "Three-sentence outsider-friendly story present",
+      "Matrix includes frequency, pain, risk, and priority",
+      "High-priority items have semi-auto (AI+human) plans",
+      "High-risk automation exclusions listed",
+      "One-pager has no fake TAM/ROI/investor interest",
+      "Tool names conceptual only; no platform integration claims"
+    ],
+    "zhScorecard": [
+      "清晰",
+      "證據",
+      "節奏",
+      "誠實",
+      "Ask"
+    ],
+    "enScorecard": [
+      "Clarity",
+      "Evidence",
+      "Pacing",
+      "Honesty",
+      "Ask"
+    ],
+    "zhNotePrompt": "寫下你的三句生意故事、一個高優先半自動步驟、以及一個你對外绝不會宣稱已自動完成的動作。",
+    "enNotePrompt": "Write your three-sentence story, one high-priority semi-auto step, and one action you will never claim is already fully automatic.",
+    "zhCoachPrompt": "請評我的 Pitch 是否太功能導向，並幫我改成問題—解法—進展結構。",
+    "enCoachPrompt": "Critique feature-heavy pitching and reshape to problem–solution–traction.",
+    "zhWhyItMatters": {
+      "problem": "故事说不清，又同時想自動化一切，優先序會失控。",
+      "ineffective": "只做華麗投影片或只丟「全部自動化」願望。",
+      "solution": "三句生意故事＋評估矩陣＋半自動方案與排除項。"
+    },
+    "enWhyItMatters": {
+      "problem": "Unclear story plus “automate everything” destroys priorities.",
+      "ineffective": "Only glossy slides or an “automate all” wish.",
+      "solution": "Three-sentence story + assessment matrix + semi-auto plans and exclusions."
+    },
+    "zhObjectives": [
+      "寫出外人听得懂的三句生意故事",
+      "建立含風險與優先級的評估矩陣",
+      "為高優先項設計半自動（AI＋人工）方案",
+      "列出明確排除的高風險自動化",
+      "存成「自動化機會評估矩陣」"
+    ],
+    "enObjectives": [
+      "Write a three-sentence business story outsiders get",
+      "Build a matrix with risk and priority",
+      "Design semi-auto (AI+human) plans for high-priority items",
+      "List explicit high-risk automation exclusions",
+      "Save an Automation Opportunity Matrix"
+    ],
+    "estimatedTime": "約 55 分鐘 / About 55 min",
+    "difficulty": "中階 / Intermediate",
+    "zhOutputName": "自動化機會評估矩陣",
+    "enOutputName": "Automation Opportunity Matrix",
+    "zhCaseStudyBlocks": {
+      "problem": "要對外說明，又想排自動化優先序。",
+      "wrong": "華麗假財報＋全部自動。",
+      "right": "三句故事＋矩陣＋半自動與排除項。",
+      "result": "「自動化機會評估矩陣」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Needs outsider clarity and automation priorities.",
+      "wrong": "Glossy fake financials + automate everything.",
+      "right": "Three-sentence story + matrix + semi-auto and exclusions.",
+      "result": "An Automation Opportunity Matrix."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "寫三句故事",
+        "why": "听不懂就無法談自動化",
+        "input": "問題／做法／價值",
+        "output": "故事稿",
+        "check": "外人能否複述"
+      },
+      {
+        "do": "列步驟",
+        "why": "沒有步驟無法打分",
+        "input": "目前流程",
+        "output": "步驟表",
+        "check": "是否完整"
+      },
+      {
+        "do": "打分排優先",
+        "why": "全高優先等於無優先",
+        "input": "步驟表",
+        "output": "矩陣",
+        "check": "有無高低分布"
+      },
+      {
+        "do": "設計半自動",
+        "why": "全自動風險高",
+        "input": "高優先項",
+        "output": "方案",
+        "check": "是否含人工確認"
+      },
+      {
+        "do": "寫排除與一頁重點",
+        "why": "對外不說假話",
+        "input": "定稿",
+        "output": "一頁＋排除",
+        "check": "有無假財報"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Write three-sentence story",
+        "why": "If unclear, automation talk fails",
+        "input": "Problem/approach/value",
+        "output": "Story draft",
+        "check": "Can an outsider retell?"
+      },
+      {
+        "do": "List steps",
+        "why": "No steps, no scoring",
+        "input": "Current process",
+        "output": "Step table",
+        "check": "Complete?"
+      },
+      {
+        "do": "Score and prioritize",
+        "why": "All-high = no priority",
+        "input": "Step table",
+        "output": "Matrix",
+        "check": "H/M/L spread?"
+      },
+      {
+        "do": "Design semi-auto",
+        "why": "Full auto is risky",
+        "input": "High-priority items",
+        "output": "Plans",
+        "check": "Human confirm included?"
+      },
+      {
+        "do": "Write exclusions + one-pager",
+        "why": "No fake claims outside",
+        "input": "Final",
+        "output": "One-pager + exclusions",
+        "check": "Fake financials?"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "故事",
+        "standard": "外人能複述",
+        "mistakes": "堆砌術語",
+        "check": "能否 30 秒說完？"
+      },
+      {
+        "task": "矩陣",
+        "standard": "含風險與優先級",
+        "mistakes": "全部高優先",
+        "check": "分布是否合理？"
+      },
+      {
+        "task": "半自動方案",
+        "standard": "AI＋人工確認",
+        "mistakes": "無監督 Agent",
+        "check": "排除項是否寫？"
+      },
+      {
+        "task": "一頁重點",
+        "standard": "無假 TAM／ROI",
+        "mistakes": "放投資人假意向",
+        "check": "是否誠實？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Story",
+        "standard": "Outsider can retell",
+        "mistakes": "Jargon pile",
+        "check": "Sayable in 30s?"
+      },
+      {
+        "task": "Matrix",
+        "standard": "Risk + priority columns",
+        "mistakes": "All high",
+        "check": "Sensible spread?"
+      },
+      {
+        "task": "Semi-auto plans",
+        "standard": "AI + human confirm",
+        "mistakes": "Unsupervised agent",
+        "check": "Exclusions written?"
+      },
+      {
+        "task": "One-pager",
+        "standard": "No fake TAM/ROI",
+        "mistakes": "Fake investor interest",
+        "check": "Honest?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "要對外說清楚生意，並排出自動化優先序時使用",
+      "fields": [
+        "[請填寫問題]",
+        "[請填寫目標使用者]",
+        "[請填寫目前流程]",
+        "[請填寫限制條件]"
+      ],
+      "body": "你是自動化機會教練，協助把「讓別人聽懂你的生意」轉成可溝通的「自動化機會評估矩陣」：哪些步驟重複、值不值得流程化。不可捏造節省時數、ROI 或客戶需求強度；數字標示意。\n\n我的背景：\n- 生意／專案一句話：[請填寫問題]\n- 目標使用者：[請填寫目標使用者]\n- 目前主要營運流程：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- 我想對外說明的重點（可含 pitch 對象角色，非真實個資）：[請填寫]\n\n任務：產出「自動化機會評估矩陣」，包含：\n1) 生意故事三句（問題 → 做法 → 價值；給外人听懂）\n2) 流程步驟清單（沿用或精簡）\n3) 矩陣欄位：頻率、痛感、規則清晰度、風險、人工必要性、優先級（高／中／低）\n4) 每個高優先項：建議的「半自動」做法（AI 草稿＋人工確認），工具名僅概念例子（如 Zapier／Make／n8n）\n5) 明確排除：自動付款、自動簽約、自動刪資料、無監督 Agent\n6) 對外說明用的一頁重點（非完整假 Pitch 財務）\n7) 需人工確認項（至少 3 項）\n\n限制：本平台未串接任何自動化或金流工具。不要捏造市場規模或投資人興趣。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "expected": "含生意三句故事與優先級矩陣的自動化機會評估",
+      "revisionReminder": "請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "extensions": [
+        {
+          "title": "延伸：把高優先項寫成外人听得懂的一句",
+          "body": "選我矩陣中優先級最高的 2 項，各寫成「我們先半自動做 X，仍由人確認 Y」。不要加入 ROI 假數字。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when you must explain the business clearly and rank automation priorities",
+      "fields": [
+        "[Enter problem]",
+        "[Enter target user]",
+        "[Enter current process]",
+        "[Enter constraints]"
+      ],
+      "body": "You are an automation-opportunity coach turning “make the business understandable” into an Automation Opportunity Matrix: which steps repeat and deserve processization. Do not invent hours saved, ROI, or demand intensity; label numbers illustrative.\n\nMy context:\n- Business/project in one line: [Enter problem]\n- Target user: [Enter target user]\n- Current main ops process: [Enter current process]\n- Constraints: [Enter constraints]\n- What you want outsiders to understand (pitch audience role OK, no real PII): [Enter]\n\nTask: Produce an “Automation Opportunity Matrix” with:\n1) Three-sentence business story (problem → approach → value) outsiders can grasp\n2) Process step list (reuse or simplify)\n3) Matrix columns: frequency, pain, rule clarity, risk, must-human, priority (H/M/L)\n4) For each high-priority item: a semi-auto approach (AI draft + human confirm); tool names conceptual only (e.g., Zapier/Make/n8n)\n5) Explicit exclusions: auto-pay, auto-sign, auto-delete, unsupervised agents\n6) One-pager talking points for outsiders (not fake pitch financials)\n7) Human-confirmation items (at least 3)\n\nLimits: This platform integrates no automation or payment tools. Do not invent market size or investor interest.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "expected": "An automation opportunity assessment with a three-sentence story and priority matrix",
+      "revisionReminder": "Remove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "extensions": [
+        {
+          "title": "Extension: one outsider-friendly line per top item",
+          "body": "Pick my two highest-priority items; write each as “We semi-automate X; humans still confirm Y.” Do not add fake ROI numbers."
+        }
+      ]
+    },
+    "zhNextStep": "下一堂把高優先項落成「簡單自動化流程設計」（仍含人工關卡）。",
+    "enNextStep": "Next, turn high-priority items into a simple automation flow draft—still with human gates.",
+    "zhConceptBlocks": {
+      "principles": [
+        "先听懂再自動化",
+        "半自動優於無監督",
+        "優先序需要風險欄"
+      ],
+      "terms": [
+        "評估矩陣",
+        "半自動",
+        "排除清單"
+      ],
+      "criteria": [
+        "有故事",
+        "有矩陣",
+        "有排除"
+      ],
+      "boundaries": [
+        "避免：假 ROI",
+        "避免：假串接",
+        "避免：自動金錢操作"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Understand before automate",
+        "Semi-auto beats unsupervised",
+        "Priority needs a risk column"
+      ],
+      "terms": [
+        "Assessment matrix",
+        "Semi-auto",
+        "Exclusion list"
+      ],
+      "criteria": [
+        "Story present",
+        "Matrix present",
+        "Exclusions present"
+      ],
+      "boundaries": [
+        "Avoid: fake ROI",
+        "Avoid: fake integrations",
+        "Avoid: auto money actions"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：自動化機會評估矩陣",
+      "故事清楚才能談優先序。",
+      "工具名是例子，半自動才是預設。"
+    ],
+    "enSummary": [
+      "Deliverable: Automation Opportunity Matrix",
+      "Clear story enables prioritization.",
+      "Tool names are examples; semi-auto is the default."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "用假 ROI 說服別人",
+        "why": "信任破裂",
+        "fix": "只談流程與風險，數字示意"
+      },
+      {
+        "error": "把所有步驟標高優先",
+        "why": "沒有取捨",
+        "fix": "強制高／中／低分布"
+      },
+      {
+        "error": "把 Pitch 做成假財報",
+        "why": "誤導",
+        "fix": "改成故事＋矩陣＋排除項"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Persuading with fake ROI",
+        "why": "Breaks trust",
+        "fix": "Talk process and risk; numbers illustrative"
+      },
+      {
+        "error": "Marking every step high priority",
+        "why": "No tradeoffs",
+        "fix": "Force H/M/L distribution"
+      },
+      {
+        "error": "Turning the pitch into fake financials",
+        "why": "Misleading",
+        "fix": "Use story + matrix + exclusions"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "可懂度",
+        "levels": {
+          "incomplete": "外人听不懂生意",
+          "basic": "有故事但不完整",
+          "good": "三句故事清楚",
+          "ready": "一頁重點可用"
+        }
+      },
+      {
+        "name": "矩陣品質",
+        "levels": {
+          "incomplete": "無優先級",
+          "basic": "欄位缺風險",
+          "good": "頻率痛感風險齊",
+          "ready": "高優先含半自動方案"
+        }
+      },
+      {
+        "name": "安全邊界",
+        "levels": {
+          "incomplete": "鼓勵無監督自動金錢操作",
+          "basic": "排除項弱",
+          "good": "有排除清單",
+          "ready": "工具僅概念例子"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Clarity",
+        "levels": {
+          "incomplete": "Outsiders don’t get the business",
+          "basic": "Story incomplete",
+          "good": "Three-sentence story clear",
+          "ready": "One-pager usable"
+        }
+      },
+      {
+        "name": "Matrix quality",
+        "levels": {
+          "incomplete": "No priorities",
+          "basic": "Missing risk column",
+          "good": "Frequency/pain/risk present",
+          "ready": "High priority has semi-auto plan"
+        }
+      },
+      {
+        "name": "Safety boundary",
+        "levels": {
+          "incomplete": "Encourages unsupervised money actions",
+          "basic": "Weak exclusions",
+          "good": "Exclusion list present",
+          "ready": "Tools conceptual only"
+        }
+      }
+    ]
+  },
+  {
+    "id": "startup-automation-L8",
+    "lessonKey": "startup-automation-L8",
+    "zhTitle": "第8課：建立自動化思維：把重複工作變成流程",
+    "enTitle": "Lesson 8: Build automation thinking: turn repeat work into workflows",
+    "zhConcept": "自動化思維是把重複工作變成「觸發 → 步驟 → 人工關卡 → 結束」的流程設計，而不是一鍵無監督執行。AI 可產流程草稿與測試清單；Zapier／Make／n8n 等名稱僅概念例子。本平台未串接這些工具。",
+    "enConcept": "Automation thinking turns repeat work into trigger → steps → human gate → end—not one-click unsupervised execution. AI can draft flows and test checklists; Zapier/Make/n8n names are conceptual. This platform does not integrate them.",
+    "zhPrompt": "你是自動化流程教練，協助把重複工作設計成「簡單自動化流程設計」（半自動）。不可宣稱已接上 Zapier／Make／n8n／Gmail／LINE；工具名僅概念例子。不可設計自動付款、自動簽約、自動刪資料。\n\n我的背景：\n- 要流程化的問題／步驟：[請填寫問題]\n- 目標使用者／操作者：[請填寫目標使用者]\n- 目前手動怎麼做：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- 觸發條件（何時開始）：[請填寫]\n\n任務：產出「簡單自動化流程設計」，包含：\n1) 觸發 → 步驟 → 人工關卡 → 結束\n2) 每步：資料內容（去敏）、負責角色、失敗怎麼辦\n3) 哪些可用 AI 產草稿，哪些必須人眼看過\n4) 概念工具對照表（例：表單、試算表、Zapier／Make／n8n 概念），標「未在本平台串接」\n5) 測試清單（用假資料／示意資料）\n6) 回滾與停止條件\n7) 需人工確認項（至少 3 項）\n\n輸出強調：這是設計稿，不是已上線整合。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+    "enPrompt": "You are an automation-flow coach designing a simple Automation Flow Draft (semi-automatic). Do not claim Zapier/Make/n8n/Gmail/LINE are connected; tool names are conceptual. Do not design auto-pay, auto-sign, or auto-delete.\n\nMy context:\n- Problem/step to processize: [Enter problem]\n- Target user/operator: [Enter target user]\n- How it is done manually now: [Enter current process]\n- Constraints: [Enter constraints]\n- Trigger (when it starts): [Enter]\n\nTask: Produce an “Automation Flow Draft” with:\n1) Trigger → steps → human gate → end\n2) Per step: data content (sanitized), owner role, failure handling\n3) What AI may draft vs what humans must eyeball\n4) Conceptual tool map (e.g., form, spreadsheet, Zapier/Make/n8n concepts) labeled “not integrated on this platform”\n5) Test checklist (fake/illustrative data)\n6) Rollback and stop conditions\n7) Human-confirmation items (at least 3)\n\nEmphasize: this is a design draft, not a live integration.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+    "zhExample": "問題：報價草稿重複產出；目標使用者：接案者本人；目前流程：手動貼需求給 AI；限制：價格必須人工確認後才傳送。",
+    "enExample": "Problem: repeating quote drafts; target user: the freelancer; current process: manually paste briefs to AI; constraints: price must be human-confirmed before send.",
+    "zhPractice": "畫觸發→步驟→人工關卡→結束。；寫失敗處理與示意測試 3 筆。；用主 Prompt 產出設計並標未串接。；存成「簡單自動化流程設計」。",
+    "enPractice": "Draw trigger→steps→human gate→end.; Write failure handling and 3 illustrative tests.; Run the main prompt and label not-integrated.; Save the Automation Flow Draft.",
+    "zhFeedbackPrompt": "你是一位自動化教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 清楚度\n- 風險控制\n- 可測\n- 節省潛力\n- 創業營運焦點\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a automation coach. Score 1-10 for: Clarity, Risk control, Testability, Savings potential, Ops focus. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhQuizItems": [
+      {
+        "q": "自動化前應先？",
+        "options": [
+          "畫清流程與人工關卡",
+          "直接全自動",
+          "不管失敗"
+        ],
+        "answer": 0,
+        "explain": "先理解。"
+      },
+      {
+        "q": "失敗處理重要因為？",
+        "options": [
+          "避免靜默出錯",
+          "讓流程更酷",
+          "可以省略成功定義"
+        ],
+        "answer": 0,
+        "explain": "可靠。"
+      },
+      {
+        "q": "適合先自動的是？",
+        "options": [
+          "高頻重複低風險步驟",
+          "高風險一次決策",
+          "完全無規律危機"
+        ],
+        "answer": 0,
+        "explain": "重複性。"
+      },
+      {
+        "q": "AI 適合？",
+        "options": [
+          "整理流程草圖",
+          "保證零錯誤無人看管",
+          "取代所有責任"
+        ],
+        "answer": 0,
+        "explain": "設計輔助。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "流程草圖",
+          "完整財報",
+          "無關文件"
+        ],
+        "answer": 0,
+        "explain": "自動化草圖。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "自動化前應先？",
+        "options": [
+          "畫清流程與人工關卡",
+          "直接全自動",
+          "不管失敗"
+        ],
+        "answer": 0,
+        "explain": "先理解。"
+      },
+      {
+        "q": "失敗處理重要因為？",
+        "options": [
+          "避免靜默出錯",
+          "讓流程更酷",
+          "可以省略成功定義"
+        ],
+        "answer": 0,
+        "explain": "可靠。"
+      },
+      {
+        "q": "適合先自動的是？",
+        "options": [
+          "高頻重複低風險步驟",
+          "高風險一次決策",
+          "完全無規律危機"
+        ],
+        "answer": 0,
+        "explain": "重複性。"
+      },
+      {
+        "q": "AI 適合？",
+        "options": [
+          "整理流程草圖",
+          "保證零錯誤無人看管",
+          "取代所有責任"
+        ],
+        "answer": 0,
+        "explain": "設計輔助。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "流程草圖",
+          "完整財報",
+          "無關文件"
+        ],
+        "answer": 0,
+        "explain": "自動化草圖。"
+      }
+    ],
+    "zhOutcome": "簡單自動化流程設計",
+    "enOutcome": "Automation Flow Draft",
+    "zhValueTip": "先設計半自動與關卡，再談工具；設計稿≠已串接。",
+    "enValueTip": "Design semi-auto and gates before tools. A draft is not an integration.",
+    "zhCaseStudy": "報價兔把「需求進表單 → AI 產報價草稿 → 人工改價確認 → 手動傳送」畫成流程。概念上提到可用試算表或自動化工具搬資料，但頁面標「未串接」。測試用假名三筆，失敗條件＝資料缺欄就停在關卡。",
+    "enCaseStudy": "QuoteBunny drafted: form intake → AI quote draft → human price confirm → manual send. They mentioned spreadsheets or automation tools conceptually, labeled “not integrated,” tested three fake-name rows, and stopped at the gate when fields were missing.",
+    "zhExcellentExample": "含：觸發、步驟、人工關卡、失敗處理、概念工具表（未串接）、示意測試、回滾條件。",
+    "enExcellentExample": "Includes trigger, steps, human gate, failure handling, conceptual tool map (not integrated), illustrative tests, rollback conditions.",
+    "zhWorkflow": [
+      "選定一個高優先重複步驟與觸發條件",
+      "寫目前手動做法與限制",
+      "用 Prompt 產出半自動流程與測試清單",
+      "刪除自動付款／刪資料與已串接宣稱",
+      "存成「簡單自動化流程設計」"
+    ],
+    "enWorkflow": [
+      "Pick one high-priority repeat step and trigger",
+      "Write current manual method and constraints",
+      "Generate semi-auto flow and test checklist with the prompt",
+      "Remove auto-pay/delete and live-integration claims",
+      "Save the Automation Flow Draft"
+    ],
+    "zhCommonMistakes": [
+      "宣稱本平台已串接 Zapier／Make／n8n",
+      "流程無人工關卡",
+      "設計自動付款或自動刪資料",
+      "用真實個資做測試",
+      "把設計稿說成已上線"
+    ],
+    "enCommonMistakes": [
+      "Claiming this platform integrates Zapier/Make/n8n",
+      "Flows with no human gate",
+      "Designing auto-pay or auto-delete",
+      "Testing with real PII",
+      "Calling a draft a live launch"
+    ],
+    "zhDeliverableChecklist": [
+      "已有觸發→步驟→人工關卡→結束",
+      "每步含失敗處理與角色",
+      "已分開 AI 草稿與人眼檢查",
+      "概念工具表標明未在本平台串接",
+      "已有示意測試清單與回滾／停止條件",
+      "無自動付款／簽約／刪資料設計"
+    ],
+    "enDeliverableChecklist": [
+      "Trigger→steps→human gate→end present",
+      "Each step has failure handling and roles",
+      "AI draft vs human eyeball separated",
+      "Conceptual tool map labeled not integrated here",
+      "Illustrative tests and rollback/stop conditions present",
+      "No auto-pay/sign/delete design"
+    ],
+    "zhScorecard": [
+      "清楚度",
+      "風險控制",
+      "可測",
+      "節省潛力",
+      "創業營運焦點"
+    ],
+    "enScorecard": [
+      "Clarity",
+      "Risk control",
+      "Testability",
+      "Savings potential",
+      "Ops focus"
+    ],
+    "zhNotePrompt": "寫下你的觸發條件、一個人工關卡、以及一個出錯時的停止動作。",
+    "enNotePrompt": "Write your trigger, one human gate, and one stop action when something goes wrong.",
+    "zhCoachPrompt": "請檢查我的自動化是否缺少人工關卡或失敗處理，並給出修正。",
+    "enCoachPrompt": "Check for missing human gates or failure handling and suggest fixes.",
+    "zhWhyItMatters": {
+      "problem": "沒有人工關卡的「全自動」構想，容易在金錢與資料上出事。",
+      "ineffective": "只說「用 Zapier 全部自動跑」。",
+      "solution": "畫半自動流程、標關卡與失敗處理，並用示意資料測試。"
+    },
+    "enWhyItMatters": {
+      "problem": "“Fully automatic” ideas without human gates risk money and data incidents.",
+      "ineffective": "Only saying “Zapier will run everything.”",
+      "solution": "Draft a semi-auto flow with gates and failure handling; test with illustrative data."
+    },
+    "zhObjectives": [
+      "畫出觸發到結束的半自動流程",
+      "在關鍵輸出前設置人工關卡",
+      "標示 AI 草稿與人眼檢查界線",
+      "完成示意資料測試清單與回滾條件",
+      "存成「簡單自動化流程設計」"
+    ],
+    "enObjectives": [
+      "Draw a semi-auto flow from trigger to end",
+      "Place a human gate before critical outputs",
+      "Mark AI-draft vs human-eyeball boundaries",
+      "Finish illustrative test checklist and rollback conditions",
+      "Save an Automation Flow Draft"
+    ],
+    "estimatedTime": "約 55 分鐘 / About 55 min",
+    "difficulty": "中階 / Intermediate",
+    "zhOutputName": "簡單自動化流程設計",
+    "enOutputName": "Automation Flow Draft",
+    "zhCaseStudyBlocks": {
+      "problem": "重複報價步驟耗時，想自動化。",
+      "wrong": "宣稱已接 Make 全自動寄出含價格信件。",
+      "right": "半自動流程＋人工改價關卡＋示意測試。",
+      "result": "「簡單自動化流程設計」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Repeat quoting steps eat time; wants automation.",
+      "wrong": "Claim Make already auto-sends priced emails.",
+      "right": "Semi-auto flow + human price gate + illustrative tests.",
+      "result": "An Automation Flow Draft."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "選步驟與觸發",
+        "why": "範圍太大無法設計",
+        "input": "矩陣高優先項",
+        "output": "觸發句",
+        "check": "是否單一"
+      },
+      {
+        "do": "畫主流程",
+        "why": "沒有關卡會失控",
+        "input": "手動做法",
+        "output": "流程草圖",
+        "check": "有無人工關卡"
+      },
+      {
+        "do": "標資料與失敗",
+        "why": "失敗不理會會堆錯",
+        "input": "步驟",
+        "output": "失敗處理",
+        "check": "是否可停止"
+      },
+      {
+        "do": "寫測試清單",
+        "why": "不測就不敢跑",
+        "input": "示意資料",
+        "output": "測試表",
+        "check": "有無真實個資"
+      },
+      {
+        "do": "定回滾",
+        "why": "出錯要停",
+        "input": "原則",
+        "output": "回滾條件",
+        "check": "能否回到手動"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Pick step and trigger",
+        "why": "Too wide to design",
+        "input": "Matrix high-priority",
+        "output": "Trigger sentence",
+        "check": "Single?"
+      },
+      {
+        "do": "Draw main flow",
+        "why": "No gate = runaway",
+        "input": "Manual method",
+        "output": "Flow sketch",
+        "check": "Human gate present?"
+      },
+      {
+        "do": "Mark data and failures",
+        "why": "Ignoring failure piles errors",
+        "input": "Steps",
+        "output": "Failure handling",
+        "check": "Can stop?"
+      },
+      {
+        "do": "Write test checklist",
+        "why": "Untested = unsafe to run",
+        "input": "Illustrative data",
+        "output": "Test table",
+        "check": "Any real PII?"
+      },
+      {
+        "do": "Define rollback",
+        "why": "Must stop on error",
+        "input": "Principles",
+        "output": "Rollback conditions",
+        "check": "Can revert to manual?"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "流程結構",
+        "standard": "含關卡",
+        "mistakes": "全自動無確認",
+        "check": "關卡在關鍵輸出前？"
+      },
+      {
+        "task": "工具對照",
+        "standard": "標未串接",
+        "mistakes": "寫已上線整合",
+        "check": "是否標概念例子？"
+      },
+      {
+        "task": "測試",
+        "standard": "假資料",
+        "mistakes": "真實客戶列",
+        "check": "是否去敏？"
+      },
+      {
+        "task": "回滾",
+        "standard": "可停可退",
+        "mistakes": "無法停止",
+        "check": "停止條件清楚？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Flow structure",
+        "standard": "Includes gate",
+        "mistakes": "Full auto no confirm",
+        "check": "Gate before critical output?"
+      },
+      {
+        "task": "Tool map",
+        "standard": "Labeled not integrated",
+        "mistakes": "Claimed live integration",
+        "check": "Conceptual examples?"
+      },
+      {
+        "task": "Tests",
+        "standard": "Fake data",
+        "mistakes": "Real customer rows",
+        "check": "Sanitized?"
+      },
+      {
+        "task": "Rollback",
+        "standard": "Can stop and revert",
+        "mistakes": "Cannot stop",
+        "check": "Stop conditions clear?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "已選高優先重複步驟、要畫半自動流程時使用",
+      "fields": [
+        "[請填寫問題]",
+        "[請填寫目標使用者]",
+        "[請填寫目前流程]",
+        "[請填寫限制條件]"
+      ],
+      "body": "你是自動化流程教練，協助把重複工作設計成「簡單自動化流程設計」（半自動）。不可宣稱已接上 Zapier／Make／n8n／Gmail／LINE；工具名僅概念例子。不可設計自動付款、自動簽約、自動刪資料。\n\n我的背景：\n- 要流程化的問題／步驟：[請填寫問題]\n- 目標使用者／操作者：[請填寫目標使用者]\n- 目前手動怎麼做：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- 觸發條件（何時開始）：[請填寫]\n\n任務：產出「簡單自動化流程設計」，包含：\n1) 觸發 → 步驟 → 人工關卡 → 結束\n2) 每步：資料內容（去敏）、負責角色、失敗怎麼辦\n3) 哪些可用 AI 產草稿，哪些必須人眼看過\n4) 概念工具對照表（例：表單、試算表、Zapier／Make／n8n 概念），標「未在本平台串接」\n5) 測試清單（用假資料／示意資料）\n6) 回滾與停止條件\n7) 需人工確認項（至少 3 項）\n\n輸出強調：這是設計稿，不是已上線整合。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "expected": "含觸發、人工關卡、測試與回滾的簡單自動化流程設計",
+      "revisionReminder": "請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "extensions": [
+        {
+          "title": "延伸：寫測試用示意資料",
+          "body": "為我的流程寫 3 筆示意測試資料（假名），並標每筆預期人工關卡結果。不要使用真實個資。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when a high-priority repeat step is chosen and you need a semi-auto flow draft",
+      "fields": [
+        "[Enter problem]",
+        "[Enter target user]",
+        "[Enter current process]",
+        "[Enter constraints]"
+      ],
+      "body": "You are an automation-flow coach designing a simple Automation Flow Draft (semi-automatic). Do not claim Zapier/Make/n8n/Gmail/LINE are connected; tool names are conceptual. Do not design auto-pay, auto-sign, or auto-delete.\n\nMy context:\n- Problem/step to processize: [Enter problem]\n- Target user/operator: [Enter target user]\n- How it is done manually now: [Enter current process]\n- Constraints: [Enter constraints]\n- Trigger (when it starts): [Enter]\n\nTask: Produce an “Automation Flow Draft” with:\n1) Trigger → steps → human gate → end\n2) Per step: data content (sanitized), owner role, failure handling\n3) What AI may draft vs what humans must eyeball\n4) Conceptual tool map (e.g., form, spreadsheet, Zapier/Make/n8n concepts) labeled “not integrated on this platform”\n5) Test checklist (fake/illustrative data)\n6) Rollback and stop conditions\n7) Human-confirmation items (at least 3)\n\nEmphasize: this is a design draft, not a live integration.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "expected": "A simple automation flow draft with trigger, human gates, tests, and rollback",
+      "revisionReminder": "Remove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "extensions": [
+        {
+          "title": "Extension: illustrative test rows",
+          "body": "Write 3 illustrative test rows (fake names) for my flow and expected human-gate outcomes. Do not use real PII."
+        }
+      ]
+    },
+    "zhNextStep": "下一堂畫「AI Agent 責任地圖」：何時用人、何時用機器、何處必須監督。",
+    "enNextStep": "Next, draw an AI Agent Responsibility Map: when humans, when machines, and where supervision is mandatory.",
+    "zhConceptBlocks": {
+      "principles": [
+        "半自動預設",
+        "關卡在關鍵輸出前",
+        "設計≠上線串接"
+      ],
+      "terms": [
+        "觸發",
         "人工關卡",
-        "失敗處理",
-        "成功定義",
-        "試跑紀錄"
+        "回滾"
       ],
-      "enDeliverableChecklist": [
-        "Flow sketch",
-        "Human gates",
-        "Failure handling",
-        "Success definition",
-        "Pilot log"
+      "criteria": [
+        "有流程",
+        "有測試",
+        "有停止條件"
       ],
-      "zhScorecard": [
-        "清楚度",
-        "風險控制",
-        "可測",
-        "節省潛力",
-        "創業營運焦點"
-      ],
-      "enScorecard": [
-        "Clarity",
-        "Risk control",
-        "Testability",
-        "Savings potential",
-        "Ops focus"
-      ],
-      "zhNotePrompt": "貼上自動化流程草圖與試跑結果。",
-      "enNotePrompt": "Paste your automation sketch and pilot result.",
-      "zhCoachPrompt": "請檢查我的自動化是否缺少人工關卡或失敗處理，並給出修正。",
-      "enCoachPrompt": "Check for missing human gates or failure handling and suggest fixes.",
-      "title": "建立自動化思維：把重複工作變成流程",
-      "description": "建立自動化思維：把重複工作變成可檢查的流程。",
-      "goal": "產出一張自動化流程草圖：觸發、步驟、人工關卡、失敗處理與成功定義。"
+      "boundaries": [
+        "避免：假串接",
+        "避免：無監督金錢動作",
+        "避免：真實個資測試"
+      ]
     },
-    {
-      "id": "startup-automation-L9",
-      "lessonKey": "startup-automation-L9",
-      "zhTitle": "第9課：認識自動化與 AI Agent：何時用人、何時用機器",
-      "enTitle": "Lesson 9: Know automation and AI agents: when to use people vs machines",
-      "zhConcept": "規則自動化適合明確若則；AI Agent 適合需要理解非結構化輸入但仍需邊界的任務；人適合高風險決策與例外。選錯會帶來幻覺與責任空洞。為每個 Agent 任務寫：輸入、允許工具、成功標準、人工監督、停止條件。本課在創業／自動化能力內討論 Agent，用途是產品與營運自動化，不是其他能力域。",
-      "enConcept": "Rules fit clear if-then work; agents fit bounded unstructured tasks; humans keep high-risk decisions. For each agent task define inputs, allowed tools, success criteria, oversight, and stop conditions—inside startup/ops automation.",
-      "zhPrompt": "請擔任自動化與 Agent 教練。我的任務清單：【】。風險等級：【】。\n\n請做成人／規則／Agent 決策表，為 Agent 項寫監督與停止條件，並說明哪些不該自動。不要建議規避法律或平台規則。",
-      "enPrompt": "Act as an automation/agent coach. Task list: []. Risk levels: []. Build a human/rules/agent table with oversight and stop conditions; state what must stay human. Suggest nothing that bypasses law or platform rules.",
-      "zhExample": "弱：「全部交給 Agent」。強：「FAQ 草稿→Agent；價格承諾→人；資料刪除→人＋雙重確認。」",
-      "enExample": "Weak: agents do everything. Strong: FAQ drafts→agent; price promises→human; deletions→human with dual confirm.",
-      "zhPractice": "列出 10 個營運任務。；填決策表。；為 2 個 Agent 任務寫監督。；選 1 個做小試驗。；記錄錯誤案例並更新表。",
-      "enPractice": "List 10 ops tasks.；Fill the table.；Write oversight for 2 agent tasks.；Pilot one.；Log errors and update.",
-      "zhFeedbackPrompt": "你是一位自動化與 Agent 教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 判斷品質\n- 風險意識\n- 可監督\n- 可執行\n- 自動化焦點\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a automation and agent coach. Score 1-10 for: Judgment quality, Risk awareness, Supervisability, Executability, Automation focus. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhQuizItems": [
-        {
-          "q": "高風險決策通常應？",
-          "options": [
-            "由人負責",
-            "全交 Agent",
-            "隨機決定"
-          ],
-          "answer": 0,
-          "explain": "責任在人。"
-        },
-        {
-          "q": "Agent 任務需要？",
-          "options": [
-            "監督與停止條件",
-            "完全無邊界",
-            "隱藏錯誤"
-          ],
-          "answer": 0,
-          "explain": "可控。"
-        },
-        {
-          "q": "規則自動化適合？",
-          "options": [
-            "明確若則",
-            "完全開放創作",
-            "法律裁決"
-          ],
-          "answer": 0,
-          "explain": "清楚規則。"
-        },
-        {
-          "q": "本課 Agent 用途應服務？",
-          "options": [
-            "產品與營運自動化",
-            "與創業無關的閒聊",
-            "取代所有學習"
-          ],
-          "answer": 0,
-          "explain": "能力邊界。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "決策表",
-            "完整無關文件包",
-            "無關申請包"
-          ],
-          "answer": 0,
-          "explain": "決策表。"
-        }
+    "enConceptBlocks": {
+      "principles": [
+        "Semi-auto default",
+        "Gate before critical outputs",
+        "Design ≠ live integration"
       ],
-      "enQuizItems": [
-        {
-          "q": "高風險決策通常應？",
-          "options": [
-            "由人負責",
-            "全交 Agent",
-            "隨機決定"
-          ],
-          "answer": 0,
-          "explain": "責任在人。"
-        },
-        {
-          "q": "Agent 任務需要？",
-          "options": [
-            "監督與停止條件",
-            "完全無邊界",
-            "隱藏錯誤"
-          ],
-          "answer": 0,
-          "explain": "可控。"
-        },
-        {
-          "q": "規則自動化適合？",
-          "options": [
-            "明確若則",
-            "完全開放創作",
-            "法律裁決"
-          ],
-          "answer": 0,
-          "explain": "清楚規則。"
-        },
-        {
-          "q": "本課 Agent 用途應服務？",
-          "options": [
-            "產品與營運自動化",
-            "與創業無關的閒聊",
-            "取代所有學習"
-          ],
-          "answer": 0,
-          "explain": "能力邊界。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "決策表",
-            "完整無關文件包",
-            "無關申請包"
-          ],
-          "answer": 0,
-          "explain": "決策表。"
-        }
+      "terms": [
+        "Trigger",
+        "Human gate",
+        "Rollback"
       ],
-      "zhOutcome": "產出決策表：任務類型 × 人／規則／Agent，附監督方式與不採用理由。",
-      "enOutcome": "Produce a decision table: task type × human/rules/agent, with oversight and reasons not to automate.",
-      "zhValueTip": "判斷何時用人、何時用規則自動化、何時用 AI Agent，並設計監督點。",
-      "enValueTip": "Decide when to use humans, rule automation, or AI agents—and design oversight points.",
-      "zhCaseStudy": "客服意向分類可用 Agent 草稿，但退款批准必須人。團隊做決策表後，誤退款風險下降，同時分類速度上升。",
-      "enCaseStudy": "Intent classification used an agent draft while refunds stayed human—faster triage with lower mistaken-refund risk.",
-      "zhExcellentExample": "決策表至少 8 列；每列有監督與停止條件；含「不採用 Agent」的高風險例。",
-      "enExcellentExample": "Decision table with 8+ rows, oversight and stop conditions each, including high-risk cases that stay human.",
-      "zhWorkflow": [
-        "列任務",
-        "評風險",
-        "選人／規則／Agent",
-        "寫監督與停止",
-        "小試驗更新"
+      "criteria": [
+        "Flow present",
+        "Tests present",
+        "Stop conditions present"
       ],
-      "enWorkflow": [
-        "List tasks",
-        "Rate risk",
-        "Choose human/rules/agent",
-        "Write oversight/stops",
-        "Pilot and update"
-      ],
-      "zhCommonMistakes": [
-        "高風險全自動",
-        "無停止條件",
-        "無監督",
-        "把 Agent 神化",
-        "忽略資料權限"
-      ],
-      "enCommonMistakes": [
-        "Full auto on high risk",
-        "No stop conditions",
-        "No oversight",
-        "Agent worship",
-        "Ignoring data permissions"
-      ],
-      "zhDeliverableChecklist": [
-        "決策表",
-        "監督",
-        "停止條件",
-        "不採用理由",
-        "試驗紀錄"
-      ],
-      "enDeliverableChecklist": [
-        "Decision table",
-        "Oversight",
-        "Stop conditions",
-        "Why-not reasons",
-        "Pilot log"
-      ],
-      "zhScorecard": [
-        "判斷品質",
-        "風險意識",
-        "可監督",
-        "可執行",
-        "自動化焦點"
-      ],
-      "enScorecard": [
-        "Judgment quality",
-        "Risk awareness",
-        "Supervisability",
-        "Executability",
-        "Automation focus"
-      ],
-      "zhNotePrompt": "貼上決策表與一個 Agent 任務的監督設計。",
-      "enNotePrompt": "Paste your decision table and one agent oversight design.",
-      "zhCoachPrompt": "請挑戰我把高風險任務交給 Agent 的決定，並建議監督點。",
-      "enCoachPrompt": "Challenge high-risk agent assignments and suggest oversight points.",
-      "title": "認識自動化與 AI Agent：何時用人、何時用機器",
-      "description": "判斷何時用人、何時用規則自動化、何時用 AI Agent，並設計監督點。",
-      "goal": "產出決策表：任務類型 × 人／規則／Agent，附監督方式與不採用理由。"
+      "boundaries": [
+        "Avoid: fake integrations",
+        "Avoid: unsupervised money actions",
+        "Avoid: real PII in tests"
+      ]
     },
-    {
-      "id": "startup-automation-L10",
-      "lessonKey": "startup-automation-L10",
-      "zhTitle": "第10課：整合完成「創業提案＋基礎 AI 自動化流程」",
-      "enTitle": "Lesson 10: Complete your startup proposal and basic AI automation workflow",
-      "zhConcept": "最後一課做整合，不是新開題。把前面的問題、訪談／驗證、模式、規格、Pitch 與一條自動化流程收成可展示包。品質標準是一致的故事線：同一使用者、同一問題、同一 MVP，自動化必須服務這個生意而非裝飾。AI 可幫你做總檢查與缺口清單；不可補假進展。",
-      "enConcept": "Integrate prior work into one coherent pack—same user, problem, MVP—and one automation that serves the business. AI can audit gaps; it must not invent traction.",
-      "zhPrompt": "請擔任創業整合教練。以下是我目前的各部份草稿：【貼上】。\n\n請做總檢查：故事是否一致、缺什麼證據、自動化是否服務核心流程、Pitch Ask 是否清楚，並給出 7 天修訂清單。禁止新增假進展。",
-      "enPrompt": "Act as a startup integration coach. Here are my draft parts: []. Audit story coherence, missing evidence, whether automation serves the core flow, and clarity of the ask; give a 7-day revision list. Add no fake traction.",
-      "zhExample": "弱包：Pitch 說有 1 萬用戶，資料夾無證據；自動化是無關的壁紙產生器。強包：用戶數＝試用社團 3 個可點名；自動化＝試用申請處理流程。",
-      "enExample": "Weak: pitch claims 10k users with no proof; automation is unrelated. Strong: three named trial clubs; automation handles trial intake.",
-      "zhPractice": "建立成果包目錄。；放入各課產出並統一名詞。；跑整合檢查 Prompt。；修最重要 3 個缺口。；做 5 分鐘完整演示。",
-      "enPractice": "Create the pack index.；Insert prior outputs with consistent names.；Run the integration audit.；Fix top 3 gaps.；Deliver a 5-minute demo.",
-      "zhFeedbackPrompt": "你是一位創業整合教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 一致性\n- 證據\n- 可演示\n- 誠實缺口\n- 整合完整度\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a startup integration coach. Score 1-10 for: Coherence, Evidence, Demoability, Honest gaps, Integration completeness. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhQuizItems": [
-        {
-          "q": "整合課目標是？",
-          "options": [
-            "收成一致可展示的創業包",
-            "另開全新題目",
-            "補假數據讓數字好看"
-          ],
-          "answer": 0,
-          "explain": "整合。"
-        },
-        {
-          "q": "自動化應？",
-          "options": [
-            "服務核心生意流程",
-            "當無關裝飾",
-            "取代 Pitch"
-          ],
-          "answer": 0,
-          "explain": "服務生意。"
-        },
-        {
-          "q": "發現缺口時？",
-          "options": [
-            "誠實列出並排修訂",
-            "用假進展填滿",
-            "刪除目錄裝看不見"
-          ],
-          "answer": 0,
-          "explain": "誠實。"
-        },
-        {
-          "q": "演示時最好？",
-          "options": [
-            "能指到證據",
-            "只唸口號",
-            "拒絕回答限制"
-          ],
-          "answer": 0,
-          "explain": "證據。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "提案＋自動化成果包",
-            "無關文件包",
-            "無關申請包"
-          ],
-          "answer": 0,
-          "explain": "創業包。"
+    "zhSummary": [
+      "本堂成果：簡單自動化流程設計",
+      "重複工作可流程化，但不能無監督。",
+      "測試用示意資料，工具名只是例子。"
+    ],
+    "enSummary": [
+      "Deliverable: Automation Flow Draft",
+      "Repeat work can be processized—not left unsupervised.",
+      "Test with illustrative data; tool names are examples."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "把設計稿說成已串接上線",
+        "why": "造成錯誤期待",
+        "fix": "每頁標設計／未串接"
+      },
+      {
+        "error": "流程沒有人工關卡",
+        "why": "高風險失控",
+        "fix": "至少一個確認關卡"
+      },
+      {
+        "error": "用真實客戶資料測試",
+        "why": "隱私事故",
+        "fix": "只用示意／假資料"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Calling a draft a live integration",
+        "why": "False expectations",
+        "fix": "Label design / not integrated"
+      },
+      {
+        "error": "No human gate in the flow",
+        "why": "High-risk runaway",
+        "fix": "At least one confirm gate"
+      },
+      {
+        "error": "Testing with real customer data",
+        "why": "Privacy incident",
+        "fix": "Use illustrative/fake data only"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "結構",
+        "levels": {
+          "incomplete": "缺觸發或結束",
+          "basic": "有步驟缺失敗處理",
+          "good": "觸發到結束完整",
+          "ready": "含回滾與停止條件"
         }
-      ],
-      "enQuizItems": [
-        {
-          "q": "整合課目標是？",
-          "options": [
-            "收成一致可展示的創業包",
-            "另開全新題目",
-            "補假數據讓數字好看"
-          ],
-          "answer": 0,
-          "explain": "整合。"
-        },
-        {
-          "q": "自動化應？",
-          "options": [
-            "服務核心生意流程",
-            "當無關裝飾",
-            "取代 Pitch"
-          ],
-          "answer": 0,
-          "explain": "服務生意。"
-        },
-        {
-          "q": "發現缺口時？",
-          "options": [
-            "誠實列出並排修訂",
-            "用假進展填滿",
-            "刪除目錄裝看不見"
-          ],
-          "answer": 0,
-          "explain": "誠實。"
-        },
-        {
-          "q": "演示時最好？",
-          "options": [
-            "能指到證據",
-            "只唸口號",
-            "拒絕回答限制"
-          ],
-          "answer": 0,
-          "explain": "證據。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "提案＋自動化成果包",
-            "無關文件包",
-            "無關申請包"
-          ],
-          "answer": 0,
-          "explain": "創業包。"
+      },
+      {
+        "name": "安全",
+        "levels": {
+          "incomplete": "無人工關卡",
+          "basic": "關卡位置不當",
+          "good": "關鍵輸出前有關卡",
+          "ready": "禁自動金錢／刪資料"
         }
+      },
+      {
+        "name": "可測性",
+        "levels": {
+          "incomplete": "無測試清單",
+          "basic": "測試含真實個資",
+          "good": "示意資料可測",
+          "ready": "預期結果清楚"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Structure",
+        "levels": {
+          "incomplete": "Missing trigger or end",
+          "basic": "Steps without failure handling",
+          "good": "Trigger-to-end complete",
+          "ready": "Rollback and stop conditions"
+        }
+      },
+      {
+        "name": "Safety",
+        "levels": {
+          "incomplete": "No human gate",
+          "basic": "Gate poorly placed",
+          "good": "Gate before critical outputs",
+          "ready": "No auto money/delete"
+        }
+      },
+      {
+        "name": "Testability",
+        "levels": {
+          "incomplete": "No test list",
+          "basic": "Tests use real PII",
+          "good": "Illustrative data usable",
+          "ready": "Expected results clear"
+        }
+      }
+    ]
+  },
+  {
+    "id": "startup-automation-L9",
+    "lessonKey": "startup-automation-L9",
+    "zhTitle": "第9課：認識自動化與 AI Agent：何時用人、何時用機器",
+    "enTitle": "Lesson 9: Know automation and AI agents: when to use people vs machines",
+    "zhConcept": "AI Agent 可以是「代為執行草稿步驟的助手構想」，但不是無人看管員工。責任地圖用 RACI 分清誰負責、誰確認；付款、簽約、刪資料、對外承諾必須人工。監督與事故應對要預先寫好。",
+    "enConcept": "An AI agent can be a conceptual helper that drafts steps—not an unattended employee. A responsibility map uses RACI for who owns and who confirms; pay, sign, delete, and external commitments stay human. Supervision and incident response must be written in advance.",
+    "zhPrompt": "你是 AI Agent 治理教練，協助產出「AI Agent 責任地圖」：何時用人、何時用機器、何處必須監督。明確：Agent ≠ 無監督系統。\n\n我的背景：\n- 場景問題：[請填寫問題]\n- 目標使用者／利害關係人：[請填寫目標使用者]\n- 目前人機分工現況：[請填寫目前流程]\n- 限制條件（合規、隱私、技能）：[請填寫限制條件]\n- 我想引入 Agent／自動化的環節（構想）：[請填寫]\n\n任務：產出「AI Agent 責任地圖」，包含：\n1) 角色：人類負責人、AI 助手、（可選）概念 Agent\n2) RACI 風格：誰負責、誰執行草稿、誰確認、誰知情\n3) 允許 AI／Agent 做的事 vs 禁止無監督做的事（付款、簽約、刪資料、對外承諾）\n4) 監督節奏（每次／抽樣／每日回顧）\n5) 事故應對：暫停、回滾、通知誰\n6) 紅線清單（至少 5 條）\n7) 需人工確認項（至少 3 項）\n\n限制：不要鼓勵無監督 Agent 操作金流、信箱大量寄信或刪除資料。本平台未提供 Agent 自動串接。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+    "enPrompt": "You are an AI-agent governance coach producing an AI Agent Responsibility Map: when humans, when machines, where supervision is mandatory. Be explicit: Agent ≠ unsupervised system.\n\nMy context:\n- Scenario problem: [Enter problem]\n- Target user / stakeholders: [Enter target user]\n- Current human-machine split: [Enter current process]\n- Constraints (compliance, privacy, skills): [Enter constraints]\n- Where you want to introduce an agent/automation (idea): [Enter]\n\nTask: Produce an “AI Agent Responsibility Map” with:\n1) Roles: human owner, AI assistant, optional conceptual agent\n2) RACI-style: accountable, drafts, confirms, informed\n3) Allowed AI/agent actions vs banned unsupervised actions (pay, sign, delete, external commitments)\n4) Supervision cadence (every time / sample / daily review)\n5) Incident response: pause, rollback, whom to notify\n6) Red-line list (at least 5)\n7) Human-confirmation items (at least 3)\n\nLimits: Do not encourage unsupervised agents on payments, mass email, or data deletion. This platform does not provide agent auto-integrations.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+    "zhExample": "場景：社團內容候補選；目標使用者：社員與幹部；目前流程：人工蒐集；限制：禁止自動群發與刪雲端檔。",
+    "enExample": "Scenario: club content candidate list; target user: members and officers; current process: manual collection; constraints: ban auto mass-send and cloud-file deletion.",
+    "zhPractice": "指定人類負責人並完成 RACI。；寫 ≥5 條紅線與監督節奏。；用主 Prompt 產出地圖並做事故演練。；存成「AI Agent 責任地圖」。",
+    "enPractice": "Name a human owner and finish RACI.; Write ≥5 red lines and supervision cadence.; Run the main prompt and do an incident drill.; Save the AI Agent Responsibility Map.",
+    "zhFeedbackPrompt": "你是一位自動化與 Agent 教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 判斷品質\n- 風險意識\n- 可監督\n- 可執行\n- 自動化焦點\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a automation and agent coach. Score 1-10 for: Judgment quality, Risk awareness, Supervisability, Executability, Automation focus. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhQuizItems": [
+      {
+        "q": "高風險決策通常應？",
+        "options": [
+          "由人負責",
+          "全交 Agent",
+          "隨機決定"
+        ],
+        "answer": 0,
+        "explain": "責任在人。"
+      },
+      {
+        "q": "Agent 任務需要？",
+        "options": [
+          "監督與停止條件",
+          "完全無邊界",
+          "隱藏錯誤"
+        ],
+        "answer": 0,
+        "explain": "可控。"
+      },
+      {
+        "q": "規則自動化適合？",
+        "options": [
+          "明確若則",
+          "完全開放創作",
+          "法律裁決"
+        ],
+        "answer": 0,
+        "explain": "清楚規則。"
+      },
+      {
+        "q": "本課 Agent 用途應服務？",
+        "options": [
+          "產品與營運自動化",
+          "與創業無關的閒聊",
+          "取代所有學習"
+        ],
+        "answer": 0,
+        "explain": "能力邊界。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "決策表",
+          "完整無關文件包",
+          "無關申請包"
+        ],
+        "answer": 0,
+        "explain": "決策表。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "高風險決策通常應？",
+        "options": [
+          "由人負責",
+          "全交 Agent",
+          "隨機決定"
+        ],
+        "answer": 0,
+        "explain": "責任在人。"
+      },
+      {
+        "q": "Agent 任務需要？",
+        "options": [
+          "監督與停止條件",
+          "完全無邊界",
+          "隱藏錯誤"
+        ],
+        "answer": 0,
+        "explain": "可控。"
+      },
+      {
+        "q": "規則自動化適合？",
+        "options": [
+          "明確若則",
+          "完全開放創作",
+          "法律裁決"
+        ],
+        "answer": 0,
+        "explain": "清楚規則。"
+      },
+      {
+        "q": "本課 Agent 用途應服務？",
+        "options": [
+          "產品與營運自動化",
+          "與創業無關的閒聊",
+          "取代所有學習"
+        ],
+        "answer": 0,
+        "explain": "能力邊界。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "決策表",
+          "完整無關文件包",
+          "無關申請包"
+        ],
+        "answer": 0,
+        "explain": "決策表。"
+      }
+    ],
+    "zhOutcome": "AI Agent 責任地圖",
+    "enOutcome": "AI Agent Responsibility Map",
+    "zhValueTip": "Agent 先談責任與紅線，再談能力；無監督不是目標。",
+    "enValueTip": "For agents, responsibility and red lines come before capabilities. Unsupervised is not the goal.",
+    "zhCaseStudy": "週刊匣曾想「Agent 每晚自動爬連結並群發」。責任地圖把負責人設為總編（虛構角色）、AI 只產候選清單、確認與發送必須人工；紅線含禁止自動群發、禁止刪除社團雲端檔。事故演練：錯誤連結进草稿就暫停當日發送。",
+    "enCaseStudy": "WeekBox considered an “agent crawls links and mass-sends nightly.” The map set a fictional editor-in-chief as owner; AI only drafted candidates; confirm and send stayed human. Red lines banned auto mass-send and cloud-file deletion. Drill: bad link in draft pauses that day’s send.",
+    "zhExcellentExample": "含：負責人、RACI、允許／禁止、監督節奏、≥5 紅線、事故暫停／回滾／通知。",
+    "enExcellentExample": "Includes owner, RACI, allow/ban, supervision cadence, ≥5 red lines, incident pause/rollback/notify.",
+    "zhWorkflow": [
+      "寫場景、利害關係人、目前分工與限制",
+      "指定人類負責人",
+      "用 Prompt 產出 RACI、紅線與事故流程",
+      "刪除無監督金流／刪資料設計",
+      "存成「AI Agent 責任地圖」"
+    ],
+    "enWorkflow": [
+      "Write scenario, stakeholders, current split, and constraints",
+      "Name the human owner",
+      "Generate RACI, red lines, and incident flow with the prompt",
+      "Remove unsupervised payment/delete designs",
+      "Save the AI Agent Responsibility Map"
+    ],
+    "zhCommonMistakes": [
+      "把 Agent 當無監督員工",
+      "允許自動付款、簽約或刪資料",
+      "RACI 沒有確認者",
+      "事故無人可通知",
+      "宣稱平台提供 Agent 自動串接信箱／金流"
+    ],
+    "enCommonMistakes": [
+      "Treating agents as unsupervised staff",
+      "Allowing auto-pay, sign, or delete",
+      "RACI without a confirmer",
+      "Incidents with nobody to notify",
+      "Claiming the platform provides agent auto email/payment integrations"
+    ],
+    "zhDeliverableChecklist": [
+      "已指定人類負責人",
+      "RACI 含執行草稿與確認",
+      "允許／禁止清單清楚",
+      "監督節奏與 ≥5 條紅線齊全",
+      "事故含暫停、回滾、通知",
+      "無無監督付款／簽約／刪資料或平台 Agent 串接宣稱"
+    ],
+    "enDeliverableChecklist": [
+      "Human owner named",
+      "RACI includes drafting and confirmation",
+      "Allow/ban list clear",
+      "Supervision cadence and ≥5 red lines present",
+      "Incident includes pause, rollback, notify",
+      "No unsupervised pay/sign/delete or platform agent-integration claims"
+    ],
+    "zhScorecard": [
+      "判斷品質",
+      "風險意識",
+      "可監督",
+      "可執行",
+      "自動化焦點"
+    ],
+    "enScorecard": [
+      "Judgment quality",
+      "Risk awareness",
+      "Supervisability",
+      "Executability",
+      "Automation focus"
+    ],
+    "zhNotePrompt": "寫下負責人是誰、一條你最重要的紅線、以及事故時你會做的第一個暫停動作。",
+    "enNotePrompt": "Write who the owner is, your most important red line, and the first pause action you will take in an incident.",
+    "zhCoachPrompt": "請挑戰我把高風險任務交給 Agent 的決定，並建議監督點。",
+    "enCoachPrompt": "Challenge high-risk agent assignments and suggest oversight points.",
+    "zhWhyItMatters": {
+      "problem": "一說 Agent 就想像全自動，責任與紅線卻空白。",
+      "ineffective": "只問「哪個 Agent 最強」而不問誰負責。",
+      "solution": "畫責任地圖：允許／禁止、監督節奏、事故暫停與回滾。"
+    },
+    "enWhyItMatters": {
+      "problem": "“Agent” triggers full-auto fantasy while ownership and red lines stay blank.",
+      "ineffective": "Only asking “which agent is strongest” without who is accountable.",
+      "solution": "Map responsibility: allow/ban, supervision cadence, pause and rollback on incidents."
+    },
+    "zhObjectives": [
+      "定義人類負責人與 AI／Agent 角色",
+      "完成 RACI 與監督節奏",
+      "列出至少 5 條紅線（含金錢與資料）",
+      "寫出事故暫停／回滾／通知流程",
+      "存成「AI Agent 責任地圖」"
+    ],
+    "enObjectives": [
+      "Define human owner and AI/agent roles",
+      "Complete RACI and supervision cadence",
+      "List ≥5 red lines (including money and data)",
+      "Write incident pause/rollback/notify flow",
+      "Save an AI Agent Responsibility Map"
+    ],
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "中階 / Intermediate",
+    "zhOutputName": "AI Agent 責任地圖",
+    "enOutputName": "AI Agent Responsibility Map",
+    "zhCaseStudyBlocks": {
+      "problem": "想用 Agent 省時間，但責任不清。",
+      "wrong": "無監督夜間自動群發。",
+      "right": "RACI＋紅線＋監督與事故流程。",
+      "result": "「AI Agent 責任地圖」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Wants agent time-savings without clear ownership.",
+      "wrong": "Unsupervised nightly mass-send.",
+      "right": "RACI + red lines + supervision and incident flow.",
+      "result": "An AI Agent Responsibility Map."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "指定負責人",
+        "why": "無人負責等於失控",
+        "input": "利害關係人",
+        "output": "負責人",
+        "check": "是否具名角色"
+      },
+      {
+        "do": "畫 RACI",
+        "why": "執行與確認混為一談",
+        "input": "分工現況",
+        "output": "RACI 表",
+        "check": "確認欄是否有人"
+      },
+      {
+        "do": "寫允許／禁止",
+        "why": "紅線模糊會越界",
+        "input": "構想清單",
+        "output": "允許禁止表",
+        "check": "是否含付款簽約刪資料"
+      },
+      {
+        "do": "訂監督節奏",
+        "why": "從不檢查等於無監督",
+        "input": "風險等級",
+        "output": "節奏",
+        "check": "是否可執行"
+      },
+      {
+        "do": "事故演練",
+        "why": "紙上談兵不夠",
+        "input": "紅線",
+        "output": "應對步驟",
+        "check": "能否暫停回滾"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Name owner",
+        "why": "No owner = runaway",
+        "input": "Stakeholders",
+        "output": "Owner role",
+        "check": "Named role?"
+      },
+      {
+        "do": "Draw RACI",
+        "why": "Doing vs confirming mixed",
+        "input": "Current split",
+        "output": "RACI table",
+        "check": "Confirm column filled?"
+      },
+      {
+        "do": "Write allow/ban",
+        "why": "Fuzzy red lines get crossed",
+        "input": "Idea list",
+        "output": "Allow/ban table",
+        "check": "Pay/sign/delete included?"
+      },
+      {
+        "do": "Set supervision cadence",
+        "why": "Never checking = unsupervised",
+        "input": "Risk level",
+        "output": "Cadence",
+        "check": "Executable?"
+      },
+      {
+        "do": "Incident drill",
+        "why": "Paper plans are not enough",
+        "input": "Red lines",
+        "output": "Response steps",
+        "check": "Can pause/rollback?"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "負責人",
+        "standard": "具名角色",
+        "mistakes": "寫「大家負責」",
+        "check": "是否可問責？"
+      },
+      {
+        "task": "紅線",
+        "standard": "≥5 含金錢資料",
+        "mistakes": "允許自動扣款",
+        "check": "是否禁止無監督？"
+      },
+      {
+        "task": "監督",
+        "standard": "有節奏",
+        "mistakes": "從不檢查",
+        "check": "能否本週執行？"
+      },
+      {
+        "task": "事故",
+        "standard": "暫停回滾通知",
+        "mistakes": "沒有通知人",
+        "check": "步驟是否可演練？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Owner",
+        "standard": "Named role",
+        "mistakes": "“Everyone owns it”",
+        "check": "Accountable?"
+      },
+      {
+        "task": "Red lines",
+        "standard": "≥5 including money/data",
+        "mistakes": "Allow auto-charge",
+        "check": "Unsupervised banned?"
+      },
+      {
+        "task": "Supervision",
+        "standard": "Cadence present",
+        "mistakes": "Never check",
+        "check": "Doable this week?"
+      },
+      {
+        "task": "Incident",
+        "standard": "Pause/rollback/notify",
+        "mistakes": "No notify person",
+        "check": "Drillable steps?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "想引入 Agent 卻怕責任不清、變成無監督時使用",
+      "fields": [
+        "[請填寫問題]",
+        "[請填寫目標使用者]",
+        "[請填寫目前流程]",
+        "[請填寫限制條件]"
       ],
-      "zhOutcome": "完成「創業提案＋基礎自動化」成果包：問題、驗證、模式、規格摘要、Pitch 要點與一條自動化流程說明。",
-      "enOutcome": "Complete a startup+automation pack: problem, validation, model, spec summary, pitch points, and one documented automation flow.",
-      "zhValueTip": "整合創業提案與一條可運行的基礎自動化流程，形成可展示成果包。",
-      "enValueTip": "Integrate a startup proposal with one working basic automation flow into a demo-ready pack.",
-      "zhCaseStudy": "學生把排班問題、8 訪、學期收費假設、衝突提醒 MVP、9 頁 Pitch，以及「試用申請自動回覆＋人工審核」流程放進同一資料夾。展示時故事一致，評審追問也能指到證據。",
-      "enCaseStudy": "A student bundled scheduling problem, interviews, pricing hypothesis, conflict-alert MVP, 9-slide pitch, and trial-request automation into one coherent folder reviewers could interrogate.",
-      "zhExcellentExample": "成果包有目錄、故事一致、證據可點開、自動化有流程圖與試跑、缺口誠實列出、下一步 7 天計畫清楚。",
-      "enExcellentExample": "Pack with index, coherent story, openable evidence, automation diagram + pilot, honest gaps, and a clear 7-day next plan.",
-      "zhWorkflow": [
-        "建目錄",
-        "匯入各部份",
-        "一致性檢查",
-        "修缺口",
-        "演示與收尾"
+      "body": "你是 AI Agent 治理教練，協助產出「AI Agent 責任地圖」：何時用人、何時用機器、何處必須監督。明確：Agent ≠ 無監督系統。\n\n我的背景：\n- 場景問題：[請填寫問題]\n- 目標使用者／利害關係人：[請填寫目標使用者]\n- 目前人機分工現況：[請填寫目前流程]\n- 限制條件（合規、隱私、技能）：[請填寫限制條件]\n- 我想引入 Agent／自動化的環節（構想）：[請填寫]\n\n任務：產出「AI Agent 責任地圖」，包含：\n1) 角色：人類負責人、AI 助手、（可選）概念 Agent\n2) RACI 風格：誰負責、誰執行草稿、誰確認、誰知情\n3) 允許 AI／Agent 做的事 vs 禁止無監督做的事（付款、簽約、刪資料、對外承諾）\n4) 監督節奏（每次／抽樣／每日回顧）\n5) 事故應對：暫停、回滾、通知誰\n6) 紅線清單（至少 5 條）\n7) 需人工確認項（至少 3 項）\n\n限制：不要鼓勵無監督 Agent 操作金流、信箱大量寄信或刪除資料。本平台未提供 Agent 自動串接。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "expected": "含 RACI、紅線與事故應對的 AI Agent 責任地圖",
+      "revisionReminder": "請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "extensions": [
+        {
+          "title": "延伸：寫一則事故演練",
+          "body": "假設 AI 草稿含錯誤價格且差点送出，按我的責任地圖寫暫停→回滾→通知步驟。不要建議自動送出。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when you want agents but fear unclear ownership and unsupervised risk",
+      "fields": [
+        "[Enter problem]",
+        "[Enter target user]",
+        "[Enter current process]",
+        "[Enter constraints]"
       ],
-      "enWorkflow": [
-        "Create index",
-        "Import parts",
-        "Coherence check",
-        "Fix gaps",
-        "Demo and close"
+      "body": "You are an AI-agent governance coach producing an AI Agent Responsibility Map: when humans, when machines, where supervision is mandatory. Be explicit: Agent ≠ unsupervised system.\n\nMy context:\n- Scenario problem: [Enter problem]\n- Target user / stakeholders: [Enter target user]\n- Current human-machine split: [Enter current process]\n- Constraints (compliance, privacy, skills): [Enter constraints]\n- Where you want to introduce an agent/automation (idea): [Enter]\n\nTask: Produce an “AI Agent Responsibility Map” with:\n1) Roles: human owner, AI assistant, optional conceptual agent\n2) RACI-style: accountable, drafts, confirms, informed\n3) Allowed AI/agent actions vs banned unsupervised actions (pay, sign, delete, external commitments)\n4) Supervision cadence (every time / sample / daily review)\n5) Incident response: pause, rollback, whom to notify\n6) Red-line list (at least 5)\n7) Human-confirmation items (at least 3)\n\nLimits: Do not encourage unsupervised agents on payments, mass email, or data deletion. This platform does not provide agent auto-integrations.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "expected": "An AI Agent Responsibility Map with RACI, red lines, and incident response",
+      "revisionReminder": "Remove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "extensions": [
+        {
+          "title": "Extension: incident drill",
+          "body": "Assume an AI draft has a wrong price and nearly sends; write pause→rollback→notify steps from my map. Do not suggest auto-send."
+        }
+      ]
+    },
+    "zhNextStep": "最後一堂整合前九堂，輸出「創業與 AI 自動化藍圖」（誠實標示缺漏，不重填全部）。",
+    "enNextStep": "Finally, integrate prior lessons into a Startup & AI Automation Blueprint—honest about gaps, without retyping everything.",
+    "zhConceptBlocks": {
+      "principles": [
+        "Agent ≠ 無監督",
+        "先責任後能力",
+        "紅線可執行"
       ],
-      "zhCommonMistakes": [
-        "故事不一致",
-        "假進展",
-        "自動化與生意無關",
-        "Ask 缺失",
-        "展示無證據可指"
+      "terms": [
+        "RACI",
+        "監督節奏",
+        "事故回滾"
       ],
-      "enCommonMistakes": [
-        "Incoherent story",
-        "Fake traction",
-        "Automation unrelated to the business",
-        "Missing ask",
-        "Demo without evidence"
+      "criteria": [
+        "有負責人",
+        "有紅線",
+        "有事故流程"
       ],
-      "zhDeliverableChecklist": [
-        "目錄",
-        "問題與驗證",
-        "模式與規格",
-        "Pitch",
-        "自動化流程與試跑"
+      "boundaries": [
+        "避免：自動金錢操作",
+        "避免：責任真空",
+        "避免：假串接"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Agent ≠ unsupervised",
+        "Responsibility before capability",
+        "Executable red lines"
       ],
-      "enDeliverableChecklist": [
-        "Index",
-        "Problem+validation",
-        "Model+spec",
-        "Pitch",
-        "Automation + pilot"
+      "terms": [
+        "RACI",
+        "Supervision cadence",
+        "Incident rollback"
       ],
-      "zhScorecard": [
-        "一致性",
-        "證據",
-        "可演示",
-        "誠實缺口",
-        "整合完整度"
+      "criteria": [
+        "Owner present",
+        "Red lines present",
+        "Incident flow present"
       ],
-      "enScorecard": [
-        "Coherence",
-        "Evidence",
-        "Demoability",
-        "Honest gaps",
-        "Integration completeness"
+      "boundaries": [
+        "Avoid: auto money actions",
+        "Avoid: accountability vacuum",
+        "Avoid: fake integrations"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：AI Agent 責任地圖",
+      "先定誰負責，再談 Agent 能做什麼。",
+      "無監督不是進階，是風險。"
+    ],
+    "enSummary": [
+      "Deliverable: AI Agent Responsibility Map",
+      "Name who is accountable before what an agent can do.",
+      "Unsupervised is not advanced—it is risk."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "Agent 等同放著不管",
+        "why": "責任真空",
+        "fix": "寫明負責人與監督節奏"
+      },
+      {
+        "error": "允許 Agent 自動付款簽約",
+        "why": "高風險違法風險",
+        "fix": "列入紅線禁止"
+      },
+      {
+        "error": "事故無人可通知",
+        "why": "無法止血",
+        "fix": "預先指定通知對象角色"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Treating agent as set-and-forget",
+        "why": "Accountability vacuum",
+        "fix": "Name owner and supervision cadence"
+      },
+      {
+        "error": "Allowing agent auto-pay/sign",
+        "why": "High legal/financial risk",
+        "fix": "Put on red-line ban"
+      },
+      {
+        "error": "Incidents with no notify path",
+        "why": "Cannot stop the bleed",
+        "fix": "Pre-assign notify roles"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "責任清晰",
+        "levels": {
+          "incomplete": "無人負責",
+          "basic": "角色模糊",
+          "good": "RACI 清楚",
+          "ready": "含監督節奏"
+        }
+      },
+      {
+        "name": "紅線",
+        "levels": {
+          "incomplete": "無紅線",
+          "basic": "紅線過少",
+          "good": "≥5 條紅線",
+          "ready": "含付款簽約刪資料"
+        }
+      },
+      {
+        "name": "可運作",
+        "levels": {
+          "incomplete": "無事故流程",
+          "basic": "事故空泛",
+          "good": "暫停回滾通知齊",
+          "ready": "可演練"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Accountability",
+        "levels": {
+          "incomplete": "No owner",
+          "basic": "Fuzzy roles",
+          "good": "Clear RACI",
+          "ready": "Supervision cadence included"
+        }
+      },
+      {
+        "name": "Red lines",
+        "levels": {
+          "incomplete": "None",
+          "basic": "Too few",
+          "good": "≥5 red lines",
+          "ready": "Includes pay/sign/delete"
+        }
+      },
+      {
+        "name": "Operability",
+        "levels": {
+          "incomplete": "No incident flow",
+          "basic": "Vague incident",
+          "good": "Pause/rollback/notify present",
+          "ready": "Drillable"
+        }
+      }
+    ]
+  },
+  {
+    "id": "startup-automation-L10",
+    "lessonKey": "startup-automation-L10",
+    "zhTitle": "第10課：整合完成「創業提案＋基礎 AI 自動化流程」",
+    "enTitle": "Lesson 10: Complete your startup proposal and basic AI automation workflow",
+    "zhConcept": "最後一堂不是重做九次，而是整合成「創業與 AI 自動化藍圖」：總覽、各段用法、缺漏、本週優先與總則。藍圖要能下週再跑；缺漏要誠實。仍然禁止假市場證據、無監督 Agent、自動付款／簽約／刪資料，以及平台串接宣稱。",
+    "enConcept": "The final lesson is not redoing nine times—it is integrating a Startup & AI Automation Blueprint: overview, section usage, gaps, weekly priorities, and standing rules. The blueprint should run again next week; gaps stay honest. Still ban fake market evidence, unsupervised agents, auto-pay/sign/delete, and platform integration claims.",
+    "zhPrompt": "你是創業與自動化整合教練，協助把前九堂成果整理成「創業與 AI 自動化藍圖」。不可要求重貼全部原文；不可填補使用者沒有的假訪談、假營收、假串接。\n\n我的背景：\n- 核心問題：[請填寫問題]\n- 目標使用者：[請填寫目標使用者]\n- 目前整體流程摘要：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- 我已完成的堂次摘要（條列重點即可，缺漏請標「未完成」）：[請填寫]\n\n任務：產出「創業與 AI 自動化藍圖」，包含：\n1) 一頁總覽：問題、使用者、付費假設、MVP、流程、自動化優先、Agent 紅線\n2) 各段：何時用／輸入／輸出／不可交給 AI\n3) 缺漏清單（誠實，不假裝齊套）\n4) 本週優先 3 項（可執行）\n5) 隱私與不捏造總則 5 條\n6) 明確聲明：無自動付款／簽約／刪資料；工具名僅例子；本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM\n7) 需人工確認項（至少 3 項）\n\n限制：不要重寫九份完整原文。不要捏造投資人意見或市場成績。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+    "enPrompt": "You are a startup and automation integration coach compiling prior lessons into a Startup & AI Automation Blueprint. Do not demand full paste of every prior document. Do not invent missing interviews, revenue, or integrations.\n\nMy context:\n- Core problem: [Enter problem]\n- Target user: [Enter target user]\n- Current overall process summary: [Enter current process]\n- Constraints: [Enter constraints]\n- Summaries of lessons completed (bullets OK; mark gaps “incomplete”): [Enter]\n\nTask: Produce a “Startup & AI Automation Blueprint” with:\n1) One-page overview: problem, user, pay hypothesis, MVP, process, automation priority, agent red lines\n2) Per section: when to use / input / output / must not give to AI\n3) Honest gap list (do not fake completeness)\n4) Top 3 actionable priorities this week\n5) Five privacy and no-fabrication rules\n6) Explicit statements: no auto-pay/sign/delete; tool names are examples only; this platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM\n7) Human-confirmation items (at least 3)\n\nLimits: Do not rewrite nine full originals. Do not invent investor opinions or market results.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+    "zhExample": "核心問題：宿舍團購難集合；目標使用者：夜貓族學生；流程：表單＋人工媒合；限制：兩人團隊；摘要：L1–L4 完成，L5–L9 有草稿，訪談標未完成。",
+    "enExample": "Core problem: dorm group orders hard to consolidate; target user: night-owl students; process: form + manual match; constraints: two-person team; summaries: L1–L4 done, L5–L9 drafted, interviews marked incomplete.",
+    "zhPractice": "條列各課摘要並標缺漏。；產出一頁總覽與本週優先 3 項。；用主 Prompt 整合成藍圖並刪假齊套。；存成「創業與 AI 自動化藍圖」。",
+    "enPractice": "Bullet lesson summaries and mark gaps.; Produce one-page overview and weekly top 3.; Run the main prompt to integrate and delete fake completeness.; Save the Startup & AI Automation Blueprint.",
+    "zhFeedbackPrompt": "你是一位創業整合教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 一致性\n- 證據\n- 可演示\n- 誠實缺口\n- 整合完整度\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a startup integration coach. Score 1-10 for: Coherence, Evidence, Demoability, Honest gaps, Integration completeness. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhQuizItems": [
+      {
+        "q": "整合課目標是？",
+        "options": [
+          "收成一致可展示的創業包",
+          "另開全新題目",
+          "補假數據讓數字好看"
+        ],
+        "answer": 0,
+        "explain": "整合。"
+      },
+      {
+        "q": "自動化應？",
+        "options": [
+          "服務核心生意流程",
+          "當無關裝飾",
+          "取代 Pitch"
+        ],
+        "answer": 0,
+        "explain": "服務生意。"
+      },
+      {
+        "q": "發現缺口時？",
+        "options": [
+          "誠實列出並排修訂",
+          "用假進展填滿",
+          "刪除目錄裝看不見"
+        ],
+        "answer": 0,
+        "explain": "誠實。"
+      },
+      {
+        "q": "演示時最好？",
+        "options": [
+          "能指到證據",
+          "只唸口號",
+          "拒絕回答限制"
+        ],
+        "answer": 0,
+        "explain": "證據。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "提案＋自動化成果包",
+          "無關文件包",
+          "無關申請包"
+        ],
+        "answer": 0,
+        "explain": "創業包。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "整合課目標是？",
+        "options": [
+          "收成一致可展示的創業包",
+          "另開全新題目",
+          "補假數據讓數字好看"
+        ],
+        "answer": 0,
+        "explain": "整合。"
+      },
+      {
+        "q": "自動化應？",
+        "options": [
+          "服務核心生意流程",
+          "當無關裝飾",
+          "取代 Pitch"
+        ],
+        "answer": 0,
+        "explain": "服務生意。"
+      },
+      {
+        "q": "發現缺口時？",
+        "options": [
+          "誠實列出並排修訂",
+          "用假進展填滿",
+          "刪除目錄裝看不見"
+        ],
+        "answer": 0,
+        "explain": "誠實。"
+      },
+      {
+        "q": "演示時最好？",
+        "options": [
+          "能指到證據",
+          "只唸口號",
+          "拒絕回答限制"
+        ],
+        "answer": 0,
+        "explain": "證據。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "提案＋自動化成果包",
+          "無關文件包",
+          "無關申請包"
+        ],
+        "answer": 0,
+        "explain": "創業包。"
+      }
+    ],
+    "zhOutcome": "創業與 AI 自動化藍圖",
+    "enOutcome": "Startup & AI Automation Blueprint",
+    "zhValueTip": "整合要可再跑；缺漏誠實標示，比假裝齊套更重要。",
+    "enValueTip": "Integration must be re-runnable. Honest gaps beat fake completeness.",
+    "zhCaseStudy": "小班送把 L1–L9 重點做成一頁：問題定義、需求假設（標待驗證）、商業模式示意、MVP 表單媒合、流程圖、工作流節奏、自動化矩陣高優先「整理需求」、半自動流程、Agent 紅線。缺漏寫「訪談只完成 2 場」。本週優先：完成 3 場去敏訪談、跑一次半自動草稿、複習紅線。沒有假營收，也沒有「已接 n8n」。",
+    "enCaseStudy": "DormRun built one page from L1–L9: problem definition, need hypothesis (to validate), illustrative model, MVP form-matching, process map, workflow cadence, automation matrix priority “clean requests,” semi-auto flow, agent red lines. Gap: “only 2 interviews done.” Weekly top 3: three sanitized interviews, one semi-auto draft run, red-line review. No fake revenue, no “n8n already connected.”",
+    "zhExcellentExample": "含：一頁總覽、各段用法、誠實缺漏、本週優先 3、5 條總則、反自動高風險與反假串接聲明。",
+    "enExcellentExample": "Includes one-page overview, section usage, honest gaps, weekly top 3, five rules, and anti high-risk-auto / anti fake-integration statements.",
+    "zhWorkflow": [
+      "條列已完成堂次摘要與缺漏",
+      "寫核心問題、使用者、流程與限制",
+      "用 Prompt 產出藍圖總覽與本週優先",
+      "刪假齊套／假數字／假串接",
+      "存成「創業與 AI 自動化藍圖」"
+    ],
+    "enWorkflow": [
+      "Bullet completed-lesson summaries and gaps",
+      "Write core problem, user, process, and constraints",
+      "Generate blueprint overview and weekly priorities with the prompt",
+      "Delete fake completeness/numbers/integrations",
+      "Save the Startup & AI Automation Blueprint"
+    ],
+    "zhCommonMistakes": [
+      "要求重填前九堂全部原文",
+      "用 AI 捏造補齊未做的訪談與營收",
+      "藍圖宣稱已串接自動化／金流工具",
+      "把無監督 Agent 當完成態",
+      "沒有本週可執行優先項"
+    ],
+    "enCommonMistakes": [
+      "Demanding full re-entry of all nine lessons",
+      "Using AI to invent missing interviews and revenue",
+      "Blueprint claiming live automation/payment integrations",
+      "Treating unsupervised agents as the finished state",
+      "No executable weekly priorities"
+    ],
+    "zhDeliverableChecklist": [
+      "一頁總覽串起問題到 Agent 紅線",
+      "各段有何時用／輸入／輸出／不可交給 AI",
+      "缺漏已誠實標示，未假裝齊套",
+      "本週優先 3 項可執行",
+      "有 5 條隱私與不捏造總則",
+      "聲明無自動付款／簽約／刪資料，且工具名僅例子、平台未串接"
+    ],
+    "enDeliverableChecklist": [
+      "One-page overview connects problem to agent red lines",
+      "Sections include when / input / output / must not give to AI",
+      "Gaps marked honestly; nothing faked as complete",
+      "Top 3 weekly priorities are executable",
+      "Five privacy and no-fabrication rules present",
+      "States no auto-pay/sign/delete; tool names examples only; platform not integrated"
+    ],
+    "zhScorecard": [
+      "一致性",
+      "證據",
+      "可演示",
+      "誠實缺口",
+      "整合完整度"
+    ],
+    "enScorecard": [
+      "Coherence",
+      "Evidence",
+      "Demoability",
+      "Honest gaps",
+      "Integration completeness"
+    ],
+    "zhNotePrompt": "寫下本週優先第 1 項、一個你標出的缺漏、以及一條你會守住的紅線。",
+    "enNotePrompt": "Write weekly priority #1, one gap you marked, and one red line you will keep.",
+    "zhCoachPrompt": "請做整合總檢查：指出不一致與缺證，並給 7 天修訂順序。",
+    "enCoachPrompt": "Run an integration audit: inconsistencies, missing proof, and a 7-day fix order.",
+    "zhWhyItMatters": {
+      "problem": "成果散落各課，下週不知從何執行。",
+      "ineffective": "要求把九份全文再貼一次或請 AI 編造補齊。",
+      "solution": "摘要整合、標缺漏、訂本週三優先與不可破總則。"
+    },
+    "enWhyItMatters": {
+      "problem": "Artifacts are scattered; next week has no start point.",
+      "ineffective": "Demanding full re-paste of nine docs or asking AI to invent the missing pieces.",
+      "solution": "Summarize, mark gaps, set top-three weekly priorities and non-negotiable rules."
+    },
+    "zhObjectives": [
+      "產出一頁總覽串起問題到自動化紅線",
+      "為各段寫何時用／輸入／輸出／不可交給 AI",
+      "誠實列出缺漏與本週優先 3 項",
+      "寫下 5 條隱私與不捏造總則",
+      "存成「創業與 AI 自動化藍圖」"
+    ],
+    "enObjectives": [
+      "Produce a one-page overview from problem to automation red lines",
+      "Write when/input/output/must-not-give-to-AI per section",
+      "Honestly list gaps and top 3 weekly priorities",
+      "Write five privacy and no-fabrication rules",
+      "Save a Startup & AI Automation Blueprint"
+    ],
+    "estimatedTime": "約 60 分鐘 / About 60 min",
+    "difficulty": "進階 / Advanced",
+    "zhOutputName": "創業與 AI 自動化藍圖",
+    "enOutputName": "Startup & AI Automation Blueprint",
+    "zhCaseStudyBlocks": {
+      "problem": "九堂成果分散，難以對外說明與執行。",
+      "wrong": "重貼全文或讓 AI 編造補齊。",
+      "right": "摘要總覽＋缺漏＋本週三優先＋總則。",
+      "result": "可再跑的「創業與 AI 自動化藍圖」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Nine lesson artifacts are scattered and hard to run.",
+      "wrong": "Re-paste everything or invent the missing pieces.",
+      "right": "Summary overview + gaps + weekly top 3 + rules.",
+      "result": "A re-runnable Startup & AI Automation Blueprint."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "收摘要",
+        "why": "全文重貼會失敗",
+        "input": "各課重點",
+        "output": "摘要列",
+        "check": "缺漏是否標出"
+      },
+      {
+        "do": "寫總覽",
+        "why": "外人／未來的自己要能看懂",
+        "input": "摘要",
+        "output": "一頁總覽",
+        "check": "是否串起十段"
+      },
+      {
+        "do": "補各段用法",
+        "why": "沒有何時用就不會再跑",
+        "input": "總覽",
+        "output": "用法表",
+        "check": "是否含不可交給 AI"
+      },
+      {
+        "do": "訂本週三優先",
+        "why": "沒有優先就不發生",
+        "input": "缺漏＋總覽",
+        "output": "優先 3",
+        "check": "是否可執行"
+      },
+      {
+        "do": "寫總則聲明",
+        "why": "紅線要可見",
+        "input": "隱私與安全",
+        "output": "5 條＋聲明",
+        "check": "是否含反假串接"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Collect summaries",
+        "why": "Full re-paste fails",
+        "input": "Lesson highlights",
+        "output": "Summary list",
+        "check": "Gaps marked?"
+      },
+      {
+        "do": "Write overview",
+        "why": "Outsiders/future-you must get it",
+        "input": "Summaries",
+        "output": "One-pager",
+        "check": "Ten parts connected?"
+      },
+      {
+        "do": "Add section usage",
+        "why": "No when-to-use = won’t rerun",
+        "input": "Overview",
+        "output": "Usage table",
+        "check": "Must-not-give-to-AI included?"
+      },
+      {
+        "do": "Set weekly top 3",
+        "why": "No priority = no action",
+        "input": "Gaps + overview",
+        "output": "Top 3",
+        "check": "Executable?"
+      },
+      {
+        "do": "Write standing rules",
+        "why": "Red lines must be visible",
+        "input": "Privacy/safety",
+        "output": "5 rules + statements",
+        "check": "Anti fake-integration included?"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "摘要與缺漏",
+        "standard": "誠實標未完成",
+        "mistakes": "假裝全做完",
+        "check": "缺漏是否可見？"
+      },
+      {
+        "task": "總覽",
+        "standard": "串起關鍵段",
+        "mistakes": "只有口號",
+        "check": "外人能否理解？"
+      },
+      {
+        "task": "本週三優先",
+        "standard": "可執行",
+        "mistakes": "空泛「繼續努力」",
+        "check": "完成標準有嗎？"
+      },
+      {
+        "task": "總則",
+        "standard": "5 條＋反自動高風險＋反假串接",
+        "mistakes": "省略紅線",
+        "check": "是否寫明？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Summaries and gaps",
+        "standard": "Honest incomplete marks",
+        "mistakes": "Pretend all done",
+        "check": "Gaps visible?"
+      },
+      {
+        "task": "Overview",
+        "standard": "Key sections connected",
+        "mistakes": "Slogans only",
+        "check": "Outsider understandable?"
+      },
+      {
+        "task": "Weekly top 3",
+        "standard": "Executable",
+        "mistakes": "Vague “keep going”",
+        "check": "Done criteria?"
+      },
+      {
+        "task": "Rules",
+        "standard": "5 rules + anti high-risk auto + anti fake integration",
+        "mistakes": "Omit red lines",
+        "check": "Stated?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "要整合前九堂、輸出可執行藍圖時使用",
+      "fields": [
+        "[請填寫問題]",
+        "[請填寫目標使用者]",
+        "[請填寫目前流程]",
+        "[請填寫限制條件]"
       ],
-      "zhNotePrompt": "貼上成果包目錄與整合檢查結果。",
-      "enNotePrompt": "Paste your pack index and integration audit.",
-      "zhCoachPrompt": "請做整合總檢查：指出不一致與缺證，並給 7 天修訂順序。",
-      "enCoachPrompt": "Run an integration audit: inconsistencies, missing proof, and a 7-day fix order.",
-      "title": "整合完成「創業提案＋基礎 AI 自動化流程」",
-      "description": "整合創業提案與一條可運行的基礎自動化流程，形成可展示成果包。",
-      "goal": "完成「創業提案＋基礎自動化」成果包：問題、驗證、模式、規格摘要、Pitch 要點與一條自動化流程說明。"
-    }
-  ]
+      "body": "你是創業與自動化整合教練，協助把前九堂成果整理成「創業與 AI 自動化藍圖」。不可要求重貼全部原文；不可填補使用者沒有的假訪談、假營收、假串接。\n\n我的背景：\n- 核心問題：[請填寫問題]\n- 目標使用者：[請填寫目標使用者]\n- 目前整體流程摘要：[請填寫目前流程]\n- 限制條件：[請填寫限制條件]\n- 我已完成的堂次摘要（條列重點即可，缺漏請標「未完成」）：[請填寫]\n\n任務：產出「創業與 AI 自動化藍圖」，包含：\n1) 一頁總覽：問題、使用者、付費假設、MVP、流程、自動化優先、Agent 紅線\n2) 各段：何時用／輸入／輸出／不可交給 AI\n3) 缺漏清單（誠實，不假裝齊套）\n4) 本週優先 3 項（可執行）\n5) 隱私與不捏造總則 5 條\n6) 明確聲明：無自動付款／簽約／刪資料；工具名僅例子；本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM\n7) 需人工確認項（至少 3 項）\n\n限制：不要重寫九份完整原文。不要捏造投資人意見或市場成績。\n\n請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "expected": "含總覽、缺漏、本週優先與總則的創業與 AI 自動化藍圖",
+      "revisionReminder": "請先移除密碼、API Key、銀行資訊、客戶個資、公司機密、未公開營運數據與其他敏感內容，再提供給 AI。若使用第三方 AI 或自動化服務，請先確認其資料與隱私政策。\n\nAI 不得捏造訪談人數、問卷結果、市場規模、TAM/SAM/SOM、競爭者營收、客戶需求、銷售成績、成本、轉換率或投資人意見。數字必須標「示意／假設」。不要鼓勵自動付款、自動簽約、自動刪資料或無監督高風險操作。本平台未串接 Zapier／Make／n8n／Gmail／LINE／ECPay／CRM；工具名僅作概念例子，實際功能與價格以官方為準。",
+      "extensions": [
+        {
+          "title": "延伸：本週執行卡",
+          "body": "只根據藍圖的本週優先 3 項，各寫：第一步、所需輸入、完成標準、不可交給 AI 的點。不要新增假進度。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when integrating prior lessons into an executable blueprint",
+      "fields": [
+        "[Enter problem]",
+        "[Enter target user]",
+        "[Enter current process]",
+        "[Enter constraints]"
+      ],
+      "body": "You are a startup and automation integration coach compiling prior lessons into a Startup & AI Automation Blueprint. Do not demand full paste of every prior document. Do not invent missing interviews, revenue, or integrations.\n\nMy context:\n- Core problem: [Enter problem]\n- Target user: [Enter target user]\n- Current overall process summary: [Enter current process]\n- Constraints: [Enter constraints]\n- Summaries of lessons completed (bullets OK; mark gaps “incomplete”): [Enter]\n\nTask: Produce a “Startup & AI Automation Blueprint” with:\n1) One-page overview: problem, user, pay hypothesis, MVP, process, automation priority, agent red lines\n2) Per section: when to use / input / output / must not give to AI\n3) Honest gap list (do not fake completeness)\n4) Top 3 actionable priorities this week\n5) Five privacy and no-fabrication rules\n6) Explicit statements: no auto-pay/sign/delete; tool names are examples only; this platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM\n7) Human-confirmation items (at least 3)\n\nLimits: Do not rewrite nine full originals. Do not invent investor opinions or market results.\n\nRemove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "expected": "A Startup & AI Automation Blueprint with overview, gaps, weekly priorities, and standing rules",
+      "revisionReminder": "Remove passwords, API keys, banking information, customer personal data, confidential business information, unpublished operational data, and other sensitive content before using AI. Review the data and privacy policies of third-party AI or automation services.\n\nAI must not invent interview counts, survey results, market size, TAM/SAM/SOM, competitor revenue, customer demand, sales, costs, conversion rates, or investor opinions. Label numbers as illustrative/assumptions. Do not encourage auto-payments, auto-signing, auto-deleting data, or unsupervised high-risk actions. This platform does not integrate Zapier/Make/n8n/Gmail/LINE/ECPay/CRM; tool names are conceptual examples only—check official docs for features and pricing.",
+      "extensions": [
+        {
+          "title": "Extension: weekly execution cards",
+          "body": "From the blueprint’s top 3 only, write for each: first step, required input, done criteria, and must-not-give-to-AI. Do not invent progress."
+        }
+      ]
+    },
+    "zhNextStep": "每週重跑藍圖：更新缺漏、重排本週三優先，並守住紅線與去敏習慣。",
+    "enNextStep": "Rerun the blueprint weekly: update gaps, reshuffle top 3, and keep red lines and sanitization habits.",
+    "zhConceptBlocks": {
+      "principles": [
+        "整合不重寫",
+        "缺漏要誠實",
+        "每週可再跑"
+      ],
+      "terms": [
+        "藍圖",
+        "缺漏清單",
+        "本週優先 3 項"
+      ],
+      "criteria": [
+        "有總覽",
+        "有優先項",
+        "有總則"
+      ],
+      "boundaries": [
+        "避免：假齊套",
+        "避免：假串接",
+        "避免：無監督完成態"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Integrate, don’t rewrite",
+        "Be honest about gaps",
+        "Re-run weekly"
+      ],
+      "terms": [
+        "Blueprint",
+        "Gap list",
+        "Weekly top 3"
+      ],
+      "criteria": [
+        "Overview present",
+        "Priorities present",
+        "Rules present"
+      ],
+      "boundaries": [
+        "Avoid: fake completeness",
+        "Avoid: fake integrations",
+        "Avoid: unsupervised “done”"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：創業與 AI 自動化藍圖",
+      "藍圖要能每週再跑。",
+      "這不是融資保證，也不是已串接的自動化套件。"
+    ],
+    "enSummary": [
+      "Deliverable: Startup & AI Automation Blueprint",
+      "The blueprint should run again next week.",
+      "Not a fundraising guarantee or a live automation suite."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "假裝九堂都完成",
+        "why": "藍圖不可信",
+        "fix": "缺漏誠實標未完成"
+      },
+      {
+        "error": "整包重寫耗盡時間",
+        "why": "整合失敗",
+        "fix": "只摘要重點"
+      },
+      {
+        "error": "藍圖含自動扣款上線承諾",
+        "why": "高風險",
+        "fix": "改回半自動＋人工關卡"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Pretending all nine lessons are done",
+        "why": "Blueprint untrustworthy",
+        "fix": "Mark gaps incomplete honestly"
+      },
+      {
+        "error": "Full rewrite burns time",
+        "why": "Integration fails",
+        "fix": "Summarize highlights only"
+      },
+      {
+        "error": "Blueprint promises live auto-charge",
+        "why": "High risk",
+        "fix": "Return to semi-auto + human gates"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "整合度",
+        "levels": {
+          "incomplete": "只有散落筆記",
+          "basic": "有總覽缺段",
+          "good": "各段何時用／輸入／輸出齊",
+          "ready": "含缺漏與優先 3 項"
+        }
+      },
+      {
+        "name": "誠實度",
+        "levels": {
+          "incomplete": "假齊套或假數字",
+          "basic": "缺漏含糊",
+          "good": "缺漏清楚",
+          "ready": "無假市場／營收"
+        }
+      },
+      {
+        "name": "可執行",
+        "levels": {
+          "incomplete": "無本週行動",
+          "basic": "行動空泛",
+          "good": "3 項可執行",
+          "ready": "含總則與紅線聲明"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Integration",
+        "levels": {
+          "incomplete": "Scattered notes only",
+          "basic": "Overview missing sections",
+          "good": "When/input/output present",
+          "ready": "Gaps + top 3 included"
+        }
+      },
+      {
+        "name": "Honesty",
+        "levels": {
+          "incomplete": "Fake completeness or numbers",
+          "basic": "Vague gaps",
+          "good": "Gaps clear",
+          "ready": "No fake market/revenue"
+        }
+      },
+      {
+        "name": "Actionability",
+        "levels": {
+          "incomplete": "No weekly actions",
+          "basic": "Vague actions",
+          "good": "3 executable items",
+          "ready": "Rules and red-line statements included"
+        }
+      }
+    ]
+  }
+]
 };
 
 
