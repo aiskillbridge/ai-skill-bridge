@@ -22052,1968 +22052,5115 @@ const PREMIUM_LESSON_DETAILS = {
   }
 ],
   "workplace-productivity": [
-    {
-      "id": "workplace-productivity-L1",
-      "lessonKey": "workplace-productivity-L1",
-      "zhTitle": "第1課：建立職場 AI 工作觀：什麼自己做、什麼交給 AI",
-      "enTitle": "Lesson 1: Build a workplace AI mindset: what you do vs what AI does",
-      "zhConcept": "這一課只服務職場生產力與工作流程。重點不是「多用 AI」，而是建立可重複的判斷：資訊整理、初稿、檢查表可以由 AI 加速；決策、對外承諾、敏感資料與最終責任必須留在人。\n\n先把你的典型工作任務分成：自己做、AI 起草後你改、禁止使用 AI。再寫核對步驟（事實、數字、語氣、權限）。本週只選一個真實工作任務做實驗，避免一次改掉全部流程。",
-      "enConcept": "For workplace productivity, classify tasks into human-only, AI-draft-then-edit, and AI-forbidden. Keep decisions, external commitments, sensitive data, and final accountability human. Run one real-work experiment this week.",
-      "zhPrompt": "請擔任職場生產力教練。我的典型工作任務：【】。資料敏感程度：【】。對外輸出類型：【】。\n\n請幫我產出 AI 使用原則一頁：任務分類、紅線、核對清單、本週實驗設計。不要建議違法或規避合規的做法。",
-      "enPrompt": "Act as a workplace productivity coach. Typical tasks: []. Sensitivity: []. External outputs: []. Produce a one-page AI usage policy: classes, red lines, checks, and one weekly experiment. Suggest nothing that bypasses compliance.",
-      "zhExample": "弱原則「能用就用」。強原則「會議紀錄可 AI 整理成待辦；待辦負責人與期限由我確認；薪資與人事資料禁止貼上。」",
-      "enExample": "Weak: use AI whenever. Strong: AI may draft meeting actions; owners/dates are human-confirmed; HR/pay data never pasted.",
-      "zhPractice": "列出本週 8 個真實工作任務。；分成自做／AI 起草／禁止。；寫三條紅線與核對清單。；選 1 個任務做前後計時實驗。；把原則存成團隊可分享的一頁文件。",
-      "enPractice": "List 8 real tasks.；Classify human/AI-draft/forbidden.；Write three red lines and checks.；Time one experiment.；Save a shareable one-pager.",
-      "zhFeedbackPrompt": "你是一位職場生產力教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 邊界清楚\n- 可執行\n- 合規意識\n- 實驗可測\n- 是否只談工作流程\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a workplace productivity coach. Score 1-10 for: Clear boundaries, Executability, Compliance awareness, Measurable experiment, Workplace focus. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhQuizItems": [
-        {
-          "q": "職場 AI 工作觀的核心是？",
-          "options": [
-            "任務分類與責任邊界",
-            "越多自動越好不管風險",
-            "把決策全交给模型"
-          ],
-          "answer": 0,
-          "explain": "邊界與責任。"
-        },
-        {
-          "q": "對外數字最該？",
-          "options": [
-            "人工核對來源",
-            "直接相信草稿",
-            "刪除所有數字"
-          ],
-          "answer": 0,
-          "explain": "核對。"
-        },
-        {
-          "q": "本週實驗最好？",
-          "options": [
-            "只選一個真實任務",
-            "一次改全部流程",
-            "完全不計時"
-          ],
-          "answer": 0,
-          "explain": "可測。"
-        },
-        {
-          "q": "敏感資料應？",
-          "options": [
-            "依公司規則處理，必要時禁止貼上",
-            "為求方便一律貼公開模型",
-            "交給同事的私人帳號即可"
-          ],
-          "answer": 0,
-          "explain": "合規。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "使用原則一頁",
-            "股價預測表",
-            "與工作無關的長文"
-          ],
-          "answer": 0,
-          "explain": "原則文件。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "職場 AI 工作觀的核心是？",
-          "options": [
-            "任務分類與責任邊界",
-            "越多自動越好不管風險",
-            "把決策全交给模型"
-          ],
-          "answer": 0,
-          "explain": "邊界與責任。"
-        },
-        {
-          "q": "對外數字最該？",
-          "options": [
-            "人工核對來源",
-            "直接相信草稿",
-            "刪除所有數字"
-          ],
-          "answer": 0,
-          "explain": "核對。"
-        },
-        {
-          "q": "本週實驗最好？",
-          "options": [
-            "只選一個真實任務",
-            "一次改全部流程",
-            "完全不計時"
-          ],
-          "answer": 0,
-          "explain": "可測。"
-        },
-        {
-          "q": "敏感資料應？",
-          "options": [
-            "依公司規則處理，必要時禁止貼上",
-            "為求方便一律貼公開模型",
-            "交給同事的私人帳號即可"
-          ],
-          "answer": 0,
-          "explain": "合規。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "使用原則一頁",
-            "股價預測表",
-            "與工作無關的長文"
-          ],
-          "answer": 0,
-          "explain": "原則文件。"
-        }
-      ],
-      "zhOutcome": "產出一頁「職場 AI 工作觀」：任務分類、紅線、核對清單與本週實驗。",
-      "enOutcome": "Produce a one-page workplace AI operating view: task classes, red lines, verification checklist, and a weekly experiment.",
-      "zhValueTip": "建立職場 AI 使用原則：哪些自己判斷、哪些可交給 AI、哪些绝對要人工核對。",
-      "enValueTip": "Build workplace AI principles: what you own, what AI can draft, and what must be human-verified.",
-      "zhCaseStudy": "行銷專員每天要整理競品更新。她規定：AI 可做摘要與表格草稿；對外簡報數字必須回來源頁；客戶名單不得貼進公開模型。一週後，她把整理時間從 90 分鐘降到 35 分鐘，且沒有發生資料外洩。",
-      "enCaseStudy": "A marketing specialist let AI draft competitive summaries, required source checks for external numbers, and banned pasting client lists into public models—cutting prep time without a data leak.",
-      "zhExcellentExample": "一頁原則含任務分類表、三條紅線、對外輸出核對清單、例外狀況（急件怎麼辦），以及本週單一實驗的前後時間紀錄。",
-      "enExcellentExample": "One-pager with task classes, three red lines, external-output checks, exception handling, and before/after time for one experiment.",
-      "zhWorkflow": [
-        "盤點任務",
-        "分類人／AI 邊界",
-        "寫紅線與核對",
-        "做一週實驗",
-        "依結果修正原則"
-      ],
-      "enWorkflow": [
-        "Inventory tasks",
-        "Classify boundaries",
-        "Write red lines/checks",
-        "Run a weekly experiment",
-        "Revise principles"
-      ],
-      "zhCommonMistakes": [
-        "敏感資料貼進不當工具",
-        "把 AI 草稿當已核准決策",
-        "沒有核對數字就對外寄出",
-        "一次改全部流程導致混亂",
-        "原則寫了卻不執行"
-      ],
-      "enCommonMistakes": [
-        "Pasting sensitive data unsafely",
-        "Treating drafts as decisions",
-        "Sending unchecked numbers",
-        "Changing every workflow at once",
-        "Policy without practice"
-      ],
-      "zhDeliverableChecklist": [
-        "分類表",
-        "紅線",
-        "核對清單",
-        "本週實驗",
-        "時間紀錄"
-      ],
-      "enDeliverableChecklist": [
-        "Classification",
-        "Red lines",
-        "Checks",
-        "Weekly experiment",
-        "Time log"
-      ],
-      "zhScorecard": [
-        "邊界清楚",
-        "可執行",
-        "合規意識",
-        "實驗可測",
-        "是否只談工作流程"
-      ],
-      "enScorecard": [
-        "Clear boundaries",
-        "Executability",
-        "Compliance awareness",
-        "Measurable experiment",
-        "Workplace focus"
-      ],
-      "zhNotePrompt": "貼上你的職場 AI 原則一頁與實驗結果。",
-      "enNotePrompt": "Paste your workplace AI one-pager and experiment result.",
-      "zhCoachPrompt": "請檢查我的職場 AI 原則是否有資料風險或不可執行之處，並給出修改建議。",
-      "enCoachPrompt": "Check my workplace AI principles for data risk or infeasibility and suggest edits.",
-      "title": "建立職場 AI 工作觀：什麼自己做、什麼交給 AI",
-      "description": "建立職場 AI 使用原則：哪些自己判斷、哪些可交給 AI、哪些绝對要人工核對。",
-      "goal": "產出一頁「職場 AI 工作觀」：任務分類、紅線、核對清單與本週實驗。"
+  {
+    "id": "workplace-productivity-L1",
+    "lessonKey": "workplace-productivity-L1",
+    "zhTitle": "第1課：建立職場 AI 工作觀：什麼自己做、什麼交給 AI",
+    "enTitle": "Lesson 1: Build a workplace AI mindset: what you do vs what AI does",
+    "zhConcept": "職場最常見的卡關不是「不會用 AI」，而是任務本身模糊：目標不清、截止不明、不知哪些可請 AI 協助、哪些必須本人判斷。這一課把模糊任務變成「AI 工作任務拆解表」：目標、截止、輸出、步驟、AI 可協助、必須本人判斷、完成標準。AI 可以加速整理與提案，但不能替你做決策、對外承諾，也不能捏造主管要求。",
+    "enConcept": "The usual workplace stuck point is not “how to use AI,” but a vague task: unclear goal, fuzzy deadline, no split between AI help and human judgment. This lesson turns that into an AI Work Task Breakdown: goal, deadline, output, steps, AI-help zone, must-judge zone, and done criteria. AI can speed drafting—it cannot decide, commit externally, or invent manager requests.",
+    "zhPrompt": "你是職場生產力教練，協助把工作目標拆成可執行任務。不可捏造主管要求、截止日期、KPI 或公司規定。\n\n我的背景：\n- 角色／情境（例如營運助理、行銷企劃、專案助理）：[請填寫目標受眾]\n- 工作目標：[請填寫工作目標]\n- 已知截止日期／里程碑（沒有就寫「未確認」）：[請填寫]\n- 已去除敏感資訊的任務說明：[請貼上已去除敏感資訊的內容]\n- 我目前卡住的地方：[請填寫]\n\n任務：產出「AI 工作任務拆解表」，必須包含：\n1) 工作目標（一句可檢查的成果描述）\n2) 截止日期（標註：使用者提供／需向主管確認）\n3) 輸出成果（交付物長什麼樣）\n4) 任務步驟（5–8 步，每步含預估投入）\n5) AI 可以協助的部分（具體動作，例如：整理草稿、列選項）\n6) 必須由本人判斷的部分（決策、對外承諾、敏感資訊核對）\n7) 完成標準（怎樣算完成，可勾選）\n8) 風險與需人工確認項（至少 3 項）\n\n輸出格式：表格 + 條列。每個建議旁註「根據你提供的資料」或「需人工確認」。不要保證升遷、加薪或績效分數。不要宣稱可自動串接 Gmail／Slack／Teams／Docs。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+    "enPrompt": "You are a workplace productivity coach who turns work goals into executable tasks. Do not invent manager requests, deadlines, KPIs, or company rules.\n\nMy context:\n- Role / scenario (e.g., ops assistant, marketing coordinator, junior PM): [Enter target audience]\n- Work goal: [Enter work goal]\n- Known deadline / milestone (or “unconfirmed”): [Enter]\n- Sanitized task description: [Paste sanitized content]\n- Where I am stuck: [Enter]\n\nTask: Produce an “AI Work Task Breakdown” with:\n1) Work goal (one checkable outcome sentence)\n2) Deadline (label: user-provided / confirm with manager)\n3) Output deliverable (what “done” looks like)\n4) Task steps (5–8 steps with effort hints)\n5) Where AI may help (concrete actions)\n6) What I must judge myself (decisions, external commitments, sensitive checks)\n7) Done criteria (tickable)\n8) Risks and human-confirmation items (at least 3)\n\nFormat: tables + bullets. Label tips “based on your input” or “needs human confirmation.” No promotion/raise/performance guarantees. No claims of Gmail/Slack/Teams/Docs auto-integration.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+    "zhExample": "角色：行銷企劃；目標：完成本週社群檔期初稿（去敏後）；截止：週五 17:00（主管已說）；卡住：不知哪些可請 AI 列大綱。",
+    "enExample": "Role: marketing coordinator; goal: draft this week’s social calendar (sanitized); deadline: Fri 17:00 (manager confirmed); stuck: unsure what AI may outline.",
+    "zhPractice": "選定一個真實工作目標並去敏。；完成步驟、AI／人工界線與完成標準。；用主 Prompt 產出拆解表並刪捏造項。；存成「AI 工作任務拆解表」。",
+    "enPractice": "Pick one real sanitized work goal.; Finish steps, AI/human split, and done criteria.; Run the main prompt and delete inventions.; Save the AI Work Task Breakdown.",
+    "zhFeedbackPrompt": "你是一位職場生產力教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 邊界清楚\n- 可執行\n- 合規意識\n- 實驗可測\n- 是否只談工作流程\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a workplace productivity coach. Score 1-10 for: Clear boundaries, Executability, Compliance awareness, Measurable experiment, Workplace focus. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhQuizItems": [
+      {
+        "q": "職場 AI 工作觀的核心是？",
+        "options": [
+          "任務分類與責任邊界",
+          "越多自動越好不管風險",
+          "把決策全交给模型"
+        ],
+        "answer": 0,
+        "explain": "邊界與責任。"
+      },
+      {
+        "q": "對外數字最該？",
+        "options": [
+          "人工核對來源",
+          "直接相信草稿",
+          "刪除所有數字"
+        ],
+        "answer": 0,
+        "explain": "核對。"
+      },
+      {
+        "q": "本週實驗最好？",
+        "options": [
+          "只選一個真實任務",
+          "一次改全部流程",
+          "完全不計時"
+        ],
+        "answer": 0,
+        "explain": "可測。"
+      },
+      {
+        "q": "敏感資料應？",
+        "options": [
+          "依公司規則處理，必要時禁止貼上",
+          "為求方便一律貼公開模型",
+          "交給同事的私人帳號即可"
+        ],
+        "answer": 0,
+        "explain": "合規。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "使用原則一頁",
+          "股價預測表",
+          "與工作無關的長文"
+        ],
+        "answer": 0,
+        "explain": "原則文件。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "職場 AI 工作觀的核心是？",
+        "options": [
+          "任務分類與責任邊界",
+          "越多自動越好不管風險",
+          "把決策全交给模型"
+        ],
+        "answer": 0,
+        "explain": "邊界與責任。"
+      },
+      {
+        "q": "對外數字最該？",
+        "options": [
+          "人工核對來源",
+          "直接相信草稿",
+          "刪除所有數字"
+        ],
+        "answer": 0,
+        "explain": "核對。"
+      },
+      {
+        "q": "本週實驗最好？",
+        "options": [
+          "只選一個真實任務",
+          "一次改全部流程",
+          "完全不計時"
+        ],
+        "answer": 0,
+        "explain": "可測。"
+      },
+      {
+        "q": "敏感資料應？",
+        "options": [
+          "依公司規則處理，必要時禁止貼上",
+          "為求方便一律貼公開模型",
+          "交給同事的私人帳號即可"
+        ],
+        "answer": 0,
+        "explain": "合規。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "使用原則一頁",
+          "股價預測表",
+          "與工作無關的長文"
+        ],
+        "answer": 0,
+        "explain": "原則文件。"
+      }
+    ],
+    "zhOutcome": "AI 工作任務拆解表",
+    "enOutcome": "AI Work Task Breakdown",
+    "zhValueTip": "先拆任務與界線，再談 Prompt；AI 加速整理，不取代判斷與責任。",
+    "enValueTip": "Break down the task and boundaries before prompting. AI speeds drafting—it does not replace judgment.",
+    "zhCaseStudy": "營運助理小安接到「把下週客戶到訪準備好」，她先請 AI「直接給完整計畫」，得到一堆她沒聽過的 KPI。她改成：寫清目標是「到訪資料夾＋行程確認清單」、截止未確認、貼上去敏後的已知事項，請 AI 只拆步驟並標需向主管確認項。她第一次有可勾選的完成標準，而不是一份假裝已核准的假計畫。",
+    "enCaseStudy": "Ops assistant Ann got “prepare for next week’s client visit,” asked AI for a full plan, and received KPIs she had never heard. She then stated the goal as “visit folder + schedule checklist,” marked the deadline unconfirmed, pasted sanitized known facts, and asked AI only to split steps and flag manager confirmations. She got tickable done criteria—not a fake approved plan.",
+    "zhExcellentExample": "含：可檢查目標、截止來源標記、5–8 步、AI／人工界線、完成標準、至少 3 個需確認項。",
+    "enExcellentExample": "Includes checkable goal, deadline source labels, 5–8 steps, AI/human split, done criteria, 3+ confirmation items.",
+    "zhWorkflow": [
+      "寫下工作目標、已知截止與已去敏任務說明",
+      "標出我必須本人判斷的決策點",
+      "用本課 Prompt 產出拆解表",
+      "刪掉任何捏造的主管要求／數據，補上需確認標記",
+      "存成「AI 工作任務拆解表」"
+    ],
+    "enWorkflow": [
+      "Write the goal, known deadline, and sanitized task notes",
+      "Mark decisions you must judge yourself",
+      "Generate the breakdown with this lesson’s prompt",
+      "Delete invented manager asks/data; add confirmation flags",
+      "Save the AI Work Task Breakdown"
+    ],
+    "zhCommonMistakes": [
+      "未去敏就貼上客戶名單或合約全文",
+      "讓 AI 編造主管要求或截止日期",
+      "沒有「必須本人判斷」欄",
+      "完成標準無法勾選",
+      "宣稱平台會自動串接公司信箱或專案工具"
+    ],
+    "enCommonMistakes": [
+      "Pasting client lists or full contracts without sanitizing",
+      "Letting AI invent manager asks or deadlines",
+      "No must-judge-myself column",
+      "Done criteria that cannot be ticked",
+      "Claiming the platform auto-connects work email or project tools"
+    ],
+    "zhDeliverableChecklist": [
+      "已寫出可檢查的工作目標與輸出成果",
+      "已列出 5–8 個任務步驟",
+      "已分開 AI 可協助與必須本人判斷",
+      "已有可勾選完成標準",
+      "未知截止／要求已標需確認，未捏造",
+      "已去敏且未宣稱自動串接通訊工具"
+    ],
+    "enDeliverableChecklist": [
+      "Checkable work goal and output listed",
+      "5–8 task steps listed",
+      "AI-help vs must-judge separated",
+      "Tickable done criteria present",
+      "Unknown deadlines/asks flagged—not invented",
+      "Sanitized; no auto-integration claims"
+    ],
+    "zhScorecard": [
+      "邊界清楚",
+      "可執行",
+      "合規意識",
+      "實驗可測",
+      "是否只談工作流程"
+    ],
+    "enScorecard": [
+      "Clear boundaries",
+      "Executability",
+      "Compliance awareness",
+      "Measurable experiment",
+      "Workplace focus"
+    ],
+    "zhNotePrompt": "用自己的話寫：這個任務的完成標準、我絕不交給 AI 的 2 件事、明天要做的第 1 步。",
+    "enNotePrompt": "In your own words: done criteria, 2 things you will never give AI, and tomorrow’s first step.",
+    "zhCoachPrompt": "請檢查我的職場 AI 原則是否有資料風險或不可執行之處，並給出修改建議。",
+    "enCoachPrompt": "Check my workplace AI principles for data risk or infeasibility and suggest edits.",
+    "zhWhyItMatters": {
+      "problem": "任務一模糊，就容易整段丟給 AI，得到看起來完整、其實對不上現實的計畫。",
+      "ineffective": "只問「幫我把這件事做完」或「給我一個完美行程」。",
+      "solution": "先寫目標與已知事實，再用 Prompt 拆步驟，並強制標出 AI／人工界線與需確認項。"
     },
-    {
-      "icon": "✉️",
-      "title": "用 AI 處理 Email 與專業溝通",
-      "description": "用 AI 寫清楚、有禮貌、可執行的學術 Email：主旨、請求、語氣與追蹤，避免冒犯或含糊。",
-      "goal": "我的學術 Email 模板庫（請求／道歉／協調／追問）＋語氣檢查表",
-      "estimatedTime": "45-70 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "Email",
-        "學術溝通",
-        "語氣",
-        "Chapter8"
-      ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 7,
-      "chapterZh": "AI 學習生產力系統",
-      "chapterEn": "AI Learning Productivity System",
-      "zhTitle": "第2課：用 AI 處理 Email 與專業溝通",
-      "enTitle": "Lesson 2: Use AI for email and professional communication",
-      "zhValueTip": "用 AI 寫清楚、有禮貌、可執行的學術 Email：主旨、請求、語氣與追蹤，避免冒犯或含糊。",
-      "enValueTip": "Write clear, polite, actionable academic emails—subject, ask, tone, and follow-up—without rudeness or vagueness.",
-      "zhOutcome": "我的學術 Email 模板庫（請求／道歉／協調／追問）＋語氣檢查表",
-      "enOutcome": "My Academic Email Template Bank (request/apology/coord/follow-up) + Tone Checklist",
-      "zhConcept": "學術 Email 是大學生產力的關鍵介面：約面談、請假、求延長、問成績、小組協調、實習／研究詢問。好信結構：清楚主旨→自我介紹（必要時）→情境一句→具體請求→期限／附件→感謝與署名。一段一事，避免情緒長文。AI 可依情境產草稿並給正式／更短兩版，但必須保留事實正確；不可替你捏造成績、病假證明細節或老師沒說過的承諾。語氣：對老師用敬語與完整句子；對同學可較短但仍尊重。避免命令句、陰陽怪氣、過度表情符號（視文化）。主旨要可掃讀：【課程名】請求延長報告截止／詢問面談時段。空白主旨或「請問」不夠。追蹤：若未回，隔 3-5 個工作天禮貌追問，附前信重點，不重複情緒指控。敏感議題（成績爭議、申訴）先查系上流程；Email 留存事實與時間戳，不人身攻擊。與 Workspace 課銜接：附件放 Drive 連結並設對的權限，避免「您沒有存取權」。完成後建立模板庫，臨場只改關鍵欄位，減少焦慮與失禮風險。Chapter 8 閉環：文件、表格、投影片、協作、溝通——讓學習產出能交、能算、能講、能協作、能問。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。",
-      "enConcept": "Use a clear subject, one ask, polite tone, and respectful follow-up. AI drafts variants; you keep facts honest and permissions correct on attachments.",
-      "zhCaseStudy": "情境案例：阿廷用一句「老師我能不能晚交」無主旨寄出，被忽略。他改用模板：主旨含課程、說明理由與已完成進度、提出新日期並附大綱連結（權限正確）。老師當日回覆同意條件。阿廷把該信存進模板庫。",
-      "enCaseStudy": "A-Ting replaced a vague subject-less ask with a structured extension email and got a same-day conditional yes.",
-      "zhWorkflow": [
-        "釐清收件人、目的、請求、期限、附件",
-        "請 AI 產正式／精簡兩版並檢查事實",
-        "用語氣檢查表修改",
-        "確認連結權限後寄出",
-        "設定追蹤日並歸檔模板"
-      ],
-      "enWorkflow": [
-        "Clarify audience, purpose, ask, deadline, attachments",
-        "Generate formal/short drafts and fact-check",
-        "Revise with a tone checklist",
-        "Verify link permissions, then send",
-        "Set a follow-up date and save templates"
-      ],
-      "zhCommonMistakes": [
-        "無主旨或主旨含糊",
-        "請求不具體",
-        "語氣命令或不敬",
-        "附件無權限／事實不實"
-      ],
-      "enCommonMistakes": [
-        "Missing/vague subject",
-        "Unclear ask",
-        "Commanding or disrespectful tone",
-        "Broken permissions or untrue facts"
-      ],
-      "zhExcellentExample": "優秀信：主旨可掃、請求可執行、語氣得體、附件可開、有合理期限與感謝。",
-      "enExcellentExample": "A strong email has a scannable subject, actionable ask, appropriate tone, working attachments, and a reasonable timeframe.",
-      "zhPrompt": "【Prompt 1｜學術 Email 草稿器】\n收件人：［老師／助教／同學／辦公室］；目的：［ ］；事實（不可捏造）：\n（條列）\n具體請求：［ ］；語氣：正式\n請給正式版與精簡版，含主旨建議。不要添加我未提供的理由或診斷；缺資訊先問我。",
-      "enPrompt": "[Prompt 1 | Academic Email Drafter] Produce formal and short versions with subject lines from my facts only; ask if details are missing.",
-      "zhCoachPrompt": "【Prompt 2｜語氣與清晰度修改】\n我的草稿：\n（貼上）\n請標出：含糊請求、可能冒犯、資訊過載、主旨問題；給修改版並說明理由。保持原意，不要改成另一個請求。",
-      "enCoachPrompt": "[Prompt 2 | Tone & Clarity Edit] Flag vague asks, tone risks, overload, and subject issues; revise with reasons without changing the request.",
-      "zhFeedbackPrompt": "【Prompt 3｜寄出前驗收】\n最終信：\n（貼上）\n附件／連結權限說明：\n（貼上）\n請用檢查表評分並給寄出前最後三修。若權限資訊不足，明確警告風險。",
-      "enFeedbackPrompt": "[Prompt 3 | Pre-send QA] Score the final email and warn if permission info is insufficient; give three last fixes.",
-      "zhExample": "主旨：【統計學】請求報告延長至 5/12（附大綱）。｜正文：自我介紹→進度→理由一句→請求新日期→Drive 連結→感謝。",
-      "enExample": "A structured extension email with course-tagged subject, progress, one reason, a clear new date, and a permissioned link.",
-      "zhPractice": "建立四類模板：請求、道歉、協調、追問。；改寫一封你過去寫得不好的信。；完成語氣檢查表。；Challenge：實際寄出一封必要學術信（或給老師／助教預覽），並記錄回覆時間與你會改的一點。",
-      "enPractice": "Build four templates.；Rewrite one weak past email.；Complete the tone checklist.；Challenge: send (or preview with staff) one real academic email and log reply time plus one improvement.",
-      "zhQuizItems": [
-        {
-          "q": "學術 Email 主旨較佳的是？",
-          "options": [
-            "（空白）",
-            "【課程名】具體事由，例如請求面談時段",
-            "急！！！",
-            "請問"
-          ],
-          "answer": 1,
-          "explain": "主旨要可掃讀且含課程與事由。"
-        },
-        {
-          "q": "請 AI 寫信時最重要的是？",
-          "options": [
-            "讓它編造更感人的理由",
-            "只提供真實事實，缺資訊要先澄清",
-            "語氣越卑微越好到失去清楚請求",
-            "不需要署名"
-          ],
-          "answer": 1,
-          "explain": "事實真實與請求清楚優先。"
-        },
-        {
-          "q": "未獲回覆時較合適的是？",
-          "options": [
-            "連續轟炸並指責",
-            "隔數個工作天禮貌追問並附重點",
-            "立刻公開投訴社群",
-            "改寄空白信"
-          ],
-          "answer": 1,
-          "explain": "禮貌有間隔的追問是專業做法。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "Best academic email subject?",
-          "options": [
-            "(blank)",
-            "[Course] specific purpose, e.g., meeting request",
-            "URGENT!!!",
-            "Question"
-          ],
-          "answer": 1,
-          "explain": "Subjects should be scannable with course + purpose."
-        },
-        {
-          "q": "Most important when using AI to draft email?",
-          "options": [
-            "Invent more emotional reasons",
-            "Provide only true facts and clarify gaps first",
-            "Maximize self-abasement until the ask is unclear",
-            "Skip the signature"
-          ],
-          "answer": 1,
-          "explain": "True facts and a clear ask come first."
-        },
-        {
-          "q": "If there’s no reply, better to:",
-          "options": [
-            "Spam and accuse",
-            "Politely follow up after a few business days with a recap",
-            "Publicly complain immediately",
-            "Send a blank message"
-          ],
-          "answer": 1,
-          "explain": "Spaced polite follow-ups are professional."
-        }
-      ],
-      "zhNotePrompt": "貼上一封模板的主旨與請求句，以及語氣檢查表中你常犯的兩項。",
-      "enNotePrompt": "Paste one template’s subject and ask sentence, plus two tone checklist items you often miss.",
-      "zhDeliverableChecklist": [
-        "四類模板完成",
-        "語氣檢查表可用",
-        "至少一封改寫定稿",
-        "附件權限規則寫明",
-        "追蹤方式已定"
-      ],
-      "enDeliverableChecklist": [
-        "Four templates ready",
-        "Tone checklist usable",
-        "≥1 rewritten final email",
-        "Attachment permission rule written",
-        "Follow-up method set"
-      ],
-      "zhScorecard": [
-        "主旨清楚",
-        "請求可執行",
-        "語氣得體",
-        "事實真實",
-        "可追蹤"
-      ],
-      "enScorecard": [
-        "Clear subject",
-        "Actionable ask",
-        "Appropriate tone",
-        "True facts",
-        "Follow-up ready"
-      ],
-      "resources": [
-        {
-          "name": "Gmail",
-          "url": "https://mail.google.com",
-          "note": "學術信寄送與排程／範本"
-        },
-        {
-          "name": "Google Drive",
-          "url": "https://drive.google.com",
-          "note": "附件連結與權限"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "多語氣草稿與清晰度修改"
-        },
-        {
-          "name": "Grammarly",
-          "url": "https://www.grammarly.com",
-          "note": "英文信表面檢查（若使用英文）"
-        },
-        {
-          "name": "Outlook",
-          "url": "https://outlook.live.com",
-          "note": "學校信箱常見介面備援"
-        }
-      ],
-      "challenge": "建立個人學術 Email 模板庫至少 4 封，並用其中一封完成真實溝通（老師／助教／組員）；回顧是否一次說清請求。",
-      "id": "workplace-productivity-L2",
-      "lessonKey": "workplace-productivity-L2"
+    "enWhyItMatters": {
+      "problem": "Vague tasks invite dumping everything into AI and getting polished plans that miss reality.",
+      "ineffective": "Only asking “just finish this for me” or “give me a perfect schedule.”",
+      "solution": "Write the goal and known facts, then split steps with clear AI/human boundaries and confirmation flags."
     },
-    {
-      "icon": "📝",
-      "title": "用 AI 整理會議紀錄、決策與待辦",
-      "description": "用議程、錄音／逐字稿與 AI 整理決策、待辦、負責人與期限，並核對幻覺後會後確認。",
-      "goal": "我的標準會議紀錄模板＋一份已核對的真實會議紀錄",
-      "estimatedTime": "55-75 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "會議紀錄",
-        "逐字稿",
-        "待辦",
-        "Chapter9"
-      ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 8,
-      "chapterZh": "AI 團隊協作與專案管理",
-      "chapterEn": "AI Team Collaboration and Project Management",
-      "zhTitle": "第3課：用 AI 整理會議紀錄、決策與待辦",
-      "enTitle": "Lesson 3: Use AI to capture meeting notes, decisions, and action items",
-      "zhValueTip": "用議程、錄音／逐字稿與 AI 整理決策、待辦、負責人與期限，並核對幻覺後會後確認。",
-      "enValueTip": "Use agendas, transcripts, and AI to capture decisions, actions, owners, and deadlines—then verify hallucinations and confirm after the meeting.",
-      "zhOutcome": "我的標準會議紀錄模板＋一份已核對的真實會議紀錄",
-      "enOutcome": "My Standard Meeting-Notes Template + One Verified Real Meeting Record",
-      "zhConcept": "沒有決策與待辦的會議等於聊天。大學生專題會議要固定產出：議程、決策、待辦（負責人＋期限）、未解決問題、下次會議前必做。會議前：發出議程與會前閱讀；指定紀錄者與計時。會議中：可錄音（先徵得同意），標註時間戳與決議句。會後：用 Otter／Zoom 逐字稿或筆記餵給 AI 整理，但必須人工核對——AI 常誤植人名、期限、把討論中的提議當成已通過決策。核對規則：每條決策要能指回原句或時間戳；無法辨認標「待確認」；清楚分開「事實紀錄／AI 建議／推測」。保留原始逐字稿或錄音連結，不覆蓋。會後確認流程：30-60 分鐘內丟進群組，請組員在時限內回覆修正；逾期視同知悉（需事先約定）。完整會議紀錄案例欄位：日期、出席、議程、決策表、Action items、風險／阻礙、Parking lot、下次會議。AI 不可自行發明「全組已同意延期」之類未說出口的決策。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。當分工、會議、任務、規劃與整合形成閉環，換專題也能複製同一套協作作業系統。跨系或競賽情境同樣適用：先對齊目標與責任，再談工具；工具只是載體，紀律才是產能。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。當分工、會議、任務、規劃與整合形成閉環，換專題也能複製同一套協作作業系統。跨系或競賽情境同樣適用：先對齊目標與責任，再談工具；工具只是載體，紀律才是產能。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。當分工、會議、任務、規劃與整合形成閉環，換專題也能複製同一套協作作業系統。跨系或競賽情境同樣適用：先對齊目標與責任，再談工具；工具只是載體，紀律才是產能。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。當分工、會議、任務、規劃與整合形成閉環，換專題也能複製同一套協作作業系統。跨系或競賽情境同樣適用：先對齊目標與責任，再談工具；工具只是載體，紀律才是產能。",
-      "enConcept": "Agenda → capture → AI draft → human verification against transcript → async confirmation. Never treat proposals as decisions; mark unclear items pending; keep raw sources.",
-      "zhCaseStudy": "情境案例：社團衝刺會議開完沒人記得誰做海報。後來用議程＋錄音，AI 整理出待辦，但把「考慮換主視覺」寫成已決定。紀錄者回放 12:40 原句改成待確認，會後確認才正式通過。隔週海報準時交付。",
-      "enCaseStudy": "A club caught an AI false decision by replaying the timestamp, marked it pending, then confirmed asynchronously.",
-      "zhWorkflow": [
-        "會前發布議程與角色",
-        "會議錄音／筆記（經同意）",
-        "AI 產出結構化紀錄草稿",
-        "對逐字稿核對決策與人名期限",
-        "會後確認並歸檔原始檔"
-      ],
-      "enWorkflow": [
-        "Publish agenda and roles",
-        "Record/note with consent",
-        "Draft structured notes with AI",
-        "Verify decisions/names/dates against transcript",
-        "Confirm async and archive raw files"
-      ],
-      "zhCommonMistakes": [
-        "無議程開會",
-        "把提議當決策",
-        "不核對 AI 幻覺",
-        "刪掉原始逐字稿"
-      ],
-      "enCommonMistakes": [
-        "No agenda",
-        "Treating ideas as decisions",
-        "Skipping hallucination checks",
-        "Deleting raw transcripts"
-      ],
-      "zhExcellentExample": "優秀紀錄：議程對得上、決策可追溯、待辦含負責人與期限、待確認分明、會後已確認。",
-      "enExcellentExample": "Strong notes map to the agenda, trace decisions, include owners/dates, separate pending items, and are confirmed.",
-      "zhPrompt": "【Prompt 1｜逐字稿→會議紀錄（禁捏造決策）】\n議程：\n（貼上）\n逐字稿或筆記：\n（貼上）\n請輸出：出席（若可辨）、決策、待辦（負責人／期限）、未解決問題、下次會前必做。規則：無法辨認的人名／日期標待確認；不要把討論提議寫成已通過；區分事實／建議／推測；保留你引用的原句片段。",
-      "enPrompt": "[Prompt 1 | Transcript to Minutes] Extract decisions/actions with owners/dates; mark unclear items pending; never invent passed votes; keep quote snippets.",
-      "zhCoachPrompt": "【Prompt 2｜決策與待辦擷取檢查】\nAI 初稿：\n（貼上）\n關鍵原句：\n（貼上）\n請逐條判定：已決策／僅討論／資訊不足。給修正後待辦表。缺少負責人時不要隨便填名字。",
-      "enCoachPrompt": "[Prompt 2 | Decision Audit] Classify each item as decided/discussed/insufficient; fix the action table; never invent owners.",
-      "zhFeedbackPrompt": "【Prompt 3｜會後確認包】\n會議紀錄定稿候選：\n（貼上）\n請寫一則給組員的確認訊息（精簡），列出需回覆的待確認項。不要自行替組員回覆同意。",
-      "enFeedbackPrompt": "[Prompt 3 | Confirmation Ping] Draft a short confirmation message listing pending items—do not consent on members’ behalf.",
-      "zhExample": "決策：主視覺維持 A 案（原句 12:40）。｜待辦：小哲 5/3 前出海報初稿。｜待確認：是否加校外贊助（未表決）。",
-      "enExample": "A verified decision with timestamp, one dated action, and an unvoted item marked pending.",
-      "zhPractice": "為下次會議準備議程。；用真實會議產出經核對的紀錄。；完成會後確認。；Challenge：故意找 AI 草稿中 1 個錯誤（人名／決策／期限）並附原句證據修正。",
-      "enPractice": "Prep an agenda.；Produce verified minutes from a real meeting.；Run confirmation.；Challenge: catch one AI error with quote evidence and fix it.",
-      "zhQuizItems": [
-        {
-          "q": "AI 整理會議逐字稿後最必要的一步是？",
-          "options": [
-            "立刻當最終決策執行",
-            "人工核對決策／人名／期限並標待確認",
-            "刪除原始錄音以省空間",
-            "讓 AI 替缺席者投票"
-          ],
-          "answer": 1,
-          "explain": "必須防幻覺並保留可追溯性。"
-        },
-        {
-          "q": "會議紀錄中「待辦」應至少包含？",
-          "options": [
-            "只有一句很長的感想",
-            "任務、負責人與截止時間",
-            "無關表情符號",
-            "未確認的八卦"
-          ],
-          "answer": 1,
-          "explain": "無可執行三件組就不算待辦。"
-        },
-        {
-          "q": "把「有人提議延期」寫成「已決議延期」屬於？",
-          "options": [
-            "正確摘要",
-            "把討論當決策的高風險錯誤",
-            "不必理會",
-            "比原句更真實"
-          ],
-          "answer": 1,
-          "explain": "提議≠通過。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "Most necessary step after AI meeting notes?",
-          "options": [
-            "Execute as final immediately",
-            "Human-verify decisions/names/dates and mark pending",
-            "Delete the recording",
-            "Let AI vote for absentees"
-          ],
-          "answer": 1,
-          "explain": "Prevent hallucinations and keep traceability."
-        },
-        {
-          "q": "An action item should include at least:",
-          "options": [
-            "A long reflection only",
-            "Task, owner, and due date",
-            "Random emojis",
-            "Unverified gossip"
-          ],
-          "answer": 1,
-          "explain": "Without the trio it isn’t actionable."
-        },
-        {
-          "q": "Writing “someone suggested delay” as “we resolved to delay” is:",
-          "options": [
-            "Accurate summary",
-            "A high-risk treat-discussion-as-decision error",
-            "Harmless",
-            "More true than the quote"
-          ],
-          "answer": 1,
-          "explain": "Proposal ≠ decision."
-        }
-      ],
-      "zhNotePrompt": "貼上三條已核對待辦（負責人＋期限）與一條待確認項。",
-      "enNotePrompt": "Paste three verified actions (owner+date) and one pending item.",
-      "zhDeliverableChecklist": [
-        "議程模板可用",
-        "真實會議紀錄完成",
-        "決策可追溯原句",
-        "待辦含負責人期限",
-        "會後確認完成"
-      ],
-      "enDeliverableChecklist": [
-        "Agenda template ready",
-        "Real minutes done",
-        "Decisions quote-traceable",
-        "Actions have owners/dates",
-        "Async confirmation done"
-      ],
-      "zhScorecard": [
-        "可追溯",
-        "可執行",
-        "無假決策",
-        "已確認",
-        "原始檔保留"
-      ],
-      "enScorecard": [
-        "Traceable",
-        "Actionable",
-        "No false decisions",
-        "Confirmed",
-        "Raw kept"
-      ],
-      "resources": [
-        {
-          "name": "Otter.ai",
-          "url": "https://otter.ai",
-          "note": "會議錄音轉逐字稿"
-        },
-        {
-          "name": "Zoom",
-          "url": "https://zoom.us",
-          "note": "線上會議與錄影"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "結構化整理（需核對）"
-        },
-        {
-          "name": "Google Docs",
-          "url": "https://docs.google.com",
-          "note": "會後共編確認"
-        },
-        {
-          "name": "Notion",
-          "url": "https://www.notion.so",
-          "note": "會議資料庫與待辦連結"
-        },
-        {
-          "name": "Microsoft Teams",
-          "url": "https://www.microsoft.com/microsoft-teams",
-          "note": "課堂／專題常見會議工具"
-        }
-      ],
-      "challenge": "完成一次真實小組會議的「議程→紀錄→核對→確認」全流程，並在群組留下確認串。",
-      "id": "workplace-productivity-L3",
-      "lessonKey": "workplace-productivity-L3"
+    "zhObjectives": [
+      "把一個真實工作目標寫成可檢查的一句話",
+      "列出 5–8 個可執行步驟與輸出成果",
+      "區分 AI 可協助與必須本人判斷的部分",
+      "寫出可勾選的完成標準與至少 3 個需確認項",
+      "把成果存成「AI 工作任務拆解表」"
+    ],
+    "enObjectives": [
+      "Rewrite one real work goal into a checkable sentence",
+      "List 5–8 executable steps and the output deliverable",
+      "Separate AI-help from must-judge-myself work",
+      "Write tickable done criteria and at least 3 confirmation items",
+      "Save an AI Work Task Breakdown"
+    ],
+    "estimatedTime": "約 45 分鐘 / About 45 min",
+    "difficulty": "入門 / Beginner",
+    "zhOutputName": "AI 工作任務拆解表",
+    "enOutputName": "AI Work Task Breakdown",
+    "zhCaseStudyBlocks": {
+      "problem": "營運助理小安接到模糊到訪任務，不知從何開始。",
+      "wrong": "請 AI 直接產出完整計畫並接受捏造的 KPI。",
+      "right": "寫目標、已知事實與未確認項，請 AI 拆步驟並標 AI／人工界線。",
+      "result": "一份可執行的「AI 工作任務拆解表」。"
     },
-    {
-      "icon": "📄",
-      "title": "用 AI 撰寫與整理商務文件",
-      "description": "用 AI 協助大學文件的結構、標題層級、修訂與格式檢查，產出可繳交的 Word／Docs 文件。",
-      "goal": "我的課程文件模板＋一份已整理的作業／報告 Word 定稿檢查表",
-      "estimatedTime": "55-75 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "Word",
-        "文件整理",
-        "格式",
-        "Chapter8"
-      ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 7,
-      "chapterZh": "AI 學習生產力系統",
-      "chapterEn": "AI Learning Productivity System",
-      "zhTitle": "第4課：用 AI 撰寫與整理商務文件",
-      "enTitle": "Lesson 4: Use AI to draft and organize business documents",
-      "zhValueTip": "用 AI 協助大學文件的結構、標題層級、修訂與格式檢查，產出可繳交的 Word／Docs 文件。",
-      "enValueTip": "Use AI to structure university documents, heading levels, revisions, and format checks for submission-ready Word/Docs files.",
-      "zhOutcome": "我的課程文件模板＋一份已整理的作業／報告 Word 定稿檢查表",
-      "enOutcome": "My Course Document Template + Submission Format Checklist",
-      "zhConcept": "大學生每週都在交 Word／Google Docs：作業、報告、會議紀錄、申請說明。生產力不是「請 AI 寫全文」，而是建立可重複的文件作業系統：標題樣式、層級、目錄、引用區、修訂紀錄、檔名規則。先讀繳交規格：字數、字型、行距、頁邊、標題格式、是否要目錄／封面。把規格寫成檢查表，再請 AI 對照你的草稿指出缺口；AI 不得發明老師沒要求的花俏格式。結構優先於美化：H1 報告題目、H2 章、H3 節；內文用正文樣式，不要手動調每段字級造成混亂。長文件用導覽窗格檢查層級是否跳躍。AI 適合：把雜亂筆記重排成大綱、建議標題名稱、列出格式不一致處、產生修訂說明、把口語段落改成書面語（仍需你保留原意）。不適合：無依據代寫、亂加未要求的圖表框、把個人語氣改到認不出。版本管理：檔名用 課程_作業名_日期_v1／final；重大修改另存，避免覆蓋。與同學協作時用建議模式／追蹤修訂，不要默默覆蓋他人段落。定稿前三檢：規格、結構、錯字與殘留註解。把「刪除黃色醒目／TODO」寫進檢查表。這一課連到 Chapter 4 報告與 Chapter 7 英文寫作：內容品質來自前章，本章負責可繳交的文件層。完成後你會有一份課程文件模板，換作業只改題目與章節，不再從空白頁重來。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。",
-      "enConcept": "Build a reusable document system—styles, headings, specs checklist, revision hygiene, and filenames. AI reorganizes and audits format; you keep meaning and authorship.",
-      "zhCaseStudy": "情境案例：社會系小恩交報告常因「標題層級亂、頁碼沒開、還留著草稿註解」被扣格式分。她用規格檢查表＋AI 結構審計，把全文套用樣式，刪除 14 處 TODO，檔名改成 final。助教回饋格式一次過。她把模板複製到所有課程資料夾。",
-      "enCaseStudy": "Xiao En stopped losing format points by applying a styles-based template and an AI structure audit before submit.",
-      "zhWorkflow": [
-        "把作業格式規格寫成檢查表",
-        "建立／套用標題與正文樣式",
-        "請 AI 重排大綱並標不一致處（禁代寫）",
-        "清理註解、目錄、頁碼與檔名",
-        "依檢查表定稿"
-      ],
-      "enWorkflow": [
-        "Turn format rules into a checklist",
-        "Apply heading/body styles",
-        "Ask AI to reorder outline and flag inconsistencies (no ghostwriting)",
-        "Clean comments, TOC, page numbers, filename",
-        "Finalize against the checklist"
-      ],
-      "zhCommonMistakes": [
-        "手動調字級造成樣式崩壞",
-        "請 AI 代寫全文只為交差",
-        "定稿仍留 TODO／對話泡泡",
-        "檔名混亂找不到 final"
-      ],
-      "enCommonMistakes": [
-        "Manual font chaos",
-        "Full ghostwriting for submission",
-        "Leaving TODOs in the final",
-        "Lost final among messy filenames"
-      ],
-      "zhExcellentExample": "優秀文件：樣式一致、層級可導覽、規格全勾、無殘留註解、檔名含 final 與日期。",
-      "enExcellentExample": "A strong file has consistent styles, navigable headings, a checked specs list, no leftover comments, and a dated final filename.",
-      "zhPrompt": "【Prompt 1｜文件結構整理教練】\n繳交規格：\n（貼上）\n我的草稿大綱或雜亂標題：\n（貼上）\n請重排成 H1／H2／H3 建議，並指出可能不符合規格之處。規則：不要撰寫完整正文取代我；規格未提及的格式標為「非必要／勿自行添加」。資訊不足請先問我。",
-      "enPrompt": "[Prompt 1 | Doc Structure Coach] Propose H1–H3 order vs my specs; do not write the full paper; do not invent extra format rules.",
-      "zhCoachPrompt": "【Prompt 2｜格式不一致稽核】\n以下是我各段開頭與目前格式描述：\n（貼上）\n請列出：樣式不一致、層級跳躍、可能的殘留草稿語句、建議的清理順序。每項給我可執行的 Word／Docs 操作提示。不要改寫我的論點內容。",
-      "enCoachPrompt": "[Prompt 2 | Format Audit] Flag style inconsistencies, heading jumps, and draft leftovers with actionable Word/Docs steps—no argument rewrites.",
-      "zhFeedbackPrompt": "【Prompt 3｜定稿檢查表驗收】\n規格檢查表：\n（貼上）\n我已完成項目：\n（貼上）\n請評分可繳交度，指出未勾風險，給交卷前 10 分鐘必做清單。不要因為想「加分」而建議老師沒要求的裝飾。",
-      "enFeedbackPrompt": "[Prompt 3 | Final Checklist QA] Score submission readiness and list a 10-minute must-do list—no unrequested decoration.",
-      "zhExample": "規格：標楷12／1.5行距／APA。｜AI 指出 H3 跳號與內文混用兩種字級。｜行動：全選套用正文樣式→重設標題→更新目錄→另存 final。",
-      "enExample": "Specs audit finds heading jumps and mixed body fonts; student reapplies styles and saves a dated final.",
-      "zhPractice": "為一科建立文件模板與規格檢查表。；整理一份真實草稿的標題層級。；清掉註解並統一檔名。；Challenge：用導覽窗格／大綱檢視向同學展示你的層級，並在 5 分鐘內修掉對方指出的兩處不一致。",
-      "enPractice": "Build a course template and checklist.；Fix heading levels on a real draft.；Clean comments and filename.；Challenge: demo outline pane and fix two inconsistencies in 5 minutes.",
-      "zhQuizItems": [
-        {
-          "q": "Word／文件整理的首要目標較接近？",
-          "options": [
-            "請 AI 代寫全文並加大量裝飾",
-            "符合繳交規格並建立可重複的結構與樣式系統",
-            "每段手動調不同藝術字",
-            "不需要檔名規則"
-          ],
-          "answer": 1,
-          "explain": "規格＋可重複樣式才是生產力。"
-        },
-        {
-          "q": "請 AI 協助文件時應避免？",
-          "options": [
-            "對照規格做結構建議",
-            "發明老師未要求的格式並當成必須",
-            "指出層級跳躍",
-            "列出殘留 TODO"
-          ],
-          "answer": 1,
-          "explain": "不可自行添加未要求硬性格式。"
-        },
-        {
-          "q": "定稿前最該清掉的通常包括？",
-          "options": [
-            "所有標題",
-            "草稿註解、TODO、不一致字級與錯誤檔名",
-            "頁碼",
-            "目錄"
-          ],
-          "answer": 1,
-          "explain": "殘留草稿痕跡常造成扣分與混亂。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "Primary goal of document organization?",
-          "options": [
-            "Ghostwrite with heavy decoration",
-            "Meet specs and build a reusable style/structure system",
-            "Artistic fonts per paragraph",
-            "No filename rules needed"
-          ],
-          "answer": 1,
-          "explain": "Specs plus reusable styles equal productivity."
-        },
-        {
-          "q": "When using AI on documents, avoid:",
-          "options": [
-            "Structure advice against specs",
-            "Inventing unrequested format rules as mandatory",
-            "Flagging heading jumps",
-            "Listing leftover TODOs"
-          ],
-          "answer": 1,
-          "explain": "Don’t invent mandatory extras."
-        },
-        {
-          "q": "Before submit, usually clean:",
-          "options": [
-            "All headings",
-            "Draft comments, TODOs, inconsistent fonts, bad filenames",
-            "Page numbers",
-            "The table of contents"
-          ],
-          "answer": 1,
-          "explain": "Draft residue causes avoidable losses."
-        }
-      ],
-      "zhNotePrompt": "貼上你的規格檢查表與最終檔名規則，並列出本週清掉的 3 個格式問題。",
-      "enNotePrompt": "Paste your specs checklist and filename rule, plus three format issues you cleaned.",
-      "zhDeliverableChecklist": [
-        "完成課程文件模板",
-        "規格檢查表可用",
-        "真實文件層級已整理",
-        "無殘留註解",
-        "final 檔名正確"
-      ],
-      "enDeliverableChecklist": [
-        "Course template ready",
-        "Specs checklist usable",
-        "Real doc headings fixed",
-        "No leftover comments",
-        "Final filename correct"
-      ],
-      "zhScorecard": [
-        "規格對齊",
-        "樣式一致",
-        "結構清楚",
-        "版本可控",
-        "可繳交"
-      ],
-      "enScorecard": [
-        "Spec alignment",
-        "Style consistency",
-        "Clear structure",
-        "Version control",
-        "Submission-ready"
-      ],
-      "resources": [
-        {
-          "name": "Microsoft Word",
-          "url": "https://www.microsoft.com/microsoft-365/word",
-          "note": "樣式、目錄與追蹤修訂"
-        },
-        {
-          "name": "Google Docs",
-          "url": "https://docs.google.com",
-          "note": "雲端文件與建議模式"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "結構重排與格式稽核提示"
-        },
-        {
-          "name": "Google Drive",
-          "url": "https://drive.google.com",
-          "note": "版本與資料夾管理"
-        }
-      ],
-      "challenge": "把一份即將繳交（或剛繳交）的作業重套樣式並跑完整規格檢查表；記錄因此避免的至少 3 個格式風險。",
-      "id": "workplace-productivity-L4",
-      "lessonKey": "workplace-productivity-L4"
+    "enCaseStudyBlocks": {
+      "problem": "Ops assistant Ann receives a vague client-visit task.",
+      "wrong": "Ask AI for a full plan and accept invented KPIs.",
+      "right": "State goal, known facts, and unknowns; ask AI to split steps with boundaries.",
+      "result": "An actionable AI Work Task Breakdown."
     },
-    {
-      "icon": "📊",
-      "title": "用 AI 處理表格與數據初稿",
-      "description": "用 AI 協助清理資料、設計欄位、寫公式與做摘要表，完成大學生常見的表格分析任務。",
-      "goal": "我的資料清理規則＋一份可重算的分析表（含公式說明）",
-      "estimatedTime": "60-80 分鐘",
-      "difficulty": "中階",
-      "tags": [
-        "Excel",
-        "資料清理",
-        "公式",
-        "Chapter8"
+    "zhWorkflowSteps": [
+      {
+        "do": "收集已知事實",
+        "why": "沒有事實就只能空想",
+        "input": "任務說明（去敏）",
+        "output": "事實清單",
+        "check": "是否含未確認項"
+      },
+      {
+        "do": "寫可檢查目標",
+        "why": "空泛目標無法拆步驟",
+        "input": "工作目標",
+        "output": "一句成果描述",
+        "check": "別人能否判斷完成？"
+      },
+      {
+        "do": "用 Prompt 拆步驟",
+        "why": "把焦慮變成流程",
+        "input": "上一步資料",
+        "output": "拆解表初稿",
+        "check": "是否有 AI／人工欄"
+      },
+      {
+        "do": "清除捏造內容",
+        "why": "避免錯誤承諾",
+        "input": "初稿",
+        "output": "已清理版",
+        "check": "有無假 KPI／假截止"
+      },
+      {
+        "do": "存入成果包",
+        "why": "後續課堂會沿用",
+        "input": "定稿",
+        "output": "成果項目",
+        "check": "完成標準能否勾選"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Gather known facts",
+        "why": "No facts means fantasy planning",
+        "input": "Sanitized notes",
+        "output": "Fact list",
+        "check": "Unknowns marked"
+      },
+      {
+        "do": "Write a checkable goal",
+        "why": "Vague goals cannot be split",
+        "input": "Work goal",
+        "output": "One outcome sentence",
+        "check": "Could someone else judge done?"
+      },
+      {
+        "do": "Split steps with the prompt",
+        "why": "Turn anxiety into a flow",
+        "input": "Prior notes",
+        "output": "Draft breakdown",
+        "check": "AI/human columns present"
+      },
+      {
+        "do": "Remove inventions",
+        "why": "Avoid false commitments",
+        "input": "Draft",
+        "output": "Clean version",
+        "check": "No fake KPIs/deadlines"
+      },
+      {
+        "do": "Save to package",
+        "why": "Later lessons reuse this",
+        "input": "Final",
+        "output": "Package entry",
+        "check": "Done criteria tickable"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "寫目標與已知／未知",
+        "standard": "截止未確認要標明",
+        "mistakes": "假裝已有官方截止",
+        "check": "未知是否誠實？"
+      },
+      {
+        "task": "拆步驟與界線",
+        "standard": "每步可執行且有 AI／人工",
+        "mistakes": "整段交給 AI",
+        "check": "必須本人判斷區是否空白？"
+      },
+      {
+        "task": "產出並清理",
+        "standard": "無捏造要求／數據",
+        "mistakes": "接受假 KPI",
+        "check": "是否標需確認？"
+      },
+      {
+        "task": "存檔",
+        "standard": "成果名稱正確",
+        "mistakes": "空白儲存",
+        "check": "重新整理後仍在？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Write goal + known/unknown",
+        "standard": "Unconfirmed deadlines labeled",
+        "mistakes": "Pretend there is an official deadline",
+        "check": "Are unknowns honest?"
+      },
+      {
+        "task": "Split steps and boundaries",
+        "standard": "Each step executable with AI/human marks",
+        "mistakes": "Hand the whole job to AI",
+        "check": "Is must-judge empty?"
+      },
+      {
+        "task": "Generate and clean",
+        "standard": "No invented asks/data",
+        "mistakes": "Accept fake KPIs",
+        "check": "Confirmation flags present?"
+      },
+      {
+        "task": "Save",
+        "standard": "Correct deliverable name",
+        "mistakes": "Saving blank",
+        "check": "Still visible after refresh?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "接到新任務、不知從何下手時使用",
+      "fields": [
+        "[請填寫工作目標]",
+        "[請貼上已去除敏感資訊的內容]",
+        "[請填寫目標受眾]"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 7,
-      "chapterZh": "AI 學習生產力系統",
-      "chapterEn": "AI Learning Productivity System",
-      "zhTitle": "第5課：用 AI 處理表格與數據初稿",
-      "enTitle": "Lesson 5: Use AI for spreadsheets and first-pass data work",
-      "zhValueTip": "用 AI 協助清理資料、設計欄位、寫公式與做摘要表，完成大學生常見的表格分析任務。",
-      "enValueTip": "Use AI to clean data, design columns, write formulas, and build summary tables for common university spreadsheet tasks.",
-      "zhOutcome": "我的資料清理規則＋一份可重算的分析表（含公式說明）",
-      "enOutcome": "My Data-Cleaning Rules + Recomputable Analysis Sheet (with formula notes)",
-      "zhConcept": "Excel／Sheets 生產力的核心是「資料可信任、公式可重算、結果可解釋」。常見大學任務：成績統計、問卷整理、實驗紀錄、社團經費、報告附表。流程：定義問題→檢查欄位與單位→清理（空白、重複、格式）→建立計算欄→摘要（樞紐／SUMIFS／平均）→圖表或結論句。請 AI 幫你時，要貼欄位名稱與 3-5 列示例（脱敏），說明想要的輸出；要求它給公式與逐步說明，並提醒假設。你必須在真實表驗證，不可盲信。清理規則要寫下來：日期格式、缺失值怎麼標、類別名稱是否統一。否則下次匯入又亂。避免：把多種資料塞同一格、合併儲存格當資料庫、用手打結果取代公式、用 AI 捏造不存在的數據列。好的分析表能回答一個清楚問題，例如「各組平均分數與缺交人數」。結論要能指回儲存格。與 Chapter 6 考試數據或報告附表銜接時，同樣遵守不捏造；資訊不足就標待補。Google Sheets 與 Excel 公式高度相近；先掌握相對／絕對參照與基本邏輯函數，再學樞紐。完成後保存「資料字典」：每欄意義、來源、清理規則、關鍵公式，讓未來的你與組員接得住。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。",
-      "enConcept": "Define the question, clean fields, compute with formulas, summarize, and explain. AI proposes formulas from sample rows; you verify and never invent data.",
-      "zhCaseStudy": "情境案例：資管系小組問卷 80 份，欄位名稱中英混雜、性別寫法五種。他們先定清理規則，用 AI 建議 COUNTIF／平均公式，在 Sheets 驗證後做摘要。報告附表可重算，老師改一筆資料總表自動更新。組長把資料字典放進 Drive。",
-      "enCaseStudy": "A MIS team fixed messy survey fields with written cleaning rules and verified formulas, producing a recomputable appendix.",
-      "zhWorkflow": [
-        "寫下分析問題與所需欄位",
-        "脱敏示例＋請 AI 建議清理與公式",
-        "在 Excel／Sheets 實作並抽樣驗證",
-        "做摘要表／圖並寫一句結論",
-        "輸出資料字典與版本檔名"
-      ],
-      "enWorkflow": [
-        "Write the analysis question and required fields",
-        "Share anonymized samples; ask AI for cleaning + formulas",
-        "Implement and spot-check in Excel/Sheets",
-        "Build a summary and one conclusion sentence",
-        "Export a data dictionary and versioned file"
-      ],
-      "zhCommonMistakes": [
-        "手動填結果不留公式",
-        "不清理就統計",
-        "讓 AI 補假資料",
-        "合併儲存格導致無法篩選"
-      ],
-      "enCommonMistakes": [
-        "Hard-coding results",
-        "Stats on dirty data",
-        "Letting AI fabricate rows",
-        "Merged cells that break filters"
-      ],
-      "zhExcellentExample": "優秀表：欄位清楚、清理規則可見、公式可重算、摘要對應問題、資料字典齊全。",
-      "enExcellentExample": "A strong sheet has clear fields, visible cleaning rules, recomputable formulas, a question-aligned summary, and a data dictionary.",
-      "zhPrompt": "【Prompt 1｜資料清理與欄位設計】\n分析問題：［ ］\n目前欄位與 5 列脱敏示例：\n（貼上）\n請建議：清理規則、應拆／應合的欄位、缺失值處理、以及我下一步該算什麼。不要發明示例中沒有的數值列；資訊不足請列出要問我的問題。",
-      "enPrompt": "[Prompt 1 | Cleaning & Schema] Propose cleaning rules and field design from my anonymized samples; invent no rows; ask if info is missing.",
-      "zhCoachPrompt": "【Prompt 2｜公式教練】\n表名／欄位：\n（貼上）\n我想計算：［例如各組平均、條件加總］\n請給 Excel 與 Google Sheets 可用公式、相對／絕對參照說明、常見錯誤。提供用我示例驗算的步驟。不要只給結果數字而不給公式。",
-      "enCoachPrompt": "[Prompt 2 | Formula Coach] Provide spreadsheet formulas with absolute/relative notes and a verification walkthrough—not only final numbers.",
-      "zhFeedbackPrompt": "【Prompt 3｜分析表驗收】\n問題：\n（貼上）\n我的摘要結果與公式：\n（貼上）\n請檢查：是否回答問題、公式邏輯風險、清理是否足夠。給修改優先序。若無法判斷因為缺少欄位說明，明確說資訊不足。",
-      "enFeedbackPrompt": "[Prompt 3 | Sheet QA] Check question fit and formula risks; say when column meaning is insufficient to judge.",
-      "zhExample": "問題：三組缺交率。｜清理：空白=缺交。｜公式：=COUNTIF(C:C,\"\")/COUNTA(A:A)。｜結論：B 組缺交最高，見摘要表！",
-      "enExample": "Missing-assignment rates by group with a verified COUNTIF formula and a one-line conclusion.",
-      "zhPractice": "選一份真實表格（成績／問卷／經費）。；完成清理規則與關鍵公式。；產出摘要與資料字典。；Challenge：改動兩筆原始資料，證明摘要會自動更新；若不會，回頭修成公式驅動。",
-      "enPractice": "Pick a real sheet.；Write cleaning rules and key formulas.；Build summary + dictionary.；Challenge: change two source rows and prove the summary updates automatically.",
-      "zhQuizItems": [
+      "body": "你是職場生產力教練，協助把工作目標拆成可執行任務。不可捏造主管要求、截止日期、KPI 或公司規定。\n\n我的背景：\n- 角色／情境（例如營運助理、行銷企劃、專案助理）：[請填寫目標受眾]\n- 工作目標：[請填寫工作目標]\n- 已知截止日期／里程碑（沒有就寫「未確認」）：[請填寫]\n- 已去除敏感資訊的任務說明：[請貼上已去除敏感資訊的內容]\n- 我目前卡住的地方：[請填寫]\n\n任務：產出「AI 工作任務拆解表」，必須包含：\n1) 工作目標（一句可檢查的成果描述）\n2) 截止日期（標註：使用者提供／需向主管確認）\n3) 輸出成果（交付物長什麼樣）\n4) 任務步驟（5–8 步，每步含預估投入）\n5) AI 可以協助的部分（具體動作，例如：整理草稿、列選項）\n6) 必須由本人判斷的部分（決策、對外承諾、敏感資訊核對）\n7) 完成標準（怎樣算完成，可勾選）\n8) 風險與需人工確認項（至少 3 項）\n\n輸出格式：表格 + 條列。每個建議旁註「根據你提供的資料」或「需人工確認」。不要保證升遷、加薪或績效分數。不要宣稱可自動串接 Gmail／Slack／Teams／Docs。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "expected": "一份含目標、步驟、AI／人工界線與完成標準的任務拆解表",
+      "revisionReminder": "請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "extensions": [
         {
-          "q": "試算表分析前最應先做？",
-          "options": [
-            "直接畫最炫圖表",
-            "確認問題、欄位意義並清理資料",
-            "刪除所有公式",
-            "請 AI 隨意填滿空白當作真實資料"
-          ],
-          "answer": 1,
-          "explain": "可信資料與清楚問題優先於視覺。"
-        },
-        {
-          "q": "使用 AI 產生公式時正確態度是？",
-          "options": [
-            "貼上就信，不必驗證",
-            "要求說明與驗算步驟，並在真實表抽查",
-            "只要結果好看即可",
-            "用 AI 捏造缺失問卷答案"
-          ],
-          "answer": 1,
-          "explain": "公式必須可解釋、可驗證。"
-        },
-        {
-          "q": "資料字典的用途是？",
-          "options": [
-            "裝飾封面",
-            "記錄欄位意義、來源、清理規則與關鍵公式便於交接",
-            "取代原始資料",
-            "隱藏錯誤"
-          ],
-          "answer": 1,
-          "explain": "字典讓分析可維護、可交接。"
+          "title": "延伸：把步驟排成今日三件事",
+          "body": "根據我貼上的拆解表，只選今天可完成的 3 步，標出必須本人判斷的項目。不要新增我沒寫的主管要求。"
         }
-      ],
-      "enQuizItems": [
-        {
-          "q": "Before spreadsheet analysis, first:",
-          "options": [
-            "Make the flashiest chart",
-            "Clarify the question, field meaning, and cleaning",
-            "Delete all formulas",
-            "Have AI invent missing survey answers"
-          ],
-          "answer": 1,
-          "explain": "Trusted data and a clear question come first."
-        },
-        {
-          "q": "Correct stance toward AI formulas?",
-          "options": [
-            "Trust blindly",
-            "Require explanations and verify on the real sheet",
-            "Looks good enough",
-            "Fabricate missing responses"
-          ],
-          "answer": 1,
-          "explain": "Formulas must be explainable and checked."
-        },
-        {
-          "q": "A data dictionary is for:",
-          "options": [
-            "Cover decoration",
-            "Recording field meaning, source, cleaning rules, and key formulas",
-            "Replacing raw data",
-            "Hiding errors"
-          ],
-          "answer": 1,
-          "explain": "Dictionaries make analysis maintainable."
-        }
-      ],
-      "zhNotePrompt": "寫下分析問題、兩條清理規則、一條關鍵公式與驗算結果。",
-      "enNotePrompt": "Write your analysis question, two cleaning rules, one key formula, and a verification result.",
-      "zhDeliverableChecklist": [
-        "分析問題清楚",
-        "清理規則成文",
-        "關鍵公式可重算",
-        "摘要能回答問題",
-        "資料字典完成"
-      ],
-      "enDeliverableChecklist": [
-        "Question clear",
-        "Cleaning rules written",
-        "Key formulas recomputable",
-        "Summary answers the question",
-        "Data dictionary done"
-      ],
-      "zhScorecard": [
-        "資料可信",
-        "公式正確",
-        "可重算",
-        "可解釋",
-        "可交接"
-      ],
-      "enScorecard": [
-        "Trusted data",
-        "Correct formulas",
-        "Recomputable",
-        "Explainable",
-        "Handoff-ready"
-      ],
-      "resources": [
-        {
-          "name": "Microsoft Excel",
-          "url": "https://www.microsoft.com/microsoft-365/excel",
-          "note": "公式、樞紐與資料清理"
-        },
-        {
-          "name": "Google Sheets",
-          "url": "https://sheets.google.com",
-          "note": "雲端協作試算與公式"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "公式建議與清理規則草稿"
-        },
-        {
-          "name": "Google Drive",
-          "url": "https://drive.google.com",
-          "note": "存放原始檔與資料字典"
-        }
-      ],
-      "challenge": "完成一份課程／社團真實資料表：含清理前後對照、至少 3 個公式、一張摘要，並能向同學在 3 分鐘內解釋結果如何算出。",
-      "id": "workplace-productivity-L5",
-      "lessonKey": "workplace-productivity-L5"
+      ]
     },
-    {
-      "icon": "🖼️",
-      "title": "用 AI 製作工作簡報（對內／對外）",
-      "description": "用 AI 把內容做成可講的投影片：主張頁、精簡文字、講者備註與時間控制，銜接大學簡報場景。",
-      "goal": "我的 PowerPoint／Slides 主張地圖＋一組可上台初稿（含備註）",
-      "estimatedTime": "55-75 分鐘",
-      "difficulty": "初階",
-      "tags": [
-        "PowerPoint",
-        "投影片",
-        "講者備註",
-        "Chapter8"
+    "enPromptPack": {
+      "when": "Use when a new work task feels vague or overwhelming",
+      "fields": [
+        "[Enter work goal]",
+        "[Paste sanitized content]",
+        "[Enter target audience]"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 7,
-      "chapterZh": "AI 學習生產力系統",
-      "chapterEn": "AI Learning Productivity System",
-      "zhTitle": "第6課：用 AI 製作工作簡報（對內／對外）",
-      "enTitle": "Lesson 6: Use AI to create internal and external work presentations",
-      "zhValueTip": "用 AI 把內容做成可講的投影片：主張頁、精簡文字、講者備註與時間控制，銜接大學簡報場景。",
-      "enValueTip": "Turn content into speakable slides—claim pages, sparse text, speaker notes, and timing—for university presentations.",
-      "zhOutcome": "我的 PowerPoint／Slides 主張地圖＋一組可上台初稿（含備註）",
-      "enOutcome": "My PowerPoint/Slides Claim Map + Speakable Draft Deck (with notes)",
-      "zhConcept": "本章投影片課聚焦「生產力製作流程」，與 Chapter 5 故事線互補：先有主張地圖，再用 PowerPoint／Google Slides／可選 Gamma 落地。原則：一頁一主張、少字、大標題、講者備註放細節、總頁數服務時長。AI 可把報告大綱轉成頁面清單與備註草稿，但不可發明數據。製作順序：鎖定時長與主訊息→頁面主張→子彈點精簡→統一版面母片→加入圖表（真實資料）→備註→計時刪頁。避免：把 Word 段落貼上投影片、裝飾蓋過主張、無備註導致上台忘詞就念牆。母片與主題色一旦選定就全套一致；臨時每頁不同模板會拖慢生產力。匯出與備援：上課前匯出 PDF／帶離線副本；字體要可攜或用系統字。與 Lesson 36／37 銜接：文件結論與表格圖可進投影片，但要重寫成口語視覺，不是截一張糊圖。完成標準：同學只看標題能懂故事線；你不看稿也能靠備註關鍵詞講完。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。",
-      "enConcept": "Produce speakable decks from a claim map with sparse bullets, master-slide consistency, real charts, and timed notes. AI drafts structure/notes; you own evidence and delivery.",
-      "zhCaseStudy": "情境案例：小哲把報告直接貼進 PPT，20 頁超時。他用 AI 壓成 10 頁主張，備註放數字來源，統一母片。計時 8 分鐘過關。老師說「終於聽得懂重點」。",
-      "enCaseStudy": "Xiao Zhe replaced pasted report walls with a 10-claim timed deck and clear speaker notes.",
-      "zhWorkflow": [
-        "寫主訊息與時長預算",
-        "產出頁面主張地圖",
-        "在 PPT／Slides 套母片並精簡文字",
-        "補真實圖表與講者備註",
-        "計時刪修並備援匯出"
-      ],
-      "enWorkflow": [
-        "Set message and time budget",
-        "Build a claim map",
-        "Apply a master and sparse text in PPT/Slides",
-        "Add real charts and speaker notes",
-        "Time, cut, and export backups"
-      ],
-      "zhCommonMistakes": [
-        "文字牆",
-        "無時間預算",
-        "每頁不同混亂風格",
-        "捏造圖表數字"
-      ],
-      "enCommonMistakes": [
-        "Text walls",
-        "No time budget",
-        "Inconsistent slide themes",
-        "Invented chart numbers"
-      ],
-      "zhExcellentExample": "優秀初稿：主張清晰、母片一致、備註可講、計時合規、圖表可追溯。",
-      "enExcellentExample": "A strong draft has clear claims, one master, speakable notes, on-time timing, and traceable charts.",
-      "zhPrompt": "【Prompt 1｜投影片主張地圖】\n時長：［N］；主訊息：［ ］；來源要點：\n（貼上）\n請列出每頁：主張標題、最多3子彈點、建議視覺、預估秒數、講者備註關鍵詞。禁止發明來源沒有的數據；不足標［待補］。",
-      "enPrompt": "[Prompt 1 | Slide Claim Map] List claim titles, ≤3 bullets, visual, seconds, and note keywords; invent no data.",
-      "zhCoachPrompt": "【Prompt 2｜文字精簡與備註分工】\n目前某頁文字：\n（貼上）\n請拆成：投影片可見短句 vs 講者備註。說明刪了什麼與為何。保持原意，不要改成另一個主張。",
-      "enCoachPrompt": "[Prompt 2 | Sparse Text vs Notes] Split slide-visible text from speaker notes; keep the same claim.",
-      "zhFeedbackPrompt": "【Prompt 3｜可講性與時間驗收】\n頁面清單與秒數：\n（貼上）\n請檢查是否超時、哪頁該刪併、標題是否像主張。給修改優先序，不要重做整套花俏動畫建議。",
-      "enFeedbackPrompt": "[Prompt 3 | Speakability & Timing QA] Flag overtime and weak titles; prioritize cuts—not flashy animation essays.",
-      "zhExample": "P4 主張：試辦分三階段。｜子彈：準備／試點／評估。｜備註：各階段兩週、負責人。｜秒數：70。",
-      "enExample": "A three-phase pilot claim slide with sparse bullets, note details, and a 70-second budget.",
-      "zhPractice": "把一份報告或作業做成主張地圖。；製成 PPT／Slides 初稿含備註。；計時一輪並刪頁。；Challenge：只顯示標題，向同學講完整故事；對方聽不懂的頁立刻改標題。",
-      "enPractice": "Turn a report into a claim map.；Build a PPT/Slides draft with notes.；Time and cut.；Challenge: tell the story from titles only; rewrite unclear titles immediately.",
-      "zhQuizItems": [
+      "body": "You are a workplace productivity coach who turns work goals into executable tasks. Do not invent manager requests, deadlines, KPIs, or company rules.\n\nMy context:\n- Role / scenario (e.g., ops assistant, marketing coordinator, junior PM): [Enter target audience]\n- Work goal: [Enter work goal]\n- Known deadline / milestone (or “unconfirmed”): [Enter]\n- Sanitized task description: [Paste sanitized content]\n- Where I am stuck: [Enter]\n\nTask: Produce an “AI Work Task Breakdown” with:\n1) Work goal (one checkable outcome sentence)\n2) Deadline (label: user-provided / confirm with manager)\n3) Output deliverable (what “done” looks like)\n4) Task steps (5–8 steps with effort hints)\n5) Where AI may help (concrete actions)\n6) What I must judge myself (decisions, external commitments, sensitive checks)\n7) Done criteria (tickable)\n8) Risks and human-confirmation items (at least 3)\n\nFormat: tables + bullets. Label tips “based on your input” or “needs human confirmation.” No promotion/raise/performance guarantees. No claims of Gmail/Slack/Teams/Docs auto-integration.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "expected": "A breakdown with goal, steps, AI/human boundaries, and done criteria",
+      "revisionReminder": "Remove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "extensions": [
         {
-          "q": "大學投影片較正確的單位是？",
-          "options": [
-            "一頁貼上整段報告",
-            "一頁一個主張＋精簡要點",
-            "頁數越多越好",
-            "沒有備註比較專業"
-          ],
-          "answer": 1,
-          "explain": "單頁單主張才好講好記。"
-        },
-        {
-          "q": "講者備註的主要用途是？",
-          "options": [
-            "投影給觀眾看的第二面文字牆",
-            "提醒你要講的細節與來源，觀眾看標題即可",
-            "放無關笑話為主",
-            "取代練習"
-          ],
-          "answer": 1,
-          "explain": "備註服務講者，不是第二投影片。"
-        },
-        {
-          "q": "AI 產投影片內容時不可做的是？",
-          "options": [
-            "依你提供要點產主張地圖",
-            "標示待補資料",
-            "捏造統計數字讓圖表好看",
-            "建議刪超時頁"
-          ],
-          "answer": 2,
-          "explain": "不可捏造數據。"
+          "title": "Extension: today’s top 3 steps",
+          "body": "From my breakdown, pick only 3 steps doable today and mark must-judge-myself items. Do not invent manager requests."
         }
-      ],
-      "enQuizItems": [
-        {
-          "q": "Best unit for university slides?",
-          "options": [
-            "Paste a full report section",
-            "One claim per slide with sparse points",
-            "Maximize slide count",
-            "No notes is more professional"
-          ],
-          "answer": 1,
-          "explain": "One claim per slide is speakable and memorable."
-        },
-        {
-          "q": "Speaker notes are mainly for:",
-          "options": [
-            "A second text wall for the audience",
-            "Details and sources for you while the audience sees titles",
-            "Only unrelated jokes",
-            "Replacing rehearsal"
-          ],
-          "answer": 1,
-          "explain": "Notes serve the speaker."
-        },
-        {
-          "q": "AI must not:",
-          "options": [
-            "Build a claim map from your points",
-            "Mark data needed",
-            "Invent statistics for prettier charts",
-            "Suggest cutting overtime slides"
-          ],
-          "answer": 2,
-          "explain": "Never invent data."
-        }
-      ],
-      "zhNotePrompt": "貼上主訊息、頁數與總秒數，以及最需要刪／改的兩頁理由。",
-      "enNotePrompt": "Paste core message, slide count, total seconds, and reasons to cut/change two slides.",
-      "zhDeliverableChecklist": [
-        "主張地圖完成",
-        "母片風格一致",
-        "備註齊備",
-        "計時達標",
-        "無捏造數據"
-      ],
-      "enDeliverableChecklist": [
-        "Claim map done",
-        "Master consistent",
-        "Notes complete",
-        "Timing on target",
-        "No invented data"
-      ],
-      "zhScorecard": [
-        "主張清楚",
-        "少字",
-        "可講",
-        "準時",
-        "一致"
-      ],
-      "enScorecard": [
-        "Clear claims",
-        "Sparse text",
-        "Speakable",
-        "On time",
-        "Consistent"
-      ],
-      "resources": [
-        {
-          "name": "Microsoft PowerPoint",
-          "url": "https://www.microsoft.com/microsoft-365/powerpoint",
-          "note": "投影片母片、備註與演講者檢視"
-        },
-        {
-          "name": "Google Slides",
-          "url": "https://slides.google.com",
-          "note": "協作投影片與備註"
-        },
-        {
-          "name": "Gamma",
-          "url": "https://gamma.app",
-          "note": "可選 AI 初稿，仍需人工對齊主張"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "主張地圖與文字精簡"
-        },
-        {
-          "name": "Canva",
-          "url": "https://www.canva.com",
-          "note": "可選美化，內容正確後再做"
-        }
-      ],
-      "challenge": "用本課流程完成一份真實 5-10 分鐘課程／社團簡報初稿（PowerPoint 或 Slides），含備註與一次計時紀錄。",
-      "id": "workplace-productivity-L6",
-      "lessonKey": "workplace-productivity-L6"
+      ]
     },
-    {
-      "id": "workplace-productivity-L7",
-      "lessonKey": "workplace-productivity-L7",
-      "zhTitle": "第7課：用 AI 建立 SOP 與標準作業流程",
-      "enTitle": "Lesson 7: Use AI to create SOPs and standard operating procedures",
-      "zhConcept": "SOP 讓工作不依賴「當日記憶」。好的 SOP 有觸發條件、步驟、輸入／輸出、負責人、完成定義、品質檢查與例外分流。AI 可把你的口述流程整理成結構，並找出含糊步驟；不可假裝已驗證你沒做過的流程。\n\n先選一個高頻、低風險的工作流程（例如週報彙整、會議後待辦整理），寫到別人照做也不致翻車，再談優化。",
-      "enConcept": "SOPs capture triggers, steps, I/O, owners, done definitions, checks, and exceptions. AI can structure your dictation and spot ambiguity; it cannot validate a process you never ran. Start with a frequent, low-risk workflow.",
-      "zhPrompt": "請擔任流程設計教練。流程名稱：【】。現況口述：【】。常見失誤：【】。\n\n請整理成 SOP：觸發、步驟、輸入輸出、負責人、完成定義、檢查表、例外處理，並標出含糊語句。不要發明公司不存在的系統。",
-      "enPrompt": "Act as a process coach. Process: []. Current narration: []. Common failures: []. Produce an SOP with trigger, steps, I/O, owner, done definition, checklist, and exceptions; flag vague lines. Invent no systems.",
-      "zhExample": "弱步驟「妥善通知相關人士」。強步驟「在 #ops 頻道標記負責人，貼上逾期項目表，並於當日 17:00 前確認是否回覆；未回覆則升級給主管。」",
-      "enExample": "Weak: notify stakeholders properly. Strong: tag owners in #ops with the overdue table and escalate by 17:00 if no reply.",
-      "zhPractice": "選一個高頻工作流程。；口述錄成文字。；用 Prompt 轉 SOP。；找同事試跑一次並記問題。；改第二版檢查表。",
-      "enPractice": "Pick a frequent workflow.；Dictate it.；Convert to SOP.；Have a colleague dry-run.；Revise the checklist.",
-      "zhFeedbackPrompt": "你是一位流程設計教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 可交接性\n- 清楚度\n- 可檢查\n- 例外完整\n- 真實演練\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
-      "enFeedbackPrompt": "Act as a process design coach. Score 1-10 for: Handoffability, Clarity, Checkability, Exception coverage, Real dry-run. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
-      "zhQuizItems": [
-        {
-          "q": "好 SOP 通常包含？",
-          "options": [
-            "觸發、步驟、檢查與例外",
-            "只有口號目標",
-            "只有軟體名稱"
-          ],
-          "answer": 0,
-          "explain": "可執行結構。"
-        },
-        {
-          "q": "含糊步驟的風險？",
-          "options": [
-            "無法交接且品質不穩",
-            "比較有彈性所以最好",
-            "一定提升創意"
-          ],
-          "answer": 0,
-          "explain": "交接失敗。"
-        },
-        {
-          "q": "AI 適合？",
-          "options": [
-            "整理結構並標含糊處",
-            "假裝流程已驗證",
-            "省略檢查表"
-          ],
-          "answer": 0,
-          "explain": "結構輔助。"
-        },
-        {
-          "q": "適合先寫 SOP 的是？",
-          "options": [
-            "高頻低風險重複工作",
-            "一年一次的特殊專案",
-            "完全無規律的危機"
-          ],
-          "answer": 0,
-          "explain": "重複性。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "SOP 初稿",
-            "股價",
-            "與流程無關的散文"
-          ],
-          "answer": 0,
-          "explain": "流程文件。"
-        }
+    "zhNextStep": "下一堂把溝通任務做成可重用的職場 Email／訊息模板，仍先去敏再請 AI 協助。",
+    "enNextStep": "Next, turn communication work into reusable email/message templates—still sanitize before asking AI.",
+    "zhConceptBlocks": {
+      "principles": [
+        "先拆任務再提問",
+        "AI 改變速度不取代責任",
+        "未知必須標確認"
       ],
-      "enQuizItems": [
-        {
-          "q": "好 SOP 通常包含？",
-          "options": [
-            "觸發、步驟、檢查與例外",
-            "只有口號目標",
-            "只有軟體名稱"
-          ],
-          "answer": 0,
-          "explain": "可執行結構。"
-        },
-        {
-          "q": "含糊步驟的風險？",
-          "options": [
-            "無法交接且品質不穩",
-            "比較有彈性所以最好",
-            "一定提升創意"
-          ],
-          "answer": 0,
-          "explain": "交接失敗。"
-        },
-        {
-          "q": "AI 適合？",
-          "options": [
-            "整理結構並標含糊處",
-            "假裝流程已驗證",
-            "省略檢查表"
-          ],
-          "answer": 0,
-          "explain": "結構輔助。"
-        },
-        {
-          "q": "適合先寫 SOP 的是？",
-          "options": [
-            "高頻低風險重複工作",
-            "一年一次的特殊專案",
-            "完全無規律的危機"
-          ],
-          "answer": 0,
-          "explain": "重複性。"
-        },
-        {
-          "q": "本課產出？",
-          "options": [
-            "SOP 初稿",
-            "股價",
-            "與流程無關的散文"
-          ],
-          "answer": 0,
-          "explain": "流程文件。"
-        }
+      "terms": [
+        "必須本人判斷",
+        "完成標準",
+        "需人工確認"
       ],
-      "zhOutcome": "產出一份可交給同事執行的 SOP 初稿（含檢查表與例外處理）。",
-      "enOutcome": "Produce a colleague-ready SOP draft with a checklist and exception handling.",
-      "zhValueTip": "把重複工作寫成 SOP：觸發條件、步驟、負責、檢查與例外。",
-      "enValueTip": "Turn repeatable work into an SOP: trigger, steps, owners, checks, and exceptions.",
-      "zhCaseStudy": "營運助理每週花很多時間追進度。她把「週一進度彙整」寫成 SOP：收集來源 → 表格欄位 → 紅黃燈規則 → 寄出前檢查。AI 幫她找出「跟進」兩字太含糊，改成「若紅燈則於當日 15:00 前在頻道點名負責人並記錄回覆」。新人第一週就能代班。",
-      "enCaseStudy": "An ops assistant turned Monday status collection into an SOP with sources, fields, RAG status rules, and a concrete follow-up action—clear enough for a newcomer to cover.",
-      "zhExcellentExample": "SOP 含觸發、步驟、I/O、負責人、完成定義、檢查表、例外；並經過一次真實演練註記耗時。",
-      "enExcellentExample": "SOP with trigger, steps, I/O, owner, done definition, checklist, exceptions, plus one timed dry run.",
-      "zhWorkflow": [
-        "選高頻流程",
-        "口述現況",
-        "轉成 SOP 結構",
-        "試跑找含糊點",
-        "更新檢查表"
+      "criteria": [
+        "有目標",
+        "有步驟",
+        "有界線與標準"
       ],
-      "enWorkflow": [
-        "Pick frequent process",
-        "Dictate current state",
-        "Structure as SOP",
-        "Dry-run for ambiguity",
-        "Update checklist"
-      ],
-      "zhCommonMistakes": [
-        "步驟含糊無法交接",
-        "沒有完成定義",
-        "例外全靠當下感覺",
-        "寫了從不試跑",
-        "把偶發專案硬写成 SOP"
-      ],
-      "enCommonMistakes": [
-        "Vague non-handoffable steps",
-        "No done definition",
-        "Exceptions by vibe",
-        "Never dry-run",
-        "Forcing one-offs into SOPs"
-      ],
-      "zhDeliverableChecklist": [
-        "觸發與步驟",
-        "負責人",
-        "完成定義",
-        "檢查表",
-        "例外與試跑紀錄"
-      ],
-      "enDeliverableChecklist": [
-        "Trigger/steps",
-        "Owner",
-        "Done definition",
-        "Checklist",
-        "Exceptions + dry-run"
-      ],
-      "zhScorecard": [
-        "可交接性",
-        "清楚度",
-        "可檢查",
-        "例外完整",
-        "真實演練"
-      ],
-      "enScorecard": [
-        "Handoffability",
-        "Clarity",
-        "Checkability",
-        "Exception coverage",
-        "Real dry-run"
-      ],
-      "zhNotePrompt": "貼上 SOP 初稿與試跑筆記。",
-      "enNotePrompt": "Paste your SOP draft and dry-run notes.",
-      "zhCoachPrompt": "請找出 SOP 中含糊、無法交接的步驟，並改寫成可執行語句。",
-      "enCoachPrompt": "Find vague non-handoffable SOP steps and rewrite them to be executable.",
-      "title": "用 AI 建立 SOP 與標準作業流程",
-      "description": "把重複工作寫成 SOP：觸發條件、步驟、負責、檢查與例外。",
-      "goal": "產出一份可交給同事執行的 SOP 初稿（含檢查表與例外處理）。"
+      "boundaries": [
+        "避免：捏造主管要求",
+        "避免：未去敏貼機密",
+        "避免：保證績效"
+      ]
     },
-    {
-      "icon": "🧠",
-      "title": "建立個人或團隊知識庫（第二大腦／企業知識）",
-      "description": "建立 AI Second Brain：課程／PDF／筆記／Prompt／作業／作品集資料庫，含命名、標籤、搜尋與備份分工。",
-      "goal": "我的 AI Second Brain 架構圖＋資料庫清單＋命名／標籤／備份規則",
-      "estimatedTime": "70-90 分鐘",
-      "difficulty": "中階",
-      "tags": [
-        "Second Brain",
-        "知識管理",
-        "資料庫",
-        "Chapter12"
+    "enConceptBlocks": {
+      "principles": [
+        "Break down before prompting",
+        "AI changes speed, not responsibility",
+        "Unknowns need confirmation"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 11,
-      "chapterZh": "AI University OS 與最終專案",
-      "chapterEn": "AI University OS and Capstone Project",
-      "zhTitle": "第8課：建立個人或團隊知識庫（第二大腦／企業知識）",
-      "enTitle": "Lesson 8: Build a personal or team knowledge base",
-      "zhValueTip": "建立 AI Second Brain：課程／PDF／筆記／Prompt／作業／作品集資料庫，含命名、標籤、搜尋與備份分工。",
-      "enValueTip": "Build an AI Second Brain with course/PDF/notes/prompt/assignment/portfolio databases plus naming, tags, search, and backup roles.",
-      "zhOutcome": "我的 AI Second Brain 架構圖＋資料庫清單＋命名／標籤／備份規則",
-      "enOutcome": "My AI Second Brain Architecture + DB Inventory + Naming/Tag/Backup Rules",
-      "zhConcept": "AI University OS 的地基是知識管理，不是再下載十個 App。AI Second Brain 指：你能把四年大學的輸入（課堂、PDF、連結、對話）變成可搜尋、可重用、可追溯的個人知識資產，並讓 AI 在「你的來源」上協助，而不是每次從空白聊天開始。先定義分層：Inbox（未整理捕捉）→ 課程資料庫（每科一頁／一資料夾）→ 筆記資料庫（課堂／閱讀／複習）→ PDF 資料庫（講義與文獻，含頁碼與狀態）→ Prompt Library（依任務分類的可重用提示）→ 作業與報告資料庫（題目、規格、版本、回饋）→ 專案與作品集資料庫（問題、方法、成果、連結）。Google Drive 適合作為檔案真相來源與備份；Notion／Obsidian 適合作為結構化資料庫與雙向連結；NotebookLM 適合作為「針對已上傳資料的 grounded 問答層」。三者分工：Drive 存檔、Notion/Obsidian 管關係與任務、NotebookLM 做來源問答，避免全部擠在聊天紀錄裡。檔案命名建議：YYYYMMDD_課程代碼_類型_主題_v01。例：20260512_STAT201_note_hypothesis_v02。標籤系統用少量高頻：#課程 #考試 #專案 #求職 #待補 #final。標籤過多等於沒有標籤。搜尋要可落地：統一關鍵字、封面摘要欄、狀態（raw／review／final）。備份：雲端＋定期匯出；重要 final 另存，不覆蓋。AI 可幫你設計架構與遷移清單，但不可假裝你已經整理完四年資料；未完成要標進度。事實（你現有資料位置）／目標／假設／建議分開。完整知識管理架構案例：大三生把散落在桌面的 200 個檔案收成 Drive 樹：00_Inbox、01_Courses、02_PDFs、03_Notes、04_Prompts、05_Assignments、06_Projects、99_Archive；Notion 用關聯把「課程—筆記—作業—考試」串起；NotebookLM 每科一個來源包。這一課結束，你不是多一個資料夾，而是擁有可支撐 Lesson 57–60 的 OS 底座：後面的工作流、四年地圖、工具整合與最終專案都掛在這上面。也請回顧 Chapter 1 的 Workspace 與 Second Brain、Chapter 3 筆記、Chapter 4 報告來源：本章是升級成系統，而不是重做一次收藏。此外，請把本課產出存成 raw／final，並在 Second Brain 標註狀態；未演示、未通測的項目不得標完成。每次系統改動寫三行變更日誌：改了什麼、為何、如何回滾；讓 OS 可維護而不是一次性作業。全課程的誠信底線在此收束：不捏造成果、數據與完成狀態；AI 是加速器，人工審核是品質閘門。當知識庫、工作流、四年地圖、工具整合與發表形成閉環，你就擁有可帶走的 AI University OS。下學期用同一套檢查表繼續跑；系統的價值在持續使用，不在一次華麗演示。此外，請把本課產出存成 raw／final，並在 Second Brain 標註狀態；未演示、未通測的項目不得標完成。每次系統改動寫三行變更日誌：改了什麼、為何、如何回滾；讓 OS 可維護而不是一次性作業。全課程的誠信底線在此收束：不捏造成果、數據與完成狀態；AI 是加速器，人工審核是品質閘門。當知識庫、工作流、四年地圖、工具整合與發表形成閉環，你就擁有可帶走的 AI University OS。下學期用同一套檢查表繼續跑；系統的價值在持續使用，不在一次華麗演示。此外，請把本課產出存成 raw／final，並在 Second Brain 標註狀態；未演示、未通測的項目不得標完成。每次系統改動寫三行變更日誌：改了什麼、為何、如何回滾；讓 OS 可維護而不是一次性作業。全課程的誠信底線在此收束：不捏造成果、數據與完成狀態；AI 是加速器，人工審核是品質閘門。當知識庫、工作流、四年地圖、工具整合與發表形成閉環，你就擁有可帶走的 AI University OS。下學期用同一套檢查表繼續跑；系統的價值在持續使用，不在一次華麗演示。此外，請把本課產出存成 raw／final，並在 Second Brain 標註狀態；未演示、未通測的項目不得標完成。每次系統改動寫三行變更日誌：改了什麼、為何、如何回滾；讓 OS 可維護而不是一次性作業。",
-      "enConcept": "Build an AI Second Brain with clear databases for courses, PDFs, notes, prompts, assignments, and portfolio items; define naming/tags/search/backup; split roles across Drive, Notion/Obsidian, and NotebookLM. AI designs; you don’t fake finished migrations.",
-      "zhCaseStudy": "完整知識管理架構案例：企管系小恩以前考試前找不到上學期的定義卡。她花一個週末只做「架構＋命名＋每科一頁」，先不追求完美遷移。Notion 課程頁連結 Drive 講義與 Prompt「考試範圍拆解」。下一次統計學複習，她 10 分鐘找回必考清單。她拒絕把未讀 PDF 標成已精讀，狀態欄保持誠實。半年後作品集也能從專案庫一鍵抓出截圖與反思。",
-      "enCaseStudy": "Xiao En fixed “can’t find notes” by shipping architecture first—honest statuses, course pages, and linked prompts—without fake completion.",
-      "zhWorkflow": [
-        "盤點現有檔案位置與痛點",
-        "設計資料庫清單與工具分工",
-        "訂命名、標籤、狀態、備份規則",
-        "建立空架構並遷移 1 科樣板",
-        "請 AI 檢查缺口，標未完成進度"
+      "terms": [
+        "Must-judge zone",
+        "Done criteria",
+        "Human confirmation"
       ],
-      "enWorkflow": [
-        "Inventory current files and pain points",
-        "Design DB list and tool roles",
-        "Set naming, tags, status, backup rules",
-        "Create empty architecture and migrate one course as template",
-        "AI gap-check; mark unfinished progress honestly"
+      "criteria": [
+        "Goal present",
+        "Steps present",
+        "Boundaries and standards"
       ],
-      "zhCommonMistakes": [
-        "只有收藏沒有資料庫欄位",
-        "工具職責重疊導致不知放哪",
-        "把未整理標成已完成",
-        "無備份與命名規則"
-      ],
-      "enCommonMistakes": [
-        "Hoarding without fields",
-        "Overlapping tool roles",
-        "Marking unorganized as done",
-        "No backup/naming rules"
-      ],
-      "zhExcellentExample": "優秀 Second Brain：資料庫齊全、命名一致、標籤精簡、狀態誠實、Drive／Notion／NotebookLM 分工清楚、至少一科完整樣板可示範。",
-      "enExcellentExample": "A strong Second Brain has complete DBs, consistent naming, lean tags, honest status, clear tool roles, and one demoable course template.",
-      "zhPrompt": "【Prompt 1｜個人知識管理架構規劃】\n我的科系與年級：［ ］\n現有資料散落位置：\n（貼上）\n痛點：\n（貼上）\n請規劃 AI Second Brain：資料庫清單、欄位建議、Google Drive／Notion／NotebookLM／Obsidian 分工。清楚標示建議；不要宣稱我已完成遷移；資訊不足列待補資料；輸出需可執行可檢查。",
-      "enPrompt": "[Prompt 1 | KM Architecture] Propose Second Brain DBs, fields, and tool roles from my real mess; label suggestions; don’t claim migration is done.",
-      "zhCoachPrompt": "【Prompt 2｜命名規則、標籤與課程資料庫】\n我的課程清單：\n（貼上）\n請給檔名規則、標籤白名單、課程資料庫欄位（大綱／講義／筆記／考試／作業／Prompt）。提供 5 個命名範例。不要捏造我沒修的課。",
-      "enCoachPrompt": "[Prompt 2 | Naming, Tags, Course DB] Provide naming rules, tag whitelist, course fields, and 5 examples; invent no courses.",
-      "zhFeedbackPrompt": "【Prompt 3｜架構驗收與 Prompt Library 分類】\n我的架構草稿：\n（貼上）\n請檢查：缺哪些庫、狀態是否誠實、備份是否可執行；並建議 Prompt Library 分類（筆記／報告／簡報／考試／英文／協作／專案／求職）。不要把計畫寫成已建好；列出待補資料。",
-      "enFeedbackPrompt": "[Prompt 3 | Architecture QA + Prompt Library] Check missing DBs, honesty, backup; suggest prompt categories; don’t mark plans as built.",
-      "zhExample": "Drive：01_Courses/STAT201/…｜Notion 課程頁欄位：狀態、期末日、必考連結｜Prompt Library：exam/scope-decode｜備份：每月匯出 Notion＋Drive 版控。",
-      "enExample": "A course folder + Notion course page + prompt category + monthly export backup rule.",
-      "zhPractice": "畫出 Second Brain 架構圖。；訂命名／標籤／備份規則。；完成一科樣板遷移。；Challenge：用架構在 5 分鐘內找回上一個月某科的「考試重點卡」；找不回就補欄位。",
-      "enPractice": "Draw the architecture.；Set naming/tags/backup.；Migrate one course template.；Challenge: retrieve last month’s exam cards in 5 minutes or fix fields.",
-      "zhQuizItems": [
-        {
-          "q": "AI Second Brain 最核心的目的是？",
-          "options": [
-            "收藏越多 App 越好",
-            "讓知識可搜尋、可重用、可追溯，並讓 AI 基於你的來源協助",
-            "取代所有思考",
-            "只聊天不存檔"
-          ],
-          "answer": 1,
-          "explain": "系統價值在可重用與可追溯。"
-        },
-        {
-          "q": "Drive／Notion／NotebookLM 較合理的分工是？",
-          "options": [
-            "三者放完全相同複本且無規則",
-            "Drive 管檔案與備份、Notion 管結構關係、NotebookLM 做 grounded 問答",
-            "全部只放聊天框",
-            "禁止備份"
-          ],
-          "answer": 1,
-          "explain": "分工清楚才能降低混亂。"
-        },
-        {
-          "q": "建立資料庫時不可？",
-          "options": [
-            "標示 raw／final 狀態",
-            "把未整理內容標成已完成遷移",
-            "使用精簡標籤",
-            "保留可檢查的命名規則"
-          ],
-          "answer": 1,
-          "explain": "不可把計畫或未完成寫成已完成。"
-        }
-      ],
-      "enQuizItems": [
-        {
-          "q": "Core purpose of an AI Second Brain?",
-          "options": [
-            "Collect more apps",
-            "Make knowledge searchable, reusable, traceable for grounded AI help",
-            "Replace all thinking",
-            "Chat only, never save"
-          ],
-          "answer": 1,
-          "explain": "Value is reuse and provenance."
-        },
-        {
-          "q": "Sensible Drive/Notion/NotebookLM split?",
-          "options": [
-            "Identical unmanaged copies everywhere",
-            "Drive for files/backup, Notion for structure, NotebookLM for grounded Q&A",
-            "Everything only in chat",
-            "No backups"
-          ],
-          "answer": 1,
-          "explain": "Clear roles reduce chaos."
-        },
-        {
-          "q": "When building databases you must not:",
-          "options": [
-            "Use raw/final statuses",
-            "Mark unorganized content as fully migrated",
-            "Keep a lean tag set",
-            "Keep checkable naming rules"
-          ],
-          "answer": 1,
-          "explain": "Don’t mark unfinished as done."
-        }
-      ],
-      "zhNotePrompt": "貼上資料庫清單、命名規則一句範例，以及一科樣板的連結或路徑。",
-      "enNotePrompt": "Paste your DB list, one naming example, and the path/link to one course template.",
-      "zhDeliverableChecklist": [
-        "架構圖完成",
-        "六類資料庫有定義",
-        "命名／標籤／備份成文",
-        "工具分工清楚",
-        "至少一科樣板可示範"
-      ],
-      "enDeliverableChecklist": [
-        "Architecture drawn",
-        "Six DB types defined",
-        "Naming/tags/backup written",
-        "Tool roles clear",
-        "≥1 course template demoable"
-      ],
-      "zhScorecard": [
-        "可搜尋",
-        "可重用",
-        "狀態誠實",
-        "分工清楚",
-        "可備份"
-      ],
-      "enScorecard": [
-        "Searchable",
-        "Reusable",
-        "Honest status",
-        "Clear roles",
-        "Backup-ready"
-      ],
-      "resources": [
-        {
-          "name": "Notion",
-          "url": "https://www.notion.so",
-          "note": "課程／筆記／Prompt 資料庫"
-        },
-        {
-          "name": "Google Drive",
-          "url": "https://drive.google.com",
-          "note": "檔案真相來源與備份"
-        },
-        {
-          "name": "NotebookLM",
-          "url": "https://notebooklm.google.com",
-          "note": "依上傳來源做 grounded 問答"
-        },
-        {
-          "name": "Obsidian",
-          "url": "https://obsidian.md",
-          "note": "本地雙向連結筆記選項"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "架構規劃與分類建議"
-        }
-      ],
-      "challenge": "完成可示範的 Second Brain 空架構＋一科完整樣板；錄 2 分鐘螢幕說明「檔案放哪、如何搜、如何備份」，不得宣稱四年資料已全部遷移完成。",
-      "id": "workplace-productivity-L8",
-      "lessonKey": "workplace-productivity-L8"
+      "boundaries": [
+        "Avoid: inventing manager asks",
+        "Avoid: unsanitized secrets",
+        "Avoid: performance guarantees"
+      ]
     },
-    {
-      "icon": "📋",
-      "title": "用 AI 做任務管理、優先順序與週期回報",
-      "description": "把交付物拆成任務、設定優先序與狀態，用看板追蹤阻礙與延誤預警，區分個人與團隊任務。",
-      "goal": "我的專案看板（Kanban）＋每週進度追蹤表",
-      "estimatedTime": "55-75 分鐘",
-      "difficulty": "中階",
-      "tags": [
-        "任務管理",
-        "Kanban",
-        "進度追蹤",
-        "Chapter9"
-      ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 8,
-      "chapterZh": "AI 團隊協作與專案管理",
-      "chapterEn": "AI Team Collaboration and Project Management",
-      "zhTitle": "第9課：用 AI 做任務管理、優先順序與週期回報",
-      "enTitle": "Lesson 9: Use AI for task management, priorities, and recurring updates",
-      "zhValueTip": "把交付物拆成任務、設定優先序與狀態，用看板追蹤阻礙與延誤預警，區分個人與團隊任務。",
-      "enValueTip": "Break deliverables into tasks with priority and status, track blockers on a Kanban, and separate personal vs team work.",
-      "zhOutcome": "我的專案看板（Kanban）＋每週進度追蹤表",
-      "enOutcome": "My Project Kanban + Weekly Progress Tracker",
-      "zhConcept": "任務管理把會議待辦變成可持續推進的系統。先拆解：交付物→任務→子任務，每張卡要有定義完成（DoD）、負責人、截止、優先序、依賴。優先序可用緊急／重要或 P0-P2；不要所有卡都標「很急」。Kanban 常見欄：Backlog／Ready／Doing／Blocked／Done；限制 WIP（進行中數量）避免偽忙碌。進度狀態要誠實：Blocked 必須寫阻礙與需要誰解。每週追蹤：完成數、延誤、新增範圍、下週 P0。延誤預警：截止前 48 小時仍在 Ready、或 Doing 超過預估 1.5 倍就升級討論，不要等到當天。個人任務（自己課業）與團隊任務分欄或標籤，避免把個人事務塞進專題看板造成噪音。AI 可依會議紀錄與 RACI 建議任務清單與優先序，但不可捏造已完成、不可擅自改期限；缺負責人標待確認。工具：Trello／Asana／ClickUp／Notion；重點是紀律而非軟體品牌。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。當分工、會議、任務、規劃與整合形成閉環，換專題也能複製同一套協作作業系統。跨系或競賽情境同樣適用：先對齊目標與責任，再談工具；工具只是載體，紀律才是產能。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。當分工、會議、任務、規劃與整合形成閉環，換專題也能複製同一套協作作業系統。跨系或競賽情境同樣適用：先對齊目標與責任，再談工具；工具只是載體，紀律才是產能。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。當分工、會議、任務、規劃與整合形成閉環，換專題也能複製同一套協作作業系統。跨系或競賽情境同樣適用：先對齊目標與責任，再談工具；工具只是載體，紀律才是產能。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。不要用 AI 捏造決策、進度或組員承諾；資訊不足就要標待確認並保留原始資料。當分工、會議、任務、規劃與整合形成閉環，換專題也能複製同一套協作作業系統。跨系或競賽情境同樣適用：先對齊目標與責任，再談工具；工具只是載體，紀律才是產能。此外，請把本課產出存成 raw／final：raw 保留討論與 AI 草稿，final 是全組確認後可執行或可繳交的版本。每次協作結束寫三行：今天澄清的責任、仍待確認的事項、下次會議第一個議程。",
-      "enConcept": "Decompose work into cards with DoD, owner, date, priority, and dependencies. Use Kanban + WIP limits, log blockers, run weekly reviews, and warn early on slips. AI suggests; humans update truth.",
-      "zhCaseStudy": "完整任務管理案例：競賽隊用 Trello，起初 40 張卡全標急。改成 P0-P2＋WIP≤3 後，Blocked「問卷未過審」提前曝光。每週追蹤顯示寫作卡連續延誤，於是重配 R。交件前兩天只剩 P0，不再半夜開新想法卡。",
-      "enCaseStudy": "A competition team fixed “everything urgent” with priorities, WIP limits, and weekly slip reviews.",
-      "zhWorkflow": [
-        "從交付物拆任務卡（含 DoD）",
-        "設優先序、期限、依賴與個人／團隊標籤",
-        "上看板並限制進行中數量",
-        "每日／每週更新狀態與阻礙",
-        "做延誤預警與重配"
-      ],
-      "enWorkflow": [
-        "Break deliverables into cards with DoD",
-        "Set priority, dates, deps, personal/team tags",
-        "Board with WIP limits",
-        "Update status and blockers",
-        "Run slip warnings and rebalance"
-      ],
-      "zhCommonMistakes": [
-        "所有任務都急",
-        "不做阻礙紀錄",
-        "用 AI 假更新進度",
-        "個人與團隊任務混雜"
-      ],
-      "enCommonMistakes": [
-        "Everything urgent",
-        "No blocker notes",
-        "AI-fake progress",
-        "Mixing personal and team work"
-      ],
-      "zhExcellentExample": "優秀看板：卡可執行、優先序真實、Blocked 有原因、每週追蹤可見、個人／團隊分離。",
-      "enExcellentExample": "A strong board has actionable cards, honest priorities, explained blockers, visible weekly tracking, and separated personal work.",
-      "zhPrompt": "【Prompt 1｜任務清單生成器】\n交付物與 RACI：\n（貼上）\n會議待辦：\n（貼上）\n請拆成任務卡欄位：任務、DoD、負責人、期限、優先序、依賴、個人或團隊。負責人不明標待確認；不要發明已完成項目；區分事實輸入與你的拆解建議。",
-      "enPrompt": "[Prompt 1 | Task Breakdown] Create cards with DoD/owner/date/priority/deps; mark unknown owners pending; invent no completed work.",
-      "zhCoachPrompt": "【Prompt 2｜優先序與每週追蹤】\n任務列表：\n（貼上）\n本週截止：［日期］\n請建議 P0-P2，並產出每週追蹤表模板（完成／延誤／阻礙／下週P0）。若期限互相衝突，列出需組員決策的取捨，不要擅自刪別人的承諾。",
-      "enCoachPrompt": "[Prompt 2 | Priority & Weekly Tracker] Suggest P0–P2 and a weekly tracker; surface trade-offs instead of deleting others’ commitments.",
-      "zhFeedbackPrompt": "【Prompt 3｜延誤預警分析】\n看板狀態摘要：\n（貼上）\n請指出高風險卡、可能延誤原因、升級問題清單。資訊不足（無期限／無負責人）先列缺失，不要假報綠燈。",
-      "enFeedbackPrompt": "[Prompt 3 | Slip Warning] Flag high-risk cards and escalation questions; if data is missing, say so—don’t fake green status.",
-      "zhExample": "卡：問卷定稿｜DoD：題目過審＋Forms上線｜P0｜依賴：倫理同意｜狀態：Blocked（同意未回）。",
-      "enExample": "A P0 survey card blocked on ethics approval with a clear Definition of Done.",
-      "zhPractice": "建立真實專案看板。；完成一輪每週追蹤。；寫下至少一則延誤預警處理。；Challenge：把 WIP 降到可執行上限，刪併或延後至少 3 張低優先卡並通知組員。",
-      "enPractice": "Build a real Kanban.；Run one weekly review.；Handle one slip warning.；Challenge: enforce WIP by deferring/merging ≥3 low-priority cards with notice.",
-      "zhQuizItems": [
-        {
-          "q": "Kanban 中 Blocked 欄最應做的是？",
-          "options": [
-            "空白放著等奇蹟",
-            "寫明阻礙與需要誰處理",
-            "直接標 Done 安慰自己",
-            "刪除該任務假裝沒發生"
-          ],
-          "answer": 1,
-          "explain": "阻礙可見才能解。"
-        },
-        {
-          "q": "設定優先序時應避免？",
-          "options": [
-            "分辨 P0／P1／P2",
-            "全部標成最高優先",
-            "對齊截止與依賴",
-            "每週重審"
-          ],
-          "answer": 1,
-          "explain": "全部都急等於沒有優先序。"
-        },
-        {
-          "q": "AI 更新任務進度時不可？",
-          "options": [
-            "依組員提供狀態整理追蹤表",
-            "在無人回報時自行標示全部完成",
-            "標出缺負責人的卡",
-            "提出延誤預警問題"
-          ],
-          "answer": 1,
-          "explain": "不可捏造完成狀態。"
+    "zhSummary": [
+      "本堂成果：AI 工作任務拆解表",
+      "先分清 AI 可協助與必須本人判斷。",
+      "未知項一律標需確認，不捏造職場事實。"
+    ],
+    "enSummary": [
+      "Deliverable: AI Work Task Breakdown",
+      "Separate AI help from must-judge work.",
+      "Flag unknowns; never invent workplace facts."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "把整份任務丟給 AI 就算完成",
+        "why": "責任與判斷仍在本人",
+        "fix": "先拆步驟並標必須本人判斷區"
+      },
+      {
+        "error": "捏造截止日期或主管要求",
+        "why": "造成錯誤承諾",
+        "fix": "未知項一律標需確認"
+      },
+      {
+        "error": "完成標準空泛",
+        "why": "無法檢查是否完成",
+        "fix": "改成可勾選條件"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Treating AI output as the finished job",
+        "why": "Judgment stays with you",
+        "fix": "Split steps and mark must-judge items"
+      },
+      {
+        "error": "Inventing deadlines or manager asks",
+        "why": "Creates false commitments",
+        "fix": "Mark unknowns as needs confirmation"
+      },
+      {
+        "error": "Vague done criteria",
+        "why": "Cannot verify completion",
+        "fix": "Rewrite into tickable checks"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "完整度",
+        "levels": {
+          "incomplete": "缺主要區塊",
+          "basic": "只有步驟清單",
+          "good": "有 AI／人工界線",
+          "ready": "含完成標準與風險"
         }
-      ],
-      "enQuizItems": [
-        {
-          "q": "On a Kanban Blocked column you should:",
-          "options": [
-            "Leave it blank hoping",
-            "State the blocker and who must act",
-            "Mark Done for comfort",
-            "Delete the task"
-          ],
-          "answer": 1,
-          "explain": "Visible blockers enable resolution."
-        },
-        {
-          "q": "When prioritizing, avoid:",
-          "options": [
-            "Using P0/P1/P2",
-            "Marking everything top priority",
-            "Aligning dates and dependencies",
-            "Weekly re-review"
-          ],
-          "answer": 1,
-          "explain": "If all is urgent, nothing is."
-        },
-        {
-          "q": "AI must not when updating progress:",
-          "options": [
-            "Summarize statuses people reported",
-            "Mark everything done with no reports",
-            "Flag ownerless cards",
-            "Ask slip-warning questions"
-          ],
-          "answer": 1,
-          "explain": "Never fabricate completion."
+      },
+      {
+        "name": "正確性",
+        "levels": {
+          "incomplete": "捏造要求或數據",
+          "basic": "界線模糊",
+          "good": "事實與建議分開",
+          "ready": "未知項皆標確認"
         }
-      ],
-      "zhNotePrompt": "貼上本週 P0 三張卡與一則 Blocked 原因。",
-      "enNotePrompt": "Paste three P0 cards and one Blocked reason.",
-      "zhDeliverableChecklist": [
-        "任務卡含 DoD",
-        "看板欄位運作中",
-        "優先序已標",
-        "每週追蹤完成一次",
-        "個人／團隊任務已區分"
-      ],
-      "enDeliverableChecklist": [
-        "Cards have DoD",
-        "Board columns live",
-        "Priorities set",
-        "One weekly review done",
-        "Personal vs team separated"
-      ],
-      "zhScorecard": [
-        "可執行",
-        "優先真實",
-        "阻礙可見",
-        "追蹤規律",
-        "無假進度"
-      ],
-      "enScorecard": [
-        "Actionable",
-        "Honest priority",
-        "Visible blockers",
-        "Regular tracking",
-        "No fake progress"
-      ],
-      "resources": [
-        {
-          "name": "Trello",
-          "url": "https://trello.com",
-          "note": "Kanban 看板"
-        },
-        {
-          "name": "Asana",
-          "url": "https://asana.com",
-          "note": "任務期限與責任人"
-        },
-        {
-          "name": "ClickUp",
-          "url": "https://clickup.com",
-          "note": "狀態與工時追蹤"
-        },
-        {
-          "name": "Notion",
-          "url": "https://www.notion.so",
-          "note": "任務資料庫與每週檢視"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "拆卡與預警分析"
+      },
+      {
+        "name": "可執行度",
+        "levels": {
+          "incomplete": "無法開始",
+          "basic": "需大改",
+          "good": "本週可用",
+          "ready": "他人可依表執行"
         }
-      ],
-      "challenge": "為小組專題建立運作中的看板，連續 7 天每日更新；提交一張每週追蹤截圖（遮敏）與一則延誤處理紀錄。",
-      "id": "workplace-productivity-L9",
-      "lessonKey": "workplace-productivity-L9"
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Completeness",
+        "levels": {
+          "incomplete": "Missing core sections",
+          "basic": "Steps only",
+          "good": "AI/human split present",
+          "ready": "Done criteria + risks"
+        }
+      },
+      {
+        "name": "Accuracy",
+        "levels": {
+          "incomplete": "Invented asks/data",
+          "basic": "Fuzzy boundaries",
+          "good": "Facts vs suggestions split",
+          "ready": "Unknowns flagged"
+        }
+      },
+      {
+        "name": "Usability",
+        "levels": {
+          "incomplete": "Cannot start",
+          "basic": "Needs rewrite",
+          "good": "Usable this week",
+          "ready": "Someone else could follow it"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 45 分鐘 / About 45 min",
+    "difficulty": "入門 / Beginner",
+    "zhTitle": "第2課：用 AI 處理 Email 與專業溝通",
+    "enTitle": "Lesson 2: Use AI for email and professional communication",
+    "zhValueTip": "先有事實與請求，再調語氣；AI 草稿必須經人工確認才可送出。",
+    "enValueTip": "Facts and ask first, tone second. AI drafts need human confirmation before sending.",
+    "zhOutcome": "職場 Email 與訊息溝通模板",
+    "enOutcome": "Work Communication Template",
+    "zhConcept": "職場溝通不是「把話寫漂亮」，而是讓對方知道：你要什麼、根據哪些事實、何時回覆、下一步是什麼。AI 可以幫忙產主旨與結構，但不可假冒主管、不可捏造客戶意見，也不可代替你按下傳送。本平台不會自動串接 Gmail／Slack／Teams。",
+    "enConcept": "Workplace communication is not “pretty wording”—it is making the ask, facts, reply-by, and next step obvious. AI can draft subjects and structure, but must not impersonate managers, invent customer opinions, or hit send for you. This platform does not auto-connect Gmail/Slack/Teams.",
+    "zhCaseStudy": "行銷企劃小希要跟設計同事催檔，AI 第一版寫成「主管說你必須今天交」。她改成只提供：檔案類型、已知截止、自己的請求，並要求 Email＋短訊息兩版與禮貌跟進模板。她手動複製到自己的信箱與通訊軟體，沒有任何自動串接。",
+    "enCaseStudy": "Marketing coordinator Hope needed a design follow-up. AI’s first draft said “the manager says you must deliver today.” She then provided only file type, known deadline, and her own ask, and requested email + short-message versions plus a polite follow-up template. She copied manually into her own tools—no auto-integration.",
+    "zhWorkflow": [
+      "寫下收件者角色、目的與去敏事實",
+      "決定語氣與需要回覆時間",
+      "用 Prompt 產出主旨、正文、短訊息與四情境模板",
+      "用檢查表核對姓名、日期、承諾",
+      "手動複製到自己的工具並存檔模板"
+    ],
+    "enWorkflow": [
+      "Write recipient role, purpose, and sanitized facts",
+      "Choose tone and reply-by need",
+      "Generate subjects, body, short message, and four scenario templates",
+      "Check names, dates, and commitments",
+      "Copy manually into your tools and save the template"
+    ],
+    "zhCommonMistakes": [
+      "假冒主管或同事立場",
+      "未提供事實就要求完美信件",
+      "短訊息沒有請求與回覆時間",
+      "未核對姓名、日期、數字",
+      "宣稱平台會自動寄信或串接 Slack／Teams"
+    ],
+    "enCommonMistakes": [
+      "Impersonating a manager or coworker",
+      "Asking for a perfect letter with no facts",
+      "Short messages with no ask or reply-by",
+      "Skipping name/date/number checks",
+      "Claiming auto-send or Slack/Teams integration"
+    ],
+    "zhExcellentExample": "含：3 個主旨、結構完整正文、短訊息版、四情境模板、語氣檢查與人工確認清單。",
+    "enExcellentExample": "Includes 3 subjects, structured body, short message, four scenarios, tone checks, and human confirmation list.",
+    "zhPrompt": "你是職場溝通教練，協助撰寫專業、清楚、可追蹤的 Email／訊息草稿。不可假冒主管或同事立場，不可捏造客戶意見或未發生的承諾。\n\n我的背景：\n- 目標受眾（收件者角色）：[請填寫目標受眾]\n- 溝通目的（請求／更新／跟進／禮貌拒絕等）：[請填寫工作目標]\n- 已去除敏感資訊的事實與限制：[請貼上已去除敏感資訊的內容]\n- 想要的語氣（正式／友善／簡潔）：[請填寫]\n- 需要對方何時回覆（沒有就寫「未指定」）：[請填寫]\n\n任務：產出「職場 Email 與訊息溝通模板」，包含：\n1) Email 主旨 3 個選項（清楚、可搜尋）\n2) Email 正文結構：目的 → 事實 → 請求 → 截止／下一步 → 感謝\n3) 短訊息版（適合 Slack／Teams 類工具，手動複製；本平台無自動串接）\n4) 進度更新版、請求協助版、跟進版、禮貌拒絕版各 1 則短模板\n5) 語氣檢查表（是否清楚、是否可追蹤、是否過度承諾）\n6) 需人工確認清單（姓名、日期、數字、承諾範圍）\n\n限制：不要寫成已代表公司正式發信；不要捏造對方說過的話。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+    "enPrompt": "You are a workplace communication coach for clear, professional, trackable email/message drafts. Do not impersonate a manager or coworker. Do not invent customer opinions or commitments that did not happen.\n\nMy context:\n- Audience (recipient role): [Enter target audience]\n- Communication goal (request / update / follow-up / polite decline): [Enter work goal]\n- Sanitized facts and constraints: [Paste sanitized content]\n- Desired tone (formal / friendly / concise): [Enter]\n- Needed reply-by (or “unspecified”): [Enter]\n\nTask: Produce a “Work Communication Template” with:\n1) 3 email subject options (clear, searchable)\n2) Email body structure: purpose → facts → ask → deadline/next step → thanks\n3) Short-message version (for Slack/Teams-like tools; copy manually—this platform has no auto-integration)\n4) One short template each for: progress update, ask for help, follow-up, polite decline\n5) Tone checklist (clarity, trackability, over-commitment)\n6) Human confirmation list (names, dates, numbers, commitment scope)\n\nLimits: Do not present this as an official company send. Do not invent what the other party said.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+    "zhCoachPrompt": "【Prompt 2｜語氣與清晰度修改】\n我的草稿：\n（貼上）\n請標出：含糊請求、可能冒犯、資訊過載、主旨問題；給修改版並說明理由。保持原意，不要改成另一個請求。",
+    "enCoachPrompt": "[Prompt 2 | Tone & Clarity Edit] Flag vague asks, tone risks, overload, and subject issues; revise with reasons without changing the request.",
+    "zhFeedbackPrompt": "【Prompt 3｜寄出前驗收】\n最終信：\n（貼上）\n附件／連結權限說明：\n（貼上）\n請用檢查表評分並給寄出前最後三修。若權限資訊不足，明確警告風險。",
+    "enFeedbackPrompt": "[Prompt 3 | Pre-send QA] Score the final email and warn if permission info is insufficient; give three last fixes.",
+    "zhExample": "受眾：跨部門同事；目的：跟進設計檔；事實：截止週三、檔案為去敏後的規格摘要；語氣：簡潔友善。",
+    "enExample": "Audience: cross-team teammate; goal: follow up on design file; facts: due Wed, sanitized spec summary; tone: concise and friendly.",
+    "zhPractice": "選定一種真實溝通情境並去敏。；產出 Email＋短訊息＋四情境模板。；完成語氣與確認檢查。；存成「職場 Email 與訊息溝通模板」。",
+    "enPractice": "Pick one real sanitized communication case.; Produce email + short message + four scenarios.; Finish tone and confirmation checks.; Save the Work Communication Template.",
+    "zhQuizItems": [
+      {
+        "q": "學術 Email 主旨較佳的是？",
+        "options": [
+          "（空白）",
+          "【課程名】具體事由，例如請求面談時段",
+          "急！！！",
+          "請問"
+        ],
+        "answer": 1,
+        "explain": "主旨要可掃讀且含課程與事由。"
+      },
+      {
+        "q": "請 AI 寫信時最重要的是？",
+        "options": [
+          "讓它編造更感人的理由",
+          "只提供真實事實，缺資訊要先澄清",
+          "語氣越卑微越好到失去清楚請求",
+          "不需要署名"
+        ],
+        "answer": 1,
+        "explain": "事實真實與請求清楚優先。"
+      },
+      {
+        "q": "未獲回覆時較合適的是？",
+        "options": [
+          "連續轟炸並指責",
+          "隔數個工作天禮貌追問並附重點",
+          "立刻公開投訴社群",
+          "改寄空白信"
+        ],
+        "answer": 1,
+        "explain": "禮貌有間隔的追問是專業做法。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "Best academic email subject?",
+        "options": [
+          "(blank)",
+          "[Course] specific purpose, e.g., meeting request",
+          "URGENT!!!",
+          "Question"
+        ],
+        "answer": 1,
+        "explain": "Subjects should be scannable with course + purpose."
+      },
+      {
+        "q": "Most important when using AI to draft email?",
+        "options": [
+          "Invent more emotional reasons",
+          "Provide only true facts and clarify gaps first",
+          "Maximize self-abasement until the ask is unclear",
+          "Skip the signature"
+        ],
+        "answer": 1,
+        "explain": "True facts and a clear ask come first."
+      },
+      {
+        "q": "If there’s no reply, better to:",
+        "options": [
+          "Spam and accuse",
+          "Politely follow up after a few business days with a recap",
+          "Publicly complain immediately",
+          "Send a blank message"
+        ],
+        "answer": 1,
+        "explain": "Spaced polite follow-ups are professional."
+      }
+    ],
+    "zhNotePrompt": "寫下你最常寫的一種訊息、你容易過度承諾的一句話，以及你會改成的可追蹤版本。",
+    "enNotePrompt": "Write your most common message type, one sentence you tend to over-promise, and your trackable rewrite.",
+    "zhDeliverableChecklist": [
+      "已有 Email 主旨與正文結構",
+      "已有短訊息版",
+      "已有更新／請求／跟進／拒絕模板",
+      "已有語氣檢查表",
+      "已有姓名／日期／數字／承諾確認清單",
+      "未假冒他人立場，未宣稱自動串接"
+    ],
+    "enDeliverableChecklist": [
+      "Email subjects and body structure included",
+      "Short-message version included",
+      "Update / ask / follow-up / decline templates included",
+      "Tone checklist included",
+      "Name/date/number/commitment confirmation list included",
+      "No impersonation; no auto-integration claims"
+    ],
+    "zhScorecard": [
+      "主旨清楚",
+      "請求可執行",
+      "語氣得體",
+      "事實真實",
+      "可追蹤"
+    ],
+    "enScorecard": [
+      "Clear subject",
+      "Actionable ask",
+      "Appropriate tone",
+      "True facts",
+      "Follow-up ready"
+    ],
+    "id": "workplace-productivity-L2",
+    "lessonKey": "workplace-productivity-L2",
+    "zhWhyItMatters": {
+      "problem": "溝通一急，就容易語氣過硬、承諾過度，或訊息短到無法追蹤。",
+      "ineffective": "只說「幫我寫一封專業 Email」卻不提供事實與請求。",
+      "solution": "先整理去敏事實與目的，產出可重用模板，再用人工確認姓名、日期與承諾範圍。"
     },
-    {
-      "icon": "☁️",
-      "title": "整合完成「個人 AI 工作流程系統」",
-      "description": "用 Drive／Docs／Sheets／Slides 與 AI 建立大學專題協作規範：權限、版本、註解與交接。",
-      "goal": "我的小組 Workspace 協作憲章＋資料夾權限與交接示範",
-      "estimatedTime": "55-75 分鐘",
-      "difficulty": "中階",
-      "tags": [
-        "Google Workspace",
-        "協作",
-        "權限",
-        "Chapter8"
+    "enWhyItMatters": {
+      "problem": "Rushing leads to harsh tone, over-commitment, or untrackable short messages.",
+      "ineffective": "Only saying “write a professional email” with no facts or ask.",
+      "solution": "Sanitize facts and purpose first, build reusable templates, then human-check names, dates, and commitment scope."
+    },
+    "zhObjectives": [
+      "為一種真實溝通情境寫清目的與請求",
+      "產出 Email 主旨、正文與短訊息版",
+      "建立更新／請求／跟進／拒絕四類短模板",
+      "完成語氣與人工確認檢查表",
+      "存成「職場 Email 與訊息溝通模板」"
+    ],
+    "enObjectives": [
+      "Clarify purpose and ask for one real communication case",
+      "Produce email subjects, body, and short-message version",
+      "Build update / ask / follow-up / decline short templates",
+      "Finish tone and human-confirmation checklists",
+      "Save a Work Communication Template"
+    ],
+    "zhOutputName": "職場 Email 與訊息溝通模板",
+    "enOutputName": "Work Communication Template",
+    "zhCaseStudyBlocks": {
+      "problem": "小希要催稿，怕語氣太硬或假借主管施壓。",
+      "wrong": "讓 AI 假冒主管要求並直接當正式訊息。",
+      "right": "只提供去敏事實與自己的請求，產出模板並人工確認。",
+      "result": "可重用的「職場 Email 與訊息溝通模板」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Hope needs a follow-up without sounding harsh or faking manager pressure.",
+      "wrong": "Let AI impersonate a manager and treat it as final.",
+      "right": "Provide sanitized facts and her ask; draft templates; human-check.",
+      "result": "A reusable Work Communication Template."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "整理溝通事實",
+        "why": "沒有事實就容易空話",
+        "input": "去敏筆記",
+        "output": "事實清單",
+        "check": "有無敏感資料"
+      },
+      {
+        "do": "寫目的與請求",
+        "why": "對方要能行動",
+        "input": "工作目標",
+        "output": "一句請求",
+        "check": "是否可追蹤"
+      },
+      {
+        "do": "產出模板",
+        "why": "一次建立可重用資產",
+        "input": "上一步",
+        "output": "溝通模板包",
+        "check": "是否含四情境"
+      },
+      {
+        "do": "人工確認",
+        "why": "避免低級錯誤",
+        "input": "草稿",
+        "output": "已核對版",
+        "check": "姓名日期數字"
+      },
+      {
+        "do": "存檔",
+        "why": "之後可改寫重用",
+        "input": "定稿",
+        "output": "成果包",
+        "check": "有無自動串接宣稱"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Gather communication facts",
+        "why": "No facts → empty prose",
+        "input": "Sanitized notes",
+        "output": "Fact list",
+        "check": "Sensitive data removed"
+      },
+      {
+        "do": "Write purpose and ask",
+        "why": "Recipient must be able to act",
+        "input": "Work goal",
+        "output": "One ask",
+        "check": "Trackable"
+      },
+      {
+        "do": "Generate templates",
+        "why": "Build a reusable asset",
+        "input": "Prior step",
+        "output": "Template pack",
+        "check": "Four scenarios present"
+      },
+      {
+        "do": "Human confirmation",
+        "why": "Catch basic errors",
+        "input": "Draft",
+        "output": "Checked version",
+        "check": "Names/dates/numbers"
+      },
+      {
+        "do": "Save",
+        "why": "Reuse later",
+        "input": "Final",
+        "output": "Package",
+        "check": "No auto-integration claims"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "寫清目的與受眾",
+        "standard": "請求具體可回覆",
+        "mistakes": "只有「幫我寫信」",
+        "check": "對方知不知道要做什麼？"
+      },
+      {
+        "task": "產出多版本模板",
+        "standard": "含主旨與短訊息",
+        "mistakes": "只有一封長文",
+        "check": "能否手動複製使用？"
+      },
+      {
+        "task": "檢查語氣與承諾",
+        "standard": "無假冒、無過度承諾",
+        "mistakes": "借用主管施壓",
+        "check": "是否越權？"
+      },
+      {
+        "task": "存檔",
+        "standard": "名稱正確",
+        "mistakes": "未存",
+        "check": "成果包看得到？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Clarify purpose and audience",
+        "standard": "Ask is replyable",
+        "mistakes": "Only “write an email”",
+        "check": "Does the recipient know what to do?"
+      },
+      {
+        "task": "Produce multi-version templates",
+        "standard": "Subjects + short message",
+        "mistakes": "One long letter only",
+        "check": "Can you copy manually?"
+      },
+      {
+        "task": "Check tone and commitments",
+        "standard": "No impersonation or over-promise",
+        "mistakes": "Fake manager pressure",
+        "check": "Any overreach?"
+      },
+      {
+        "task": "Save",
+        "standard": "Correct name",
+        "mistakes": "Not saved",
+        "check": "Visible in package?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "要寫 Email／訊息卻怕語氣或承諾失控時使用",
+      "fields": [
+        "[請填寫工作目標]",
+        "[請貼上已去除敏感資訊的內容]",
+        "[請填寫目標受眾]"
       ],
-      "progress": 0,
-      "completed": false,
-      "locked": false,
-      "chapterIndex": 7,
-      "chapterZh": "AI 學習生產力系統",
-      "chapterEn": "AI Learning Productivity System",
-      "zhTitle": "第10課：整合完成「個人 AI 工作流程系統」",
-      "enTitle": "Lesson 10: Complete your personal AI workplace workflow system",
-      "zhValueTip": "用 Drive／Docs／Sheets／Slides 與 AI 建立大學專題協作規範：權限、版本、註解與交接。",
-      "enValueTip": "Build a university team Workspace playbook—permissions, versions, comments, and handoffs—across Drive/Docs/Sheets/Slides with AI help.",
-      "zhOutcome": "我的小組 Workspace 協作憲章＋資料夾權限與交接示範",
-      "enOutcome": "My Team Workspace Collaboration Charter + Folder Permission & Handoff Demo",
-      "zhConcept": "大學專題失敗常因協作而非智商：檔案散落、權限錯、有人覆蓋、不知道哪份是 final。Google Workspace 生產力系統包含：單一專案資料夾、命名規則、角色權限（檢視／留言／編輯）、建議模式、版本紀錄、任務看板（可用 Sheets）、會議紀錄 Docs。AI 可協助草擬協作憲章、開會紀錄結構、分工表、風險清單；不可替整組編造進度或假資料。權限最小必要：外部連結預設受限；交作業前鎖定編輯或匯出 PDF。敏感個資不要放可公開連結。註解文化：改他人內容先留言說明；爭議用建議模式。AI 可幫你把爭執點整理成選項表，決策仍由人定。交接：負責人輪替時更新「檔案地圖」——哪個檔是真相來源（source of truth）。與前幾課整合：Word 規格、Excel 字典、PPT 主張圖都放進同一 Drive 樹，避免各做各的。完成後小組應能在 2 分鐘內找到 final 與原始資料。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。每次結束寫三行日誌：今天節省的步驟、仍易出錯的點、明天可複製到其他課程的模板動作。與同學協作時遵守最小權限與學術誠信；不要用 AI 捏造數據、進度或老師承諾。當文件、試算、投影片、雲端協作與 Email 能串成生產力閉環，你換專案也能快速啟動。資訊不足時要敢標示待補，不要為了「看起來完整」而硬編；可執行的真實系統勝過華麗空殼。此外，請把本課產出存成 raw／final：raw 保留 AI 對話與草稿，final 是核對後可繳交或可交接的版本。",
-      "enConcept": "Create one project folder tree, naming rules, least-privilege sharing, suggestion mode, version truth, and handoff maps. AI drafts playbooks; humans decide and never fake progress.",
-      "zhCaseStudy": "情境案例：四人不斷傳 LINE 檔，交件前三份「最終版」。後來建 Drive 專案樹＋憲章，只保留一處 final，權限分級。截止前衝突下降，助教也找得到正確檔。",
-      "enCaseStudy": "A four-person team replaced LINE file chaos with a Drive tree and one source-of-truth final.",
-      "zhWorkflow": [
-        "建立專案資料夾樹與命名規則",
-        "寫協作憲章（權限／留言／AI 使用／截止）",
-        "設定分享與建議模式示範",
-        "用 AI 產生會議紀錄與分工表模板",
-        "做交接檔案地圖演練"
-      ],
-      "enWorkflow": [
-        "Build folder tree and naming rules",
-        "Write a collaboration charter",
-        "Demo sharing + suggestion mode",
-        "Generate meeting notes and task templates with AI",
-        "Rehearse a handoff file map"
-      ],
-      "zhCommonMistakes": [
-        "到處開放編輯連結",
-        "多個 final 並存",
-        "不留言直接大改",
-        "用 AI 謊報進度"
-      ],
-      "enCommonMistakes": [
-        "Anyone-with-link edit",
-        "Multiple competing finals",
-        "Silent overwrites",
-        "AI-faked progress"
-      ],
-      "zhExcellentExample": "優秀協作：一樹資料夾、一處 final、憲章可見、權限正確、交接地圖清楚。",
-      "enExcellentExample": "Strong collaboration has one tree, one final, a visible charter, correct permissions, and a clear handoff map.",
-      "zhPrompt": "【Prompt 1｜Workspace 協作憲章草稿】\n專案：［ ］；人數：［ ］；工具：Drive／Docs／Sheets／Slides\n已知問題：\n（貼上）\n請草擬協作憲章：資料夾結構、命名、權限、建議模式規則、AI 使用界線、截止前鎖定流程。標出需全組確認的決策點；不要假裝已投票通過。",
-      "enPrompt": "[Prompt 1 | Collaboration Charter Draft] Propose folder/naming/permissions/AI boundaries and mark decisions needing team confirmation.",
-      "zhCoachPrompt": "【Prompt 2｜會議紀錄與分工表】\n會議原始筆記：\n（貼上）\n請整理成：決議、待辦（負責人／截止）、風險、下次會議前必做。不要發明出席者沒說的承諾；不清楚處列「待確認」。",
-      "enCoachPrompt": "[Prompt 2 | Notes & Tasks] Turn raw notes into decisions, owners/deadlines, risks, and pre-work—no invented commitments.",
-      "zhFeedbackPrompt": "【Prompt 3｜權限與 final 風險審查】\n目前分享設定與檔案列表描述：\n（貼上）\n請指出外洩／覆蓋／找錯檔風險，給修復步驟。資訊不足請追問，不要假設我已設好限制連結。",
-      "enFeedbackPrompt": "[Prompt 3 | Permission & Final Risk Review] Flag leak/overwrite/wrong-file risks and fixes; ask when sharing details are missing.",
-      "zhExample": "結構：00_管理／01_資料／02_文稿／03_簡報／99_final。｜權限：組員編輯、同學檢視。｜交件前：鎖定＋匯出 PDF。",
-      "enExample": "A numbered Drive tree with edit for teammates, view for peers, and lock+PDF before submit.",
-      "zhPractice": "為真實小組專案建資料夾樹。；完成協作憲章 v1。；示範建議模式與版本。；Challenge：模擬負責人請假，另一人只靠檔案地圖在 5 分鐘內找到 final 與原始資料。",
-      "enPractice": "Build a real project folder tree.；Write charter v1.；Demo suggestion mode/version history.；Challenge: a 5-minute handoff drill to find final and source data.",
-      "zhQuizItems": [
+      "body": "你是職場溝通教練，協助撰寫專業、清楚、可追蹤的 Email／訊息草稿。不可假冒主管或同事立場，不可捏造客戶意見或未發生的承諾。\n\n我的背景：\n- 目標受眾（收件者角色）：[請填寫目標受眾]\n- 溝通目的（請求／更新／跟進／禮貌拒絕等）：[請填寫工作目標]\n- 已去除敏感資訊的事實與限制：[請貼上已去除敏感資訊的內容]\n- 想要的語氣（正式／友善／簡潔）：[請填寫]\n- 需要對方何時回覆（沒有就寫「未指定」）：[請填寫]\n\n任務：產出「職場 Email 與訊息溝通模板」，包含：\n1) Email 主旨 3 個選項（清楚、可搜尋）\n2) Email 正文結構：目的 → 事實 → 請求 → 截止／下一步 → 感謝\n3) 短訊息版（適合 Slack／Teams 類工具，手動複製；本平台無自動串接）\n4) 進度更新版、請求協助版、跟進版、禮貌拒絕版各 1 則短模板\n5) 語氣檢查表（是否清楚、是否可追蹤、是否過度承諾）\n6) 需人工確認清單（姓名、日期、數字、承諾範圍）\n\n限制：不要寫成已代表公司正式發信；不要捏造對方說過的話。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "expected": "含主旨、正文、短訊息與多情境模板的溝通包",
+      "revisionReminder": "請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "extensions": [
         {
-          "q": "小組協作最應避免的是？",
-          "options": [
-            "單一專案資料夾與命名規則",
-            "同時存在多個互斥「最終版」且權限混亂",
-            "使用建議模式討論修改",
-            "交件前鎖定"
-          ],
-          "answer": 1,
-          "explain": "多 final＋亂權限是交件災難主因。"
-        },
-        {
-          "q": "對外分享連結時較安全的預設是？",
-          "options": [
-            "任何人可編輯",
-            "最小必要權限，避免公開可編輯",
-            "把個資放在公開資料夾無妨",
-            "不需要資料夾"
-          ],
-          "answer": 1,
-          "explain": "最小權限原則。"
-        },
-        {
-          "q": "AI 在協作中的合適角色是？",
-          "options": [
-            "替小組捏造進度報告交差",
-            "草擬憲章、整理會議待辦，決策與事實仍由人確認",
-            "自動覆蓋他人段落不必說明",
-            "取消所有權限設定"
-          ],
-          "answer": 1,
-          "explain": "AI 輔助整理，不造假、不擅自覆蓋。"
+          "title": "延伸：把草稿改成更可追蹤",
+          "body": "請檢查我貼上的草稿，標出含糊請求與缺少截止的句子，改成可追蹤版本。不要新增我沒提供的承諾。"
         }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when drafting email/messages and you worry about tone or over-commitment",
+      "fields": [
+        "[Enter work goal]",
+        "[Paste sanitized content]",
+        "[Enter target audience]"
       ],
-      "enQuizItems": [
+      "body": "You are a workplace communication coach for clear, professional, trackable email/message drafts. Do not impersonate a manager or coworker. Do not invent customer opinions or commitments that did not happen.\n\nMy context:\n- Audience (recipient role): [Enter target audience]\n- Communication goal (request / update / follow-up / polite decline): [Enter work goal]\n- Sanitized facts and constraints: [Paste sanitized content]\n- Desired tone (formal / friendly / concise): [Enter]\n- Needed reply-by (or “unspecified”): [Enter]\n\nTask: Produce a “Work Communication Template” with:\n1) 3 email subject options (clear, searchable)\n2) Email body structure: purpose → facts → ask → deadline/next step → thanks\n3) Short-message version (for Slack/Teams-like tools; copy manually—this platform has no auto-integration)\n4) One short template each for: progress update, ask for help, follow-up, polite decline\n5) Tone checklist (clarity, trackability, over-commitment)\n6) Human confirmation list (names, dates, numbers, commitment scope)\n\nLimits: Do not present this as an official company send. Do not invent what the other party said.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "expected": "A communication pack with subjects, body, short message, and scenario templates",
+      "revisionReminder": "Remove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "extensions": [
         {
-          "q": "Team collaboration should most avoid:",
-          "options": [
-            "One project folder and naming rules",
-            "Multiple conflicting finals with messy permissions",
-            "Suggestion mode discussions",
-            "Locking before submit"
-          ],
-          "answer": 1,
-          "explain": "Competing finals plus bad permissions cause submit disasters."
-        },
-        {
-          "q": "Safer default for sharing links:",
-          "options": [
-            "Anyone can edit",
-            "Least privilege; avoid public edit links",
-            "Public PII is fine",
-            "Folders unnecessary"
-          ],
-          "answer": 1,
-          "explain": "Least privilege."
-        },
-        {
-          "q": "Appropriate AI role in collaboration?",
-          "options": [
-            "Fabricate progress reports",
-            "Draft charters and task lists while humans confirm facts",
-            "Silently overwrite others",
-            "Remove all permissions"
-          ],
-          "answer": 1,
-          "explain": "AI assists; humans own truth and edits."
+          "title": "Extension: make the draft trackable",
+          "body": "Review my draft; flag vague asks and missing deadlines; rewrite for trackability. Do not add commitments I did not provide."
         }
+      ]
+    },
+    "zhNextStep": "下一堂把會議前準備與會後紀錄做成可重用的會議系統，仍不得捏造未發生的決議。",
+    "enNextStep": "Next, build a reusable meeting prep-and-notes system—still without inventing decisions that did not happen.",
+    "zhConceptBlocks": {
+      "principles": [
+        "事實先於文采",
+        "請求必須可追蹤",
+        "人工確認後才送出"
       ],
-      "zhNotePrompt": "貼上資料夾樹與憲章中的 AI 使用界線、交件鎖定規則。",
-      "enNotePrompt": "Paste your folder tree plus AI boundaries and pre-submit lock rules from the charter.",
-      "zhDeliverableChecklist": [
-        "專案資料夾樹完成",
-        "協作憲章 v1",
-        "權限設定正確",
-        "會議／分工模板可用",
-        "交接演練通過"
+      "terms": [
+        "可追蹤請求",
+        "短訊息版",
+        "語氣檢查表"
       ],
-      "enDeliverableChecklist": [
-        "Folder tree ready",
-        "Charter v1 done",
-        "Permissions correct",
-        "Meeting/task templates ready",
-        "Handoff drill passed"
+      "criteria": [
+        "有目的",
+        "有請求",
+        "有確認清單"
       ],
-      "zhScorecard": [
-        "單一真相來源",
-        "權限安全",
+      "boundaries": [
+        "避免：假冒主管",
+        "避免：捏造對方意見",
+        "避免：自動串接宣稱"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Facts before style",
+        "Asks must be trackable",
+        "Human confirm before send"
+      ],
+      "terms": [
+        "Trackable ask",
+        "Short-message version",
+        "Tone checklist"
+      ],
+      "criteria": [
+        "Purpose",
+        "Ask",
+        "Confirmation list"
+      ],
+      "boundaries": [
+        "Avoid: impersonation",
+        "Avoid: inventing others’ views",
+        "Avoid: integration claims"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：職場 Email 與訊息溝通模板",
+      "模板可重用，送出前必須人工確認。",
+      "本平台不自動寄信或串接通訊工具。"
+    ],
+    "enSummary": [
+      "Deliverable: Work Communication Template",
+      "Reusable templates; human confirm before send.",
+      "No auto-send or chat integrations here."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "假冒主管口吻發號施令",
+        "why": "越權且不真實",
+        "fix": "只用自己的角色與已知事實"
+      },
+      {
+        "error": "把短訊息寫成無法追蹤的一句話",
+        "why": "對方不知要做什麼",
+        "fix": "補上請求與回覆時間"
+      },
+      {
+        "error": "未核對姓名日期就送出",
+        "why": "低級錯誤傷信任",
+        "fix": "用確認清單逐項勾"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Impersonating a manager’s voice",
+        "why": "Unauthorized and untrue",
+        "fix": "Stay in your role with known facts"
+      },
+      {
+        "error": "One-line messages with no ask",
+        "why": "Recipient cannot act",
+        "fix": "Add the ask and reply-by"
+      },
+      {
+        "error": "Sending without checking names/dates",
+        "why": "Erodes trust",
+        "fix": "Tick the confirmation list"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "清楚度",
+        "levels": {
+          "incomplete": "目的不明",
+          "basic": "有目的但請求糊",
+          "good": "目的與請求清楚",
+          "ready": "含截止與追蹤點"
+        }
+      },
+      {
+        "name": "專業度",
+        "levels": {
+          "incomplete": "語氣越權或冒犯",
+          "basic": "可用但不穩",
+          "good": "語氣得體",
+          "ready": "無假冒／無過度承諾"
+        }
+      },
+      {
+        "name": "可重用性",
+        "levels": {
+          "incomplete": "只能用一次",
+          "basic": "略改可用",
+          "good": "四情境模板齊",
+          "ready": "含檢查表"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Clarity",
+        "levels": {
+          "incomplete": "Purpose unclear",
+          "basic": "Purpose ok, ask fuzzy",
+          "good": "Purpose and ask clear",
+          "ready": "Deadline + tracking"
+        }
+      },
+      {
+        "name": "Professionalism",
+        "levels": {
+          "incomplete": "Overreach or rude",
+          "basic": "Usable but shaky",
+          "good": "Appropriate tone",
+          "ready": "No impersonation/over-promise"
+        }
+      },
+      {
+        "name": "Reuse",
+        "levels": {
+          "incomplete": "One-off only",
+          "basic": "Slightly reusable",
+          "good": "Four scenarios covered",
+          "ready": "Checklist included"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 45 分鐘 / About 45 min",
+    "difficulty": "入門 / Beginner",
+    "zhTitle": "第3課：用 AI 整理會議紀錄、決策與待辦",
+    "enTitle": "Lesson 3: Use AI to capture meeting notes, decisions, and action items",
+    "zhValueTip": "會議紀錄的價值在可追蹤，不在文筆；沒寫過的決議不要讓 AI 補。",
+    "enValueTip": "Meeting notes are valuable when trackable, not when eloquent. Do not let AI invent decisions.",
+    "zhOutcome": "會議準備與紀錄系統",
+    "enOutcome": "Meeting Preparation & Notes Workflow",
+    "zhConcept": "有效會議有兩段：會前把目的與問題準備好，會後把決策與 Action Items 變成可追蹤事項。AI 可以幫忙整理結構，但不能幫你「記得」沒發生過的話，也不能自動錄音或寫進公司日曆。這一課產出「會議準備與紀錄系統」。",
+    "enConcept": "Effective meetings have two halves: prepare purpose and questions beforehand; turn decisions and action items into trackable work afterward. AI can structure notes—it cannot remember words that were never said, auto-record, or write into your company calendar. This lesson produces a Meeting Preparation & Notes Workflow.",
+    "zhCaseStudy": "初階專案助理阿哲開完對齊會，請 AI「生成完整會議紀錄」，結果出現他沒聽過的預算決議。他改成只貼去敏關鍵字筆記，要求：分開討論／決策／待確認，並產出 Action Items 空 Owner 處標未指定。他會後用 10 分鐘向與會者確認，而不是把假決議發出。",
+    "enCaseStudy": "Junior PM Zhe asked AI for “full minutes” after a sync and got a budget decision he never heard. He then pasted only sanitized keyword notes, required discussion/decisions/to-confirm splits, and marked blank owners as unassigned. He spent 10 minutes confirming with attendees instead of sending fake decisions.",
+    "zhWorkflow": [
+      "寫會議目的與已知議題（去敏）",
+      "產出會前 Agenda 與要確認的問題",
+      "會後貼上真實筆記，整理決策與 Action Items",
+      "刪除任何補造內容並向與會者確認",
+      "存成會議準備與紀錄系統"
+    ],
+    "enWorkflow": [
+      "Write meeting purpose and known topics (sanitized)",
+      "Produce pre-meeting agenda and confirmation questions",
+      "Paste real notes after; structure decisions and action items",
+      "Delete fabrications and confirm with attendees",
+      "Save the Meeting Preparation & Notes Workflow"
+    ],
+    "zhCommonMistakes": [
+      "讓 AI 捏造未發生的決議或發言",
+      "Action Items 沒有 Owner 或 Deadline",
+      "把會前假設寫成會後事實",
+      "貼上含客戶機密的完整錄音稿",
+      "宣稱平台會自動錄音／轉錄／寫入日曆"
+    ],
+    "enCommonMistakes": [
+      "Letting AI invent decisions or quotes",
+      "Action items without owner or deadline",
+      "Writing pre-meeting guesses as post facts",
+      "Pasting confidential full transcripts",
+      "Claiming auto recording/transcription/calendar writeback"
+    ],
+    "zhExcellentExample": "含：目的、時間盒 Agenda、紀錄三區、Action Items 表、待確認決策、手動追蹤提示。",
+    "enExcellentExample": "Includes purpose, timeboxed agenda, three note zones, action-item table, to-confirm decisions, manual-tracking note.",
+    "zhPrompt": "你是會議效率教練，協助準備議程與整理會議紀錄。不可捏造未發生的討論、決議、出席者發言或 Action Items。\n\n我的背景：\n- 會議目的／工作目標：[請填寫工作目標]\n- 目標受眾（與會角色）：[請填寫目標受眾]\n- 已去除敏感資訊的會前資料或會中筆記：[請貼上已去除敏感資訊的內容]\n- 會議時長與已知議題（沒有就寫「未定」）：[請填寫]\n\n任務：產出「會議準備與紀錄系統」，包含：\nA. 會前：會議目的、Agenda（含時間盒）、要確認的問題、需要帶的資料清單\nB. 會中／會後：會議紀錄架構（討論重點／決策／待決）\nC. Action Items 表：事項、Owner、Deadline、依賴、狀態\nD. 決策區：只列使用者提供或標「需向與會者確認」的決策\nE. 風險：可能被誤解或遺漏的項目\nF. 手動追蹤提示（本平台無自動會議錄音、轉錄或日曆串接）\n\n規則：原始筆記沒寫的，寫「未在輸入中出現／需確認」，禁止補造。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+    "enPrompt": "You are a meeting-effectiveness coach for agendas and notes. Do not invent discussions, decisions, quotes, or action items that did not happen.\n\nMy context:\n- Meeting purpose / work goal: [Enter work goal]\n- Audience (attendee roles): [Enter target audience]\n- Sanitized prep notes or in-meeting notes: [Paste sanitized content]\n- Duration and known topics (or “TBD”): [Enter]\n\nTask: Produce a “Meeting Preparation & Notes Workflow” with:\nA. Before: purpose, agenda (timeboxed), questions to confirm, materials to bring\nB. During/after: notes structure (discussion / decisions / open issues)\nC. Action-item table: item, owner, deadline, dependency, status\nD. Decisions section: only user-provided decisions or mark “confirm with attendees”\nE. Risks: likely misunderstandings or omissions\nF. Manual tracking note (this platform has no auto recording, transcription, or calendar integration)\n\nRule: If it was not in the input, write “not in input / needs confirmation.” Do not fabricate.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+    "zhCoachPrompt": "【Prompt 2｜決策與待辦擷取檢查】\nAI 初稿：\n（貼上）\n關鍵原句：\n（貼上）\n請逐條判定：已決策／僅討論／資訊不足。給修正後待辦表。缺少負責人時不要隨便填名字。",
+    "enCoachPrompt": "[Prompt 2 | Decision Audit] Classify each item as decided/discussed/insufficient; fix the action table; never invent owners.",
+    "zhFeedbackPrompt": "【Prompt 3｜會後確認包】\n會議紀錄定稿候選：\n（貼上）\n請寫一則給組員的確認訊息（精簡），列出需回覆的待確認項。不要自行替組員回覆同意。",
+    "enFeedbackPrompt": "[Prompt 3 | Confirmation Ping] Draft a short confirmation message listing pending items—do not consent on members’ behalf.",
+    "zhExample": "目的：對齊週報時程；與會：主管＋兩位同事；筆記：三個議題關鍵字與兩個待辦（去敏）。",
+    "enExample": "Purpose: align weekly report timing; attendees: manager + two teammates; notes: three topic keywords and two todos (sanitized).",
+    "zhPractice": "選一場真實會議（或模擬）並去敏。；完成會前 Agenda 與會後紀錄架構。；建立 Action Items 並標未指定項。；存成「會議準備與紀錄系統」。",
+    "enPractice": "Pick one real or practice meeting (sanitized).; Finish pre-agenda and post notes structure.; Build action items and mark unassigned fields.; Save the Meeting Preparation & Notes Workflow.",
+    "zhQuizItems": [
+      {
+        "q": "AI 整理會議逐字稿後最必要的一步是？",
+        "options": [
+          "立刻當最終決策執行",
+          "人工核對決策／人名／期限並標待確認",
+          "刪除原始錄音以省空間",
+          "讓 AI 替缺席者投票"
+        ],
+        "answer": 1,
+        "explain": "必須防幻覺並保留可追溯性。"
+      },
+      {
+        "q": "會議紀錄中「待辦」應至少包含？",
+        "options": [
+          "只有一句很長的感想",
+          "任務、負責人與截止時間",
+          "無關表情符號",
+          "未確認的八卦"
+        ],
+        "answer": 1,
+        "explain": "無可執行三件組就不算待辦。"
+      },
+      {
+        "q": "把「有人提議延期」寫成「已決議延期」屬於？",
+        "options": [
+          "正確摘要",
+          "把討論當決策的高風險錯誤",
+          "不必理會",
+          "比原句更真實"
+        ],
+        "answer": 1,
+        "explain": "提議≠通過。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "Most necessary step after AI meeting notes?",
+        "options": [
+          "Execute as final immediately",
+          "Human-verify decisions/names/dates and mark pending",
+          "Delete the recording",
+          "Let AI vote for absentees"
+        ],
+        "answer": 1,
+        "explain": "Prevent hallucinations and keep traceability."
+      },
+      {
+        "q": "An action item should include at least:",
+        "options": [
+          "A long reflection only",
+          "Task, owner, and due date",
+          "Random emojis",
+          "Unverified gossip"
+        ],
+        "answer": 1,
+        "explain": "Without the trio it isn’t actionable."
+      },
+      {
+        "q": "Writing “someone suggested delay” as “we resolved to delay” is:",
+        "options": [
+          "Accurate summary",
+          "A high-risk treat-discussion-as-decision error",
+          "Harmless",
+          "More true than the quote"
+        ],
+        "answer": 1,
+        "explain": "Proposal ≠ decision."
+      }
+    ],
+    "zhNotePrompt": "寫下下次會議的 1 個目的、3 個要確認的問題，以及你會如何標記未指定的 Owner。",
+    "enNotePrompt": "Write one purpose for your next meeting, 3 confirmation questions, and how you will mark unassigned owners.",
+    "zhDeliverableChecklist": [
+      "已有會議目的與 Agenda",
+      "已有討論／決策／待決架構",
+      "已有 Action Items（Owner／Deadline 或未指定標記）",
+      "未出現的內容已標需確認",
+      "未捏造發言或決議",
+      "未宣稱自動錄音／日曆串接"
+    ],
+    "enDeliverableChecklist": [
+      "Meeting purpose and agenda included",
+      "Discussion/decisions/open structure included",
+      "Action items with owner/deadline or unassigned marks",
+      "Missing content flagged for confirmation",
+      "No invented quotes or decisions",
+      "No auto-record/calendar integration claims"
+    ],
+    "zhScorecard": [
+      "可追溯",
+      "可執行",
+      "無假決策",
+      "已確認",
+      "原始檔保留"
+    ],
+    "enScorecard": [
+      "Traceable",
+      "Actionable",
+      "No false decisions",
+      "Confirmed",
+      "Raw kept"
+    ],
+    "id": "workplace-productivity-L3",
+    "lessonKey": "workplace-productivity-L3",
+    "zhWhyItMatters": {
+      "problem": "會開完只有一堆聊天紀錄，沒有決策、沒有負責人、沒有截止。",
+      "ineffective": "請 AI「整理成完整會議紀錄」卻不提供真實筆記。",
+      "solution": "用去敏筆記產出議程與紀錄架構，強制區分事實／待確認，並建立 Action Items 表。"
+    },
+    "enWhyItMatters": {
+      "problem": "Meetings end as chat logs with no decisions, owners, or deadlines.",
+      "ineffective": "Asking AI for “complete minutes” without real notes.",
+      "solution": "Build agenda and notes from sanitized input, separate facts vs to-confirm, and create an action-item table."
+    },
+    "zhObjectives": [
+      "為一場會議寫出目的與時間盒 Agenda",
+      "整理討論／決策／待決的紀錄架構",
+      "建立含 Owner 與 Deadline 的 Action Items",
+      "標出需向與會者確認的項目",
+      "存成「會議準備與紀錄系統」"
+    ],
+    "enObjectives": [
+      "Write purpose and a timeboxed agenda for one meeting",
+      "Structure discussion / decisions / open issues",
+      "Build action items with owners and deadlines",
+      "Flag items that need attendee confirmation",
+      "Save a Meeting Preparation & Notes Workflow"
+    ],
+    "zhOutputName": "會議準備與紀錄系統",
+    "enOutputName": "Meeting Preparation & Notes Workflow",
+    "zhCaseStudyBlocks": {
+      "problem": "阿哲會後只有零碎筆記，想快速變成正式紀錄。",
+      "wrong": "讓 AI 補造決議與發言。",
+      "right": "只根據筆記結構化，未知項標確認並建立 Action Items。",
+      "result": "「會議準備與紀錄系統」可進入追蹤。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Zhe has fragmentary notes and wants formal minutes fast.",
+      "wrong": "Let AI invent decisions and quotes.",
+      "right": "Structure only from notes; flag unknowns; build action items.",
+      "result": "A Meeting Preparation & Notes Workflow ready to track."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "定義會議目的",
+        "why": "沒有目的就容易開成聊天",
+        "input": "工作目標",
+        "output": "目的句",
+        "check": "是否可檢查"
+      },
+      {
+        "do": "準備 Agenda",
+        "why": "時間盒避免失控",
+        "input": "議題清單",
+        "output": "Agenda",
+        "check": "是否含問題"
+      },
+      {
+        "do": "整理會後筆記",
+        "why": "只根據真實輸入",
+        "input": "去敏筆記",
+        "output": "紀錄架構",
+        "check": "有無補造"
+      },
+      {
+        "do": "建立 Action Items",
+        "why": "讓事項可追蹤",
+        "input": "決策／待辦",
+        "output": "AI 表",
+        "check": "Owner／Deadline"
+      },
+      {
+        "do": "確認並存檔",
+        "why": "避免錯假決議外傳",
+        "input": "待確認清單",
+        "output": "定稿",
+        "check": "是否完成確認"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Define purpose",
+        "why": "No purpose → chatty meeting",
+        "input": "Work goal",
+        "output": "Purpose sentence",
+        "check": "Checkable"
+      },
+      {
+        "do": "Prepare agenda",
+        "why": "Timeboxes prevent drift",
+        "input": "Topic list",
+        "output": "Agenda",
+        "check": "Questions included"
+      },
+      {
+        "do": "Structure post notes",
+        "why": "Only from real input",
+        "input": "Sanitized notes",
+        "output": "Notes structure",
+        "check": "No fabrication"
+      },
+      {
+        "do": "Build action items",
+        "why": "Make work trackable",
+        "input": "Decisions/todos",
+        "output": "AI table",
+        "check": "Owner/deadline"
+      },
+      {
+        "do": "Confirm and save",
+        "why": "Stop false decisions spreading",
+        "input": "To-confirm list",
+        "output": "Final",
+        "check": "Confirmations done"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "會前準備",
+        "standard": "有目的、Agenda、問題",
+        "mistakes": "只有開會通知",
+        "check": "問題清單有無？"
+      },
+      {
+        "task": "會後結構化",
+        "standard": "討論／決策／待決分開",
+        "mistakes": "一篇散文摘要",
+        "check": "決策是否都有來源？"
+      },
+      {
+        "task": "Action Items",
+        "standard": "有 Owner／Deadline 或標未指定",
+        "mistakes": "AI 自行指派負責人",
+        "check": "有無捏造？"
+      },
+      {
+        "task": "存檔",
+        "standard": "系統完整",
+        "mistakes": "缺表",
+        "check": "成果名稱正確？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Pre-meeting prep",
+        "standard": "Purpose, agenda, questions",
+        "mistakes": "Invite only",
+        "check": "Question list present?"
+      },
+      {
+        "task": "Post structure",
+        "standard": "Discussion/decisions/open split",
+        "mistakes": "One prose summary",
+        "check": "Do decisions have sources?"
+      },
+      {
+        "task": "Action items",
+        "standard": "Owner/deadline or unassigned",
+        "mistakes": "AI assigns owners alone",
+        "check": "Any invention?"
+      },
+      {
+        "task": "Save",
+        "standard": "System complete",
+        "mistakes": "Missing tables",
+        "check": "Correct deliverable name?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "開會前要準備、或會後要把筆記變成可追蹤事項時使用",
+      "fields": [
+        "[請填寫工作目標]",
+        "[請貼上已去除敏感資訊的內容]",
+        "[請填寫目標受眾]"
+      ],
+      "body": "你是會議效率教練，協助準備議程與整理會議紀錄。不可捏造未發生的討論、決議、出席者發言或 Action Items。\n\n我的背景：\n- 會議目的／工作目標：[請填寫工作目標]\n- 目標受眾（與會角色）：[請填寫目標受眾]\n- 已去除敏感資訊的會前資料或會中筆記：[請貼上已去除敏感資訊的內容]\n- 會議時長與已知議題（沒有就寫「未定」）：[請填寫]\n\n任務：產出「會議準備與紀錄系統」，包含：\nA. 會前：會議目的、Agenda（含時間盒）、要確認的問題、需要帶的資料清單\nB. 會中／會後：會議紀錄架構（討論重點／決策／待決）\nC. Action Items 表：事項、Owner、Deadline、依賴、狀態\nD. 決策區：只列使用者提供或標「需向與會者確認」的決策\nE. 風險：可能被誤解或遺漏的項目\nF. 手動追蹤提示（本平台無自動會議錄音、轉錄或日曆串接）\n\n規則：原始筆記沒寫的，寫「未在輸入中出現／需確認」，禁止補造。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "expected": "含議程、紀錄架構與 Action Items 的會議系統",
+      "revisionReminder": "請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "extensions": [
+        {
+          "title": "延伸：只抽出 Action Items",
+          "body": "根據我貼上的會議紀錄，只抽出 Action Items 表。沒寫 Owner／Deadline 的標需確認，不要自行指定負責人。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use before a meeting to prepare, or after to turn notes into trackable actions",
+      "fields": [
+        "[Enter work goal]",
+        "[Paste sanitized content]",
+        "[Enter target audience]"
+      ],
+      "body": "You are a meeting-effectiveness coach for agendas and notes. Do not invent discussions, decisions, quotes, or action items that did not happen.\n\nMy context:\n- Meeting purpose / work goal: [Enter work goal]\n- Audience (attendee roles): [Enter target audience]\n- Sanitized prep notes or in-meeting notes: [Paste sanitized content]\n- Duration and known topics (or “TBD”): [Enter]\n\nTask: Produce a “Meeting Preparation & Notes Workflow” with:\nA. Before: purpose, agenda (timeboxed), questions to confirm, materials to bring\nB. During/after: notes structure (discussion / decisions / open issues)\nC. Action-item table: item, owner, deadline, dependency, status\nD. Decisions section: only user-provided decisions or mark “confirm with attendees”\nE. Risks: likely misunderstandings or omissions\nF. Manual tracking note (this platform has no auto recording, transcription, or calendar integration)\n\nRule: If it was not in the input, write “not in input / needs confirmation.” Do not fabricate.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "expected": "A meeting system with agenda, notes structure, and action items",
+      "revisionReminder": "Remove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "extensions": [
+        {
+          "title": "Extension: action items only",
+          "body": "From my notes, extract only an action-item table. Mark missing owner/deadline as needs confirmation—do not assign owners yourself."
+        }
+      ]
+    },
+    "zhNextStep": "下一堂把長文件變成「事實／摘要／待確認／行動」分明的摘要流程。",
+    "enNextStep": "Next, turn long documents into a summary workflow that separates facts, summary, to-confirm, and actions.",
+    "zhConceptBlocks": {
+      "principles": [
+        "會前有目的",
+        "會後可追蹤",
+        "沒寫過的不補造"
+      ],
+      "terms": [
+        "Agenda",
+        "Action Items",
+        "待確認決策"
+      ],
+      "criteria": [
+        "有議程",
+        "有 AI 表",
+        "有確認標記"
+      ],
+      "boundaries": [
+        "避免：假決議",
+        "避免：自動錄音宣稱",
+        "避免：未去敏全文"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Purpose before the meeting",
+        "Trackability after",
+        "No invention beyond notes"
+      ],
+      "terms": [
+        "Agenda",
+        "Action items",
+        "To-confirm decisions"
+      ],
+      "criteria": [
+        "Agenda present",
+        "AI table present",
+        "Confirmation flags"
+      ],
+      "boundaries": [
+        "Avoid: fake decisions",
+        "Avoid: auto-record claims",
+        "Avoid: unsanitized full text"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：會議準備與紀錄系統",
+      "議程＋紀錄＋Action Items。",
+      "未出現的決議一律標需確認。"
+    ],
+    "enSummary": [
+      "Deliverable: Meeting Preparation & Notes Workflow",
+      "Agenda + notes + action items.",
+      "Unseen decisions always need confirmation."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "把 AI 補的決議當成已通過",
+        "why": "會造成錯誤執行",
+        "fix": "未出現的決策標需確認"
+      },
+      {
+        "error": "Action Item 沒有 Owner",
+        "why": "無人負責等於沒做",
+        "fix": "每列都要有人或標未指定"
+      },
+      {
+        "error": "會前記錄與會後事實混在一起",
+        "why": "難以追溯",
+        "fix": "分開會前假設與會後確認"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Treating AI-filled decisions as approved",
+        "why": "Causes wrong execution",
+        "fix": "Flag decisions not in notes"
+      },
+      {
+        "error": "Action items without owners",
+        "why": "No owner means no work",
+        "fix": "Every row needs a person or unassigned"
+      },
+      {
+        "error": "Mixing pre-meeting guesses with after facts",
+        "why": "Hard to audit",
+        "fix": "Separate assumptions vs confirmed"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "完整度",
+        "levels": {
+          "incomplete": "只有摘要",
+          "basic": "有議程或缺 AI 表",
+          "good": "議程+紀錄+AI 表",
+          "ready": "含決策與風險"
+        }
+      },
+      {
+        "name": "忠實度",
+        "levels": {
+          "incomplete": "大量補造",
+          "basic": "偶有推論未標",
+          "good": "事實與待確認分開",
+          "ready": "無捏造發言／決議"
+        }
+      },
+      {
+        "name": "可追蹤",
+        "levels": {
+          "incomplete": "無下一步",
+          "basic": "有事項無主人",
+          "good": "有 Owner／Deadline",
+          "ready": "可進入週追蹤"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Completeness",
+        "levels": {
+          "incomplete": "Summary only",
+          "basic": "Agenda or AI table missing",
+          "good": "Agenda+notes+AI table",
+          "ready": "Decisions + risks"
+        }
+      },
+      {
+        "name": "Fidelity",
+        "levels": {
+          "incomplete": "Heavy fabrication",
+          "basic": "Unmarked inference",
+          "good": "Facts vs to-confirm split",
+          "ready": "No invented quotes/decisions"
+        }
+      },
+      {
+        "name": "Trackability",
+        "levels": {
+          "incomplete": "No next steps",
+          "basic": "Items without owners",
+          "good": "Owners/deadlines present",
+          "ready": "Ready for weekly tracking"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 45 分鐘 / About 45 min",
+    "difficulty": "中階 / Intermediate",
+    "zhTitle": "第4課：用 AI 撰寫與整理商務文件",
+    "enTitle": "Lesson 4: Use AI to draft and organize business documents",
+    "zhValueTip": "摘要要能回原文；缺資料就標待確認，不要讓 AI 補齊。",
+    "enValueTip": "Summaries must map to the source. Missing data becomes to-confirm—not AI filler.",
+    "zhOutcome": "文件與長資訊摘要流程",
+    "enOutcome": "Document Summary Workflow",
+    "zhConcept": "長文件最容易出錯的地方，是把「AI 摘要」誤當成「原文事實」。好的摘要流程要分開：原始事實、摘要、待確認、行動項目。AI 可以加速整理，但原文沒寫的條款與數字不得自行補充；你仍要對回原文。",
+    "enConcept": "Long documents fail when “AI summary” is mistaken for “source fact.” A good workflow separates source facts, summary, to-confirm items, and actions. AI can speed organizing—but must not invent missing clauses or numbers—and you still map back to the source.",
+    "zhCaseStudy": "營運助理小安要整理一份去敏後的供應商說明長文。AI 第一版補上「對方同意七天到貨」，但原文沒有。她要求四欄輸出後，那句被標成待確認。她寫信問同事，而不是把假承諾寫進對內摘要。",
+    "enCaseStudy": "Ops assistant Ann summarized a sanitized vendor brief. AI’s first draft added “they agreed to 7-day delivery,” which was not in the source. With four-column output, that line became to-confirm. She asked a teammate instead of writing a false promise into the internal summary.",
+    "zhWorkflow": [
+      "只貼去敏後必要段落",
+      "用 Prompt 產出四欄摘要流程",
+      "標出過度推論句並改成待確認",
+      "對回原文做人工核對",
+      "存成文件與長資訊摘要流程"
+    ],
+    "enWorkflow": [
+      "Paste only sanitized necessary paragraphs",
+      "Generate the four-column workflow with the prompt",
+      "Flag over-inference and move to to-confirm",
+      "Human-verify against the source",
+      "Save the Document Summary Workflow"
+    ],
+    "zhCommonMistakes": [
+      "原文沒提到仍補充條款或數字",
+      "事實與摘要混在同一段",
+      "把摘要當正式對外文件",
+      "貼上未去敏的完整合約或客戶資料",
+      "宣稱平台會自動建立 Docs"
+    ],
+    "enCommonMistakes": [
+      "Adding clauses or numbers absent from the source",
+      "Mixing facts and summary in one paragraph",
+      "Treating the summary as external final copy",
+      "Pasting unsanitized full contracts or customer data",
+      "Claiming the platform auto-creates Docs"
+    ],
+    "zhExcellentExample": "四欄齊全、閱讀路徑清楚、待確認誠實、每句可回原文、含人工核對步驟。",
+    "enExcellentExample": "All four columns, clear reading path, honest to-confirm, each line maps to source, verification steps included.",
+    "zhPrompt": "你是商務文件整理教練，協助把長資訊做成可核對的摘要流程。若原始資料沒有提到，不得自行補充事實、數字、條款或結論。\n\n我的背景：\n- 文件／資訊用途（工作目標）：[請填寫工作目標]\n- 目標受眾：[請填寫目標受眾]\n- 已去除敏感資訊的原文摘錄：[請貼上已去除敏感資訊的內容]\n- 我最需要抓出的重點類型（時程／責任／風險／數字等）：[請填寫]\n\n任務：產出「文件與長資訊摘要流程」，明確分成四欄：\n1) 原始事實（盡量贴近原文用詞，短句）\n2) 摘要（標示這是摘要，不是原文）\n3) 待確認事項（原文不清楚、缺數字、需向同事確認）\n4) 行動項目（若原文未要求行動，寫「原文未要求行動」）\n\n另外提供：\n- 一頁閱讀路徑（先看哪三段）\n- 風險清單（可能被過度推論的地方）\n- 人工核對步驟（對回原文）\n\n禁止：把摘要寫成可直接對外正式發文的定稿；禁止宣稱可自動建立 Google Docs。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+    "enPrompt": "You are a business-document coach for checkable summaries of long information. If the source does not mention it, do not add facts, numbers, clauses, or conclusions.\n\nMy context:\n- Document purpose (work goal): [Enter work goal]\n- Target audience: [Enter target audience]\n- Sanitized source excerpt: [Paste sanitized content]\n- What I most need to extract (timeline / ownership / risks / numbers): [Enter]\n\nTask: Produce a “Document Summary Workflow” with four columns:\n1) Source facts (close to source wording; short lines)\n2) Summary (labeled as summary, not source)\n3) To-confirm items (unclear text, missing numbers, ask a teammate)\n4) Action items (if source has none, write “source requests no action”)\n\nAlso provide:\n- A one-page reading path (which sections first)\n- Risk list (where over-inference is likely)\n- Human verification steps (map back to source)\n\nForbidden: treating the summary as a final external publication; claiming Google Docs auto-creation.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+    "zhCoachPrompt": "【Prompt 2｜格式不一致稽核】\n以下是我各段開頭與目前格式描述：\n（貼上）\n請列出：樣式不一致、層級跳躍、可能的殘留草稿語句、建議的清理順序。每項給我可執行的 Word／Docs 操作提示。不要改寫我的論點內容。",
+    "enCoachPrompt": "[Prompt 2 | Format Audit] Flag style inconsistencies, heading jumps, and draft leftovers with actionable Word/Docs steps—no argument rewrites.",
+    "zhFeedbackPrompt": "【Prompt 3｜定稿檢查表驗收】\n規格檢查表：\n（貼上）\n我已完成項目：\n（貼上）\n請評分可繳交度，指出未勾風險，給交卷前 10 分鐘必做清單。不要因為想「加分」而建議老師沒要求的裝飾。",
+    "enFeedbackPrompt": "[Prompt 3 | Final Checklist QA] Score submission readiness and list a 10-minute must-do list—no unrequested decoration.",
+    "zhExample": "用途：給主管的一頁重點；受眾：直屬主管；摘錄：去敏後的專案時程說明兩段；需求：抓責任與風險。",
+    "enExample": "Purpose: one-pager for manager; audience: direct manager; excerpt: two sanitized project-timeline paragraphs; need: ownership and risks.",
+    "zhPractice": "選一段去敏長資訊。；完成四欄輸出與閱讀路徑。；刪除或改寫無來源句。；存成「文件與長資訊摘要流程」。",
+    "enPractice": "Pick a sanitized long excerpt.; Finish four columns and reading path.; Delete/rewrite unsourced lines.; Save the Document Summary Workflow.",
+    "zhQuizItems": [
+      {
+        "q": "Word／文件整理的首要目標較接近？",
+        "options": [
+          "請 AI 代寫全文並加大量裝飾",
+          "符合繳交規格並建立可重複的結構與樣式系統",
+          "每段手動調不同藝術字",
+          "不需要檔名規則"
+        ],
+        "answer": 1,
+        "explain": "規格＋可重複樣式才是生產力。"
+      },
+      {
+        "q": "請 AI 協助文件時應避免？",
+        "options": [
+          "對照規格做結構建議",
+          "發明老師未要求的格式並當成必須",
+          "指出層級跳躍",
+          "列出殘留 TODO"
+        ],
+        "answer": 1,
+        "explain": "不可自行添加未要求硬性格式。"
+      },
+      {
+        "q": "定稿前最該清掉的通常包括？",
+        "options": [
+          "所有標題",
+          "草稿註解、TODO、不一致字級與錯誤檔名",
+          "頁碼",
+          "目錄"
+        ],
+        "answer": 1,
+        "explain": "殘留草稿痕跡常造成扣分與混亂。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "Primary goal of document organization?",
+        "options": [
+          "Ghostwrite with heavy decoration",
+          "Meet specs and build a reusable style/structure system",
+          "Artistic fonts per paragraph",
+          "No filename rules needed"
+        ],
+        "answer": 1,
+        "explain": "Specs plus reusable styles equal productivity."
+      },
+      {
+        "q": "When using AI on documents, avoid:",
+        "options": [
+          "Structure advice against specs",
+          "Inventing unrequested format rules as mandatory",
+          "Flagging heading jumps",
+          "Listing leftover TODOs"
+        ],
+        "answer": 1,
+        "explain": "Don’t invent mandatory extras."
+      },
+      {
+        "q": "Before submit, usually clean:",
+        "options": [
+          "All headings",
+          "Draft comments, TODOs, inconsistent fonts, bad filenames",
+          "Page numbers",
+          "The table of contents"
+        ],
+        "answer": 1,
+        "explain": "Draft residue causes avoidable losses."
+      }
+    ],
+    "zhNotePrompt": "寫下你摘要裡最容易被補造的一類資訊（例如數字），以及你會如何標成待確認。",
+    "enNotePrompt": "Write the type of info most often invented in your summaries (e.g., numbers) and how you will mark it to-confirm.",
+    "zhDeliverableChecklist": [
+      "已有原始事實與摘要兩欄",
+      "已有待確認事項",
+      "已有行動項目（或註明原文未要求）",
+      "已有閱讀路徑與風險清單",
+      "已有人工核對步驟",
+      "無外加事實，且已去敏"
+    ],
+    "enDeliverableChecklist": [
+      "Source-fact and summary columns present",
+      "To-confirm items present",
+      "Actions present (or noted as none in source)",
+      "Reading path and risk list present",
+      "Human verification steps present",
+      "No added facts; content sanitized"
+    ],
+    "zhScorecard": [
+      "規格對齊",
+      "樣式一致",
+      "結構清楚",
+      "版本可控",
+      "可繳交"
+    ],
+    "enScorecard": [
+      "Spec alignment",
+      "Style consistency",
+      "Clear structure",
+      "Version control",
+      "Submission-ready"
+    ],
+    "id": "workplace-productivity-L4",
+    "lessonKey": "workplace-productivity-L4",
+    "zhWhyItMatters": {
+      "problem": "長資訊一多，人會略讀，AI 一補就變成看似完整的假重點。",
+      "ineffective": "只說「幫我摘要這份文件」並接受一段無法對回原文的文字。",
+      "solution": "強制四欄輸出，並用人工核對步驟把摘要釘回原文。"
+    },
+    "enWhyItMatters": {
+      "problem": "Long info invites skimming; AI fills gaps with polished false highlights.",
+      "ineffective": "Only asking “summarize this” and accepting text you cannot map to the source.",
+      "solution": "Require four-column output and human verification back to the source."
+    },
+    "zhObjectives": [
+      "把一段去敏原文拆成事實與摘要兩欄",
+      "列出待確認事項與行動項目",
+      "設計一頁閱讀路徑",
+      "完成人工核對步驟",
+      "存成「文件與長資訊摘要流程」"
+    ],
+    "enObjectives": [
+      "Split a sanitized excerpt into fact and summary columns",
+      "List to-confirm items and actions",
+      "Design a one-page reading path",
+      "Complete human verification steps",
+      "Save a Document Summary Workflow"
+    ],
+    "zhOutputName": "文件與長資訊摘要流程",
+    "enOutputName": "Document Summary Workflow",
+    "zhCaseStudyBlocks": {
+      "problem": "小安要快速消化長文件並轉述給主管。",
+      "wrong": "接受含補造條款的單段摘要。",
+      "right": "四欄分開，缺句進待確認，再對回原文。",
+      "result": "可核對的「文件與長資訊摘要流程」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Ann must digest a long doc for her manager.",
+      "wrong": "Accept a single summary with invented clauses.",
+      "right": "Four columns; gaps → to-confirm; map back to source.",
+      "result": "A checkable Document Summary Workflow."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "去敏並截取必要段",
+        "why": "降低洩密風險",
+        "input": "原文",
+        "output": "摘錄",
+        "check": "是否仍含機密"
+      },
+      {
+        "do": "四欄產出",
+        "why": "避免摘要混事實",
+        "input": "摘錄",
+        "output": "四欄表",
+        "check": "欄位是否齊"
+      },
+      {
+        "do": "找過度推論",
+        "why": "擋假重點",
+        "input": "四欄表",
+        "output": "待確認清單",
+        "check": "有無外加數字"
+      },
+      {
+        "do": "對回原文",
+        "why": "確保可核對",
+        "input": "原文＋表",
+        "output": "已核對版",
+        "check": "每句有來源？"
+      },
+      {
+        "do": "存檔",
+        "why": "供報告課沿用",
+        "input": "定稿",
+        "output": "成果包",
+        "check": "名稱正確？"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Sanitize and clip",
+        "why": "Reduce leak risk",
+        "input": "Source",
+        "output": "Excerpt",
+        "check": "Secrets removed"
+      },
+      {
+        "do": "Four-column output",
+        "why": "Keep facts vs summary apart",
+        "input": "Excerpt",
+        "output": "Four-column table",
+        "check": "All columns present"
+      },
+      {
+        "do": "Find over-inference",
+        "why": "Stop false highlights",
+        "input": "Table",
+        "output": "To-confirm list",
+        "check": "No added numbers"
+      },
+      {
+        "do": "Map to source",
+        "why": "Keep it verifiable",
+        "input": "Source + table",
+        "output": "Verified version",
+        "check": "Each line sourced?"
+      },
+      {
+        "do": "Save",
+        "why": "Reuse in report lesson",
+        "input": "Final",
+        "output": "Package",
+        "check": "Correct name?"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "準備摘錄",
+        "standard": "已去敏且夠用",
+        "mistakes": "貼整份機密檔",
+        "check": "能否指出刪了什麼？"
+      },
+      {
+        "task": "完成四欄",
+        "standard": "事實／摘要／待確認／行動",
+        "mistakes": "只有一段摘要",
+        "check": "行動欄是否誠實？"
+      },
+      {
+        "task": "核對原文",
+        "standard": "無外加事實",
+        "mistakes": "保留假數字",
+        "check": "待確認有無？"
+      },
+      {
+        "task": "存檔",
+        "standard": "流程完整",
+        "mistakes": "缺核對步驟",
+        "check": "成果包可見？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Prepare excerpt",
+        "standard": "Sanitized and sufficient",
+        "mistakes": "Paste full confidential file",
+        "check": "Can you name what you removed?"
+      },
+      {
+        "task": "Finish four columns",
+        "standard": "Facts/summary/to-confirm/actions",
+        "mistakes": "One summary blob",
+        "check": "Is actions column honest?"
+      },
+      {
+        "task": "Verify source",
+        "standard": "No added facts",
+        "mistakes": "Keep fake numbers",
+        "check": "To-confirm present?"
+      },
+      {
+        "task": "Save",
+        "standard": "Workflow complete",
+        "mistakes": "Missing verification steps",
+        "check": "Visible in package?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "面對長文件、長郵件串或長簡報稿，需要可核對摘要時使用",
+      "fields": [
+        "[請填寫工作目標]",
+        "[請貼上已去除敏感資訊的內容]",
+        "[請填寫目標受眾]"
+      ],
+      "body": "你是商務文件整理教練，協助把長資訊做成可核對的摘要流程。若原始資料沒有提到，不得自行補充事實、數字、條款或結論。\n\n我的背景：\n- 文件／資訊用途（工作目標）：[請填寫工作目標]\n- 目標受眾：[請填寫目標受眾]\n- 已去除敏感資訊的原文摘錄：[請貼上已去除敏感資訊的內容]\n- 我最需要抓出的重點類型（時程／責任／風險／數字等）：[請填寫]\n\n任務：產出「文件與長資訊摘要流程」，明確分成四欄：\n1) 原始事實（盡量贴近原文用詞，短句）\n2) 摘要（標示這是摘要，不是原文）\n3) 待確認事項（原文不清楚、缺數字、需向同事確認）\n4) 行動項目（若原文未要求行動，寫「原文未要求行動」）\n\n另外提供：\n- 一頁閱讀路徑（先看哪三段）\n- 風險清單（可能被過度推論的地方）\n- 人工核對步驟（對回原文）\n\n禁止：把摘要寫成可直接對外正式發文的定稿；禁止宣稱可自動建立 Google Docs。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "expected": "含事實／摘要／待確認／行動四欄的文件摘要流程",
+      "revisionReminder": "請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "extensions": [
+        {
+          "title": "延伸：找出過度推論句",
+          "body": "請標出我摘要中任何原文沒有支持的句子，改成待確認或刪除。不要補充新事實。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when a long doc, email thread, or deck draft needs a checkable summary",
+      "fields": [
+        "[Enter work goal]",
+        "[Paste sanitized content]",
+        "[Enter target audience]"
+      ],
+      "body": "You are a business-document coach for checkable summaries of long information. If the source does not mention it, do not add facts, numbers, clauses, or conclusions.\n\nMy context:\n- Document purpose (work goal): [Enter work goal]\n- Target audience: [Enter target audience]\n- Sanitized source excerpt: [Paste sanitized content]\n- What I most need to extract (timeline / ownership / risks / numbers): [Enter]\n\nTask: Produce a “Document Summary Workflow” with four columns:\n1) Source facts (close to source wording; short lines)\n2) Summary (labeled as summary, not source)\n3) To-confirm items (unclear text, missing numbers, ask a teammate)\n4) Action items (if source has none, write “source requests no action”)\n\nAlso provide:\n- A one-page reading path (which sections first)\n- Risk list (where over-inference is likely)\n- Human verification steps (map back to source)\n\nForbidden: treating the summary as a final external publication; claiming Google Docs auto-creation.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "expected": "A document summary workflow with facts / summary / to-confirm / actions",
+      "revisionReminder": "Remove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "extensions": [
+        {
+          "title": "Extension: find over-inference",
+          "body": "Flag any sentence in my summary not supported by the source; turn into to-confirm or delete. Do not add new facts."
+        }
+      ]
+    },
+    "zhNextStep": "下一堂把事實與數據變成報告／簡報架構，仍不得捏造公司數據。",
+    "enNextStep": "Next, turn facts and data into a report/presentation outline—still without inventing company numbers.",
+    "zhConceptBlocks": {
+      "principles": [
+        "事實與摘要分開",
+        "缺資料就待確認",
+        "摘要必須可回原文"
+      ],
+      "terms": [
+        "原始事實",
+        "待確認事項",
+        "閱讀路徑"
+      ],
+      "criteria": [
+        "四欄齊",
+        "有核對步驟",
+        "無外加事實"
+      ],
+      "boundaries": [
+        "避免：補造條款",
+        "避免：未去敏全文",
+        "避免：自動 Docs 宣稱"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Separate facts and summary",
+        "Missing data → to-confirm",
+        "Summaries must map to source"
+      ],
+      "terms": [
+        "Source facts",
+        "To-confirm items",
+        "Reading path"
+      ],
+      "criteria": [
+        "Four columns",
+        "Verification steps",
+        "No added facts"
+      ],
+      "boundaries": [
+        "Avoid: inventing clauses",
+        "Avoid: unsanitized full text",
+        "Avoid: auto-Docs claims"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：文件與長資訊摘要流程",
+      "四欄分開，才能安全轉述。",
+      "原文沒有的，不要讓 AI 補。"
+    ],
+    "enSummary": [
+      "Deliverable: Document Summary Workflow",
+      "Four columns keep retelling safe.",
+      "If the source lacks it, AI must not fill it."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "把摘要當原文",
+        "why": "查證困難",
+        "fix": "分開事實欄與摘要欄"
+      },
+      {
+        "error": "原文沒有的數字被補上",
+        "why": "決策風險",
+        "fix": "缺數字就進待確認"
+      },
+      {
+        "error": "整份機密合約貼進 Prompt",
+        "why": "資安與合規風險",
+        "fix": "只貼去敏必要段落"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Treating summary as source",
+        "why": "Hard to verify",
+        "fix": "Separate fact and summary columns"
+      },
+      {
+        "error": "Adding numbers not in the source",
+        "why": "Decision risk",
+        "fix": "Missing numbers → to-confirm"
+      },
+      {
+        "error": "Pasting a full confidential contract",
+        "why": "Security/compliance risk",
+        "fix": "Paste only sanitized necessary paragraphs"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "忠實度",
+        "levels": {
+          "incomplete": "大量外加資訊",
+          "basic": "摘要混入推論",
+          "good": "四欄清楚",
+          "ready": "每句可回原文"
+        }
+      },
+      {
+        "name": "可用性",
+        "levels": {
+          "incomplete": "太長難用",
+          "basic": "有摘要缺行動",
+          "good": "閱讀路徑清楚",
+          "ready": "可交給同事核對"
+        }
+      },
+      {
+        "name": "安全",
+        "levels": {
+          "incomplete": "含敏感原文",
+          "basic": "去敏不完整",
+          "good": "已去敏",
+          "ready": "含核對步驟"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Fidelity",
+        "levels": {
+          "incomplete": "Lots of added info",
+          "basic": "Inference mixed in",
+          "good": "Four columns clear",
+          "ready": "Each line maps to source"
+        }
+      },
+      {
+        "name": "Usefulness",
+        "levels": {
+          "incomplete": "Too long",
+          "basic": "Summary without actions",
+          "good": "Reading path clear",
+          "ready": "Teammate can verify"
+        }
+      },
+      {
+        "name": "Safety",
+        "levels": {
+          "incomplete": "Sensitive raw text",
+          "basic": "Partial sanitize",
+          "good": "Sanitized",
+          "ready": "Verification steps included"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "中階 / Intermediate",
+    "zhTitle": "第5課：用 AI 處理表格與數據初稿",
+    "enTitle": "Lesson 5: Use AI for spreadsheets and first-pass data work",
+    "zhValueTip": "先有訊息與證據，再談頁數；沒有的數據就標需補，不要生成。",
+    "enValueTip": "Messages and evidence before page count. Missing data is a gap—not something to generate.",
+    "zhOutcome": "報告與簡報架構",
+    "enOutcome": "Business Report / Presentation Outline",
+    "zhConcept": "報告與簡報不是把表格貼上去，而是：目標 → 受眾 → 核心訊息 → 證據 → 建議 → 下一步。表格與數據初稿只能當「候選證據」，必須標來源、標初稿，必要時本人重算。AI 可幫你架構，不可捏造公司數據。",
+    "enConcept": "Reports and decks are not pasted tables. They are: goal → audience → core messages → evidence → recommendations → next steps. Table drafts are candidate evidence only—source them, label drafts, and recompute when needed. AI can outline; it must not invent company data.",
+    "zhCaseStudy": "行銷企劃小希有一張去敏後的活動數據表初稿，請 AI「直接做完整簡報」。AI 補了轉換率與營收。她改成只要架構：3 句核心訊息、證據地圖、缺口清單、10 頁大綱。她把假數字刪光，自己重算兩欄後再上台練習。",
+    "enCaseStudy": "Marketing coordinator Hope had a sanitized campaign table draft and asked AI for a “full deck.” AI invented conversion and revenue. She then asked only for structure: 3 messages, evidence map, gap list, 10-page outline. She deleted fake numbers, recomputed two columns, then rehearsed.",
+    "zhWorkflow": [
+      "整理去敏事實與表格重點",
+      "寫目標、受眾、最多 3 句核心訊息",
+      "用 Prompt 產出證據地圖與雙大綱",
+      "刪假數據、標需補資料、重算關鍵欄",
+      "存成報告與簡報架構"
+    ],
+    "enWorkflow": [
+      "Gather sanitized facts and table highlights",
+      "Write goal, audience, max 3 core messages",
+      "Generate evidence map and dual outlines with the prompt",
+      "Delete fake data, mark gaps, recompute key columns",
+      "Save the Business Report / Presentation Outline"
+    ],
+    "zhCommonMistakes": [
+      "捏造公司數據或客戶成果",
+      "核心訊息超過 3 句且無證據",
+      "把表格初稿當已稽核財務",
+      "建議寫得像已核准決策",
+      "宣稱平台會自動上傳正式簡報到公司雲端"
+    ],
+    "enCommonMistakes": [
+      "Inventing company data or customer results",
+      "More than 3 core messages with no evidence",
+      "Treating table drafts as audited financials",
+      "Writing recommendations as already approved decisions",
+      "Claiming auto-upload of official decks to company cloud"
+    ],
+    "zhExcellentExample": "目標清楚、≤3 句訊息、證據地圖、缺口清單、書面與 8–12 頁簡報大綱、數據重算規則。",
+    "enExcellentExample": "Clear goal, ≤3 messages, evidence map, gap list, written + 8–12 page outlines, recompute rules.",
+    "zhPrompt": "你是商務報告與簡報架構教練。可協助組織論點與頁面大綱，但不得捏造公司數據、客戶成果、財務數字或未提供的證據。\n\n我的背景：\n- 報告／簡報工作目標：[請填寫工作目標]\n- 目標受眾：[請填寫目標受眾]\n- 已去除敏感資訊的可用事實／表格重點：[請貼上已去除敏感資訊的內容]\n- 場合（對內週報／對外說明／決策會議）：[請填寫]\n\n任務：產出「報告與簡報架構」（Business Report / Presentation Outline），包含：\n1) 目標（這份報告要促成什麼決定或理解）\n2) 受眾與他們在乎的問題\n3) 核心訊息（最多 3 句）\n4) 證據地圖：每句核心訊息對應哪些「使用者提供的事實／表格」；缺證據標「需補資料」\n5) 建議（僅根據已有證據；不足則給選項而非定論）\n6) 下一步（誰、做什麼、何時——未知就標需確認）\n7) 簡報頁面大綱（8–12 頁／段）與一頁書面報告大綱\n8) 數據使用規則：表格初稿如何支撐論點，哪些計算必須本人重算\n\n不要保證報告會被核准；不要宣稱可自動生成並上傳正式投影片檔到公司雲端。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+    "enPrompt": "You are a business report and presentation-outline coach. You may organize arguments and page outlines, but must not invent company data, customer results, financials, or evidence not provided.\n\nMy context:\n- Report/presentation work goal: [Enter work goal]\n- Target audience: [Enter target audience]\n- Sanitized available facts / table highlights: [Paste sanitized content]\n- Setting (internal weekly / external briefing / decision meeting): [Enter]\n\nTask: Produce a “Business Report / Presentation Outline” with:\n1) Goal (what decision or understanding this should enable)\n2) Audience and the questions they care about\n3) Core messages (max 3 sentences)\n4) Evidence map: each message → which user-provided facts/tables; missing evidence → “needs more data”\n5) Recommendations (only from available evidence; if weak, give options not verdicts)\n6) Next steps (who / what / when—unknowns marked needs confirmation)\n7) Slide outline (8–12 pages/sections) and a one-page written report outline\n8) Data-use rules: how table drafts support claims; which calculations you must recompute yourself\n\nNo approval guarantees. No claims of auto-generating and uploading official decks to company cloud.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+    "zhCoachPrompt": "【Prompt 2｜公式教練】\n表名／欄位：\n（貼上）\n我想計算：［例如各組平均、條件加總］\n請給 Excel 與 Google Sheets 可用公式、相對／絕對參照說明、常見錯誤。提供用我示例驗算的步驟。不要只給結果數字而不給公式。",
+    "enCoachPrompt": "[Prompt 2 | Formula Coach] Provide spreadsheet formulas with absolute/relative notes and a verification walkthrough—not only final numbers.",
+    "zhFeedbackPrompt": "【Prompt 3｜分析表驗收】\n問題：\n（貼上）\n我的摘要結果與公式：\n（貼上）\n請檢查：是否回答問題、公式邏輯風險、清理是否足夠。給修改優先序。若無法判斷因為缺少欄位說明，明確說資訊不足。",
+    "enFeedbackPrompt": "[Prompt 3 | Sheet QA] Check question fit and formula risks; say when column meaning is insufficient to judge.",
+    "zhExample": "目標：說明本週活動初步觀察；受眾：行銷主管；事實：去敏後的觸及與點擊表（初稿）；場合：對內週會。",
+    "enExample": "Goal: share early campaign observations; audience: marketing lead; facts: sanitized reach/click table (draft); setting: internal weekly.",
+    "zhPractice": "準備去敏事實／表格重點。；完成核心訊息與證據地圖。；產出報告與簡報大綱並刪假數據。；存成「報告與簡報架構」。",
+    "enPractice": "Prepare sanitized facts/table highlights.; Finish core messages and evidence map.; Produce dual outlines and delete fake data.; Save the Business Report / Presentation Outline.",
+    "zhQuizItems": [
+      {
+        "q": "試算表分析前最應先做？",
+        "options": [
+          "直接畫最炫圖表",
+          "確認問題、欄位意義並清理資料",
+          "刪除所有公式",
+          "請 AI 隨意填滿空白當作真實資料"
+        ],
+        "answer": 1,
+        "explain": "可信資料與清楚問題優先於視覺。"
+      },
+      {
+        "q": "使用 AI 產生公式時正確態度是？",
+        "options": [
+          "貼上就信，不必驗證",
+          "要求說明與驗算步驟，並在真實表抽查",
+          "只要結果好看即可",
+          "用 AI 捏造缺失問卷答案"
+        ],
+        "answer": 1,
+        "explain": "公式必須可解釋、可驗證。"
+      },
+      {
+        "q": "資料字典的用途是？",
+        "options": [
+          "裝飾封面",
+          "記錄欄位意義、來源、清理規則與關鍵公式便於交接",
+          "取代原始資料",
+          "隱藏錯誤"
+        ],
+        "answer": 1,
+        "explain": "字典讓分析可維護、可交接。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "Before spreadsheet analysis, first:",
+        "options": [
+          "Make the flashiest chart",
+          "Clarify the question, field meaning, and cleaning",
+          "Delete all formulas",
+          "Have AI invent missing survey answers"
+        ],
+        "answer": 1,
+        "explain": "Trusted data and a clear question come first."
+      },
+      {
+        "q": "Correct stance toward AI formulas?",
+        "options": [
+          "Trust blindly",
+          "Require explanations and verify on the real sheet",
+          "Looks good enough",
+          "Fabricate missing responses"
+        ],
+        "answer": 1,
+        "explain": "Formulas must be explainable and checked."
+      },
+      {
+        "q": "A data dictionary is for:",
+        "options": [
+          "Cover decoration",
+          "Recording field meaning, source, cleaning rules, and key formulas",
+          "Replacing raw data",
+          "Hiding errors"
+        ],
+        "answer": 1,
+        "explain": "Dictionaries make analysis maintainable."
+      }
+    ],
+    "zhNotePrompt": "寫下你的 1 句核心訊息、它依賴的 1 個證據，以及 1 個你還缺的資料。",
+    "enNotePrompt": "Write one core message, one evidence piece it depends on, and one data gap you still have.",
+    "zhDeliverableChecklist": [
+      "已有目標、受眾與 ≤3 句核心訊息",
+      "已有證據地圖與需補資料標記",
+      "已有建議與下一步（未知已標確認）",
+      "已有書面報告與 8–12 頁簡報大綱",
+      "已說明數據初稿與重算責任",
+      "未捏造公司數據，未保證核准"
+    ],
+    "enDeliverableChecklist": [
+      "Goal, audience, and ≤3 core messages present",
+      "Evidence map with needs-more-data flags",
+      "Recommendations and next steps (unknowns flagged)",
+      "Written report and 8–12 page slide outlines",
+      "Draft-data and recompute responsibility stated",
+      "No invented company data; no approval guarantee"
+    ],
+    "zhScorecard": [
+      "資料可信",
+      "公式正確",
+      "可重算",
+      "可解釋",
+      "可交接"
+    ],
+    "enScorecard": [
+      "Trusted data",
+      "Correct formulas",
+      "Recomputable",
+      "Explainable",
+      "Handoff-ready"
+    ],
+    "id": "workplace-productivity-L5",
+    "lessonKey": "workplace-productivity-L5",
+    "zhWhyItMatters": {
+      "problem": "有數據卻講不清，或為了好看而讓 AI 補假數字。",
+      "ineffective": "直接說「幫我做一組簡報」卻不提供事實與受眾。",
+      "solution": "先鎖核心訊息與證據地圖，再產出報告／簡報大綱，缺口誠實標示。"
+    },
+    "enWhyItMatters": {
+      "problem": "You have data but cannot explain it—or AI invents numbers to look complete.",
+      "ineffective": "Asking “make me a deck” with no facts or audience.",
+      "solution": "Lock core messages and an evidence map first, then outline; mark gaps honestly."
+    },
+    "zhObjectives": [
+      "為一份報告寫出目標、受眾與最多 3 句核心訊息",
+      "建立訊息到證據的對應地圖",
+      "在證據不足時改給選項而非假結論",
+      "產出書面報告與簡報頁面大綱",
+      "存成「報告與簡報架構」"
+    ],
+    "enObjectives": [
+      "Write goal, audience, and max 3 core messages for one report",
+      "Map each message to evidence",
+      "Offer options instead of fake conclusions when evidence is weak",
+      "Produce written and slide outlines",
+      "Save a Business Report / Presentation Outline"
+    ],
+    "zhOutputName": "報告與簡報架構",
+    "enOutputName": "Business Report / Presentation Outline",
+    "zhCaseStudyBlocks": {
+      "problem": "小希要把表格變成對內說明簡報。",
+      "wrong": "讓 AI 補造績效數字做成完整投影片。",
+      "right": "先做架構與證據地圖，缺口標需補，數字本人重算。",
+      "result": "可用的「報告與簡報架構」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Hope must turn a table into an internal briefing deck.",
+      "wrong": "Let AI invent performance numbers into a full slide set.",
+      "right": "Outline + evidence map first; gaps marked; recompute numbers yourself.",
+      "result": "A usable Business Report / Presentation Outline."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "鎖定目標與受眾",
+        "why": "決定什麼叫成功",
+        "input": "場合說明",
+        "output": "目標句",
+        "check": "是否可檢查"
+      },
+      {
+        "do": "寫核心訊息",
+        "why": "避免頁面失控",
+        "input": "事實清單",
+        "output": "≤3 句",
+        "check": "是否過長"
+      },
+      {
+        "do": "做證據地圖",
+        "why": "訊息要有支撐",
+        "input": "表格重點",
+        "output": "地圖",
+        "check": "缺證是否標出"
+      },
+      {
+        "do": "產出大綱",
+        "why": "書面＋簡報並行",
+        "input": "地圖",
+        "output": "雙大綱",
+        "check": "頁數是否 8–12"
+      },
+      {
+        "do": "清理與存檔",
+        "why": "去掉假數據",
+        "input": "大綱",
+        "output": "定稿",
+        "check": "有無保證核准"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Lock goal and audience",
+        "why": "Defines success",
+        "input": "Setting notes",
+        "output": "Goal sentence",
+        "check": "Checkable"
+      },
+      {
+        "do": "Write core messages",
+        "why": "Prevents slide sprawl",
+        "input": "Fact list",
+        "output": "≤3 lines",
+        "check": "Too long?"
+      },
+      {
+        "do": "Build evidence map",
+        "why": "Messages need support",
+        "input": "Table highlights",
+        "output": "Map",
+        "check": "Gaps flagged"
+      },
+      {
+        "do": "Produce outlines",
+        "why": "Written + slides together",
+        "input": "Map",
+        "output": "Dual outlines",
+        "check": "8–12 pages"
+      },
+      {
+        "do": "Clean and save",
+        "why": "Remove fake data",
+        "input": "Outlines",
+        "output": "Final",
+        "check": "No approval guarantee"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "寫目標與訊息",
+        "standard": "≤3 句可記",
+        "mistakes": "十句以上",
+        "check": "受眾能否複述？"
+      },
+      {
+        "task": "證據地圖",
+        "standard": "每句有事實或需補",
+        "mistakes": "無來源結論",
+        "check": "缺口是否誠實？"
+      },
+      {
+        "task": "雙大綱",
+        "standard": "書面＋ 8–12 頁",
+        "mistakes": "只有裝飾標題",
+        "check": "能否開講？"
+      },
+      {
+        "task": "存檔",
+        "standard": "無捏造數據",
+        "mistakes": "保留假營收",
+        "check": "已重算關鍵欄？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Write goal and messages",
+        "standard": "≤3 memorable lines",
+        "mistakes": "10+ lines",
+        "check": "Can audience repeat them?"
+      },
+      {
+        "task": "Evidence map",
+        "standard": "Each line has fact or gap",
+        "mistakes": "Unsupported conclusions",
+        "check": "Gaps honest?"
+      },
+      {
+        "task": "Dual outlines",
+        "standard": "Written + 8–12 pages",
+        "mistakes": "Decorative titles only",
+        "check": "Can you present?"
+      },
+      {
+        "task": "Save",
+        "standard": "No invented data",
+        "mistakes": "Keep fake revenue",
+        "check": "Key columns recomputed?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "要把表格／事實收成對內報告或簡報架構時使用",
+      "fields": [
+        "[請填寫工作目標]",
+        "[請貼上已去除敏感資訊的內容]",
+        "[請填寫目標受眾]"
+      ],
+      "body": "你是商務報告與簡報架構教練。可協助組織論點與頁面大綱，但不得捏造公司數據、客戶成果、財務數字或未提供的證據。\n\n我的背景：\n- 報告／簡報工作目標：[請填寫工作目標]\n- 目標受眾：[請填寫目標受眾]\n- 已去除敏感資訊的可用事實／表格重點：[請貼上已去除敏感資訊的內容]\n- 場合（對內週報／對外說明／決策會議）：[請填寫]\n\n任務：產出「報告與簡報架構」（Business Report / Presentation Outline），包含：\n1) 目標（這份報告要促成什麼決定或理解）\n2) 受眾與他們在乎的問題\n3) 核心訊息（最多 3 句）\n4) 證據地圖：每句核心訊息對應哪些「使用者提供的事實／表格」；缺證據標「需補資料」\n5) 建議（僅根據已有證據；不足則給選項而非定論）\n6) 下一步（誰、做什麼、何時——未知就標需確認）\n7) 簡報頁面大綱（8–12 頁／段）與一頁書面報告大綱\n8) 數據使用規則：表格初稿如何支撐論點，哪些計算必須本人重算\n\n不要保證報告會被核准；不要宣稱可自動生成並上傳正式投影片檔到公司雲端。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "expected": "含目標、訊息、證據地圖與頁面大綱的報告／簡報架構",
+      "revisionReminder": "請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "extensions": [
+        {
+          "title": "延伸：檢查證據缺口",
+          "body": "根據我的架構，列出每個核心訊息缺少的證據，並給我「需補哪種去敏資料」清單。不要編造數據填洞。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when turning tables/facts into an internal report or presentation outline",
+      "fields": [
+        "[Enter work goal]",
+        "[Paste sanitized content]",
+        "[Enter target audience]"
+      ],
+      "body": "You are a business report and presentation-outline coach. You may organize arguments and page outlines, but must not invent company data, customer results, financials, or evidence not provided.\n\nMy context:\n- Report/presentation work goal: [Enter work goal]\n- Target audience: [Enter target audience]\n- Sanitized available facts / table highlights: [Paste sanitized content]\n- Setting (internal weekly / external briefing / decision meeting): [Enter]\n\nTask: Produce a “Business Report / Presentation Outline” with:\n1) Goal (what decision or understanding this should enable)\n2) Audience and the questions they care about\n3) Core messages (max 3 sentences)\n4) Evidence map: each message → which user-provided facts/tables; missing evidence → “needs more data”\n5) Recommendations (only from available evidence; if weak, give options not verdicts)\n6) Next steps (who / what / when—unknowns marked needs confirmation)\n7) Slide outline (8–12 pages/sections) and a one-page written report outline\n8) Data-use rules: how table drafts support claims; which calculations you must recompute yourself\n\nNo approval guarantees. No claims of auto-generating and uploading official decks to company cloud.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "expected": "A report/presentation outline with goal, messages, evidence map, and page outline",
+      "revisionReminder": "Remove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "extensions": [
+        {
+          "title": "Extension: evidence gaps",
+          "body": "From my outline, list missing evidence per core message and what sanitized data to gather. Do not invent numbers to fill gaps."
+        }
+      ]
+    },
+    "zhNextStep": "下一堂把可重複的工作方式寫成 SOP 初稿，並標明尚未確認的流程不要寫成正式政策。",
+    "enNextStep": "Next, turn repeatable work into an SOP draft—and do not present unconfirmed practices as official policy.",
+    "zhConceptBlocks": {
+      "principles": [
+        "訊息先於頁面",
+        "證據先於建議",
+        "初稿數據要重算"
+      ],
+      "terms": [
+        "核心訊息",
+        "證據地圖",
+        "需補資料"
+      ],
+      "criteria": [
+        "≤3 訊息",
+        "雙大綱",
+        "缺口誠實"
+      ],
+      "boundaries": [
+        "避免：捏造數據",
+        "避免：假核准",
+        "避免：自動上傳宣稱"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Message before pages",
+        "Evidence before recommendations",
+        "Recompute draft data"
+      ],
+      "terms": [
+        "Core message",
+        "Evidence map",
+        "Needs more data"
+      ],
+      "criteria": [
+        "≤3 messages",
+        "Dual outlines",
+        "Honest gaps"
+      ],
+      "boundaries": [
+        "Avoid: inventing data",
+        "Avoid: fake approval",
+        "Avoid: auto-upload claims"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：報告與簡報架構",
+      "用證據支撐訊息，不用 AI 補假數字。",
+      "表格初稿要標示並重算關鍵欄。"
+    ],
+    "enSummary": [
+      "Deliverable: Business Report / Presentation Outline",
+      "Evidence supports messages—AI does not invent numbers.",
+      "Label table drafts and recompute key columns."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "沒有證據仍寫結論",
+        "why": "誤導決策",
+        "fix": "缺證據就標需補資料"
+      },
+      {
+        "error": "把表格初稿數字當已稽核財務",
+        "why": "合規風險",
+        "fix": "註明初稿／需本人重算"
+      },
+      {
+        "error": "簡報頁數很多但沒有核心訊息",
+        "why": "聽眾抓不住重點",
+        "fix": "先定最多 3 句核心訊息"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Conclusions without evidence",
+        "why": "Misleads decisions",
+        "fix": "Mark needs-more-data"
+      },
+      {
+        "error": "Treating draft table numbers as audited finance",
+        "why": "Compliance risk",
+        "fix": "Label draft / recompute yourself"
+      },
+      {
+        "error": "Many slides, no core message",
+        "why": "Audience loses the point",
+        "fix": "Lock max 3 core messages first"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "論點結構",
+        "levels": {
+          "incomplete": "無核心訊息",
+          "basic": "訊息散亂",
+          "good": "最多 3 句清楚",
+          "ready": "證據地圖完整"
+        }
+      },
+      {
+        "name": "數據紀律",
+        "levels": {
+          "incomplete": "捏造數字",
+          "basic": "未標初稿",
+          "good": "來源清楚",
+          "ready": "重算責任明確"
+        }
+      },
+      {
+        "name": "簡報可用性",
+        "levels": {
+          "incomplete": "只有標題",
+          "basic": "大綱過粗",
+          "good": "8–12 頁可用",
+          "ready": "含下一步"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Argument structure",
+        "levels": {
+          "incomplete": "No core message",
+          "basic": "Scattered messages",
+          "good": "Max 3 clear lines",
+          "ready": "Evidence map complete"
+        }
+      },
+      {
+        "name": "Data discipline",
+        "levels": {
+          "incomplete": "Invented numbers",
+          "basic": "Draft unlabeled",
+          "good": "Sources clear",
+          "ready": "Recompute duty clear"
+        }
+      },
+      {
+        "name": "Deck usability",
+        "levels": {
+          "incomplete": "Titles only",
+          "basic": "Outline too thin",
+          "good": "8–12 usable pages",
+          "ready": "Next steps included"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "中階 / Intermediate",
+    "zhTitle": "第6課：用 AI 製作工作簡報（對內／對外）",
+    "enTitle": "Lesson 6: Use AI to create internal and external work presentations",
+    "zhValueTip": "SOP 初稿先求可執行與可審核，不求一次變成正式政策。",
+    "enValueTip": "SOP drafts should be executable and reviewable—not instantly official policy.",
+    "zhOutcome": "SOP 初稿",
+    "enOutcome": "SOP Draft",
+    "zhConcept": "SOP 的價值是讓同事在相似情境用同一套步驟產出穩定品質。AI 可幫你把現行做法整理成初稿，但未審核前它只是「試用稿」，不是公司正式政策。例外、升級與品質檢查要比漂亮措辭更重要。",
+    "enConcept": "SOPs help teammates produce stable quality in similar situations. AI can turn current practice into a draft—but until reviewed it is a trial draft, not official policy. Exceptions, escalation, and quality checks matter more than pretty wording.",
+    "zhCaseStudy": "初階專案助理阿哲常做「週報彙整」，請假時沒人接手。他請 AI 根據去敏步驟寫 SOP 初稿，並要求標「待主管確認、非正式政策」。主管只改了兩步升級條件，團隊才第一次能交接。",
+    "enCaseStudy": "Junior PM Zhe often compiled weekly reports and nobody could cover his leave. He asked AI to draft an SOP from sanitized steps, labeled “pending manager confirmation—not official policy.” His manager only changed two escalation steps, and the team could finally hand off.",
+    "zhWorkflow": [
+      "寫下現行做法（去敏）與 Trigger",
+      "用 Prompt 產出 SOP 初稿結構",
+      "補例外、升級與品質檢查",
+      "標記試用稿／待確認，刪假政策語氣",
+      "存成 SOP 初稿"
+    ],
+    "enWorkflow": [
+      "Write current practice (sanitized) and trigger",
+      "Generate SOP draft structure with the prompt",
+      "Add exceptions, escalation, and quality checks",
+      "Label trial/pending; remove fake-policy tone",
+      "Save the SOP Draft"
+    ],
+    "zhCommonMistakes": [
+      "把未確認流程寫成正式公司政策",
+      "捏造規章編號或罰則",
+      "步驟無可檢查的完成標準",
+      "Owner 暴露不必要個資",
+      "宣稱自動寫入 ERP／企業知識庫"
+    ],
+    "enCommonMistakes": [
+      "Presenting unconfirmed practice as official policy",
+      "Inventing regulation IDs or penalties",
+      "Steps with no checkable completion standard",
+      "Owners exposing unnecessary personal data",
+      "Claiming auto-write into ERP/knowledge bases"
+    ],
+    "zhExcellentExample": "含適用、Trigger、步驟、Owner、I/O、例外、品質檢查、試用稿狀態。",
+    "enExcellentExample": "Includes scope, trigger, steps, owner, I/O, exceptions, quality checks, trial-draft status.",
+    "zhPrompt": "你是 SOP／標準作業流程教練。可協助把重複工作寫成初稿流程，但不得把尚未確認的做法寫成公司正式政策，也不得捏造既有規章編號或罰則。\n\n我的背景：\n- 要標準化的工作目標：[請填寫工作目標]\n- 主要執行者／目標受眾：[請填寫目標受眾]\n- 已去除敏感資訊的現行做法描述：[請貼上已去除敏感資訊的內容]\n- 適用情境與觸發條件（Trigger）：[請填寫]\n\n任務：產出「SOP 初稿」（SOP Draft），包含：\n1) 適用情境\n2) Trigger（何時啟動）\n3) 步驟（編號、動作、注意點）\n4) Owner（角色，不是真實個資姓名也可以用角色）\n5) 輸入／輸出\n6) 例外狀況與升級條件\n7) 品質檢查（完成前要勾的項）\n8) 狀態標記：試用稿／待主管確認／不可當作正式政策\n\n限制：清楚寫「此為學習用初稿，需人工審核後才可能成為團隊約定」。不要宣稱可自動寫入公司知識庫或 ERP。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+    "enPrompt": "You are an SOP / standard-operating-procedure coach. You may draft a repeatable workflow, but must not present unconfirmed practices as official company policy, and must not invent policy IDs or penalties.\n\nMy context:\n- Work to standardize (work goal): [Enter work goal]\n- Primary operator / audience: [Enter target audience]\n- Sanitized description of current practice: [Paste sanitized content]\n- Situation and trigger: [Enter]\n\nTask: Produce an “SOP Draft” with:\n1) Applicable situations\n2) Trigger (when it starts)\n3) Steps (numbered actions + cautions)\n4) Owner (role; not real personal identifiers)\n5) Inputs / outputs\n6) Exceptions and escalation\n7) Quality checks (pre-completion ticks)\n8) Status label: trial draft / pending manager confirmation / not official policy\n\nLimits: State clearly this is a learning draft needing human review before it can become a team agreement. Do not claim auto-write into company knowledge bases or ERP.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+    "zhCoachPrompt": "【Prompt 2｜文字精簡與備註分工】\n目前某頁文字：\n（貼上）\n請拆成：投影片可見短句 vs 講者備註。說明刪了什麼與為何。保持原意，不要改成另一個主張。",
+    "enCoachPrompt": "[Prompt 2 | Sparse Text vs Notes] Split slide-visible text from speaker notes; keep the same claim.",
+    "zhFeedbackPrompt": "【Prompt 3｜可講性與時間驗收】\n頁面清單與秒數：\n（貼上）\n請檢查是否超時、哪頁該刪併、標題是否像主張。給修改優先序，不要重做整套花俏動畫建議。",
+    "enFeedbackPrompt": "[Prompt 3 | Speakability & Timing QA] Flag overtime and weak titles; prioritize cuts—not flashy animation essays.",
+    "zhExample": "目標：標準化「活動素材索取回覆」；執行者：行銷企劃；現行做法：去敏後的五步手動流程；Trigger：收到索取訊息。",
+    "enExample": "Goal: standardize “asset-request replies”; operator: marketing coordinator; practice: sanitized five-step manual flow; trigger: request message received.",
+    "zhPractice": "選一個重複工作並去敏描述。；完成 Trigger、步驟、例外與檢查。；標成試用稿並刪政策語氣。；存成「SOP 初稿」。",
+    "enPractice": "Pick one repeatable job and sanitize it.; Finish trigger, steps, exceptions, checks.; Label as trial draft; remove policy tone.; Save the SOP Draft.",
+    "zhQuizItems": [
+      {
+        "q": "大學投影片較正確的單位是？",
+        "options": [
+          "一頁貼上整段報告",
+          "一頁一個主張＋精簡要點",
+          "頁數越多越好",
+          "沒有備註比較專業"
+        ],
+        "answer": 1,
+        "explain": "單頁單主張才好講好記。"
+      },
+      {
+        "q": "講者備註的主要用途是？",
+        "options": [
+          "投影給觀眾看的第二面文字牆",
+          "提醒你要講的細節與來源，觀眾看標題即可",
+          "放無關笑話為主",
+          "取代練習"
+        ],
+        "answer": 1,
+        "explain": "備註服務講者，不是第二投影片。"
+      },
+      {
+        "q": "AI 產投影片內容時不可做的是？",
+        "options": [
+          "依你提供要點產主張地圖",
+          "標示待補資料",
+          "捏造統計數字讓圖表好看",
+          "建議刪超時頁"
+        ],
+        "answer": 2,
+        "explain": "不可捏造數據。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "Best unit for university slides?",
+        "options": [
+          "Paste a full report section",
+          "One claim per slide with sparse points",
+          "Maximize slide count",
+          "No notes is more professional"
+        ],
+        "answer": 1,
+        "explain": "One claim per slide is speakable and memorable."
+      },
+      {
+        "q": "Speaker notes are mainly for:",
+        "options": [
+          "A second text wall for the audience",
+          "Details and sources for you while the audience sees titles",
+          "Only unrelated jokes",
+          "Replacing rehearsal"
+        ],
+        "answer": 1,
+        "explain": "Notes serve the speaker."
+      },
+      {
+        "q": "AI must not:",
+        "options": [
+          "Build a claim map from your points",
+          "Mark data needed",
+          "Invent statistics for prettier charts",
+          "Suggest cutting overtime slides"
+        ],
+        "answer": 2,
+        "explain": "Never invent data."
+      }
+    ],
+    "zhNotePrompt": "寫下這個 SOP 的 Trigger、1 個例外狀況，以及你會請誰（角色）確認後才可試用。",
+    "enNotePrompt": "Write this SOP’s trigger, one exception, and which role must confirm before trial use.",
+    "zhDeliverableChecklist": [
+      "已有適用情境與 Trigger",
+      "已有步驟、Owner、輸入與輸出",
+      "已有例外與升級條件",
+      "已有品質檢查項",
+      "已標試用稿／待確認／非正式政策",
+      "未捏造規章，未宣稱自動寫入企業系統"
+    ],
+    "enDeliverableChecklist": [
+      "Scope and trigger present",
+      "Steps, owner, inputs, and outputs present",
+      "Exceptions and escalation present",
+      "Quality checks present",
+      "Trial/pending/not-official status labeled",
+      "No invented regulations; no auto-system-write claims"
+    ],
+    "zhScorecard": [
+      "主張清楚",
+      "少字",
+      "可講",
+      "準時",
+      "一致"
+    ],
+    "enScorecard": [
+      "Clear claims",
+      "Sparse text",
+      "Speakable",
+      "On time",
+      "Consistent"
+    ],
+    "id": "workplace-productivity-L6",
+    "lessonKey": "workplace-productivity-L6",
+    "zhWhyItMatters": {
+      "problem": "重複工作只存在某個人腦中，請假或交接就中斷。",
+      "ineffective": "請 AI「寫一份正式公司 SOP」卻無現行做法與審核狀態。",
+      "solution": "根據去敏現行做法寫初稿，強制含 Trigger、例外、檢查與非政策標記。"
+    },
+    "enWhyItMatters": {
+      "problem": "Repeatable work lives in one person’s head and breaks on leave or handoff.",
+      "ineffective": "Asking AI for an “official company SOP” with no current practice or review status.",
+      "solution": "Draft from sanitized current practice with trigger, exceptions, checks, and non-policy labeling."
+    },
+    "zhObjectives": [
+      "描述適用情境與 Trigger",
+      "寫出可交接的步驟與 Owner 角色",
+      "補齊輸入、輸出、例外與升級",
+      "加上品質檢查與初稿狀態標記",
+      "存成「SOP 初稿」"
+    ],
+    "enObjectives": [
+      "Describe applicable situations and trigger",
+      "Write handoff-ready steps and owner roles",
+      "Complete inputs, outputs, exceptions, and escalation",
+      "Add quality checks and draft-status labeling",
+      "Save an SOP Draft"
+    ],
+    "zhOutputName": "SOP 初稿",
+    "enOutputName": "SOP Draft",
+    "zhCaseStudyBlocks": {
+      "problem": "阿哲的重複流程無法交接。",
+      "wrong": "產出看似正式、含假規章編號的政策文。",
+      "right": "寫試用稿，含例外與檢查，送主管確認。",
+      "result": "可審核的「SOP 初稿」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Zhe’s repeatable process cannot be handed off.",
+      "wrong": "Produce official-looking policy with fake regulation IDs.",
+      "right": "Write a trial draft with exceptions and checks; send for confirmation.",
+      "result": "A reviewable SOP Draft."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "描述現行做法",
+        "why": "SOP 必須來自真實作業",
+        "input": "去敏筆記",
+        "output": "做法草稿",
+        "check": "有無機密"
+      },
+      {
+        "do": "定義 Trigger",
+        "why": "知道何時啟動",
+        "input": "情境",
+        "output": "Trigger 句",
+        "check": "是否可判斷"
+      },
+      {
+        "do": "寫步驟與 I/O",
+        "why": "別人要能照做",
+        "input": "做法",
+        "output": "步驟表",
+        "check": "輸入輸出齊？"
+      },
+      {
+        "do": "加例外與檢查",
+        "why": "穩定品質",
+        "input": "步驟表",
+        "output": "完整初稿",
+        "check": "有無升級條件"
+      },
+      {
+        "do": "標狀態並存檔",
+        "why": "避免被當正式政策",
+        "input": "初稿",
+        "output": "成果",
+        "check": "狀態標記清楚？"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Describe current practice",
+        "why": "SOPs must come from real work",
+        "input": "Sanitized notes",
+        "output": "Practice draft",
+        "check": "Secrets removed"
+      },
+      {
+        "do": "Define trigger",
+        "why": "Know when it starts",
+        "input": "Situation",
+        "output": "Trigger sentence",
+        "check": "Judgable"
+      },
+      {
+        "do": "Write steps and I/O",
+        "why": "Others must follow",
+        "input": "Practice",
+        "output": "Step table",
+        "check": "I/O complete?"
+      },
+      {
+        "do": "Add exceptions and checks",
+        "why": "Stabilize quality",
+        "input": "Steps",
+        "output": "Full draft",
+        "check": "Escalation present?"
+      },
+      {
+        "do": "Label status and save",
+        "why": "Avoid fake official policy",
+        "input": "Draft",
+        "output": "Deliverable",
+        "check": "Status clear?"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "寫適用與 Trigger",
+        "standard": "可判斷何時啟動",
+        "mistakes": "含糊「有需要就做」",
+        "check": "新人看得懂嗎？"
+      },
+      {
+        "task": "步驟可交接",
+        "standard": "有 Owner／I/O",
+        "mistakes": "只有自己縮寫",
+        "check": "同事能否執行？"
+      },
+      {
+        "task": "例外與檢查",
+        "standard": "至少 3 個檢查項",
+        "mistakes": "無例外",
+        "check": "品質如何勾？"
+      },
+      {
+        "task": "狀態標記",
+        "standard": "非正式政策",
+        "mistakes": "寫成公司法規",
+        "check": "有審核提醒嗎？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Write scope and trigger",
+        "standard": "Clear start condition",
+        "mistakes": "Vague “when needed”",
+        "check": "Would a newcomer get it?"
+      },
+      {
+        "task": "Handoff-ready steps",
+        "standard": "Owner + I/O",
+        "mistakes": "Personal shorthand only",
+        "check": "Can a teammate run it?"
+      },
+      {
+        "task": "Exceptions and checks",
+        "standard": "At least 3 checks",
+        "mistakes": "No exceptions",
+        "check": "How is quality ticked?"
+      },
+      {
+        "task": "Status label",
+        "standard": "Not official policy",
+        "mistakes": "Written as company law",
+        "check": "Review reminder present?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "要把重複工作寫成可交給同事執行的流程初稿時使用",
+      "fields": [
+        "[請填寫工作目標]",
+        "[請貼上已去除敏感資訊的內容]",
+        "[請填寫目標受眾]"
+      ],
+      "body": "你是 SOP／標準作業流程教練。可協助把重複工作寫成初稿流程，但不得把尚未確認的做法寫成公司正式政策，也不得捏造既有規章編號或罰則。\n\n我的背景：\n- 要標準化的工作目標：[請填寫工作目標]\n- 主要執行者／目標受眾：[請填寫目標受眾]\n- 已去除敏感資訊的現行做法描述：[請貼上已去除敏感資訊的內容]\n- 適用情境與觸發條件（Trigger）：[請填寫]\n\n任務：產出「SOP 初稿」（SOP Draft），包含：\n1) 適用情境\n2) Trigger（何時啟動）\n3) 步驟（編號、動作、注意點）\n4) Owner（角色，不是真實個資姓名也可以用角色）\n5) 輸入／輸出\n6) 例外狀況與升級條件\n7) 品質檢查（完成前要勾的項）\n8) 狀態標記：試用稿／待主管確認／不可當作正式政策\n\n限制：清楚寫「此為學習用初稿，需人工審核後才可能成為團隊約定」。不要宣稱可自動寫入公司知識庫或 ERP。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "expected": "含 Trigger、步驟、例外與品質檢查的 SOP 初稿",
+      "revisionReminder": "請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "extensions": [
+        {
+          "title": "延伸：例外狀況表",
+          "body": "根據我的 SOP 初稿，列出 5 個例外狀況與升級對象（用角色）。不要新增我沒描述的公司罰則。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when turning repeatable work into a draft others could follow",
+      "fields": [
+        "[Enter work goal]",
+        "[Paste sanitized content]",
+        "[Enter target audience]"
+      ],
+      "body": "You are an SOP / standard-operating-procedure coach. You may draft a repeatable workflow, but must not present unconfirmed practices as official company policy, and must not invent policy IDs or penalties.\n\nMy context:\n- Work to standardize (work goal): [Enter work goal]\n- Primary operator / audience: [Enter target audience]\n- Sanitized description of current practice: [Paste sanitized content]\n- Situation and trigger: [Enter]\n\nTask: Produce an “SOP Draft” with:\n1) Applicable situations\n2) Trigger (when it starts)\n3) Steps (numbered actions + cautions)\n4) Owner (role; not real personal identifiers)\n5) Inputs / outputs\n6) Exceptions and escalation\n7) Quality checks (pre-completion ticks)\n8) Status label: trial draft / pending manager confirmation / not official policy\n\nLimits: State clearly this is a learning draft needing human review before it can become a team agreement. Do not claim auto-write into company knowledge bases or ERP.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "expected": "An SOP draft with trigger, steps, exceptions, and quality checks",
+      "revisionReminder": "Remove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "extensions": [
+        {
+          "title": "Extension: exception table",
+          "body": "From my SOP draft, list 5 exceptions and escalation roles. Do not invent company penalties I did not describe."
+        }
+      ]
+    },
+    "zhNextStep": "下一堂分析哪些重複工作值得用 AI 協助，哪些因判斷或敏感資料而不適合自動化。",
+    "enNextStep": "Next, analyze which repetitive work deserves AI help—and which should not be automated due to judgment or sensitive data.",
+    "zhConceptBlocks": {
+      "principles": [
+        "來自真實做法",
+        "初稿需審核",
+        "例外與檢查優先"
+      ],
+      "terms": [
+        "Trigger",
+        "例外升級",
+        "試用稿"
+      ],
+      "criteria": [
         "可交接",
-        "溝通可追溯",
-        "AI 界線清楚"
+        "有檢查",
+        "狀態清楚"
       ],
-      "enScorecard": [
-        "Single source of truth",
-        "Safe permissions",
+      "boundaries": [
+        "避免：假政策",
+        "避免：假罰則",
+        "避免：自動寫入系統宣稱"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "From real practice",
+        "Drafts need review",
+        "Exceptions and checks first"
+      ],
+      "terms": [
+        "Trigger",
+        "Escalation",
+        "Trial draft"
+      ],
+      "criteria": [
         "Handoff-ready",
-        "Traceable comms",
-        "Clear AI boundaries"
+        "Checks present",
+        "Status clear"
       ],
-      "resources": [
-        {
-          "name": "Google Drive",
-          "url": "https://drive.google.com",
-          "note": "專案資料夾與分享權限"
-        },
-        {
-          "name": "Google Docs",
-          "url": "https://docs.google.com",
-          "note": "建議模式與會議紀錄"
-        },
-        {
-          "name": "Google Sheets",
-          "url": "https://sheets.google.com",
-          "note": "分工表與進度板"
-        },
-        {
-          "name": "Google Slides",
-          "url": "https://slides.google.com",
-          "note": "共編簡報"
-        },
-        {
-          "name": "ChatGPT",
-          "url": "https://chatgpt.com",
-          "note": "憲章與會議整理草稿"
+      "boundaries": [
+        "Avoid: fake policy",
+        "Avoid: fake penalties",
+        "Avoid: auto-system write claims"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：SOP 初稿",
+      "可執行、可審核，不是自動生效的政策。",
+      "例外與品質檢查決定穩定性。"
+    ],
+    "enSummary": [
+      "Deliverable: SOP Draft",
+      "Executable and reviewable—not auto-official policy.",
+      "Exceptions and quality checks create stability."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "把試用稿標成正式政策",
+        "why": "誤導同事",
+        "fix": "明確標待確認／非正式"
+      },
+      {
+        "error": "步驟缺少輸入輸出",
+        "why": "別人無法接手",
+        "fix": "每段補齊輸入／輸出"
+      },
+      {
+        "error": "Owner 寫真實個資姓名過多",
+        "why": "隱私風險",
+        "fix": "改用角色並去敏"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Labeling a trial draft as official policy",
+        "why": "Misleads teammates",
+        "fix": "Mark pending / not official"
+      },
+      {
+        "error": "Steps without inputs/outputs",
+        "why": "Others cannot take over",
+        "fix": "Add inputs/outputs per section"
+      },
+      {
+        "error": "Owners as excessive real personal names",
+        "why": "Privacy risk",
+        "fix": "Use roles and sanitize"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "可執行性",
+        "levels": {
+          "incomplete": "只有口號",
+          "basic": "步驟含糊",
+          "good": "步驟可照做",
+          "ready": "含例外與檢查"
         }
+      },
+      {
+        "name": "定位正確",
+        "levels": {
+          "incomplete": "寫成正式法規",
+          "basic": "狀態不明",
+          "good": "標試用稿",
+          "ready": "含審核提醒"
+        }
+      },
+      {
+        "name": "交接友善",
+        "levels": {
+          "incomplete": "只有自己看得懂",
+          "basic": "缺 Owner",
+          "good": "角色清楚",
+          "ready": "輸入輸出齊"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Executability",
+        "levels": {
+          "incomplete": "Slogans only",
+          "basic": "Vague steps",
+          "good": "Steps followable",
+          "ready": "Exceptions + checks"
+        }
+      },
+      {
+        "name": "Correct status",
+        "levels": {
+          "incomplete": "Written as law",
+          "basic": "Status unclear",
+          "good": "Trial draft labeled",
+          "ready": "Review reminder"
+        }
+      },
+      {
+        "name": "Handoff-friendly",
+        "levels": {
+          "incomplete": "Only author understands",
+          "basic": "Missing owner",
+          "good": "Roles clear",
+          "ready": "I/O complete"
+        }
+      }
+    ]
+  },
+  {
+    "id": "workplace-productivity-L7",
+    "lessonKey": "workplace-productivity-L7",
+    "zhTitle": "第7課：用 AI 建立 SOP 與標準作業流程",
+    "enTitle": "Lesson 7: Use AI to create SOPs and standard operating procedures",
+    "zhConcept": "不是所有重複工作都該自動化。要看：頻率、耗時、判斷密度、敏感資料。高判斷或高敏感的部分應留在人工；AI 較適合草稿、格式整理與選項生成，且需人工核對。本平台不會自動執行你的公司系統任務。",
+    "enConcept": "Not every repetitive task should be automated. Check frequency, time, judgment density, and sensitive data. High-judgment or high-sensitivity work stays human; AI fits drafting, formatting, and options—with human checks. This platform does not auto-run your company systems.",
+    "zhPrompt": "你是重複工作分析教練，協助判斷哪些工作可用 AI 加速、哪些不適合自動化。不可宣稱本平台能自動串接公司系統或自動執行任務。\n\n我的背景：\n- 想改善的工作目標：[請填寫工作目標]\n- 執行者／目標受眾：[請填寫目標受眾]\n- 已去除敏感資訊的重複工作描述（含頻率與大概耗時）：[請貼上已去除敏感資訊的內容]\n\n任務：產出「重複工作分析表」（Repetitive Work Analysis），對每個子任務評分／說明：\n1) 重複頻率\n2) 每次花費時間\n3) 是否需要判斷（高／中／低，需說明）\n4) 是否涉及敏感資料（是／否／部分）\n5) 可以使用 AI 的部分（具體）\n6) 不適合自動化的部分（具體）\n7) 建議模式：人工為主／AI 草稿＋人工核對／暫不導入 AI\n8) 下週小實驗：只選 1 個子任務，寫 3 天驗證方式\n\n禁止：保證節省固定工時百分比；禁止建議上傳密碼、客戶個資或未公開財務到 AI。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+    "enPrompt": "You are a repetitive-work analysis coach deciding where AI can speed work and where automation is a bad fit. Do not claim this platform auto-connects to company systems or auto-executes tasks.\n\nMy context:\n- Work goal to improve: [Enter work goal]\n- Operator / audience: [Enter target audience]\n- Sanitized repetitive-work description (frequency + rough time): [Paste sanitized content]\n\nTask: Produce a “Repetitive Work Analysis” scoring/explaining each subtask for:\n1) Frequency\n2) Time per run\n3) Judgment needed (high/medium/low + why)\n4) Sensitive data involved (yes/no/partial)\n5) Where AI may help (concrete)\n6) Where automation is unsuitable (concrete)\n7) Recommended mode: human-led / AI draft + human check / do not introduce AI yet\n8) Next-week experiment: pick ONE subtask and a 3-day validation plan\n\nForbidden: guaranteeing a fixed % time saved; suggesting uploads of passwords, customer PII, or non-public financials to AI.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+    "zhExample": "目標：縮短每週狀態整理；描述：每天 30 分鐘更新表格（去敏欄位）；受眾：營運助理。",
+    "enExample": "Goal: shorten weekly status cleanup; description: 30 minutes daily updating a sanitized table; audience: ops assistant.",
+    "zhPractice": "描述一個重複工作並去敏。；完成分析表與模式建議。；設計單一子任務 3 天實驗。；存成「重複工作分析表」。",
+    "enPractice": "Describe one repetitive job (sanitized).; Finish analysis and mode advice.; Design a one-subtask 3-day experiment.; Save the Repetitive Work Analysis.",
+    "zhFeedbackPrompt": "你是一位流程設計教練。\n\n以下是我的成果：\n（貼上）\n\n請專業回饋。\n第一部分評分（1-10）：\n- 可交接性\n- 清楚度\n- 可檢查\n- 例外完整\n- 真實演練\n第二部分：3優點\n第三部分：3問題（問題／影響／改法）\n第四部分：改寫建議\n第五部分：今天／明天／最後檢查\n不要捏造資料。",
+    "enFeedbackPrompt": "Act as a process design coach. Score 1-10 for: Handoffability, Clarity, Checkability, Exception coverage, Real dry-run. Give 3 strengths, 3 issues, rewrites, next actions. No invented facts.",
+    "zhQuizItems": [
+      {
+        "q": "好 SOP 通常包含？",
+        "options": [
+          "觸發、步驟、檢查與例外",
+          "只有口號目標",
+          "只有軟體名稱"
+        ],
+        "answer": 0,
+        "explain": "可執行結構。"
+      },
+      {
+        "q": "含糊步驟的風險？",
+        "options": [
+          "無法交接且品質不穩",
+          "比較有彈性所以最好",
+          "一定提升創意"
+        ],
+        "answer": 0,
+        "explain": "交接失敗。"
+      },
+      {
+        "q": "AI 適合？",
+        "options": [
+          "整理結構並標含糊處",
+          "假裝流程已驗證",
+          "省略檢查表"
+        ],
+        "answer": 0,
+        "explain": "結構輔助。"
+      },
+      {
+        "q": "適合先寫 SOP 的是？",
+        "options": [
+          "高頻低風險重複工作",
+          "一年一次的特殊專案",
+          "完全無規律的危機"
+        ],
+        "answer": 0,
+        "explain": "重複性。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "SOP 初稿",
+          "股價",
+          "與流程無關的散文"
+        ],
+        "answer": 0,
+        "explain": "流程文件。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "好 SOP 通常包含？",
+        "options": [
+          "觸發、步驟、檢查與例外",
+          "只有口號目標",
+          "只有軟體名稱"
+        ],
+        "answer": 0,
+        "explain": "可執行結構。"
+      },
+      {
+        "q": "含糊步驟的風險？",
+        "options": [
+          "無法交接且品質不穩",
+          "比較有彈性所以最好",
+          "一定提升創意"
+        ],
+        "answer": 0,
+        "explain": "交接失敗。"
+      },
+      {
+        "q": "AI 適合？",
+        "options": [
+          "整理結構並標含糊處",
+          "假裝流程已驗證",
+          "省略檢查表"
+        ],
+        "answer": 0,
+        "explain": "結構輔助。"
+      },
+      {
+        "q": "適合先寫 SOP 的是？",
+        "options": [
+          "高頻低風險重複工作",
+          "一年一次的特殊專案",
+          "完全無規律的危機"
+        ],
+        "answer": 0,
+        "explain": "重複性。"
+      },
+      {
+        "q": "本課產出？",
+        "options": [
+          "SOP 初稿",
+          "股價",
+          "與流程無關的散文"
+        ],
+        "answer": 0,
+        "explain": "流程文件。"
+      }
+    ],
+    "zhOutcome": "重複工作分析表",
+    "enOutcome": "Repetitive Work Analysis",
+    "zhValueTip": "先分類風險，再談加速；敏感與高判斷工作不要為了快而交給 AI。",
+    "enValueTip": "Sort risk before speed. Do not hand sensitive or high-judgment work to AI just to go faster.",
+    "zhCaseStudy": "營運助理小安每天整理到貨狀態。她先想「全部交給 AI」。分析後發現：狀態改寫需判斷、客戶欄位敏感。她只實驗「把去敏狀態改成表格格式」，三天後錯誤下降，且沒有貼出客戶電話。",
+    "enCaseStudy": "Ops assistant Ann updated arrival statuses daily and wanted “all AI.” Analysis showed status changes need judgment and customer fields are sensitive. She experimented only on “format sanitized statuses into a table.” After three days errors dropped—and no phone numbers were pasted.",
+    "zhExcellentExample": "子任務評分齊、模式建議具體、單一實驗含停用條件、無省時保證與系統自動執行宣稱。",
+    "enExcellentExample": "Scored subtasks, concrete modes, one experiment with stop condition, no time-save or auto-execution claims.",
+    "zhWorkflow": [
+      "列出重複子任務與頻率／耗時（去敏）",
+      "評分判斷與敏感度",
+      "用 Prompt 產出分析表與模式建議",
+      "只選 1 項寫 3 天實驗與停用條件",
+      "存成重複工作分析表"
+    ],
+    "enWorkflow": [
+      "List repetitive subtasks with frequency/time (sanitized)",
+      "Score judgment and sensitivity",
+      "Generate the analysis and mode advice with the prompt",
+      "Pick one item for a 3-day experiment and stop condition",
+      "Save the Repetitive Work Analysis"
+    ],
+    "zhCommonMistakes": [
+      "建議把密碼或客戶個資貼給 AI",
+      "高判斷工作仍選全自動",
+      "一次實驗全部子任務",
+      "保證節省固定比例工時",
+      "宣稱平台會自動執行公司系統"
+    ],
+    "enCommonMistakes": [
+      "Suggesting passwords or customer PII to AI",
+      "Choosing full automation for high-judgment work",
+      "Experimenting on every subtask at once",
+      "Guaranteeing a fixed % time saved",
+      "Claiming the platform auto-runs company systems"
+    ],
+    "zhDeliverableChecklist": [
+      "已拆成可評估子任務",
+      "已標頻率、耗時、判斷、敏感度",
+      "已寫 AI 可協助與不適合自動化部分",
+      "每項有模式建議",
+      "已有單一子任務 3 天實驗與停用條件",
+      "無省時保證，無自動執行公司系統宣稱"
+    ],
+    "enDeliverableChecklist": [
+      "Split into evaluable subtasks",
+      "Frequency, time, judgment, sensitivity marked",
+      "AI-help and unsuitable-automation parts written",
+      "Mode advice per item",
+      "One-subtask 3-day experiment with stop condition",
+      "No time-save guarantee; no auto-execution claims"
+    ],
+    "zhScorecard": [
+      "可交接性",
+      "清楚度",
+      "可檢查",
+      "例外完整",
+      "真實演練"
+    ],
+    "enScorecard": [
+      "Handoffability",
+      "Clarity",
+      "Checkability",
+      "Exception coverage",
+      "Real dry-run"
+    ],
+    "zhNotePrompt": "寫下你選的 1 個實驗子任務、它的敏感風險，以及失敗時的停用訊號。",
+    "enNotePrompt": "Write the one experiment subtask, its sensitivity risk, and the stop signal if it fails.",
+    "zhCoachPrompt": "請找出 SOP 中含糊、無法交接的步驟，並改寫成可執行語句。",
+    "enCoachPrompt": "Find vague non-handoffable SOP steps and rewrite them to be executable.",
+    "zhWhyItMatters": {
+      "problem": "一股腦導入 AI，可能更快產出錯誤，或把敏感資料送出去。",
+      "ineffective": "只問「如何自動化我的工作」卻不做風險分類。",
+      "solution": "用分析表逐項評分，選 1 個低風險子任務做下週小實驗。"
+    },
+    "enWhyItMatters": {
+      "problem": "Blind AI adoption can produce errors faster—or leak sensitive data.",
+      "ineffective": "Only asking “how do I automate my job” with no risk sorting.",
+      "solution": "Score each subtask, then run a one-subtask experiment next week."
+    },
+    "zhObjectives": [
+      "把重複工作拆成可評估的子任務",
+      "標出判斷密度與敏感資料風險",
+      "為每項選擇 AI 適配模式",
+      "設計只含 1 個子任務的 3 天實驗",
+      "存成「重複工作分析表」"
+    ],
+    "enObjectives": [
+      "Split repetitive work into evaluable subtasks",
+      "Mark judgment density and sensitive-data risk",
+      "Choose an AI-fit mode per subtask",
+      "Design a 3-day experiment on one subtask only",
+      "Save a Repetitive Work Analysis"
+    ],
+    "estimatedTime": "約 45 分鐘 / About 45 min",
+    "difficulty": "中階 / Intermediate",
+    "zhOutputName": "重複工作分析表",
+    "enOutputName": "Repetitive Work Analysis",
+    "zhCaseStudyBlocks": {
+      "problem": "小安被重複更新拖住，想一次自動化。",
+      "wrong": "把含客戶資料的流程全丟給 AI。",
+      "right": "逐項分析，只實驗低敏感格式整理。",
+      "result": "一份可執行的「重複工作分析表」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Ann is stuck in repetitive updates and wants full automation.",
+      "wrong": "Send the whole customer-data flow to AI.",
+      "right": "Score each part; experiment only on low-sensitivity formatting.",
+      "result": "An actionable Repetitive Work Analysis."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "拆子任務",
+        "why": "才能個別評估",
+        "input": "工作描述",
+        "output": "子任務清單",
+        "check": "是否可觀察"
+      },
+      {
+        "do": "評判斷／敏感",
+        "why": "決定能否用 AI",
+        "input": "清單",
+        "output": "評分表",
+        "check": "高敏感是否標出"
+      },
+      {
+        "do": "選模式",
+        "why": "避免一刀切",
+        "input": "評分表",
+        "output": "模式欄",
+        "check": "是否含暫不導入"
+      },
+      {
+        "do": "設計小實驗",
+        "why": "驗證真實效益",
+        "input": "低風險項",
+        "output": "3 天計畫",
+        "check": "有無停用條件"
+      },
+      {
+        "do": "存檔",
+        "why": "供品質課沿用",
+        "input": "定稿",
+        "output": "成果",
+        "check": "有無省時保證"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Split subtasks",
+        "why": "Enable per-item scoring",
+        "input": "Job description",
+        "output": "Subtask list",
+        "check": "Observable"
+      },
+      {
+        "do": "Score judgment/sensitivity",
+        "why": "Decides AI fitness",
+        "input": "List",
+        "output": "Score table",
+        "check": "High sensitivity flagged"
+      },
+      {
+        "do": "Choose modes",
+        "why": "Avoid one-size-fits-all",
+        "input": "Scores",
+        "output": "Mode column",
+        "check": "Includes do-not-introduce"
+      },
+      {
+        "do": "Design mini experiment",
+        "why": "Validate real benefit",
+        "input": "Low-risk item",
+        "output": "3-day plan",
+        "check": "Stop condition"
+      },
+      {
+        "do": "Save",
+        "why": "Reuse in quality lesson",
+        "input": "Final",
+        "output": "Deliverable",
+        "check": "No time-save guarantee"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "拆解子任務",
+        "standard": "每項可單獨觀察",
+        "mistakes": "整包無法拆",
+        "check": "能否計次？"
+      },
+      {
+        "task": "標風險",
+        "standard": "判斷＋敏感兩欄",
+        "mistakes": "全標低風險",
+        "check": "高敏感是否誠實？"
+      },
+      {
+        "task": "選實驗",
+        "standard": "只 1 項＋停用條件",
+        "mistakes": "一次改全部",
+        "check": "失敗怎麼停？"
+      },
+      {
+        "task": "存檔",
+        "standard": "無省時保證用語",
+        "mistakes": "保證省 50%",
+        "check": "用語是否務實？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Split subtasks",
+        "standard": "Each observable alone",
+        "mistakes": "Cannot split the bundle",
+        "check": "Can you count runs?"
+      },
+      {
+        "task": "Mark risks",
+        "standard": "Judgment + sensitivity columns",
+        "mistakes": "All marked low risk",
+        "check": "High sensitivity honest?"
+      },
+      {
+        "task": "Pick experiment",
+        "standard": "One item + stop condition",
+        "mistakes": "Change everything at once",
+        "check": "How do you stop on failure?"
+      },
+      {
+        "task": "Save",
+        "standard": "No guaranteed time-save wording",
+        "mistakes": "Promise 50% saved",
+        "check": "Is wording realistic?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "想減少重複勞動，但不確定能否安全用 AI 時使用",
+      "fields": [
+        "[請填寫工作目標]",
+        "[請貼上已去除敏感資訊的內容]",
+        "[請填寫目標受眾]"
       ],
-      "challenge": "與至少一名同學實際建立共用專案資料夾並簽署（同意）協作憲章；截圖權限設定（遮敏）與 final 位置說明。",
-      "id": "workplace-productivity-L10",
-      "lessonKey": "workplace-productivity-L10"
-    }
-  ],
+      "body": "你是重複工作分析教練，協助判斷哪些工作可用 AI 加速、哪些不適合自動化。不可宣稱本平台能自動串接公司系統或自動執行任務。\n\n我的背景：\n- 想改善的工作目標：[請填寫工作目標]\n- 執行者／目標受眾：[請填寫目標受眾]\n- 已去除敏感資訊的重複工作描述（含頻率與大概耗時）：[請貼上已去除敏感資訊的內容]\n\n任務：產出「重複工作分析表」（Repetitive Work Analysis），對每個子任務評分／說明：\n1) 重複頻率\n2) 每次花費時間\n3) 是否需要判斷（高／中／低，需說明）\n4) 是否涉及敏感資料（是／否／部分）\n5) 可以使用 AI 的部分（具體）\n6) 不適合自動化的部分（具體）\n7) 建議模式：人工為主／AI 草稿＋人工核對／暫不導入 AI\n8) 下週小實驗：只選 1 個子任務，寫 3 天驗證方式\n\n禁止：保證節省固定工時百分比；禁止建議上傳密碼、客戶個資或未公開財務到 AI。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "expected": "含頻率、判斷、敏感度與 AI 適配建議的分析表",
+      "revisionReminder": "請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "extensions": [
+        {
+          "title": "延伸：只選一個實驗",
+          "body": "根據我的分析表，只推薦 1 個下週可實驗的子任務，並寫失敗時如何停用。不要承諾節省固定工時。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when you want less repetitive labor but are unsure AI is safe/fit",
+      "fields": [
+        "[Enter work goal]",
+        "[Paste sanitized content]",
+        "[Enter target audience]"
+      ],
+      "body": "You are a repetitive-work analysis coach deciding where AI can speed work and where automation is a bad fit. Do not claim this platform auto-connects to company systems or auto-executes tasks.\n\nMy context:\n- Work goal to improve: [Enter work goal]\n- Operator / audience: [Enter target audience]\n- Sanitized repetitive-work description (frequency + rough time): [Paste sanitized content]\n\nTask: Produce a “Repetitive Work Analysis” scoring/explaining each subtask for:\n1) Frequency\n2) Time per run\n3) Judgment needed (high/medium/low + why)\n4) Sensitive data involved (yes/no/partial)\n5) Where AI may help (concrete)\n6) Where automation is unsuitable (concrete)\n7) Recommended mode: human-led / AI draft + human check / do not introduce AI yet\n8) Next-week experiment: pick ONE subtask and a 3-day validation plan\n\nForbidden: guaranteeing a fixed % time saved; suggesting uploads of passwords, customer PII, or non-public financials to AI.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "expected": "An analysis table with frequency, judgment, sensitivity, and AI-fit advice",
+      "revisionReminder": "Remove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "extensions": [
+        {
+          "title": "Extension: one experiment only",
+          "body": "From my analysis, recommend only one subtask to try next week and how to stop if it fails. Do not promise fixed time savings."
+        }
+      ]
+    },
+    "zhNextStep": "下一堂建立工作成果品質檢查表，讓 AI 草稿在送出前經過人工把關。",
+    "enNextStep": "Next, build a quality-review checklist so AI drafts get human gates before sending.",
+    "zhConceptBlocks": {
+      "principles": [
+        "先分類再加速",
+        "敏感優先於速度",
+        "小實驗驗證"
+      ],
+      "terms": [
+        "判斷密度",
+        "AI 適配模式",
+        "停用條件"
+      ],
+      "criteria": [
+        "有評分",
+        "有模式",
+        "有單點實驗"
+      ],
+      "boundaries": [
+        "避免：貼機密",
+        "避免：全自動高判斷",
+        "避免：自動執行宣稱"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Sort before speed",
+        "Sensitivity over speed",
+        "Validate with small experiments"
+      ],
+      "terms": [
+        "Judgment density",
+        "AI-fit mode",
+        "Stop condition"
+      ],
+      "criteria": [
+        "Scores present",
+        "Modes present",
+        "Single experiment"
+      ],
+      "boundaries": [
+        "Avoid: pasting secrets",
+        "Avoid: full-auto high judgment",
+        "Avoid: auto-execution claims"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：重複工作分析表",
+      "不是每件事都該自動化。",
+      "先做低風險小實驗。"
+    ],
+    "enSummary": [
+      "Deliverable: Repetitive Work Analysis",
+      "Not everything should be automated.",
+      "Start with a low-risk mini experiment."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "把高判斷＋高敏感工作全交給 AI",
+        "why": "錯誤與洩密風險",
+        "fix": "改為人工為主或暫不導入"
+      },
+      {
+        "error": "一次自動化全部子任務",
+        "why": "無法驗證",
+        "fix": "下週只實驗 1 個"
+      },
+      {
+        "error": "用保證省時當成功標準",
+        "why": "不真實",
+        "fix": "改成可觀察的品質與耗時紀錄"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Handing high-judgment + high-sensitivity work to AI",
+        "why": "Error and leak risk",
+        "fix": "Keep human-led or do not introduce AI"
+      },
+      {
+        "error": "Automating every subtask at once",
+        "why": "Cannot validate",
+        "fix": "Experiment on one next week"
+      },
+      {
+        "error": "Using guaranteed time-saved as success",
+        "why": "Unrealistic",
+        "fix": "Track observable quality and time"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "分析深度",
+        "levels": {
+          "incomplete": "只有清單",
+          "basic": "缺敏感或判斷欄",
+          "good": "欄位齊",
+          "ready": "每項有模式建議"
+        }
+      },
+      {
+        "name": "安全意識",
+        "levels": {
+          "incomplete": "建議貼機密",
+          "basic": "敏感標示弱",
+          "good": "敏感欄清楚",
+          "ready": "有禁止上傳項"
+        }
+      },
+      {
+        "name": "可實驗性",
+        "levels": {
+          "incomplete": "無下一步",
+          "basic": "實驗過大",
+          "good": "單一子任務實驗",
+          "ready": "含停用條件"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Depth",
+        "levels": {
+          "incomplete": "List only",
+          "basic": "Missing sensitivity/judgment",
+          "good": "Columns complete",
+          "ready": "Mode per item"
+        }
+      },
+      {
+        "name": "Safety awareness",
+        "levels": {
+          "incomplete": "Suggests pasting secrets",
+          "basic": "Weak sensitivity marks",
+          "good": "Sensitivity clear",
+          "ready": "Upload bans present"
+        }
+      },
+      {
+        "name": "Experimentability",
+        "levels": {
+          "incomplete": "No next step",
+          "basic": "Experiment too big",
+          "good": "Single-subtask experiment",
+          "ready": "Stop condition included"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 40 分鐘 / About 40 min",
+    "difficulty": "中階 / Intermediate",
+    "zhTitle": "第8課：建立個人或團隊知識庫（第二大腦／企業知識）",
+    "enTitle": "Lesson 8: Build a personal or team knowledge base",
+    "zhValueTip": "AI 可協助檢查，人必須做最終確認；沒勾最終欄就不算可送出。",
+    "enValueTip": "AI can assist review; humans must final-confirm. No final tick means not ready to send.",
+    "zhOutcome": "工作成果品質檢查表",
+    "enOutcome": "AI-Assisted Quality Review Checklist",
+    "zhConcept": "品質檢查不是「再請 AI 美化一次」，而是用固定清單抓住正確性、完整性、語氣、數字、日期、姓名、來源與敏感資訊，最後一定要有人工確認。AI 可以找疑點，但不能當唯一最終審核者。",
+    "enConcept": "Quality review is not “ask AI to polish again.” It is a fixed checklist for accuracy, completeness, tone, numbers, dates, names, sources, and sensitive info—ending with required human confirmation. AI can spot issues; it cannot be the only final reviewer.",
+    "zhCaseStudy": "行銷企劃小希用 AI 寫好對外說明後就想送。檢查表抓到：日期寫錯、數字單位不一致、還殘留內部專案代號。她修完並親勾「最終人工確認」才寄出。",
+    "enCaseStudy": "Marketing coordinator Hope almost sent an external brief drafted with AI. The checklist caught a wrong date, inconsistent units, and an internal project code. She fixed them and personally ticked final human confirmation before sending.",
+    "zhWorkflow": [
+      "選定要送出的去敏草稿",
+      "用 Prompt 產出完整檢查表",
+      "逐項標記綠／紅燈並修改",
+      "完成最終人工確認勾選",
+      "存成工作成果品質檢查表"
+    ],
+    "enWorkflow": [
+      "Pick the sanitized draft to send",
+      "Generate the full checklist with the prompt",
+      "Mark green/red per row and fix",
+      "Complete the final human-confirmation tick",
+      "Save the AI-Assisted Quality Review Checklist"
+    ],
+    "zhCommonMistakes": [
+      "把 AI 檢查當成最終核准",
+      "跳過姓名、日期、數字檢查",
+      "紅燈未修就送出",
+      "檢查後仍殘留敏感資訊",
+      "捏造「已通過稽核」結果"
+    ],
+    "enCommonMistakes": [
+      "Treating AI review as final approval",
+      "Skipping name/date/number checks",
+      "Sending with unfixed red lights",
+      "Leaving sensitive info after review",
+      "Inventing “passed audit” results"
+    ],
+    "zhExcellentExample": "9 類可勾選、紅燈有修改建議、最終人工確認必填、明確寫 AI≠核准。",
+    "enExcellentExample": "9 tickable categories, fix tips for reds, required final human tick, clear AI≠approval note.",
+    "zhPrompt": "你是工作成果品質檢查教練。AI 可協助找疑點，但不得作為唯一最終審核者，也不得捏造「已通過內部稽核」之類結果。\n\n我的背景：\n- 要檢查的成果類型／工作目標：[請填寫工作目標]\n- 目標受眾（將收到此成果的人）：[請填寫目標受眾]\n- 已去除敏感資訊的成果草稿：[請貼上已去除敏感資訊的內容]\n\n任務：產出「工作成果品質檢查表」（AI-Assisted Quality Review Checklist），至少涵蓋：\n1) 正確性（事實、邏輯、有無過度推論）\n2) 完整性（缺段落、缺請求、缺下一步）\n3) 語氣（是否得體、是否越權）\n4) 數字（計算、單位、是否初稿）\n5) 日期\n6) 姓名／稱謂\n7) 引用來源（若有）\n8) 公司敏感資訊（是否仍殘留）\n9) 最終人工確認（必須由人勾選才能視為可送出）\n\n輸出：可勾選清單 + 每個紅燈項的修改建議（不直接假裝已修好）。清楚寫：AI 檢查 ≠ 最終核准。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+    "enPrompt": "You are a work-quality review coach. AI may help spot issues, but must not be the only final reviewer, and must not invent results like “passed internal audit.”\n\nMy context:\n- Deliverable type / work goal: [Enter work goal]\n- Audience (who will receive it): [Enter target audience]\n- Sanitized draft deliverable: [Paste sanitized content]\n\nTask: Produce an “AI-Assisted Quality Review Checklist” covering at least:\n1) Accuracy (facts, logic, over-inference)\n2) Completeness (missing sections, asks, next steps)\n3) Tone (appropriate, no overreach)\n4) Numbers (math, units, draft status)\n5) Dates\n6) Names / titles\n7) Citation sources (if any)\n8) Residual sensitive company information\n9) Final human confirmation (a human must tick before “ready to send”)\n\nOutput: tickable checklist + fix suggestions per red item (do not pretend already fixed). State clearly: AI review ≠ final approval.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+    "zhCoachPrompt": "【Prompt 2｜命名規則、標籤與課程資料庫】\n我的課程清單：\n（貼上）\n請給檔名規則、標籤白名單、課程資料庫欄位（大綱／講義／筆記／考試／作業／Prompt）。提供 5 個命名範例。不要捏造我沒修的課。",
+    "enCoachPrompt": "[Prompt 2 | Naming, Tags, Course DB] Provide naming rules, tag whitelist, course fields, and 5 examples; invent no courses.",
+    "zhFeedbackPrompt": "【Prompt 3｜架構驗收與 Prompt Library 分類】\n我的架構草稿：\n（貼上）\n請檢查：缺哪些庫、狀態是否誠實、備份是否可執行；並建議 Prompt Library 分類（筆記／報告／簡報／考試／英文／協作／專案／求職）。不要把計畫寫成已建好；列出待補資料。",
+    "enFeedbackPrompt": "[Prompt 3 | Architecture QA + Prompt Library] Check missing DBs, honesty, backup; suggest prompt categories; don’t mark plans as built.",
+    "zhExample": "成果：對外活動說明草稿（去敏）；受眾：合作窗口；目標：送出前品質把關。",
+    "enExample": "Deliverable: sanitized external campaign brief; audience: partner contact; goal: pre-send quality gate.",
+    "zhPractice": "選一份即將送出的去敏草稿。；跑完整檢查表並標記紅燈。；修完並勾最終人工確認。；存成「工作成果品質檢查表」。",
+    "enPractice": "Pick a sanitized draft about to send.; Run the full checklist and mark reds.; Fix and tick final human confirmation.; Save the AI-Assisted Quality Review Checklist.",
+    "zhQuizItems": [
+      {
+        "q": "AI Second Brain 最核心的目的是？",
+        "options": [
+          "收藏越多 App 越好",
+          "讓知識可搜尋、可重用、可追溯，並讓 AI 基於你的來源協助",
+          "取代所有思考",
+          "只聊天不存檔"
+        ],
+        "answer": 1,
+        "explain": "系統價值在可重用與可追溯。"
+      },
+      {
+        "q": "Drive／Notion／NotebookLM 較合理的分工是？",
+        "options": [
+          "三者放完全相同複本且無規則",
+          "Drive 管檔案與備份、Notion 管結構關係、NotebookLM 做 grounded 問答",
+          "全部只放聊天框",
+          "禁止備份"
+        ],
+        "answer": 1,
+        "explain": "分工清楚才能降低混亂。"
+      },
+      {
+        "q": "建立資料庫時不可？",
+        "options": [
+          "標示 raw／final 狀態",
+          "把未整理內容標成已完成遷移",
+          "使用精簡標籤",
+          "保留可檢查的命名規則"
+        ],
+        "answer": 1,
+        "explain": "不可把計畫或未完成寫成已完成。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "Core purpose of an AI Second Brain?",
+        "options": [
+          "Collect more apps",
+          "Make knowledge searchable, reusable, traceable for grounded AI help",
+          "Replace all thinking",
+          "Chat only, never save"
+        ],
+        "answer": 1,
+        "explain": "Value is reuse and provenance."
+      },
+      {
+        "q": "Sensible Drive/Notion/NotebookLM split?",
+        "options": [
+          "Identical unmanaged copies everywhere",
+          "Drive for files/backup, Notion for structure, NotebookLM for grounded Q&A",
+          "Everything only in chat",
+          "No backups"
+        ],
+        "answer": 1,
+        "explain": "Clear roles reduce chaos."
+      },
+      {
+        "q": "When building databases you must not:",
+        "options": [
+          "Use raw/final statuses",
+          "Mark unorganized content as fully migrated",
+          "Keep a lean tag set",
+          "Keep checkable naming rules"
+        ],
+        "answer": 1,
+        "explain": "Don’t mark unfinished as done."
+      }
+    ],
+    "zhNotePrompt": "寫下你最常漏查的 1 欄（例如日期），以及你會如何強制自己勾最終人工確認。",
+    "enNotePrompt": "Write the one row you most often miss (e.g., dates) and how you will force the final human tick.",
+    "zhDeliverableChecklist": [
+      "已涵蓋正確性、完整性、語氣、數字、日期、姓名",
+      "已涵蓋來源與敏感資訊檢查",
+      "紅燈項有修改建議",
+      "已有最終人工確認欄",
+      "明確標示 AI 檢查不是最終核准",
+      "未捏造稽核通過結果"
+    ],
+    "enDeliverableChecklist": [
+      "Covers accuracy, completeness, tone, numbers, dates, names",
+      "Covers sources and sensitive-info checks",
+      "Red items have fix suggestions",
+      "Final human-confirmation row present",
+      "States AI review is not final approval",
+      "No invented audit-pass results"
+    ],
+    "zhScorecard": [
+      "可搜尋",
+      "可重用",
+      "狀態誠實",
+      "分工清楚",
+      "可備份"
+    ],
+    "enScorecard": [
+      "Searchable",
+      "Reusable",
+      "Honest status",
+      "Clear roles",
+      "Backup-ready"
+    ],
+    "id": "workplace-productivity-L8",
+    "lessonKey": "workplace-productivity-L8",
+    "zhWhyItMatters": {
+      "problem": "AI 草稿一順，人就略過核對，錯誤與敏感資訊一起送出。",
+      "ineffective": "只問「幫我看看有沒有問題」卻沒有可勾選標準。",
+      "solution": "建立固定檢查表，紅燈逐項修，最終人工確認後才算可送出。"
+    },
+    "enWhyItMatters": {
+      "problem": "Fluent AI drafts tempt people to skip checks—errors and secrets go out together.",
+      "ineffective": "Only asking “any issues?” with no tickable standard.",
+      "solution": "Build a fixed checklist, fix red items, and require a final human tick before send."
+    },
+    "zhObjectives": [
+      "為一類工作成果建立可勾選品質檢查表",
+      "覆蓋正確性到敏感資訊各欄",
+      "把紅燈轉成可執行修改項",
+      "保留最終人工確認步驟",
+      "存成「工作成果品質檢查表」"
+    ],
+    "enObjectives": [
+      "Build a tickable quality checklist for one deliverable type",
+      "Cover accuracy through sensitive-info fields",
+      "Turn red lights into actionable fixes",
+      "Keep a final human-confirmation step",
+      "Save an AI-Assisted Quality Review Checklist"
+    ],
+    "zhOutputName": "工作成果品質檢查表",
+    "enOutputName": "AI-Assisted Quality Review Checklist",
+    "zhCaseStudyBlocks": {
+      "problem": "小希的 AI 草稿讀起來很順，但暗藏低級錯誤。",
+      "wrong": "以 AI「看起來沒問題」當作核准。",
+      "right": "用檢查表逐項勾，紅燈先修，最後人工確認。",
+      "result": "「工作成果品質檢查表」成為送出前門檻。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Hope’s AI draft reads well but hides basic errors.",
+      "wrong": "Treat AI “looks fine” as approval.",
+      "right": "Tick the checklist, fix reds, final human confirm.",
+      "result": "The quality checklist becomes the pre-send gate."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "準備草稿",
+        "why": "有對象才查得準",
+        "input": "去敏成果",
+        "output": "待檢檔",
+        "check": "受眾是否清楚"
+      },
+      {
+        "do": "產出檢查表",
+        "why": "標準固定",
+        "input": "草稿",
+        "output": "清單",
+        "check": "欄位是否覆蓋 9 類"
+      },
+      {
+        "do": "標記紅燈",
+        "why": "找真問題",
+        "input": "清單",
+        "output": "紅燈列",
+        "check": "有無空勾"
+      },
+      {
+        "do": "修改並複檢",
+        "why": "修完再送",
+        "input": "紅燈列",
+        "output": "已修版",
+        "check": "敏感是否清零"
+      },
+      {
+        "do": "人工確認存檔",
+        "why": "責任回到人",
+        "input": "已修版",
+        "output": "成果",
+        "check": "最終欄有勾？"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Prepare draft",
+        "why": "Audience makes review precise",
+        "input": "Sanitized deliverable",
+        "output": "To-review file",
+        "check": "Audience clear"
+      },
+      {
+        "do": "Generate checklist",
+        "why": "Standards stay fixed",
+        "input": "Draft",
+        "output": "List",
+        "check": "9 categories covered"
+      },
+      {
+        "do": "Mark red lights",
+        "why": "Find real issues",
+        "input": "List",
+        "output": "Red rows",
+        "check": "No empty ticks"
+      },
+      {
+        "do": "Fix and recheck",
+        "why": "Fix before send",
+        "input": "Red rows",
+        "output": "Fixed version",
+        "check": "Sensitivity cleared"
+      },
+      {
+        "do": "Human confirm + save",
+        "why": "Responsibility returns to human",
+        "input": "Fixed version",
+        "output": "Deliverable",
+        "check": "Final tick done?"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "建立檢查表",
+        "standard": "9 類都有",
+        "mistakes": "只有語氣",
+        "check": "敏感欄有無？"
+      },
+      {
+        "task": "標紅燈",
+        "standard": "每項可改",
+        "mistakes": "只寫「還不錯」",
+        "check": "能否列出三修？"
+      },
+      {
+        "task": "人工確認",
+        "standard": "本人勾選",
+        "mistakes": "請 AI 代勾",
+        "check": "責任清楚嗎？"
+      },
+      {
+        "task": "存檔",
+        "standard": "可重用於多類成果",
+        "mistakes": "只用一次就丟",
+        "check": "下封信還用得到？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Build checklist",
+        "standard": "All 9 categories",
+        "mistakes": "Tone only",
+        "check": "Sensitivity row present?"
+      },
+      {
+        "task": "Mark reds",
+        "standard": "Each fixable",
+        "mistakes": "Only “looks fine”",
+        "check": "Can you list top 3 fixes?"
+      },
+      {
+        "task": "Human confirm",
+        "standard": "You tick it",
+        "mistakes": "Ask AI to tick",
+        "check": "Ownership clear?"
+      },
+      {
+        "task": "Save",
+        "standard": "Reusable across deliverables",
+        "mistakes": "Throwaway once",
+        "check": "Usable on next email?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "送出 Email、報告、SOP 或簡報前要做品質把關時使用",
+      "fields": [
+        "[請填寫工作目標]",
+        "[請貼上已去除敏感資訊的內容]",
+        "[請填寫目標受眾]"
+      ],
+      "body": "你是工作成果品質檢查教練。AI 可協助找疑點，但不得作為唯一最終審核者，也不得捏造「已通過內部稽核」之類結果。\n\n我的背景：\n- 要檢查的成果類型／工作目標：[請填寫工作目標]\n- 目標受眾（將收到此成果的人）：[請填寫目標受眾]\n- 已去除敏感資訊的成果草稿：[請貼上已去除敏感資訊的內容]\n\n任務：產出「工作成果品質檢查表」（AI-Assisted Quality Review Checklist），至少涵蓋：\n1) 正確性（事實、邏輯、有無過度推論）\n2) 完整性（缺段落、缺請求、缺下一步）\n3) 語氣（是否得體、是否越權）\n4) 數字（計算、單位、是否初稿）\n5) 日期\n6) 姓名／稱謂\n7) 引用來源（若有）\n8) 公司敏感資訊（是否仍殘留）\n9) 最終人工確認（必須由人勾選才能視為可送出）\n\n輸出：可勾選清單 + 每個紅燈項的修改建議（不直接假裝已修好）。清楚寫：AI 檢查 ≠ 最終核准。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "expected": "含正確性到最終人工確認的品質檢查表",
+      "revisionReminder": "請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "extensions": [
+        {
+          "title": "延伸：只列紅燈三項",
+          "body": "根據我的檢查表，只排出最優先要修的 3 個紅燈，並說明為何不能略過人工確認。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use before sending email, reports, SOPs, or decks for a quality gate",
+      "fields": [
+        "[Enter work goal]",
+        "[Paste sanitized content]",
+        "[Enter target audience]"
+      ],
+      "body": "You are a work-quality review coach. AI may help spot issues, but must not be the only final reviewer, and must not invent results like “passed internal audit.”\n\nMy context:\n- Deliverable type / work goal: [Enter work goal]\n- Audience (who will receive it): [Enter target audience]\n- Sanitized draft deliverable: [Paste sanitized content]\n\nTask: Produce an “AI-Assisted Quality Review Checklist” covering at least:\n1) Accuracy (facts, logic, over-inference)\n2) Completeness (missing sections, asks, next steps)\n3) Tone (appropriate, no overreach)\n4) Numbers (math, units, draft status)\n5) Dates\n6) Names / titles\n7) Citation sources (if any)\n8) Residual sensitive company information\n9) Final human confirmation (a human must tick before “ready to send”)\n\nOutput: tickable checklist + fix suggestions per red item (do not pretend already fixed). State clearly: AI review ≠ final approval.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "expected": "A quality checklist from accuracy through final human confirmation",
+      "revisionReminder": "Remove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "extensions": [
+        {
+          "title": "Extension: top 3 red lights",
+          "body": "From my checklist, rank the top 3 red items to fix and explain why human confirmation cannot be skipped."
+        }
+      ]
+    },
+    "zhNextStep": "下一堂把任務→AI→驗證→輸出串成你的個人 AI 工作流。",
+    "enNextStep": "Next, connect receive→AI→verify→output into your personal AI work workflow.",
+    "zhConceptBlocks": {
+      "principles": [
+        "固定清單優於感覺",
+        "紅燈先修",
+        "人工做最終確認"
+      ],
+      "terms": [
+        "紅燈項",
+        "最終人工確認",
+        "AI≠核准"
+      ],
+      "criteria": [
+        "可勾選",
+        "覆蓋敏感",
+        "有最終欄"
+      ],
+      "boundaries": [
+        "避免：AI 終審",
+        "避免：空勾",
+        "避免：假稽核結果"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Fixed list beats vibes",
+        "Fix reds first",
+        "Humans final-confirm"
+      ],
+      "terms": [
+        "Red item",
+        "Final human confirmation",
+        "AI≠approval"
+      ],
+      "criteria": [
+        "Tickable",
+        "Sensitivity covered",
+        "Final row present"
+      ],
+      "boundaries": [
+        "Avoid: AI final review",
+        "Avoid: empty ticks",
+        "Avoid: fake audit results"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：工作成果品質檢查表",
+      "AI 找疑點，人做最終確認。",
+      "沒勾最終欄就不送出。"
+    ],
+    "enSummary": [
+      "Deliverable: AI-Assisted Quality Review Checklist",
+      "AI spots issues; humans final-confirm.",
+      "No final tick, no send."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "AI 說沒問題就直接送出",
+        "why": "AI 不是最終審核者",
+        "fix": "保留最終人工確認欄並親勾"
+      },
+      {
+        "error": "忽略姓名日期數字",
+        "why": "低級錯誤傷信任",
+        "fix": "逐項勾選不可跳過"
+      },
+      {
+        "error": "檢查後仍留敏感資訊",
+        "why": "資安風險",
+        "fix": "敏感欄必須清零才可送出"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Sending because AI said OK",
+        "why": "AI is not final reviewer",
+        "fix": "Keep final human tick and do it yourself"
+      },
+      {
+        "error": "Skipping names/dates/numbers",
+        "why": "Basic errors hurt trust",
+        "fix": "Tick every row; no skipping"
+      },
+      {
+        "error": "Sensitive info remains after review",
+        "why": "Security risk",
+        "fix": "Sensitivity must be clear before send"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "覆蓋度",
+        "levels": {
+          "incomplete": "只有語感",
+          "basic": "缺數字／日期",
+          "good": "主要欄位齊",
+          "ready": "含敏感與最終人工"
+        }
+      },
+      {
+        "name": "可操作性",
+        "levels": {
+          "incomplete": "只有評語",
+          "basic": "建議含糊",
+          "good": "紅燈可改",
+          "ready": "有優先三修"
+        }
+      },
+      {
+        "name": "責任定位",
+        "levels": {
+          "incomplete": "AI 當最終核准",
+          "basic": "責任不清",
+          "good": "標示 AI≠核准",
+          "ready": "人工確認必填"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Coverage",
+        "levels": {
+          "incomplete": "Tone only",
+          "basic": "Missing numbers/dates",
+          "good": "Core fields present",
+          "ready": "Sensitivity + final human"
+        }
+      },
+      {
+        "name": "Actionability",
+        "levels": {
+          "incomplete": "Comments only",
+          "basic": "Vague advice",
+          "good": "Red items fixable",
+          "ready": "Top 3 fixes"
+        }
+      },
+      {
+        "name": "Accountability",
+        "levels": {
+          "incomplete": "AI as final approve",
+          "basic": "Unclear ownership",
+          "good": "AI≠approval labeled",
+          "ready": "Human tick required"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 50 分鐘 / About 50 min",
+    "difficulty": "中階 / Intermediate",
+    "zhTitle": "第9課：用 AI 做任務管理、優先順序與週期回報",
+    "enTitle": "Lesson 9: Use AI for task management, priorities, and recurring updates",
+    "zhValueTip": "工作流要能本週跑一次；驗證與追蹤不能省略。",
+    "enValueTip": "A workflow must run once this week; verify and follow-up are not optional.",
+    "zhOutcome": "個人 AI 工作流設計",
+    "enOutcome": "Personal AI Work Workflow",
+    "zhConcept": "個人 AI 工作流把零散提問收成節奏：收到任務→理解→使用 AI→驗證→修改→輸出→儲存→追蹤。每一段都要標「我做／AI 可協助／不可交給 AI」。這是手動可重複的工作方式，不是會自動替你決策的 Agent。",
+    "enConcept": "A personal AI workflow turns random prompting into a rhythm: receive → understand → use AI → verify → revise → output → store → follow up. Each stage marks I do / AI may help / must not give to AI. It is a manual repeatable method—not an agent that decides for you.",
+    "zhCaseStudy": "初階專案助理阿哲以前「有事就問 AI」，常忘跟進。他建成八段流程，把驗證綁到品質檢查表，追蹤段寫「兩天後若無回覆就發跟進模板」。本週他只拿一個對齊任務跑完，終於有可重複節奏。",
+    "enCaseStudy": "Junior PM Zhe used to “ask AI whenever,” then forgot follow-ups. He built eight stages, tied verify to the quality checklist, and wrote “if no reply in two days, send follow-up template.” This week he ran one alignment task end-to-end and finally had a repeatable rhythm.",
+    "zhWorkflow": [
+      "回顧目前真實做法與卡點（去敏）",
+      "寫八段流程與界線",
+      "接上驗證／儲存／追蹤規則",
+      "選 1 個本週任務跑示範",
+      "存成個人 AI 工作流設計"
+    ],
+    "enWorkflow": [
+      "Review current real practice and stuck points (sanitized)",
+      "Write eight stages and boundaries",
+      "Attach verify / store / follow-up rules",
+      "Run a one-task demo this week",
+      "Save the Personal AI Work Workflow"
+    ],
+    "zhCommonMistakes": [
+      "工作流缺少驗證或追蹤段",
+      "每段沒有「不可交給 AI」",
+      "本週示範一次涵蓋所有任務",
+      "儲存規則無法執行",
+      "宣稱有自動排程／自動決策 Agent"
+    ],
+    "enCommonMistakes": [
+      "Workflow missing verify or follow-up",
+      "Stages without must-not-give-to-AI",
+      "This-week demo covering every task",
+      "Storage rules that cannot be executed",
+      "Claiming auto-scheduling or decision agents"
+    ],
+    "zhExcellentExample": "八段皆有界線、驗證接品質表、儲存與追蹤可執行、本週單任務示範完整。",
+    "enExcellentExample": "All eight stages bounded, verify tied to checklist, executable store/follow-up, complete one-task demo.",
+    "zhPrompt": "你是個人職場 AI 工作流教練，協助把「收到任務到完成追蹤」做成可重複流程。不可宣稱有自動排程代理或自動代表使用者決策。\n\n我的背景：\n- 典型工作目標類型：[請填寫工作目標]\n- 主要利害關係人／目標受眾：[請填寫目標受眾]\n- 我目前實際做法（已去敏）：[請貼上已去除敏感資訊的內容]\n- 我最常出錯或卡住的步驟：[請填寫]\n\n任務：產出「個人 AI 工作流設計」（Personal AI Work Workflow），串起：\n1) 收到任務\n2) 理解需求\n3) 使用 AI（何時用、用什麼輸入）\n4) 驗證（對回事實／用品質檢查表）\n5) 修改\n6) 輸出（送出／存檔）\n7) 儲存（命名與放置規則，手動）\n8) 後續追蹤（何時跟進、用什麼標記）\n\n每一段都要有：我做／AI 可協助／不可交給 AI。加上一頁「本週示範流程」：只選 1 個真實任務跑一次。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+    "enPrompt": "You are a personal workplace AI-workflow coach connecting “receive task → follow-up” into a repeatable flow. Do not claim an auto-scheduling agent or that AI decides on the user’s behalf.\n\nMy context:\n- Typical work-goal type: [Enter work goal]\n- Main stakeholders / audience: [Enter target audience]\n- My current practice (sanitized): [Paste sanitized content]\n- Where I most often err or get stuck: [Enter]\n\nTask: Produce a “Personal AI Work Workflow” connecting:\n1) Receive task\n2) Understand requirements\n3) Use AI (when + what input)\n4) Verify (against facts / quality checklist)\n5) Revise\n6) Output (send/save)\n7) Store (naming and placement rules; manual)\n8) Follow up (when + what markers)\n\nEach stage needs: I do / AI may help / must not give to AI. Add a one-page “this-week demo flow” running ONE real task once.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+    "zhCoachPrompt": "【Prompt 2｜優先序與每週追蹤】\n任務列表：\n（貼上）\n本週截止：［日期］\n請建議 P0-P2，並產出每週追蹤表模板（完成／延誤／阻礙／下週P0）。若期限互相衝突，列出需組員決策的取捨，不要擅自刪別人的承諾。",
+    "enCoachPrompt": "[Prompt 2 | Priority & Weekly Tracker] Suggest P0–P2 and a weekly tracker; surface trade-offs instead of deleting others’ commitments.",
+    "zhFeedbackPrompt": "【Prompt 3｜延誤預警分析】\n看板狀態摘要：\n（貼上）\n請指出高風險卡、可能延誤原因、升級問題清單。資訊不足（無期限／無負責人）先列缺失，不要假報綠燈。",
+    "enFeedbackPrompt": "[Prompt 3 | Slip Warning] Flag high-risk cards and escalation questions; if data is missing, say so—don’t fake green status.",
+    "zhExample": "典型任務：跨部門跟進；卡點：驗證後忘追蹤；現況：有時用 AI 寫訊息但無固定步驟。",
+    "enExample": "Typical task: cross-team follow-up; stuck: forget follow-up after verify; current: sometimes AI-writes messages with no fixed steps.",
+    "zhPractice": "寫出目前做法與卡點。；完成八段界線與儲存／追蹤規則。；跑本週單任務示範。；存成「個人 AI 工作流設計」。",
+    "enPractice": "Write current practice and stuck points.; Finish eight-stage boundaries plus store/follow-up rules.; Run one-task demo this week.; Save the Personal AI Work Workflow.",
+    "zhQuizItems": [
+      {
+        "q": "Kanban 中 Blocked 欄最應做的是？",
+        "options": [
+          "空白放著等奇蹟",
+          "寫明阻礙與需要誰處理",
+          "直接標 Done 安慰自己",
+          "刪除該任務假裝沒發生"
+        ],
+        "answer": 1,
+        "explain": "阻礙可見才能解。"
+      },
+      {
+        "q": "設定優先序時應避免？",
+        "options": [
+          "分辨 P0／P1／P2",
+          "全部標成最高優先",
+          "對齊截止與依賴",
+          "每週重審"
+        ],
+        "answer": 1,
+        "explain": "全部都急等於沒有優先序。"
+      },
+      {
+        "q": "AI 更新任務進度時不可？",
+        "options": [
+          "依組員提供狀態整理追蹤表",
+          "在無人回報時自行標示全部完成",
+          "標出缺負責人的卡",
+          "提出延誤預警問題"
+        ],
+        "answer": 1,
+        "explain": "不可捏造完成狀態。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "On a Kanban Blocked column you should:",
+        "options": [
+          "Leave it blank hoping",
+          "State the blocker and who must act",
+          "Mark Done for comfort",
+          "Delete the task"
+        ],
+        "answer": 1,
+        "explain": "Visible blockers enable resolution."
+      },
+      {
+        "q": "When prioritizing, avoid:",
+        "options": [
+          "Using P0/P1/P2",
+          "Marking everything top priority",
+          "Aligning dates and dependencies",
+          "Weekly re-review"
+        ],
+        "answer": 1,
+        "explain": "If all is urgent, nothing is."
+      },
+      {
+        "q": "AI must not when updating progress:",
+        "options": [
+          "Summarize statuses people reported",
+          "Mark everything done with no reports",
+          "Flag ownerless cards",
+          "Ask slip-warning questions"
+        ],
+        "answer": 1,
+        "explain": "Never fabricate completion."
+      }
+    ],
+    "zhNotePrompt": "寫下你本週要示範的 1 個任務、驗證段你會用的 1 個檢查項，以及追蹤段的提醒時機。",
+    "enNotePrompt": "Write the one task you will demo this week, one verify checklist item, and when follow-up reminds you.",
+    "zhDeliverableChecklist": [
+      "已包含收到任務到後續追蹤八段",
+      "每段有我做／AI 可協助／不可交給 AI",
+      "已接上驗證與品質檢查",
+      "已有儲存命名與放置規則",
+      "已有本週單一任務示範",
+      "未宣稱自動排程或自動決策 Agent"
+    ],
+    "enDeliverableChecklist": [
+      "Includes all eight stages from receive to follow-up",
+      "Each stage has I do / AI may help / must not give to AI",
+      "Verify and quality check attached",
+      "Storage naming and placement rules present",
+      "One-task this-week demo present",
+      "No auto-schedule or decision-agent claims"
+    ],
+    "zhScorecard": [
+      "可執行",
+      "優先真實",
+      "阻礙可見",
+      "追蹤規律",
+      "無假進度"
+    ],
+    "enScorecard": [
+      "Actionable",
+      "Honest priority",
+      "Visible blockers",
+      "Regular tracking",
+      "No fake progress"
+    ],
+    "id": "workplace-productivity-L9",
+    "lessonKey": "workplace-productivity-L9",
+    "zhWhyItMatters": {
+      "problem": "偶爾用 AI 很爽，但沒有驗證與追蹤，錯誤與遺漏會重複發生。",
+      "ineffective": "只收集很多 Prompt，卻沒有固定階段與界線。",
+      "solution": "建成八段流程，並用本週一個真實任務跑示範。"
+    },
+    "enWhyItMatters": {
+      "problem": "Occasional AI feels fast, but without verify/follow-up, errors repeat.",
+      "ineffective": "Collecting many prompts without fixed stages and boundaries.",
+      "solution": "Build eight stages and demo them on one real task this week."
+    },
+    "zhObjectives": [
+      "定義八段個人 AI 工作流",
+      "為每段寫我做／AI／不可交給 AI",
+      "接上品質檢查與儲存規則",
+      "設計本週單一任務示範",
+      "存成「個人 AI 工作流設計」"
+    ],
+    "enObjectives": [
+      "Define an eight-stage personal AI workflow",
+      "Write I do / AI / must-not for each stage",
+      "Attach quality checks and storage rules",
+      "Design a one-task demo for this week",
+      "Save a Personal AI Work Workflow"
+    ],
+    "zhOutputName": "個人 AI 工作流設計",
+    "enOutputName": "Personal AI Work Workflow",
+    "zhCaseStudyBlocks": {
+      "problem": "阿哲的 AI 使用碎片化，任務常懸空。",
+      "wrong": "繼續堆 Prompt，或幻想自動 Agent 幫他追蹤。",
+      "right": "八段界線＋本週單任務示範＋手動追蹤規則。",
+      "result": "可重複的「個人 AI 工作流設計」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "Zhe’s AI use is fragmented; tasks hang open.",
+      "wrong": "Keep stacking prompts, or imagine an auto-agent will follow up.",
+      "right": "Eight-stage boundaries + one-task demo + manual follow-up rules.",
+      "result": "A repeatable Personal AI Work Workflow."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "盤點現況",
+        "why": "工作流要貼合真實",
+        "input": "去敏做法",
+        "output": "現況圖",
+        "check": "卡點是否具體"
+      },
+      {
+        "do": "寫八段",
+        "why": "形成節奏",
+        "input": "現況圖",
+        "output": "八段表",
+        "check": "每段有界線？"
+      },
+      {
+        "do": "補驗證與追蹤",
+        "why": "避免外送錯誤與懸空",
+        "input": "八段表",
+        "output": "完整流",
+        "check": "最終確認在哪"
+      },
+      {
+        "do": "本週示範",
+        "why": "證明可跑",
+        "input": "真實任務",
+        "output": "示範紀錄",
+        "check": "是否只選 1 個"
+      },
+      {
+        "do": "存檔",
+        "why": "供 L10 整合",
+        "input": "定稿",
+        "output": "成果",
+        "check": "有無 Agent 宣稱"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Map current state",
+        "why": "Workflow must match reality",
+        "input": "Sanitized practice",
+        "output": "As-is map",
+        "check": "Stuck point concrete"
+      },
+      {
+        "do": "Write eight stages",
+        "why": "Create rhythm",
+        "input": "As-is map",
+        "output": "Eight-stage table",
+        "check": "Boundaries each stage?"
+      },
+      {
+        "do": "Add verify and follow-up",
+        "why": "Stop errors and open loops",
+        "input": "Table",
+        "output": "Full flow",
+        "check": "Where is final confirm"
+      },
+      {
+        "do": "This-week demo",
+        "why": "Prove it runs",
+        "input": "Real task",
+        "output": "Demo log",
+        "check": "Only one task?"
+      },
+      {
+        "do": "Save",
+        "why": "Feeds L10",
+        "input": "Final",
+        "output": "Deliverable",
+        "check": "No agent claims"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "八段齊備",
+        "standard": "每段有三種界線",
+        "mistakes": "缺驗證或追蹤",
+        "check": "哪段空白？"
+      },
+      {
+        "task": "規則可執行",
+        "standard": "命名／跟進可照做",
+        "mistakes": "只寫「記得存檔」",
+        "check": "明天找不找得到？"
+      },
+      {
+        "task": "本週示範",
+        "standard": "只 1 個真實任務",
+        "mistakes": "一次改所有專案",
+        "check": "示範有紀錄嗎？"
+      },
+      {
+        "task": "存檔",
+        "standard": "無自動決策宣稱",
+        "mistakes": "寫成 Agent 代管",
+        "check": "用語是否誠實？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Eight stages complete",
+        "standard": "Three boundaries each",
+        "mistakes": "Missing verify or follow-up",
+        "check": "Which stage blank?"
+      },
+      {
+        "task": "Rules executable",
+        "standard": "Naming/follow-up doable",
+        "mistakes": "Only “remember to save”",
+        "check": "Can you find it tomorrow?"
+      },
+      {
+        "task": "This-week demo",
+        "standard": "One real task only",
+        "mistakes": "Change every project at once",
+        "check": "Demo logged?"
+      },
+      {
+        "task": "Save",
+        "standard": "No auto-decision claims",
+        "mistakes": "Written as agent-managed",
+        "check": "Honest wording?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "想把零散 AI 使用收成固定工作節奏時使用",
+      "fields": [
+        "[請填寫工作目標]",
+        "[請貼上已去除敏感資訊的內容]",
+        "[請填寫目標受眾]"
+      ],
+      "body": "你是個人職場 AI 工作流教練，協助把「收到任務到完成追蹤」做成可重複流程。不可宣稱有自動排程代理或自動代表使用者決策。\n\n我的背景：\n- 典型工作目標類型：[請填寫工作目標]\n- 主要利害關係人／目標受眾：[請填寫目標受眾]\n- 我目前實際做法（已去敏）：[請貼上已去除敏感資訊的內容]\n- 我最常出錯或卡住的步驟：[請填寫]\n\n任務：產出「個人 AI 工作流設計」（Personal AI Work Workflow），串起：\n1) 收到任務\n2) 理解需求\n3) 使用 AI（何時用、用什麼輸入）\n4) 驗證（對回事實／用品質檢查表）\n5) 修改\n6) 輸出（送出／存檔）\n7) 儲存（命名與放置規則，手動）\n8) 後續追蹤（何時跟進、用什麼標記）\n\n每一段都要有：我做／AI 可協助／不可交給 AI。加上一頁「本週示範流程」：只選 1 個真實任務跑一次。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "expected": "八段可重複的個人 AI 工作流＋本週示範",
+      "revisionReminder": "請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "extensions": [
+        {
+          "title": "延伸：找出瓶頸段",
+          "body": "根據我的工作流，指出最可能卡住的 2 段，並給不增加工具串接的改法。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use when scattered AI usage needs a fixed work rhythm",
+      "fields": [
+        "[Enter work goal]",
+        "[Paste sanitized content]",
+        "[Enter target audience]"
+      ],
+      "body": "You are a personal workplace AI-workflow coach connecting “receive task → follow-up” into a repeatable flow. Do not claim an auto-scheduling agent or that AI decides on the user’s behalf.\n\nMy context:\n- Typical work-goal type: [Enter work goal]\n- Main stakeholders / audience: [Enter target audience]\n- My current practice (sanitized): [Paste sanitized content]\n- Where I most often err or get stuck: [Enter]\n\nTask: Produce a “Personal AI Work Workflow” connecting:\n1) Receive task\n2) Understand requirements\n3) Use AI (when + what input)\n4) Verify (against facts / quality checklist)\n5) Revise\n6) Output (send/save)\n7) Store (naming and placement rules; manual)\n8) Follow up (when + what markers)\n\nEach stage needs: I do / AI may help / must not give to AI. Add a one-page “this-week demo flow” running ONE real task once.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "expected": "An eight-stage personal AI workflow plus a this-week demo",
+      "revisionReminder": "Remove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "extensions": [
+        {
+          "title": "Extension: find bottlenecks",
+          "body": "From my workflow, name the 2 stages most likely to stall and suggest fixes that do not add tool integrations."
+        }
+      ]
+    },
+    "zhNextStep": "下一堂把前 9 堂成果整合成「我的 AI 生產力系統」，不必重貼全文。",
+    "enNextStep": "Next, integrate the first 9 deliverables into My AI Productivity System—without repasting full texts.",
+    "zhConceptBlocks": {
+      "principles": [
+        "節奏優於靈感",
+        "驗證不可省",
+        "人做決策"
+      ],
+      "terms": [
+        "八段工作流",
+        "本週示範",
+        "追蹤標記"
+      ],
+      "criteria": [
+        "八段齊",
+        "有界線",
+        "示範可跑"
+      ],
+      "boundaries": [
+        "避免：無驗證",
+        "避免：自動 Agent 宣稱",
+        "避免：一次改全部"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Rhythm over inspiration",
+        "Verify is mandatory",
+        "Humans decide"
+      ],
+      "terms": [
+        "Eight-stage workflow",
+        "This-week demo",
+        "Follow-up markers"
+      ],
+      "criteria": [
+        "Eight complete",
+        "Boundaries present",
+        "Demo runnable"
+      ],
+      "boundaries": [
+        "Avoid: no verify",
+        "Avoid: auto-agent claims",
+        "Avoid: change-everything demos"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：個人 AI 工作流設計",
+      "八段可重複，本週先跑一次。",
+      "不是自動決策 Agent。"
+    ],
+    "enSummary": [
+      "Deliverable: Personal AI Work Workflow",
+      "Eight repeatable stages—run once this week.",
+      "Not an auto-decision agent."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "有 AI 段卻無驗證段",
+        "why": "錯誤直接外送",
+        "fix": "驗證與品質檢查設為必經"
+      },
+      {
+        "error": "儲存規則含糊",
+        "why": "下次找不到",
+        "fix": "寫命名與放置規則"
+      },
+      {
+        "error": "把工作流寫成自動 Agent 決策",
+        "why": "超出平台能力且責任不清",
+        "fix": "改成手動步驟＋人做決策"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "AI stage without verify stage",
+        "why": "Errors go out",
+        "fix": "Make verify + quality check mandatory"
+      },
+      {
+        "error": "Vague storage rules",
+        "why": "Cannot find work later",
+        "fix": "Write naming and placement rules"
+      },
+      {
+        "error": "Workflow as auto-agent decisions",
+        "why": "Beyond platform + unclear ownership",
+        "fix": "Keep manual steps; humans decide"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "完整性",
+        "levels": {
+          "incomplete": "缺多段",
+          "basic": "八段名有內容空",
+          "good": "八段皆有界線",
+          "ready": "含本週示範"
+        }
+      },
+      {
+        "name": "可執行",
+        "levels": {
+          "incomplete": "太抽象",
+          "basic": "難開始",
+          "good": "本週可跑 1 次",
+          "ready": "卡點有對策"
+        }
+      },
+      {
+        "name": "責任清晰",
+        "levels": {
+          "incomplete": "AI 代做決策",
+          "basic": "界線含糊",
+          "good": "不可交給 AI 清楚",
+          "ready": "無自動代理宣稱"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Completeness",
+        "levels": {
+          "incomplete": "Many stages missing",
+          "basic": "Names only",
+          "good": "All eight with boundaries",
+          "ready": "This-week demo included"
+        }
+      },
+      {
+        "name": "Executability",
+        "levels": {
+          "incomplete": "Too abstract",
+          "basic": "Hard to start",
+          "good": "Runnable once this week",
+          "ready": "Bottleneck fixes present"
+        }
+      },
+      {
+        "name": "Clear ownership",
+        "levels": {
+          "incomplete": "AI decides",
+          "basic": "Fuzzy boundaries",
+          "good": "Must-not-give-to-AI clear",
+          "ready": "No auto-agent claims"
+        }
+      }
+    ]
+  },
+  {
+    "estimatedTime": "約 55 分鐘 / About 55 min",
+    "difficulty": "進階 / Advanced",
+    "zhTitle": "第10課：整合完成「個人 AI 工作流程系統」",
+    "enTitle": "Lesson 10: Complete your personal AI workplace workflow system",
+    "zhValueTip": "整合不重寫；一頁系統能每週再跑，比完美長文重要。",
+    "enValueTip": "Integrate, don’t rewrite. A one-page weekly-runnable system beats a perfect essay.",
+    "zhOutcome": "我的 AI 生產力系統",
+    "enOutcome": "My AI Productivity System",
+    "zhConcept": "最後一堂不是再學新工具，而是把任務、溝通、會議、文件、報告、SOP、重複工作、品質檢查與個人工作流收成「我的 AI 生產力系統」。用摘要整合，不重貼全文；缺漏要誠實；系統要能每週再跑。",
+    "enConcept": "The final lesson is not a new tool—it packages tasking, communication, meetings, documents, reports, SOPs, repetitive-work analysis, quality checks, and personal workflow into My AI Productivity System. Integrate from highlights, do not repaste everything; mark gaps honestly; make it weekly-runnable.",
+    "zhCaseStudy": "行銷企劃小希把九份檔案全貼給 AI，得到重複長文。她改成每堂只貼 5 行，缺 L6 就標尚未完成。系統變成一頁：每天對應段落、本週只跑溝通＋品質＋追蹤。她另外寫了 5 條隱私與不捏造總則。",
+    "enCaseStudy": "Marketing coordinator Hope pasted all nine files and got a repetitive essay. She then pasted five lines per lesson and marked L6 unfinished. The system became one page: daily stages, and this week only communication + quality + follow-up. She also wrote five privacy/no-fabrication rules.",
+    "zhWorkflow": [
+      "從成果包複製各堂 3–6 行摘要（缺的標尚未完成）",
+      "用 Prompt 編成九段系統",
+      "檢查每段都有不可交給 AI",
+      "寫缺漏、本週優先 3 項與 5 條總則",
+      "存成我的 AI 生產力系統"
+    ],
+    "enWorkflow": [
+      "Copy 3–6 line highlights per lesson (mark missing unfinished)",
+      "Compile nine system sections with the prompt",
+      "Check each section has must-not-give-to-AI",
+      "Write gaps, top 3 this week, and 5 rules",
+      "Save My AI Productivity System"
+    ],
+    "zhCommonMistakes": [
+      "要求重新輸入前 9 堂全部原文",
+      "系統沒有「不可交給 AI」欄",
+      "假裝缺漏已完成",
+      "保證升遷、績效或自動串接工具",
+      "本週優先項空泛無法執行"
+    ],
+    "enCommonMistakes": [
+      "Requiring a full re-entry of all 9 outputs",
+      "A system with no must-not-give-to-AI column",
+      "Pretending gaps are finished",
+      "Guaranteeing promotion/performance or tool auto-integrations",
+      "Vague weekly priorities that cannot be executed"
+    ],
+    "zhExcellentExample": "九段流程、缺漏誠實、本週三優先、5 條總則、無串接與績效保證宣稱。",
+    "enExcellentExample": "Nine sections, honest gaps, weekly top 3, 5 rules, no integration or performance-guarantee claims.",
+    "zhPrompt": "你是職場 AI 生產力系統整合教練。根據使用者提供的前課摘要整合成一頁系統，不要要求重新輸入前 9 堂全部原文，也不要保證升遷、績效或錄取。\n\n我的輸入：\n- 我的主要工作目標類型：[請填寫工作目標]\n- 主要受眾／利害關係人：[請填寫目標受眾]\n- 前 9 堂成果重點摘要（每堂 3–6 行，缺的標「尚未完成」）：\n[請貼上已去除敏感資訊的內容]\n\n任務：產出「我的 AI 生產力系統」（My AI Productivity System），整合：\n1) 任務拆解\n2) Email／溝通\n3) 會議\n4) 文件摘要\n5) 報告／簡報\n6) SOP\n7) 重複工作分析\n8) 品質檢查\n9) 個人工作流\n\n每段包含：何時用、輸入、輸出、不可交給 AI、對應前課成果。\n另附：缺漏清單、本週優先 3 項、隱私與不捏造總則（5 條）、明確聲明本平台無 Gmail／Slack／Teams／Docs／ERP 自動串接。\n\n不要重寫全部細節；重點是可週而復始的一頁系統。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+    "enPrompt": "You are a workplace AI productivity system integrator. Build one page from user-provided prior-lesson highlights. Do not demand a full re-entry of all 9 lessons, and do not guarantee promotions, performance scores, or hiring outcomes.\n\nMy input:\n- Main work-goal types: [Enter work goal]\n- Main audience / stakeholders: [Enter target audience]\n- Highlights from lessons 1–9 (3–6 lines each; mark missing as “not finished yet”):\n[Paste sanitized content]\n\nTask: Produce “My AI Productivity System” integrating:\n1) Task breakdown\n2) Email/communication\n3) Meetings\n4) Document summary\n5) Report/presentation\n6) SOP\n7) Repetitive-work analysis\n8) Quality review\n9) Personal workflow\n\nEach section includes: when to use, inputs, outputs, must-not-give-to-AI, and which prior deliverable it maps to.\nAlso include: gap list, top 3 priorities this week, 5 privacy/no-fabrication rules, and an explicit statement that this platform has no Gmail/Slack/Teams/Docs/ERP auto-integrations.\n\nDo not rewrite every detail; focus on a one-page system you can rerun weekly.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+    "zhCoachPrompt": "【Prompt 2｜會議紀錄與分工表】\n會議原始筆記：\n（貼上）\n請整理成：決議、待辦（負責人／截止）、風險、下次會議前必做。不要發明出席者沒說的承諾；不清楚處列「待確認」。",
+    "enCoachPrompt": "[Prompt 2 | Notes & Tasks] Turn raw notes into decisions, owners/deadlines, risks, and pre-work—no invented commitments.",
+    "zhFeedbackPrompt": "【Prompt 3｜權限與 final 風險審查】\n目前分享設定與檔案列表描述：\n（貼上）\n請指出外洩／覆蓋／找錯檔風險，給修復步驟。資訊不足請追問，不要假設我已設好限制連結。",
+    "enFeedbackPrompt": "[Prompt 3 | Permission & Final Risk Review] Flag leak/overwrite/wrong-file risks and fixes; ask when sharing details are missing.",
+    "zhExample": "摘要：L1 有拆解表；L2 有跟進模板；L3 會議 AI 表；L4 四欄摘要；L5 大綱；L6 尚未完成；L7 實驗中；L8 檢查表；L9 八段流。",
+    "enExample": "Highlights: L1 breakdown; L2 follow-up template; L3 meeting AI table; L4 four-column summary; L5 outline; L6 unfinished; L7 experimenting; L8 checklist; L9 eight-stage flow.",
+    "zhPractice": "貼前課重點摘要（缺則標尚未完成）。；產出九段系統與缺漏清單。；寫本週優先 3 項與 5 條總則。；存成「我的 AI 生產力系統」。",
+    "enPractice": "Paste prior highlights (mark missing).; Produce nine sections and a gap list.; Write top 3 this week and 5 rules.; Save My AI Productivity System.",
+    "zhQuizItems": [
+      {
+        "q": "小組協作最應避免的是？",
+        "options": [
+          "單一專案資料夾與命名規則",
+          "同時存在多個互斥「最終版」且權限混亂",
+          "使用建議模式討論修改",
+          "交件前鎖定"
+        ],
+        "answer": 1,
+        "explain": "多 final＋亂權限是交件災難主因。"
+      },
+      {
+        "q": "對外分享連結時較安全的預設是？",
+        "options": [
+          "任何人可編輯",
+          "最小必要權限，避免公開可編輯",
+          "把個資放在公開資料夾無妨",
+          "不需要資料夾"
+        ],
+        "answer": 1,
+        "explain": "最小權限原則。"
+      },
+      {
+        "q": "AI 在協作中的合適角色是？",
+        "options": [
+          "替小組捏造進度報告交差",
+          "草擬憲章、整理會議待辦，決策與事實仍由人確認",
+          "自動覆蓋他人段落不必說明",
+          "取消所有權限設定"
+        ],
+        "answer": 1,
+        "explain": "AI 輔助整理，不造假、不擅自覆蓋。"
+      }
+    ],
+    "enQuizItems": [
+      {
+        "q": "Team collaboration should most avoid:",
+        "options": [
+          "One project folder and naming rules",
+          "Multiple conflicting finals with messy permissions",
+          "Suggestion mode discussions",
+          "Locking before submit"
+        ],
+        "answer": 1,
+        "explain": "Competing finals plus bad permissions cause submit disasters."
+      },
+      {
+        "q": "Safer default for sharing links:",
+        "options": [
+          "Anyone can edit",
+          "Least privilege; avoid public edit links",
+          "Public PII is fine",
+          "Folders unnecessary"
+        ],
+        "answer": 1,
+        "explain": "Least privilege."
+      },
+      {
+        "q": "Appropriate AI role in collaboration?",
+        "options": [
+          "Fabricate progress reports",
+          "Draft charters and task lists while humans confirm facts",
+          "Silently overwrite others",
+          "Remove all permissions"
+        ],
+        "answer": 1,
+        "explain": "AI assists; humans own truth and edits."
+      }
+    ],
+    "zhNotePrompt": "寫下你下週要跑的 1 段系統、1 個缺漏要補的摘要，以及 1 條你會遵守的紅線。",
+    "enNotePrompt": "Write the one system section you will run next week, one missing highlight to add, and one red line you will keep.",
+    "zhDeliverableChecklist": [
+      "九段都有何時用／輸入／輸出／不可交給 AI",
+      "有標示尚未完成的堂次，沒有假裝齊套",
+      "有本週優先 3 項",
+      "有 5 條隱私與不捏造總則",
+      "沒有要求重填前 9 堂全部原文",
+      "沒有績效／升遷保證或 Gmail／Slack／Teams／Docs／ERP 自動串接宣稱"
+    ],
+    "enDeliverableChecklist": [
+      "Nine sections include when / input / output / must not give to AI",
+      "Unfinished lessons marked; nothing faked as complete",
+      "Top 3 priorities this week included",
+      "5 privacy and no-fabrication rules included",
+      "No demand to retype all 9 prior outputs",
+      "No performance/promotion guarantee or Gmail/Slack/Teams/Docs/ERP auto-integration claims"
+    ],
+    "zhScorecard": [
+      "單一真相來源",
+      "權限安全",
+      "可交接",
+      "溝通可追溯",
+      "AI 界線清楚"
+    ],
+    "enScorecard": [
+      "Single source of truth",
+      "Safe permissions",
+      "Handoff-ready",
+      "Traceable comms",
+      "Clear AI boundaries"
+    ],
+    "id": "workplace-productivity-L10",
+    "lessonKey": "workplace-productivity-L10",
+    "zhWhyItMatters": {
+      "problem": "九份成果分散，下週不知先跑哪一段。",
+      "ineffective": "重寫全部內容，或宣稱已有自動串接與績效保證。",
+      "solution": "一頁九段系統＋缺漏＋本週優先 3 項＋隱私與不捏造總則。"
+    },
+    "enWhyItMatters": {
+      "problem": "Nine deliverables are scattered; next week you do not know what to run.",
+      "ineffective": "Rewriting everything, or claiming auto-integrations and performance guarantees.",
+      "solution": "One-page nine-section system + gaps + top 3 this week + privacy/no-fabrication rules."
+    },
+    "zhObjectives": [
+      "用前課摘要整合成九段系統",
+      "每段寫清何時用與不可交給 AI",
+      "誠實標出尚未完成的堂次",
+      "排出本週優先 3 項",
+      "存成「我的 AI 生產力系統」"
+    ],
+    "enObjectives": [
+      "Integrate prior highlights into nine system sections",
+      "State when-to-use and must-not-give-to-AI per section",
+      "Honestly mark unfinished lessons",
+      "Set top 3 priorities this week",
+      "Save My AI Productivity System"
+    ],
+    "zhOutputName": "我的 AI 生產力系統",
+    "enOutputName": "My AI Productivity System",
+    "zhCaseStudyBlocks": {
+      "problem": "小希上完 9 堂，檔案分散，不知下週先做哪段。",
+      "wrong": "重貼全部原文，或宣稱自動串接與績效保證。",
+      "right": "摘要整合成九段、標缺漏、定本週三優先。",
+      "result": "可重複使用的「我的 AI 生產力系統」。"
+    },
+    "enCaseStudyBlocks": {
+      "problem": "After 9 lessons Hope’s files are scattered and next week is unclear.",
+      "wrong": "Repaste everything, or claim integrations and performance guarantees.",
+      "right": "Integrate highlights into nine sections, mark gaps, set weekly top 3.",
+      "result": "A reusable My AI Productivity System."
+    },
+    "zhWorkflowSteps": [
+      {
+        "do": "匯入摘要而非全文",
+        "why": "避免重填與洩密",
+        "input": "成果包",
+        "output": "9 段重點",
+        "check": "缺的是否標尚未完成"
+      },
+      {
+        "do": "編成九段系統",
+        "why": "系統要能週而復始",
+        "input": "摘要",
+        "output": "系統頁",
+        "check": "是否對應九能力"
+      },
+      {
+        "do": "補界線與總則",
+        "why": "守住隱私與真實",
+        "input": "系統頁",
+        "output": "含總則版",
+        "check": "是否含不捏造"
+      },
+      {
+        "do": "定本週三優先",
+        "why": "避免一次全跑",
+        "input": "缺漏清單",
+        "output": "優先 3 項",
+        "check": "是否可執行"
+      },
+      {
+        "do": "存入成果包",
+        "why": "之後每週沿用",
+        "input": "定稿",
+        "output": "系統包",
+        "check": "有無串接／績效保證"
+      }
+    ],
+    "enWorkflowSteps": [
+      {
+        "do": "Import highlights, not full files",
+        "why": "Avoid re-entry and leaks",
+        "input": "Package",
+        "output": "9 highlights",
+        "check": "Missing marked unfinished"
+      },
+      {
+        "do": "Compile nine sections",
+        "why": "System must loop weekly",
+        "input": "Highlights",
+        "output": "System page",
+        "check": "Maps to nine capabilities"
+      },
+      {
+        "do": "Add boundaries and rules",
+        "why": "Protect privacy and truth",
+        "input": "System page",
+        "output": "Rules version",
+        "check": "No-fabrication included"
+      },
+      {
+        "do": "Set weekly top 3",
+        "why": "Avoid running all at once",
+        "input": "Gap list",
+        "output": "Top 3",
+        "check": "Executable"
+      },
+      {
+        "do": "Save to package",
+        "why": "Reuse each week",
+        "input": "Final",
+        "output": "System pack",
+        "check": "No integration/performance guarantees"
+      }
+    ],
+    "zhPracticeSteps": [
+      {
+        "task": "匯入而非重寫",
+        "standard": "缺項標尚未完成",
+        "mistakes": "要求重打全部",
+        "check": "有沒有逼自己重填？"
+      },
+      {
+        "task": "九段都有界線",
+        "standard": "每段有不可交給 AI",
+        "mistakes": "某段空白",
+        "check": "品質段是否保留人工確認？"
+      },
+      {
+        "task": "本週三優先",
+        "standard": "具體可做",
+        "mistakes": "寫「全部完成」",
+        "check": "明天能否開始？"
+      },
+      {
+        "task": "存檔",
+        "standard": "無串接／績效保證",
+        "mistakes": "寫成自動 Agent 系統",
+        "check": "用語是否誠實？"
+      }
+    ],
+    "enPracticeSteps": [
+      {
+        "task": "Import, don’t rewrite",
+        "standard": "Missing marked unfinished",
+        "mistakes": "Retype everything",
+        "check": "Did you force a full re-entry?"
+      },
+      {
+        "task": "Boundaries in nine sections",
+        "standard": "Each has must-not-give-to-AI",
+        "mistakes": "A blank section",
+        "check": "Does quality keep human confirm?"
+      },
+      {
+        "task": "Weekly top 3",
+        "standard": "Concrete and doable",
+        "mistakes": "Write “finish everything”",
+        "check": "Can tomorrow start?"
+      },
+      {
+        "task": "Save",
+        "standard": "No integration/performance guarantees",
+        "mistakes": "Call it an auto-agent system",
+        "check": "Is wording honest?"
+      }
+    ],
+    "zhPromptPack": {
+      "when": "上完前 9 堂，要把成果收成可重複系統時使用",
+      "fields": [
+        "[請填寫工作目標]",
+        "[請貼上已去除敏感資訊的內容]",
+        "[請填寫目標受眾]"
+      ],
+      "body": "你是職場 AI 生產力系統整合教練。根據使用者提供的前課摘要整合成一頁系統，不要要求重新輸入前 9 堂全部原文，也不要保證升遷、績效或錄取。\n\n我的輸入：\n- 我的主要工作目標類型：[請填寫工作目標]\n- 主要受眾／利害關係人：[請填寫目標受眾]\n- 前 9 堂成果重點摘要（每堂 3–6 行，缺的標「尚未完成」）：\n[請貼上已去除敏感資訊的內容]\n\n任務：產出「我的 AI 生產力系統」（My AI Productivity System），整合：\n1) 任務拆解\n2) Email／溝通\n3) 會議\n4) 文件摘要\n5) 報告／簡報\n6) SOP\n7) 重複工作分析\n8) 品質檢查\n9) 個人工作流\n\n每段包含：何時用、輸入、輸出、不可交給 AI、對應前課成果。\n另附：缺漏清單、本週優先 3 項、隱私與不捏造總則（5 條）、明確聲明本平台無 Gmail／Slack／Teams／Docs／ERP 自動串接。\n\n不要重寫全部細節；重點是可週而復始的一頁系統。\n\n請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "expected": "一頁整合九段能力的個人 AI 生產力系統",
+      "revisionReminder": "請先移除公司機密、客戶資料、個人識別資訊、密碼、API Key 與其他敏感資訊，再將內容提供給 AI。若公司有 AI 使用政策，請優先遵循公司規範。\n\nAI 不得捏造主管要求、客戶意見、公司數據、會議決議、KPI、政策、財務資訊或工作成果。請清楚區分：使用者提供的事實、AI 建議、需要人工確認的內容。本平台沒有 Gmail／Slack／Teams／Docs 自動串接。",
+      "extensions": [
+        {
+          "title": "延伸：本週只跑三段",
+          "body": "根據我的系統與缺漏，建議本週只跑 3 段，並說明為何不是九段全跑。不要要求重貼全文。"
+        }
+      ]
+    },
+    "enPromptPack": {
+      "when": "Use after the first 9 lessons to assemble a repeatable system",
+      "fields": [
+        "[Enter work goal]",
+        "[Paste sanitized content]",
+        "[Enter target audience]"
+      ],
+      "body": "You are a workplace AI productivity system integrator. Build one page from user-provided prior-lesson highlights. Do not demand a full re-entry of all 9 lessons, and do not guarantee promotions, performance scores, or hiring outcomes.\n\nMy input:\n- Main work-goal types: [Enter work goal]\n- Main audience / stakeholders: [Enter target audience]\n- Highlights from lessons 1–9 (3–6 lines each; mark missing as “not finished yet”):\n[Paste sanitized content]\n\nTask: Produce “My AI Productivity System” integrating:\n1) Task breakdown\n2) Email/communication\n3) Meetings\n4) Document summary\n5) Report/presentation\n6) SOP\n7) Repetitive-work analysis\n8) Quality review\n9) Personal workflow\n\nEach section includes: when to use, inputs, outputs, must-not-give-to-AI, and which prior deliverable it maps to.\nAlso include: gap list, top 3 priorities this week, 5 privacy/no-fabrication rules, and an explicit statement that this platform has no Gmail/Slack/Teams/Docs/ERP auto-integrations.\n\nDo not rewrite every detail; focus on a one-page system you can rerun weekly.\n\nRemove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "expected": "A one-page personal AI productivity system integrating nine capabilities",
+      "revisionReminder": "Remove confidential business information, customer data, personal identifiers, passwords, API keys, and other sensitive information before providing content to AI. Follow your organization's AI policy when applicable.\n\nAI must not invent manager requests, customer opinions, company data, meeting decisions, KPIs, policies, financials, or work results. Clearly separate: user-provided facts, AI suggestions, and items needing human confirmation. This platform has no Gmail/Slack/Teams/Docs auto-integrations.",
+      "extensions": [
+        {
+          "title": "Extension: run only three stages",
+          "body": "From my system and gaps, recommend only 3 stages to run this week and why not all nine. Do not require full repastes."
+        }
+      ]
+    },
+    "zhNextStep": "把這份系統存進成果包，下週從優先 3 項的第一項開始實際跑一次。不必重寫全部前課。",
+    "enNextStep": "Save this system to your package and run the first of your top 3 next week. You do not need to rewrite prior lessons.",
+    "zhConceptBlocks": {
+      "principles": [
+        "整合不重寫",
+        "每週可重複",
+        "缺漏要誠實"
+      ],
+      "terms": [
+        "生產力系統",
+        "缺漏清單",
+        "本週優先 3 項"
+      ],
+      "criteria": [
+        "九段齊",
+        "有總則",
+        "有優先項"
+      ],
+      "boundaries": [
+        "避免：重填全部",
+        "避免：績效保證",
+        "避免：自動串接宣稱"
+      ]
+    },
+    "enConceptBlocks": {
+      "principles": [
+        "Integrate, don’t rewrite",
+        "Repeat weekly",
+        "Be honest about gaps"
+      ],
+      "terms": [
+        "Productivity system",
+        "Gap list",
+        "Weekly top 3"
+      ],
+      "criteria": [
+        "Nine sections",
+        "Rules present",
+        "Priorities present"
+      ],
+      "boundaries": [
+        "Avoid: full re-entry",
+        "Avoid: performance guarantees",
+        "Avoid: auto-integration claims"
+      ]
+    },
+    "zhSummary": [
+      "本堂成果：我的 AI 生產力系統",
+      "系統要能每週再跑。",
+      "這不是升遷保證，也不是自動串接工具包。"
+    ],
+    "enSummary": [
+      "Deliverable: My AI Productivity System",
+      "The system should run again next week.",
+      "Not a promotion guarantee or auto-integration toolkit."
+    ],
+    "zhMistakesDetailed": [
+      {
+        "error": "要求重貼前 9 堂全文",
+        "why": "成本過高且易洩密",
+        "fix": "只貼 3–6 行摘要，缺則標尚未完成"
+      },
+      {
+        "error": "系統沒有不可交給 AI 欄",
+        "why": "界線消失",
+        "fix": "每段補上不可交給 AI"
+      },
+      {
+        "error": "宣稱完成後保證績效或自動串接工具",
+        "why": "不實承諾",
+        "fix": "刪保證與串接宣稱，改寫可執行優先項"
+      }
+    ],
+    "enMistakesDetailed": [
+      {
+        "error": "Requiring full repaste of 9 lessons",
+        "why": "Too costly and leaky",
+        "fix": "Paste 3–6 line highlights; mark unfinished"
+      },
+      {
+        "error": "System with no must-not-give-to-AI",
+        "why": "Boundaries vanish",
+        "fix": "Add must-not per section"
+      },
+      {
+        "error": "Guaranteeing performance or tool auto-integrations",
+        "why": "False promises",
+        "fix": "Delete guarantees/integrations; write executable priorities"
+      }
+    ],
+    "zhRubric": [
+      {
+        "name": "整合度",
+        "levels": {
+          "incomplete": "只有口號",
+          "basic": "缺多段",
+          "good": "九段齊",
+          "ready": "有缺漏與優先 3 項"
+        }
+      },
+      {
+        "name": "誠實度",
+        "levels": {
+          "incomplete": "假裝全完成",
+          "basic": "缺漏含糊",
+          "good": "尚未完成標清",
+          "ready": "無績效保證"
+        }
+      },
+      {
+        "name": "可週期運行",
+        "levels": {
+          "incomplete": "無法重跑",
+          "basic": "太長難用",
+          "good": "一頁可跑",
+          "ready": "本週行動清楚"
+        }
+      }
+    ],
+    "enRubric": [
+      {
+        "name": "Integration",
+        "levels": {
+          "incomplete": "Slogans only",
+          "basic": "Many sections missing",
+          "good": "Nine sections present",
+          "ready": "Gaps + top 3"
+        }
+      },
+      {
+        "name": "Honesty",
+        "levels": {
+          "incomplete": "Pretends all done",
+          "basic": "Vague gaps",
+          "good": "Unfinished clearly marked",
+          "ready": "No performance guarantee"
+        }
+      },
+      {
+        "name": "Weekly runnable",
+        "levels": {
+          "incomplete": "Cannot rerun",
+          "basic": "Too long",
+          "good": "One-page runnable",
+          "ready": "This-week actions clear"
+        }
+      }
+    ]
+  }
+],
   "startup-automation": [
     {
       "id": "startup-automation-L1",
