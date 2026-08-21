@@ -32674,8 +32674,8 @@ const RESULT_PACKAGE_CONFIG = [
     "free": true,
     "icon": "🎁",
     "totalItems": 5,
-    "zhTitle": "免費入門成果包",
-    "enTitle": "Free Starter Result Package",
+    "zhTitle": "我的免費成果包",
+    "enTitle": "My Free Result Package",
     "zhCourseName": "免費入門／AI 新手訓練營",
     "enCourseName": "Free Intro / AI Beginner Bootcamp",
     "zhCapability": "AI 基礎入門",
@@ -32698,8 +32698,8 @@ const RESULT_PACKAGE_CONFIG = [
     "free": false,
     "icon": "🎓",
     "totalItems": 10,
-    "zhTitle": "大學申請成果包",
-    "enTitle": "University Application Result Package",
+    "zhTitle": "大學申請包",
+    "enTitle": "University Application Kit",
     "zhCourseName": "高中生申請大學 AI 實戰課",
     "enCourseName": "AI University Application Course",
     "zhCapability": "升學申請",
@@ -32716,7 +32716,7 @@ const RESULT_PACKAGE_CONFIG = [
     "icon": "📚",
     "totalItems": 10,
     "zhTitle": "AI 大學學習系統包",
-    "enTitle": "AI University Learning System Package",
+    "enTitle": "AI Learning System Kit",
     "zhCourseName": "大學生 AI 學習系統",
     "enCourseName": "AI Learning System for University Students",
     "zhCapability": "課堂學習、作業與考試",
@@ -32732,8 +32732,8 @@ const RESULT_PACKAGE_CONFIG = [
     "free": false,
     "icon": "🔬",
     "totalItems": 10,
-    "zhTitle": "研究、專題與競賽成果包",
-    "enTitle": "Research and Competition Result Package",
+    "zhTitle": "研究與競賽成果包",
+    "enTitle": "Research & Competition Kit",
     "zhCourseName": "大學生研究、專題與競賽 AI 實戰課",
     "enCourseName": "AI Research and Competition Lab",
     "zhCapability": "研究、專題與競賽",
@@ -32749,8 +32749,8 @@ const RESULT_PACKAGE_CONFIG = [
     "free": false,
     "icon": "💼",
     "totalItems": 10,
-    "zhTitle": "求職與實習申請包",
-    "enTitle": "Career and Internship Application Package",
+    "zhTitle": "求職與實習成果包",
+    "enTitle": "Career & Internship Kit",
     "zhCourseName": "求職與實習 AI 實戰課",
     "enCourseName": "AI Career and Internship Course",
     "zhCapability": "實習與求職",
@@ -32766,8 +32766,8 @@ const RESULT_PACKAGE_CONFIG = [
     "free": false,
     "icon": "⚙️",
     "totalItems": 10,
-    "zhTitle": "個人 AI 工作流程包",
-    "enTitle": "Personal AI Workplace Workflow Package",
+    "zhTitle": "職場 AI 工作流程包",
+    "enTitle": "AI Productivity Workflow Kit",
     "zhCourseName": "職場生產力 AI 工作流程課",
     "enCourseName": "AI Workplace Productivity Course",
     "zhCapability": "職場生產力與工作流程",
@@ -32783,8 +32783,8 @@ const RESULT_PACKAGE_CONFIG = [
     "free": false,
     "icon": "🚀",
     "totalItems": 10,
-    "zhTitle": "創業驗證與自動化成果包",
-    "enTitle": "Startup Validation and Automation Package",
+    "zhTitle": "創業與自動化成果包",
+    "enTitle": "Startup & Automation Kit",
     "zhCourseName": "創業與 AI 自動化實戰課",
     "enCourseName": "AI Startup and Automation Course",
     "zhCapability": "創業、產品與自動化",
@@ -32795,6 +32795,13 @@ const RESULT_PACKAGE_CONFIG = [
     "enFinalOutcome": "A startup validation and automation package with audience, interviews, model, MVP, pitch deck, and automation."
   }
 ];
+
+/** Single courseId → packageId map (Phase 3A). Derived from RESULT_PACKAGE_CONFIG — do not duplicate elsewhere. */
+const COURSE_RESULT_PACKAGE_MAP = Object.fromEntries(
+  RESULT_PACKAGE_CONFIG.filter(function (p) { return p.courseId; }).map(function (p) {
+    return [p.courseId, p.id];
+  })
+);
 
 const COURSE_RESULT_PACKAGE_META = Object.fromEntries(
   RESULT_PACKAGE_CONFIG.filter(function (p) { return p.courseId; }).map(function (p) {

@@ -2610,6 +2610,88 @@ textarea[id^="free-note-"] {
   margin-top: 24px;
 }
 
+.result-package-detail-header h2 {
+  margin: 12px 0 8px;
+  font-size: 1.25rem;
+}
+
+.result-package-lesson-grid {
+  min-width: 0;
+}
+
+.result-package-lesson-item,
+.course-result-item {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.result-package-item-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.result-package-lesson-label {
+  font-size: 12px;
+  font-weight: 800;
+  color: #475569;
+  letter-spacing: 0.04em;
+}
+
+.result-package-empty-note {
+  margin: 8px 0 12px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.result-package-result-details {
+  margin: 8px 0 12px;
+}
+
+.result-package-result-body {
+  margin-top: 10px;
+  max-width: 100%;
+}
+
+.result-package-result-text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  max-width: 100%;
+  margin: 8px 0 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  font: inherit;
+  color: #0f172a;
+  box-sizing: border-box;
+}
+
+.result-package-lesson-item h3,
+.course-result-item h3 {
+  overflow-wrap: anywhere;
+  word-break: normal;
+  max-width: 100%;
+}
+
+@media (max-width: 430px) {
+  .result-package-lesson-item .btnrow,
+  .course-result-item .btnrow {
+    flex-direction: column;
+  }
+
+  .result-package-lesson-item .btnrow .btn,
+  .course-result-item .btnrow .btn {
+    width: 100%;
+  }
+}
+
 .auth-gate-panel {
   max-width: 720px;
   margin: 0 auto;

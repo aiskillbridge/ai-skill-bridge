@@ -1660,7 +1660,7 @@ function bindMoreMenuEvents() {
 
 function goApplicationPackage() {
   if (typeof hasCourseAccess === "function" && hasCourseAccess("admissions")) {
-    setRoute("applicationPackage");
+    openResultPackage("pkg-admissions");
   } else {
     toast(state.lang === "zh" ? "請先開通「高中生申請大學 AI 實戰課」" : "Please unlock the University Application course first");
     setRoute("premium");
@@ -3702,6 +3702,10 @@ function getResultPackageById(packageId) {
 }
 
 function getResultPackageByCourseId(courseId) {
+  if (!courseId) return null;
+  if (typeof COURSE_RESULT_PACKAGE_MAP !== "undefined" && COURSE_RESULT_PACKAGE_MAP[courseId]) {
+    return getResultPackageById(COURSE_RESULT_PACKAGE_MAP[courseId]);
+  }
   return getResultPackageConfigList().find(p => p.courseId === courseId) || null;
 }
 
@@ -3724,6 +3728,31 @@ function resultPackageAccessLabel(packageId) {
 function resultPackageStorageCourseKey(pkg) {
   if (!pkg) return "free-starter";
   return pkg.courseId || pkg.id || "free-starter";
+}
+
+/** Fixed hub order: free + 6 premium kits (Phase 3A). */
+const RESULT_PACKAGE_HUB_ORDER = [
+  "free-starter",
+  "pkg-admissions",
+  "pkg-college-learning",
+  "pkg-research-competition",
+  "pkg-career-internship",
+  "pkg-workplace-productivity",
+  "pkg-startup-automation"
+];
+
+function getResultPackagesHubEntries() {
+  const entries = [];
+  RESULT_PACKAGE_HUB_ORDER.forEach(id => {
+    const pkg = getResultPackageById(id);
+    if (pkg) entries.push({ type: "package", pkg });
+  });
+  getResultPackageConfigList().forEach(pkg => {
+    if (!entries.some(entry => entry.pkg && entry.pkg.id === pkg.id)) {
+      entries.push({ type: "package", pkg });
+    }
+  });
+  return entries;
 }
 
 /* Restored after Accordion refactor accidentally removed these helpers.
@@ -5580,11 +5609,37 @@ function getCourseResultEntry(courseId, lessonIndex) {
   const userKey = courseResultPackageUserKey();
   const lessonKey = String(lessonIndex);
   const entry = (((store[userKey] || {})[courseId] || {})[lessonKey]) || {};
-  return {
+  const normalized = {
     text: typeof entry.text === "string" ? entry.text : "",
     url: typeof entry.url === "string" ? entry.url : "",
-    savedAt: entry.savedAt || ""
+    savedAt: entry.savedAt || "",
+    updatedAt: entry.updatedAt || entry.savedAt || ""
   };
+  // Phase 3A: admissions legacy applicationPackage keys are read-only fallback (same SoT once saved in lesson).
+  if (!isCourseResultEntryComplete(normalized) && courseId === "admissions" && state.user) {
+    const legacyText = getLegacyApplicationPackageTextForLesson(lessonIndex);
+    if (legacyText && legacyText.trim()) {
+      return {
+        text: legacyText,
+        url: "",
+        savedAt: normalized.savedAt || "",
+        updatedAt: normalized.updatedAt || "",
+        fromLegacy: true
+      };
+    }
+  }
+  return normalized;
+}
+
+function getLegacyApplicationPackageTextForLesson(lessonIndex) {
+  if (typeof APPLICATION_PACKAGE_ITEMS === "undefined" || !Array.isArray(APPLICATION_PACKAGE_ITEMS)) return "";
+  const item = APPLICATION_PACKAGE_ITEMS.find(row => row.linkedLessonIndex === Number(lessonIndex));
+  if (!item || typeof loadApplicationPackageValue !== "function") return "";
+  try {
+    return loadApplicationPackageValue(item.id) || "";
+  } catch (error) {
+    return "";
+  }
 }
 
 function isCourseResultEntryComplete(entry) {
@@ -5593,10 +5648,27 @@ function isCourseResultEntryComplete(entry) {
   return Boolean(text || url);
 }
 
+function getPackageResultItemStatus(courseId, lessonIndex) {
+  const saved = isCourseResultEntryComplete(getCourseResultEntry(courseId, lessonIndex));
+  const lessonDone = typeof isLessonComplete === "function" && isLessonComplete(courseId, lessonIndex);
+  if (!saved) return "empty";
+  if (lessonDone) return "completed";
+  return "saved";
+}
+
+function packageResultStatusLabel(status) {
+  if (status === "completed") return text("已完成", "Completed");
+  if (status === "saved") return text("已儲存", "Saved");
+  return text("尚未建立", "Not Created");
+}
+
 function courseResultPackageProgress(courseId) {
   const pkg = getResultPackageByCourseId(courseId) || getResultPackageById(courseId);
   const total = pkg ? Number(pkg.totalItems) || 10 : 10;
   const storageKey = pkg ? resultPackageStorageCourseKey(pkg) : courseId;
+  if (!state.user) {
+    return { completed: 0, total, percent: 0 };
+  }
   let completed = 0;
   for (let i = 0; i < total; i++) {
     if (isCourseResultEntryComplete(getCourseResultEntry(storageKey, i))) completed += 1;
@@ -5612,6 +5684,9 @@ function resultPackageProgressByConfig(pkg) {
   if (!pkg) return { completed: 0, total: 0, percent: 0 };
   const storageKey = resultPackageStorageCourseKey(pkg);
   const total = Number(pkg.totalItems) || (pkg.items ? pkg.items.length : 10);
+  if (!state.user) {
+    return { completed: 0, total, percent: 0 };
+  }
   let completed = 0;
   for (let i = 0; i < total; i++) {
     if (isCourseResultEntryComplete(getCourseResultEntry(storageKey, i))) completed += 1;
@@ -5630,68 +5705,6 @@ function hasApplicationPackageAccess() {
 function applicationPackageAccessLabel() {
   if (hasApplicationPackageAccess()) return text("已解鎖", "Unlocked");
   return text("尚未解鎖", "Locked");
-}
-
-function getResultPackagesHubEntries() {
-  const packages = getResultPackageConfigList().filter(pkg => pkg.id !== "pkg-admissions");
-  const order = [
-    "free-starter",
-    "pkg-research-competition",
-    "pkg-career-internship",
-    "pkg-workplace-productivity",
-    "pkg-startup-automation",
-    "pkg-college-learning"
-  ];
-  const sorted = [];
-  order.forEach(id => {
-    const pkg = packages.find(p => p.id === id);
-    if (pkg) sorted.push({ type: "package", pkg });
-  });
-  packages.forEach(pkg => {
-    if (!sorted.some(entry => entry.type === "package" && entry.pkg.id === pkg.id)) {
-      sorted.push({ type: "package", pkg });
-    }
-  });
-  const freeIndex = sorted.findIndex(entry => entry.type === "package" && entry.pkg.id === "free-starter");
-  sorted.splice(freeIndex >= 0 ? freeIndex + 1 : 0, 0, { type: "application-kit" });
-  return sorted;
-}
-
-function renderApplicationKitHubCard(index) {
-  const unlocked = hasApplicationPackageAccess();
-  const needsLogin = !state.user;
-  const progress = (!needsLogin && unlocked)
-    ? applicationPackageProgress(false)
-    : { completed: 0, total: APPLICATION_PACKAGE_ITEMS.length, percent: 0 };
-  const course = typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === "admissions") : null;
-  const price = course ? formatTwdPrice(course.price) : "";
-
-  return `
-    <article class="card result-package-card ${unlocked && !needsLogin ? "" : "result-package-card-locked"}">
-      <span class="tag ${unlocked ? "free" : "premiumtag"}">${applicationPackageAccessLabel()}</span>
-      <h2>${index}. ${text("大學申請包", "University Application Kit")}</h2>
-      <p><b>${text("主題", "Topics")}：</b>${text("大學申請 · 學習歷程 · 面試準備 · 申請文件", "University apps · Learning portfolio · Interview prep · Application docs")}</p>
-      <p><b>${text("所屬課程", "Course")}：</b>${text("高中生申請大學 AI 實戰課", "AI University Application Course")}</p>
-      <p>${text(
-        "整合申請動機、自傳、學習歷程、面試準備與資料檢查工具，協助你完成完整的大學申請成果。",
-        "Create a complete University Application Kit with personal statements, learning portfolios, interview preparation, and application checklists."
-      )}</p>
-      ${!unlocked && price ? `<p class="course-result-meta">${text("課程售價", "Course Price")}：<span class="price-nowrap">${price}</span> · ${text("一次付費", "One-time payment")}</p>` : ""}
-      <p>${text("完成進度", "Progress")}：${needsLogin ? text("登入後顯示", "Sign in to view") : `${progress.completed} / ${progress.total}（${progress.percent}%）`}</p>
-      <div class="package-progress-track"><div class="package-progress-bar" style="width:${needsLogin ? 0 : progress.percent}%"></div></div>
-      <div class="btnrow">
-        ${needsLogin
-          ? `<button class="btn primary" onclick='requireGoogleLogin({"route":"applicationPackage"})'>${text("開啟申請包", "Open Application Kit")}</button>`
-          : unlocked
-          ? `<button class="btn primary" onclick="goApplicationPackage()">${text("開啟申請包", "Open Application Kit")}</button>`
-          : `<button class="btn secondary" onclick="goApplicationPackage()">${text("已鎖定", "Locked")}</button>
-             <button class="btn secondary" onclick="openCourse('admissions')">${text("查看課程", "View Course")}</button>`
-        }
-      </div>
-      ${!unlocked && !needsLogin ? renderPaymentComingSoonNote() : ""}
-      ${!unlocked && !needsLogin ? `<p class="course-result-meta">${text("價格", "Price")}：${price}</p>` : ""}
-    </article>
-  `;
 }
 
 function saveCourseResultEntry(courseId, lessonIndex, options = {}) {
@@ -5729,7 +5742,8 @@ function saveCourseResultEntry(courseId, lessonIndex, options = {}) {
   store[userKey][storageKey][String(lessonIndex)] = {
     text: textValue,
     url,
-    savedAt: new Date().toISOString()
+    savedAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
   };
   saveCourseResultPackagesStore(store);
   toast(state.lang === "zh" ? "已儲存到課程成果包" : "Saved to course result package");
@@ -5740,36 +5754,39 @@ function saveCourseResultEntry(courseId, lessonIndex, options = {}) {
 }
 
 function renderResultPackageHubCard(pkg, index) {
-  const needsLogin = pkg.free && !state.user;
+  const needsLogin = !state.user;
   const unlocked = hasResultPackageAccess(pkg.id);
-  const progress = (!state.user && pkg.free)
-    ? { completed: 0, total: Number(pkg.totalItems) || (pkg.items ? pkg.items.length : 0), percent: 0 }
-    : resultPackageProgressByConfig(pkg);
+  const progress = resultPackageProgressByConfig(pkg);
   const course = pkg.courseId && typeof PREMIUM !== "undefined"
     ? PREMIUM.find(p => p.id === pkg.courseId)
     : null;
   const price = pkg.free ? formatTwdPrice(0) : (course ? formatTwdPrice(course.price) : "");
+  const statusLabel = needsLogin
+    ? text("登入後顯示", "Sign in to view")
+    : unlocked
+      ? text("已解鎖", "Unlocked")
+      : resultPackageAccessLabel(pkg.id);
 
   return `
     <article class="card result-package-card ${unlocked && !needsLogin ? "" : "result-package-card-locked"}">
-      <span class="tag ${pkg.free || unlocked ? "free" : "premiumtag"}">${resultPackageAccessLabel(pkg.id)}</span>
-      <h2>${index}. ${state.lang === "zh" ? pkg.zhTitle : pkg.enTitle}</h2>
+      <span class="tag ${pkg.free || unlocked ? "free" : "premiumtag"}">${statusLabel}</span>
+      <h2>${index + 1}. ${state.lang === "zh" ? pkg.zhTitle : pkg.enTitle}</h2>
       <p><b>${text("所屬課程", "Course")}：</b>${state.lang === "zh" ? pkg.zhCourseName : pkg.enCourseName}</p>
-      <p>${state.lang === "zh" ? pkg.zhFinalOutcome : pkg.enFinalOutcome}</p>
+      <p>${state.lang === "zh" ? pkg.zhDescription : pkg.enDescription}</p>
       ${!unlocked && !pkg.free && price ? `<p class="course-result-meta">${text("課程售價", "Course Price")}：<span class="price-nowrap">${price}</span> · ${text("一次付費", "One-time payment")}</p>` : ""}
-      <p>${text("完成進度", "Progress")}：${needsLogin ? text("登入後顯示", "Sign in to view") : `${progress.completed} / ${progress.total}（${progress.percent}%）`}</p>
+      <p>${text("完成進度", "Progress")}：${needsLogin ? text("登入後顯示", "Sign in to view") : `${progress.completed} / ${progress.total} ${text("成果完成", "results completed")}`}</p>
       <div class="package-progress-track"><div class="package-progress-bar" style="width:${needsLogin ? 0 : progress.percent}%"></div></div>
       <div class="btnrow">
         ${needsLogin
           ? `<button class="btn primary" onclick="openResultPackage('${pkg.id}')">${text("查看介紹", "View Intro")}</button>
              <button class="btn secondary" onclick='requireGoogleLogin({"route":"courseResultPackage","packageId":"${pkg.id}","action":"openResultPackage"})'>${text("使用 Google 登入", "Sign in with Google")}</button>`
           : unlocked
-          ? `<button class="btn primary" onclick="openResultPackage('${pkg.id}')">${text("查看成果包", "View Package")}</button>`
+          ? `<button class="btn primary" onclick="openResultPackage('${pkg.id}')">${text("開啟成果包", "Open Package")}</button>`
           : `<button class="btn secondary" onclick="showResultPackageLockedMessage('${pkg.id}')">${text("已鎖定", "Locked")}</button>
              <button class="btn secondary" onclick="${course ? `openCourse('${course.id}')` : "setRoute('map')"}">${text("查看課程", "View Course")}</button>`
         }
       </div>
-      ${!unlocked && !pkg.free ? renderPaymentComingSoonNote() : ""}
+      ${!unlocked && !pkg.free && !needsLogin ? renderPaymentComingSoonNote() : ""}
     </article>
   `;
 }
@@ -5946,15 +5963,111 @@ function resultPackages() {
         ${membership}
 
         <div class="grid three result-package-overview-grid">
-          ${hubEntries.map((entry, index) => (
-            entry.type === "application-kit"
-              ? renderApplicationKitHubCard(index)
-              : renderResultPackageHubCard(entry.pkg, index)
-          )).join("")}
+          ${hubEntries.map((entry, index) => renderResultPackageHubCard(entry.pkg, index)).join("")}
         </div>
       </div>
     </main>
   `);
+}
+
+function getPackageLessonResultMeta(pkg, lessonIndex) {
+  const i = Number(lessonIndex) || 0;
+  const courseId = pkg && pkg.courseId ? pkg.courseId : null;
+  const course = courseId && typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === courseId) : null;
+  const details = (courseId && typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[courseId])
+    ? PREMIUM_LESSON_DETAILS[courseId]
+    : [];
+  const detail = details[i] || {};
+  const lessons = course ? (state.lang === "zh" ? course.zhLessons : course.enLessons) : [];
+  let title = `L${i + 1}`;
+  let outcome = "";
+  if (pkg && pkg.free && pkg.items && pkg.items[i]) {
+    title = state.lang === "zh" ? pkg.items[i].zh : pkg.items[i].en;
+    outcome = title;
+  } else {
+    title = (state.lang === "zh" ? (detail.zhTitle || lessons[i]) : (detail.enTitle || lessons[i]))
+      || lessons[i]
+      || `Lesson ${i + 1}`;
+    outcome = state.lang === "zh"
+      ? (detail.zhOutputName || detail.zhOutcome || "")
+      : (detail.enOutputName || detail.enOutcome || "");
+  }
+  return {
+    courseId: courseId || (pkg && pkg.id) || "",
+    lessonId: detail.id || detail.lessonId || (courseId ? `${courseId}:index:${i}` : `item:${i}`),
+    resultId: `${courseId || (pkg && pkg.id) || "pkg"}:${i}`,
+    title,
+    outcome,
+    lessonIndex: i
+  };
+}
+
+function renderPremiumPackageResultItem(pkg, lessonIndex) {
+  const meta = getPackageLessonResultMeta(pkg, lessonIndex);
+  const storageKey = resultPackageStorageCourseKey(pkg);
+  const entry = getCourseResultEntry(storageKey, lessonIndex);
+  const status = getPackageResultItemStatus(storageKey, lessonIndex);
+  const statusLabel = packageResultStatusLabel(status);
+  const saved = status !== "empty";
+  const updated = entry.updatedAt || entry.savedAt;
+  const bodyText = escapeTextareaValue(entry.text || "");
+  const bodyUrl = escapeTextareaValue(entry.url || "");
+
+  return `
+    <section class="panel application-package-item course-result-item result-package-lesson-item">
+      <div class="result-package-item-head">
+        <span class="tag ${saved ? "free" : "premiumtag"}">${statusLabel}</span>
+        <span class="result-package-lesson-label">L${lessonIndex + 1}</span>
+      </div>
+      <h3>${meta.title}</h3>
+      ${meta.outcome ? `<p class="course-result-meta"><b>${text("成果名稱", "Result")}：</b>${meta.outcome}</p>` : ""}
+      <p class="course-result-meta">${text("最後更新", "Last Updated")}：${saved ? formatCourseResultSavedAt(updated) : text("尚未建立", "Not Created")}</p>
+      ${saved ? `
+        <details class="lesson-accordion result-package-result-details">
+          <summary>${text("查看成果", "View Result")}</summary>
+          <div class="result-package-result-body">
+            <p><b>${text("成果標題", "Result title")}：</b>${meta.outcome || meta.title}</p>
+            <p><b>${text("對應課程", "Course")}：</b>${state.lang === "zh" ? pkg.zhCourseName : pkg.enCourseName}</p>
+            <p><b>${text("對應 Lesson", "Lesson")}：</b>L${lessonIndex + 1} · ${meta.title}</p>
+            <p><b>${text("最後更新", "Last Updated")}：</b>${formatCourseResultSavedAt(updated)}</p>
+            ${bodyText ? `<pre class="result-package-result-text">${bodyText}</pre>` : ""}
+            ${bodyUrl ? `<p><a href="${bodyUrl}" target="_blank" rel="noopener noreferrer">${bodyUrl}</a></p>` : ""}
+          </div>
+        </details>
+      ` : `
+        <p class="result-package-empty-note">${text("尚未建立成果", "No result yet")}</p>
+      `}
+      <div class="btnrow">
+        ${saved
+          ? `<button class="btn primary" onclick="currentCourseId='${pkg.courseId}'; openLesson(${lessonIndex})">${text("返回課程編輯", "Edit in Lesson")}</button>`
+          : `<button class="btn primary" onclick="currentCourseId='${pkg.courseId}'; openLesson(${lessonIndex})">${text("前往完成這堂課", "Complete This Lesson")}</button>`
+        }
+      </div>
+    </section>
+  `;
+}
+
+function renderFreePackageResultItem(pkg, lessonIndex) {
+  const storageKey = resultPackageStorageCourseKey(pkg);
+  const entry = getCourseResultEntry(storageKey, lessonIndex);
+  const done = isCourseResultEntryComplete(entry);
+  const meta = getPackageLessonResultMeta(pkg, lessonIndex);
+  return `
+    <section class="panel application-package-item course-result-item">
+      <span class="tag ${done ? "free" : "premiumtag"}">${done ? text("已儲存", "Saved") : text("尚未建立", "Not Created")}</span>
+      <h2>${text("成果", "Item")} ${lessonIndex + 1}</h2>
+      <h3>${meta.title}</h3>
+      <label class="course-result-label">${text("成果文字", "Result text")}</label>
+      <textarea id="course-result-text-${storageKey}-${lessonIndex}" placeholder="${text("貼上本堂成果...", "Paste this lesson output...")}">${escapeTextareaValue(entry.text)}</textarea>
+      <label class="course-result-label">${text("成果連結", "Result link")}</label>
+      <input class="course-result-url-input" id="course-result-url-${storageKey}-${lessonIndex}" type="url" value="${escapeTextareaValue(entry.url)}" placeholder="https://" />
+      <p class="course-result-meta">${text("最後更新", "Last Updated")}: ${formatCourseResultSavedAt(entry.updatedAt || entry.savedAt)}</p>
+      <div class="btnrow">
+        <button class="btn primary" onclick="saveCourseResultEntry('${storageKey}', ${lessonIndex})">${text("儲存這一項", "Save This Item")}</button>
+        <button class="btn secondary" onclick="setRoute('freePortfolio')">${text("打開免費成果包", "Open Free Portfolio")}</button>
+      </div>
+    </section>
+  `;
 }
 
 function courseResultPackage() {
@@ -6017,73 +6130,66 @@ function courseResultPackage() {
     `);
   }
 
-  const storageKey = resultPackageStorageCourseKey(pkg);
+  if (!state.user) {
+    return shell(`
+      <main class="page">
+        <div class="wrap">
+          <section class="panel auth-gate-panel">
+            <h1>${state.lang === "zh" ? pkg.zhTitle : pkg.enTitle}</h1>
+            <p class="lead">${state.lang === "zh" ? pkg.zhDescription : pkg.enDescription}</p>
+            <p>${text("登入後才能查看你的私人成果內容。", "Sign in to view your private results.")}</p>
+            <div class="btnrow">
+              <button class="btn primary" onclick='requireGoogleLogin({"route":"courseResultPackage","packageId":"${pkg.id}","action":"openResultPackage"})'>${text("使用 Google 登入", "Sign in with Google")}</button>
+              <button class="btn secondary" onclick="setRoute('result-packages')">${text("返回成果禮包", "Back to Result Packages")}</button>
+            </div>
+          </section>
+        </div>
+      </main>
+    `);
+  }
+
   const progress = resultPackageProgressByConfig(pkg);
-  const course = pkg.courseId && typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === pkg.courseId) : null;
-  const details = (pkg.courseId && typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[pkg.courseId])
-    ? PREMIUM_LESSON_DETAILS[pkg.courseId]
-    : [];
-  const lessons = course ? (state.lang === "zh" ? course.zhLessons : course.enLessons) : [];
   const total = Number(pkg.totalItems) || (pkg.items ? pkg.items.length : 10);
+  const courseLabel = state.lang === "zh" ? pkg.zhCourseName : pkg.enCourseName;
 
   return shell(`
     <main class="page">
       <div class="wrap">
         <button class="btn secondary" onclick="setRoute('result-packages')">← ${text("回到成果禮包", "Back to Result Packages")}</button>
 
-        <section class="panel" style="margin-top:16px">
-          <span class="tag free">${pkg.icon || ""} ${text("我的課程成果包", "My Course Result Package")}</span>
+        <section class="panel result-package-detail-header" style="margin-top:16px">
+          <span class="tag free">${pkg.icon || ""} ${text("成果包", "Result Package")}</span>
           <h1>${state.lang === "zh" ? pkg.zhTitle : pkg.enTitle}</h1>
           <p class="lead">${state.lang === "zh" ? pkg.zhDescription : pkg.enDescription}</p>
-          <p><b>${text("這門課完成後會得到什麼", "What you will get")}：</b>${state.lang === "zh" ? pkg.zhFinalOutcome : pkg.enFinalOutcome}</p>
-          <h2>${text("完成進度", "Progress")}：${progress.completed} / ${progress.total}（${progress.percent}%）</h2>
+          <p><b>${text("對應課程", "Course")}：</b>${courseLabel}</p>
+          <h2>${progress.completed} / ${progress.total} ${text("成果完成", "results completed")}</h2>
           <div class="package-progress-track">
             <div class="package-progress-bar" style="width:${progress.percent}%"></div>
           </div>
+          <p class="course-result-meta">${text(
+            "進度以「已儲存成果」計算；與是否按過完成本課分開。",
+            "Progress counts saved results only — separate from lesson completion."
+          )}</p>
         </section>
 
-        <div class="grid course-result-grid" style="margin-top:24px">
-          ${Array.from({ length: total }, (_, i) => {
-            const entry = getCourseResultEntry(storageKey, i);
-            const done = isCourseResultEntryComplete(entry);
-            let title = `Item ${i + 1}`;
-            let outcome = "";
-            if (pkg.free && pkg.items && pkg.items[i]) {
-              title = state.lang === "zh" ? pkg.items[i].zh : pkg.items[i].en;
-              outcome = title;
-            } else {
-              const detail = details[i] || {};
-              title = lessons[i] || detail.zhTitle || `Lesson ${i + 1}`;
-              outcome = state.lang === "zh" ? (detail.zhOutcome || "") : (detail.enOutcome || "");
-            }
-            return `
-              <section class="panel application-package-item course-result-item">
-                <span class="tag ${done ? "free" : "premiumtag"}">${done ? text("已儲存", "Saved") : text("尚未完成", "Incomplete")}</span>
-                <h2>${pkg.free ? `${text("成果", "Item")} ${i + 1}` : `Lesson ${i + 1}`}</h2>
-                <h3>${title}</h3>
-                <p><b>${text("應產出成果", "Deliverable")}:</b> ${outcome}</p>
-                <label class="course-result-label">${text("成果文字", "Result text")}</label>
-                <textarea id="course-result-text-${storageKey}-${i}" placeholder="${text("貼上本堂成果...", "Paste this lesson output...")}">${escapeTextareaValue(entry.text)}</textarea>
-                <label class="course-result-label">${text("成果連結", "Result link")}</label>
-                <input class="course-result-url-input" id="course-result-url-${storageKey}-${i}" type="url" value="${escapeTextareaValue(entry.url)}" placeholder="https://" />
-                <p class="course-result-meta">${text("最後儲存時間", "Last saved")}: ${formatCourseResultSavedAt(entry.savedAt)}</p>
-                <div class="btnrow">
-                  <button class="btn primary" onclick="saveCourseResultEntry('${storageKey}', ${i})">${text("儲存這一項", "Save This Item")}</button>
-                  ${pkg.free
-                    ? `<button class="btn secondary" onclick="setRoute('courses')">${text("前往免費課程", "Open Free Course")}</button>`
-                    : `<button class="btn secondary" onclick="currentCourseId='${pkg.courseId}'; openLesson(${i})">${text("前往對應 Lesson", "Open Lesson")}</button>`
-                  }
-                </div>
-              </section>
-            `;
-          }).join("")}
+        <div class="grid course-result-grid result-package-lesson-grid" style="margin-top:24px">
+          ${Array.from({ length: total }, (_, i) => (
+            pkg.free ? renderFreePackageResultItem(pkg, i) : renderPremiumPackageResultItem(pkg, i)
+          )).join("")}
         </div>
 
         <section class="panel" style="margin-top:24px">
           <h2>${text("這門課的最終成果", "Final Course Outcome")}</h2>
           <p>${state.lang === "zh" ? pkg.zhFinalOutcome : pkg.enFinalOutcome}</p>
           <div class="btnrow">
-            ${pkg.courseId ? `<button class="btn secondary" onclick="openCourse('${pkg.courseId}')">${text("回到課程繼續學習", "Back to Course")}</button>` : `<button class="btn secondary" onclick="setRoute('courses')">${text("回到免費入門", "Back to Free Intro")}</button>`}
+            ${pkg.courseId
+              ? `<button class="btn secondary" onclick="openCourse('${pkg.courseId}')">${text("回到課程繼續學習", "Back to Course")}</button>`
+              : `<button class="btn secondary" onclick="setRoute('freePortfolio')">${text("打開免費成果包", "Open Free Portfolio")}</button>`
+            }
+            ${pkg.id === "pkg-admissions"
+              ? `<button class="btn secondary" onclick="copyFinalReviewPrompt()">${text("複製最終總檢查 Prompt", "Copy Final Review Prompt")}</button>`
+              : ""
+            }
             <button class="btn primary" onclick="setRoute('result-packages')">${text("查看全部成果禮包", "View All Packages")}</button>
           </div>
         </section>
@@ -6250,21 +6356,12 @@ function getApplicationPackageCurrentValue(id) {
 }
 
 function applicationPackageProgress(useDom = true) {
-  const completed = APPLICATION_PACKAGE_ITEMS.filter(item => {
-    const value = useDom ? getApplicationPackageCurrentValue(item.id) : loadApplicationPackageValue(item.id);
-    return value.trim().length > 0;
-  }).length;
-
-  const total = APPLICATION_PACKAGE_ITEMS.length;
-  return {
-    completed,
-    total,
-    percent: Math.round((completed / total) * 100)
-  };
+  // Phase 3A: same SoT as pkg-admissions / lesson results (legacy keys via getCourseResultEntry compat).
+  return courseResultPackageProgress("admissions");
 }
 
 function updateApplicationPackageProgressUI() {
-  const progress = applicationPackageProgress(true);
+  const progress = applicationPackageProgress(false);
   const label = document.getElementById("application-package-progress-label");
   const bar = document.getElementById("application-package-progress-bar");
   const status = document.getElementById("application-package-live-status");
@@ -6276,16 +6373,6 @@ function updateApplicationPackageProgressUI() {
       ? (state.lang === "zh" ? "已完成全部 10 項，可以進行最終總檢查。" : "All 10 sections are complete. You can run the final review.")
       : (state.lang === "zh" ? `還差 ${progress.total - progress.completed} 項完成。` : `${progress.total - progress.completed} sections remaining.`);
   }
-
-  APPLICATION_PACKAGE_ITEMS.forEach(item => {
-    const badge = document.getElementById(`application-package-status-${item.id}`);
-    const value = getApplicationPackageCurrentValue(item.id);
-    if (badge) {
-      const done = value.trim().length > 0;
-      badge.textContent = done ? (state.lang === "zh" ? "已完成" : "Completed") : (state.lang === "zh" ? "尚未填寫" : "Empty");
-      badge.className = `tag ${done ? "free" : "premiumtag"}`;
-    }
-  });
 }
 
 function saveApplicationPackageItem(id, shouldRender = false) {
@@ -6328,9 +6415,12 @@ function clearApplicationPackageItem(id) {
 
 function buildFinalReviewPrompt() {
   const emptyLabel = text("尚未填寫", "Empty");
-  const data = APPLICATION_PACKAGE_ITEMS.map(item => {
-    const copy = getApplicationPackageItemCopy(item);
-    return `${copy.title}\n${getApplicationPackageCurrentValue(item.id) || loadApplicationPackageValue(item.id) || emptyLabel}`;
+  const pkg = getResultPackageById("pkg-admissions");
+  const data = Array.from({ length: 10 }, (_, i) => {
+    const meta = getPackageLessonResultMeta(pkg || { courseId: "admissions", free: false }, i);
+    const entry = getCourseResultEntry("admissions", i);
+    const body = (entry.text || entry.url || "").trim() || emptyLabel;
+    return `L${i + 1}. ${meta.title}\n${body}`;
   }).join("\n\n---\n\n");
 
   return text(
@@ -6371,7 +6461,6 @@ function showFinalReviewPrompt() {
 }
 
 function copyFinalReviewPrompt() {
-  saveAllApplicationPackageItems();
   const prompt = buildFinalReviewPrompt();
 
   if (navigator.clipboard && window.isSecureContext) {
@@ -6398,97 +6487,11 @@ function copyFinalReviewPrompt() {
 }
 
 function applicationPackage() {
-  if (!(typeof hasCourseAccess === "function" && hasCourseAccess("admissions"))) {
-    return shell(`
-      <main class="page">
-        <div class="wrap">
-          <section class="panel">
-            <span class="tag premiumtag">${text("付費功能", "Premium Feature")}</span>
-            <h1>${text("大學申請包尚未開通", "University Application Kit Locked")}</h1>
-            <p class="lead">${text(
-              "這個功能屬於「高中生申請大學 AI 實戰課」。開通後，你才能集中儲存 10 堂課成果並產出完整申請資料。",
-              "This feature belongs to the University Application premium course. Unlock it to store all 10 lesson outputs and generate a complete University Application Kit."
-            )}</p>
-            <button class="btn primary" onclick="setRoute('premium')">${text("前往進階付費", "Go to Premium")}</button>
-          </section>
-        </div>
-      </main>
-    `);
-  }
-
-  const progress = applicationPackageProgress(false);
-
-  setTimeout(updateApplicationPackageProgressUI, 0);
-
-  return shell(`
-    <main class="page">
-      <div class="wrap">
-        <section class="panel">
-          <span class="tag free">${text("付費課程成果區", "Premium Course Output")}</span>
-          <h1>${text("我的大學申請包", "My University Application Kit")}</h1>
-          <p class="lead">${text(
-            "每一課完成後，把成果貼到對應欄位並儲存。完成 10 個欄位後，你就會得到一份完整的大學申請資料。",
-            "After each lesson, paste your result into the matching section and save it. When all 10 sections are complete, you will have a full university application kit."
-          )}</p>
-
-          <h2>${text("完成進度", "Progress")}：<span id="application-package-progress-label">${progress.completed}/${progress.total}（${progress.percent}%）</span></h2>
-          <div class="package-progress-track">
-            <div id="application-package-progress-bar" class="package-progress-bar" style="width:${progress.percent}%"></div>
-          </div>
-          <p id="application-package-live-status">${progress.percent === 100 ? text("已完成全部 10 項，可以進行最終總檢查。", "All 10 sections are complete. You can run the final review.") : text(`還差 ${progress.total - progress.completed} 項完成。`, `${progress.total - progress.completed} sections remaining.`)}</p>
-
-          <div class="btnrow" style="margin-top:20px">
-            <button class="btn primary" onclick="saveAllApplicationPackageItems()">${text("全部儲存", "Save All")}</button>
-            <button class="btn secondary" onclick="copyFinalReviewPrompt()">${text("複製最終總檢查 Prompt", "Copy Final Review Prompt")}</button>
-            <button class="btn secondary" onclick="showFinalReviewPrompt()">${text("顯示 Prompt 手動複製", "Show Prompt")}</button>
-          </div>
-        </section>
-
-        <section class="panel">
-          <h2>${text("怎麼使用", "How to Use")}</h2>
-          <ol>
-            <li>${text("上完一課後，複製該課成果。", "After finishing a lesson, copy that lesson's output.")}</li>
-            <li>${text("貼到下面對應欄位，進度會馬上更新。", "Paste it below; progress updates immediately.")}</li>
-            <li>${text("按下「儲存這一項」或「全部儲存」。", "Click 'Save This Section' or 'Save All'.")}</li>
-            <li>${text("10 個欄位完成後，複製總檢查 Prompt 到 AI 做最後修改。", "After all 10 sections are complete, copy the final review prompt to AI for final revision.")}</li>
-          </ol>
-        </section>
-
-        <div class="grid">
-          ${APPLICATION_PACKAGE_ITEMS.map(item => {
-            const copy = getApplicationPackageItemCopy(item);
-            const value = loadApplicationPackageValue(item.id);
-            const done = value.trim().length > 0;
-            return `
-              <section class="panel application-package-item">
-                <span id="application-package-status-${item.id}" class="tag ${done ? "free" : "premiumtag"}">${done ? text("已完成", "Completed") : text("尚未填寫", "Empty")}</span>
-                <h2>${copy.title}</h2>
-                <p>${copy.desc}</p>
-                <textarea id="application-package-${item.id}" placeholder="${copy.placeholder}" oninput="updateApplicationPackageProgressUI()">${escapeTextareaValue(value)}</textarea>
-                <div class="btnrow">
-                  <button class="btn secondary" onclick="saveApplicationPackageItem('${item.id}')">${text("儲存這一項", "Save This Section")}</button>
-                  <button class="btn secondary" onclick="clearApplicationPackageItem('${item.id}')">${text("清除", "Clear")}</button>
-                </div>
-              </section>
-            `;
-          }).join("")}
-        </div>
-
-        <section class="panel" style="margin-top:24px">
-          <h2>${text("最終總檢查", "Final Review")}</h2>
-          <p>${text(
-            "完成 10 個欄位後，按下面按鈕複製總檢查 Prompt，貼到 AI，讓 AI 幫你檢查整份申請包。",
-            "After completing all 10 sections, copy the final review prompt and paste it into AI to review the full package."
-          )}</p>
-          <button class="btn primary" onclick="copyFinalReviewPrompt()">${text("複製最終總檢查 Prompt", "Copy Final Review Prompt")}</button>
-          <button class="btn secondary" onclick="showFinalReviewPrompt()">${text("顯示 Prompt 手動複製", "Show Prompt")}</button>
-          <textarea id="final-review-prompt-box" style="display:none;min-height:320px;margin-top:18px" readonly></textarea>
-        </section>
-      </div>
-    </main>
-  `);
+  // Phase 3A: applicationPackage route shares pkg-admissions SoT (no second kit UI).
+  currentResultPackageId = "pkg-admissions";
+  currentCourseId = "admissions";
+  return courseResultPackage();
 }
-
 
 function tools() {
   const scenarios = [
@@ -6732,6 +6735,7 @@ async function startApp() {
   await initAuth();
   render();
   runPremiumContentAuditIfDev();
+  runResultPackageAuditIfDev();
   runI18nAuditIfDev();
 }
 
@@ -6944,6 +6948,103 @@ function runPremiumContentAuditIfDev() {
       console.warn("[CONTENT AUDIT] skipped", courseId, error && error.message ? error.message : error);
     }
   });
+}
+
+function validateResultPackagePhase3A() {
+  const issues = [];
+  const packages = getResultPackageConfigList();
+  const expectedOrder = RESULT_PACKAGE_HUB_ORDER.slice();
+  const expectedCourseIds = [
+    "admissions",
+    "college-learning",
+    "research-competition",
+    "career-internship",
+    "workplace-productivity",
+    "startup-automation"
+  ];
+
+  let packageOk = 0;
+  expectedOrder.forEach(id => {
+    const pkg = getResultPackageById(id);
+    if (!pkg) {
+      issues.push({ path: id, issue: "missing package" });
+      return;
+    }
+    if (!pkg.zhTitle || !pkg.enTitle) {
+      issues.push({ path: id, issue: "missing zhTitle/enTitle" });
+      return;
+    }
+    packageOk += 1;
+  });
+
+  let mappingOk = 0;
+  expectedCourseIds.forEach(courseId => {
+    const mappedId = (typeof COURSE_RESULT_PACKAGE_MAP !== "undefined")
+      ? COURSE_RESULT_PACKAGE_MAP[courseId]
+      : null;
+    const pkg = getResultPackageByCourseId(courseId);
+    if (!mappedId || !pkg || pkg.id !== mappedId || pkg.courseId !== courseId) {
+      issues.push({ path: courseId, issue: "course→package mapping invalid" });
+      return;
+    }
+    mappingOk += 1;
+  });
+
+  let lessonMapOk = 0;
+  expectedCourseIds.forEach(courseId => {
+    const details = (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[courseId]) || [];
+    const pkg = getResultPackageByCourseId(courseId);
+    const total = pkg ? Number(pkg.totalItems) || 10 : 10;
+    for (let i = 0; i < total; i++) {
+      if (!details[i]) {
+        issues.push({ path: `${courseId}:${i}`, issue: "missing lesson detail for result slot" });
+        continue;
+      }
+      const meta = getPackageLessonResultMeta(pkg, i);
+      if (!meta.resultId || !meta.lessonId) {
+        issues.push({ path: `${courseId}:${i}`, issue: "missing resultId/lessonId" });
+        continue;
+      }
+      lessonMapOk += 1;
+    }
+  });
+
+  const mapValues = expectedCourseIds.map(id => COURSE_RESULT_PACKAGE_MAP && COURSE_RESULT_PACKAGE_MAP[id]);
+  const dupes = mapValues.filter((id, i) => id && mapValues.indexOf(id) !== i);
+  if (dupes.length) {
+    issues.push({ path: "COURSE_RESULT_PACKAGE_MAP", issue: `duplicate package ids: ${dupes.join(",")}` });
+  }
+
+  const admissionsPkg = getResultPackageById("pkg-admissions");
+  if (!admissionsPkg || admissionsPkg.courseId !== "admissions") {
+    issues.push({ path: "applicationPackage", issue: "pkg-admissions not linked to admissions" });
+  }
+
+  return {
+    issues,
+    summary: {
+      packages: `${packageOk}/7`,
+      courseMappings: `${mappingOk}/6`,
+      lessonMappings: `${lessonMapOk}/60`,
+      packageTotal: packages.length
+    }
+  };
+}
+
+function runResultPackageAuditIfDev() {
+  if (!isLocalDevHost()) return;
+  try {
+    const result = validateResultPackagePhase3A();
+    const s = result.summary || {};
+    console.log(`[RESULT PACKAGE AUDIT] ${s.courseMappings} premium course mappings valid`);
+    console.log(`[RESULT PACKAGE AUDIT] ${s.lessonMappings} lesson result mappings valid`);
+    console.log(`[RESULT PACKAGE AUDIT] ${s.packages} result packages valid`);
+    if (result.issues && result.issues.length) {
+      console.warn("[RESULT PACKAGE AUDIT] issues", result.issues);
+    }
+  } catch (error) {
+    console.warn("[RESULT PACKAGE AUDIT] skipped", error && error.message ? error.message : error);
+  }
 }
 
 addEventListener("DOMContentLoaded", startApp);
