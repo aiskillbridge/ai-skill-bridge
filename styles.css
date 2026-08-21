@@ -2305,9 +2305,168 @@ textarea[id^="free-note-"] {
 
 .site-footer-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1.2fr 1fr;
-  gap: 32px 40px;
+  grid-template-columns: 1.1fr 1.1fr 1fr 1fr;
+  gap: 28px 32px;
   padding-bottom: 32px;
+}
+
+.site-footer-link-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.site-footer-link-list li {
+  margin: 0 0 6px;
+}
+
+.site-footer-link-btn {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: #1d4ed8;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+}
+
+.site-footer-link-btn:hover,
+.site-footer-link-btn:focus-visible {
+  text-decoration: underline;
+  outline: none;
+}
+
+.course-price-policy-link {
+  margin: 10px 0 0;
+}
+
+.course-price-policy-link .linkish {
+  font-size: 13px;
+}
+
+/* Phase 4A public policy pages */
+.public-info-page {
+  padding-bottom: 24px;
+}
+
+.public-info-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 24px;
+  align-items: start;
+}
+
+.public-info-article {
+  max-width: 760px;
+}
+
+.public-info-body {
+  color: #334155;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+.public-info-section {
+  margin-top: 28px;
+}
+
+.public-info-section h2 {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+  color: #0f172a;
+}
+
+.public-info-section p {
+  margin: 0 0 12px;
+}
+
+.public-info-list {
+  margin: 0 0 12px;
+  padding-left: 1.2rem;
+}
+
+.public-info-list li {
+  margin: 0 0 8px;
+}
+
+.public-info-note {
+  margin-top: 10px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.public-info-nav {
+  position: sticky;
+  top: 88px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.public-info-nav-label {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.public-info-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.public-info-nav li {
+  margin: 0 0 6px;
+}
+
+.public-info-nav-link {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-align: left;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1d4ed8;
+  cursor: pointer;
+}
+
+.public-info-nav-link:hover,
+.public-info-nav-link:focus-visible,
+.public-info-nav-link.is-active {
+  background: #eff6ff;
+  outline: none;
+}
+
+@media (max-width: 900px) {
+  .site-footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .public-info-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .public-info-nav {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+    padding-top: 36px;
+  }
+
+  .site-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
 }
 
 .site-footer-name {

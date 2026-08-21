@@ -19,10 +19,32 @@ const SPECIAL_ACCOUNT_ROLES = {
   }
 };
 
-/** Public customer support contact (ECPay seller verification). Single source for footer. */
+/**
+ * Public business info — single source for footer, contact, and policy pages.
+ * TODO: add registered business information once confirmed
+ * (company legal name, tax ID, registered address, support hours).
+ * Do not invent legal-entity details for end-user UI.
+ * Legal copy should receive professional review before commercial launch.
+ */
+const PUBLIC_BUSINESS_INFO = {
+  brandName: "AI Skill Bridge",
+  supportEmail: "li19840610@gmail.com",
+  supportPhone: "0933577360",
+  currencyCode: "TWD",
+  currencyZh: "新臺幣（TWD）",
+  currencyEn: "New Taiwan Dollar (TWD)",
+  positioningZh: "AI 學習與數位能力培養平台",
+  positioningEn: "AI Learning and Digital Skills Platform",
+  serviceTypeZh: "線上 AI 課程與數位學習內容",
+  serviceTypeEn: "Online AI courses and digital learning content",
+  deliveryZh: "線上數位內容，無實體配送",
+  deliveryEn: "Online digital content. No physical delivery."
+};
+
+/** @deprecated Prefer PUBLIC_BUSINESS_INFO; kept for existing footer callers. */
 const BUSINESS_CONTACT = {
-  email: "li19840610@gmail.com",
-  phone: "0933577360"
+  email: PUBLIC_BUSINESS_INFO.supportEmail,
+  phone: PUBLIC_BUSINESS_INFO.supportPhone
 };
 
 function normalizeAccountEmail(email) {
@@ -262,6 +284,11 @@ function L(path) {
 function applyDocumentLang() {
   try {
     document.documentElement.lang = state.lang === "zh" ? "zh-Hant" : "en";
+  } catch (error) {}
+  try {
+    if (typeof getDocumentTitleForRoute === "function") {
+      document.title = getDocumentTitleForRoute(state.route);
+    }
   } catch (error) {}
 }
 
@@ -793,14 +820,22 @@ function renderPaymentComingSoonNote() {
 }
 
 function renderCourseProductFacts() {
+  const info = PUBLIC_BUSINESS_INFO;
   return `
     <ul class="course-price-facts">
-      <li><span>${text("商品類型", "Product Type")}</span><strong>${text("線上 AI 教育課程與數位學習內容", "Online AI courses and digital learning content")}</strong></li>
-      <li><span>${text("計價貨幣", "Currency")}</span><strong>${text("新臺幣（TWD）", "New Taiwan Dollar (TWD)")}</strong></li>
+      <li><span>${text("商品類型", "Product Type")}</span><strong>${text(info.serviceTypeZh, info.serviceTypeEn)}</strong></li>
+      <li><span>${text("計價貨幣", "Currency")}</span><strong>${text(info.currencyZh, info.currencyEn)}</strong></li>
       <li><span>${text("交付方式", "Delivery")}</span><strong>${text("帳號開通後於 AI Skill Bridge 網站登入使用", "Access through the AI Skill Bridge website after account activation")}</strong></li>
       <li><span>${text("實體配送", "Physical Delivery")}</span><strong>${text("無", "None")}</strong></li>
     </ul>
   `;
+}
+
+function renderDigitalContentPolicyLink() {
+  return `<p class="course-price-policy-link"><button type="button" class="linkish" onclick="setRoute('digital-content')">${text(
+    "查看數位內容與服務說明",
+    "Digital Content & Service Information"
+  )}</button></p>`;
 }
 
 function renderCoursePriceBlock(courseOrId, options = {}) {
@@ -847,6 +882,7 @@ function renderCoursePriceBlock(courseOrId, options = {}) {
           ${renderPaymentComingSoonNote()}
           ${showFacts ? renderCourseProductFacts() : ""}
         `}
+        ${renderDigitalContentPolicyLink()}
       </div>
     `;
   }
@@ -865,6 +901,7 @@ function renderCoursePriceBlock(courseOrId, options = {}) {
         ${renderPaymentComingSoonNote()}
         ${showFacts ? renderCourseProductFacts() : ""}
       `}
+      ${renderDigitalContentPolicyLink()}
     </div>
   `;
 }
@@ -1776,17 +1813,23 @@ function nav() {
 }
 
 function renderSiteFooter() {
-  const email = BUSINESS_CONTACT.email;
-  const phone = BUSINESS_CONTACT.phone;
+  const info = PUBLIC_BUSINESS_INFO;
+  const email = info.supportEmail;
+  const phone = info.supportPhone;
+  const policyLinks = [
+    { route: "about", zh: "關於我們", en: "About" },
+    { route: "contact", zh: "聯絡我們", en: "Contact" },
+    { route: "terms", zh: "服務條款", en: "Terms" },
+    { route: "privacy", zh: "隱私權政策", en: "Privacy" },
+    { route: "digital-content", zh: "數位內容說明", en: "Digital Content" },
+    { route: "refund-policy", zh: "退款與客服", en: "Refund & Support" }
+  ];
   return `
     <footer class="site-footer" role="contentinfo">
       <div class="wrap site-footer-grid">
         <div class="site-footer-brand">
-          <strong class="site-footer-name">AI Skill Bridge</strong>
-          <p class="site-footer-tagline">${text(
-            "線上 AI 教育課程與數位學習平台",
-            "Online AI Education & Digital Learning Platform"
-          )}</p>
+          <strong class="site-footer-name">${info.brandName}</strong>
+          <p class="site-footer-tagline">${text(info.positioningZh, info.positioningEn)}</p>
         </div>
         <div class="site-footer-contact">
           <h2 class="site-footer-heading">${text("聯絡我們", "Contact Us")}</h2>
@@ -1798,23 +1841,21 @@ function renderSiteFooter() {
             ${text("電話：", "Phone: ")}<a href="tel:${phone}" class="site-footer-link">${phone}</a>
           </p>
         </div>
+        <div class="site-footer-links">
+          <h2 class="site-footer-heading">${text("資訊與政策", "Information & Policies")}</h2>
+          <ul class="site-footer-link-list">
+            ${policyLinks.map(item => `
+              <li><button type="button" class="site-footer-link-btn" onclick="setRoute('${item.route}')">${state.lang === "zh" ? item.zh : item.en}</button></li>
+            `).join("")}
+          </ul>
+        </div>
         <div class="site-footer-meta">
-          <p>${text(
-            "所有價格皆以新臺幣（TWD）計價。",
-            "All prices are in New Taiwan Dollars (TWD)."
-          )}</p>
-          <p>${text(
-            "計價貨幣：新臺幣（TWD）",
-            "Currency: New Taiwan Dollar (TWD)"
-          )}</p>
-          <p>${text(
-            "本平台提供線上數位課程與數位學習內容，無實體配送。",
-            "This platform provides online digital courses and learning content. No physical delivery is provided."
-          )}</p>
+          <p>${text(`計價貨幣：${info.currencyZh}`, `Currency: ${info.currencyEn}`)}</p>
+          <p>${text(`數位服務：${info.deliveryZh}`, `Digital service: ${info.deliveryEn}`)}</p>
         </div>
       </div>
       <div class="wrap site-footer-bottom">
-        <p>© 2026 AI Skill Bridge</p>
+        <p>© 2026 ${info.brandName}</p>
       </div>
     </footer>
   `;
@@ -7232,6 +7273,426 @@ function impact() {
   `);
 }
 
+/* ========== Phase 4A: Public trust / policy pages ========== */
+const PUBLIC_INFO_ROUTE_IDS = [
+  "about",
+  "contact",
+  "terms",
+  "privacy",
+  "digital-content",
+  "refund-policy"
+];
+
+const PUBLIC_INFO_NAV = [
+  { route: "about", zh: "關於我們", en: "About" },
+  { route: "contact", zh: "聯絡我們", en: "Contact" },
+  { route: "terms", zh: "服務條款", en: "Terms" },
+  { route: "privacy", zh: "隱私權政策", en: "Privacy" },
+  { route: "digital-content", zh: "數位內容說明", en: "Digital Content" },
+  { route: "refund-policy", zh: "退款與客服", en: "Refund & Support" }
+];
+
+function getDocumentTitleForRoute(route) {
+  const pageTitle = ({
+    about: text("關於 AI Skill Bridge", "About AI Skill Bridge"),
+    contact: text("聯絡我們", "Contact Us"),
+    terms: text("服務條款", "Terms of Service"),
+    privacy: text("隱私權政策", "Privacy Policy"),
+    "digital-content": text("數位內容與服務說明", "Digital Content & Service Information"),
+    "refund-policy": text("退款與客服說明", "Refund & Support"),
+    "result-packages": text("成果禮包", "Result Packages"),
+    resultPackages: text("成果禮包", "Result Packages"),
+    showcase: text("成果展示", "Showcase"),
+    map: text("學習地圖", "Learning Map"),
+    premium: text("進階課程", "Premium Courses"),
+    learning: text("我的學習中心", "Learning Center"),
+    courses: text("免費入門", "Free Intro"),
+    course: text("課程", "Course"),
+    lesson: text("課程內容", "Lesson"),
+    freePortfolio: text("免費成果包", "Free Result Package"),
+    assessment: text("AI 能力測驗", "AI Skill Assessment")
+  })[route];
+  if (!pageTitle) return PUBLIC_BUSINESS_INFO.brandName;
+  return `${pageTitle} | ${PUBLIC_BUSINESS_INFO.brandName}`;
+}
+
+function renderPublicInfoNav(activeRoute) {
+  return `
+    <nav class="public-info-nav" aria-label="${text("資訊與政策", "Information & Policies")}">
+      <p class="public-info-nav-label">${text("相關頁面", "Related pages")}</p>
+      <ul>
+        ${PUBLIC_INFO_NAV.map(item => `
+          <li>
+            <button type="button" class="public-info-nav-link ${activeRoute === item.route ? "is-active" : ""}" onclick="setRoute('${item.route}')">
+              ${state.lang === "zh" ? item.zh : item.en}
+            </button>
+          </li>
+        `).join("")}
+      </ul>
+    </nav>
+  `;
+}
+
+function renderPublicInfoPage({ route, title, lead, bodyHtml }) {
+  return shell(`
+    <main class="page public-info-page">
+      <div class="wrap public-info-layout">
+        <article class="panel public-info-article">
+          <h1>${title}</h1>
+          ${lead ? `<p class="lead">${lead}</p>` : ""}
+          <div class="public-info-body">
+            ${bodyHtml}
+          </div>
+        </article>
+        ${renderPublicInfoNav(route)}
+      </div>
+    </main>
+  `);
+}
+
+function renderPublicSupportBlock() {
+  const info = PUBLIC_BUSINESS_INFO;
+  return `
+    <ul class="public-info-list">
+      <li><b>${text("Email", "Email")}：</b><a href="mailto:${info.supportEmail}">${info.supportEmail}</a></li>
+      <li><b>${text("電話", "Phone")}：</b><a href="tel:${info.supportPhone}">${info.supportPhone}</a></li>
+    </ul>
+  `;
+}
+
+function aboutPage() {
+  return renderPublicInfoPage({
+    route: "about",
+    title: text("關於 AI Skill Bridge", "About AI Skill Bridge"),
+    lead: text(
+      "AI Skill Bridge 是一個以實作成果為核心的 AI 學習平台，協助使用者從認識 AI 工具，進一步建立升學、學習、研究、求職、職場與創業所需的 AI 應用能力。",
+      "AI Skill Bridge is a practice-first AI learning platform that helps people move from exploring AI tools to building practical skills for admissions, study, research, careers, workplace work, and startups."
+    ),
+    bodyHtml: `
+      <section class="public-info-section">
+        <h2>${text("我們在做什麼", "What we offer")}</h2>
+        <p>${text(
+          "平台以可完成、可保存、可整理的成果為核心，而不是只提供觀看內容。",
+          "The platform focuses on outputs you can complete, save, and organize—not watching content alone."
+        )}</p>
+        <ul class="public-info-list">
+          <li>${text("免費入門課程", "A free introductory course")}</li>
+          <li>${text("六種核心 AI 能力", "Six core AI capability tracks")}</li>
+          <li>${text("六門付費實戰課程", "Six premium practice courses")}</li>
+          <li>${text("共 60 堂付費實作課", "60 premium practice lessons in total")}</li>
+          <li>${text("成果禮包與學習進度", "Result packages and learning progress")}</li>
+          <li>${text("成果展示與列印／存成 PDF", "Showcase view with print / save as PDF")}</li>
+        </ul>
+      </section>
+      <section class="public-info-section">
+        <h2>${text("平台定位", "Positioning")}</h2>
+        <p>${text(PUBLIC_BUSINESS_INFO.positioningZh, PUBLIC_BUSINESS_INFO.positioningEn)}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>${text("聯絡", "Contact")}</h2>
+        <p>${text("如需協助，請使用客服聯絡資訊與我們聯繫。", "If you need help, please reach us through the support contacts below.")}</p>
+        ${renderPublicSupportBlock()}
+      </section>
+    `
+  });
+}
+
+function contactPage() {
+  const info = PUBLIC_BUSINESS_INFO;
+  return renderPublicInfoPage({
+    route: "contact",
+    title: text("聯絡我們", "Contact Us"),
+    lead: text(
+      "若您對課程、帳號、成果或服務有疑問，可以透過以下方式聯絡我們。",
+      "For questions about courses, accounts, results, or the platform, please contact us using the information below."
+    ),
+    bodyHtml: `
+      <section class="public-info-section">
+        <h2>${text("客服聯絡資訊", "Customer Support")}</h2>
+        ${renderPublicSupportBlock()}
+      </section>
+      <section class="public-info-section">
+        <h2>${text("服務資訊", "Service Information")}</h2>
+        <ul class="public-info-list">
+          <li><b>${text("服務", "Service")}：</b>${text(info.serviceTypeZh, info.serviceTypeEn)}</li>
+          <li><b>${text("計價貨幣", "Currency")}：</b>${text(info.currencyZh, info.currencyEn)}</li>
+          <li><b>${text("服務方式", "Delivery")}：</b>${text(info.deliveryZh, info.deliveryEn)}</li>
+        </ul>
+      </section>
+    `
+  });
+}
+
+function termsPage() {
+  const info = PUBLIC_BUSINESS_INFO;
+  return renderPublicInfoPage({
+    route: "terms",
+    title: text("服務條款", "Terms of Service"),
+    lead: text(
+      "以下為 AI Skill Bridge 第一版服務條款摘要，方便使用者理解平台使用方式。",
+      "This is a first-edition Terms of Service summary to help users understand how AI Skill Bridge works."
+    ),
+    bodyHtml: `
+      <section class="public-info-section">
+        <h2>1. ${text("服務說明", "Service Description")}</h2>
+        <p>${text(
+          "AI Skill Bridge 提供線上 AI 學習內容、實作流程、成果整理與相關數位學習工具。服務內容可能隨產品更新而調整。",
+          "AI Skill Bridge provides online AI learning content, practice workflows, result organization tools, and related digital learning features. Features may change as the product evolves."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>2. ${text("帳號使用", "Account Use")}</h2>
+        <ul class="public-info-list">
+          <li>${text("目前以 Google 登入（Google OAuth）建立與使用帳號。", "Accounts are created and accessed through Google sign-in (Google OAuth).")}</li>
+          <li>${text("請妥善保護您的 Google 帳號與登入環境。", "Please protect your Google account and sign-in environment.")}</li>
+          <li>${text("請勿將帳號提供他人使用，或以未授權方式存取他人帳號。", "Do not share your account or access another person’s account without authorization.")}</li>
+          <li>${text("您的學習成果屬私人內容，請勿在未授權情況下公開或轉讓他人專屬存取權。", "Your learning results are private content; do not disclose or transfer exclusive access without authorization.")}</li>
+        </ul>
+      </section>
+      <section class="public-info-section">
+        <h2>3. ${text("課程與數位內容", "Courses and Digital Content")}</h2>
+        <p>${text(
+          "課程、Prompt、案例、實作任務與成果工具屬於數位內容。取得對應權限後，請於本網站登入使用。平台不提供實體配送。",
+          "Courses, prompts, cases, practice tasks, and result tools are digital content. After you receive the relevant access, use them by signing in on this website. Physical delivery is not provided."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>4. ${text("使用者責任", "User Responsibilities")}</h2>
+        <p>${text(
+          "您應以合法、合理方式使用平台，並對自己輸入、儲存與對外使用的內容負責。",
+          "You agree to use the platform lawfully and responsibly, and you are responsible for content you enter, save, or use externally."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>5. ${text("AI 使用限制", "AI Use Limitations")}</h2>
+        <p>${text(
+          "AI Skill Bridge 提供 AI 使用方法、Prompt、學習流程與實作框架。AI 產生的回答可能不完整、不正確或過時。請自行查證重要資訊，並遵守學校、公司或所在機構政策。",
+          "AI Skill Bridge provides AI methods, prompts, learning flows, and practice frameworks. AI-generated answers may be incomplete, incorrect, or outdated. Please verify important information yourself and follow school, workplace, or institutional policies."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>6. ${text("智慧財產", "Intellectual Property")}</h2>
+        <p>${text(
+          "平台教材、介面、品牌名稱與相關設計，除另有標示外，均受智慧財產相關規定保護。您保留自己輸入與產出成果的內容權利；平台保留提供服務所需的合理使用範圍。",
+          "Unless otherwise noted, course materials, interface design, and brand assets are protected by intellectual-property rules. You retain rights to content you create; the platform retains the rights needed to operate the service."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>7. ${text("禁止行為", "Prohibited Conduct")}</h2>
+        <ul class="public-info-list">
+          <li>${text("從事違法、侵權、詐欺或傷害他人權益的行為", "Illegal, infringing, fraudulent, or harmful activity")}</li>
+          <li>${text("干擾服務運作、濫用系統或嘗試未授權存取", "Interfering with the service, abusing systems, or attempting unauthorized access")}</li>
+          <li>${text("惡意散布惡意程式、垃圾訊息或攻擊性行為", "Distributing malware, spam, or attack behavior")}</li>
+        </ul>
+      </section>
+      <section class="public-info-section">
+        <h2>8. ${text("服務變更", "Service Changes")}</h2>
+        <p>${text(
+          "我們可能更新功能、內容或條款。若重大變更影響既有使用方式，我們會盡合理方式於網站上說明。",
+          "We may update features, content, or these terms. If a material change affects how the service works, we will provide reasonable notice on the website."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>9. ${text("聯絡方式", "Contact")}</h2>
+        ${renderPublicSupportBlock()}
+        <p class="public-info-note">${text(`品牌：${info.brandName}`, `Brand: ${info.brandName}`)}</p>
+      </section>
+    `
+  });
+}
+
+function privacyPage() {
+  const info = PUBLIC_BUSINESS_INFO;
+  return renderPublicInfoPage({
+    route: "privacy",
+    title: text("隱私權政策", "Privacy Policy"),
+    lead: text(
+      "本政策說明 AI Skill Bridge 目前實際處理的資料類型與用途。以下內容對應現有產品功能，並非法律審核定稿。",
+      "This policy describes the types of data AI Skill Bridge currently processes and why. It reflects existing product features and is not a lawyer-certified final legal opinion."
+    ),
+    bodyHtml: `
+      <section class="public-info-section">
+        <h2>1. ${text("我們可能處理哪些資料", "What data we may process")}</h2>
+        <ul class="public-info-list">
+          <li>${text("Google 登入相關識別資訊（例如 Email、Google user id）", "Google sign-in identifiers (such as email and Google user id)")}</li>
+          <li>${text("顯示名稱（Display Name）", "Display name")}</li>
+          <li>${text("課程進度、完課狀態與測驗相關紀錄", "Course progress, completion status, and related quiz records")}</li>
+          <li>${text("Lesson Results、成果禮包與 Showcase 偏好設定", "Lesson results, result packages, and showcase preferences")}</li>
+          <li>${text("瀏覽器本機儲存（localStorage）中的學習與介面設定", "Learning and interface settings stored in browser localStorage")}</li>
+          <li>${text("若已同步：Supabase profile 中的基本帳號欄位（例如 id、email、display_name、plan）", "If synced: basic Supabase profile fields (such as id, email, display_name, plan)")}</li>
+        </ul>
+        <p>${text(
+          "目前平台並未要求您提供地址、身分證字號、信用卡或銀行帳號等資料。",
+          "The platform does not currently request your postal address, national ID number, credit card, or bank account details."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>2. ${text("為什麼需要這些資料", "Why we need this data")}</h2>
+        <p>${text(
+          "我們使用這些資料來提供登入、保存進度、顯示課程權限、整理成果，以及改善學習體驗。",
+          "We use this data to support sign-in, save progress, show course access, organize results, and improve the learning experience."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>3. ${text("Google 登入", "Google Sign-In")}</h2>
+        <p>${text(
+          "登入透過 Google Authentication 完成。我們不會另外建立密碼登入系統。",
+          "Sign-in is handled through Google Authentication. We do not operate a separate password login system."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>4. ${text("學習進度與成果", "Learning Progress and Results")}</h2>
+        <p>${text(
+          "您的 Lesson Results 與成果包內容用於個人學習與展示，不會作為公開個人檔案預設公開。",
+          "Your lesson results and package content are for personal learning and showcase use, and are not published as a public profile by default."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>5. ${text("localStorage", "localStorage")}</h2>
+        <p>${text(
+          "部分進度、成果與介面偏好會保存在您的瀏覽器本機儲存中，以便重新整理後仍可繼續使用。",
+          "Some progress, results, and interface preferences are stored in your browser’s local storage so your work can continue after refresh."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>6. ${text("Supabase", "Supabase")}</h2>
+        <p>${text(
+          "平台使用 Supabase 支援身分驗證與基本 profile 相關功能。我們僅處理服務運作所需欄位。",
+          "The platform uses Supabase for authentication and basic profile-related features. We process only fields needed to operate the service."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>7. ${text("資料安全", "Data Security")}</h2>
+        <p>${text(
+          "我們採取合理措施保護資料，但任何網路服務都無法保證絕對安全。",
+          "We take reasonable measures to protect data, but no online service can guarantee absolute security."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>8. ${text("第三方服務", "Third-Party Services")}</h2>
+        <ul class="public-info-list">
+          <li>Google Authentication</li>
+          <li>Supabase</li>
+          <li>Vercel</li>
+        </ul>
+        <p>${text(
+          "付款處理商將在付款功能正式上線後另行列出。",
+          "Payment processors will be listed after payment features go live."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>9. ${text("使用者控制", "Your Controls")}</h2>
+        <p>${text(
+          "您可登出帳號、管理 Google 帳號授權，並透過客服聯絡我們詢問帳號與資料相關問題。",
+          "You can sign out, manage Google account permissions, and contact support about account or data questions."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>10. ${text("聯絡方式", "Contact")}</h2>
+        ${renderPublicSupportBlock()}
+        <p class="public-info-note">${text(`品牌：${info.brandName}`, `Brand: ${info.brandName}`)}</p>
+      </section>
+    `
+  });
+}
+
+function digitalContentPage() {
+  const info = PUBLIC_BUSINESS_INFO;
+  return renderPublicInfoPage({
+    route: "digital-content",
+    title: text("數位內容與服務說明", "Digital Content & Service Information"),
+    lead: text(
+      "AI Skill Bridge 提供線上數位課程與學習成果管理服務。",
+      "AI Skill Bridge provides online digital courses and learning-result management services."
+    ),
+    bodyHtml: `
+      <section class="public-info-section">
+        <h2>${text("商品型態", "Product Type")}</h2>
+        <p>${text("數位內容", "Digital content")}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>${text("交付方式", "Delivery")}</h2>
+        <p>${text(
+          "帳號取得對應課程權限後，於 AI Skill Bridge 網站登入使用。",
+          "After your account receives the relevant course access, sign in on the AI Skill Bridge website to use the content."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>${text("實體配送", "Physical Delivery")}</h2>
+        <p>${text("無", "None")}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>${text("課程形式", "Course Format")}</h2>
+        <p>${text(
+          "線上自學內容、Prompt、案例、實作任務與成果整理工具。",
+          "Self-paced online content, prompts, cases, practice tasks, and result-organization tools."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>${text("計價貨幣", "Currency")}</h2>
+        <p>${text(info.currencyZh, info.currencyEn)}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>${text("購買與開通", "Purchase and Access")}</h2>
+        <p>${text(
+          "目前付款功能建置中。實際開通方式將依購買流程所示。",
+          "Payment features are currently under construction. Access activation will follow the purchase flow shown at the time of buying."
+        )}</p>
+        <p>${renderPaymentComingSoonNote()}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>${text("聯絡", "Contact")}</h2>
+        ${renderPublicSupportBlock()}
+      </section>
+    `
+  });
+}
+
+function refundPolicyPage() {
+  return renderPublicInfoPage({
+    route: "refund-policy",
+    title: text("退款與客服說明", "Refund & Support"),
+    lead: text(
+      "以下為數位內容服務的取消、退款與客服處理說明框架。正式購買條件將於購買頁面揭示後適用。",
+      "This page outlines a framework for cancellation, refunds, and support for digital content. Formal purchase terms will apply as shown on the purchase page."
+    ),
+    bodyHtml: `
+      <section class="public-info-section">
+        <h2>${text("數位內容性質", "Nature of Digital Content")}</h2>
+        <p>${text(
+          "AI Skill Bridge 提供的是線上數位課程與學習工具，無實體配送。",
+          "AI Skill Bridge provides online digital courses and learning tools, with no physical delivery."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>${text("取消、退款與權利說明", "Cancellation, Refunds, and Rights")}</h2>
+        <p>${text(
+          "實際取消、退款及數位內容相關權利將依購買頁面所揭示的條件及適用規定辦理。如遇重複付款、無法正常取得已購買內容或其他付款問題，請聯絡客服處理。",
+          "Cancellation, refund, and digital-content terms will follow the conditions shown at purchase and applicable requirements. If you experience duplicate charges, access issues, or other payment-related problems, please contact support."
+        )}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>${text("常見客服情境", "Common Support Scenarios")}</h2>
+        <ul class="public-info-list">
+          <li>${text("尚未開始使用或尚未完成購買流程", "Purchase not completed or service not yet started")}</li>
+          <li>${text("已取得／使用數位內容後的權限或內容問題", "Access or content issues after digital content has been obtained or used")}</li>
+          <li>${text("技術問題導致無法正常使用", "Technical issues preventing normal use")}</li>
+          <li>${text("重複付款或其他付款異常", "Duplicate charges or other payment issues")}</li>
+        </ul>
+      </section>
+      <section class="public-info-section">
+        <h2>${text("目前購買狀態", "Current Purchase Status")}</h2>
+        <p>${text("目前付款功能建置中。", "Payment features are currently under construction.")}</p>
+        <p>${renderPaymentComingSoonNote()}</p>
+      </section>
+      <section class="public-info-section">
+        <h2>${text("客服聯絡", "Contact Support")}</h2>
+        ${renderPublicSupportBlock()}
+      </section>
+    `
+  });
+}
+
 function bindLessonInteractiveA11y() {
   document.querySelectorAll(".lesson-accordion").forEach(details => {
     const summary = details.querySelector("summary");
@@ -7288,7 +7749,13 @@ function render() {
       course,
       lesson,
       thailand,
-      impact
+      impact,
+      about: aboutPage,
+      contact: contactPage,
+      terms: termsPage,
+      privacy: privacyPage,
+      "digital-content": digitalContentPage,
+      "refund-policy": refundPolicyPage
     };
     document.getElementById("app").innerHTML = (routes[state.route] || home)();
     try {
@@ -7313,6 +7780,7 @@ async function startApp() {
   runPremiumContentAuditIfDev();
   runResultPackageAuditIfDev();
   runShowcaseAuditIfDev();
+  runPublicInfoAuditIfDev();
   runI18nAuditIfDev();
 }
 
@@ -7730,6 +8198,74 @@ function runShowcaseAuditIfDev() {
     }
   } catch (error) {
     console.warn("[SHOWCASE AUDIT] skipped", error && error.message ? error.message : error);
+  }
+}
+
+function validatePublicInfoPhase4A() {
+  const issues = [];
+  const routes = PUBLIC_INFO_ROUTE_IDS.slice();
+  const handlers = {
+    about: aboutPage,
+    contact: contactPage,
+    terms: termsPage,
+    privacy: privacyPage,
+    "digital-content": digitalContentPage,
+    "refund-policy": refundPolicyPage
+  };
+
+  let routeOk = 0;
+  routes.forEach(route => {
+    if (typeof handlers[route] !== "function") {
+      issues.push({ path: route, issue: "missing page handler" });
+      return;
+    }
+    if (AUTH_REQUIRED_ROUTES.has(route)) {
+      issues.push({ path: route, issue: "route incorrectly auth-required" });
+      return;
+    }
+    routeOk += 1;
+  });
+
+  const emailOk = PUBLIC_BUSINESS_INFO.supportEmail === BUSINESS_CONTACT.email
+    && PUBLIC_BUSINESS_INFO.supportEmail === "li19840610@gmail.com";
+  const phoneOk = PUBLIC_BUSINESS_INFO.supportPhone === BUSINESS_CONTACT.phone
+    && PUBLIC_BUSINESS_INFO.supportPhone === "0933577360";
+  const currencyOk = PUBLIC_BUSINESS_INFO.currencyCode === "TWD";
+
+  if (!emailOk) issues.push({ path: "supportEmail", issue: "email source mismatch" });
+  if (!phoneOk) issues.push({ path: "supportPhone", issue: "phone source mismatch" });
+  if (!currencyOk) issues.push({ path: "currency", issue: "currency is not TWD" });
+
+  let footerLinksOk = true;
+  PUBLIC_INFO_NAV.forEach(item => {
+    if (!routes.includes(item.route)) footerLinksOk = false;
+  });
+  if (!footerLinksOk) issues.push({ path: "footer", issue: "footer policy links incomplete" });
+
+  return {
+    issues,
+    summary: {
+      routes: `${routeOk}/6`,
+      contactConsistent: emailOk && phoneOk ? "yes" : "no",
+      signedOutAvailable: routeOk === 6 ? "yes" : "no",
+      currency: PUBLIC_BUSINESS_INFO.currencyCode
+    }
+  };
+}
+
+function runPublicInfoAuditIfDev() {
+  if (!isLocalDevHost()) return;
+  try {
+    const result = validatePublicInfoPhase4A();
+    const s = result.summary || {};
+    console.log(`[PUBLIC INFO AUDIT] ${s.routes} public routes valid`);
+    console.log(`[PUBLIC INFO AUDIT] contact information consistent`);
+    console.log(`[PUBLIC INFO AUDIT] all routes available while signed out`);
+    if (result.issues && result.issues.length) {
+      console.warn("[PUBLIC INFO AUDIT] issues", result.issues);
+    }
+  } catch (error) {
+    console.warn("[PUBLIC INFO AUDIT] skipped", error && error.message ? error.message : error);
   }
 }
 
