@@ -2615,8 +2615,56 @@ textarea[id^="free-note-"] {
   font-size: 1.25rem;
 }
 
+.result-package-progress-line {
+  margin: 10px 0 4px;
+  font-size: 1.15rem;
+  font-weight: 750;
+  color: #0f172a;
+}
+
+.result-package-percent {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #475569;
+}
+
+.result-package-summary-list {
+  margin: 8px 0 0;
+  padding-left: 1.1rem;
+  color: #334155;
+  line-height: 1.7;
+}
+
+.result-package-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.result-package-filter-row .lang.active {
+  background: #eef2ff;
+  color: #3730a3;
+  border-color: #c7d2fe;
+}
+
+.result-package-intro-list {
+  margin: 12px 0 18px;
+  padding-left: 1.1rem;
+  line-height: 1.7;
+  color: #334155;
+}
+
 .result-package-lesson-grid {
   min-width: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 768px) {
+  .result-package-lesson-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .result-package-lesson-item,
@@ -2624,7 +2672,7 @@ textarea[id^="free-note-"] {
   min-width: 0;
   max-width: 100%;
   box-sizing: border-box;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   word-break: normal;
 }
 
@@ -2660,7 +2708,7 @@ textarea[id^="free-note-"] {
 
 .result-package-result-text {
   white-space: pre-wrap;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   word-break: normal;
   max-width: 100%;
   margin: 8px 0 0;
@@ -2675,19 +2723,45 @@ textarea[id^="free-note-"] {
 
 .result-package-lesson-item h3,
 .course-result-item h3 {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   word-break: normal;
   max-width: 100%;
 }
 
+.tag.result-status-completed,
+.tag.hub-state-completed {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.tag.result-status-saved,
+.tag.hub-state-progress {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.tag.result-status-empty,
+.tag.hub-state-idle {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.tag.hub-state-locked {
+  background: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
 @media (max-width: 430px) {
   .result-package-lesson-item .btnrow,
-  .course-result-item .btnrow {
+  .course-result-item .btnrow,
+  .result-package-continue-row {
     flex-direction: column;
   }
 
   .result-package-lesson-item .btnrow .btn,
-  .course-result-item .btnrow .btn {
+  .course-result-item .btnrow .btn,
+  .result-package-continue-row .btn {
     width: 100%;
   }
 }

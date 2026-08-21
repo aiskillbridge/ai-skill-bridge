@@ -1909,10 +1909,16 @@ function countCompletedLessonsAcrossPlatform() {
 }
 
 function countCompletedResultPackageItems() {
+  // Legacy name kept: now counts packages that reached full Result Saved (10/10), not item totals.
+  return countCompletedResultPackages();
+}
+
+function countCompletedResultPackages() {
   if (!state.user) return 0;
   return getResultPackageConfigList().reduce((sum, pkg) => {
     if (!hasResultPackageAccess(pkg.id)) return sum;
-    return sum + resultPackageProgressByConfig(pkg).completed;
+    const progress = resultPackageProgressByConfig(pkg);
+    return sum + (progress.total > 0 && progress.completed >= progress.total ? 1 : 0);
   }, 0);
 }
 
@@ -2256,7 +2262,7 @@ function renderHomeHeroPreview() {
               <strong>${completedLessons}</strong>
             </article>
             <article>
-              <span>${text("成果包完成數", "Package items")}</span>
+              <span>${text("成果包完成數", "Packages completed")}</span>
               <strong>${packageItems}</strong>
             </article>
           </div>
@@ -5662,6 +5668,167 @@ function packageResultStatusLabel(status) {
   return text("尚未建立", "Not Created");
 }
 
+function packageResultStatusClass(status) {
+  if (status === "completed") return "result-status-completed";
+  if (status === "saved") return "result-status-saved";
+  return "result-status-empty";
+}
+
+let currentResultPackageFilter = "all";
+
+function setResultPackageFilter(filter) {
+  currentResultPackageFilter = (filter === "saved" || filter === "empty") ? filter : "all";
+  if (state.route === "courseResultPackage" || state.route === "applicationPackage") {
+    render();
+  }
+}
+
+function formatPackageDate(iso) {
+  if (!iso) return "";
+  try {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return "";
+    if (state.lang === "zh") {
+      const mm = String(d.getMonth() + 1).padStart(2, "0");
+      const dd = String(d.getDate()).padStart(2, "0");
+      return `${d.getFullYear()}/${mm}/${dd}`;
+    }
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  } catch (error) {
+    return "";
+  }
+}
+
+function formatPackageDateTime(iso) {
+  if (!iso) return text("尚未建立", "Not Created");
+  try {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return text("尚未建立", "Not Created");
+    if (state.lang === "zh") {
+      const hh = String(d.getHours()).padStart(2, "0");
+      const mi = String(d.getMinutes()).padStart(2, "0");
+      return `${d.getMonth() + 1}/${d.getDate()} ${hh}:${mi}`;
+    }
+    return d.toLocaleString(undefined, {
+      month: "numeric",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+  } catch (error) {
+    return text("尚未建立", "Not Created");
+  }
+}
+
+function getPackageItemRows(pkg) {
+  const storageKey = resultPackageStorageCourseKey(pkg);
+  const total = Number(pkg.totalItems) || (pkg.items ? pkg.items.length : 10);
+  const rows = [];
+  for (let i = 0; i < total; i++) {
+    const entry = state.user ? getCourseResultEntry(storageKey, i) : { text: "", url: "", savedAt: "", updatedAt: "" };
+    let status = "empty";
+    if (state.user) {
+      if (pkg.free) {
+        status = isCourseResultEntryComplete(entry) ? "saved" : "empty";
+      } else {
+        status = getPackageResultItemStatus(storageKey, i);
+      }
+    }
+    rows.push({
+      index: i,
+      status,
+      entry,
+      meta: getPackageLessonResultMeta(pkg, i),
+      updatedAt: (entry && (entry.updatedAt || entry.savedAt)) || ""
+    });
+  }
+  return rows;
+}
+
+function getPackageUxSummary(pkg) {
+  const items = getPackageItemRows(pkg);
+  const savedCount = items.filter(item => item.status !== "empty").length;
+  const emptyCount = items.filter(item => item.status === "empty").length;
+  let latest = null;
+  items.forEach(item => {
+    if (!item.updatedAt) return;
+    if (!latest || String(item.updatedAt) > String(latest.updatedAt)) latest = item;
+  });
+  const firstEmpty = items.find(item => item.status === "empty");
+  return {
+    items,
+    savedCount,
+    emptyCount,
+    total: items.length,
+    percent: items.length ? Math.round((savedCount / items.length) * 100) : 0,
+    latest,
+    firstEmptyIndex: firstEmpty ? firstEmpty.index : 0,
+    isComplete: items.length > 0 && savedCount >= items.length,
+    isEmpty: savedCount === 0
+  };
+}
+
+function getPackageContinueAction(summary) {
+  if (summary.isEmpty) {
+    return {
+      label: text("開始建立第一項成果", "Create Your First Result"),
+      index: 0,
+      reviewAll: false
+    };
+  }
+  if (summary.isComplete) {
+    return {
+      label: text("查看完整成果", "Review All Results"),
+      index: null,
+      reviewAll: true
+    };
+  }
+  return {
+    label: text("繼續建立成果", "Continue Building Results"),
+    index: summary.firstEmptyIndex,
+    reviewAll: false
+  };
+}
+
+function openPackageLesson(courseId, lessonIndex, focusReview) {
+  if (!courseId) {
+    setRoute("freePortfolio");
+    return;
+  }
+  const stage = focusReview ? "review" : "overview";
+  if (typeof continuePremiumLearningStep === "function") {
+    continuePremiumLearningStep(courseId, lessonIndex, stage);
+    return;
+  }
+  currentCourseId = courseId;
+  openLesson(lessonIndex);
+}
+
+function getResultPackageHubState(pkg) {
+  if (!state.user) {
+    return pkg.free ? "not_started" : "locked";
+  }
+  if (!hasResultPackageAccess(pkg.id)) return "locked";
+  const progress = resultPackageProgressByConfig(pkg);
+  if (progress.completed <= 0) return "not_started";
+  if (progress.completed >= progress.total) return "completed";
+  return "in_progress";
+}
+
+function resultPackageHubStateLabel(hubState) {
+  if (hubState === "locked") return text("未解鎖", "Locked");
+  if (hubState === "completed") return text("已完成", "Completed");
+  if (hubState === "in_progress") return text("進行中", "In Progress");
+  return text("尚未開始", "Not Started");
+}
+
+function resultPackageHubStateClass(hubState) {
+  if (hubState === "locked") return "hub-state-locked";
+  if (hubState === "completed") return "hub-state-completed";
+  if (hubState === "in_progress") return "hub-state-progress";
+  return "hub-state-idle";
+}
+
 function courseResultPackageProgress(courseId) {
   const pkg = getResultPackageByCourseId(courseId) || getResultPackageById(courseId);
   const total = pkg ? Number(pkg.totalItems) || 10 : 10;
@@ -5756,37 +5923,42 @@ function saveCourseResultEntry(courseId, lessonIndex, options = {}) {
 function renderResultPackageHubCard(pkg, index) {
   const needsLogin = !state.user;
   const unlocked = hasResultPackageAccess(pkg.id);
-  const progress = resultPackageProgressByConfig(pkg);
+  const hubState = getResultPackageHubState(pkg);
+  const progress = (!needsLogin && unlocked)
+    ? resultPackageProgressByConfig(pkg)
+    : { completed: 0, total: Number(pkg.totalItems) || (pkg.items ? pkg.items.length : 0), percent: 0 };
   const course = pkg.courseId && typeof PREMIUM !== "undefined"
     ? PREMIUM.find(p => p.id === pkg.courseId)
     : null;
-  const price = pkg.free ? formatTwdPrice(0) : (course ? formatTwdPrice(course.price) : "");
-  const statusLabel = needsLogin
-    ? text("登入後顯示", "Sign in to view")
-    : unlocked
-      ? text("已解鎖", "Unlocked")
-      : resultPackageAccessLabel(pkg.id);
+  const capability = state.lang === "zh"
+    ? (pkg.zhCapability || pkg.zhCourseName)
+    : (pkg.enCapability || pkg.enCourseName);
 
   return `
-    <article class="card result-package-card ${unlocked && !needsLogin ? "" : "result-package-card-locked"}">
-      <span class="tag ${pkg.free || unlocked ? "free" : "premiumtag"}">${statusLabel}</span>
+    <article class="card result-package-card ${hubState === "locked" || (needsLogin && !pkg.free) ? "result-package-card-locked" : ""}">
+      <span class="tag ${resultPackageHubStateClass(hubState)}">${resultPackageHubStateLabel(hubState)}</span>
       <h2>${index + 1}. ${state.lang === "zh" ? pkg.zhTitle : pkg.enTitle}</h2>
       <p><b>${text("所屬課程", "Course")}：</b>${state.lang === "zh" ? pkg.zhCourseName : pkg.enCourseName}</p>
+      <p><b>${text("對應能力", "Capability")}：</b>${capability}</p>
       <p>${state.lang === "zh" ? pkg.zhDescription : pkg.enDescription}</p>
-      ${!unlocked && !pkg.free && price ? `<p class="course-result-meta">${text("課程售價", "Course Price")}：<span class="price-nowrap">${price}</span> · ${text("一次付費", "One-time payment")}</p>` : ""}
-      <p>${text("完成進度", "Progress")}：${needsLogin ? text("登入後顯示", "Sign in to view") : `${progress.completed} / ${progress.total} ${text("成果完成", "results completed")}`}</p>
-      <div class="package-progress-track"><div class="package-progress-bar" style="width:${needsLogin ? 0 : progress.percent}%"></div></div>
+      <p>${text("完成進度", "Progress")}：${
+        needsLogin
+          ? text("登入後顯示", "Sign in to view")
+          : unlocked
+            ? `${progress.completed} / ${progress.total} · ${progress.percent}%`
+            : text("解鎖後顯示", "Unlock to view")
+      }</p>
+      <div class="package-progress-track"><div class="package-progress-bar" style="width:${needsLogin || !unlocked ? 0 : progress.percent}%"></div></div>
       <div class="btnrow">
         ${needsLogin
           ? `<button class="btn primary" onclick="openResultPackage('${pkg.id}')">${text("查看介紹", "View Intro")}</button>
              <button class="btn secondary" onclick='requireGoogleLogin({"route":"courseResultPackage","packageId":"${pkg.id}","action":"openResultPackage"})'>${text("使用 Google 登入", "Sign in with Google")}</button>`
           : unlocked
           ? `<button class="btn primary" onclick="openResultPackage('${pkg.id}')">${text("開啟成果包", "Open Package")}</button>`
-          : `<button class="btn secondary" onclick="showResultPackageLockedMessage('${pkg.id}')">${text("已鎖定", "Locked")}</button>
-             <button class="btn secondary" onclick="${course ? `openCourse('${course.id}')` : "setRoute('map')"}">${text("查看課程", "View Course")}</button>`
+          : `<button class="btn secondary" onclick="openResultPackage('${pkg.id}')">${text("查看介紹", "View Intro")}</button>
+             <button class="btn primary" onclick="${course ? `openCourse('${course.id}')` : "setRoute('map')"}">${text("查看對應課程", "View Course")}</button>`
         }
       </div>
-      ${!unlocked && !pkg.free && !needsLogin ? renderPaymentComingSoonNote() : ""}
     </article>
   `;
 }
@@ -5814,9 +5986,10 @@ function openResultPackage(packageId) {
     setRoute("result-packages");
     return;
   }
+  currentResultPackageId = packageId;
+  currentCourseId = pkg.courseId || null;
+  currentResultPackageFilter = "all";
   if (pkg.free) {
-    currentResultPackageId = packageId;
-    currentCourseId = pkg.courseId || null;
     if (!state.authReady || !state.user) {
       if (!state.user) {
         savePostLoginDestination({
@@ -5831,12 +6004,7 @@ function openResultPackage(packageId) {
     setRoute("courseResultPackage");
     return;
   }
-  if (!hasResultPackageAccess(packageId)) {
-    showResultPackageLockedMessage(packageId);
-    return;
-  }
-  currentResultPackageId = packageId;
-  currentCourseId = pkg.courseId || null;
+  // Locked packages still open intro (no private results); unlocked open the management view.
   setRoute("courseResultPackage");
 }
 
@@ -5888,27 +6056,22 @@ function getRecentEditedResults(limit = 3) {
   const userKey = courseResultPackageUserKey();
   const userStore = store[userKey] || {};
   const rows = [];
+  if (!state.user) return [];
   getResultPackageConfigList().forEach(pkg => {
     if (!hasResultPackageAccess(pkg.id)) return;
     const storageKey = resultPackageStorageCourseKey(pkg);
     const courseStore = userStore[storageKey] || {};
     Object.keys(courseStore).forEach(lessonKey => {
       const entry = courseStore[lessonKey] || {};
-      if (!entry.savedAt) return;
+      const at = entry.updatedAt || entry.savedAt;
+      if (!at) return;
       const idx = Number(lessonKey);
-      let itemTitle = `Item ${idx + 1}`;
-      if (pkg.free && pkg.items && pkg.items[idx]) {
-        itemTitle = state.lang === "zh" ? pkg.items[idx].zh : pkg.items[idx].en;
-      } else if (pkg.courseId && typeof PREMIUM !== "undefined") {
-        const course = PREMIUM.find(p => p.id === pkg.courseId);
-        const lessons = course ? (state.lang === "zh" ? course.zhLessons : course.enLessons) : [];
-        itemTitle = lessons[idx] || itemTitle;
-      }
+      const meta = getPackageLessonResultMeta(pkg, idx);
       rows.push({
         packageId: pkg.id,
         packageTitle: state.lang === "zh" ? pkg.zhTitle : pkg.enTitle,
-        itemTitle,
-        savedAt: entry.savedAt
+        itemTitle: meta.outcome || meta.title,
+        savedAt: at
       });
     });
   });
@@ -6002,36 +6165,37 @@ function getPackageLessonResultMeta(pkg, lessonIndex) {
   };
 }
 
-function renderPremiumPackageResultItem(pkg, lessonIndex) {
-  const meta = getPackageLessonResultMeta(pkg, lessonIndex);
-  const storageKey = resultPackageStorageCourseKey(pkg);
-  const entry = getCourseResultEntry(storageKey, lessonIndex);
-  const status = getPackageResultItemStatus(storageKey, lessonIndex);
+function renderPremiumPackageResultItem(pkg, row) {
+  const lessonIndex = row.index;
+  const meta = row.meta;
+  const status = row.status;
   const statusLabel = packageResultStatusLabel(status);
   const saved = status !== "empty";
-  const updated = entry.updatedAt || entry.savedAt;
-  const bodyText = escapeTextareaValue(entry.text || "");
-  const bodyUrl = escapeTextareaValue(entry.url || "");
+  const updated = row.updatedAt;
+  const bodyText = escapeTextareaValue((row.entry && row.entry.text) || "");
+  const bodyUrl = escapeTextareaValue((row.entry && row.entry.url) || "");
+  const resultName = meta.outcome || meta.title;
 
   return `
-    <section class="panel application-package-item course-result-item result-package-lesson-item">
+    <section class="panel application-package-item course-result-item result-package-lesson-item" data-result-status="${status}">
       <div class="result-package-item-head">
-        <span class="tag ${saved ? "free" : "premiumtag"}">${statusLabel}</span>
         <span class="result-package-lesson-label">L${lessonIndex + 1}</span>
+        <span class="tag ${packageResultStatusClass(status)}">${statusLabel}</span>
       </div>
-      <h3>${meta.title}</h3>
-      ${meta.outcome ? `<p class="course-result-meta"><b>${text("成果名稱", "Result")}：</b>${meta.outcome}</p>` : ""}
-      <p class="course-result-meta">${text("最後更新", "Last Updated")}：${saved ? formatCourseResultSavedAt(updated) : text("尚未建立", "Not Created")}</p>
+      <h3>${resultName}</h3>
+      <p class="course-result-meta">${text("最後更新", "Last Updated")}：${saved ? formatPackageDateTime(updated) : text("尚未建立", "Not Created")}</p>
       ${saved ? `
         <details class="lesson-accordion result-package-result-details">
           <summary>${text("查看成果", "View Result")}</summary>
           <div class="result-package-result-body">
-            <p><b>${text("成果標題", "Result title")}：</b>${meta.outcome || meta.title}</p>
-            <p><b>${text("對應課程", "Course")}：</b>${state.lang === "zh" ? pkg.zhCourseName : pkg.enCourseName}</p>
+            <p><b>${text("成果名稱", "Result")}：</b>${resultName}</p>
             <p><b>${text("對應 Lesson", "Lesson")}：</b>L${lessonIndex + 1} · ${meta.title}</p>
-            <p><b>${text("最後更新", "Last Updated")}：</b>${formatCourseResultSavedAt(updated)}</p>
+            <p><b>${text("最後更新", "Last Updated")}：</b>${formatPackageDateTime(updated)}</p>
             ${bodyText ? `<pre class="result-package-result-text">${bodyText}</pre>` : ""}
             ${bodyUrl ? `<p><a href="${bodyUrl}" target="_blank" rel="noopener noreferrer">${bodyUrl}</a></p>` : ""}
+            <div class="btnrow" style="margin-top:12px">
+              <button class="btn secondary" onclick="openPackageLesson('${pkg.courseId}', ${lessonIndex}, true)">${text("回課程編輯", "Edit in Lesson")}</button>
+            </div>
           </div>
         </details>
       ` : `
@@ -6039,35 +6203,84 @@ function renderPremiumPackageResultItem(pkg, lessonIndex) {
       `}
       <div class="btnrow">
         ${saved
-          ? `<button class="btn primary" onclick="currentCourseId='${pkg.courseId}'; openLesson(${lessonIndex})">${text("返回課程編輯", "Edit in Lesson")}</button>`
-          : `<button class="btn primary" onclick="currentCourseId='${pkg.courseId}'; openLesson(${lessonIndex})">${text("前往完成這堂課", "Complete This Lesson")}</button>`
+          ? `<button class="btn primary" onclick="openPackageLesson('${pkg.courseId}', ${lessonIndex}, true)">${text("回課程編輯", "Edit in Lesson")}</button>`
+          : `<button class="btn primary" onclick="openPackageLesson('${pkg.courseId}', ${lessonIndex}, false)">${text("前往完成這堂課", "Complete This Lesson")}</button>`
         }
       </div>
     </section>
   `;
 }
 
-function renderFreePackageResultItem(pkg, lessonIndex) {
+function renderFreePackageResultItem(pkg, row) {
+  const lessonIndex = row.index;
   const storageKey = resultPackageStorageCourseKey(pkg);
-  const entry = getCourseResultEntry(storageKey, lessonIndex);
-  const done = isCourseResultEntryComplete(entry);
-  const meta = getPackageLessonResultMeta(pkg, lessonIndex);
+  const entry = row.entry;
+  const status = row.status;
+  const meta = row.meta;
+  const saved = status !== "empty";
   return `
-    <section class="panel application-package-item course-result-item">
-      <span class="tag ${done ? "free" : "premiumtag"}">${done ? text("已儲存", "Saved") : text("尚未建立", "Not Created")}</span>
-      <h2>${text("成果", "Item")} ${lessonIndex + 1}</h2>
+    <section class="panel application-package-item course-result-item result-package-lesson-item" data-result-status="${status}">
+      <div class="result-package-item-head">
+        <span class="result-package-lesson-label">${text("成果", "Item")} ${lessonIndex + 1}</span>
+        <span class="tag ${packageResultStatusClass(status)}">${packageResultStatusLabel(status)}</span>
+      </div>
       <h3>${meta.title}</h3>
+      <p class="course-result-meta">${text("最後更新", "Last Updated")}：${saved ? formatPackageDateTime(row.updatedAt) : text("尚未建立", "Not Created")}</p>
+      ${saved ? `
+        <details class="lesson-accordion result-package-result-details">
+          <summary>${text("查看成果", "View Result")}</summary>
+          <div class="result-package-result-body">
+            ${entry.text ? `<pre class="result-package-result-text">${escapeTextareaValue(entry.text)}</pre>` : ""}
+            ${entry.url ? `<p><a href="${escapeTextareaValue(entry.url)}" target="_blank" rel="noopener noreferrer">${escapeTextareaValue(entry.url)}</a></p>` : ""}
+          </div>
+        </details>
+      ` : `<p class="result-package-empty-note">${text("尚未建立成果", "No result yet")}</p>`}
       <label class="course-result-label">${text("成果文字", "Result text")}</label>
       <textarea id="course-result-text-${storageKey}-${lessonIndex}" placeholder="${text("貼上本堂成果...", "Paste this lesson output...")}">${escapeTextareaValue(entry.text)}</textarea>
       <label class="course-result-label">${text("成果連結", "Result link")}</label>
       <input class="course-result-url-input" id="course-result-url-${storageKey}-${lessonIndex}" type="url" value="${escapeTextareaValue(entry.url)}" placeholder="https://" />
-      <p class="course-result-meta">${text("最後更新", "Last Updated")}: ${formatCourseResultSavedAt(entry.updatedAt || entry.savedAt)}</p>
       <div class="btnrow">
         <button class="btn primary" onclick="saveCourseResultEntry('${storageKey}', ${lessonIndex})">${text("儲存這一項", "Save This Item")}</button>
         <button class="btn secondary" onclick="setRoute('freePortfolio')">${text("打開免費成果包", "Open Free Portfolio")}</button>
       </div>
     </section>
   `;
+}
+
+function renderLockedResultPackageIntro(pkg) {
+  const course = pkg.courseId && typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === pkg.courseId) : null;
+  const courseName = state.lang === "zh" ? pkg.zhCourseName : pkg.enCourseName;
+  const capability = state.lang === "zh" ? (pkg.zhCapability || "") : (pkg.enCapability || "");
+  const total = Number(pkg.totalItems) || 10;
+  const intros = Array.from({ length: total }, (_, i) => {
+    const meta = getPackageLessonResultMeta(pkg, i);
+    return `<li><b>L${i + 1}</b> ${meta.outcome || meta.title}</li>`;
+  }).join("");
+
+  return shell(`
+    <main class="page">
+      <div class="wrap">
+        <button class="btn secondary" onclick="setRoute('result-packages')">← ${text("回到成果禮包", "Back to Result Packages")}</button>
+        <section class="panel" style="margin-top:16px">
+          <span class="tag hub-state-locked">${text("未解鎖", "Locked")}</span>
+          <h1>${state.lang === "zh" ? pkg.zhTitle : pkg.enTitle}</h1>
+          <p class="lead">${state.lang === "zh" ? pkg.zhDescription : pkg.enDescription}</p>
+          <p><b>${text("對應課程", "Course")}：</b>${courseName}</p>
+          ${capability ? `<p><b>${text("對應能力", "Capability")}：</b>${capability}</p>` : ""}
+          <p>${text(
+            `此成果包包含在「${courseName}」中。你可以先了解將會建立的 ${total} 項成果；解鎖課程後即可保存私人內容。`,
+            `This package is included in “${courseName}”. You can preview the ${total} results you will build; unlock the course to save private content.`
+          )}</p>
+          <h2>${text("將包含的成果", "Results included")}</h2>
+          <ul class="result-package-intro-list">${intros}</ul>
+          <div class="btnrow">
+            <button class="btn primary" onclick="${course ? `openCourse('${course.id}')` : "setRoute('map')"}">${text("查看對應課程", "View Course")}</button>
+            <button class="btn secondary" onclick="setRoute('result-packages')">${text("回到成果禮包", "Back to Result Packages")}</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  `);
 }
 
 function courseResultPackage() {
@@ -6106,28 +6319,7 @@ function courseResultPackage() {
   }
 
   if (!hasResultPackageAccess(pkg.id)) {
-    const courseName = state.lang === "zh" ? pkg.zhCourseName : pkg.enCourseName;
-    const course = pkg.courseId && typeof PREMIUM !== "undefined" ? PREMIUM.find(p => p.id === pkg.courseId) : null;
-    return shell(`
-      <main class="page">
-        <div class="wrap">
-          <section class="panel">
-            <span class="tag premiumtag">${text("尚未解鎖", "Locked")}</span>
-            <h1>${state.lang === "zh" ? pkg.zhTitle : pkg.enTitle}</h1>
-            <p class="lead">${text(
-              `此成果包包含在「${courseName}」中，解鎖課程後即可使用。`,
-              `This package is included in “${courseName}”. Unlock the course to use it.`
-            )}</p>
-            ${course ? renderCoursePriceBlock(course, { compact: true }) : ""}
-            <div class="btnrow">
-              <button class="btn secondary" onclick="${course ? `openCourse('${course.id}')` : "setRoute('map')"}">${text("查看課程", "View Course")}</button>
-              <button class="btn secondary" onclick="setRoute('result-packages')">${text("回到成果禮包", "Back to Result Packages")}</button>
-            </div>
-            ${renderPaymentComingSoonNote()}
-          </section>
-        </div>
-      </main>
-    `);
+    return renderLockedResultPackageIntro(pkg);
   }
 
   if (!state.user) {
@@ -6148,9 +6340,29 @@ function courseResultPackage() {
     `);
   }
 
-  const progress = resultPackageProgressByConfig(pkg);
-  const total = Number(pkg.totalItems) || (pkg.items ? pkg.items.length : 10);
+  const summary = getPackageUxSummary(pkg);
+  const continueAction = getPackageContinueAction(summary);
   const courseLabel = state.lang === "zh" ? pkg.zhCourseName : pkg.enCourseName;
+  const latestLabel = summary.latest
+    ? `L${summary.latest.index + 1} ${summary.latest.meta.outcome || summary.latest.meta.title}`
+    : text("尚無", "None");
+  const lastUpdatedLine = summary.isEmpty
+    ? text("尚未開始建立成果", "No results created yet")
+    : text(
+      `最近更新：${formatPackageDate(summary.latest && summary.latest.updatedAt)}`,
+      `Last updated: ${formatPackageDate(summary.latest && summary.latest.updatedAt)}`
+    );
+  const filter = currentResultPackageFilter || "all";
+  const visibleRows = summary.items.filter(row => {
+    if (filter === "saved") return row.status !== "empty";
+    if (filter === "empty") return row.status === "empty";
+    return true;
+  });
+  const continueOnclick = continueAction.reviewAll
+    ? "(function(){var el=document.getElementById('result-package-list');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});})()"
+    : (pkg.free
+      ? "setResultPackageFilter('empty');(function(){var el=document.getElementById('result-package-list');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});})()"
+      : `openPackageLesson('${pkg.courseId}', ${Number(continueAction.index) || 0}, false)`);
 
   return shell(`
     <main class="page">
@@ -6159,23 +6371,52 @@ function courseResultPackage() {
 
         <section class="panel result-package-detail-header" style="margin-top:16px">
           <span class="tag free">${pkg.icon || ""} ${text("成果包", "Result Package")}</span>
+          ${summary.isComplete ? `<span class="tag result-status-completed">${text("成果包已完成", "Result Package Complete")}</span>` : ""}
           <h1>${state.lang === "zh" ? pkg.zhTitle : pkg.enTitle}</h1>
           <p class="lead">${state.lang === "zh" ? pkg.zhDescription : pkg.enDescription}</p>
-          <p><b>${text("對應課程", "Course")}：</b>${courseLabel}</p>
-          <h2>${progress.completed} / ${progress.total} ${text("成果完成", "results completed")}</h2>
+          <p class="result-package-progress-line">${
+            state.lang === "zh"
+              ? `已完成 ${summary.savedCount} / ${summary.total} 項成果`
+              : `${summary.savedCount} / ${summary.total} results completed`
+          }</p>
+          <p class="result-package-percent">${summary.percent}%</p>
           <div class="package-progress-track">
-            <div class="package-progress-bar" style="width:${progress.percent}%"></div>
+            <div class="package-progress-bar" style="width:${summary.percent}%"></div>
           </div>
+          <p class="course-result-meta">${lastUpdatedLine}</p>
+          <div class="btnrow result-package-continue-row">
+            <button class="btn primary" onclick="${continueOnclick}">${continueAction.label}</button>
+            ${pkg.courseId ? `<button class="btn secondary" onclick="openCourse('${pkg.courseId}')">${text("打開對應課程", "Open Course")}</button>` : ""}
+          </div>
+        </section>
+
+        <section class="panel result-package-summary" style="margin-top:16px">
+          <h2>${text("成果摘要", "Results Summary")}</h2>
+          <ul class="result-package-summary-list">
+            <li><b>${text("已完成", "Completed")}：</b>${summary.savedCount}</li>
+            <li><b>${text("尚未建立", "Not Created")}：</b>${summary.emptyCount}</li>
+            <li><b>${text("最近更新", "Recently Updated")}：</b>${latestLabel}</li>
+            <li><b>${text("對應課程", "Course")}：</b>${courseLabel}</li>
+          </ul>
           <p class="course-result-meta">${text(
-            "進度以「已儲存成果」計算；與是否按過完成本課分開。",
-            "Progress counts saved results only — separate from lesson completion."
+            "「已完成」這裡指已儲存成果數量；Lesson 完課狀態另計。",
+            "“Completed” here means saved results; lesson completion is tracked separately."
           )}</p>
         </section>
 
-        <div class="grid course-result-grid result-package-lesson-grid" style="margin-top:24px">
-          ${Array.from({ length: total }, (_, i) => (
-            pkg.free ? renderFreePackageResultItem(pkg, i) : renderPremiumPackageResultItem(pkg, i)
-          )).join("")}
+        <div class="result-package-filter-row" id="result-package-list">
+          <button type="button" class="lang ${filter === "all" ? "active" : ""}" onclick="setResultPackageFilter('all')">${text("全部", "All")}</button>
+          <button type="button" class="lang ${filter === "saved" ? "active" : ""}" onclick="setResultPackageFilter('saved')">${text("已完成／已儲存", "Saved")}</button>
+          <button type="button" class="lang ${filter === "empty" ? "active" : ""}" onclick="setResultPackageFilter('empty')">${text("尚未建立", "Not Created")}</button>
+        </div>
+
+        <div class="grid course-result-grid result-package-lesson-grid" style="margin-top:16px">
+          ${visibleRows.length
+            ? visibleRows.map(row => (
+              pkg.free ? renderFreePackageResultItem(pkg, row) : renderPremiumPackageResultItem(pkg, row)
+            )).join("")
+            : `<section class="panel"><p>${text("這個篩選條件下沒有成果項目。", "No results match this filter.")}</p></section>`
+          }
         </div>
 
         <section class="panel" style="margin-top:24px">
@@ -7020,12 +7261,42 @@ function validateResultPackagePhase3A() {
     issues.push({ path: "applicationPackage", issue: "pkg-admissions not linked to admissions" });
   }
 
+  let stateOk = 0;
+  expectedOrder.forEach(id => {
+    const pkg = getResultPackageById(id);
+    if (!pkg) return;
+    const hubState = getResultPackageHubState(pkg);
+    if (!["not_started", "in_progress", "completed", "locked"].includes(hubState)) {
+      issues.push({ path: id, issue: `invalid hub state ${hubState}` });
+      return;
+    }
+    stateOk += 1;
+  });
+
+  let editLinkOk = 0;
+  let emptyLinkOk = 0;
+  expectedCourseIds.forEach(courseId => {
+    const pkg = getResultPackageByCourseId(courseId);
+    const total = pkg ? Number(pkg.totalItems) || 10 : 10;
+    for (let i = 0; i < total; i++) {
+      if (!pkg || !pkg.courseId) {
+        issues.push({ path: `${courseId}:${i}`, issue: "missing edit link courseId" });
+        continue;
+      }
+      editLinkOk += 1;
+      emptyLinkOk += 1;
+    }
+  });
+
   return {
     issues,
     summary: {
       packages: `${packageOk}/7`,
       courseMappings: `${mappingOk}/6`,
       lessonMappings: `${lessonMapOk}/60`,
+      packageStates: `${stateOk}/7`,
+      editLinks: `${editLinkOk}/60`,
+      emptyLinks: `${emptyLinkOk}/60`,
       packageTotal: packages.length
     }
   };
@@ -7039,6 +7310,9 @@ function runResultPackageAuditIfDev() {
     console.log(`[RESULT PACKAGE AUDIT] ${s.courseMappings} premium course mappings valid`);
     console.log(`[RESULT PACKAGE AUDIT] ${s.lessonMappings} lesson result mappings valid`);
     console.log(`[RESULT PACKAGE AUDIT] ${s.packages} result packages valid`);
+    console.log(`[RESULT PACKAGE AUDIT] ${s.packageStates} package states valid`);
+    console.log(`[RESULT PACKAGE AUDIT] ${s.editLinks} edit links valid`);
+    console.log(`[RESULT PACKAGE AUDIT] ${s.emptyLinks} empty-state links valid`);
     if (result.issues && result.issues.length) {
       console.warn("[RESULT PACKAGE AUDIT] issues", result.issues);
     }
