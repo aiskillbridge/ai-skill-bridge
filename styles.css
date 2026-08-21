@@ -402,15 +402,20 @@ p {
 }
 
 .home-price-original {
-  margin: 0 0 2px;
+  margin: 0;
   color: #94a3b8;
   font-size: 14px;
+  line-height: 1.4;
+  max-width: 100%;
 }
 
 .home-price-note {
-  margin: 4px 0 0;
+  margin: 0;
   color: #64748b;
   font-size: 13px;
+  line-height: 1.4;
+  max-width: 100%;
+  white-space: normal;
 }
 
 .map-card-desc {
@@ -2085,7 +2090,8 @@ textarea[id^="free-note-"] {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 32px 28px;
+  gap: 8px;
+  padding: 28px 24px 24px;
   border-radius: var(--hp-r-lg);
   background: #fff;
   border: 1px solid var(--hp-border);
@@ -2094,10 +2100,12 @@ textarea[id^="free-note-"] {
   box-sizing: border-box;
   max-width: 100%;
   min-width: 0;
-  overflow: hidden;
+  height: 100%;
+  overflow: visible;
 }
 
 .home-price-card h3 {
+  margin: 0;
   white-space: normal;
   overflow-wrap: normal;
   word-break: normal;
@@ -2116,21 +2124,26 @@ textarea[id^="free-note-"] {
 }
 
 .home-price-badge {
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: static;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin: 0 0 4px;
   padding: 6px 12px;
   border-radius: 999px;
   background: linear-gradient(135deg, #1d4ed8, #6366f1);
   color: #fff;
   font-size: 12px;
   font-weight: 700;
+  line-height: 1.2;
   white-space: nowrap;
+  transform: none;
 }
 
 .home-price-amount {
-  margin: 10px 0 18px !important;
+  margin: 0 !important;
   font-size: clamp(20px, 2.4vw, 28px) !important;
   font-weight: 750;
   letter-spacing: -0.03em;
@@ -2144,9 +2157,11 @@ textarea[id^="free-note-"] {
 
 .home-price-card ul {
   list-style: none;
-  margin: 0 0 24px;
+  margin: 8px 0 0;
   padding: 0;
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .home-price-card li {
@@ -2156,6 +2171,9 @@ textarea[id^="free-note-"] {
   border-bottom: 1px solid #f1f5f9;
   font-size: 14px;
   color: #475569;
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .home-price-card li::before {
@@ -2169,7 +2187,21 @@ textarea[id^="free-note-"] {
   background: linear-gradient(135deg, #2563eb, #7c3aed);
 }
 
-.home-price-card .home-btn { width: 100%; }
+.home-price-card .home-btn {
+  width: 100%;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.home-price-card .course-price-coming-soon {
+  margin: 12px 0 0;
+  flex-shrink: 0;
+  max-width: 100%;
+  white-space: normal;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.4;
+}
 
 .home-audience-grid {
   display: grid;
