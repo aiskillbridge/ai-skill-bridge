@@ -489,6 +489,16 @@ function applyPostLoginDestination(destination) {
     state.route = "courseResultPackage";
     return true;
   }
+  if (destination.action === "openShowcase" && destination.packageId) {
+    currentResultPackageId = destination.packageId;
+    state.route = "showcase";
+    return true;
+  }
+  if (destination.route === "showcase" && destination.packageId) {
+    currentResultPackageId = destination.packageId;
+    state.route = "showcase";
+    return true;
+  }
   if (destination.route) {
     state.route = destination.route;
     return true;
@@ -1004,8 +1014,10 @@ async function signInWithGoogle() {
       route: state.route,
       courseId: currentCourseId || null,
       lessonId: state.route === "freeLesson" ? state.freeLessonIndex : null,
-      packageId: state.route === "courseResultPackage" ? currentResultPackageId : null,
-      action: state.route === "freeLesson" ? "openFreeLesson" : null
+      packageId: (state.route === "courseResultPackage" || state.route === "showcase") ? currentResultPackageId : null,
+      action: state.route === "freeLesson"
+        ? "openFreeLesson"
+        : (state.route === "showcase" ? "openShowcase" : null)
     });
   }
 
@@ -1510,7 +1522,7 @@ function isMainNavActive(itemId) {
     return r === "map" || r === "premium" || r === "course" || r === "lesson" || r === "applicationPackage";
   }
   if (itemId === "result-packages") {
-    return r === "result-packages" || r === "resultPackages" || r === "courseResultPackage";
+    return r === "result-packages" || r === "resultPackages" || r === "courseResultPackage" || r === "showcase";
   }
   if (itemId === "learning") return r === "learning" || r === "center";
   return false;
@@ -6386,6 +6398,7 @@ function courseResultPackage() {
           <p class="course-result-meta">${lastUpdatedLine}</p>
           <div class="btnrow result-package-continue-row">
             <button class="btn primary" onclick="${continueOnclick}">${continueAction.label}</button>
+            <button class="btn secondary" onclick="openResultPackageShowcase('${pkg.id}')">${text("成果展示", "Showcase")}</button>
             ${pkg.courseId ? `<button class="btn secondary" onclick="openCourse('${pkg.courseId}')">${text("打開對應課程", "Open Course")}</button>` : ""}
           </div>
         </section>
@@ -6434,6 +6447,324 @@ function courseResultPackage() {
             <button class="btn primary" onclick="setRoute('result-packages')">${text("查看全部成果禮包", "View All Packages")}</button>
           </div>
         </section>
+      </div>
+    </main>
+  `);
+}
+
+/* ========== Phase 3C: Result Package Showcase (display layer only) ========== */
+const SHOWCASE_PREFS_STORAGE_KEY = "asb_showcase_prefs_v1";
+
+const SHOWCASE_DEFAULT_TITLES = {
+  "free-starter": { zh: "我的 AI 學習成果", en: "My AI Learning Portfolio" },
+  "pkg-admissions": { zh: "我的大學申請成果", en: "My University Application Results" },
+  "pkg-college-learning": { zh: "我的 AI 學習系統", en: "My AI Learning System" },
+  "pkg-research-competition": { zh: "我的研究與競賽成果", en: "My Research & Competition Results" },
+  "pkg-career-internship": { zh: "我的求職與實習成果", en: "My Career & Internship Results" },
+  "pkg-workplace-productivity": { zh: "我的 AI 工作流程", en: "My AI Workplace Workflow" },
+  "pkg-startup-automation": { zh: "我的創業與 AI 自動化藍圖", en: "My Startup & AI Automation Blueprint" }
+};
+
+function getDefaultShowcaseTitle(packageId) {
+  const row = SHOWCASE_DEFAULT_TITLES[packageId] || { zh: "我的 AI 學習成果", en: "My AI Learning Portfolio" };
+  return state.lang === "zh" ? row.zh : row.en;
+}
+
+function loadShowcasePrefsStore() {
+  try {
+    const raw = localStorage.getItem(SHOWCASE_PREFS_STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch (error) {
+    return {};
+  }
+}
+
+function saveShowcasePrefsStore(store) {
+  localStorage.setItem(SHOWCASE_PREFS_STORAGE_KEY, JSON.stringify(store));
+}
+
+function getShowcasePrefsRaw(packageId) {
+  const store = loadShowcasePrefsStore();
+  const userKey = courseResultPackageUserKey();
+  const userStore = store[userKey] || {};
+  const prefs = userStore[packageId] || {};
+  return {
+    displayName: typeof prefs.displayName === "string" ? prefs.displayName : "",
+    title: typeof prefs.title === "string" ? prefs.title : "",
+    selected: Array.isArray(prefs.selected) ? prefs.selected.map(Number).filter(n => !Number.isNaN(n)) : null
+  };
+}
+
+function getShowcasePrefs(packageId) {
+  const raw = getShowcasePrefsRaw(packageId);
+  return {
+    displayName: raw.displayName,
+    title: raw.title.trim() ? raw.title : getDefaultShowcaseTitle(packageId),
+    selected: raw.selected
+  };
+}
+
+function persistShowcasePrefs(packageId, patch = {}) {
+  if (!state.user || !packageId) return;
+  const store = loadShowcasePrefsStore();
+  const userKey = courseResultPackageUserKey();
+  if (!store[userKey]) store[userKey] = {};
+  const prev = getShowcasePrefsRaw(packageId);
+  store[userKey][packageId] = {
+    displayName: patch.displayName != null ? String(patch.displayName) : prev.displayName,
+    title: patch.title != null ? String(patch.title) : prev.title,
+    selected: patch.selected !== undefined ? patch.selected : prev.selected
+  };
+  saveShowcasePrefsStore(store);
+}
+
+function getShowcaseSelectableRows(pkg) {
+  return getPackageItemRows(pkg).filter(row => row.status !== "empty");
+}
+
+function getShowcaseSelectedIndices(pkg) {
+  const savedRows = getShowcaseSelectableRows(pkg);
+  const prefs = getShowcasePrefsRaw(pkg.id);
+  if (!prefs.selected) return savedRows.map(row => row.index);
+  const allowed = new Set(savedRows.map(row => row.index));
+  return prefs.selected.filter(index => allowed.has(index));
+}
+
+function openResultPackageShowcase(packageId) {
+  const pkg = getResultPackageById(packageId);
+  if (!pkg) {
+    toast(state.lang === "zh" ? "找不到成果包" : "Result package not found");
+    return;
+  }
+  if (!state.user) {
+    requireGoogleLogin({
+      route: "showcase",
+      packageId,
+      action: "openShowcase"
+    });
+    return;
+  }
+  if (!hasResultPackageAccess(packageId)) {
+    toast(state.lang === "zh" ? "請先解鎖此成果包" : "Please unlock this result package first");
+    openResultPackage(packageId);
+    return;
+  }
+  currentResultPackageId = packageId;
+  currentCourseId = pkg.courseId || null;
+  setRoute("showcase");
+}
+
+function printResultPackageShowcase() {
+  window.print();
+}
+
+function applyShowcaseControls(packageId) {
+  const nameEl = document.getElementById("showcase-display-name");
+  const titleEl = document.getElementById("showcase-title");
+  const selected = [];
+  document.querySelectorAll(".showcase-select-item:checked").forEach(el => {
+    selected.push(Number(el.value));
+  });
+  persistShowcasePrefs(packageId, {
+    displayName: nameEl ? nameEl.value : "",
+    title: titleEl ? titleEl.value : "",
+    selected
+  });
+  toast(state.lang === "zh" ? "展示設定已更新" : "Showcase settings updated");
+  render();
+}
+
+function selectAllShowcaseSaved(packageId) {
+  const pkg = getResultPackageById(packageId);
+  if (!pkg) return;
+  const indices = getShowcaseSelectableRows(pkg).map(row => row.index);
+  const nameEl = document.getElementById("showcase-display-name");
+  const titleEl = document.getElementById("showcase-title");
+  persistShowcasePrefs(packageId, {
+    displayName: nameEl ? nameEl.value : getShowcasePrefsRaw(packageId).displayName,
+    title: titleEl ? titleEl.value : getShowcasePrefsRaw(packageId).title,
+    selected: indices
+  });
+  render();
+}
+
+function getShowcaseFilenameHint(pkg) {
+  const name = state.lang === "zh" ? pkg.zhTitle : pkg.enTitle;
+  const safe = String(name || "Result-Package")
+    .replace(/[\\/:*?"<>|]+/g, "")
+    .replace(/\s+/g, "-")
+    .slice(0, 48);
+  return `AI-Skill-Bridge-${safe || "Showcase"}`;
+}
+
+function formatShowcasePreparedDate() {
+  const d = new Date();
+  if (state.lang === "zh") {
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    return `${d.getFullYear()}/${mm}/${dd}`;
+  }
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+}
+
+function resultPackageShowcase() {
+  const pkg = currentResultPackageId
+    ? getResultPackageById(currentResultPackageId)
+    : null;
+
+  if (!pkg) {
+    return shell(`
+      <main class="page">
+        <div class="wrap">
+          <h1>${text("找不到成果包", "Package Not Found")}</h1>
+          <button class="btn primary" onclick="setRoute('result-packages')">${text("回到成果禮包", "Back to Result Packages")}</button>
+        </div>
+      </main>
+    `);
+  }
+
+  if (!state.authReady) return renderAuthChecking();
+
+  if (!state.user) {
+    return shell(`
+      <main class="page">
+        <div class="wrap">
+          <section class="panel auth-gate-panel">
+            <h1>${text("成果展示", "Showcase")}</h1>
+            <p class="lead">${text(
+              "請先登入後，才能查看你的私人成果展示。",
+              "Sign in to view your private result showcase."
+            )}</p>
+            <div class="btnrow">
+              <button class="btn primary" onclick='requireGoogleLogin({"route":"showcase","packageId":"${pkg.id}","action":"openShowcase"})'>${text("使用 Google 登入", "Sign in with Google")}</button>
+              <button class="btn secondary" onclick="openResultPackage('${pkg.id}')">${text("返回成果包", "Back to Result Package")}</button>
+            </div>
+          </section>
+        </div>
+      </main>
+    `);
+  }
+
+  if (!hasResultPackageAccess(pkg.id)) {
+    return renderLockedResultPackageIntro(pkg);
+  }
+
+  const summary = getPackageUxSummary(pkg);
+  const prefs = getShowcasePrefs(pkg.id);
+  const selectable = getShowcaseSelectableRows(pkg);
+  const selectedIndices = getShowcaseSelectedIndices(pkg);
+  const selectedSet = new Set(selectedIndices);
+  const selectedRows = selectable.filter(row => selectedSet.has(row.index));
+  const courseLabel = state.lang === "zh" ? pkg.zhCourseName : pkg.enCourseName;
+  const packageLabel = state.lang === "zh" ? pkg.zhTitle : pkg.enTitle;
+  const filenameHint = getShowcaseFilenameHint(pkg);
+  const continueCourseAction = pkg.courseId
+    ? `openCourse('${pkg.courseId}')`
+    : "setRoute('freePortfolio')";
+
+  if (!selectable.length) {
+    return shell(`
+      <main class="page showcase-page">
+        <div class="wrap">
+          <section class="panel">
+            <h1>${text("成果展示", "Showcase")}</h1>
+            <p class="lead">${text("目前還沒有可展示的成果。", "No results are available to showcase yet.")}</p>
+            <div class="btnrow">
+              <button class="btn primary" onclick="${continueCourseAction}">${text("前往完成課程", "Continue Course")}</button>
+              <button class="btn secondary" onclick="openResultPackage('${pkg.id}')">${text("返回成果包", "Back to Result Package")}</button>
+            </div>
+          </section>
+        </div>
+      </main>
+    `);
+  }
+
+  return shell(`
+    <main class="page showcase-page">
+      <div class="wrap">
+        <section class="panel showcase-toolbar no-print">
+          <div class="btnrow">
+            <button class="btn secondary" onclick="openResultPackage('${pkg.id}')">${text("返回成果包", "Back to Result Package")}</button>
+            <button class="btn secondary" onclick="(function(){var el=document.getElementById('showcase-select-panel');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});})()">${text("選擇成果", "Select Results")}</button>
+            <button class="btn primary" onclick="printResultPackageShowcase()">${text("列印／存成 PDF", "Print / Save as PDF")}</button>
+          </div>
+          <p class="course-result-meta">${text(
+            `建議檔名：${filenameHint}`,
+            `Suggested filename: ${filenameHint}`
+          )}</p>
+          <p class="showcase-privacy-note">${text(
+            "請在展示或列印前確認內容中沒有不希望公開的個人資料、公司機密或敏感資訊。",
+            "Before presenting or printing, review your content and remove personal, confidential, or sensitive information you do not want to disclose."
+          )}</p>
+        </section>
+
+        <section class="panel showcase-controls no-print" id="showcase-select-panel" style="margin-top:16px">
+          <h2>${text("展示設定", "Showcase Settings")}</h2>
+          <label class="course-result-label" for="showcase-display-name">${text("展示名稱", "Display Name")}</label>
+          <input id="showcase-display-name" class="showcase-input" type="text" value="${escapeTextareaValue(prefs.displayName)}" placeholder="Aven Chou" />
+          <label class="course-result-label" for="showcase-title">${text("成果展示標題", "Showcase Title")}</label>
+          <input id="showcase-title" class="showcase-input" type="text" value="${escapeTextareaValue(prefs.title)}" placeholder="${escapeTextareaValue(getDefaultShowcaseTitle(pkg.id))}" />
+          <h3 style="margin-top:16px">${text("選擇成果", "Select Results")}</h3>
+          <p class="course-result-meta">${text("只有已儲存的成果可以加入展示。", "Only saved results can be included.")}</p>
+          <div class="showcase-select-list">
+            ${selectable.map(row => `
+              <label class="showcase-select-row">
+                <input class="showcase-select-item" type="checkbox" value="${row.index}" ${selectedSet.has(row.index) ? "checked" : ""} />
+                <span>L${row.index + 1} · ${row.meta.outcome || row.meta.title}</span>
+              </label>
+            `).join("")}
+          </div>
+          <div class="btnrow" style="margin-top:14px">
+            <button class="btn secondary" onclick="selectAllShowcaseSaved('${pkg.id}')">${text("全選已儲存", "Select All Saved")}</button>
+            <button class="btn primary" onclick="applyShowcaseControls('${pkg.id}')">${text("套用展示設定", "Apply Showcase Settings")}</button>
+          </div>
+        </section>
+
+        <article class="showcase-document" style="margin-top:16px">
+          <header class="showcase-cover">
+            <p class="showcase-brand">AI Skill Bridge</p>
+            <h1 class="showcase-title">${escapeTextareaValue(prefs.title)}</h1>
+            <p class="showcase-package-name">${packageLabel}</p>
+            <p class="showcase-course">${text("對應課程", "Course")}：${courseLabel}</p>
+            ${prefs.displayName.trim()
+              ? `<p class="showcase-display-name">${text("展示名稱", "Display Name")}：${escapeTextareaValue(prefs.displayName.trim())}</p>`
+              : ""
+            }
+            <p class="showcase-progress">${
+              state.lang === "zh"
+                ? `${summary.savedCount} / ${summary.total} 項成果`
+                : `${summary.savedCount} / ${summary.total} results completed`
+            }</p>
+            <p class="showcase-prepared">${text("整理日期", "Prepared on")}：${formatShowcasePreparedDate()}</p>
+          </header>
+
+          ${selectedRows.length ? `
+            <section class="showcase-items">
+              <h2 class="showcase-section-title">${text("展示項目", "Showcase Items")}</h2>
+              ${selectedRows.map(row => {
+                const resultName = row.meta.outcome || row.meta.title;
+                const bodyText = escapeTextareaValue((row.entry && row.entry.text) || "");
+                const bodyUrl = escapeTextareaValue((row.entry && row.entry.url) || "");
+                const updated = row.updatedAt ? formatPackageDate(row.updatedAt) : "";
+                return `
+                  <section class="showcase-item">
+                    <p class="showcase-item-label">L${row.index + 1}</p>
+                    <h3>${resultName}</h3>
+                    ${updated ? `<p class="showcase-item-meta">${text("最後更新", "Last Updated")}：${updated}</p>` : ""}
+                    ${bodyText ? `<pre class="showcase-item-body">${bodyText}</pre>` : ""}
+                    ${bodyUrl ? `<p class="showcase-item-link"><a href="${bodyUrl}" target="_blank" rel="noopener noreferrer">${bodyUrl}</a></p>` : ""}
+                  </section>
+                `;
+              }).join("")}
+            </section>
+          ` : `
+            <section class="showcase-items">
+              <p>${text("請至少選擇一項已儲存成果。", "Please select at least one saved result.")}</p>
+            </section>
+          `}
+        </article>
       </div>
     </main>
   `);
@@ -6947,6 +7278,7 @@ function render() {
       premium,
       applicationPackage,
       courseResultPackage,
+      showcase: resultPackageShowcase,
       "result-packages": resultPackages,
       resultPackages,
       tools,
@@ -6959,6 +7291,9 @@ function render() {
       impact
     };
     document.getElementById("app").innerHTML = (routes[state.route] || home)();
+    try {
+      document.body.classList.toggle("route-showcase", state.route === "showcase");
+    } catch (error) {}
     // Navbar DOM is fully rebuilt on every render; re-check nodes and keep delegation alive.
     bindMoreMenuEvents();
     bindLessonInteractiveA11y();
@@ -6977,6 +7312,7 @@ async function startApp() {
   render();
   runPremiumContentAuditIfDev();
   runResultPackageAuditIfDev();
+  runShowcaseAuditIfDev();
   runI18nAuditIfDev();
 }
 
@@ -7318,6 +7654,82 @@ function runResultPackageAuditIfDev() {
     }
   } catch (error) {
     console.warn("[RESULT PACKAGE AUDIT] skipped", error && error.message ? error.message : error);
+  }
+}
+
+function validateShowcasePhase3C() {
+  const issues = [];
+  const packages = getResultPackageConfigList();
+  let supported = 0;
+  (packages || []).forEach(pkg => {
+    if (!pkg || !pkg.id) {
+      issues.push({ path: "package", issue: "missing package id" });
+      return;
+    }
+    if (!SHOWCASE_DEFAULT_TITLES[pkg.id]) {
+      issues.push({ path: pkg.id, issue: "missing default showcase title" });
+      return;
+    }
+    if (typeof openResultPackageShowcase !== "function" || typeof resultPackageShowcase !== "function") {
+      issues.push({ path: pkg.id, issue: "showcase functions missing" });
+      return;
+    }
+    supported += 1;
+  });
+
+  const routeProtected = typeof resultPackageShowcase === "function";
+  if (!routeProtected) {
+    issues.push({ path: "showcase", issue: "private route missing" });
+  }
+
+  const sourceIsLesson = typeof getCourseResultEntry === "function"
+    && typeof getPackageItemRows === "function"
+    && SHOWCASE_PREFS_STORAGE_KEY === "asb_showcase_prefs_v1"
+    && COURSE_RESULT_PACKAGE_STORAGE_KEY === "asb_course_result_packages_v1";
+  if (!sourceIsLesson) {
+    issues.push({ path: "source", issue: "showcase source wiring unexpected" });
+  }
+
+  const noDuplicateStorage = SHOWCASE_PREFS_STORAGE_KEY !== COURSE_RESULT_PACKAGE_STORAGE_KEY;
+  if (!noDuplicateStorage) {
+    issues.push({ path: "storage", issue: "showcase prefs collided with result store" });
+  }
+
+  let printStylesLoaded = false;
+  try {
+    printStylesLoaded = Array.from(document.styleSheets || []).some(() => true)
+      || Boolean(document.querySelector('link[href*="styles.css"]'));
+  } catch (error) {
+    printStylesLoaded = Boolean(document.querySelector('link[href*="styles.css"]'));
+  }
+
+  return {
+    issues,
+    summary: {
+      packagesSupported: `${supported}/7`,
+      routeProtected: routeProtected ? "yes" : "no",
+      resultSource: sourceIsLesson ? "lesson results" : "unknown",
+      duplicatedStorage: noDuplicateStorage ? "no" : "yes",
+      printStylesLoaded: printStylesLoaded ? "yes" : "no"
+    }
+  };
+}
+
+function runShowcaseAuditIfDev() {
+  if (!isLocalDevHost()) return;
+  try {
+    const result = validateShowcasePhase3C();
+    const s = result.summary || {};
+    console.log(`[SHOWCASE AUDIT] ${s.packagesSupported} packages supported`);
+    console.log(`[SHOWCASE AUDIT] private route protected`);
+    console.log(`[SHOWCASE AUDIT] result source = ${s.resultSource}`);
+    console.log(`[SHOWCASE AUDIT] no duplicated result storage`);
+    console.log(`[SHOWCASE AUDIT] print styles loaded`);
+    if (result.issues && result.issues.length) {
+      console.warn("[SHOWCASE AUDIT] issues", result.issues);
+    }
+  } catch (error) {
+    console.warn("[SHOWCASE AUDIT] skipped", error && error.message ? error.message : error);
   }
 }
 

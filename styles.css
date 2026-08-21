@@ -4120,3 +4120,241 @@ textarea[id^="free-note-"] {
     padding: 4px 12px 16px;
   }
 }
+
+/* ========== Phase 3C: Result Package Showcase ========== */
+.showcase-page {
+  max-width: 100%;
+}
+
+.showcase-toolbar .btnrow,
+.showcase-controls .btnrow {
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.showcase-privacy-note {
+  margin: 12px 0 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.showcase-input {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font: inherit;
+}
+
+.showcase-select-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.showcase-select-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+  color: #0f172a;
+  font-size: 14px;
+  line-height: 1.45;
+  cursor: pointer;
+}
+
+.showcase-select-row input {
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.showcase-document {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 28px 24px;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.showcase-cover {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.showcase-brand {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #334155;
+  text-transform: uppercase;
+}
+
+.showcase-title {
+  margin: 0 0 10px;
+  font-size: clamp(24px, 4vw, 34px);
+  line-height: 1.25;
+  color: #0f172a;
+  overflow-wrap: break-word;
+}
+
+.showcase-package-name,
+.showcase-course,
+.showcase-display-name,
+.showcase-progress,
+.showcase-prepared {
+  margin: 6px 0 0;
+  color: #475569;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.showcase-section-title {
+  margin: 0 0 16px;
+  font-size: 1.15rem;
+  color: #0f172a;
+}
+
+.showcase-item {
+  margin: 0 0 18px;
+  padding: 16px 0 18px;
+  border-bottom: 1px solid #eef2f7;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.showcase-item:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
+.showcase-item-label {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #64748b;
+}
+
+.showcase-item h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: #0f172a;
+  overflow-wrap: break-word;
+}
+
+.showcase-item-meta {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.showcase-item-body {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: normal;
+  max-width: 100%;
+  font: inherit;
+  color: #0f172a;
+  line-height: 1.65;
+}
+
+.showcase-item-link {
+  margin: 10px 0 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 430px) {
+  .showcase-document {
+    padding: 20px 16px;
+  }
+
+  .showcase-toolbar .btnrow .btn,
+  .showcase-controls .btnrow .btn {
+    width: 100%;
+  }
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 14mm 12mm;
+  }
+
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  body.route-showcase header,
+  body.route-showcase .site-footer,
+  body.route-showcase .no-print,
+  body.route-showcase .toast,
+  body.route-showcase #toast,
+  .no-print {
+    display: none !important;
+  }
+
+  body.route-showcase .page,
+  body.route-showcase .wrap,
+  body.route-showcase .showcase-page,
+  body.route-showcase .showcase-document {
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+  }
+
+  body.route-showcase .showcase-document {
+    font-size: 11pt;
+    line-height: 1.55;
+    color: #111;
+  }
+
+  body.route-showcase .showcase-title {
+    font-size: 18pt;
+    color: #111;
+  }
+
+  body.route-showcase .showcase-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border-bottom: 1px solid #ddd;
+  }
+
+  body.route-showcase .showcase-item-body {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    color: #111;
+  }
+
+  body.route-showcase a {
+    color: #111;
+    text-decoration: none;
+  }
+
+  body.route-showcase .showcase-cover {
+    border-bottom: 1px solid #ccc;
+  }
+}
