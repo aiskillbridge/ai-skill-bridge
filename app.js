@@ -712,7 +712,23 @@ function formatTwdPrice(price) {
   const amount = normalizePriceNumber(price);
   if (amount === 0) return text("免費", "Free");
   if (amount == null || Number.isNaN(amount)) return "";
-  return `NT$${amount.toLocaleString("en-US")}`;
+  const formatted = amount.toLocaleString("en-US");
+  // zh: NT$499 — en: TWD 499 (avoid bare $ / USD confusion for international users)
+  return state.lang === "zh" ? `NT$${formatted}` : `TWD ${formatted}`;
+}
+
+/** Wrap a formatted price so only the price token stays on one line. */
+function formatTwdPriceToken(price) {
+  const label = formatTwdPrice(price);
+  if (!label) return "";
+  return `<span class="price-token">${label}</span>`;
+}
+
+function renderPriceCurrencyNote(className = "price-currency-note") {
+  return `<p class="${className}">${text(
+    "所有價格皆以新臺幣（TWD）計價。",
+    "All prices are in New Taiwan Dollars (TWD)."
+  )}</p>`;
 }
 
 function getCoursePriceInfo(courseOrId) {
@@ -770,7 +786,7 @@ function renderCourseProductFacts() {
   return `
     <ul class="course-price-facts">
       <li><span>${text("商品類型", "Product Type")}</span><strong>${text("線上 AI 教育課程與數位學習內容", "Online AI courses and digital learning content")}</strong></li>
-      <li><span>${text("計價貨幣", "Currency")}</span><strong>${text("新臺幣", "New Taiwan Dollar")}</strong></li>
+      <li><span>${text("計價貨幣", "Currency")}</span><strong>${text("新臺幣（TWD）", "New Taiwan Dollar (TWD)")}</strong></li>
       <li><span>${text("交付方式", "Delivery")}</span><strong>${text("帳號開通後於 AI Skill Bridge 網站登入使用", "Access through the AI Skill Bridge website after account activation")}</strong></li>
       <li><span>${text("實體配送", "Physical Delivery")}</span><strong>${text("無", "None")}</strong></li>
     </ul>
@@ -809,14 +825,14 @@ function renderCoursePriceBlock(courseOrId, options = {}) {
         ${info.originalPrice != null ? `<p class="course-price-original"><span>${text("原價", "Regular Price")}</span> <s>${formatTwdPrice(info.originalPrice)}</s></p>` : ""}
         <p class="course-price-amount is-earlybird"><span class="course-price-eyebrow">${text("早鳥價", "Early-bird Price")}</span>${formatTwdPrice(info.price)}</p>
         ${saveAmount > 0 ? `<p class="course-price-save">${text(`現省 ${formatTwdPrice(saveAmount)}`, `Save ${formatTwdPrice(saveAmount)}`)}</p>` : ""}
-        <p class="course-price-meta">${text("一次付費，非訂閱制", "One-time payment · Not a subscription")}</p>
+        <p class="course-price-meta">${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</p>
         ${compact ? "" : `
           <ul class="course-price-includes">
             <li>${text("六門付費課程", "Six premium courses")}</li>
             <li>${text("共60堂實戰課", "60 practical lessons in total")}</li>
             <li>${text("六種核心 AI 能力", "Six core AI capabilities")}</li>
             <li>${text("全部對應付費成果包", "All matching premium result packages")}</li>
-            <li>${text("一次付費，非訂閱制", "One-time payment · Not a subscription")}</li>
+            <li>${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</li>
           </ul>
           ${renderPaymentComingSoonNote()}
           ${showFacts ? renderCourseProductFacts() : ""}
@@ -832,7 +848,7 @@ function renderCoursePriceBlock(courseOrId, options = {}) {
       <p class="course-price-meta">${text("一次付費", "One-time payment")}</p>
       ${compact ? "" : `
         <ul class="course-price-includes">
-          <li>${text("一次付費，非訂閱制", "One-time payment · Not a subscription")}</li>
+          <li>${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</li>
           <li>${text(`包含${lessonCount}堂線上實戰課與對應成果包`, `Includes ${lessonCount} practical online lessons and the corresponding result package`)}${packageName ? `（${packageName}）` : ""}</li>
           <li>${text("本商品為線上數位課程，不提供實體配送", "Digital course · No physical delivery")}</li>
         </ul>
@@ -1772,8 +1788,12 @@ function renderSiteFooter() {
         </div>
         <div class="site-footer-meta">
           <p>${text(
-            "商品價格皆以新臺幣（NT$）計價。",
-            "All prices are listed in New Taiwan Dollars (NT$)."
+            "所有價格皆以新臺幣（TWD）計價。",
+            "All prices are in New Taiwan Dollars (TWD)."
+          )}</p>
+          <p>${text(
+            "計價貨幣：新臺幣（TWD）",
+            "Currency: New Taiwan Dollar (TWD)"
           )}</p>
           <p>${text(
             "本平台提供線上數位課程與數位學習內容，無實體配送。",
@@ -1848,13 +1868,14 @@ function getHomeSingleCoursePriceLabel() {
     .filter(n => n != null && n > 0);
   if (!amounts.length) return text("依課程而定", "Varies by course");
   const min = Math.min(...amounts);
-  return text(`付費課程 ${formatTwdPrice(min)} 起`, `Premium courses from ${formatTwdPrice(min)}`);
+  const price = formatTwdPriceToken(min);
+  return text(`付費課程 ${price} 起`, `Premium courses from ${price}`);
 }
 
 function getHomeAllAccessPriceLabel() {
   const info = getCoursePriceInfo("all-access");
   if (info.price == null) return "";
-  return formatTwdPrice(info.price);
+  return formatTwdPriceToken(info.price);
 }
 
 function renderHomePriceTeaser() {
@@ -1863,7 +1884,7 @@ function renderHomePriceTeaser() {
   return `
     <p class="home-price-teaser">
       <button type="button" class="home-price-teaser-link" onclick="setRoute('map')">
-        ${single}${allAccess ? text(`｜全站通行證早鳥價 ${allAccess}`, `｜All-access early-bird price ${allAccess}`) : ""}
+        ${single}${allAccess ? text(`｜全站通行證早鳥價 ${allAccess}`, ` | All-access early-bird price ${allAccess}`) : ""}
       </button>
     </p>
   `;
@@ -2326,7 +2347,7 @@ function renderHomeCapabilities() {
         <ul class="home-cap-meta">
           <li>${lessonCount} ${text("堂課", "lessons")}</li>
           <li>${pkg ? (state.lang === "zh" ? pkg.zhTitle : pkg.enTitle) : (state.lang === "zh" ? course.zhFinalProduct : course.enFinalProduct)}</li>
-          <li class="home-cap-price"><span class="price-nowrap">${formatTwdPrice(course.price)}</span> · ${text("一次付費", "One-time payment")}</li>
+          <li class="home-cap-price"><span class="price-token">${formatTwdPrice(course.price)}</span> · ${text("一次付費", "One-time payment")}</li>
         </ul>
         <button type="button" class="home-btn home-btn-secondary home-btn-compact" onclick="homeOpenCapability('${course.id}')">${text("查看課程", "View Course")}</button>
       </article>
@@ -2456,11 +2477,12 @@ function renderHomePricing() {
             "先免費上手，再選擇單門能力課程，或一次打通完整路徑。",
             "Start free, choose one capability course, or open the full path at once."
           )}</p>
+          ${renderPriceCurrencyNote("home-price-currency-note")}
         </div>
         <div class="home-pricing-grid">
           <article class="home-price-card">
             <h3>${text("免費開始", "Start Free")}</h3>
-            <p class="home-price-amount is-free">${formatTwdPrice(0)}</p>
+            <p class="home-price-amount is-free">${formatTwdPriceToken(0)}</p>
             <p class="home-price-note">${text("8堂實作課", "8 practical lessons")}</p>
             <ul>
               <li>${text("免費入門課程", "Free intro course")}</li>
@@ -2483,14 +2505,14 @@ function renderHomePricing() {
           <article class="home-price-card home-price-featured">
             <span class="home-price-badge">${text("早鳥價", "Early-bird Price")}</span>
             <h3>${text("全站通行證", "All-Access Pass")}</h3>
-            ${allAccessInfo.originalPrice != null ? `<p class="home-price-original"><s>${formatTwdPrice(allAccessInfo.originalPrice)}</s></p>` : ""}
-            <p class="home-price-amount">${formatTwdPrice(allAccessInfo.price)}</p>
-            ${saveAmount > 0 ? `<p class="home-price-note">${text(`現省 ${formatTwdPrice(saveAmount)}`, `Save ${formatTwdPrice(saveAmount)}`)}</p>` : `<p class="home-price-note">${text("一次付費", "One-time payment")}</p>`}
+            ${allAccessInfo.originalPrice != null ? `<p class="home-price-original"><s class="price-token">${formatTwdPrice(allAccessInfo.originalPrice)}</s></p>` : ""}
+            <p class="home-price-amount">${formatTwdPriceToken(allAccessInfo.price)}</p>
+            ${saveAmount > 0 ? `<p class="home-price-note">${text(`現省 ${formatTwdPriceToken(saveAmount)}`, `Save ${formatTwdPriceToken(saveAmount)}`)}</p>` : `<p class="home-price-note">${text("一次付費", "One-time payment")}</p>`}
             <ul>
               <li>${text(`解鎖 ${stats.courseCount} 門付費課程`, `Unlock ${stats.courseCount} premium courses`)}</li>
               <li>${text(`共 ${stats.lessonCount} 堂實戰課`, `${stats.lessonCount} practice lessons total`)}</li>
               <li>${text("全部成果禮包", "All result packages")}</li>
-              <li>${text("一次付費，非訂閱制", "One-time payment · Not a subscription")}</li>
+              <li>${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</li>
             </ul>
             <button class="home-btn home-btn-primary" onclick="setRoute('map')">${text("查看全站方案", "View All-Access Plan")}</button>
             ${renderPaymentComingSoonNote()}
@@ -2621,6 +2643,7 @@ function learningMap() {
             "從免費入門到升學、學習、研究、求職、職場與創業，選擇你目前最需要的 AI 能力路徑。",
             "Choose the AI learning path that matches your current goals, from free foundations to study, research, career, work, and startup skills."
           )}</p>
+          ${renderPriceCurrencyNote()}
           ${state.user ? renderAccountMembershipSummary() : ""}
         </section>
 
@@ -3618,9 +3641,10 @@ function premium() {
       <div class="wrap">
         <h1>${L("premium.title")}</h1>
         <p class="lead">${text(
-          "付費區採用「一個完整課程一個價格」的方式，不是單堂課收費。每個課程包含 10 堂課、實作任務、Prompt 模板與最後成果。全站通行證可解鎖全部課程。價格以新臺幣一次付費計價，付款功能建置中。",
-          "Premium courses are sold as complete courses, not by individual lessons. Each course includes 10 lessons, practical tasks, prompt templates, and a final product. The All-Access Pass unlocks everything. Prices are one-time TWD payments; payment service is coming soon."
+          "付費區採用「一個完整課程一個價格」的方式，不是單堂課收費。每個課程包含 10 堂課、實作任務、Prompt 模板與最後成果。全站通行證可解鎖全部課程。價格以新臺幣（TWD）一次付費計價，付款功能建置中。",
+          "Premium courses are sold as complete courses, not by individual lessons. Each course includes 10 lessons, practical tasks, prompt templates, and a final product. The All-Access Pass unlocks everything. All prices are in New Taiwan Dollars (TWD) as one-time payments; payment service is coming soon."
         )}</p>
+        ${renderPriceCurrencyNote()}
 
         ${accessBanner}
 

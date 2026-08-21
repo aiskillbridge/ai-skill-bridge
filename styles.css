@@ -239,8 +239,30 @@ p {
 }
 
 .price-nowrap,
+.price-token,
 .course-price-amount {
   white-space: nowrap;
+}
+
+.price-currency-note,
+.home-price-currency-note {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #64748b;
+  white-space: normal;
+}
+
+.home-price-currency-note {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.home-price-amount {
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+  max-width: 100%;
 }
 
 .course-price-block {
@@ -364,6 +386,11 @@ p {
   font-weight: 700;
   cursor: pointer;
   text-align: left;
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+  max-width: 100%;
+  line-height: 1.5;
 }
 
 .home-price-teaser-link:hover {
@@ -1942,7 +1969,8 @@ textarea[id^="free-note-"] {
 .home-cap-price {
   color: var(--primary);
   font-weight: 800;
-  white-space: nowrap;
+  white-space: normal;
+  max-width: 100%;
 }
 
 .home-process-grid {
@@ -2063,6 +2091,17 @@ textarea[id^="free-note-"] {
   border: 1px solid var(--hp-border);
   box-shadow: var(--hp-shadow);
   transition: transform 0.22s ease, box-shadow 0.22s ease;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.home-price-card h3 {
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+  max-width: 100%;
 }
 
 .home-price-card:hover {
@@ -2092,10 +2131,15 @@ textarea[id^="free-note-"] {
 
 .home-price-amount {
   margin: 10px 0 18px !important;
-  font-size: 28px !important;
+  font-size: clamp(20px, 2.4vw, 28px) !important;
   font-weight: 750;
   letter-spacing: -0.03em;
   color: #0f172a !important;
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+  max-width: 100%;
+  line-height: 1.25;
 }
 
 .home-price-card ul {
