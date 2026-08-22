@@ -32667,6 +32667,434 @@ const COURSE_DESIGN_META = {
   }
 };
 
+/**
+ * Learning-path groups for the All Courses map (Phase 4B+).
+ * Each paid course must appear in exactly one path.
+ */
+const COURSE_PATH_CONFIG = [
+  {
+    id: "study",
+    number: "01",
+    accent: "study",
+    zhTitle: "升學與學習",
+    enTitle: "Study & Admissions",
+    zhDesc: "從大學申請、日常學習到研究競賽，建立學生最常使用的 AI 能力。",
+    enDesc: "Build practical AI skills for university applications, learning, research, and competitions.",
+    courseIds: ["admissions", "college-learning", "research-competition"]
+  },
+  {
+    id: "career",
+    number: "02",
+    accent: "career",
+    zhTitle: "職涯與工作",
+    enTitle: "Career & Work",
+    zhDesc: "從求職準備到進入職場後的 AI 工作流程，提升工作產出與溝通效率。",
+    enDesc: "Use AI for job preparation, professional communication, and everyday workplace workflows.",
+    courseIds: ["career-internship", "workplace-productivity"]
+  },
+  {
+    id: "startup",
+    number: "03",
+    accent: "startup",
+    zhTitle: "創業與自動化",
+    enTitle: "Startup & Automation",
+    zhDesc: "從問題驗證、商業模式到 AI 工作流與自動化，建立自己的 AI 創業系統。",
+    enDesc: "Move from problem validation and business models to AI workflows and automation.",
+    zhAside: "適合想把想法變成可驗證產品與自動化流程的進階使用者。一次專注一條創業路徑即可。",
+    enAside: "For advanced learners who want to turn ideas into validated products and automation workflows—one focused startup path.",
+    courseIds: ["startup-automation"]
+  }
+];
+
+/** One-line “best if” copy for map cards — keep short (≤2 lines). */
+const COURSE_MAP_FIT = {
+  admissions: {
+    zh: "正在準備大學申請",
+    en: "Preparing for university applications"
+  },
+  "college-learning": {
+    zh: "希望建立 AI 學習系統的大學生",
+    en: "University students building an AI learning system"
+  },
+  "research-competition": {
+    zh: "正在做研究、專題或競賽",
+    en: "Working on research, projects, or competitions"
+  },
+  "career-internship": {
+    zh: "正在準備履歷、實習與面試",
+    en: "Preparing resumes, internships, and interviews"
+  },
+  "workplace-productivity": {
+    zh: "希望用 AI 提升工作效率",
+    en: "Wanting AI to improve workplace productivity"
+  },
+  "startup-automation": {
+    zh: "想做產品、創業或自動化流程",
+    en: "Building products, startups, or automation workflows"
+  }
+};
+
+/**
+ * Pre-purchase product copy for paid courses (Phase 4B).
+ * Prices / titles / lesson lists stay on PREMIUM; packages stay on RESULT_PACKAGE_CONFIG.
+ */
+const COURSE_PRODUCT_INFO = {
+  admissions: {
+    courseId: "admissions",
+    productType: { zh: "線上數位課程", en: "Online digital course" },
+    deliveryType: { zh: "線上數位內容，無實體配送", en: "Digital content · No physical delivery" },
+    estimatedLearningFormat: {
+      zh: "自學式線上課程：閱讀方法 → 看案例 → 用 Prompt 實作 → 儲存成果",
+      en: "Self-paced online course: read method → review example → practice with prompts → save results"
+    },
+    zhAudience: [
+      "正在準備大學申請的高中生",
+      "不知道如何整理個人經歷與學習歷程的人",
+      "想用 AI 提升申請準備效率的人",
+      "希望完成一份完整大學申請成果包的人"
+    ],
+    enAudience: [
+      "High school students preparing university applications",
+      "People who struggle to organize experience and learning portfolios",
+      "Learners who want AI to speed up application prep",
+      "Anyone who wants a complete university application kit"
+    ],
+    zhNotFor: [
+      "希望 AI 直接代寫全部申請內容",
+      "不願意投入整理與修改時間",
+      "期待購買後自動產出完整備審",
+      "需要真人一對一升學顧問服務"
+    ],
+    enNotFor: [
+      "You want AI to write the entire application for you",
+      "You are unwilling to spend time organizing and revising",
+      "You expect finished materials without practice",
+      "You need one-on-one human admissions counseling"
+    ],
+    zhBuild: [
+      "校系方向與志願選擇邏輯",
+      "學習歷程與活動故事整理",
+      "備審資料架構與申請動機初稿",
+      "自我介紹與面試題庫",
+      "大學申請包（成果禮包）"
+    ],
+    enBuild: [
+      "Major direction and preference logic",
+      "Learning portfolio and activity story drafts",
+      "Application structure and motivation drafts",
+      "Self-introduction and interview question banks",
+      "University Application Kit (result package)"
+    ],
+    zhNeed: [
+      "可用的 AI 工具帳號",
+      "可使用瀏覽器的裝置",
+      "自己的高中經歷與申請素材",
+      "願意實作並修改成果"
+    ],
+    enNeed: [
+      "An AI tool account you can use",
+      "A device with a modern browser",
+      "Your own high-school experience and application materials",
+      "Willingness to practice and revise outputs"
+    ]
+  },
+  "college-learning": {
+    courseId: "college-learning",
+    productType: { zh: "線上數位課程", en: "Online digital course" },
+    deliveryType: { zh: "線上數位內容，無實體配送", en: "Digital content · No physical delivery" },
+    estimatedLearningFormat: {
+      zh: "自學式線上課程：閱讀方法 → 看案例 → 用 Prompt 實作 → 儲存成果",
+      en: "Self-paced online course: read method → review example → practice with prompts → save results"
+    },
+    zhAudience: [
+      "想用 AI 提升教材理解與筆記效率的大學生",
+      "報告、簡報與考試複習常感到時間不夠的人",
+      "希望建立可重複使用學習系統的人",
+      "不想只把 AI 當成交作業捷徑的人"
+    ],
+    enAudience: [
+      "University students who want AI for materials and notes",
+      "People pressed for time on reports, slides, and exams",
+      "Learners who want a reusable study system",
+      "Students who refuse to treat AI as a homework shortcut only"
+    ],
+    zhNotFor: [
+      "希望 AI 直接代寫全部作業與考試答案",
+      "不願意投入實作與調整流程",
+      "期待購買後自動完成每週課業",
+      "需要真人一對一課業輔導"
+    ],
+    enNotFor: [
+      "You want AI to write all homework and exam answers",
+      "You will not practice or refine workflows",
+      "You expect coursework to finish itself after purchase",
+      "You need one-on-one tutoring"
+    ],
+    zhBuild: [
+      "AI 學習目標與課程規劃表",
+      "AI 課堂筆記工作流",
+      "報告與簡報架構模板",
+      "個人化複習與錯題整理流程",
+      "AI 大學學習系統包（成果禮包）"
+    ],
+    enBuild: [
+      "AI learning goals and course planning sheets",
+      "AI class-note workflows",
+      "Report and presentation structure templates",
+      "Personal review and error-log workflows",
+      "AI Learning System Kit (result package)"
+    ],
+    zhNeed: [
+      "可用的 AI 工具帳號",
+      "可使用瀏覽器的裝置",
+      "自己的課堂教材或作業素材",
+      "願意實作與修改成果"
+    ],
+    enNeed: [
+      "An AI tool account you can use",
+      "A device with a modern browser",
+      "Your own course materials or assignments",
+      "Willingness to practice and revise outputs"
+    ]
+  },
+  "research-competition": {
+    courseId: "research-competition",
+    productType: { zh: "線上數位課程", en: "Online digital course" },
+    deliveryType: { zh: "線上數位內容，無實體配送", en: "Digital content · No physical delivery" },
+    estimatedLearningFormat: {
+      zh: "自學式線上課程：閱讀方法 → 看案例 → 用 Prompt 實作 → 儲存成果",
+      en: "Self-paced online course: read method → review example → practice with prompts → save results"
+    },
+    zhAudience: [
+      "正在做專題、研究或競賽提案的大學生",
+      "需要整理文獻、方法與論證結構的人",
+      "想用 AI 加速研究流程但仍要求可查證的人",
+      "希望完成研究／競賽成果包的人"
+    ],
+    enAudience: [
+      "University students working on projects, research, or competitions",
+      "People who need literature, methods, and argument structure",
+      "Learners who want AI speed with verification habits",
+      "Anyone building a research or competition kit"
+    ],
+    zhNotFor: [
+      "希望 AI 直接產出可提交的完整論文",
+      "不願意查證來源與修正論點",
+      "期待購買後自動完成專題",
+      "需要真人研究指導或指導教授服務"
+    ],
+    enNotFor: [
+      "You want AI to produce a submission-ready thesis for you",
+      "You will not verify sources or revise arguments",
+      "You expect the project to finish without practice",
+      "You need a human research supervisor"
+    ],
+    zhBuild: [
+      "研究問題與專題範圍定義",
+      "文獻整理與引用工作流",
+      "方法與資料分析規劃",
+      "競賽提案與簡報架構",
+      "研究與競賽成果包（成果禮包）"
+    ],
+    enBuild: [
+      "Research question and project scope definitions",
+      "Literature and citation workflows",
+      "Method and analysis plans",
+      "Competition proposal and deck structures",
+      "Research & Competition Kit (result package)"
+    ],
+    zhNeed: [
+      "可用的 AI 工具帳號",
+      "可使用瀏覽器的裝置",
+      "自己的研究／專題／競賽主題素材",
+      "願意查證並修改成果"
+    ],
+    enNeed: [
+      "An AI tool account you can use",
+      "A device with a modern browser",
+      "Your own research, project, or competition topic materials",
+      "Willingness to verify and revise outputs"
+    ]
+  },
+  "career-internship": {
+    courseId: "career-internship",
+    productType: { zh: "線上數位課程", en: "Online digital course" },
+    deliveryType: { zh: "線上數位內容，無實體配送", en: "Digital content · No physical delivery" },
+    estimatedLearningFormat: {
+      zh: "自學式線上課程：閱讀方法 → 看案例 → 用 Prompt 實作 → 儲存成果",
+      en: "Self-paced online course: read method → review example → practice with prompts → save results"
+    },
+    zhAudience: [
+      "正在準備實習或第一份工作的學生",
+      "履歷與自我介紹不知如何整理的人",
+      "想用 AI 提升求職準備效率的人",
+      "希望完成求職與實習成果包的人"
+    ],
+    enAudience: [
+      "Students preparing for internships or a first job",
+      "People unsure how to organize resumes and self-intros",
+      "Learners who want AI to speed up job-search prep",
+      "Anyone building a career and internship kit"
+    ],
+    zhNotFor: [
+      "希望 AI 捏造不存在的經歷",
+      "不願意投入修改履歷與面試練習",
+      "期待購買後自動拿到錄取",
+      "需要真人職涯顧問一對一服務"
+    ],
+    enNotFor: [
+      "You want AI to invent experience you do not have",
+      "You will not revise resumes or practice interviews",
+      "You expect offers automatically after purchase",
+      "You need one-on-one career coaching"
+    ],
+    zhBuild: [
+      "可驗證的經驗盤點與 STAR 描述",
+      "對準職缺的履歷與 Cover Letter",
+      "自我介紹與 LinkedIn 檔案架構",
+      "作品集與面試練習流程",
+      "求職與實習成果包（成果禮包）"
+    ],
+    enBuild: [
+      "Verified experience inventory and STAR bullets",
+      "Role-aligned resume and cover letter drafts",
+      "Self-intro and LinkedIn profile structure",
+      "Portfolio and interview practice workflows",
+      "Career & Internship Kit (result package)"
+    ],
+    zhNeed: [
+      "可用的 AI 工具帳號",
+      "可使用瀏覽器的裝置",
+      "自己的真實經歷與目標職缺資訊",
+      "願意實作與修改成果"
+    ],
+    enNeed: [
+      "An AI tool account you can use",
+      "A device with a modern browser",
+      "Your real experience and target role information",
+      "Willingness to practice and revise outputs"
+    ]
+  },
+  "workplace-productivity": {
+    courseId: "workplace-productivity",
+    productType: { zh: "線上數位課程", en: "Online digital course" },
+    deliveryType: { zh: "線上數位內容，無實體配送", en: "Digital content · No physical delivery" },
+    estimatedLearningFormat: {
+      zh: "自學式線上課程：閱讀方法 → 看案例 → 用 Prompt 實作 → 儲存成果",
+      en: "Self-paced online course: read method → review example → practice with prompts → save results"
+    },
+    zhAudience: [
+      "想用 AI 處理 Email、會議與文件的職場工作者",
+      "希望把重複工作變成標準流程的人",
+      "需要提升簡報、報告與任務管理效率的人",
+      "希望建立個人 AI 工作流程包的人"
+    ],
+    enAudience: [
+      "Professionals who want AI for email, meetings, and documents",
+      "People who want repeatable standard workflows",
+      "Anyone improving decks, reports, and task management",
+      "Learners building a personal AI workflow kit"
+    ],
+    zhNotFor: [
+      "希望 AI 自動完成全部工作而不需檢查",
+      "不願意依自己的工作情境調整流程",
+      "期待購買後立刻取代整套企業系統",
+      "需要真人顧問進駐輔導"
+    ],
+    enNotFor: [
+      "You want AI to finish all work with no review",
+      "You will not adapt workflows to your real context",
+      "You expect this to replace an entire enterprise stack overnight",
+      "You need on-site consulting"
+    ],
+    zhBuild: [
+      "職場溝通與 Email 工作流",
+      "會議紀錄與待辦整理方法",
+      "文件、簡報與報告模板",
+      "SOP 與任務管理流程",
+      "職場 AI 工作流程包（成果禮包）"
+    ],
+    enBuild: [
+      "Workplace communication and email workflows",
+      "Meeting notes and action-item systems",
+      "Document, deck, and report templates",
+      "SOP and task-management workflows",
+      "AI Productivity Workflow Kit (result package)"
+    ],
+    zhNeed: [
+      "可用的 AI 工具帳號",
+      "可使用瀏覽器的裝置",
+      "自己的工作文件或任務素材",
+      "願意實作與修改成果"
+    ],
+    enNeed: [
+      "An AI tool account you can use",
+      "A device with a modern browser",
+      "Your own work documents or task materials",
+      "Willingness to practice and revise outputs"
+    ]
+  },
+  "startup-automation": {
+    courseId: "startup-automation",
+    productType: { zh: "線上數位課程", en: "Online digital course" },
+    deliveryType: { zh: "線上數位內容，無實體配送", en: "Digital content · No physical delivery" },
+    estimatedLearningFormat: {
+      zh: "自學式線上課程：閱讀方法 → 看案例 → 用 Prompt 實作 → 儲存成果",
+      en: "Self-paced online course: read method → review example → practice with prompts → save results"
+    },
+    zhAudience: [
+      "正在驗證創業想法或數位產品的人",
+      "想整理商業模式、MVP 與 Pitch 的人",
+      "希望建立基礎 AI 自動化思維的人",
+      "想完成創業與自動化成果包的進階使用者"
+    ],
+    enAudience: [
+      "People validating startup ideas or digital products",
+      "Founders shaping business models, MVPs, and pitches",
+      "Learners building foundational AI automation thinking",
+      "Advanced users completing a startup automation kit"
+    ],
+    zhNotFor: [
+      "希望 AI 保證融資成功或營收成長",
+      "不願意投入驗證與實作",
+      "期待購買後自動長出完整產品",
+      "需要真人創業加速器一對一輔導"
+    ],
+    enNotFor: [
+      "You want AI to guarantee funding or revenue growth",
+      "You will not validate ideas or practice building",
+      "You expect a full product to appear after purchase",
+      "You need one-on-one accelerator coaching"
+    ],
+    zhBuild: [
+      "問題定義與客群訪談架構",
+      "商業模式與 MVP 規劃",
+      "Pitch Deck 架構",
+      "基礎自動化與 Agent 思維流程",
+      "創業與自動化成果包（成果禮包）"
+    ],
+    enBuild: [
+      "Problem definition and interview structures",
+      "Business model and MVP plans",
+      "Pitch deck structure",
+      "Basic automation and agent thinking workflows",
+      "Startup & Automation Kit (result package)"
+    ],
+    zhNeed: [
+      "可用的 AI 工具帳號",
+      "可使用瀏覽器的裝置",
+      "自己的創業想法或產品素材",
+      "願意實作與修改成果"
+    ],
+    enNeed: [
+      "An AI tool account you can use",
+      "A device with a modern browser",
+      "Your own startup idea or product materials",
+      "Willingness to practice and revise outputs"
+    ]
+  }
+};
+
 const RESULT_PACKAGE_CONFIG = [
   {
     "id": "free-starter",
