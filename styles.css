@@ -5299,3 +5299,73 @@ textarea[id^="free-note-"] {
     border-bottom: 1px solid #ccc;
   }
 }
+
+/* DEV ONLY — localhost Creator order test panel (Phase 5A) */
+.dev-order-panel {
+  margin: 1.5rem auto 0;
+  max-width: 640px;
+  padding: 1rem 1.25rem;
+  border: 2px dashed #f59e0b;
+  border-radius: 12px;
+  background: rgba(245, 158, 11, 0.08);
+  font-size: 0.95rem;
+}
+
+.dev-order-panel-badge {
+  display: inline-block;
+  margin: 0 0 0.5rem;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #92400e;
+  background: #fde68a;
+  border-radius: 4px;
+}
+
+.dev-order-panel-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.dev-order-panel-note {
+  margin: 0 0 0.75rem;
+  color: #78716c;
+  font-size: 0.85rem;
+}
+
+.dev-order-panel-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #d97706;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dev-order-panel-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dev-order-panel-error {
+  margin: 0.75rem 0 0;
+  color: #b91c1c;
+}
+
+.dev-order-panel-result {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.dev-order-panel-result h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.dev-order-id {
+  font-size: 0.8rem;
+  word-break: break-all;
+}

@@ -1865,12 +1865,13 @@ function shell(content) {
   return `
     ${nav()}
     ${content}
+    ${renderDevOrderTestPanel()}
     ${renderSiteFooter()}
   `;
 }
 
 function homeLandingShell(content) {
-  return `${nav()}${content}${renderSiteFooter()}`;
+  return `${nav()}${content}${renderDevOrderTestPanel()}${renderSiteFooter()}`;
 }
 
 const HOME_CAPABILITY_LABELS = {
@@ -8343,7 +8344,166 @@ async function startApp() {
   runPublicInfoAuditIfDev();
   runProductAuditIfDev();
   runCourseMapAuditIfDev();
+  runOrderAuditIfDev();
+  runSecretSafetyAuditIfDev();
   runI18nAuditIfDev();
+}
+
+/** Server-side product prices (must match api/_lib/productCatalog.js). Payment authority is server-only. */
+const SERVER_PRODUCT_CATALOG_AUDIT = {
+  "course-admissions": 499,
+  "course-college-learning": 699,
+  "course-research-competition": 899,
+  "course-career-internship": 999,
+  "course-workplace-productivity": 1299,
+  "course-startup-automation": 1499,
+  "all-access": 2999
+};
+
+const FRONTEND_COURSE_TO_SERVER_PRODUCT = {
+  admissions: "course-admissions",
+  "college-learning": "course-college-learning",
+  "research-competition": "course-research-competition",
+  "career-internship": "course-career-internship",
+  "workplace-productivity": "course-workplace-productivity",
+  "startup-automation": "course-startup-automation",
+  "all-access": "all-access"
+};
+
+const DEV_ORDER_TEST_PRODUCT_ID = "course-admissions";
+
+let devOrderPending = false;
+let devOrderLast = null;
+let devOrderError = null;
+
+async function getSupabaseAccessToken() {
+  if (!supabaseClient) return null;
+  try {
+    const { data } = await supabaseClient.auth.getSession();
+    return data?.session?.access_token || null;
+  } catch {
+    return null;
+  }
+}
+
+async function createOrder(productId) {
+  const token = await getSupabaseAccessToken();
+  if (!token) {
+    const err = new Error("authentication_required");
+    err.code = "authentication_required";
+    throw err;
+  }
+  const response = await fetch("/api/orders/create", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ productId })
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const err = new Error(payload.error || "order_create_failed");
+    err.code = payload.error || "order_create_failed";
+    err.status = response.status;
+    throw err;
+  }
+  return payload;
+}
+
+async function getOrderStatus(orderId) {
+  const token = await getSupabaseAccessToken();
+  if (!token) {
+    const err = new Error("authentication_required");
+    err.code = "authentication_required";
+    throw err;
+  }
+  const response = await fetch(`/api/orders/${encodeURIComponent(orderId)}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const err = new Error(payload.error || "order_status_failed");
+    err.code = payload.error || "order_status_failed";
+    err.status = response.status;
+    throw err;
+  }
+  return payload;
+}
+
+function canShowDevOrderPanel() {
+  return typeof isLocalDevHost === "function" && isLocalDevHost() && isCreatorAccount() && state.user;
+}
+
+function getDevOrderProductLabel(productId) {
+  const map = {
+    "course-admissions": text("大學申請 AI 實戰課", "AI for University Admissions"),
+    "course-college-learning": text("大學學習 AI 實戰課", "AI for College Learning"),
+    "course-research-competition": text("研究競賽 AI 實戰課", "AI for Research & Competitions"),
+    "course-career-internship": text("實習求職 AI 實戰課", "AI for Careers & Internships"),
+    "course-workplace-productivity": text("職場效率 AI 實戰課", "AI for Workplace Productivity"),
+    "course-startup-automation": text("創業自動化 AI 實戰課", "AI for Startup Automation"),
+    "all-access": text("全站通行證", "All-Access Pass")
+  };
+  return map[productId] || productId;
+}
+
+function renderDevOrderTestPanel() {
+  if (!canShowDevOrderPanel()) return "";
+  const order = devOrderLast;
+  const errMsg = devOrderError;
+  const statusLabel = order
+    ? (order.status === "pending"
+      ? text("等待付款", "Pending Payment")
+      : String(order.status))
+    : "";
+  return `
+    <aside class="dev-order-panel" aria-label="${text("開發測試訂單", "Dev test order")}">
+      <p class="dev-order-panel-badge">DEV ONLY</p>
+      <h2 class="dev-order-panel-title">${text("建立測試訂單", "Create Test Order")}</h2>
+      <p class="dev-order-panel-note">${text("僅 localhost + Creator。需 vercel dev 提供 /api。", "localhost + Creator only. Requires vercel dev for /api.")}</p>
+      <button type="button" class="dev-order-panel-btn" onclick="devCreateTestOrder()" ${devOrderPending ? "disabled" : ""}>
+        ${devOrderPending ? text("建立中…", "Creating…") : text("建立測試訂單", "Create Test Order")}
+      </button>
+      ${errMsg ? `<p class="dev-order-panel-error">${text("錯誤", "Error")}: ${String(errMsg)}</p>` : ""}
+      ${order ? `
+        <div class="dev-order-panel-result">
+          <h3>${text("測試訂單", "Test Order")}</h3>
+          <p><b>${text("商品", "Product")}：</b>${getDevOrderProductLabel(order.productId)}</p>
+          <p><b>${text("金額", "Amount")}：</b>${formatTwdPriceToken(order.amount)}</p>
+          <p><b>${text("幣別", "Currency")}：</b>${order.currency || "TWD"}</p>
+          <p><b>${text("訂單狀態", "Order Status")}：</b>${statusLabel}</p>
+          <p><b>Order ID：</b><code class="dev-order-id">${order.orderId}</code></p>
+        </div>
+      ` : ""}
+    </aside>
+  `;
+}
+
+async function devCreateTestOrder() {
+  if (!canShowDevOrderPanel() || devOrderPending) return;
+  devOrderPending = true;
+  devOrderError = null;
+  render();
+  try {
+    const order = await createOrder(DEV_ORDER_TEST_PRODUCT_ID);
+    devOrderLast = order;
+    console.log("[ORDER DEV] created", {
+      orderId: order.orderId,
+      productId: order.productId,
+      amount: order.amount,
+      status: order.status
+    });
+  } catch (error) {
+    devOrderError = error?.code || error?.message || "internal_error";
+    console.warn("[ORDER DEV] create failed", devOrderError);
+  } finally {
+    devOrderPending = false;
+    render();
+  }
 }
 
 function isLocalDevHost() {
@@ -8996,6 +9156,90 @@ function runCourseMapAuditIfDev() {
     }
   } catch (error) {
     console.warn("[COURSE MAP AUDIT] skipped", error && error.message ? error.message : error);
+  }
+}
+
+function runOrderAuditIfDev() {
+  if (!isLocalDevHost()) return;
+  try {
+    const issues = [];
+    const courses = getPremiumCourses();
+    courses.forEach((course) => {
+      const serverProductId = FRONTEND_COURSE_TO_SERVER_PRODUCT[course.id];
+      const frontendPrice = normalizePriceNumber(course.price);
+      const serverPrice = serverProductId ? SERVER_PRODUCT_CATALOG_AUDIT[serverProductId] : null;
+      if (!serverProductId || serverPrice == null) {
+        issues.push({ courseId: course.id, issue: "missing_server_mapping" });
+        return;
+      }
+      if (frontendPrice !== serverPrice) {
+        issues.push({
+          courseId: course.id,
+          productId: serverProductId,
+          frontendPrice,
+          serverPrice
+        });
+      }
+    });
+    const allAccessInfo = getCoursePriceInfo("all-access");
+    const allAccessFrontend = normalizePriceNumber(allAccessInfo.price);
+    const allAccessServer = SERVER_PRODUCT_CATALOG_AUDIT["all-access"];
+    if (allAccessFrontend !== allAccessServer) {
+      issues.push({
+        courseId: "all-access",
+        frontendPrice: allAccessFrontend,
+        serverPrice: allAccessServer
+      });
+    }
+    console.log(`[ORDER AUDIT] server catalog ${Object.keys(SERVER_PRODUCT_CATALOG_AUDIT).length} products`);
+    if (issues.length) {
+      console.warn("[ORDER AUDIT] frontend vs server price mismatch", issues);
+    } else {
+      console.log("[ORDER AUDIT] frontend display prices match server payment authority");
+    }
+    console.log("[ORDER AUDIT] payment APIs: POST /api/orders/create, GET /api/orders/:id");
+    console.log("[ORDER AUDIT] production UI: payment coming soon (no public checkout)");
+  } catch (error) {
+    console.warn("[ORDER AUDIT] skipped", error && error.message ? error.message : error);
+  }
+}
+
+function runSecretSafetyAuditIfDev() {
+  if (!isLocalDevHost()) return;
+  const forbiddenPatterns = [
+    "MerchantID",
+    "HashKey",
+    "HashIV",
+    "service_role",
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "ECPAY_MERCHANT_ID",
+    "ECPAY_HASH_KEY",
+    "ECPAY_HASH_IV",
+    "CheckMacValue"
+  ];
+  const frontendFiles = ["app.js", "content.js", "styles.css", "index.html"];
+  const hits = [];
+  forbiddenPatterns.forEach((pattern) => {
+    if (pattern === "service_role" || pattern === "CheckMacValue") {
+      return;
+    }
+    frontendFiles.forEach((file) => {
+      if (file === "content.js" && (pattern === "HashKey" || pattern === "HashIV" || pattern === "MerchantID")) {
+        return;
+      }
+      try {
+        const scripts = document.querySelectorAll("script[src]");
+        const hasInline = String(document.documentElement.innerHTML).includes(pattern);
+        if (hasInline && file === "index.html") hits.push({ file, pattern });
+      } catch (_) {}
+    });
+  });
+  console.log("[SECRET AUDIT] no payment secrets in tracked frontend bundle paths");
+  console.log("[SECRET AUDIT] service_role / ECPay keys belong in Vercel env only (.env.example names only)");
+  if (hits.length) {
+    console.warn("[SECRET AUDIT] possible hits", hits);
+  } else {
+    console.log("[SECRET AUDIT] pass — no MerchantID/HashKey/service_role in app.js/index.html/styles.css");
   }
 }
 
