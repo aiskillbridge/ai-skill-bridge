@@ -1,4 +1,4 @@
-# Payment Architecture — Phase 5A + 5B (ECPay Stage)
+# Payment Architecture — Phase 5A + 5B + 5C-1 (ECPay Stage / Production-ready)
 
 ## Phase 5A
 
@@ -6,12 +6,12 @@
 productId → POST /api/orders/create → pending order (server price)
 ```
 
-## Phase 5B (Stage only)
+## Phase 5B / 5C-1 (ECPay AioCheckOut)
 
 ```
 pending order
   → POST /api/payments/ecpay/checkout
-  → Browser POSTs form to ECPay stage (AioCheckOut/V5)
+  → Browser POSTs form to ECPay AioCheckOut/V5 (stage or production by ECPAY_MODE)
   → ECPay POST /api/payments/ecpay/callback   ← payment authority (ReturnURL)
   → verify CheckMacValue + MerchantID + TradeAmt
   → status pending → paid (idempotent)
@@ -22,8 +22,18 @@ pending order
 
 `OrderResultURL` must NOT share the callback endpoint and must NOT POST to the static homepage (405).
 
+## ECPAY_MODE (server only)
 
-`ECPAY_MODE=production` is blocked in code for Phase 5B.
+Allowed values only:
+
+- `stage` → `https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5`
+- `production` → `https://payment.ecpay.com.tw/Cashier/AioCheckOut/V5`
+
+(Official: https://developers.ecpay.com.tw/2862/)
+
+Missing / typo / any other value → `payment_not_configured` (never fallback to production).
+
+Current runtime should remain `ECPAY_MODE=stage` until credentials + go-live checklist are ready.
 
 ## CheckMacValue (official)
 

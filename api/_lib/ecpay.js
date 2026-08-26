@@ -91,50 +91,57 @@ export function verifyCheckMacValue(params, hashKey, hashIV) {
   return provided === expected;
 }
 
+/** Official ECPay AioCheckOut V5 URLs (developers.ecpay.com.tw). */
+export const ECPAY_CHECKOUT_URLS = Object.freeze({
+  stage: "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5",
+  production: "https://payment.ecpay.com.tw/Cashier/AioCheckOut/V5"
+});
+
+function unconfigured(mode, appBaseUrl) {
+  return {
+    configured: false,
+    mode,
+    merchantId: null,
+    hashKey: null,
+    hashIV: null,
+    appBaseUrl,
+    checkoutUrl: null,
+    appBaseUrlOk: false
+  };
+}
+
+/**
+ * Server-only ECPay config from process.env.
+ * ECPAY_MODE must be exactly "stage" or "production" (no default, no fallback).
+ * Never log HashKey / HashIV.
+ */
 export function getEcpayConfig() {
   hydrateEcpayEnvFromFile();
 
   const merchantId = readEnv("ECPAY_MERCHANT_ID");
   const hashKey = readEnv("ECPAY_HASH_KEY");
   const hashIV = readEnv("ECPAY_HASH_IV");
-  const mode = (readEnv("ECPAY_MODE") || "stage").toLowerCase();
+  const rawMode = readEnv("ECPAY_MODE");
+  const mode = rawMode ? String(rawMode).trim().toLowerCase() : "";
   const appBaseUrl = (readEnv("APP_BASE_URL") || "").replace(/\/$/, "");
 
-  if (!merchantId || !hashKey || !hashIV) {
-    return {
-      configured: false,
-      mode,
-      merchantId: null,
-      hashKey: null,
-      hashIV: null,
-      appBaseUrl,
-      checkoutUrl: null,
-      appBaseUrlOk: false
-    };
+  // Strict mode gate: missing / typo / unknown → refuse (never invent production).
+  if (mode !== "stage" && mode !== "production") {
+    return unconfigured(mode || "missing", appBaseUrl);
   }
 
-  if (mode === "production") {
-    // Phase 5B: refuse production until explicitly enabled later.
-    return {
-      configured: false,
-      mode: "production_blocked",
-      merchantId: null,
-      hashKey: null,
-      hashIV: null,
-      appBaseUrl,
-      checkoutUrl: null,
-      appBaseUrlOk: false
-    };
+  if (!merchantId || !hashKey || !hashIV) {
+    return unconfigured(mode, appBaseUrl);
   }
 
   return {
     configured: true,
-    mode: "stage",
+    mode,
     merchantId,
     hashKey,
     hashIV,
     appBaseUrl,
-    checkoutUrl: "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5",
+    checkoutUrl: ECPAY_CHECKOUT_URLS[mode],
     appBaseUrlOk: isPublicHttpsBaseUrl(appBaseUrl)
   };
 }
