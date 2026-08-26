@@ -12,12 +12,16 @@ productId → POST /api/orders/create → pending order (server price)
 pending order
   → POST /api/payments/ecpay/checkout
   → Browser POSTs form to ECPay stage (AioCheckOut/V5)
-  → ECPay POST /api/payments/ecpay/callback   ← payment authority
+  → ECPay POST /api/payments/ecpay/callback   ← payment authority (ReturnURL)
   → verify CheckMacValue + MerchantID + TradeAmt
   → status pending → paid (idempotent)
   → grant entitlement
-  → Browser return URL only re-fetches GET /api/orders/:id
+  → Browser OrderResultURL POST /api/payments/ecpay/result → 303 GET SPA
+  → SPA only re-fetches GET /api/orders/:id (not payment authority)
 ```
+
+`OrderResultURL` must NOT share the callback endpoint and must NOT POST to the static homepage (405).
+
 
 `ECPAY_MODE=production` is blocked in code for Phase 5B.
 

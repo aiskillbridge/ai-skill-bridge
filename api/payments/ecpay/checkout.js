@@ -111,9 +111,12 @@ export default async function handler(req, res) {
     return sendError(res, "invalid_request", "Order is not payable");
   }
 
+  // ReturnURL = server-to-server payment authority (callback).
+  // OrderResultURL = browser POST after payment UI — must accept POST then 303 to SPA GET.
+  // Never point OrderResultURL at the static homepage (Vercel returns 405 on POST).
   const returnURL = `${ecpay.appBaseUrl}/api/payments/ecpay/callback`;
+  const orderResultURL = `${ecpay.appBaseUrl}/api/payments/ecpay/result`;
   const clientBackURL = `${ecpay.appBaseUrl}/?orderId=${encodeURIComponent(order.id)}#order-result`;
-  const orderResultURL = clientBackURL;
 
   const params = {
     MerchantID: ecpay.merchantId,
