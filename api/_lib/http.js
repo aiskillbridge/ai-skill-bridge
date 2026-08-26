@@ -8,6 +8,9 @@ export const API_ERRORS = Object.freeze({
   invalid_request: { status: 400, code: "invalid_request" },
   order_not_found: { status: 404, code: "order_not_found" },
   order_conflict: { status: 409, code: "order_conflict" },
+  order_not_pending: { status: 409, code: "order_not_pending" },
+  payment_not_configured: { status: 503, code: "payment_not_configured" },
+  payment_forbidden: { status: 403, code: "payment_forbidden" },
   internal_error: { status: 500, code: "internal_error" }
 });
 
@@ -37,7 +40,11 @@ export function getBearerToken(req) {
 /**
  * @param {import('http').IncomingMessage} req
  */
-export async function readJsonBody(req) {
+export async function readRawBody(req) {
+  if (typeof req.body === "string") return req.body;
+  if (req.body && typeof req.body === "object" && !Buffer.isBuffer(req.body)) {
+    return null;
+  }
   return new Promise((resolve, reject) => {
     let raw = "";
     req.on("data", (chunk) => {
@@ -47,19 +54,46 @@ export async function readJsonBody(req) {
         req.destroy();
       }
     });
-    req.on("end", () => {
-      if (!raw) {
-        resolve({});
-        return;
-      }
-      try {
-        resolve(JSON.parse(raw));
-      } catch {
-        reject(new Error("invalid_json"));
-      }
-    });
+    req.on("end", () => resolve(raw));
     req.on("error", reject);
   });
+}
+
+export async function readJsonBody(req) {
+  if (req.body && typeof req.body === "object" && !Buffer.isBuffer(req.body)) {
+    return req.body;
+  }
+  const raw = await readRawBody(req);
+  if (!raw) return {};
+  try {
+    return JSON.parse(raw);
+  } catch {
+    throw new Error("invalid_json");
+  }
+}
+
+/**
+ * Parse application/x-www-form-urlencoded (ECPay callbacks).
+ */
+export async function readFormBody(req) {
+  if (req.body && typeof req.body === "object" && !Buffer.isBuffer(req.body)) {
+    const out = {};
+    for (const [key, value] of Object.entries(req.body)) {
+      out[key] = value == null ? "" : String(value);
+    }
+    return out;
+  }
+  const raw = (await readRawBody(req)) || "";
+  const out = {};
+  if (!raw) return out;
+  for (const part of raw.split("&")) {
+    if (!part) continue;
+    const idx = part.indexOf("=");
+    const key = decodeURIComponent((idx >= 0 ? part.slice(0, idx) : part).replace(/\+/g, " "));
+    const value = decodeURIComponent((idx >= 0 ? part.slice(idx + 1) : "").replace(/\+/g, " "));
+    out[key] = value;
+  }
+  return out;
 }
 
 /**

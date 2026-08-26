@@ -908,7 +908,7 @@ function renderCoursePriceBlock(courseOrId, options = {}) {
 
 /**
  * Single source of truth for plan: public.profiles.plan → state.userPlan.
- * unlocked_courses column does not exist yet → state.unlockedCourses stays [].
+ * unlocked_courses (jsonb) → state.unlockedCourses when present.
  * Never reads plan from localStorage.
  * Special roles (Creator / Queen) are email-based and must not rewrite profiles.plan.
  */
@@ -921,11 +921,34 @@ async function loadUserPlan(user) {
   try {
     const { data, error } = await supabaseClient
       .from("profiles")
-      .select("id, email, display_name, plan, created_at")
+      .select("id, email, display_name, plan, created_at, unlocked_courses")
       .eq("id", user.id)
       .maybeSingle();
 
     if (error) {
+      // Backward compatible: column may not exist until Phase 5B migration is applied.
+      if (String(error.message || "").toLowerCase().includes("unlocked_courses")) {
+        const fallback = await supabaseClient
+          .from("profiles")
+          .select("id, email, display_name, plan, created_at")
+          .eq("id", user.id)
+          .maybeSingle();
+        if (fallback.error) {
+          logSupabaseError("Load user plan failed:", fallback.error);
+          state.userPlan = "free";
+          state.unlockedCourses = [];
+          return;
+        }
+        const row = fallback.data;
+        if (!row || row.plan == null || row.plan === "") {
+          state.userPlan = "free";
+          state.unlockedCourses = [];
+          return;
+        }
+        state.userPlan = normalizeUserPlan(row.plan);
+        state.unlockedCourses = parseUnlockedCoursesFromPlan(row.plan, null);
+        return;
+      }
       logSupabaseError("Load user plan failed:", error);
       state.userPlan = "free";
       state.unlockedCourses = [];
@@ -934,13 +957,12 @@ async function loadUserPlan(user) {
 
     if (!data || data.plan == null || data.plan === "") {
       state.userPlan = "free";
-      state.unlockedCourses = [];
+      state.unlockedCourses = parseUnlockedCoursesFromPlan(null, data?.unlocked_courses || null);
       return;
     }
 
     state.userPlan = normalizeUserPlan(data.plan);
-    // No unlocked_courses column in profiles yet; keep empty unless plan itself is a course id.
-    state.unlockedCourses = parseUnlockedCoursesFromPlan(data.plan, null);
+    state.unlockedCourses = parseUnlockedCoursesFromPlan(data.plan, data.unlocked_courses || null);
   } catch (err) {
     logSupabaseError("Load user plan failed:", err);
     state.userPlan = "free";
@@ -8347,6 +8369,7 @@ async function startApp() {
   runOrderAuditIfDev();
   runSecretSafetyAuditIfDev();
   runI18nAuditIfDev();
+  await refreshOrderResultFromQuery();
 }
 
 /** Server-side product prices (must match api/_lib/productCatalog.js). Payment authority is server-only. */
@@ -8434,6 +8457,60 @@ async function getOrderStatus(orderId) {
   return payload;
 }
 
+/**
+ * Request ECPay stage checkout fields from server, then auto-submit form.
+ * Browser never computes CheckMacValue and never sends amount as authority.
+ */
+async function startEcpayCheckout(orderId) {
+  const token = await getSupabaseAccessToken();
+  if (!token) {
+    const err = new Error("authentication_required");
+    err.code = "authentication_required";
+    throw err;
+  }
+  const response = await fetch("/api/payments/ecpay/checkout", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ orderId })
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const err = new Error(payload.error || "checkout_failed");
+    err.code = payload.error || "checkout_failed";
+    err.status = response.status;
+    throw err;
+  }
+  if (!payload.checkoutUrl || !payload.paymentFields) {
+    const err = new Error("invalid_checkout_payload");
+    err.code = "invalid_checkout_payload";
+    throw err;
+  }
+  submitEcpayPaymentForm(payload.checkoutUrl, payload.paymentFields);
+  return payload;
+}
+
+function submitEcpayPaymentForm(checkoutUrl, paymentFields) {
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = checkoutUrl;
+  form.acceptCharset = "UTF-8";
+  form.style.display = "none";
+  Object.keys(paymentFields || {}).forEach((key) => {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = key;
+    input.value = String(paymentFields[key] ?? "");
+    form.appendChild(input);
+  });
+  document.body.appendChild(form);
+  form.submit();
+}
+
+let devCheckoutPending = false;
+
 function canShowDevOrderPanel() {
   return typeof isLocalDevHost === "function" && isLocalDevHost() && isCreatorAccount() && state.user;
 }
@@ -8460,14 +8537,20 @@ function renderDevOrderTestPanel() {
       ? text("等待付款", "Pending Payment")
       : String(order.status))
     : "";
+  const canCheckout = order && order.status === "pending" && order.orderId;
   return `
     <aside class="dev-order-panel" aria-label="${text("開發測試訂單", "Dev test order")}">
       <p class="dev-order-panel-badge">DEV ONLY</p>
       <h2 class="dev-order-panel-title">${text("建立測試訂單", "Create Test Order")}</h2>
-      <p class="dev-order-panel-note">${text("僅 localhost + Creator。需 vercel dev 提供 /api。", "localhost + Creator only. Requires vercel dev for /api.")}</p>
+      <p class="dev-order-panel-note">${text("僅 localhost + Creator。需 vercel dev 與 ECPay stage 環境變數。", "localhost + Creator only. Requires vercel dev and ECPay stage env vars.")}</p>
       <button type="button" class="dev-order-panel-btn" onclick="devCreateTestOrder()" ${devOrderPending ? "disabled" : ""}>
         ${devOrderPending ? text("建立中…", "Creating…") : text("建立測試訂單", "Create Test Order")}
       </button>
+      ${canCheckout ? `
+        <button type="button" class="dev-order-panel-btn" onclick="devStartEcpayCheckout()" ${devCheckoutPending ? "disabled" : ""}>
+          ${devCheckoutPending ? text("導向 ECPay…", "Redirecting…") : text("ECPay 測試付款", "ECPay Stage Checkout")}
+        </button>
+      ` : ""}
       ${errMsg ? `<p class="dev-order-panel-error">${text("錯誤", "Error")}: ${String(errMsg)}</p>` : ""}
       ${order ? `
         <div class="dev-order-panel-result">
@@ -8477,6 +8560,7 @@ function renderDevOrderTestPanel() {
           <p><b>${text("幣別", "Currency")}：</b>${order.currency || "TWD"}</p>
           <p><b>${text("訂單狀態", "Order Status")}：</b>${statusLabel}</p>
           <p><b>Order ID：</b><code class="dev-order-id">${order.orderId}</code></p>
+          <p class="dev-order-panel-note">${text("ReturnURL 回來後只會重新查詢訂單狀態，不會在瀏覽器自行標記 paid。", "After ReturnURL, the browser only re-fetches order status and never marks paid itself.")}</p>
         </div>
       ` : ""}
     </aside>
@@ -8503,6 +8587,53 @@ async function devCreateTestOrder() {
   } finally {
     devOrderPending = false;
     render();
+  }
+}
+
+async function devStartEcpayCheckout() {
+  if (!canShowDevOrderPanel() || devCheckoutPending) return;
+  if (!devOrderLast?.orderId) return;
+  devCheckoutPending = true;
+  devOrderError = null;
+  render();
+  try {
+    await startEcpayCheckout(devOrderLast.orderId);
+  } catch (error) {
+    devCheckoutPending = false;
+    devOrderError = error?.code || error?.message || "checkout_failed";
+    console.warn("[ECPAY DEV] checkout failed", devOrderError);
+    render();
+  }
+}
+
+async function refreshOrderResultFromQuery() {
+  try {
+    const params = new URLSearchParams(location.search || "");
+    const orderId = params.get("orderId");
+    const hash = String(location.hash || "");
+    if (!orderId || !hash.includes("order-result")) return;
+    if (!state.user) return;
+    const order = await getOrderStatus(orderId);
+    if (canShowDevOrderPanel()) {
+      devOrderLast = {
+        orderId: order.orderId,
+        productId: order.productId,
+        amount: order.amount,
+        currency: order.currency,
+        status: order.status,
+        merchantTradeNo: order.merchantTradeNo
+      };
+    }
+    // ReturnURL is not payment authority — reload access from Supabase profiles only.
+    await loadUserPlan(state.user);
+    render();
+    console.log("[ORDER RESULT] refreshed from server", {
+      orderId: order.orderId,
+      status: order.status,
+      amount: order.amount
+    });
+  } catch (error) {
+    console.warn("[ORDER RESULT] refresh failed", error?.code || error?.message || error);
   }
 }
 
@@ -9197,8 +9328,9 @@ function runOrderAuditIfDev() {
     } else {
       console.log("[ORDER AUDIT] frontend display prices match server payment authority");
     }
-    console.log("[ORDER AUDIT] payment APIs: POST /api/orders/create, GET /api/orders/:id");
+    console.log("[ORDER AUDIT] payment APIs: POST /api/orders/create, GET /api/orders/:id, POST /api/payments/ecpay/checkout, POST /api/payments/ecpay/callback");
     console.log("[ORDER AUDIT] production UI: payment coming soon (no public checkout)");
+    console.log("[ORDER AUDIT] ECPay paid only via verified server callback");
   } catch (error) {
     console.warn("[ORDER AUDIT] skipped", error && error.message ? error.message : error);
   }
