@@ -1220,12 +1220,12 @@ const I18N = {
     },
     premium: {
       title: "進階付費課程",
-      lead: "進階課程依照使用者能力與需求分級，從學生、求職者、研究者、工作者到創業與社會創新使用者。這些課程未來可以接 Gumroad、綠界、藍新、Line Pay 或 Stripe 收費。",
+      lead: "進階課程依照使用者能力與需求分級，從學生、求職者、研究者、工作者到創業與社會創新使用者。可於本站購買單門課程或全站通行證。",
       goPay: "前往付款",
       suitableFor: "適合對象",
       outcome: "完成後你會得到",
-      noteTitle: "付款連結提醒",
-      note: "目前所有付款按鈕先連到 Gumroad 範例網址。正式上線前，只要把 content.js 裡的 paymentUrl 換成自己的收款連結即可。"
+      noteTitle: "購買說明",
+      note: "單門課程與全站通行證皆可於本站以 ECPay（綠界）完成付款。價格與權限以伺服器確認結果為準。"
     },
     tools: {
       title: "AI 工具導航",
@@ -1459,12 +1459,12 @@ const I18N = {
     },
     premium: {
       title: "Premium Advanced Courses",
-      lead: "Premium courses are divided by user ability and needs, from students, job seekers, researchers, workers, to startup and social innovation users. These courses can later connect to Gumroad, ECPay, NewebPay, Line Pay, or Stripe for payment.",
+      lead: "Premium courses are divided by user ability and needs, from students, job seekers, researchers, workers, to startup and social innovation users. Individual courses and the All-Access Pass can be purchased on this site.",
       goPay: "Go to Payment",
       suitableFor: "Suitable For",
       outcome: "Outcome",
-      noteTitle: "Payment Link Reminder",
-      note: "All payment buttons currently point to a Gumroad sample link. Before launching, replace paymentUrl in content.js with your own checkout links."
+      noteTitle: "Purchase Notes",
+      note: "Individual courses and the All-Access Pass can be purchased on this site via ECPay. Price and access follow server confirmation."
     },
     tools: {
       title: "AI Tool Navigator",

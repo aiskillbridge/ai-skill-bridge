@@ -529,6 +529,14 @@ function applyPostLoginDestination(destination) {
     }, 0);
     return true;
   }
+  if (destination.action === "purchaseCourse" && destination.courseId) {
+    state.route = destination.route || "course";
+    if (destination.courseId) currentCourseId = destination.courseId;
+    setTimeout(() => {
+      if (typeof purchaseCourse === "function") purchaseCourse(destination.courseId);
+    }, 0);
+    return true;
+  }
   if (destination.route === "showcase" && destination.packageId) {
     currentResultPackageId = destination.packageId;
     state.route = "showcase";
@@ -824,10 +832,119 @@ function getCourseAccessStatusLabel(courseId) {
 }
 
 function renderPaymentComingSoonNote() {
-  return `<p class="course-price-coming-soon">${text("付款功能建置中", "Payment service coming soon")}</p>`;
+  // Deprecated for production UI — kept as no-op so any stray call stays blank.
+  return "";
 }
 
 let allAccessCheckoutPending = false;
+let courseCheckoutPendingId = null;
+
+/** courseId → server productId (must match api/_lib/productCatalog.js). */
+function getServerProductIdForCourse(courseId) {
+  const map = typeof FRONTEND_COURSE_TO_SERVER_PRODUCT !== "undefined"
+    ? FRONTEND_COURSE_TO_SERVER_PRODUCT
+    : {
+      admissions: "course-admissions",
+      "college-learning": "course-college-learning",
+      "research-competition": "course-research-competition",
+      "career-internship": "course-career-internship",
+      "workplace-productivity": "course-workplace-productivity",
+      "startup-automation": "course-startup-automation"
+    };
+  if (!courseId || courseId === "all-access" || courseId === "free" || courseId === "free-starter") {
+    return null;
+  }
+  return map[courseId] || null;
+}
+
+/** Single-course CTA: owned / Creator-Queen → no buy; else buy at display price (server charges catalog amount). */
+function renderCoursePurchaseControls(courseId, options = {}) {
+  const variant = options.variant || "block";
+  const productId = getServerProductIdForCourse(courseId);
+  if (!productId) return "";
+
+  if (hasCourseAccess(courseId)) {
+    if (variant === "map" || variant === "header" || variant === "inline") return "";
+    const ownedLabel = hasAllAccessPass()
+      ? text("已解鎖", "Unlocked")
+      : text("已購買", "Purchased");
+    return `<p class="course-price-owned" role="status">${ownedLabel}</p>`;
+  }
+
+  const priceInfo = getCoursePriceInfo(courseId);
+  const priceLabel = formatTwdPrice(priceInfo?.price);
+  const pending = courseCheckoutPendingId === courseId;
+  const label = pending
+    ? text("處理中…", "Processing…")
+    : text(`立即購買 ${priceLabel}`, `Buy Now ${priceLabel}`);
+  const disabled = pending ? "disabled" : "";
+  const btn = `<button type="button" class="btn primary" onclick="purchaseCourse('${courseId}')" ${disabled}>${label}</button>`;
+
+  if (variant === "block") return `<div class="btnrow">${btn}</div>`;
+  return btn;
+}
+
+/**
+ * Public single-course purchase: login → POST /api/orders/create { productId }
+ * → ECPay checkout. Amount comes only from server catalog.
+ */
+async function purchaseCourse(courseId) {
+  const productId = getServerProductIdForCourse(courseId);
+  if (!productId) {
+    toast(text("找不到可購買的課程商品。", "No payable course product found."));
+    return;
+  }
+
+  if (hasCourseAccess(courseId)) {
+    toast(text("你已擁有此課程。", "You already own this course."));
+    return;
+  }
+
+  if (!state.user) {
+    savePostLoginDestination({
+      action: "purchaseCourse",
+      courseId,
+      route: state.route || "course"
+    });
+    toast(text(
+      "請先使用 Google 登入後再購買課程。",
+      "Please sign in with Google before purchasing a course."
+    ));
+    signInWithGoogle();
+    return;
+  }
+
+  if (courseCheckoutPendingId) return;
+  courseCheckoutPendingId = courseId;
+  render();
+
+  try {
+    const order = await createOrder(productId);
+    if (!order?.orderId) {
+      const err = new Error("order_create_failed");
+      err.code = "order_create_failed";
+      throw err;
+    }
+    await startEcpayCheckout(order.orderId);
+  } catch (error) {
+    courseCheckoutPendingId = null;
+    const code = error?.code || error?.message || "checkout_failed";
+    console.warn("[COURSE CHECKOUT] failed", { courseId, productId, code });
+    if (code === "authentication_required") {
+      toast(text("請先登入後再購買。", "Please sign in to purchase."));
+    } else if (code === "order_conflict") {
+      toast(text(
+        "你剛建立過待付款訂單，請稍後再試或完成上一筆付款。",
+        "A pending order was just created. Please wait or finish the previous payment."
+      ));
+    } else if (code === "payment_not_configured") {
+      toast(text("付款服務暫時無法使用，請稍後再試。", "Payment is temporarily unavailable. Please try again later."));
+    } else {
+      toast(text("無法開始付款，請稍後再試。", "Could not start checkout. Please try again."));
+    }
+    render();
+  }
+}
 
 /** All-access CTA: Creator/Queen/premium → owned; others → server-priced purchase. */
 function renderAllAccessPurchaseControls(options = {}) {
@@ -982,13 +1099,15 @@ function renderCoursePriceBlock(courseOrId, options = {}) {
       <p class="course-price-label">${text("課程售價", "Course Price")}</p>
       <p class="course-price-amount">${formatTwdPrice(info.price)}</p>
       <p class="course-price-meta">${text("一次付費", "One-time payment")}</p>
-      ${compact ? "" : `
+      ${compact ? `
+        ${renderCoursePurchaseControls(info.id, { variant: "inline" })}
+      ` : `
         <ul class="course-price-includes">
           <li>${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</li>
           <li>${text(`包含${lessonCount}堂線上實戰課與對應成果包`, `Includes ${lessonCount} practical online lessons and the corresponding result package`)}${packageName ? `（${packageName}）` : ""}</li>
           <li>${text("本商品為線上數位課程，不提供實體配送", "Digital course · No physical delivery")}</li>
         </ul>
-        ${renderPaymentComingSoonNote()}
+        ${renderCoursePurchaseControls(info.id, { variant: "block" })}
         ${showFacts ? renderCourseProductFacts() : ""}
       `}
       ${renderDigitalContentPolicyLink()}
@@ -2897,8 +3016,13 @@ function renderMapCourseCard(course) {
       ${showPrivate ? `<p class="map-course-progress">${text("進度", "Progress")} ${progress.completed}/${progress.total}</p>` : ""}
       <div class="btnrow">
         <button type="button" class="btn ${unlocked ? "primary" : "secondary"}" onclick="${primaryAction}">${primaryLabel}</button>
+        ${unlocked ? "" : renderCoursePurchaseControls(course.id, { variant: "map" })}
       </div>
-      ${unlocked ? "" : renderPaymentComingSoonNote()}
+      ${unlocked
+        ? `<p class="course-price-owned" role="status">${hasAllAccessPass()
+          ? text("已解鎖", "Unlocked")
+          : text("已購買", "Purchased")}</p>`
+        : ""}
     </article>
   `;
 }
@@ -3837,8 +3961,8 @@ function learning() {
                   ${renderCoursePriceBlock(course, { compact: true })}
                   <div class="btnrow">
                     <button class="btn secondary" onclick="openCourse('${course.id}')">${text("查看課程", "View Course")}</button>
+                    ${renderCoursePurchaseControls(course.id, { variant: "inline" })}
                   </div>
-                  ${renderPaymentComingSoonNote()}
                 </article>
               `).join("")}
             </div>
@@ -3951,7 +4075,7 @@ function premium() {
         </div>
 
         <button type="button" class="btn ${unlocked ? "primary" : "secondary"}" onclick="${ctaAction}">${ctaLabel}</button>
-        ${unlocked ? "" : renderPaymentComingSoonNote()}
+        ${unlocked ? "" : renderCoursePurchaseControls(course.id, { variant: "inline" })}
       </article>
     `;
   }).join("");
@@ -3961,8 +4085,8 @@ function premium() {
       <div class="wrap">
         <h1>${L("premium.title")}</h1>
         <p class="lead">${text(
-          "付費區採用「一個完整課程一個價格」的方式，不是單堂課收費。每個課程包含 10 堂課、實作任務、Prompt 模板與最後成果。全站通行證可解鎖全部課程。價格以新臺幣（TWD）一次付費計價，付款功能建置中。",
-          "Premium courses are sold as complete courses, not by individual lessons. Each course includes 10 lessons, practical tasks, prompt templates, and a final product. The All-Access Pass unlocks everything. All prices are in New Taiwan Dollars (TWD) as one-time payments; payment service is coming soon."
+          "付費區採用「一個完整課程一個價格」的方式，不是單堂課收費。每個課程包含 10 堂課、實作任務、Prompt 模板與最後成果。全站通行證可解鎖全部課程。價格以新臺幣（TWD）一次付費計價。",
+          "Premium courses are sold as complete courses, not by individual lessons. Each course includes 10 lessons, practical tasks, prompt templates, and a final product. The All-Access Pass unlocks everything. All prices are in New Taiwan Dollars (TWD) as one-time payments."
         )}</p>
         ${renderPriceCurrencyNote()}
 
@@ -3987,8 +4111,11 @@ function premium() {
         </div>
 
         <section class="panel" style="margin-top:24px">
-          <h2>${L("premium.noteTitle")}</h2>
-          <p>${L("premium.note")}</p>
+          <h2>${text("購買說明", "Purchase Notes")}</h2>
+          <p>${text(
+            "單門課程與全站通行證皆可於本站以 ECPay（綠界）完成付款。價格與權限以伺服器確認結果為準；登入帳號後，已購買課程會自動解鎖。",
+            "Individual courses and the All-Access Pass can be purchased on this site via ECPay. Price and access follow server confirmation; unlocked courses appear on your signed-in account."
+          )}</p>
         </section>
       </div>
     </main>
@@ -4138,7 +4265,9 @@ function openLesson(index) {
     : null;
   const lessonIndex = Number(index);
   if (item && item.id && item.id !== "all-access" && typeof hasCourseAccess === "function" && !hasCourseAccess(item.id)) {
-    toast(state.lang === "zh" ? "此課程尚未解鎖。付款功能建置中，請先查看課程內容與方案。" : "This course is locked. Payment is coming soon — review the course content and plans first.");
+    toast(state.lang === "zh"
+      ? "此課程尚未解鎖。請先購買後再開始學習。"
+      : "This course is locked. Please purchase it before starting lessons.");
     return;
   }
   if (item && item.sequentialUnlock && !isLessonUnlocked(item.id, lessonIndex)) {
@@ -4719,9 +4848,9 @@ function renderCourseHeader(item, progress, meta) {
     ? `<button type="button" class="btn primary" onclick="openLesson(${findContinueLessonIndex(item.id)})">${continueLabel}</button>
        <button type="button" class="btn secondary" onclick="document.getElementById('course-how-to-learn')?.scrollIntoView({behavior:'smooth',block:'start'})">${text("查看學習方法", "See how to learn")}</button>
        <button type="button" class="btn secondary" onclick="openCourseResultPackage('${item.id}')">${text("查看成果包", "View Result Package")}</button>`
-    : `<button type="button" class="btn primary" onclick="document.getElementById('course-curriculum')?.scrollIntoView({behavior:'smooth',block:'start'})">${text("查看課程內容", "View Course")}</button>
-       <button type="button" class="btn secondary" onclick="document.getElementById('course-plan-compare')?.scrollIntoView({behavior:'smooth',block:'start'})">${text("查看方案", "View Plan")}</button>
-       ${renderPaymentComingSoonNote()}`;
+    : `${renderCoursePurchaseControls(item.id, { variant: "header" })}
+       <button type="button" class="btn secondary" onclick="document.getElementById('course-curriculum')?.scrollIntoView({behavior:'smooth',block:'start'})">${text("查看課程內容", "View Course")}</button>
+       <button type="button" class="btn secondary" onclick="document.getElementById('course-plan-compare')?.scrollIntoView({behavior:'smooth',block:'start'})">${text("查看方案", "View Plan")}</button>`;
 
   return `
     <section class="course-pro-hero course-product-hero">
@@ -5021,7 +5150,7 @@ function renderCoursePlanComparison(item) {
       </div>
       ${hasCourseAccess(item.id) || hasAllAccessPass()
         ? ""
-        : `<div class="btnrow"><button type="button" class="btn secondary" onclick="setRoute('map')">${text("查看方案", "View Plan")}</button>${renderPaymentComingSoonNote()}</div>`}
+        : `<div class="btnrow">${renderCoursePurchaseControls(item.id, { variant: "inline" })}${renderAllAccessPurchaseControls({ variant: "map" })}</div>`}
     </section>
   `;
 }
@@ -5170,10 +5299,13 @@ function renderPremiumCourseOverview(item) {
               <ul>
                 <li>${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</li>
                 <li>${text("線上數位內容，無實體配送", "Digital content · No physical delivery")}</li>
-                <li>${text("付款功能建置中", "Payment service coming soon")}</li>
+                <li>${text("價格以新臺幣（TWD）計價", "Priced in New Taiwan Dollars (TWD)")}</li>
               </ul>
               <p class="lesson-pro-muted">${text("成果包", "Package")}：${pkgName}</p>
-              <button type="button" class="btn secondary" onclick="document.getElementById('course-plan-compare')?.scrollIntoView({behavior:'smooth',block:'start'})">${text("查看方案", "View Plan")}</button>
+              <div class="btnrow">
+                ${renderCoursePurchaseControls(item.id, { variant: "inline" })}
+                <button type="button" class="btn secondary" onclick="document.getElementById('course-plan-compare')?.scrollIntoView({behavior:'smooth',block:'start'})">${text("查看方案", "View Plan")}</button>
+              </div>
               `}
             </div>
           </aside>
@@ -8241,10 +8373,11 @@ function privacyPage() {
           <li>Google Authentication</li>
           <li>Supabase</li>
           <li>Vercel</li>
+          <li>ECPay（綠界科技）</li>
         </ul>
         <p>${text(
-          "付款處理商將在付款功能正式上線後另行列出。",
-          "Payment processors will be listed after payment features go live."
+          "付款由 ECPay（綠界科技）處理；我們不會在瀏覽器端儲存完整付款憑證作為權限依據。",
+          "Payments are processed by ECPay. We do not treat browser-side payment credentials as entitlement authority."
         )}</p>
       </section>
       <section class="public-info-section">
@@ -8302,10 +8435,9 @@ function digitalContentPage() {
       <section class="public-info-section">
         <h2>${text("購買與開通", "Purchase and Access")}</h2>
         <p>${text(
-          "目前付款功能建置中。實際開通方式將依購買流程所示。",
-          "Payment features are currently under construction. Access activation will follow the purchase flow shown at the time of buying."
+          "可於網站購買單門課程或全站通行證。付款完成並經系統確認後，將以登入帳號開通對應課程權限。",
+          "You can purchase individual courses or the All-Access Pass on this site. After payment is confirmed, access is unlocked for your signed-in account."
         )}</p>
-        <p>${renderPaymentComingSoonNote()}</p>
       </section>
       <section class="public-info-section">
         <h2>${text("聯絡", "Contact")}</h2>
@@ -8349,8 +8481,10 @@ function refundPolicyPage() {
       </section>
       <section class="public-info-section">
         <h2>${text("目前購買狀態", "Current Purchase Status")}</h2>
-        <p>${text("目前付款功能建置中。", "Payment features are currently under construction.")}</p>
-        <p>${renderPaymentComingSoonNote()}</p>
+        <p>${text(
+          "網站已支援單門課程與全站通行證的線上付款購買。實際權利以購買時頁面條件與付款確認結果為準。",
+          "Online checkout is available for individual courses and the All-Access Pass. Rights follow the purchase-page terms and confirmed payment result."
+        )}</p>
       </section>
       <section class="public-info-section">
         <h2>${text("客服聯絡", "Contact Support")}</h2>
@@ -8875,7 +9009,8 @@ function auditTranslations() {
     ["課程售價", "Course Price"],
     ["一次付費", "One-time payment"],
     ["早鳥價", "Early-bird Price"],
-    ["付款功能建置中", "Payment service coming soon"]
+    ["立即購買", "Buy Now"],
+    ["已購買", "Purchased"]
   ];
   priceKeys.forEach(([zh, en], i) => {
     if (!zh || !en) warn(`priceLabels[${i}]`, "empty");
@@ -9258,16 +9393,6 @@ function validateProductPhase4B() {
     issues.push({ path: "all-access", issue: "early-bird / regular price mismatch" });
   }
 
-  const forbiddenCtas = ["立即購買", "Buy Now", "Pay Now", "Checkout"];
-  const sampleHtml = typeof renderPremiumCourseOverview === "function" && typeof PREMIUM !== "undefined"
-    ? renderPremiumCourseOverview(PREMIUM.find(c => c.id === "admissions"))
-    : "";
-  forbiddenCtas.forEach(label => {
-    if (sampleHtml && sampleHtml.includes(label)) {
-      issues.push({ path: "cta", issue: `forbidden purchase CTA present: ${label}` });
-    }
-  });
-
   const signedOutOk = !AUTH_REQUIRED_ROUTES.has("course");
 
   return {
@@ -9418,7 +9543,7 @@ function runOrderAuditIfDev() {
       console.log("[ORDER AUDIT] frontend display prices match server payment authority");
     }
     console.log("[ORDER AUDIT] payment APIs: POST /api/orders/create, GET /api/orders/:id, POST /api/payments/ecpay/checkout, POST /api/payments/ecpay/callback");
-    console.log("[ORDER AUDIT] production UI: payment coming soon (no public checkout)");
+    console.log("[ORDER AUDIT] production UI: public course + all-access checkout enabled");
     console.log("[ORDER AUDIT] ECPay paid only via verified server callback");
   } catch (error) {
     console.warn("[ORDER AUDIT] skipped", error && error.message ? error.message : error);
