@@ -521,6 +521,14 @@ function applyPostLoginDestination(destination) {
     state.route = "showcase";
     return true;
   }
+  if (destination.action === "purchaseAllAccess") {
+    state.route = destination.route || "home";
+    // Defer until auth session + plan load finish; never treat browser as payment authority.
+    setTimeout(() => {
+      if (typeof purchaseAllAccess === "function") purchaseAllAccess();
+    }, 0);
+    return true;
+  }
   if (destination.route === "showcase" && destination.packageId) {
     currentResultPackageId = destination.packageId;
     state.route = "showcase";
@@ -819,6 +827,88 @@ function renderPaymentComingSoonNote() {
   return `<p class="course-price-coming-soon">${text("付款功能建置中", "Payment service coming soon")}</p>`;
 }
 
+let allAccessCheckoutPending = false;
+
+/** All-access CTA: Creator/Queen/premium → owned; others → server-priced purchase. */
+function renderAllAccessPurchaseControls(options = {}) {
+  const variant = options.variant || "home";
+  const priceInfo = getCoursePriceInfo("all-access");
+  const priceLabel = formatTwdPrice(priceInfo?.price ?? 2999);
+
+  if (hasAllAccessPass()) {
+    const owned = text("已全站開通", "All Access Unlocked");
+    if (variant === "home") {
+      return `<p class="home-price-owned" role="status">${owned}</p>`;
+    }
+    return `<p class="course-price-owned" role="status">${owned}</p>`;
+  }
+
+  const pending = Boolean(allAccessCheckoutPending);
+  const label = pending
+    ? text("處理中…", "Processing…")
+    : text(`立即購買 ${priceLabel}`, `Buy Now ${priceLabel}`);
+
+  if (variant === "home") {
+    return `<button type="button" class="home-btn home-btn-primary" onclick="purchaseAllAccess()" ${pending ? "disabled" : ""}>${label}</button>`;
+  }
+  if (variant === "course") {
+    return `<div class="btnrow"><button type="button" class="btn primary" onclick="purchaseAllAccess()" ${pending ? "disabled" : ""}>${label}</button></div>`;
+  }
+  return `<button type="button" class="btn primary" onclick="purchaseAllAccess()" ${pending ? "disabled" : ""}>${label}</button>`;
+}
+
+/**
+ * Public all-access purchase: login → POST /api/orders/create { productId: "all-access" }
+ * → POST /api/payments/ecpay/checkout. Amount/entitlement are server-authoritative only.
+ */
+async function purchaseAllAccess() {
+  if (hasAllAccessPass()) {
+    toast(text("你已擁有全站通行證。", "You already have All-Access."));
+    return;
+  }
+
+  if (!state.user) {
+    savePostLoginDestination({ action: "purchaseAllAccess", route: state.route || "home" });
+    toast(text(
+      "請先使用 Google 登入後再購買全站通行證。",
+      "Please sign in with Google before purchasing All-Access."
+    ));
+    signInWithGoogle();
+    return;
+  }
+
+  if (allAccessCheckoutPending) return;
+  allAccessCheckoutPending = true;
+  render();
+
+  try {
+    const order = await createOrder("all-access");
+    if (!order?.orderId) {
+      const err = new Error("order_create_failed");
+      err.code = "order_create_failed";
+      throw err;
+    }
+    await startEcpayCheckout(order.orderId);
+  } catch (error) {
+    allAccessCheckoutPending = false;
+    const code = error?.code || error?.message || "checkout_failed";
+    console.warn("[ALL-ACCESS] checkout failed", code);
+    if (code === "authentication_required") {
+      toast(text("請先登入後再購買。", "Please sign in to purchase."));
+    } else if (code === "order_conflict") {
+      toast(text(
+        "你剛建立過待付款訂單，請稍後再試或完成上一筆付款。",
+        "A pending order was just created. Please wait or finish the previous payment."
+      ));
+    } else if (code === "payment_not_configured") {
+      toast(text("付款服務暫時無法使用，請稍後再試。", "Payment is temporarily unavailable. Please try again later."));
+    } else {
+      toast(text("無法開始付款，請稍後再試。", "Could not start checkout. Please try again."));
+    }
+    render();
+  }
+}
+
 function renderCourseProductFacts() {
   const info = PUBLIC_BUSINESS_INFO;
   return `
@@ -879,7 +969,7 @@ function renderCoursePriceBlock(courseOrId, options = {}) {
             <li>${text("全部對應付費成果包", "All matching premium result packages")}</li>
             <li>${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</li>
           </ul>
-          ${renderPaymentComingSoonNote()}
+          ${renderAllAccessPurchaseControls({ variant: "course" })}
           ${showFacts ? renderCourseProductFacts() : ""}
         `}
         ${renderDigitalContentPolicyLink()}
@@ -2598,8 +2688,7 @@ function renderHomePricing() {
               <li>${text("全部成果禮包", "All result packages")}</li>
               <li>${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</li>
             </ul>
-            <button class="home-btn home-btn-primary" onclick="setRoute('map')">${text("查看全站方案", "View All-Access Plan")}</button>
-            ${renderPaymentComingSoonNote()}
+            ${renderAllAccessPurchaseControls({ variant: "home" })}
           </article>
         </div>
       </div>
@@ -2939,10 +3028,10 @@ function learningMap() {
             <div class="btnrow">
               ${hasAllAccessPass()
                 ? `<button type="button" class="btn primary" onclick="setRoute('result-packages')">${text("查看全部成果包", "View All Packages")}</button>`
-                : `<button type="button" class="btn secondary" onclick="setRoute('premium')">${text("查看方案", "View Plan")}</button>`
+                : renderAllAccessPurchaseControls({ variant: "map" })
               }
             </div>
-            ${hasAllAccessPass() ? "" : renderPaymentComingSoonNote()}
+            ${hasAllAccessPass() ? `<p class="course-price-owned" role="status">${text("已全站開通", "All Access Unlocked")}</p>` : ""}
           </div>
         </section>
 
