@@ -16,9 +16,23 @@ pending order
   → verify CheckMacValue + MerchantID + TradeAmt
   → status pending → paid (idempotent)
   → grant entitlement
+  → purchase confirmation email (best-effort, idempotent; never rolls back paid)
   → Browser OrderResultURL POST /api/payments/ecpay/result → 303 GET SPA
   → SPA only re-fetches GET /api/orders/:id (not payment authority)
 ```
+
+## Purchase confirmation email
+
+- Triggered **only** from verified `POST /api/payments/ecpay/callback` after `paid` + entitlement.
+- Browser / result page / SPA must **not** trigger trusted purchase emails.
+- Provider abstracted in `api/_lib/purchaseEmail.js` (current adapter: Resend).
+- Idempotency: `orders.purchase_email_sent_at` atomic claim; failures clear claim and keep `paid`.
+- **Production deploy (`VERCEL_ENV=production`)**: email **disabled** unless `PURCHASE_EMAIL_MODE=production` and `PURCHASE_EMAIL_FROM` is a verified custom domain (not `@resend.dev`). Skipped email leaves `purchase_email_sent_at` NULL; callback still ACKs.
+- **Test mode + `PURCHASE_EMAIL_TEST_TO`**: local / preview / `vercel dev` only — **never** on Production deploy (no redirect of real customer orders to test inbox).
+- Local dry-run: `node scripts/test-purchase-email.mjs` (no ECPay, no order mutation).
+- Learning CTA deep-link: `{APP_BASE_URL}/#learning` (SPA route `learning`).
+
+Manual SQL: `supabase/migrations/20250828010000_orders_purchase_email.sql`
 
 `OrderResultURL` must NOT share the callback endpoint and must NOT POST to the static homepage (405).
 

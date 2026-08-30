@@ -8575,9 +8575,20 @@ function render() {
   }
 }
 
+function applyHashRouteDeepLink() {
+  try {
+    const hash = String(location.hash || "").replace(/^#/, "").toLowerCase();
+    // Email CTA and bookmarks: #learning / #my-learning → 我的學習 (route: learning)
+    if (hash === "learning" || hash === "my-learning") {
+      state.route = "learning";
+    }
+  } catch (error) {}
+}
+
 async function startApp() {
   console.log("[BOOT] startApp");
   applyDocumentLang();
+  applyHashRouteDeepLink();
   bindMoreMenuEvents();
   render();
   await initAuth();

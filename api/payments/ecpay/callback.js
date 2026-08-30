@@ -2,6 +2,16 @@ import { readFormBody, setCorsHeaders, handleOptions } from "../../_lib/http.js"
 import { getSupabaseAdmin } from "../../_lib/supabaseAdmin.js";
 import { getEcpayConfig, verifyCheckMacValue } from "../../_lib/ecpay.js";
 import { grantEntitlementForPaidOrder } from "../../_lib/entitlement.js";
+import { maybeSendPurchaseConfirmation } from "../../_lib/purchaseEmail.js";
+
+async function safeSendPurchaseConfirmation(admin, orderRef) {
+  try {
+    await maybeSendPurchaseConfirmation(admin, orderRef);
+  } catch (err) {
+    // Email must never fail the ECPay ACK or roll back paid / entitlement.
+    console.error("[ecpay/callback] purchase_email_unexpected", err?.message || err);
+  }
+}
 
 function sendEcpayAck(res, ok, message = "OK") {
   const body = ok ? `1|${message}` : `0|${message}`;
@@ -82,12 +92,18 @@ export default async function handler(req, res) {
     return sendEcpayAck(res, false, "order_not_found");
   }
 
-  // Idempotent success path: already paid → ACK without re-processing side effects twice.
+  // Idempotent success path: already paid → ensure entitlement, then attempt email if needed.
   if (order.status === "paid") {
     console.log("[ecpay/callback] already_paid", {
       orderId: order.id,
       merchantTradeNo
     });
+    try {
+      await grantEntitlementForPaidOrder(admin, { ...order, status: "paid" });
+      await safeSendPurchaseConfirmation(admin, order);
+    } catch (err) {
+      console.error("[ecpay/callback] already_paid_followup_error", err?.message || err);
+    }
     return sendEcpayAck(res, true, "OK");
   }
 
@@ -153,6 +169,7 @@ export default async function handler(req, res) {
   // Race / duplicate callback: another worker already marked paid.
   if (!updated) {
     console.log("[ecpay/callback] concurrent_already_paid", { orderId: order.id });
+    await safeSendPurchaseConfirmation(admin, order);
     return sendEcpayAck(res, true, "OK");
   }
 
@@ -161,8 +178,12 @@ export default async function handler(req, res) {
   } catch (err) {
     console.error("[ecpay/callback] entitlement_error", err?.message || err);
     // Order is paid; entitlement can be retried operationally. Still ACK to avoid payment loops.
+    // Skip purchase email until entitlement succeeds on a later path / ops retry.
     return sendEcpayAck(res, true, "OK");
   }
+
+  // Purchase confirmation email is best-effort and idempotent. Never affects paid status.
+  await safeSendPurchaseConfirmation(admin, updated);
 
   console.log("[ecpay/callback] paid", {
     orderId: updated.id,
