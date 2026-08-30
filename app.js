@@ -766,7 +766,7 @@ function formatTwdPrice(price) {
   if (amount === 0) return text("免費", "Free");
   if (amount == null || Number.isNaN(amount)) return "";
   const formatted = amount.toLocaleString("en-US");
-  // zh: NT$499 — en: TWD 499 (avoid bare $ / USD confusion for international users)
+  // zh: NT$399 — en: TWD 399 (avoid bare $ / USD confusion for international users)
   return state.lang === "zh" ? `NT$${formatted}` : `TWD ${formatted}`;
 }
 
@@ -782,6 +782,20 @@ function renderPriceCurrencyNote(className = "price-currency-note") {
     "所有價格皆以新臺幣（TWD）計價。",
     "All prices are in New Taiwan Dollars (TWD)."
   )}</p>`;
+}
+
+function getPremiumCoursesBundleOriginalPrice() {
+  const amounts = getPremiumCourses()
+    .map(c => normalizePriceNumber(c.price))
+    .filter(n => n != null && n > 0);
+  if (!amounts.length) return null;
+  return amounts.reduce((sum, n) => sum + n, 0);
+}
+
+function getAllAccessSaveAmount(allAccessInfo) {
+  const info = allAccessInfo || getCoursePriceInfo("all-access");
+  if (info.originalPrice == null || info.price == null) return 0;
+  return Math.max(info.originalPrice - info.price, 0);
 }
 
 function getCoursePriceInfo(courseOrId) {
@@ -803,7 +817,10 @@ function getCoursePriceInfo(courseOrId) {
     return { id: "", price: null, originalPrice: null, currency: "TWD", isFree: false, course: null };
   }
   const price = normalizePriceNumber(course.price);
-  const originalPrice = normalizePriceNumber(course.originalPrice);
+  let originalPrice = normalizePriceNumber(course.originalPrice);
+  if (course.id === "all-access") {
+    originalPrice = getPremiumCoursesBundleOriginalPrice();
+  }
   const isFree = course.isFree === true || price === 0;
   return {
     id: course.id || "",
@@ -1068,9 +1085,7 @@ function renderCoursePriceBlock(courseOrId, options = {}) {
   }
 
   if (info.id === "all-access") {
-    const saveAmount = (info.originalPrice != null && info.price != null)
-      ? Math.max(info.originalPrice - info.price, 0)
-      : 0;
+    const saveAmount = getAllAccessSaveAmount(info);
     return `
       <div class="course-price-block is-all-access ${compact ? "is-compact" : ""}">
         <p class="course-price-label">${text("全站通行證", "All-Access Pass")}</p>
@@ -2756,9 +2771,7 @@ function renderHomeResultPackages() {
 function renderHomePricing() {
   const stats = getHomePlatformStats();
   const allAccessInfo = getCoursePriceInfo("all-access");
-  const saveAmount = (allAccessInfo.originalPrice != null && allAccessInfo.price != null)
-    ? Math.max(allAccessInfo.originalPrice - allAccessInfo.price, 0)
-    : 0;
+  const saveAmount = getAllAccessSaveAmount(allAccessInfo);
   return `
     <section class="home-section home-section-alt" id="pricing">
       <div class="wrap">
@@ -3066,9 +3079,7 @@ function learningMap() {
     : { completed: 0, total: (typeof FREE_BOOTCAMP !== "undefined" ? FREE_BOOTCAMP.length : 0), percent: 0 };
   const freeLessonCount = freeProgress.total || (typeof FREE_BOOTCAMP !== "undefined" ? FREE_BOOTCAMP.length : 8);
   const allAccessInfo = getCoursePriceInfo("all-access");
-  const saveAmount = (allAccessInfo.originalPrice != null && allAccessInfo.price != null)
-    ? Math.max(allAccessInfo.originalPrice - allAccessInfo.price, 0)
-    : 0;
+  const saveAmount = getAllAccessSaveAmount(allAccessInfo);
   const paths = getCoursePathConfigList();
   const freeCtaLabel = state.user && freeProgress.completed > 0 && freeProgress.completed < freeProgress.total
     ? text("繼續免費課程", "Continue Free Course")
@@ -5026,9 +5037,7 @@ function renderCourseHowItWorks() {
 function renderCoursePlanComparison(item) {
   const allAccess = getCoursePriceInfo("all-access");
   const singlePrice = getCoursePriceInfo(item);
-  const saveAmount = (allAccess.originalPrice != null && allAccess.price != null)
-    ? Math.max(allAccess.originalPrice - allAccess.price, 0)
-    : 0;
+  const saveAmount = getAllAccessSaveAmount(allAccess);
   const rows = [
     {
       zh: "課程數量",
@@ -8609,13 +8618,15 @@ async function startApp() {
 /** Server-side product prices (must match api/_lib/productCatalog.js). Payment authority is server-only. */
 const SERVER_PRODUCT_CATALOG_AUDIT = {
   "course-admissions": 499,
-  "course-college-learning": 699,
-  "course-research-competition": 899,
-  "course-career-internship": 999,
-  "course-workplace-productivity": 1299,
-  "course-startup-automation": 1499,
+  "course-college-learning": 399,
+  "course-research-competition": 699,
+  "course-career-internship": 699,
+  "course-workplace-productivity": 599,
+  "course-startup-automation": 899,
   "all-access": 2999
 };
+
+const PREMIUM_BUNDLE_ORIGINAL_TOTAL_AUDIT = 3794;
 
 const FRONTEND_COURSE_TO_SERVER_PRODUCT = {
   admissions: "course-admissions",
@@ -9361,11 +9372,11 @@ function validateProductPhase4B() {
   const issues = [];
   const expected = [
     { id: "admissions", price: 499, packageId: "pkg-admissions" },
-    { id: "college-learning", price: 699, packageId: "pkg-college-learning" },
-    { id: "research-competition", price: 899, packageId: "pkg-research-competition" },
-    { id: "career-internship", price: 999, packageId: "pkg-career-internship" },
-    { id: "workplace-productivity", price: 1299, packageId: "pkg-workplace-productivity" },
-    { id: "startup-automation", price: 1499, packageId: "pkg-startup-automation" }
+    { id: "college-learning", price: 399, packageId: "pkg-college-learning" },
+    { id: "research-competition", price: 699, packageId: "pkg-research-competition" },
+    { id: "career-internship", price: 699, packageId: "pkg-career-internship" },
+    { id: "workplace-productivity", price: 599, packageId: "pkg-workplace-productivity" },
+    { id: "startup-automation", price: 899, packageId: "pkg-startup-automation" }
   ];
   let productOk = 0;
   let packageOk = 0;
@@ -9399,9 +9410,18 @@ function validateProductPhase4B() {
     else issues.push({ path: `${row.id}.package`, issue: `expected ${row.packageId}, got ${mapped || "none"}` });
   });
 
+  const bundleOriginal = getPremiumCoursesBundleOriginalPrice();
   const allAccess = getCoursePriceInfo("all-access");
-  if (!(allAccess && allAccess.price === 2999 && allAccess.originalPrice === 3999)) {
-    issues.push({ path: "all-access", issue: "early-bird / regular price mismatch" });
+  const saveAmount = getAllAccessSaveAmount(allAccess);
+  const allAccessValid = Boolean(
+    allAccess
+    && allAccess.price === 2999
+    && bundleOriginal === PREMIUM_BUNDLE_ORIGINAL_TOTAL_AUDIT
+    && allAccess.originalPrice === bundleOriginal
+    && saveAmount === PREMIUM_BUNDLE_ORIGINAL_TOTAL_AUDIT - 2999
+  );
+  if (!allAccessValid) {
+    issues.push({ path: "all-access", issue: "all-access bundle price mismatch" });
   }
 
   const signedOutOk = !AUTH_REQUIRED_ROUTES.has("course");
@@ -9412,7 +9432,7 @@ function validateProductPhase4B() {
       products: `${productOk}/6`,
       packages: `${packageOk}/6`,
       prices: `${priceOk}/6`,
-      allAccessPrice: allAccess && allAccess.price === 2999 && allAccess.originalPrice === 3999 ? "valid" : "invalid",
+      allAccessPrice: allAccessValid ? "valid" : "invalid",
       signedOut: signedOutOk ? "valid" : "invalid"
     }
   };

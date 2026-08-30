@@ -27,7 +27,7 @@ export const PRODUCT_CATALOG = Object.freeze([
     type: "course",
     courseId: "college-learning",
     name: { zh: "大學學習 AI 實戰課", en: "AI for College Learning" },
-    amount: 699,
+    amount: 399,
     currency: "TWD",
     active: true
   },
@@ -36,7 +36,7 @@ export const PRODUCT_CATALOG = Object.freeze([
     type: "course",
     courseId: "research-competition",
     name: { zh: "研究競賽 AI 實戰課", en: "AI for Research & Competitions" },
-    amount: 899,
+    amount: 699,
     currency: "TWD",
     active: true
   },
@@ -45,7 +45,7 @@ export const PRODUCT_CATALOG = Object.freeze([
     type: "course",
     courseId: "career-internship",
     name: { zh: "實習求職 AI 實戰課", en: "AI for Careers & Internships" },
-    amount: 999,
+    amount: 699,
     currency: "TWD",
     active: true
   },
@@ -54,7 +54,7 @@ export const PRODUCT_CATALOG = Object.freeze([
     type: "course",
     courseId: "workplace-productivity",
     name: { zh: "職場效率 AI 實戰課", en: "AI for Workplace Productivity" },
-    amount: 1299,
+    amount: 599,
     currency: "TWD",
     active: true
   },
@@ -63,7 +63,7 @@ export const PRODUCT_CATALOG = Object.freeze([
     type: "course",
     courseId: "startup-automation",
     name: { zh: "創業自動化 AI 實戰課", en: "AI for Startup Automation" },
-    amount: 1499,
+    amount: 899,
     currency: "TWD",
     active: true
   },
@@ -92,4 +92,12 @@ export function getProductById(productId) {
 
 export function listActiveProducts() {
   return PRODUCT_CATALOG.filter((p) => p.active);
+}
+
+/** Sum of active single-course product amounts (bundle original price). */
+export function getPremiumCoursesBundleTotal() {
+  return PRODUCT_CATALOG.filter((p) => p.type === "course" && p.active).reduce(
+    (sum, p) => sum + p.amount,
+    0
+  );
 }

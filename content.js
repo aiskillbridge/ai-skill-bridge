@@ -1975,7 +1975,7 @@ const PREMIUM = [
   },
   {
     id: "college-learning",
-    price: 699,
+    price: 399,
     currency: "TWD",
     isFree: false,
     paymentUrl: "https://gumroad.com/",
@@ -2027,7 +2027,7 @@ const PREMIUM = [
   },
   {
     id: "research-competition",
-    price: 899,
+    price: 699,
     currency: "TWD",
     isFree: false,
     paymentUrl: "https://gumroad.com/",
@@ -2078,7 +2078,7 @@ const PREMIUM = [
   },
   {
     id: "career-internship",
-    price: 999,
+    price: 699,
     currency: "TWD",
     isFree: false,
     paymentUrl: "https://gumroad.com/",
@@ -2129,7 +2129,7 @@ const PREMIUM = [
   },
   {
     id: "workplace-productivity",
-    price: 1299,
+    price: 599,
     currency: "TWD",
     isFree: false,
     paymentUrl: "https://gumroad.com/",
@@ -2180,7 +2180,7 @@ const PREMIUM = [
   },
   {
     id: "startup-automation",
-    price: 1499,
+    price: 899,
     currency: "TWD",
     isFree: false,
     paymentUrl: "https://gumroad.com/",
@@ -2232,7 +2232,6 @@ const PREMIUM = [
   {
     id: "all-access",
     price: 2999,
-    originalPrice: 3999,
     currency: "TWD",
     isFree: false,
     priceNote: "early-bird",
