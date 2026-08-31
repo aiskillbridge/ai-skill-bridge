@@ -11,6 +11,14 @@ export const API_ERRORS = Object.freeze({
   order_not_pending: { status: 409, code: "order_not_pending" },
   payment_not_configured: { status: 503, code: "payment_not_configured" },
   payment_forbidden: { status: 403, code: "payment_forbidden" },
+  campus_invalid_code: { status: 404, code: "campus_invalid_code" },
+  campus_program_inactive: { status: 403, code: "campus_program_inactive" },
+  campus_program_not_started: { status: 403, code: "campus_program_not_started" },
+  campus_program_expired: { status: 403, code: "campus_program_expired" },
+  campus_already_redeemed: { status: 409, code: "campus_already_redeemed" },
+  campus_max_redemptions_reached: { status: 409, code: "campus_max_redemptions_reached" },
+  admin_forbidden: { status: 403, code: "admin_forbidden" },
+  campus_production_not_enabled: { status: 403, code: "campus_production_not_enabled" },
   internal_error: { status: 500, code: "internal_error" }
 });
 
