@@ -92,6 +92,9 @@ function getAccountAccessLabel(user = state.user) {
   if (Array.isArray(state.unlockedCourses) && state.unlockedCourses.length) {
     return text("單門課程", "Single course");
   }
+  if (getActiveCampusRedemptions().length) {
+    return text("校園試用", "Campus trial");
+  }
   return text("免費方案", "Free plan");
 }
 
@@ -141,6 +144,29 @@ function renderAccountMembershipSummary(user = state.user) {
     </div>
   `;
 }
+const CAMPUS_TEST_PROJECT_REF = "kcbzsilnfsrsnfblreve";
+const PRODUCTION_PROJECT_REF = "ifjkadoskbcgrqmcjvya";
+
+function clearStaleSupabaseAuthStorageForCampusTest() {
+  try {
+    if (typeof window === "undefined" || !window.localStorage) return;
+    const host = window.location?.hostname || "";
+    if (host !== "localhost" && host !== "127.0.0.1" && host !== "::1") return;
+    if (!String(SUPABASE_URL).includes(CAMPUS_TEST_PROJECT_REF)) return;
+    const stalePrefix = `sb-${PRODUCTION_PROJECT_REF}-`;
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith(stalePrefix)) {
+        localStorage.removeItem(key);
+      }
+    }
+  } catch {
+    // Ignore localStorage cleanup failures on localhost test.
+  }
+}
+
+clearStaleSupabaseAuthStorageForCampusTest();
+
 let supabaseClient = null;
 if (window.supabase) {
   supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -162,6 +188,14 @@ let state = {
   user: null,
   userPlan: "free",
   unlockedCourses: [],
+  campusRedemptions: [],
+  campusUi: {
+    pendingCode: "",
+    redeeming: false,
+    lastResult: null,
+    lastError: null
+  },
+  supabaseSession: null,
   authReady: false,
   loadingProgress: false
 };
@@ -379,6 +413,7 @@ function save() {
 
 function resetGuestLearningState() {
   state.user = null;
+  state.supabaseSession = null;
   state.userPlan = "free";
   state.unlockedCourses = [];
   state.progress = {};
@@ -446,6 +481,9 @@ function setRoute(route) {
   window.scrollTo(0, 0);
   if (typeof closeAllNavMenus === "function") closeAllNavMenus();
   render();
+  if (route === "campus") {
+    refreshCampusAuthState().then(() => render());
+  }
 }
 
 const POST_LOGIN_DESTINATION_KEY = "asb_post_login_destination_v1";
@@ -534,6 +572,27 @@ function applyPostLoginDestination(destination) {
     if (destination.courseId) currentCourseId = destination.courseId;
     setTimeout(() => {
       if (typeof purchaseCourse === "function") purchaseCourse(destination.courseId);
+    }, 0);
+    return true;
+  }
+  if (destination.action === "campusRedeem") {
+    state.route = "campus";
+    if (!state.campusUi) {
+      state.campusUi = { pendingCode: "", redeeming: false, lastResult: null, lastError: null };
+    }
+    if (destination.campusCode) {
+      state.campusUi.pendingCode = String(destination.campusCode);
+    }
+    setTimeout(async () => {
+      const session = await ensureSupabaseAuthSessionReady();
+      if (
+        session?.user &&
+        session?.access_token &&
+        state.campusUi?.pendingCode &&
+        typeof redeemCampusCode === "function"
+      ) {
+        await redeemCampusCode();
+      }
     }, 0);
     return true;
   }
@@ -1194,28 +1253,301 @@ async function loadUserPlan(user) {
   }
 }
 
+async function getSupabaseAuthSession() {
+  if (!supabaseClient) return null;
+  try {
+    const { data, error } = await supabaseClient.auth.getSession();
+    if (error) {
+      console.warn("[AUTH] getSession failed", error.message || error);
+      return null;
+    }
+    let session = data?.session || null;
+    if (session?.user && !session.access_token) {
+      const { data: refreshed, error: refreshError } = await supabaseClient.auth.refreshSession();
+      if (!refreshError && refreshed?.session?.access_token) {
+        session = refreshed.session;
+      }
+    }
+    return session;
+  } catch (error) {
+    console.warn("[AUTH] getSession error", error?.message || error);
+    return null;
+  }
+}
+
+function syncAuthStateFromSession(session) {
+  state.supabaseSession = session || null;
+  const authed = !!(session?.user && session?.access_token);
+  state.user = authed ? session.user : null;
+  if (authed && state.campusUi?.lastError === "authentication_required") {
+    state.campusUi.lastError = null;
+  }
+  return authed;
+}
+
+function hasValidSupabaseSession() {
+  return !!(state.supabaseSession?.user && state.supabaseSession?.access_token);
+}
+
+async function ensureSupabaseAuthSessionReady(maxAttempts = 8) {
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    const session = await getSupabaseAuthSession();
+    if (session?.user && session?.access_token) {
+      syncAuthStateFromSession(session);
+      return session;
+    }
+    await new Promise(resolve => setTimeout(resolve, 150));
+  }
+  return null;
+}
+
+async function refreshCampusAuthState() {
+  const session = await getSupabaseAuthSession();
+  syncAuthStateFromSession(session);
+  return session;
+}
+
+async function getSupabaseAccessToken() {
+  const session = await getSupabaseAuthSession();
+  return session?.access_token || null;
+}
+
+async function loadCampusStatus(user) {
+  state.campusRedemptions = [];
+  if (!user?.id) return;
+
+  try {
+    const token = await getSupabaseAccessToken();
+    if (!token) return;
+
+    const response = await fetch("/api/campus/status", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!response.ok) {
+      if (response.status !== 404) {
+        console.warn("[CAMPUS] status_load_failed", response.status);
+      }
+      return;
+    }
+    const data = await response.json();
+    state.campusRedemptions = Array.isArray(data.redemptions) ? data.redemptions : [];
+  } catch (error) {
+    console.warn("[CAMPUS] status_load_error", error?.message || error);
+    state.campusRedemptions = [];
+  }
+}
+
+function getActiveCampusRedemptions() {
+  return (state.campusRedemptions || []).filter(item => item && item.isActive);
+}
+
+function hasActiveCampusAccess(courseId) {
+  if (!courseId || courseId === "free" || courseId === "free-starter" || courseId === "all-access") {
+    return false;
+  }
+  const premiumIds = getPremiumCourseIds();
+  if (!premiumIds.includes(courseId)) return false;
+
+  return getActiveCampusRedemptions().some(item => {
+    if (item.accessType === "all-access") return true;
+    if (item.accessType === "courses") {
+      return Array.isArray(item.courseIds) && item.courseIds.includes(courseId);
+    }
+    return false;
+  });
+}
+
+function hasPaidSingleCourseAccess(courseId) {
+  return Array.isArray(state.unlockedCourses) && state.unlockedCourses.includes(courseId);
+}
+
+function getCourseAccessSource(courseId) {
+  if (!courseId) return null;
+  if (courseId === "free-starter" || courseId === "free") return "free";
+  if (isCreatorAccount() || isQueenAccount()) return "special";
+  if (state.userPlan === "premium") return "paid-all";
+  if (hasPaidSingleCourseAccess(courseId)) return "paid-single";
+  if (hasActiveCampusAccess(courseId)) return "campus";
+  return null;
+}
+
+function renderCourseOwnershipTag(courseId) {
+  const source = getCourseAccessSource(courseId);
+  if (source === "campus") {
+    return `<span class="tag premiumtag">${text("校園方案", "Campus")}</span>`;
+  }
+  if (source === "paid-single" || source === "paid-all" || source === "special") {
+    return `<span class="tag free">${text("已擁有", "Owned")}</span>`;
+  }
+  return `<span class="tag free">${text("已擁有", "Owned")}</span>`;
+}
+
+function formatCampusDate(iso) {
+  if (!iso) return "";
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return "";
+  if (state.lang === "zh") {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return `${y}/${m}/${d}`;
+  }
+  return date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+}
+
+function campusRedeemErrorMessage(code) {
+  const messages = {
+    campus_invalid_code: text("合作碼無效，請確認後再試。", "Invalid campus code. Please check and try again."),
+    campus_program_inactive: text("此校園方案目前未開放。", "This campus program is not active."),
+    campus_program_not_started: text("此校園方案尚未開始。", "This campus program has not started yet."),
+    campus_program_expired: text("此校園方案已結束。", "This campus program has ended."),
+    campus_already_redeemed: text("你已啟用過此校園方案。", "You have already activated this campus program."),
+    campus_max_redemptions_reached: text("此校園方案名額已滿。", "This campus program has reached its redemption limit."),
+    authentication_required: text("請先登入後再啟用校園方案。", "Please sign in before activating a campus program."),
+    invalid_request: text("請輸入有效的合作碼。", "Please enter a valid campus code.")
+  };
+  return messages[code] || text("啟用失敗，請稍後再試。", "Activation failed. Please try again later.");
+}
+
+function setCampusCodeInput(value) {
+  if (!state.campusUi) {
+    state.campusUi = { pendingCode: "", redeeming: false, lastResult: null, lastError: null };
+  }
+  state.campusUi.pendingCode = String(value || "");
+}
+
+async function redeemCampusCode() {
+  if (!state.campusUi) {
+    state.campusUi = { pendingCode: "", redeeming: false, lastResult: null, lastError: null };
+  }
+
+  const code = String(state.campusUi.pendingCode || "").trim();
+  if (!code) {
+    toast(text("請輸入 Campus Code", "Please enter a campus code"));
+    return;
+  }
+
+  const session = await getSupabaseAuthSession();
+  const user = session?.user || null;
+  const token = session?.access_token || null;
+
+  if (!user || !token) {
+    state.campusUi.lastError = null;
+    if (!user) {
+      requireGoogleLogin({
+        route: "campus",
+        action: "campusRedeem",
+        campusCode: code,
+        savedAt: Date.now()
+      });
+      return;
+    }
+    state.campusUi.lastError = "authentication_required";
+    toast(campusRedeemErrorMessage("authentication_required"));
+    render();
+    return;
+  }
+
+  state.user = user;
+  state.campusUi.redeeming = true;
+  state.campusUi.lastError = null;
+  render();
+
+  try {
+    const response = await fetch("/api/campus/redeem", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ code })
+    });
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      state.campusUi.lastResult = null;
+      state.campusUi.lastError = data.error || "internal_error";
+      toast(campusRedeemErrorMessage(state.campusUi.lastError));
+      return;
+    }
+
+    state.campusUi.lastResult = data.redemption || null;
+    state.campusUi.lastError = null;
+    await loadCampusStatus(state.user);
+    toast(text("校園方案啟用成功", "Campus program activated"));
+  } catch (error) {
+    console.error("[CAMPUS] redeem_error", error?.message || error);
+    state.campusUi.lastError = "internal_error";
+    state.campusUi.lastResult = null;
+    toast(campusRedeemErrorMessage("internal_error"));
+  } finally {
+    state.campusUi.redeeming = false;
+    render();
+  }
+}
+
+function renderCampusStatusPanel() {
+  const items = state.campusRedemptions || [];
+  if (!items.length) return "";
+
+  const cards = items.map(item => {
+    const accessLabel = state.lang === "zh" ? item.accessLabelZh : item.accessLabelEn;
+    const statusLine = item.isActive
+      ? (item.daysRemaining > 0
+        ? text(`剩餘 ${item.daysRemaining} 天`, `${item.daysRemaining} day${item.daysRemaining === 1 ? "" : "s"} left`)
+        : text(`有效至 ${formatCampusDate(item.expiresAt)}`, `Valid until ${formatCampusDate(item.expiresAt)}`))
+      : text("校園方案已到期", "Campus program expired");
+
+    return `
+      <article class="card campus-status-card ${item.isActive ? "is-active" : "is-expired"}">
+        <span class="tag ${item.isActive ? "premiumtag" : ""}">${text("Campus 校園方案", "Campus Program")}</span>
+        <h3>${item.schoolName || ""}</h3>
+        <p><b>${text("方案", "Program")}：</b>${item.programName || ""}</p>
+        <p><b>${text("可使用內容", "Access")}：</b>${accessLabel || ""}</p>
+        <p><b>${text("狀態", "Status")}：</b>${statusLine}</p>
+      </article>
+    `;
+  }).join("");
+
+  return `
+    <section class="panel campus-status-panel">
+      <h2>${text("Campus 校園方案", "Campus Program")}</h2>
+      <div class="grid two">${cards}</div>
+    </section>
+  `;
+}
+
 let authStateListenerBound = false;
 
 async function handleAuthSession(session, eventName = "session") {
-  const previousUserId = state.user?.id || null;
-  state.user = session?.user || null;
+  syncAuthStateFromSession(session);
   state.authReady = true;
 
   console.log("[AUTH] auth event", eventName);
   console.log("[AUTH] user email", state.user?.email || null);
+  console.log("[AUTH] session ready", hasValidSupabaseSession());
 
-  if (session?.user) {
+  if (session?.user && session?.access_token) {
+    if (state.campusUi) {
+      state.campusUi.lastError = null;
+      state.campusUi.redeeming = false;
+    }
     try {
       await syncUserProfile(session.user);
       await loadUserPlan(session.user);
+      await loadCampusStatus(session.user);
       await loadProgressFromSupabase();
       await loadNotesFromSupabase();
     } catch (error) {
       console.error("[AUTH] error", "post-login sync failed (login still succeeds)", error);
     }
 
-    const justSignedIn = previousUserId !== session.user.id;
-    if (justSignedIn) {
+    const pendingDestination = readPostLoginDestination();
+    const shouldApplyPostLoginDestination =
+      eventName === "SIGNED_IN" ||
+      (eventName === "INITIAL_SESSION" && pendingDestination);
+    if (shouldApplyPostLoginDestination) {
       const destination = consumePostLoginDestination();
       if (destination) {
         applyPostLoginDestination(destination);
@@ -1224,6 +1556,13 @@ async function handleAuthSession(session, eventName = "session") {
     }
   } else {
     resetGuestLearningState();
+    state.supabaseSession = session || null;
+    state.campusRedemptions = [];
+    if (state.campusUi) {
+      state.campusUi.lastResult = null;
+      state.campusUi.lastError = null;
+      state.campusUi.redeeming = false;
+    }
     // Do not load global asb_progress / asb_notes into guest UI.
   }
 
@@ -1246,6 +1585,7 @@ async function initAuth() {
 
   if (!authStateListenerBound) {
     supabaseClient.auth.onAuthStateChange(async (event, session) => {
+      if (event === "INITIAL_SESSION") return;
       await handleAuthSession(session, event);
     });
     authStateListenerBound = true;
@@ -1256,31 +1596,11 @@ async function initAuth() {
     if (error) {
       console.error("[AUTH] error", "getSession failed", error);
     }
-    state.user = data?.session?.user || null;
-    console.log("[AUTH] session loaded", !!data?.session, state.user?.email || null);
-
-    if (state.user) {
-      try {
-        await syncUserProfile(state.user);
-        await loadUserPlan(state.user);
-        await loadProgressFromSupabase();
-        await loadNotesFromSupabase();
-      } catch (syncError) {
-        console.error("[AUTH] error", "init sync failed (session still kept)", syncError);
-      }
-      const destination = consumePostLoginDestination();
-      if (destination) {
-        applyPostLoginDestination(destination);
-        console.log("[AUTH] post-login destination applied", destination.route || destination.action || null);
-      }
-    } else {
-      resetGuestLearningState();
-    }
+    await handleAuthSession(data?.session || null, "INITIAL_SESSION");
   } catch (error) {
     console.error("[AUTH] error", "initAuth failed", error);
+    state.authReady = true;
   }
-
-  state.authReady = true;
 }
 
 async function signInWithGoogle() {
@@ -1787,6 +2107,7 @@ const MORE_NAV_GROUPS = [
     zh: "成果與平台",
     en: "Results & Platform",
     items: [
+      { route: "campus", zh: "校園合作", en: "Campus" },
       { route: "freePortfolio", zh: "我的免費成果包", en: "My Free Result Package" },
       { route: "impact", zh: "影響力", en: "Impact" }
     ]
@@ -1794,7 +2115,7 @@ const MORE_NAV_GROUPS = [
 ];
 
 const MORE_ACTIVE_ROUTES = new Set([
-  "assessment", "tools", "prompts", "tutor", "impact", "freePortfolio", "community"
+  "assessment", "tools", "prompts", "tutor", "impact", "freePortfolio", "community", "campus"
 ]);
 
 function isMainNavActive(itemId) {
@@ -2064,6 +2385,7 @@ function renderSiteFooter() {
   const phone = info.supportPhone;
   const policyLinks = [
     { route: "about", zh: "關於我們", en: "About" },
+    { route: "campus", zh: "校園合作", en: "Campus" },
     { route: "contact", zh: "聯絡我們", en: "Contact" },
     { route: "terms", zh: "服務條款", en: "Terms" },
     { route: "privacy", zh: "隱私權政策", en: "Privacy" },
@@ -3924,6 +4246,7 @@ function learning() {
           <h1>${text("我的學習中心", "My Learning Center")}</h1>
           <p class="lead">${text("繼續學習、管理已擁有課程，並追蹤你的成果禮包進度。", "Continue learning, manage owned courses, and track your result packages.")}</p>
           ${renderAccountMembershipSummary()}
+          ${renderCampusStatusPanel()}
         </section>
 
         <section class="panel">
@@ -3949,7 +4272,7 @@ function learning() {
               const pkg = getResultPackageByCourseId(course.id);
               return `
                 <article class="card">
-                  <span class="tag free">${text("已擁有", "Owned")}</span>
+                  ${renderCourseOwnershipTag(course.id)}
                   <h3>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h3>
                   <p>${text("進度", "Progress")}：${progress.completed}/${progress.total}（${progress.percent}%）</p>
                   <div class="package-progress-track"><div class="package-progress-bar" style="width:${progress.percent}%"></div></div>
@@ -4146,7 +4469,9 @@ function hasCourseAccess(courseId) {
   if (courseId === "free-starter" || courseId === "free") return true;
   if (hasAllAccess()) return true;
   if (courseId === "all-access") return hasAllAccessPass();
-  return Array.isArray(state.unlockedCourses) && state.unlockedCourses.includes(courseId);
+  if (hasPaidSingleCourseAccess(courseId)) return true;
+  if (hasActiveCampusAccess(courseId)) return true;
+  return false;
 }
 
 function getResultPackageConfigList() {
@@ -8104,6 +8429,7 @@ function getDocumentTitleForRoute(route) {
   const pageTitle = ({
     about: text("關於 AI Skill Bridge", "About AI Skill Bridge"),
     contact: text("聯絡我們", "Contact Us"),
+    campus: text("校園合作", "Campus Partnership"),
     terms: text("服務條款", "Terms of Service"),
     privacy: text("隱私權政策", "Privacy Policy"),
     "digital-content": text("數位內容與服務說明", "Digital Content & Service Information"),
@@ -8203,6 +8529,99 @@ function aboutPage() {
       </section>
     `
   });
+}
+
+function campusPage() {
+  const ui = state.campusUi || { pendingCode: "", redeeming: false, lastResult: null, lastError: null };
+  const result = ui.lastResult;
+  const campusAuthed = hasValidSupabaseSession();
+  if (ui.lastError === "authentication_required" && campusAuthed) {
+    state.campusUi.lastError = null;
+  }
+  const showCampusAuthError =
+    ui.lastError === "authentication_required"
+      ? !campusAuthed
+      : Boolean(ui.lastError);
+  const successBlock = result ? `
+    <section class="panel campus-success-panel">
+      <span class="tag free">${text("啟用成功", "Activated")}</span>
+      <h2>${text("校園方案啟用成功", "Campus program activated")}</h2>
+      <ul class="public-info-list">
+        <li><b>${text("學校", "School")}：</b>${result.schoolName || ""}</li>
+        <li><b>${text("方案", "Program")}：</b>${result.programName || ""}</li>
+        <li><b>${text("可使用內容", "Access")}：</b>${state.lang === "zh" ? result.accessLabelZh : result.accessLabelEn}</li>
+        <li><b>${text("有效期限", "Valid until")}：</b>${formatCampusDate(result.expiresAt)}</li>
+      </ul>
+      <div class="btnrow">
+        <button class="btn primary" onclick="setRoute('learning')">${text("前往我的學習", "Go to My Learning")}</button>
+      </div>
+    </section>
+  ` : "";
+
+  const errorBlock = showCampusAuthError && !result ? `
+    <p class="campus-error-msg" role="alert">${campusRedeemErrorMessage(ui.lastError)}</p>
+  ` : "";
+
+  const loginNoteBlock = !state.authReady
+    ? `<p class="campus-login-note">${text("正在確認登入狀態…", "Checking sign-in status…")}</p>`
+    : (!campusAuthed
+      ? `<p class="campus-login-note">${text("啟用前需先 Google 登入。", "Google sign-in is required before activation.")}</p>`
+      : "");
+
+  return shell(`
+    <main class="page campus-page">
+      <div class="wrap">
+        <section class="panel">
+          <span class="tag premiumtag">${text("校園合作", "Campus")}</span>
+          <h1>${text("AI Skill Bridge 校園合作計畫", "AI Skill Bridge Campus Partnership")}</h1>
+          <p class="lead">${text(
+            "讓學生不只學 AI，而是完成真正能使用的成果。合作學生可透過學校提供的 Campus Code，取得指定課程或限時全站學習權限。",
+            "Help students go beyond learning AI — and finish work they can actually use. Partner schools provide a Campus Code for selected courses or a time-limited all-site learning pass."
+          )}</p>
+        </section>
+
+        ${successBlock}
+
+        <section class="panel campus-redeem-panel">
+          <h2>${text("我是合作學校學生", "I am a partner-school student")}</h2>
+          <p>${text("請輸入學校提供的 Campus Code，並使用 Google 登入後啟用。", "Enter your school's Campus Code and sign in with Google to activate.")}</p>
+          <label class="campus-code-label" for="campus-code-input">${text("Campus Code", "Campus Code")}</label>
+          <input
+            id="campus-code-input"
+            class="campus-code-input"
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="THU-AI-2026"
+            value="${String(ui.pendingCode || "").replace(/"/g, "&quot;")}"
+            oninput="setCampusCodeInput(this.value)"
+          />
+          ${errorBlock}
+          <div class="btnrow">
+            <button class="btn primary" onclick="redeemCampusCode()" ${ui.redeeming || !state.authReady ? "disabled" : ""}>
+              ${ui.redeeming ? text("啟用中…", "Activating…") : text("啟用校園方案", "Activate Campus Program")}
+            </button>
+          </div>
+          ${loginNoteBlock}
+        </section>
+
+        <section class="panel campus-partner-panel">
+          <h2>${text("學校 / 教師 / 系所合作", "School / faculty / department partnership")}</h2>
+          <p>${text("我們提供：", "We offer:")}</p>
+          <ul class="public-info-list">
+            <li>${text("校園 AI 學習計畫", "Campus AI learning programs")}</li>
+            <li>${text("限時免費試用", "Time-limited free trials")}</li>
+            <li>${text("指定課程授權", "Selected course access")}</li>
+            <li>${text("全站授權", "All-site access")}</li>
+            <li>${text("學生學習成果", "Student learning outcomes")}</li>
+          </ul>
+          <div class="btnrow">
+            <button class="btn secondary" onclick="setRoute('contact')">${text("洽談校園合作", "Discuss campus partnership")}</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  `);
 }
 
 function contactPage() {
@@ -8564,6 +8983,7 @@ function render() {
       thailand,
       impact,
       about: aboutPage,
+      campus: campusPage,
       contact: contactPage,
       terms: termsPage,
       privacy: privacyPage,
@@ -8643,16 +9063,6 @@ const DEV_ORDER_TEST_PRODUCT_ID = "course-admissions";
 let devOrderPending = false;
 let devOrderLast = null;
 let devOrderError = null;
-
-async function getSupabaseAccessToken() {
-  if (!supabaseClient) return null;
-  try {
-    const { data } = await supabaseClient.auth.getSession();
-    return data?.session?.access_token || null;
-  } catch {
-    return null;
-  }
-}
 
 async function createOrder(productId) {
   const token = await getSupabaseAccessToken();
@@ -9618,6 +10028,50 @@ function runSecretSafetyAuditIfDev() {
   } else {
     console.log("[SECRET AUDIT] pass — no MerchantID/HashKey/service_role in app.js/index.html/styles.css");
   }
+}
+
+async function runtimeAuthProbe() {
+  const browserProjectRef = (String(SUPABASE_URL).match(/https:\/\/([^.]+)\.supabase\.co/) || [])[1] || null;
+  const session = await getSupabaseAuthSession();
+  let getUserExists = false;
+  if (supabaseClient) {
+    const { data, error } = await supabaseClient.auth.getUser();
+    getUserExists = !error && Boolean(data?.user);
+  }
+  const supabaseStorageKeys = [];
+  try {
+    for (let i = 0; i < localStorage.length; i += 1) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith("sb-")) supabaseStorageKeys.push(key);
+    }
+  } catch {
+    // ignore
+  }
+  const campusAuthed = hasValidSupabaseSession();
+  const campusShowsLoginWarning =
+    state.route === "campus" &&
+    (
+      (state.campusUi?.lastError === "authentication_required" && !campusAuthed) ||
+      (state.authReady && !campusAuthed)
+    );
+  return {
+    browserProjectRef,
+    sessionExists: Boolean(session),
+    userExists: Boolean(session?.user),
+    accessTokenExists: Boolean(session?.access_token),
+    getUserExists,
+    headerAccountSource: state.user ? "supabase_session_user" : "none",
+    campusAuthSource: campusAuthed ? "supabase_session" : (state.campusUi?.lastError || "none"),
+    sameAuthSource: Boolean(state.user) === campusAuthed,
+    supabaseStorageKeys,
+    authReady: state.authReady,
+    campusShowsLoginWarning,
+    redeemButtonEnabled: state.route === "campus" ? !state.campusUi?.redeeming && state.authReady : null
+  };
+}
+
+if (typeof isLocalDevHost === "function" && isLocalDevHost()) {
+  window.__asbRuntimeAuthProbe = runtimeAuthProbe;
 }
 
 addEventListener("DOMContentLoaded", () => {

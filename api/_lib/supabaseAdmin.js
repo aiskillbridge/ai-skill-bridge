@@ -14,28 +14,38 @@ function readServerEnv(name) {
   return value;
 }
 
+function shouldHydrateSupabaseFromLocalFile() {
+  // Deployed Production must use platform env only.
+  if (process.env.VERCEL_ENV !== "production") return true;
+  const vercelUrl = String(process.env.VERCEL_URL || "");
+  if (!vercelUrl || vercelUrl.includes("localhost") || vercelUrl.includes("127.0.0.1")) {
+    return true;
+  }
+  return false;
+}
+
 /**
- * vercel env run loads .env.local, but some vercel dev function sandboxes
- * do not inject those keys into process.env. Hydrate once for local only.
- * Never overrides already-set env. Never logs values.
+ * vercel dev may inject linked-project env that overrides .env.local.
+ * On non-production runtimes, .env.local Supabase config wins for localhost testing.
+ * Never logs values.
  */
 function hydrateLocalEnvFromFile() {
   if (localEnvHydrated) return;
   localEnvHydrated = true;
-  if (process.env.VERCEL_ENV === "production") return;
-  if (readServerEnv("SUPABASE_URL") && readServerEnv("SUPABASE_SERVICE_ROLE_KEY")) return;
+  if (!shouldHydrateSupabaseFromLocalFile()) return;
 
   const envPath = resolve(process.cwd(), ".env.local");
-  if (!existsSync(envPath)) return;
+  const fallbackEnvPath = resolve(process.cwd(), "..", ".env.local");
+  const filePath = existsSync(envPath) ? envPath : (existsSync(fallbackEnvPath) ? fallbackEnvPath : null);
+  if (!filePath) return;
 
   try {
-    const text = readFileSync(envPath, "utf8");
+    const text = readFileSync(filePath, "utf8");
     for (const line of text.split(/\n/)) {
       if (!line || line.startsWith("#") || !line.includes("=")) continue;
       const idx = line.indexOf("=");
       const key = line.slice(0, idx).trim();
       if (key !== "SUPABASE_URL" && key !== "SUPABASE_SERVICE_ROLE_KEY") continue;
-      if (process.env[key]) continue;
       let value = line.slice(idx + 1).trim();
       if (
         (value.startsWith('"') && value.endsWith('"')) ||
@@ -49,6 +59,13 @@ function hydrateLocalEnvFromFile() {
   } catch {
     // Ignore local hydrate failures; getSupabaseAdmin will report missing config.
   }
+}
+
+export function getServerSupabaseProjectRef() {
+  hydrateLocalEnvFromFile();
+  const url = readServerEnv("SUPABASE_URL");
+  const match = String(url || "").match(/https:\/\/([^.]+)\.supabase\.co/);
+  return match ? match[1] : null;
 }
 
 export function getSupabaseAdmin() {
