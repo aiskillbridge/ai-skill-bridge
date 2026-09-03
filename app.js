@@ -546,7 +546,11 @@ function applyPostLoginDestination(destination) {
 }
 
 function requireGoogleLogin(destination = {}) {
-  if (state.user) {
+  if (!state.authReady) {
+    toast(text("正在確認登入狀態…", "Checking sign-in status…"));
+    return false;
+  }
+  if (state.user || hasValidSupabaseSession()) {
     if (destination && (destination.route || destination.action)) {
       applyPostLoginDestination(destination);
       render();
@@ -1625,8 +1629,19 @@ function renderCampusStatusPanel() {
 }
 
 let authStateListenerBound = false;
+/** Bumped on explicit sign-out so in-flight session handlers cannot re-apply a stale signed-in UI. */
+let authSessionEpoch = 0;
+let authSignInInFlight = false;
+let authSignOutInFlight = false;
 
 async function handleAuthSession(session, eventName = "session") {
+  const epoch = authSessionEpoch;
+  // Explicit logout wins over a stale signed-in event still finishing its awaits.
+  if (authSignOutInFlight && session?.user) {
+    console.log("[AUTH] ignore signed-in event during explicit sign-out", eventName);
+    return;
+  }
+
   syncAuthStateFromSession(session);
   state.authReady = true;
 
@@ -1647,6 +1662,11 @@ async function handleAuthSession(session, eventName = "session") {
       await loadNotesFromSupabase();
     } catch (error) {
       console.error("[AUTH] error", "post-login sync failed (login still succeeds)", error);
+    }
+
+    if (epoch !== authSessionEpoch || authSignOutInFlight) {
+      console.log("[AUTH] discard stale signed-in handler after sign-out", eventName);
+      return;
     }
 
     const pendingDestination = readPostLoginDestination();
@@ -1670,6 +1690,11 @@ async function handleAuthSession(session, eventName = "session") {
       state.campusUi.redeeming = false;
     }
     // Do not load global asb_progress / asb_notes into guest UI.
+  }
+
+  if (epoch !== authSessionEpoch) {
+    console.log("[AUTH] discard stale auth render", eventName);
+    return;
   }
 
   try {
@@ -1712,9 +1737,32 @@ async function initAuth() {
 async function signInWithGoogle() {
   console.log("[AUTH] sign-in requested");
 
+  if (!state.authReady || authSignInInFlight || authSignOutInFlight) {
+    console.log("[AUTH] sign-in skipped: auth not ready or transition in flight");
+    if (!state.authReady) {
+      toast(text("正在確認登入狀態…", "Checking sign-in status…"));
+    }
+    return;
+  }
+
   if (!supabaseClient) {
     console.error("[AUTH] error", "sign-in aborted: supabaseClient is null");
     alert(state.lang === "zh" ? "Supabase 尚未載入。" : "Supabase is not loaded.");
+    return;
+  }
+
+  // Never start OAuth when a valid session already exists (avoids login→logout→auto-login churn).
+  if (state.user || hasValidSupabaseSession()) {
+    console.log("[AUTH] sign-in skipped: session already present");
+    render();
+    return;
+  }
+  const existing = await getSupabaseAuthSession();
+  if (existing?.user && existing?.access_token) {
+    syncAuthStateFromSession(existing);
+    state.authReady = true;
+    console.log("[AUTH] sign-in skipped: restored existing session instead of OAuth");
+    render();
     return;
   }
 
@@ -1733,6 +1781,7 @@ async function signInWithGoogle() {
   const redirectTo = window.location.origin + window.location.pathname;
   console.log("[AUTH] redirectTo", redirectTo);
 
+  authSignInInFlight = true;
   try {
     const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: "google",
@@ -1742,25 +1791,45 @@ async function signInWithGoogle() {
     if (error) {
       console.error("[AUTH] error", error);
       alert(error.message);
+      authSignInInFlight = false;
     }
+    // On success the browser navigates away; leave the flag set.
   } catch (error) {
+    authSignInInFlight = false;
     console.error("[AUTH] error", error);
     alert(error?.message || String(error));
   }
 }
 
 async function signOut() {
-  clearPostLoginDestination();
-  if (!supabaseClient) {
+  if (!state.authReady || authSignOutInFlight || authSignInInFlight) {
+    console.log("[AUTH] sign-out skipped: auth not ready or transition in flight");
+    return;
+  }
+  if (!state.user && !hasValidSupabaseSession()) {
     resetGuestLearningState();
     state.authReady = true;
     render();
     return;
   }
-  await supabaseClient.auth.signOut();
-  resetGuestLearningState();
-  state.authReady = true;
-  render();
+
+  authSignOutInFlight = true;
+  authSessionEpoch += 1;
+  clearPostLoginDestination();
+  try {
+    if (!supabaseClient) {
+      resetGuestLearningState();
+      state.authReady = true;
+      render();
+      return;
+    }
+    await supabaseClient.auth.signOut();
+    resetGuestLearningState();
+    state.authReady = true;
+    render();
+  } finally {
+    authSignOutInFlight = false;
+  }
 }
 
 function applyFreeBootcampCacheFromProgress(progress) {
@@ -3363,9 +3432,11 @@ function nav() {
   const moreGroupsHtml = renderMoreMenuGroupsHtml("closeMoreMenu");
   const mobileMoreGroupsHtml = renderMoreMenuGroupsHtml("closeMobileNav");
 
-  const authHtml = state.user
-    ? renderAccountMenuHtml()
-    : `<button type="button" class="lang" onclick="signInWithGoogle()">${text("登入", "Sign In")}</button>`;
+  const authHtml = !state.authReady
+    ? `<button type="button" class="lang" disabled aria-busy="true">${text("確認中…", "Checking…")}</button>`
+    : (state.user
+      ? renderAccountMenuHtml()
+      : `<button type="button" class="lang" onclick="signInWithGoogle()">${text("使用 Google 登入", "Sign in with Google")}</button>`);
 
   return `
     <header class="site-header">
@@ -4490,6 +4561,17 @@ function renderHomeFinalCTA() {
 }
 
 function home() {
+  if (!state.authReady) {
+    return homeLandingShell(`
+      <main class="home-page">
+        <section class="panel auth-gate-panel" style="margin:2rem auto;max-width:40rem">
+          <span class="tag">${text("登入狀態", "Auth")}</span>
+          <h1>${text("正在確認登入狀態…", "Checking sign-in status…")}</h1>
+          <p class="lead">${text("請稍候，我們正在確認你的 Google 登入狀態。", "Please wait while we confirm your Google sign-in status.")}</p>
+        </section>
+      </main>
+    `);
+  }
   const isGuest = !state.user;
   return homeLandingShell(`
     <main class="home-page">
