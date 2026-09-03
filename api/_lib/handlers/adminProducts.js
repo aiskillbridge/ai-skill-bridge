@@ -1,11 +1,11 @@
-import { setCorsHeaders, handleOptions, sendError, readJsonBody } from "../_lib/http.js";
-import { requireAdmin } from "../_lib/adminAuth.js";
+import { setCorsHeaders, handleOptions, sendError, readJsonBody } from "../http.js";
+import { requireAdmin } from "../adminAuth.js";
 import {
   loadAuthoritativeProducts,
   updateProductPricing,
   getPricingSource,
   probePricingDatabase
-} from "../_lib/productCatalog.js";
+} from "../productCatalog.js";
 
 function toAdminProductRow(product) {
   return {

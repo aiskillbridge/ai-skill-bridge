@@ -1,5 +1,5 @@
-import { setCorsHeaders, handleOptions } from "../_lib/http.js";
-import { getPublicSupabaseConfig } from "../_lib/publicSupabaseConfig.js";
+import { setCorsHeaders, handleOptions } from "../http.js";
+import { getPublicSupabaseConfig } from "../publicSupabaseConfig.js";
 
 export default async function handler(req, res) {
   setCorsHeaders(res, req);

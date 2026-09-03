@@ -1,7 +1,7 @@
-import { setCorsHeaders, handleOptions, readJsonBody, sendError } from "../../_lib/http.js";
-import { requireAdmin } from "../../_lib/adminAuth.js";
-import { getSupabaseAdmin } from "../../_lib/supabaseAdmin.js";
-import { requireCampusAdminWrite } from "../../_lib/campusAdminGuard.js";
+import { setCorsHeaders, handleOptions, readJsonBody, sendError } from "../http.js";
+import { requireAdmin } from "../adminAuth.js";
+import { getSupabaseAdmin } from "../supabaseAdmin.js";
+import { requireCampusAdminWrite } from "../campusAdminGuard.js";
 
 export default async function handler(req, res) {
   setCorsHeaders(res, req);

@@ -1,8 +1,8 @@
-import { setCorsHeaders, handleOptions, sendError } from "../_lib/http.js";
-import { requireAdmin } from "../_lib/adminAuth.js";
-import { getSupabaseAdmin } from "../_lib/supabaseAdmin.js";
-import { toAdminOrderRow } from "../_lib/adminFormat.js";
-import { isOrdersSchemaUnavailable } from "../_lib/ordersAdmin.js";
+import { setCorsHeaders, handleOptions, sendError } from "../http.js";
+import { requireAdmin } from "../adminAuth.js";
+import { getSupabaseAdmin } from "../supabaseAdmin.js";
+import { toAdminOrderRow } from "../adminFormat.js";
+import { isOrdersSchemaUnavailable } from "../ordersAdmin.js";
 
 export default async function handler(req, res) {
   setCorsHeaders(res, req);

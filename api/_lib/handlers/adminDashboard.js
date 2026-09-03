@@ -1,8 +1,8 @@
-import { setCorsHeaders, handleOptions, sendError } from "../_lib/http.js";
-import { requireAdmin } from "../_lib/adminAuth.js";
-import { getSupabaseAdmin } from "../_lib/supabaseAdmin.js";
-import { taipeiDayKey, taipeiMonthKey, toAdminOrderRow } from "../_lib/adminFormat.js";
-import { EMPTY_DASHBOARD_ORDERS, isOrdersSchemaUnavailable } from "../_lib/ordersAdmin.js";
+import { setCorsHeaders, handleOptions, sendError } from "../http.js";
+import { requireAdmin } from "../adminAuth.js";
+import { getSupabaseAdmin } from "../supabaseAdmin.js";
+import { taipeiDayKey, taipeiMonthKey, toAdminOrderRow } from "../adminFormat.js";
+import { EMPTY_DASHBOARD_ORDERS, isOrdersSchemaUnavailable } from "../ordersAdmin.js";
 
 function sumPaidAmount(orders) {
   return (orders || [])

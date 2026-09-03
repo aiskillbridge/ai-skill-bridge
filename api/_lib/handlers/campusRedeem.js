@@ -1,12 +1,12 @@
-import { setCorsHeaders, handleOptions, getBearerToken, readJsonBody, sendError } from "../_lib/http.js";
-import { getSupabaseAdmin, verifyAccessToken } from "../_lib/supabaseAdmin.js";
+import { setCorsHeaders, handleOptions, getBearerToken, readJsonBody, sendError } from "../http.js";
+import { getSupabaseAdmin, verifyAccessToken } from "../supabaseAdmin.js";
 import {
   normalizeCampusCode,
   hashCampusCode,
   isProgramWindowOpen,
   computeRedemptionExpiresAt,
   toRedeemSuccessPayload
-} from "../_lib/campusAccess.js";
+} from "../campusAccess.js";
 
 export default async function handler(req, res) {
   setCorsHeaders(res, req);

@@ -1,11 +1,11 @@
-import { setCorsHeaders, handleOptions, sendError } from "../_lib/http.js";
-import { requireAdmin } from "../_lib/adminAuth.js";
-import { getSupabaseAdmin } from "../_lib/supabaseAdmin.js";
-import { getEcpayConfig } from "../_lib/ecpay.js";
+import { setCorsHeaders, handleOptions, sendError } from "../http.js";
+import { requireAdmin } from "../adminAuth.js";
+import { getSupabaseAdmin } from "../supabaseAdmin.js";
+import { getEcpayConfig } from "../ecpay.js";
 import {
   evaluatePurchaseEmailPolicy,
   getPurchaseEmailConfig
-} from "../_lib/purchaseEmail.js";
+} from "../purchaseEmail.js";
 
 function envConfigured(name) {
   const value = process.env[name];

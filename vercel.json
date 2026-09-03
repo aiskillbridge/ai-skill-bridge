@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    { "source": "/api/admin/dashboard", "destination": "/api/admin?__route=dashboard" },
+    { "source": "/api/admin/orders", "destination": "/api/admin?__route=orders" },
+    { "source": "/api/admin/users", "destination": "/api/admin?__route=users" },
+    { "source": "/api/admin/products", "destination": "/api/admin?__route=products" },
+    { "source": "/api/admin/system", "destination": "/api/admin?__route=system" },
+    { "source": "/api/admin/public-config", "destination": "/api/admin?__route=public-config" },
+    { "source": "/api/admin/campus/programs", "destination": "/api/admin?__route=campus/programs" },
+    { "source": "/api/admin/campus/toggle", "destination": "/api/admin?__route=campus/toggle" },
+    { "source": "/api/campus/status", "destination": "/api/campus?__route=status" },
+    { "source": "/api/campus/redeem", "destination": "/api/campus?__route=redeem" }
+  ]
+}

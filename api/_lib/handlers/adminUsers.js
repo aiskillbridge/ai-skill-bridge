@@ -1,7 +1,7 @@
-import { setCorsHeaders, handleOptions, sendError } from "../_lib/http.js";
-import { requireAdmin } from "../_lib/adminAuth.js";
-import { getSupabaseAdmin } from "../_lib/supabaseAdmin.js";
-import { parseCourseIds } from "../_lib/campusAccess.js";
+import { setCorsHeaders, handleOptions, sendError } from "../http.js";
+import { requireAdmin } from "../adminAuth.js";
+import { getSupabaseAdmin } from "../supabaseAdmin.js";
+import { parseCourseIds } from "../campusAccess.js";
 
 function parseUnlockedCourses(value) {
   if (Array.isArray(value)) return value.filter(Boolean);

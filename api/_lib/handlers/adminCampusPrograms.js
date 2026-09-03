@@ -1,15 +1,15 @@
-import { setCorsHeaders, handleOptions, readJsonBody, sendError } from "../../_lib/http.js";
-import { requireAdmin } from "../../_lib/adminAuth.js";
-import { getSupabaseAdmin } from "../../_lib/supabaseAdmin.js";
+import { setCorsHeaders, handleOptions, readJsonBody, sendError } from "../http.js";
+import { requireAdmin } from "../adminAuth.js";
+import { getSupabaseAdmin } from "../supabaseAdmin.js";
 import {
   normalizeCampusCode,
   hashCampusCode,
   parseCourseIds,
   getUnlockedCourseIdsForProgram,
   PREMIUM_COURSE_IDS
-} from "../../_lib/campusAccess.js";
-import { buildCodeHint } from "../../_lib/adminFormat.js";
-import { isCampusAdminWriteAllowed, requireCampusAdminWrite } from "../../_lib/campusAdminGuard.js";
+} from "../campusAccess.js";
+import { buildCodeHint } from "../adminFormat.js";
+import { isCampusAdminWriteAllowed, requireCampusAdminWrite } from "../campusAdminGuard.js";
 
 async function listPrograms(admin) {
   const { data: programs, error } = await admin
