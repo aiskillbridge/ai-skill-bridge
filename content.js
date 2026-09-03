@@ -1181,7 +1181,6 @@ const I18N = {
       footerCommunity: "社群",
       footerPrivacy: "隱私權",
       footerTerms: "服務條款",
-      footerAssessment: "能力測驗",
       footerPrompts: "Prompt 範例",
       footerCopy: "© 2026 AI Skill Bridge. 保留所有權利。",
       ctaTitle: "今天就開始精通 AI",
@@ -1420,7 +1419,6 @@ const I18N = {
       footerCommunity: "Community",
       footerPrivacy: "Privacy",
       footerTerms: "Terms",
-      footerAssessment: "Assessment",
       footerPrompts: "Prompts",
       footerCopy: "© 2026 AI Skill Bridge. All rights reserved.",
       ctaTitle: "Start mastering AI today",
@@ -1924,7 +1922,7 @@ const FREE_COURSE_OFFER = {
 const PREMIUM = [
   {
     id: "admissions",
-    price: 499,
+    price: 1099,
     currency: "TWD",
     isFree: false,
     paymentUrl: "https://gumroad.com/",
@@ -1975,7 +1973,7 @@ const PREMIUM = [
   },
   {
     id: "college-learning",
-    price: 399,
+    price: 899,
     currency: "TWD",
     isFree: false,
     paymentUrl: "https://gumroad.com/",
@@ -2027,7 +2025,7 @@ const PREMIUM = [
   },
   {
     id: "research-competition",
-    price: 699,
+    price: 1499,
     currency: "TWD",
     isFree: false,
     paymentUrl: "https://gumroad.com/",
@@ -2078,7 +2076,7 @@ const PREMIUM = [
   },
   {
     id: "career-internship",
-    price: 699,
+    price: 1499,
     currency: "TWD",
     isFree: false,
     paymentUrl: "https://gumroad.com/",
@@ -2129,7 +2127,7 @@ const PREMIUM = [
   },
   {
     id: "workplace-productivity",
-    price: 599,
+    price: 1299,
     currency: "TWD",
     isFree: false,
     paymentUrl: "https://gumroad.com/",
@@ -2180,7 +2178,7 @@ const PREMIUM = [
   },
   {
     id: "startup-automation",
-    price: 899,
+    price: 1799,
     currency: "TWD",
     isFree: false,
     paymentUrl: "https://gumroad.com/",
@@ -2231,10 +2229,9 @@ const PREMIUM = [
   },
   {
     id: "all-access",
-    price: 2999,
+    price: 4499,
     currency: "TWD",
     isFree: false,
-    priceNote: "early-bird",
     paymentUrl: "https://gumroad.com/",
     zhTitle: "AI Skill Bridge 全站通行證",
     enTitle: "AI Skill Bridge All-Access Pass",
@@ -33355,12 +33352,60 @@ const TOOLS = [
 ];
 
 const PROMPTS = [
-  { cat: "Study", text: "Explain [concept] in three levels: for a 10-year-old, for a high school student, and for a university student. Give one example for each level." },
-  { cat: "Report", text: "Help me create a report outline on [topic]. Include introduction, three main arguments, evidence to verify, counterarguments, and conclusion. Do not write the full essay." },
-  { cat: "Resume", text: "Improve the following resume bullet points to emphasize action, results, and skills. Keep everything truthful and do not invent experience." },
-  { cat: "Slides", text: "Turn [topic] into an 8-slide presentation. For each slide, provide a title, one key message, three bullet points, and a suggested visual." },
-  { cat: "Email", text: "Write a polite and professional email to [recipient]. Context: [context]. Goal: [goal]. Tone: sincere, clear, and not too forceful." },
-  { cat: "Research", text: "Compare the following sources in a table with columns: source, main argument, method, evidence, limitation, and relevance to my topic." },
-  { cat: "Interview", text: "Act as an interviewer for [role/program]. Ask me one question at a time. After each answer, give feedback on clarity, structure, and persuasiveness." },
-  { cat: "Planning", text: "Break this goal into a 7-day action plan. For each day, include task, estimated time, output, and success criteria." }
+  {
+    id: "study-explain-levels",
+    categoryZh: "學習",
+    categoryEn: "Study",
+    promptZh: "請用三個不同程度解釋「[概念]」：\n1. 10 歲兒童可以理解的版本\n2. 高中生可以理解的版本\n3. 大學生可以理解的版本\n\n每個程度各提供一個具體例子。",
+    promptEn: "Explain [concept] in three levels: for a 10-year-old, for a high school student, and for a university student. Give one example for each level."
+  },
+  {
+    id: "report-outline",
+    categoryZh: "報告",
+    categoryEn: "Report",
+    promptZh: "請協助我建立一份關於「[主題]」的報告大綱，包含：引言、三個主要論點、需要查證的證據、反方觀點與結論。請不要直接寫完整文章。",
+    promptEn: "Help me create a report outline on [topic]. Include introduction, three main arguments, evidence to verify, counterarguments, and conclusion. Do not write the full essay."
+  },
+  {
+    id: "resume-improve",
+    categoryZh: "履歷",
+    categoryEn: "Resume",
+    promptZh: "請改寫以下履歷條列式描述，強調行動、成果與技能。請保持真實，不要捏造任何經歷。\n\n[文字]",
+    promptEn: "Improve the following resume bullet points to emphasize action, results, and skills. Keep everything truthful and do not invent experience."
+  },
+  {
+    id: "slides-outline",
+    categoryZh: "簡報",
+    categoryEn: "Slides",
+    promptZh: "請將「[主題]」規劃為 8 頁簡報。每一頁請提供：標題、一個核心訊息、三個重點，以及建議的視覺呈現方式。",
+    promptEn: "Turn [topic] into an 8-slide presentation. For each slide, provide a title, one key message, three bullet points, and a suggested visual."
+  },
+  {
+    id: "email-professional",
+    categoryZh: "信件",
+    categoryEn: "Email",
+    promptZh: "請撰寫一封禮貌且專業的 Email 給 [對象]。\n背景：[背景說明]\n目的：[溝通目的]\n語氣：真誠、清楚，不過度強硬。",
+    promptEn: "Write a polite and professional email to [recipient]. Context: [context]. Goal: [goal]. Tone: sincere, clear, and not too forceful."
+  },
+  {
+    id: "research-compare-sources",
+    categoryZh: "研究",
+    categoryEn: "Research",
+    promptZh: "請用表格比較以下資料來源，欄位包含：來源、主要論點、研究方法、證據、限制，以及與我的主題的相關性。\n\n[文字]",
+    promptEn: "Compare the following sources in a table with columns: source, main argument, method, evidence, limitation, and relevance to my topic."
+  },
+  {
+    id: "interview-practice",
+    categoryZh: "面試",
+    categoryEn: "Interview",
+    promptZh: "請扮演 [職位/計畫] 的面試官，一次只問我一個問題。每次回答後，請針對清晰度、結構與說服力提供回饋。",
+    promptEn: "Act as an interviewer for [role/program]. Ask me one question at a time. After each answer, give feedback on clarity, structure, and persuasiveness."
+  },
+  {
+    id: "planning-7day",
+    categoryZh: "規劃",
+    categoryEn: "Planning",
+    promptZh: "請將這個目標拆解為 7 天行動計畫。每一天請包含：任務、預估時間、產出成果，以及成功標準。\n\n[目標]",
+    promptEn: "Break this goal into a 7-day action plan. For each day, include task, estimated time, output, and success criteria."
+  }
 ];

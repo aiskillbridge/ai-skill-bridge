@@ -2,6 +2,7 @@ import { setCorsHeaders, handleOptions, sendError } from "../_lib/http.js";
 import { requireAdmin } from "../_lib/adminAuth.js";
 import { getSupabaseAdmin } from "../_lib/supabaseAdmin.js";
 import { taipeiDayKey, taipeiMonthKey, toAdminOrderRow } from "../_lib/adminFormat.js";
+import { EMPTY_DASHBOARD_ORDERS, isOrdersSchemaUnavailable } from "../_lib/ordersAdmin.js";
 
 function sumPaidAmount(orders) {
   return (orders || [])
@@ -93,6 +94,58 @@ export default async function handler(req, res) {
     .eq("status", "paid");
 
   if (paidError) {
+    if (isOrdersSchemaUnavailable(paidError)) {
+      console.warn("[admin/dashboard] orders_table_unavailable", paidError.message || paidError);
+      const campus = await safeCampusStats(admin);
+
+      const { count: memberCount, error: memberError } = await admin
+        .from("profiles")
+        .select("id", { count: "exact", head: true });
+
+      if (memberError) {
+        console.warn("[admin/dashboard] profiles_count_error", memberError.message || memberError);
+      }
+
+      const { data: profiles, error: profilesError } = await admin
+        .from("profiles")
+        .select("plan, unlocked_courses");
+
+      let allAccessCount = 0;
+      let singleCourseBuyerCount = 0;
+      if (!profilesError && profiles) {
+        for (const profile of profiles) {
+          if (profile.plan === "premium" || profile.plan === "all-access") {
+            allAccessCount += 1;
+          } else if (Array.isArray(profile.unlocked_courses) && profile.unlocked_courses.length) {
+            singleCourseBuyerCount += 1;
+          } else if (
+            profile.unlocked_courses
+            && typeof profile.unlocked_courses === "object"
+            && Object.keys(profile.unlocked_courses).length
+          ) {
+            singleCourseBuyerCount += 1;
+          }
+        }
+      }
+
+      return res.status(200).json({
+        ...EMPTY_DASHBOARD_ORDERS,
+        ordersAvailable: false,
+        members: {
+          total: memberCount || 0,
+          singleCourseBuyers: singleCourseBuyerCount,
+          allAccess: allAccessCount
+        },
+        campus: {
+          users: campus.totalRedemptions,
+          activeUsers: campus.activeRedemptions,
+          activePrograms: campus.activePrograms,
+          configured: campus.configured,
+          programSummaries: campus.programSummaries
+        }
+      });
+    }
+
     console.error("[admin/dashboard] paid_orders_error", paidError.message || paidError);
     return sendError(res, "internal_error");
   }
@@ -155,6 +208,27 @@ export default async function handler(req, res) {
     .limit(10);
 
   if (recentError) {
+    if (isOrdersSchemaUnavailable(recentError)) {
+      console.warn("[admin/dashboard] recent_orders_unavailable", recentError.message || recentError);
+      const campus = await safeCampusStats(admin);
+      return res.status(200).json({
+        ...EMPTY_DASHBOARD_ORDERS,
+        ordersAvailable: false,
+        members: {
+          total: memberCount || 0,
+          singleCourseBuyers: singleCourseBuyerCount,
+          allAccess: allAccessCount
+        },
+        campus: {
+          users: campus.totalRedemptions,
+          activeUsers: campus.activeRedemptions,
+          activePrograms: campus.activePrograms,
+          configured: campus.configured,
+          programSummaries: campus.programSummaries
+        }
+      });
+    }
+
     console.error("[admin/dashboard] recent_orders_error", recentError.message || recentError);
     return sendError(res, "internal_error");
   }
@@ -162,6 +236,7 @@ export default async function handler(req, res) {
   const campus = await safeCampusStats(admin);
 
   return res.status(200).json({
+    ordersAvailable: true,
     revenue: {
       today: todayRevenue,
       month: monthRevenue,

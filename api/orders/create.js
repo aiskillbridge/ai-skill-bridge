@@ -54,7 +54,7 @@ export default async function handler(req, res) {
     return sendError(res, "invalid_request", "Untrusted payment fields are not accepted");
   }
 
-  const product = getProductById(productId);
+  const product = await getProductById(productId);
   if (!product) {
     return sendError(res, "invalid_product");
   }

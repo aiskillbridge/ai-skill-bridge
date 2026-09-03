@@ -2,6 +2,7 @@ import { setCorsHeaders, handleOptions, sendError } from "../_lib/http.js";
 import { requireAdmin } from "../_lib/adminAuth.js";
 import { getSupabaseAdmin } from "../_lib/supabaseAdmin.js";
 import { toAdminOrderRow } from "../_lib/adminFormat.js";
+import { isOrdersSchemaUnavailable } from "../_lib/ordersAdmin.js";
 
 export default async function handler(req, res) {
   setCorsHeaders(res, req);
@@ -44,11 +45,20 @@ export default async function handler(req, res) {
 
   const { data, error } = await query;
   if (error) {
+    if (isOrdersSchemaUnavailable(error)) {
+      console.warn("[admin/orders] orders_table_unavailable", error.message || error);
+      return res.status(200).json({
+        orders: [],
+        ordersAvailable: false
+      });
+    }
+
     console.error("[admin/orders] query_error", error.message || error);
     return sendError(res, "internal_error");
   }
 
   return res.status(200).json({
-    orders: (data || []).map(toAdminOrderRow)
+    orders: (data || []).map(toAdminOrderRow),
+    ordersAvailable: true
   });
 }

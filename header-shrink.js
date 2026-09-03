@@ -1,7 +1,8 @@
 
 (function () {
   function findHeader() {
-    return document.querySelector("header") ||
+    return document.querySelector("header.site-header") ||
+           document.querySelector("header") ||
            document.querySelector(".site-header") ||
            document.querySelector(".topbar") ||
            document.querySelector(".navbar") ||

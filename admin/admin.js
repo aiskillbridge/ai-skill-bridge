@@ -3,8 +3,11 @@
  * Auth: Google → Supabase session → Bearer token → /api/admin/* → server ADMIN_EMAILS check.
  */
 (function adminApp() {
-  const PUBLIC_SUPABASE_URL = "https://ifjkadoskbcgrqmcjvya.supabase.co";
-  const PUBLIC_SUPABASE_ANON_KEY = "sb_publishable_yXHovKCCYE04aUcybOc4KA_Fhdp5bTE";
+  const PRODUCTION_PROJECT_REF = "ifjkadoskbcgrqmcjvya";
+
+  let publicSupabaseUrl = "";
+  let publicSupabaseAnonKey = "";
+  let publicProjectRef = "";
 
   const PREMIUM_COURSE_OPTIONS = [
     { id: "college-learning", label: "大學學習 AI 實戰課" },
@@ -49,12 +52,75 @@
       ordersOrderId: "",
       ordersStatus: "",
       usersEmail: ""
-    }
+    },
+    productEdit: null,
+    productSaveMessage: ""
   };
 
-  const supabase = window.supabase
-    ? window.supabase.createClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY)
-    : null;
+  let supabase = null;
+
+  function getOAuthCallbackParams() {
+    const query = new URLSearchParams(window.location.search);
+    const hash = new URLSearchParams(String(window.location.hash || "").replace(/^#/, ""));
+    return {
+      code: query.get("code"),
+      error: query.get("error") || hash.get("error"),
+      errorDescription: query.get("error_description") || hash.get("error_description")
+    };
+  }
+
+  function hasOAuthCallbackParams() {
+    const params = getOAuthCallbackParams();
+    return Boolean(params.code || params.error || window.location.hash.includes("access_token="));
+  }
+
+  function clearOAuthParamsFromUrl() {
+    const cleanUrl = `${window.location.origin}${window.location.pathname}`;
+    window.history.replaceState({}, document.title, cleanUrl);
+  }
+
+  function clearStaleSupabaseAuthStorage(currentProjectRef) {
+    try {
+      if (!currentProjectRef || !window.localStorage) return;
+      if (hasOAuthCallbackParams()) return;
+      const host = window.location?.hostname || "";
+      if (host !== "localhost" && host !== "127.0.0.1" && host !== "::1") return;
+      const stalePrefix = `sb-${PRODUCTION_PROJECT_REF}-`;
+      if (currentProjectRef === PRODUCTION_PROJECT_REF) return;
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith(stalePrefix)) {
+          localStorage.removeItem(key);
+        }
+      }
+    } catch {
+      // Ignore localStorage cleanup failures on localhost test.
+    }
+  }
+
+  async function loadPublicSupabaseConfig() {
+    const response = await fetch("/api/admin/public-config");
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(payload.error || "supabase_public_config_missing");
+    }
+    publicSupabaseUrl = payload.supabaseUrl || "";
+    publicSupabaseAnonKey = payload.supabaseAnonKey || "";
+    publicProjectRef = payload.projectRef || "";
+    if (!publicSupabaseUrl || !publicSupabaseAnonKey || !publicProjectRef) {
+      throw new Error("supabase_public_config_missing");
+    }
+    clearStaleSupabaseAuthStorage(publicProjectRef);
+    if (!window.supabase) return;
+    supabase = window.supabase.createClient(publicSupabaseUrl, publicSupabaseAnonKey, {
+      auth: {
+        // Admin handles PKCE callback explicitly in recoverAuthSession().
+        detectSessionInUrl: false,
+        persistSession: true,
+        flowType: "pkce"
+      }
+    });
+  }
 
   function escapeHtml(value) {
     return String(value ?? "")
@@ -62,6 +128,11 @@
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
+  }
+
+  /** Safe single-quoted JS string for inline onclick handlers in HTML attributes. */
+  function jsStringLiteral(value) {
+    return `'${String(value ?? "").replace(/\\/g, "\\\\").replace(/'/g, "\\'")}'`;
   }
 
   function formatTwd(amount) {
@@ -92,6 +163,7 @@
   }
 
   async function getAccessToken() {
+    if (state.session?.access_token) return state.session.access_token;
     if (!supabase) return null;
     const { data } = await supabase.auth.getSession();
     return data?.session?.access_token || null;
@@ -102,6 +174,7 @@
     if (!token) {
       const err = new Error("authentication_required");
       err.code = "authentication_required";
+      err.source = "client_no_token";
       throw err;
     }
 
@@ -119,6 +192,7 @@
       const err = new Error(payload.error || "request_failed");
       err.code = payload.error || "request_failed";
       err.status = response.status;
+      err.source = "server";
       throw err;
     }
     return payload;
@@ -131,10 +205,37 @@
       state.error = "";
     } catch (error) {
       state.adminAllowed = error.code === "admin_forbidden" ? false : null;
-      if (error.code !== "admin_forbidden") {
+      if (error.code === "authentication_required" && error.source === "client_no_token") {
+        state.error = "authentication_required";
+      } else if (error.code !== "admin_forbidden") {
         state.error = error.code || "system_check_failed";
       }
     }
+  }
+
+  async function recoverAuthSession() {
+    const callback = getOAuthCallbackParams();
+    if (callback.error) {
+      clearOAuthParamsFromUrl();
+      throw new Error(callback.errorDescription || callback.error);
+    }
+
+    if (callback.code) {
+      const { data, error } = await supabase.auth.exchangeCodeForSession(callback.code);
+      clearOAuthParamsFromUrl();
+      if (error) {
+        const { data: retryData } = await supabase.auth.getSession();
+        if (retryData?.session) return retryData.session;
+        throw new Error(error.message || "oauth_callback_failed");
+      }
+      return data?.session || null;
+    }
+
+    const { data, error } = await supabase.auth.getSession();
+    if (error) {
+      throw new Error(error.message || "get_session_failed");
+    }
+    return data?.session || null;
   }
 
   async function signInWithGoogle() {
@@ -207,6 +308,71 @@
     state.filters.usersEmail = document.getElementById("users-email")?.value || "";
     loadPageData("users");
   };
+  window.adminEditProduct = function adminEditProduct(productId) {
+    const product = (state.data.products?.products || []).find((p) => p.productId === productId);
+    if (!product) return;
+    state.productEdit = {
+      productId: product.productId,
+      price: String(product.amount),
+      originalPrice: product.originalPrice == null ? "" : String(product.originalPrice),
+      active: product.active === true
+    };
+    state.productSaveMessage = "";
+    render();
+  };
+  window.adminSetProductEditField = function adminSetProductEditField(field, value) {
+    if (!state.productEdit) return;
+    if (field === "price") state.productEdit.price = value;
+    else if (field === "originalPrice") state.productEdit.originalPrice = value;
+    else if (field === "active") state.productEdit.active = value === true || value === "true";
+  };
+  window.adminCancelProductEdit = function adminCancelProductEdit() {
+    state.productEdit = null;
+    state.productSaveMessage = "";
+    render();
+  };
+  window.adminSaveProduct = async function adminSaveProduct(event) {
+    event.preventDefault();
+    const edit = state.productEdit;
+    if (!edit?.productId) return;
+    if (state.data.products?.migrationRequired) {
+      alert("目前無法儲存價格，請稍後再試。");
+      return;
+    }
+
+    const price = Number(edit.price);
+    if (!Number.isInteger(price) || price <= 0) {
+      alert("售價必須為正整數");
+      return;
+    }
+
+    let originalPrice = null;
+    const originalRaw = String(edit.originalPrice || "").trim();
+    if (originalRaw) {
+      originalPrice = Number(originalRaw);
+      if (!Number.isInteger(originalPrice) || originalPrice <= 0) {
+        alert("原價必須為正整數，或留空");
+        return;
+      }
+    }
+
+    try {
+      await apiFetch("/api/admin/products", {
+        method: "PATCH",
+        body: JSON.stringify({
+          productId: edit.productId,
+          price,
+          originalPrice,
+          active: edit.active === true
+        })
+      });
+      state.productEdit = null;
+      state.productSaveMessage = "儲存成功";
+      await loadPageData("products");
+    } catch (error) {
+      alert(error.code || "save_failed");
+    }
+  };
   window.adminToggleCampusProgram = async function adminToggleCampusProgram(programId, isActive) {
     if (isCampusWriteDisabled()) {
       alert("campus_production_not_enabled");
@@ -237,8 +403,8 @@
       const result = await apiFetch("/api/admin/campus/programs", {
         method: "POST",
         body: JSON.stringify({
-          schoolName: form.schoolName,
-          programName: form.programName,
+          schoolName: document.getElementById("campus-school-name")?.value?.trim() || "",
+          programName: document.getElementById("campus-program-name")?.value?.trim() || "",
           accessType: document.getElementById("campus-access-type")?.value || "all-access",
           courseIds: selectedCourses,
           durationDays: Number(document.getElementById("campus-duration-days")?.value || 30),
@@ -422,27 +588,70 @@
 
   function renderProducts() {
     const rows = state.data.products?.products || [];
+    const meta = state.data.products || {};
+    const dbReady = meta.migrationRequired !== true && meta.canEdit === true;
+    const edit = state.productEdit;
+    const editingProduct = edit
+      ? rows.find((p) => p.productId === edit.productId)
+      : null;
+
     return `
-      <div class="admin-alert">商品價格來自 server product catalog。第一版只讀，Admin 不能直接改價。</div>
+      <h2 class="admin-page-title">商品價格管理</h2>
+      ${dbReady
+        ? `<div class="admin-alert success">價格變更將套用到前台商品與訂單。</div>`
+        : `<div class="admin-alert warning">價格資料暫時無法編輯。</div>`
+      }
+      ${state.productSaveMessage ? `<div class="admin-alert success">${escapeHtml(state.productSaveMessage)}</div>` : ""}
       <div class="admin-card">
         <div class="admin-table-wrap">
           <table class="admin-table">
-            <thead><tr><th>商品名稱</th><th>productId</th><th>售價</th><th>類型</th><th>courseId</th><th>啟用</th></tr></thead>
+            <thead><tr><th>商品名稱</th><th>Product Key</th><th>售價</th><th>原價</th><th>類型</th><th>courseId</th><th>狀態</th><th></th></tr></thead>
             <tbody>
               ${rows.map((product) => `
                 <tr>
                   <td>${escapeHtml(product.nameZh)}</td>
-                  <td>${escapeHtml(product.productId)}</td>
+                  <td><code>${escapeHtml(product.productId)}</code></td>
                   <td>${formatTwd(product.amount)}</td>
+                  <td>${product.originalPrice != null ? formatTwd(product.originalPrice) : "—"}</td>
                   <td>${escapeHtml(product.type)}</td>
                   <td>${escapeHtml(product.courseId || "—")}</td>
-                  <td>${product.active ? "Yes" : "No"}</td>
+                  <td>${product.active ? '<span class="admin-badge paid">啟用</span>' : '<span class="admin-badge failed">停用</span>'}</td>
+                  <td>${dbReady
+                    ? `<button type="button" class="admin-btn secondary admin-btn-compact" onclick="adminEditProduct(${jsStringLiteral(product.productId)})">編輯</button>`
+                    : `<span class="admin-metric-sub">—</span>`
+                  }</td>
                 </tr>
               `).join("")}
             </tbody>
           </table>
         </div>
       </div>
+      ${editingProduct ? `
+        <div class="admin-card admin-product-edit-card">
+          <h3>編輯商品：${escapeHtml(editingProduct.nameZh)}</h3>
+          <form class="admin-form-grid" onsubmit="adminSaveProduct(event)">
+            <label>售價（TWD 整數）
+              <input class="admin-input" type="number" min="1" step="1" required
+                value="${escapeHtml(edit.price)}"
+                onchange="adminSetProductEditField('price', this.value)" />
+            </label>
+            <label>原價（劃線參考價，可留空）
+              <input class="admin-input" type="number" min="1" step="1"
+                value="${escapeHtml(edit.originalPrice)}"
+                onchange="adminSetProductEditField('originalPrice', this.value)" />
+            </label>
+            <label class="admin-checkbox-label">
+              <input type="checkbox" ${edit.active ? "checked" : ""}
+                onchange="adminSetProductEditField('active', this.checked)" />
+              啟用商品
+            </label>
+            <div class="admin-toolbar">
+              <button type="submit" class="admin-btn">儲存</button>
+              <button type="button" class="admin-btn secondary" onclick="adminCancelProductEdit()">取消</button>
+            </div>
+          </form>
+        </div>
+      ` : ""}
     `;
   }
 
@@ -452,11 +661,10 @@
     const writeDisabled = isCampusWriteDisabled();
     const disabledAttr = writeDisabled ? "disabled" : "";
     return `
-      <div class="admin-alert warning">Campus 管理目前為 Beta / 測試階段</div>
+      <h2 class="admin-page-title">校園合作方案管理</h2>
       ${writeDisabled ? `
-        <div class="admin-alert">完成 Campus Production migration 與 E2E 驗證後才會開放。</div>
+        <div class="admin-alert warning">校園方案建立功能目前未啟用。</div>
       ` : ""}
-      ${data.testStageNotice ? `<div class="admin-metric-sub">${escapeHtml(data.testStageNotice)}</div>` : ""}
       ${createResult?.campusCodeOnce ? `
         <div class="admin-code-once">
           <strong>Campus Code 只在建立時顯示一次，請立即保存。</strong>
@@ -520,7 +728,7 @@
                 </tbody>
               </table>
             </div>
-          ` : `<p>Campus tables 尚未在此 Supabase 專案設定。</p>`}
+          ` : `<p>尚無校園合作資料。</p>`}
         </div>
       </div>
     `;
@@ -609,26 +817,52 @@
       return;
     }
 
-    const { data } = await supabase.auth.getSession();
-    state.session = data?.session || null;
-
-    supabase.auth.onAuthStateChange(async (_event, session) => {
+    supabase.auth.onAuthStateChange(async (event, session) => {
       state.session = session;
-      if (session) {
+      if (session && (event === "SIGNED_IN" || event === "TOKEN_REFRESHED")) {
         await verifyAdminAccess();
         if (state.adminAllowed) await loadPageData(state.page);
-      } else {
+      } else if (!session && event === "SIGNED_OUT") {
         state.adminAllowed = null;
+        state.error = "";
       }
       render();
     });
 
-    if (state.session) {
-      await verifyAdminAccess();
-      if (state.adminAllowed) await loadPageData(state.page);
+    try {
+      state.session = await recoverAuthSession();
+      if (state.session) {
+        await verifyAdminAccess();
+        if (state.adminAllowed) await loadPageData(state.page);
+      } else {
+        state.adminAllowed = null;
+        state.error = "";
+      }
+    } catch (error) {
+      const { data: retryData } = await supabase.auth.getSession();
+      if (retryData?.session) {
+        state.session = retryData.session;
+        await verifyAdminAccess();
+        if (state.adminAllowed) await loadPageData(state.page);
+      } else {
+        state.session = null;
+        state.adminAllowed = null;
+        state.error = error.message || "auth_init_failed";
+      }
     }
+
     render();
   }
 
-  init();
+  async function bootstrap() {
+    try {
+      await loadPublicSupabaseConfig();
+      await init();
+    } catch (error) {
+      state.error = error.message || "bootstrap_failed";
+      render();
+    }
+  }
+
+  bootstrap();
 })();

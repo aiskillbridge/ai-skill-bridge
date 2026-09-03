@@ -198,10 +198,7 @@ export default async function handler(req, res) {
       const campusWriteEnabled = isCampusAdminWriteAllowed();
       return res.status(200).json({
         ...result,
-        campusWriteEnabled,
-        testStageNotice: campusWriteEnabled
-          ? "Campus 管理功能目前為 Beta / 測試階段。"
-          : "Campus 管理目前為 Beta / 測試階段。完成 Campus Production migration 與 E2E 驗證後才會開放。"
+        campusWriteEnabled
       });
     } catch (error) {
       console.error("[admin/campus/programs] list_error", error?.message || error);

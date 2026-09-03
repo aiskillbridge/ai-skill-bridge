@@ -24,8 +24,8 @@ export default async function handler(req, res) {
   let campusStatus = "not_configured";
   try {
     const admin = getSupabaseAdmin();
-    const { error } = await admin.from("orders").select("id", { head: true, count: "exact" }).limit(1);
-    supabaseStatus = error ? "error" : "connected";
+    const { error: ordersError } = await admin.from("orders").select("id").limit(1);
+    supabaseStatus = ordersError ? "error" : "connected";
 
     const { error: campusError } = await admin.from("campus_programs").select("id").limit(1);
     campusStatus = campusError ? "not_configured" : "configured";

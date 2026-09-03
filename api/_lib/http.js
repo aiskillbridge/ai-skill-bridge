@@ -18,6 +18,7 @@ export const API_ERRORS = Object.freeze({
   campus_already_redeemed: { status: 409, code: "campus_already_redeemed" },
   campus_max_redemptions_reached: { status: 409, code: "campus_max_redemptions_reached" },
   admin_forbidden: { status: 403, code: "admin_forbidden" },
+  product_not_found: { status: 404, code: "product_not_found" },
   campus_production_not_enabled: { status: 403, code: "campus_production_not_enabled" },
   internal_error: { status: 500, code: "internal_error" }
 });

@@ -1,6 +1,11 @@
-import { getProductById } from "./productCatalog.js";
-
 const TAIPEI_TZ = "Asia/Taipei";
+
+function resolveOrderProductName(order) {
+  const meta = order.metadata && typeof order.metadata === "object" ? order.metadata : null;
+  if (meta?.productName?.zh) return String(meta.productName.zh);
+  if (order.product_id === "all-access") return "全站通行證";
+  return order.product_id || "—";
+}
 
 export function formatIsoDate(iso) {
   if (!iso) return "";
@@ -19,10 +24,7 @@ export function taipeiMonthKey(date = new Date()) {
 }
 
 export function toAdminOrderRow(order) {
-  const product = getProductById(order.product_id);
-  const productName = product
-    ? product.name.zh
-    : order.product_id || "—";
+  const productName = resolveOrderProductName(order);
 
   let purchaseEmailStatus = "not_sent";
   if (order.purchase_email_sent_at) {

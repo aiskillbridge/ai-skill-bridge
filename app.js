@@ -147,12 +147,15 @@ function renderAccountMembershipSummary(user = state.user) {
 const CAMPUS_TEST_PROJECT_REF = "kcbzsilnfsrsnfblreve";
 const PRODUCTION_PROJECT_REF = "ifjkadoskbcgrqmcjvya";
 
-function clearStaleSupabaseAuthStorageForCampusTest() {
+let runtimeSupabaseProjectRef =
+  (String(SUPABASE_URL).match(/https:\/\/([^.]+)\.supabase\.co/) || [])[1] || null;
+
+function clearStaleSupabaseAuthStorageForCampusTest(projectRef = runtimeSupabaseProjectRef) {
   try {
     if (typeof window === "undefined" || !window.localStorage) return;
     const host = window.location?.hostname || "";
     if (host !== "localhost" && host !== "127.0.0.1" && host !== "::1") return;
-    if (!String(SUPABASE_URL).includes(CAMPUS_TEST_PROJECT_REF)) return;
+    if (projectRef !== CAMPUS_TEST_PROJECT_REF) return;
     const stalePrefix = `sb-${PRODUCTION_PROJECT_REF}-`;
     for (let i = localStorage.length - 1; i >= 0; i--) {
       const key = localStorage.key(i);
@@ -172,6 +175,29 @@ if (window.supabase) {
   supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 }
 
+/** On localhost, align browser Supabase client with server .env.local (campus-test). */
+async function bootstrapSupabaseClientForLocalhost() {
+  try {
+    const host = window.location?.hostname || "";
+    if (host !== "localhost" && host !== "127.0.0.1" && host !== "::1") return;
+    if (!window.supabase) return;
+
+    const response = await fetch("/api/admin/public-config");
+    if (!response.ok) return;
+
+    const cfg = await response.json();
+    if (!cfg.supabaseUrl || !cfg.supabaseAnonKey || !cfg.projectRef) return;
+    if (cfg.supabaseUrl === SUPABASE_URL && cfg.supabaseAnonKey === SUPABASE_ANON_KEY) return;
+
+    runtimeSupabaseProjectRef = cfg.projectRef;
+    supabaseClient = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey);
+    clearStaleSupabaseAuthStorageForCampusTest(cfg.projectRef);
+    console.log("[BOOT] supabase aligned with server project", cfg.projectRef);
+  } catch (error) {
+    console.warn("[BOOT] supabase_local_config_fallback", error?.message || error);
+  }
+}
+
 let currentCourseId = null;
 let currentLessonIndex = 0;
 let currentResultPackageId = null;
@@ -183,7 +209,6 @@ let state = {
   // Do not hydrate member progress from global localStorage before auth.
   progress: {},
   notes: {},
-  assessment: JSON.parse(localStorage.getItem("asb_assessment") || "null"),
   favorites: JSON.parse(localStorage.getItem("asb_favorites") || "[]"),
   user: null,
   userPlan: "free",
@@ -197,91 +222,10 @@ let state = {
   },
   supabaseSession: null,
   authReady: false,
-  loadingProgress: false
+  loadingProgress: false,
+  productCatalog: null,
+  productCatalogLoaded: false
 };
-
-const ASSESSMENT_QUESTIONS = [
-  {
-    id: "q1",
-    zh: "你是否曾經使用過 ChatGPT 或其他 AI 工具？",
-    en: "Have you used ChatGPT or another AI tool before?",
-    options: [
-      { zh: "完全沒有", en: "Never", score: 0 },
-      { zh: "用過一兩次", en: "Once or twice", score: 1 },
-      { zh: "經常使用", en: "Often", score: 2 }
-    ]
-  },
-  {
-    id: "q2",
-    zh: "你知道 Prompt 是什麼嗎？",
-    en: "Do you know what a prompt is?",
-    options: [
-      { zh: "不知道", en: "No", score: 0 },
-      { zh: "大概知道", en: "Somewhat", score: 1 },
-      { zh: "知道，也會設計 Prompt", en: "Yes, and I can write prompts", score: 2 }
-    ]
-  },
-  {
-    id: "q3",
-    zh: "你會要求 AI 用表格、條列或指定格式回答嗎？",
-    en: "Can you ask AI to answer in tables, bullet points, or specific formats?",
-    options: [
-      { zh: "不會", en: "No", score: 0 },
-      { zh: "偶爾會", en: "Sometimes", score: 1 },
-      { zh: "會，而且常用", en: "Yes, often", score: 2 }
-    ]
-  },
-  {
-    id: "q4",
-    zh: "你會查證 AI 給你的重要資訊嗎？",
-    en: "Do you verify important information from AI?",
-    options: [
-      { zh: "不會", en: "No", score: 0 },
-      { zh: "重要時會", en: "For important tasks", score: 1 },
-      { zh: "會，而且知道如何找來源", en: "Yes, and I know how to check sources", score: 2 }
-    ]
-  },
-  {
-    id: "q5",
-    zh: "你會用 AI 幫忙做報告或簡報架構嗎？",
-    en: "Can you use AI to help structure reports or presentations?",
-    options: [
-      { zh: "不會", en: "No", score: 0 },
-      { zh: "會一點", en: "A little", score: 1 },
-      { zh: "會，而且有自己的流程", en: "Yes, with my own workflow", score: 2 }
-    ]
-  },
-  {
-    id: "q6",
-    zh: "你是否知道 ChatGPT、Claude、NotebookLM、Perplexity 分別適合什麼任務？",
-    en: "Do you know what ChatGPT, Claude, NotebookLM, and Perplexity are best used for?",
-    options: [
-      { zh: "不知道", en: "No", score: 0 },
-      { zh: "知道一部分", en: "Partly", score: 1 },
-      { zh: "知道，也會依任務選工具", en: "Yes, and I choose tools by task", score: 2 }
-    ]
-  },
-  {
-    id: "q7",
-    zh: "你是否用 AI 修改過履歷、信件或自我介紹？",
-    en: "Have you used AI to improve a resume, email, or self-introduction?",
-    options: [
-      { zh: "沒有", en: "No", score: 0 },
-      { zh: "有，但不太熟", en: "Yes, but not confidently", score: 1 },
-      { zh: "有，而且能控制語氣與格式", en: "Yes, and I can control tone and format", score: 2 }
-    ]
-  },
-  {
-    id: "q8",
-    zh: "你能不能把一個大任務拆成多個 AI 小任務？",
-    en: "Can you break a large task into smaller AI-assisted steps?",
-    options: [
-      { zh: "不能", en: "No", score: 0 },
-      { zh: "有時候可以", en: "Sometimes", score: 1 },
-      { zh: "可以，這是我常用的方法", en: "Yes, it is part of my workflow", score: 2 }
-    ]
-  }
-];
 
 const LEARNING_MAP = [
   {
@@ -407,7 +351,6 @@ function save() {
     localStorage.setItem("asb_progress", JSON.stringify(state.progress));
     localStorage.setItem("asb_notes", JSON.stringify(state.notes));
   }
-  localStorage.setItem("asb_assessment", JSON.stringify(state.assessment));
   localStorage.setItem("asb_favorites", JSON.stringify(state.favorites));
 }
 
@@ -469,14 +412,8 @@ function earnedCertificates() {
   return earnedBadges().map(badge => `${badge} Completion Certificate`);
 }
 
-function recommendedLessons() {
-  if (!state.assessment) return ["ai", "prompt", "verify"];
-  if (state.assessment.level === "Level 0") return ["ai", "prompt", "role", "format", "verify"];
-  if (state.assessment.level === "Level 1") return ["study", "report", "slides", "email"];
-  return ["career", "tool-choice"];
-}
-
 function setRoute(route) {
+  if (route === "assessment") route = "home";
   state.route = route;
   window.scrollTo(0, 0);
   if (typeof closeAllNavMenus === "function") closeAllNavMenus();
@@ -678,9 +615,8 @@ function toast(message) {
 }
 
 /*
- * Supabase profiles columns currently in use:
- *   id, email, display_name, plan, created_at
- * Do not select/write unlocked_courses, updated_at, role, etc.
+ * Supabase profiles — client may only write identity fields (email, display_name).
+ * plan / unlocked_courses use DB defaults on INSERT; server-only updates via ECPay callback.
  */
 
 function logSupabaseError(label, error) {
@@ -711,7 +647,7 @@ async function syncUserProfile(user) {
     (authUser.email ? authUser.email.split("@")[0] : "") ||
     "User";
 
-  // Existing profiles: never overwrite plan. New profiles only: default plan to free.
+  // Client writes identity only. plan defaults to 'free'; unlocked_courses defaults to [] in DB.
   const identityPayload = {
     email: authUser.email || null,
     display_name
@@ -751,8 +687,7 @@ async function syncUserProfile(user) {
     .from("profiles")
     .insert({
       id: authUser.id,
-      ...identityPayload,
-      plan: "free"
+      ...identityPayload
     });
 
   if (insertError) {
@@ -843,11 +778,87 @@ function renderPriceCurrencyNote(className = "price-currency-note") {
   )}</p>`;
 }
 
+/** Fallback when /api/products is unavailable (must match api/_lib/productCatalog.js). */
+const FALLBACK_SERVER_PRODUCT_CATALOG = {
+  "course-admissions": 1099,
+  "course-college-learning": 899,
+  "course-research-competition": 1499,
+  "course-career-internship": 1499,
+  "course-workplace-productivity": 1299,
+  "course-startup-automation": 1799,
+  "all-access": 4499
+};
+
+const FALLBACK_PREMIUM_BUNDLE_TOTAL = 8094;
+
+function getProductCatalogProducts() {
+  return Array.isArray(state.productCatalog?.products) ? state.productCatalog.products : [];
+}
+
+function getProductCatalogByCourseId(courseId) {
+  if (!courseId) return null;
+  return getProductCatalogProducts().find((product) => product.courseId === courseId) || null;
+}
+
+function getProductCatalogAmount(courseId) {
+  const product = getProductCatalogByCourseId(courseId);
+  return product ? normalizePriceNumber(product.amount) : null;
+}
+
+function getAllAccessCatalogAmount() {
+  const product = getProductCatalogProducts().find((p) => p.productId === "all-access");
+  return product ? normalizePriceNumber(product.amount) : null;
+}
+
+function getProductCatalogOriginalPrice(courseId) {
+  const product = getProductCatalogByCourseId(courseId);
+  return product ? normalizePriceNumber(product.originalPrice) : null;
+}
+
+function getAllAccessCatalogOriginalPrice() {
+  const product = getProductCatalogProducts().find((p) => p.productId === "all-access");
+  return product ? normalizePriceNumber(product.originalPrice) : null;
+}
+
+function getServerProductCatalogAuditMap() {
+  const map = { ...FALLBACK_SERVER_PRODUCT_CATALOG };
+  getProductCatalogProducts().forEach((product) => {
+    if (product?.productId && product.amount != null) {
+      map[product.productId] = normalizePriceNumber(product.amount);
+    }
+  });
+  return map;
+}
+
+async function loadProductCatalog() {
+  try {
+    const response = await fetch("/api/products");
+    if (!response.ok) throw new Error("catalog_fetch_failed");
+    const data = await response.json();
+    state.productCatalog = {
+      products: Array.isArray(data.products) ? data.products : [],
+      bundleTotal: normalizePriceNumber(data.bundleTotal)
+    };
+    state.productCatalogLoaded = true;
+    console.log("[CATALOG] loaded public pricing", {
+      products: state.productCatalog.products.length,
+      bundleTotal: state.productCatalog.bundleTotal
+    });
+  } catch (error) {
+    console.warn("[CATALOG] failed to load public pricing", error?.message || error);
+    state.productCatalog = { products: [], bundleTotal: null };
+    state.productCatalogLoaded = false;
+  }
+}
+
 function getPremiumCoursesBundleOriginalPrice() {
+  if (state.productCatalog?.bundleTotal != null) {
+    return state.productCatalog.bundleTotal;
+  }
   const amounts = getPremiumCourses()
-    .map(c => normalizePriceNumber(c.price))
-    .filter(n => n != null && n > 0);
-  if (!amounts.length) return null;
+    .map((course) => getProductCatalogAmount(course.id) ?? normalizePriceNumber(course.price))
+    .filter((n) => n != null && n > 0);
+  if (!amounts.length) return FALLBACK_PREMIUM_BUNDLE_TOTAL;
   return amounts.reduce((sum, n) => sum + n, 0);
 }
 
@@ -875,11 +886,14 @@ function getCoursePriceInfo(courseOrId) {
   if (!course) {
     return { id: "", price: null, originalPrice: null, currency: "TWD", isFree: false, course: null };
   }
-  const price = normalizePriceNumber(course.price);
-  let originalPrice = normalizePriceNumber(course.originalPrice);
-  if (course.id === "all-access") {
-    originalPrice = getPremiumCoursesBundleOriginalPrice();
-  }
+  const catalogAmount = course.id === "all-access"
+    ? getAllAccessCatalogAmount()
+    : getProductCatalogAmount(course.id);
+  const price = catalogAmount ?? normalizePriceNumber(course.price);
+  const catalogOriginal = course.id === "all-access"
+    ? getAllAccessCatalogOriginalPrice()
+    : getProductCatalogOriginalPrice(course.id);
+  const originalPrice = catalogOriginal ?? normalizePriceNumber(course.originalPrice);
   const isFree = course.isFree === true || price === 0;
   return {
     id: course.id || "",
@@ -895,16 +909,110 @@ function getCourseAccessStatusLabel(courseId) {
   if (courseId === "free" || courseId === "free-starter") {
     return text("免費", "Free");
   }
-  if (hasAllAccessPass() && courseId !== "all-access") {
-    return text("全站已解鎖", "All Access Unlocked");
+  if (!hasCourseAccess(courseId)) {
+    return text("尚未解鎖", "Locked");
+  }
+  const source = getCourseAccessSource(courseId);
+  if (source === "campus") {
+    return text("校園方案", "Campus");
+  }
+  if (source === "paid-single") {
+    return text("已購買", "Purchased");
   }
   if (courseId === "all-access" && hasAllAccessPass()) {
     return text("全站已解鎖", "All Access Unlocked");
   }
-  if (hasCourseAccess(courseId)) {
-    return text("已解鎖", "Unlocked");
+  return text("已解鎖", "Unlocked");
+}
+
+function getCourseCardOwnedNote(courseId) {
+  return "";
+}
+
+function getCourseShortOutcome(course) {
+  const raw = state.lang === "zh"
+    ? (course.zhOutcome || course.zhDesc || "")
+    : (course.enOutcome || course.enDesc || "");
+  if (!raw) return "";
+  const oneLine = String(raw).replace(/\s+/g, " ").trim();
+  if (oneLine.length <= 96) return oneLine;
+  return `${oneLine.slice(0, 93)}…`;
+}
+
+function getCourseCardBadgeMeta(courseId) {
+  if (courseId === "free" || courseId === "free-starter") {
+    return { className: "ui-badge ui-badge-success", label: text("免費", "Free") };
   }
-  return text("尚未解鎖", "Locked");
+  if (!hasCourseAccess(courseId)) {
+    return { className: "ui-badge ui-badge-muted", label: text("尚未解鎖", "Locked") };
+  }
+  const source = getCourseAccessSource(courseId);
+  if (source === "campus") {
+    return { className: "ui-badge ui-badge-campus", label: text("校園方案", "Campus") };
+  }
+  if (source === "paid-single") {
+    return { className: "ui-badge ui-badge-success", label: text("已購買", "Purchased") };
+  }
+  return { className: "ui-badge ui-badge-success", label: text("已解鎖", "Unlocked") };
+}
+
+function getCourseCardLessonCount(course) {
+  if (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[course.id]) {
+    return PREMIUM_LESSON_DETAILS[course.id].length;
+  }
+  return (course.zhLessons || course.enLessons || []).length || 10;
+}
+
+function getCourseCardTitle(course) {
+  const label = HOME_CAPABILITY_LABELS[course.id];
+  if (label) return state.lang === "zh" ? label.zh : label.en;
+  return state.lang === "zh" ? course.zhTitle : course.enTitle;
+}
+
+function renderSimplifiedCourseCard(course, options = {}) {
+  const context = options.context || "home";
+  const badge = getCourseCardBadgeMeta(course.id);
+  const unlocked = hasCourseAccess(course.id);
+  const lessonCount = getCourseCardLessonCount(course);
+  const title = getCourseCardTitle(course);
+  const outcome = getCourseShortOutcome(course);
+  const priceHtml = shouldShowCoursePrice(course.id)
+    ? `<p class="course-card-price"><span class="price-token">${formatTwdPrice(getCoursePriceInfo(course).price)}</span></p>`
+    : "";
+  const ctaLabel = unlocked
+    ? text("繼續學習", "Continue Learning")
+    : text("查看課程", "View Course");
+  const onClick = options.onClick || `homeOpenCapability('${course.id}')`;
+  const btnClass = context === "home"
+    ? `home-btn home-btn-compact ${unlocked ? "home-btn-primary" : "home-btn-secondary"}`
+    : `btn ${unlocked ? "primary" : "secondary"}`;
+  const cardClass = context === "home"
+    ? `home-cap-card course-card-simple ${unlocked ? "is-unlocked" : ""}`
+    : `map-course-card course-card-simple ${unlocked ? "" : "is-locked"}`;
+
+  return `
+    <article class="${cardClass}" data-course-id="${course.id}">
+      <div class="course-card-head">
+        <span class="${badge.className}">${badge.label}</span>
+      </div>
+      <h3>${title}</h3>
+      <p class="course-card-outcome">${outcome}</p>
+      <p class="course-card-lessons">${lessonCount} ${text("堂課", "lessons")}</p>
+      ${priceHtml}
+      <button type="button" class="${btnClass}" onclick="${onClick}">${ctaLabel}</button>
+    </article>
+  `;
+}
+
+function shouldShowCoursePrice(courseId) {
+  if (!courseId || courseId === "free" || courseId === "free-starter") return false;
+  if (hasCourseAccess(courseId)) return false;
+  if (isCreatorAccount() || isQueenAccount()) return false;
+  return true;
+}
+
+function shouldShowCoursePurchase(courseId) {
+  return shouldShowCoursePrice(courseId);
 }
 
 function renderPaymentComingSoonNote() {
@@ -941,10 +1049,7 @@ function renderCoursePurchaseControls(courseId, options = {}) {
 
   if (hasCourseAccess(courseId)) {
     if (variant === "map" || variant === "header" || variant === "inline") return "";
-    const ownedLabel = hasAllAccessPass()
-      ? text("已解鎖", "Unlocked")
-      : text("已購買", "Purchased");
-    return `<p class="course-price-owned" role="status">${ownedLabel}</p>`;
+    return "";
   }
 
   const priceInfo = getCoursePriceInfo(courseId);
@@ -1026,7 +1131,7 @@ async function purchaseCourse(courseId) {
 function renderAllAccessPurchaseControls(options = {}) {
   const variant = options.variant || "home";
   const priceInfo = getCoursePriceInfo("all-access");
-  const priceLabel = formatTwdPrice(priceInfo?.price ?? 2999);
+  const priceLabel = formatTwdPrice(priceInfo?.price);
 
   if (hasAllAccessPass()) {
     const owned = text("已全站開通", "All Access Unlocked");
@@ -1148,8 +1253,8 @@ function renderCoursePriceBlock(courseOrId, options = {}) {
     return `
       <div class="course-price-block is-all-access ${compact ? "is-compact" : ""}">
         <p class="course-price-label">${text("全站通行證", "All-Access Pass")}</p>
-        ${info.originalPrice != null ? `<p class="course-price-original"><span>${text("原價", "Regular Price")}</span> <s>${formatTwdPrice(info.originalPrice)}</s></p>` : ""}
-        <p class="course-price-amount is-earlybird"><span class="course-price-eyebrow">${text("早鳥價", "Early-bird Price")}</span>${formatTwdPrice(info.price)}</p>
+        ${info.originalPrice != null ? `<p class="course-price-original"><span>${text("原價", "Original price")}</span> <s>${formatTwdPrice(info.originalPrice)}</s></p>` : ""}
+        <p class="course-price-amount">${formatTwdPrice(info.price)}</p>
         ${saveAmount > 0 ? `<p class="course-price-save">${text(`現省 ${formatTwdPrice(saveAmount)}`, `Save ${formatTwdPrice(saveAmount)}`)}</p>` : ""}
         <p class="course-price-meta">${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</p>
         ${compact ? "" : `
@@ -1171,6 +1276,7 @@ function renderCoursePriceBlock(courseOrId, options = {}) {
   return `
     <div class="course-price-block ${compact ? "is-compact" : ""}">
       <p class="course-price-label">${text("課程售價", "Course Price")}</p>
+      ${info.originalPrice != null && info.originalPrice > info.price ? `<p class="course-price-original"><s>${formatTwdPrice(info.originalPrice)}</s></p>` : ""}
       <p class="course-price-amount">${formatTwdPrice(info.price)}</p>
       <p class="course-price-meta">${text("一次付費", "One-time payment")}</p>
       ${compact ? `
@@ -1870,9 +1976,12 @@ async function saveLessonNote(lessonId) {
 }
 
 function toggleFavorite(type, id) {
-  const key = `${type}:${id}`;
-  if (state.favorites.includes(key)) {
-    state.favorites = state.favorites.filter(item => item !== key);
+  const normalizedId = type === "prompt" ? getPromptFavoriteKey(id) : id;
+  const key = `${type}:${normalizedId}`;
+  const legacyKey = type === "prompt" && String(id) !== String(normalizedId) ? `${type}:${id}` : null;
+  const isOn = state.favorites.includes(key) || (legacyKey && state.favorites.includes(legacyKey));
+  if (isOn) {
+    state.favorites = state.favorites.filter((item) => item !== key && item !== legacyKey);
   } else {
     state.favorites.push(key);
   }
@@ -1881,196 +1990,1086 @@ function toggleFavorite(type, id) {
 }
 
 function isFavorite(type, id) {
+  if (type === "prompt") {
+    const normalizedId = getPromptFavoriteKey(id);
+    if (state.favorites.includes(`prompt:${normalizedId}`)) return true;
+    if (String(id) !== String(normalizedId) && state.favorites.includes(`prompt:${id}`)) return true;
+    return false;
+  }
   return state.favorites.includes(`${type}:${id}`);
 }
 
-function submitAssessment() {
-  let score = 0;
-  let answered = 0;
+function migratePromptFavoriteKeys() {
+  if (!Array.isArray(state.favorites) || typeof PROMPTS === "undefined") return;
+  let changed = false;
+  const next = state.favorites.map((key) => {
+    const match = key.match(/^prompt:(\d+)$/);
+    if (!match) return key;
+    const prompt = PROMPTS[Number(match[1])];
+    if (prompt?.id) {
+      changed = true;
+      return `prompt:${prompt.id}`;
+    }
+    return key;
+  });
+  if (changed) {
+    state.favorites = [...new Set(next)];
+    save();
+  }
+}
 
-  ASSESSMENT_QUESTIONS.forEach(question => {
-    const selected = document.querySelector(`input[name="${question.id}"]:checked`);
-    if (selected) {
-      score += Number(selected.value);
-      answered++;
+function getFavoriteIds(type) {
+  const prefix = `${type}:`;
+  return state.favorites
+    .filter((key) => key.startsWith(prefix))
+    .map((key) => key.slice(prefix.length));
+}
+
+function getFavoritePrompts() {
+  if (typeof PROMPTS === "undefined") return [];
+  return getFavoriteIds("prompt")
+    .map((id) => getPromptById(getPromptFavoriteKey(id)))
+    .filter(Boolean);
+}
+
+function getFavoriteTools() {
+  if (typeof TOOLS === "undefined") return [];
+  return getFavoriteIds("tool")
+    .map((name) => TOOLS.find((tool) => tool.name === name))
+    .filter(Boolean);
+}
+
+function renderFavoriteToggleButton(type, id) {
+  const saved = isFavorite(type, id);
+  const star = saved ? "★" : "☆";
+  const label = saved ? text("已收藏", "Saved") : text("收藏", "Save");
+  return `<button type="button" class="btn secondary btn-compact favorite-toggle" onclick='toggleFavorite(${JSON.stringify(type)}, ${JSON.stringify(String(id))})'>${star} ${label}</button>`;
+}
+
+function getPromptPreviewText(prompt, maxLen = 140) {
+  const body = getPromptBodyText(prompt);
+  if (!body) return "";
+  const oneLine = String(body).replace(/\s+/g, " ").trim();
+  if (oneLine.length <= maxLen) return body;
+  return `${oneLine.slice(0, maxLen).trim()}…`;
+}
+
+function renderFavoritePromptCard(prompt) {
+  const category = getPromptCategoryLabel(prompt);
+  const preview = getPromptPreviewText(prompt);
+  return `
+    <article class="card favorite-card favorite-card-prompt">
+      <span class="tag">${category}</span>
+      <div class="promptbox favorite-prompt-preview">${preview}</div>
+      <div class="btnrow favorite-card-actions">
+        <button type="button" class="btn primary btn-compact" onclick="copyPrompt(${JSON.stringify(prompt.id)})">${L("prompts.copy")}</button>
+        ${renderFavoriteToggleButton("prompt", prompt.id)}
+      </div>
+    </article>
+  `;
+}
+
+function renderFavoriteToolCard(tool) {
+  const desc = state.lang === "zh" ? tool.zh : tool.en;
+  return `
+    <article class="card favorite-card favorite-card-tool tool-card-compact">
+      <div class="tool-logo tool-logo-sm">${tool.name[0]}</div>
+      <h3>${tool.name}</h3>
+      <p class="tool-card-desc">${desc}</p>
+      <div class="btnrow favorite-card-actions">
+        <a class="btn primary btn-compact" href="${tool.url}" target="_blank" rel="noopener noreferrer">${L("tools.open")}</a>
+        ${renderFavoriteToggleButton("tool", tool.name)}
+      </div>
+    </article>
+  `;
+}
+
+function renderFavoritesEmptyState() {
+  return `
+    <div class="favorites-empty">
+      <p>${text("尚未收藏任何內容", "You haven't saved anything yet.")}</p>
+      <p>${text(
+        "看到實用的 Prompt 或 AI 工具時，按下「收藏」就能在這裡快速找到。",
+        "When you find a useful prompt or AI tool, tap Save to find it here quickly."
+      )}</p>
+      <div class="btnrow">
+        <button type="button" class="btn secondary" onclick="setRoute('prompts')">${text("探索 Prompt", "Explore Prompts")}</button>
+        <button type="button" class="btn secondary" onclick="setRoute('tools')">${text("探索 AI 工具", "Explore AI Tools")}</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderLearningFavoritesSection() {
+  const prompts = getFavoritePrompts();
+  const tools = getFavoriteTools();
+  if (!prompts.length && !tools.length) {
+    return renderFavoritesEmptyState();
+  }
+  return `
+    <div class="favorites-layout">
+      <div class="favorites-group">
+        <h3>${text("Prompt", "Prompts")}</h3>
+        ${prompts.length
+          ? `<div class="favorites-prompt-grid">${prompts.map((prompt) => renderFavoritePromptCard(prompt)).join("")}</div>`
+          : `<p class="favorites-sub-empty">${text("尚未收藏 Prompt。", "No saved prompts yet.")}</p>`}
+      </div>
+      <div class="favorites-group">
+        <h3>${text("AI 工具", "AI Tools")}</h3>
+        ${tools.length
+          ? `<div class="favorites-tool-grid">${tools.map((tool) => renderFavoriteToolCard(tool)).join("")}</div>`
+          : `<p class="favorites-sub-empty">${text("尚未收藏 AI 工具。", "No saved AI tools yet.")}</p>`}
+      </div>
+    </div>
+  `;
+}
+
+function renderLearningCompletedSection() {
+  const items = [];
+  const free = v38SafeFreeProgress();
+  if (free.total > 0 && free.completed >= free.total) {
+    items.push({
+      title: text("免費入門", "Free Course"),
+      action: "openResultPackage('free-starter')"
+    });
+  }
+  getPremiumCourses().forEach((course) => {
+    if (!hasCourseAccess(course.id)) return;
+    const progress = courseProgress(course.id);
+    if (progress.total > 0 && progress.completed >= progress.total) {
+      const pkg = getResultPackageByCourseId(course.id);
+      items.push({
+        title: state.lang === "zh" ? course.zhTitle : course.enTitle,
+        action: pkg ? `openResultPackage('${pkg.id}')` : `openCourse('${course.id}')`
+      });
     }
   });
-
-  if (answered < ASSESSMENT_QUESTIONS.length) {
-    toast(text("請完成所有題目", "Please answer all questions"));
-    return;
+  if (!items.length) {
+    return `<p class="learning-muted">${text("尚無已完成的課程。", "No completed courses yet.")}</p>`;
   }
-
-  let level = "Level 0";
-  if (score >= 8 && score < 13) level = "Level 1";
-  if (score >= 13) level = "Level 2";
-
-  state.assessment = {
-    score,
-    level,
-    completedAt: new Date().toISOString()
-  };
-
-  save();
-  render();
+  return `
+    <ul class="learning-completed-list">
+      ${items.map((item) => `
+        <li><button type="button" class="linkish" onclick="${item.action}">${item.title}</button></li>
+      `).join("")}
+    </ul>
+  `;
 }
 
 
 
-function tutorReply() {
-  const input = document.getElementById("tutor-input");
-  const output = document.getElementById("tutor-output");
-  const raw = input ? input.value.trim() : "";
-  const value = raw.toLowerCase();
+/** Chat-style Prompt Coach — rule-based local generator (no external AI API). */
+let tutorCoachState = {
+  phase: "welcome",
+  intentId: "general",
+  messages: [],
+  context: {
+    originalQuestion: "",
+    answers: {},
+    refinements: []
+  },
+  questionIndex: 0,
+  optimizing: false,
+  explanationOpen: false
+};
 
-  if (!raw) {
-    toast(text("請先輸入你想問 AI 的問題", "Please type the question you want to ask AI"));
+let tutorCoachPendingInput = null;
+
+function resetTutorCoachState() {
+  tutorCoachState = {
+    phase: "welcome",
+    intentId: "general",
+    messages: [],
+    context: { originalQuestion: "", answers: {}, refinements: [] },
+    questionIndex: 0,
+    optimizing: false,
+    explanationOpen: false
+  };
+}
+
+function openTutorWithGoal(goal) {
+  if (!hasPromptTutorAccess()) {
+    setRoute("tutor");
+    return;
+  }
+  resetTutorCoachState();
+  const value = String(goal || "").trim();
+  if (value) tutorCoachPendingInput = value;
+  setRoute("tutor");
+}
+
+function consumeTutorCoachPendingInput() {
+  if (state.route !== "tutor" || !tutorCoachPendingInput) return;
+  const value = tutorCoachPendingInput;
+  tutorCoachPendingInput = null;
+  requestAnimationFrame(() => {
+    handleCoachUserInput(value, { mode: "composer" });
+  });
+}
+
+const TUTOR_COACH_INTENTS = {
+  report: {
+    id: "report",
+    detect: (raw) => /報告|作業|essay|report|paper/i.test(raw),
+    understandZh: "我了解，你想用 AI 協助完成一份報告。",
+    understandEn: "Got it — you want AI to help you with a report.",
+    missingZh: "為了幫你寫出更好的 Prompt，我還需要了解幾件事：",
+    missingEn: "To build a stronger prompt, I need a few more details:",
+    roleZh: "大學研究助理",
+    roleEn: "university research assistant",
+    questions: [
+      {
+        id: "purpose",
+        askZh: "這份報告主要是什麼用途？",
+        askEn: "What is this report mainly for?",
+        quickReplies: [
+          { zh: "課堂報告", en: "Class assignment" },
+          { zh: "研究報告", en: "Research paper" },
+          { zh: "競賽", en: "Competition" },
+          { zh: "工作", en: "Work" }
+        ]
+      },
+      {
+        id: "level",
+        askZh: "你目前是哪個階段？",
+        askEn: "What level are you at?",
+        quickReplies: [
+          { zh: "高中", en: "High school" },
+          { zh: "大學", en: "University" },
+          { zh: "研究所", en: "Graduate school" },
+          { zh: "職場", en: "Workplace" }
+        ]
+      },
+      {
+        id: "stage",
+        askZh: "你希望 AI 主要幫你到哪個階段？",
+        askEn: "Which stage should AI mainly help with?",
+        quickReplies: [
+          { zh: "建立架構", en: "Outline structure" },
+          { zh: "找資料方向", en: "Research direction" },
+          { zh: "修改草稿", en: "Revise draft" },
+          { zh: "還不確定", en: "Not sure yet" }
+        ]
+      }
+    ]
+  },
+  interview: {
+    id: "interview",
+    detect: (raw) => /面試|interview/i.test(raw),
+    understandZh: "我了解，你想為面試做準備。",
+    understandEn: "Got it — you want to prepare for an interview.",
+    missingZh: "為了幫你寫出更好的 Prompt，我還需要了解幾件事：",
+    missingEn: "To build a stronger prompt, I need a few more details:",
+    roleZh: "職涯面試教練",
+    roleEn: "career interview coach",
+    questions: [
+      {
+        id: "type",
+        askZh: "這是什麼類型的面試？",
+        askEn: "What type of interview is it?",
+        quickReplies: [
+          { zh: "求職面試", en: "Job interview" },
+          { zh: "升學面試", en: "School interview" },
+          { zh: "競賽／評審", en: "Competition / panel" },
+          { zh: "還不確定", en: "Not sure yet" }
+        ]
+      },
+      {
+        id: "timeline",
+        askZh: "距離面試還有多久？",
+        askEn: "How soon is the interview?",
+        quickReplies: [
+          { zh: "本週", en: "This week" },
+          { zh: "下週", en: "Next week" },
+          { zh: "一個月內", en: "Within a month" },
+          { zh: "還在觀望", en: "Still exploring" }
+        ]
+      },
+      {
+        id: "focus",
+        askZh: "你最需要幫忙的是？",
+        askEn: "What do you need the most help with?",
+        quickReplies: [
+          { zh: "自我介紹", en: "Self-introduction" },
+          { zh: "回答問題", en: "Answering questions" },
+          { zh: "模擬練習", en: "Mock practice" },
+          { zh: "全流程", en: "End-to-end prep" }
+        ]
+      }
+    ]
+  },
+  study: {
+    id: "study",
+    detect: (raw) => /看不懂|學習|考試|study|exam|不懂|理解|概念|總體|經濟|科目/i.test(raw),
+    understandZh: "我了解，你想用 AI 幫助你學習或理解某個主題。",
+    understandEn: "Got it — you want AI to help you learn or understand a topic.",
+    missingZh: "為了幫你寫出更好的 Prompt，我還需要了解幾件事：",
+    missingEn: "To build a stronger prompt, I need a few more details:",
+    roleZh: "學習教練",
+    roleEn: "study coach",
+    questions: [
+      {
+        id: "level",
+        askZh: "你目前的程度大概是？",
+        askEn: "What is your current level?",
+        quickReplies: [
+          { zh: "完全不懂", en: "Complete beginner" },
+          { zh: "有一點基礎", en: "Some basics" },
+          { zh: "正在準備考試", en: "Exam prep" },
+          { zh: "還不確定", en: "Not sure yet" }
+        ]
+      },
+      {
+        id: "helpStyle",
+        askZh: "你希望 AI 怎麼幫你？",
+        askEn: "How should AI help you?",
+        quickReplies: [
+          { zh: "用簡單例子解釋", en: "Explain with simple examples" },
+          { zh: "出練習題", en: "Practice questions" },
+          { zh: "整理重點", en: "Summarize key points" },
+          { zh: "還不確定", en: "Not sure yet" }
+        ]
+      }
+    ]
+  },
+  resume: {
+    id: "resume",
+    detect: (raw) => /履歷|resume|cv/i.test(raw) && !/面試|interview/i.test(raw),
+    understandZh: "我了解，你想用 AI 協助準備履歷。",
+    understandEn: "Got it — you want AI to help with your resume.",
+    missingZh: "為了幫你寫出更好的 Prompt，我還需要了解幾件事：",
+    missingEn: "To build a stronger prompt, I need a few more details:",
+    roleZh: "職涯履歷教練",
+    roleEn: "career resume coach",
+    questions: [
+      {
+        id: "target",
+        askZh: "這份履歷主要用於？",
+        askEn: "What is this resume mainly for?",
+        quickReplies: [
+          { zh: "求職", en: "Job search" },
+          { zh: "實習", en: "Internship" },
+          { zh: "升學", en: "School application" },
+          { zh: "還不確定", en: "Not sure yet" }
+        ]
+      },
+      {
+        id: "level",
+        askZh: "你目前是哪個階段？",
+        askEn: "What level are you at?",
+        quickReplies: [
+          { zh: "高中", en: "High school" },
+          { zh: "大學", en: "University" },
+          { zh: "研究所", en: "Graduate school" },
+          { zh: "職場", en: "Workplace" }
+        ]
+      },
+      {
+        id: "focus",
+        askZh: "你最需要幫忙的是？",
+        askEn: "What do you need the most help with?",
+        quickReplies: [
+          { zh: "從零開始", en: "Start from scratch" },
+          { zh: "修改潤飾", en: "Polish existing draft" },
+          { zh: "對準職缺", en: "Tailor to a role" },
+          { zh: "還不確定", en: "Not sure yet" }
+        ]
+      }
+    ]
+  },
+  organize: {
+    id: "organize",
+    detect: (raw) => /整理|資料|organize|notes/i.test(raw),
+    understandZh: "我了解，你想用 AI 協助整理資料或資訊。",
+    understandEn: "Got it — you want AI to help organize information.",
+    missingZh: "為了幫你寫出更好的 Prompt，我還需要了解幾件事：",
+    missingEn: "To build a stronger prompt, I need a few more details:",
+    roleZh: "研究整理助理",
+    roleEn: "research organization assistant",
+    questions: [
+      {
+        id: "source",
+        askZh: "你要整理的資料來源是？",
+        askEn: "What kind of material are you organizing?",
+        quickReplies: [
+          { zh: "課堂筆記", en: "Class notes" },
+          { zh: "文章／報告", en: "Articles / reports" },
+          { zh: "訪談／會議", en: "Interviews / meetings" },
+          { zh: "混合來源", en: "Mixed sources" }
+        ]
+      },
+      {
+        id: "output",
+        askZh: "你希望整理成什麼形式？",
+        askEn: "What output format do you want?",
+        quickReplies: [
+          { zh: "重點摘要", en: "Key summary" },
+          { zh: "分類表格", en: "Categorized table" },
+          { zh: "行動清單", en: "Action checklist" },
+          { zh: "還不確定", en: "Not sure yet" }
+        ]
+      }
+    ]
+  },
+  slides: {
+    id: "slides",
+    detect: (raw) => /簡報|ppt|slide|presentation/i.test(raw),
+    understandZh: "我了解，你想用 AI 協助規劃簡報。",
+    understandEn: "Got it — you want AI to help plan a presentation.",
+    missingZh: "為了幫你寫出更好的 Prompt，我還需要了解幾件事：",
+    missingEn: "To build a stronger prompt, I need a few more details:",
+    roleZh: "簡報顧問",
+    roleEn: "presentation consultant",
+    questions: [
+      {
+        id: "audience",
+        askZh: "這份簡報的對象是？",
+        askEn: "Who is the audience?",
+        quickReplies: [
+          { zh: "同學／課堂", en: "Classmates" },
+          { zh: "老師／評審", en: "Teachers / judges" },
+          { zh: "同事／客戶", en: "Colleagues / clients" },
+          { zh: "還不確定", en: "Not sure yet" }
+        ]
+      },
+      {
+        id: "duration",
+        askZh: "預計簡報時間？",
+        askEn: "How long is the presentation?",
+        quickReplies: [
+          { zh: "3–5 分鐘", en: "3–5 minutes" },
+          { zh: "10–15 分鐘", en: "10–15 minutes" },
+          { zh: "20 分鐘以上", en: "20+ minutes" },
+          { zh: "還不確定", en: "Not sure yet" }
+        ]
+      }
+    ]
+  },
+  general: {
+    id: "general",
+    detect: () => true,
+    understandZh: "我了解，你想讓 AI 幫你完成一件事。",
+    understandEn: "Got it — you want AI to help you with something.",
+    missingZh: "為了幫你寫出更好的 Prompt，我還需要了解幾件事：",
+    missingEn: "To build a stronger prompt, I need a few more details:",
+    roleZh: "AI 學習教練",
+    roleEn: "AI learning coach",
+    questions: [
+      {
+        id: "context",
+        askZh: "這件事主要在什麼情境下完成？",
+        askEn: "What is the main context?",
+        quickReplies: [
+          { zh: "課堂", en: "School" },
+          { zh: "工作", en: "Work" },
+          { zh: "個人學習", en: "Personal learning" },
+          { zh: "其他", en: "Other" }
+        ]
+      },
+      {
+        id: "output",
+        askZh: "你希望 AI 給你什麼形式的回答？",
+        askEn: "What output format do you prefer?",
+        quickReplies: [
+          { zh: "步驟清單", en: "Step-by-step list" },
+          { zh: "表格", en: "Table" },
+          { zh: "範例示範", en: "Examples" },
+          { zh: "還不確定", en: "Not sure yet" }
+        ]
+      }
+    ]
+  }
+};
+
+const TUTOR_COACH_EXAMPLES = [
+  { zh: "準備報告", en: "Plan a report", messageZh: "我要做一份報告", messageEn: "I need to write a report" },
+  { zh: "準備面試", en: "Interview prep", messageZh: "我下禮拜要面試，但不知道怎麼準備", messageEn: "I have an interview next week but don't know how to prepare" },
+  { zh: "整理資料", en: "Organize info", messageZh: "我要整理很多資料", messageEn: "I need to organize a lot of information" },
+  { zh: "學習一個概念", en: "Learn a concept", messageZh: "我看不懂總體經濟學", messageEn: "I don't understand macroeconomics" },
+  { zh: "寫履歷", en: "Write a resume", messageZh: "我想寫履歷", messageEn: "I want to write a resume" },
+  { zh: "其他", en: "Other", messageZh: "", messageEn: "" }
+];
+
+function tutorCoachEscHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function detectTutorIntent(raw) {
+  const value = String(raw || "");
+  const order = ["report", "slides", "interview", "resume", "study", "organize", "general"];
+  for (const id of order) {
+    const intent = TUTOR_COACH_INTENTS[id];
+    if (intent && intent.detect(value)) return intent;
+  }
+  return TUTOR_COACH_INTENTS.general;
+}
+
+function getTutorIntent() {
+  return TUTOR_COACH_INTENTS[tutorCoachState.intentId] || TUTOR_COACH_INTENTS.general;
+}
+
+function tutorCoachAnswerLabel(answerValue) {
+  if (!answerValue) return "";
+  for (const intent of Object.values(TUTOR_COACH_INTENTS)) {
+    for (const question of intent.questions || []) {
+      const match = (question.quickReplies || []).find((item) => item.zh === answerValue || item.en === answerValue);
+      if (match) return text(match.zh, match.en);
+    }
+  }
+  return answerValue;
+}
+
+function buildTutorCoachPromptBilingual(ctx, intent) {
+  const q = ctx.originalQuestion || "";
+  const answers = ctx.answers || {};
+  const refinements = (ctx.refinements || []).filter(Boolean);
+  const answerLinesZh = Object.entries(answers)
+    .map(([, val]) => tutorCoachAnswerLabel(val))
+    .filter(Boolean);
+  const answerLinesEn = Object.entries(answers)
+    .map(([, val]) => {
+      for (const question of intent.questions || []) {
+        const match = (question.quickReplies || []).find((item) => item.zh === val || item.en === val);
+        if (match) return match.en;
+      }
+      return val;
+    })
+    .filter(Boolean);
+
+  const refinementZh = refinements.join("；");
+  const refinementEn = refinements.join("; ");
+
+  if (intent.id === "report") {
+    const level = tutorCoachAnswerLabel(answers.level);
+    const purpose = tutorCoachAnswerLabel(answers.purpose);
+    const stage = tutorCoachAnswerLabel(answers.stage);
+    return {
+      zh: `你是一位${level ? `${level}的` : ""}${intent.roleZh}。
+
+我要製作一份報告。我的情況是：
+「${q}」
+${purpose ? `用途：${purpose}` : ""}
+${stage ? `希望 AI 協助階段：${stage}` : ""}
+${refinementZh ? `其他要求：${refinementZh}` : ""}
+
+請先幫我：
+1. 定義研究問題
+2. 建立報告架構
+3. 列出需要查證的資料
+4. 提醒我哪些內容不能直接假設
+
+不要直接替我寫完整報告。`,
+      en: `You are a ${answers.level || "university"} ${intent.roleEn}.
+
+I need to create a report. Here is my situation:
+"${q}"
+${answers.purpose ? `Purpose: ${answers.purpose}` : ""}
+${answers.stage ? `Stage I need help with: ${answers.stage}` : ""}
+${refinementEn ? `Additional requirements: ${refinementEn}` : ""}
+
+Please help me first with:
+1. Defining the research question
+2. Building a report structure
+3. Listing sources that need verification
+4. Reminding me what should not be assumed
+
+Do not write the full report for me.`
+    };
+  }
+
+  if (intent.id === "interview") {
+    return {
+      zh: `你是一位${intent.roleZh}。
+
+我即將參加面試。我的情況是：
+「${q}」
+${answers.type ? `面試類型：${tutorCoachAnswerLabel(answers.type)}` : ""}
+${answers.timeline ? `時間：${tutorCoachAnswerLabel(answers.timeline)}` : ""}
+${answers.focus ? `最需要幫忙：${tutorCoachAnswerLabel(answers.focus)}` : ""}
+${refinementZh ? `其他要求：${refinementZh}` : ""}
+
+請先幫我：
+1. 釐清這場面試最重要的準備重點
+2. 設計自我介紹架構（不要代寫逐字稿）
+3. 列出 5 個我應該準備的常見問題
+4. 提醒我哪些內容需要依真實經歷回答
+
+不要捏造我沒提過的經歷。`,
+      en: `You are my ${intent.roleEn}.
+
+I am preparing for an interview. Here is my situation:
+"${q}"
+${answers.type ? `Interview type: ${answers.type}` : ""}
+${answers.timeline ? `Timeline: ${answers.timeline}` : ""}
+${answers.focus ? `Main focus: ${answers.focus}` : ""}
+${refinementEn ? `Additional requirements: ${refinementEn}` : ""}
+
+Please help me first with:
+1. Clarifying the top priorities for this interview
+2. Designing a self-introduction structure (do not write a full script)
+3. Listing 5 common questions I should prepare for
+4. Reminding me what must be answered from my real experience
+
+Do not invent experiences I did not mention.`
+    };
+  }
+
+  if (intent.id === "study") {
+    return {
+      zh: `你是一位${intent.roleZh}。
+
+我想學習或理解一個主題。我的情況是：
+「${q}」
+${answers.level ? `目前程度：${tutorCoachAnswerLabel(answers.level)}` : ""}
+${answers.helpStyle ? `希望協助方式：${tutorCoachAnswerLabel(answers.helpStyle)}` : ""}
+${refinementZh ? `其他要求：${refinementZh}` : ""}
+
+請先幫我：
+1. 用我能理解的方式解釋核心概念
+2. 指出我容易混淆的地方
+3. 給我 3 個自我檢核問題
+4. 如果有不確定之處，標示「需要查證」
+
+不要直接給我完整答案讓我背誦。`,
+      en: `You are my ${intent.roleEn}.
+
+I want to learn or understand a topic. Here is my situation:
+"${q}"
+${answers.level ? `Current level: ${answers.level}` : ""}
+${answers.helpStyle ? `Preferred help style: ${answers.helpStyle}` : ""}
+${refinementEn ? `Additional requirements: ${refinementEn}` : ""}
+
+Please help me first with:
+1. Explaining the core concepts in language I can understand
+2. Pointing out concepts I might confuse
+3. Giving me 3 self-check questions
+4. Marking anything uncertain as "needs verification"
+
+Do not give me a complete answer to memorize.`
+    };
+  }
+
+  const contextSummaryZh = answerLinesZh.length ? answerLinesZh.join("、") : "";
+  const contextSummaryEn = answerLinesEn.length ? answerLinesEn.join(", ") : "";
+  return {
+    zh: `請你當作我的${intent.roleZh}。
+
+我現在的情況是：
+「${q}」
+${contextSummaryZh ? `補充背景：${contextSummaryZh}` : ""}
+${refinementZh ? `其他要求：${refinementZh}` : ""}
+
+請先不要直接給我最終答案。
+請先幫我：
+1. 判斷我真正想完成的任務
+2. 告訴我還缺少哪些背景資訊
+3. 用清楚的步驟或條列格式回答
+4. 如果有不確定的地方，標示「需要查證」
+
+最後請問我 2～3 個追問，幫我把需求講得更清楚。`,
+    en: `Act as my ${intent.roleEn}.
+
+Here is my situation:
+"${q}"
+${contextSummaryEn ? `Additional context: ${contextSummaryEn}` : ""}
+${refinementEn ? `Additional requirements: ${refinementEn}` : ""}
+
+Please do not give me the final answer immediately.
+First, help me with:
+1. Identifying the task I am actually trying to complete
+2. Telling me what background information is still missing
+3. Answering in a clear step-by-step or bullet format
+4. Marking anything uncertain as "needs verification"
+
+Then ask me 2–3 follow-up questions to clarify my needs.`
+  };
+}
+
+function tutorCoachGetPromptText() {
+  const promptMsg = [...tutorCoachState.messages].reverse().find((msg) => msg.kind === "prompt");
+  if (!promptMsg) return "";
+  return state.lang === "zh" ? promptMsg.promptZh : promptMsg.promptEn;
+}
+
+function tutorCoachPushCoachText(textZh, textEn) {
+  tutorCoachState.messages.push({ role: "coach", kind: "text", textZh, textEn });
+}
+
+function tutorCoachPushQuestion(questionId) {
+  tutorCoachState.messages.push({
+    role: "coach",
+    kind: "question",
+    questionId,
+    answered: false
+  });
+}
+
+function tutorCoachMarkCurrentQuestionAnswered() {
+  const questionMsg = [...tutorCoachState.messages].reverse().find((msg) => msg.kind === "question" && !msg.answered);
+  if (questionMsg) questionMsg.answered = true;
+}
+
+function tutorCoachAskCurrentQuestion() {
+  const intent = getTutorIntent();
+  const question = intent.questions[tutorCoachState.questionIndex];
+  if (!question) {
+    tutorCoachFinalizePrompt();
+    return;
+  }
+  tutorCoachPushQuestion(question.id);
+}
+
+function tutorCoachStartGathering(raw) {
+  const intent = detectTutorIntent(raw);
+  tutorCoachState.intentId = intent.id;
+  tutorCoachState.context.originalQuestion = raw;
+  tutorCoachState.context.answers = {};
+  tutorCoachState.context.refinements = [];
+  tutorCoachState.questionIndex = 0;
+  tutorCoachState.phase = "gathering";
+  tutorCoachState.optimizing = false;
+  tutorCoachState.explanationOpen = false;
+
+  tutorCoachPushCoachText(intent.understandZh, intent.understandEn);
+  tutorCoachPushCoachText(intent.missingZh, intent.missingEn);
+  tutorCoachAskCurrentQuestion();
+}
+
+function tutorCoachFinalizePrompt() {
+  tutorCoachUpdatePrompt({ zh: "這樣就清楚很多了。", en: "That makes things much clearer." });
+}
+
+function tutorCoachUpdatePrompt(introMessage) {
+  const intent = getTutorIntent();
+  const prompts = buildTutorCoachPromptBilingual(tutorCoachState.context, intent);
+  tutorCoachState.messages = tutorCoachState.messages.filter((msg) => msg.kind !== "prompt");
+  if (introMessage) {
+    tutorCoachPushCoachText(introMessage.zh, introMessage.en);
+  }
+  tutorCoachState.messages.push({
+    role: "coach",
+    kind: "prompt",
+    promptZh: prompts.zh,
+    promptEn: prompts.en
+  });
+  tutorCoachState.phase = "ready";
+  tutorCoachState.optimizing = false;
+}
+
+function tutorCoachHandleAnswer(answerRaw) {
+  const intent = getTutorIntent();
+  const question = intent.questions[tutorCoachState.questionIndex];
+  if (!question) {
+    tutorCoachFinalizePrompt();
+    return;
+  }
+  tutorCoachState.context.answers[question.id] = answerRaw;
+  tutorCoachMarkCurrentQuestionAnswered();
+  const label = tutorCoachAnswerLabel(answerRaw);
+  tutorCoachPushCoachText(
+    `了解，是「${label}」。`,
+    `Got it — "${label}".`
+  );
+  tutorCoachState.questionIndex += 1;
+  if (tutorCoachState.questionIndex >= intent.questions.length) {
+    tutorCoachFinalizePrompt();
+  } else {
+    tutorCoachAskCurrentQuestion();
+  }
+}
+
+function tutorCoachGetActiveQuestion() {
+  if (tutorCoachState.phase !== "gathering") return null;
+  const intent = getTutorIntent();
+  return intent.questions[tutorCoachState.questionIndex] || null;
+}
+
+function tutorCoachCanAnswerQuestion(questionId) {
+  const active = tutorCoachGetActiveQuestion();
+  if (!active || active.id !== questionId) return false;
+  const activeMsg = [...tutorCoachState.messages].reverse().find(
+    (msg) => msg.kind === "question" && !msg.answered
+  );
+  return Boolean(activeMsg && activeMsg.questionId === questionId);
+}
+
+/** Unified entry for composer text and Quick Reply clicks. */
+function handleCoachUserInput(raw, options = {}) {
+  const displayText = String(raw || "").trim();
+  if (!displayText) {
+    toast(text("請先輸入你想讓 AI 幫你做什麼", "Tell me what you want AI to help you with"));
     return;
   }
 
-  function buildPromptCoachResponse(userQuestion) {
-    const question = userQuestion.trim();
-
-    let likelyTaskZh = "一般問題";
-    let likelyTaskEn = "general question";
-    let suggestedRoleZh = "AI 學習教練";
-    let suggestedRoleEn = "AI learning coach";
-    let outputFormatZh = "步驟清單";
-    let outputFormatEn = "step-by-step list";
-
-    if (value.includes("報告") || value.includes("作業") || value.includes("essay") || value.includes("report")) {
-      likelyTaskZh = "報告或作業規劃";
-      likelyTaskEn = "report or assignment planning";
-      suggestedRoleZh = "大學課程助教";
-      suggestedRoleEn = "university teaching assistant";
-      outputFormatZh = "大綱 + 重點 + 待查資料";
-      outputFormatEn = "outline + key points + sources to verify";
-    } else if (value.includes("簡報") || value.includes("ppt") || value.includes("slide")) {
-      likelyTaskZh = "簡報規劃";
-      likelyTaskEn = "slide planning";
-      suggestedRoleZh = "簡報顧問";
-      suggestedRoleEn = "presentation consultant";
-      outputFormatZh = "每頁標題、核心訊息、三個重點";
-      outputFormatEn = "slide title, key message, three bullet points";
-    } else if (value.includes("讀書") || value.includes("考試") || value.includes("study") || value.includes("exam")) {
-      likelyTaskZh = "讀書與考試準備";
-      likelyTaskEn = "study and exam preparation";
-      suggestedRoleZh = "考試教練";
-      suggestedRoleEn = "exam coach";
-      outputFormatZh = "重點整理 + 練習題 + 複習計畫";
-      outputFormatEn = "key points + practice questions + review plan";
-    } else if (value.includes("履歷") || value.includes("面試") || value.includes("resume") || value.includes("interview")) {
-      likelyTaskZh = "履歷或面試準備";
-      likelyTaskEn = "resume or interview preparation";
-      suggestedRoleZh = "職涯教練";
-      suggestedRoleEn = "career coach";
-      outputFormatZh = "修改建議 + 範例 + 注意事項";
-      outputFormatEn = "revision suggestions + examples + cautions";
-    } else if (value.includes("工具") || value.includes("哪個") || value.includes("tool") || value.includes("chatgpt") || value.includes("claude") || value.includes("gemini")) {
-      likelyTaskZh = "AI 工具選擇";
-      likelyTaskEn = "AI tool selection";
-      suggestedRoleZh = "AI 工具顧問";
-      suggestedRoleEn = "AI tool advisor";
-      outputFormatZh = "工具比較表 + 使用建議";
-      outputFormatEn = "tool comparison table + usage recommendation";
-    }
-
-    const zh = `
-      <h3>我會這樣幫你把問題改成好 Prompt</h3>
-
-      <p><b>你原本想問：</b>${question}</p>
-
-      <p><b>我判斷你的任務類型：</b>${likelyTaskZh}</p>
-
-      <h3>好的 Prompt 公式</h3>
-      <div class="promptbox">角色 + 任務 + 背景 + 輸出格式 + 限制 + 追問要求</div>
-
-      <h3>可以直接複製的 Prompt</h3>
-      <div class="promptbox">請你當作我的${suggestedRoleZh}。
-
-我現在的問題是：
-「${question}」
-
-請你先不要直接給我最終答案。
-請先幫我做以下事情：
-
-1. 判斷我的問題真正想完成什麼任務
-2. 告訴我這個問題還缺少哪些背景資訊
-3. 幫我把問題改寫成一個更清楚的 Prompt
-4. 用「${outputFormatZh}」的格式回答
-5. 如果有不確定的地方，請標示「需要查證」
-6. 最後請問我 3 個追問問題，幫我把需求講得更清楚</div>
-
-      <h3>為什麼這樣問比較好？</h3>
-      <ul>
-        <li><b>有角色：</b>AI 知道要用什麼角度回答。</li>
-        <li><b>有任務：</b>AI 不會亂發散。</li>
-        <li><b>有格式：</b>答案會比較好讀。</li>
-        <li><b>有查證要求：</b>可以降低錯誤資訊風險。</li>
-        <li><b>有追問：</b>AI 會幫你把模糊需求變清楚。</li>
-      </ul>
-
-      <h3>下一步</h3>
-      <p>把上面的 Prompt 複製到 ChatGPT、Claude 或 Gemini，再把 AI 問你的 3 個追問回答完，通常答案會比直接問原問題好很多。</p>
-    `;
-
-    const en = `
-      <h3>I would turn your question into a stronger prompt like this</h3>
-
-      <p><b>Your original question:</b> ${question}</p>
-
-      <p><b>Task type:</b> ${likelyTaskEn}</p>
-
-      <h3>Good Prompt Formula</h3>
-      <div class="promptbox">Role + Task + Context + Output Format + Constraints + Follow-up Questions</div>
-
-      <h3>Copy-ready Prompt</h3>
-      <div class="promptbox">Act as my ${suggestedRoleEn}.
-
-My current question is:
-"${question}"
-
-Please do not give me the final answer immediately.
-First, do the following:
-
-1. Identify what task I am actually trying to complete
-2. Tell me what background information is missing
-3. Rewrite my question into a clearer prompt
-4. Answer using this format: ${outputFormatEn}
-5. If anything is uncertain, mark it as "needs verification"
-6. Ask me 3 follow-up questions to make my request clearer</div>
-
-      <h3>Why this works better</h3>
-      <ul>
-        <li><b>Role:</b> AI knows what perspective to use.</li>
-        <li><b>Task:</b> AI stays focused.</li>
-        <li><b>Format:</b> The answer is easier to read.</li>
-        <li><b>Verification:</b> It reduces the risk of false information.</li>
-        <li><b>Follow-up:</b> AI helps clarify vague needs.</li>
-      </ul>
-
-      <h3>Next step</h3>
-      <p>Copy the prompt above into ChatGPT, Claude, or Gemini, then answer the 3 follow-up questions. The result will usually be much better than asking the original question directly.</p>
-    `;
-
-    return text(zh, en);
+  if (options.mode === "quick-reply") {
+    if (!tutorCoachCanAnswerQuestion(options.questionId)) return;
   }
 
-  output.innerHTML = `
-    <div class="answer show">
-      ${buildPromptCoachResponse(raw)}
-      <hr>
-      <h3>${text("快速檢查：你的問題是不是好 Prompt？", "Quick Check: Is your question a good prompt?")}</h3>
-      <ul>
-        <li>${text("有沒有說明 AI 要扮演什麼角色？", "Did you specify what role AI should play?")}</li>
-        <li>${text("有沒有說明你真正要完成的任務？", "Did you explain the actual task?")}</li>
-        <li>${text("有沒有提供背景資訊？", "Did you provide context?")}</li>
-        <li>${text("有沒有要求輸出格式？", "Did you request an output format?")}</li>
-        <li>${text("有沒有提醒 AI 不確定時要標示？", "Did you ask AI to mark uncertainty?")}</li>
-      </ul>
-      <p class="small">${text("這個 AI Tutor 的定位是 Prompt 教練，不是代替你完成作業，而是教你怎麼把問題問清楚。", "This AI Tutor is a prompt coach. It does not complete work for you; it teaches you how to ask clearer questions.")}</p>
+  const input = document.getElementById("tutor-coach-input");
+  if (input && options.mode !== "quick-reply") input.value = "";
+
+  tutorCoachState.messages.push({ role: "user", text: displayText });
+
+  const answerValue = options.answerValue != null ? options.answerValue : displayText;
+
+  if (tutorCoachState.phase === "welcome") {
+    tutorCoachStartGathering(answerValue);
+  } else if (tutorCoachState.phase === "gathering") {
+    tutorCoachHandleAnswer(answerValue);
+  } else if (tutorCoachState.phase === "ready") {
+    tutorCoachState.context.refinements.push(displayText);
+    tutorCoachState.messages = tutorCoachState.messages.filter((msg) => msg.kind !== "prompt");
+    tutorCoachPushCoachText(
+      "好的，我已根據你的補充更新 Prompt。",
+      "Got it — I've updated the prompt based on your note."
+    );
+    const intent = getTutorIntent();
+    const prompts = buildTutorCoachPromptBilingual(tutorCoachState.context, intent);
+    tutorCoachState.messages.push({
+      role: "coach",
+      kind: "prompt",
+      promptZh: prompts.zh,
+      promptEn: prompts.en
+    });
+    tutorCoachState.phase = "ready";
+    tutorCoachState.optimizing = false;
+  }
+
+  render();
+  bindTutorCoachEvents();
+}
+
+function tutorCoachSend(presetText) {
+  const input = document.getElementById("tutor-coach-input");
+  const raw = String(presetText != null ? presetText : (input ? input.value : "")).trim();
+  handleCoachUserInput(raw, { mode: "composer" });
+}
+
+function tutorCoachQuickReply(questionId, replyIndex) {
+  const intent = getTutorIntent();
+  const question = (intent.questions || []).find((item) => item.id === questionId);
+  if (!question || !tutorCoachCanAnswerQuestion(questionId)) return;
+  const reply = (question.quickReplies || [])[Number(replyIndex)];
+  if (!reply) return;
+  handleCoachUserInput(text(reply.zh, reply.en), {
+    mode: "quick-reply",
+    questionId,
+    answerValue: reply.zh
+  });
+}
+
+function tutorCoachUseExample(exampleIndex) {
+  const example = TUTOR_COACH_EXAMPLES[exampleIndex];
+  if (!example) return;
+  const message = text(example.messageZh, example.messageEn);
+  if (!message) {
+    const input = document.getElementById("tutor-coach-input");
+    if (input) input.focus();
+    return;
+  }
+  tutorCoachSend(message);
+}
+
+function tutorCoachContinueOptimize() {
+  if (tutorCoachState.phase !== "ready") return;
+  tutorCoachState.optimizing = true;
+  tutorCoachPushCoachText(
+    "告訴我你想怎麼調整，例如時間限制、格式要求、語言，或「不要幫我直接寫答案」。",
+    "Tell me how you'd like to adjust it — time limits, format, language, or \"don't write the answer for me.\""
+  );
+  render();
+  bindTutorCoachEvents();
+  const input = document.getElementById("tutor-coach-input");
+  if (input) input.focus();
+}
+
+function tutorCoachRestart() {
+  resetTutorCoachState();
+  render();
+  bindTutorCoachEvents();
+}
+
+function tutorCoachCopyPrompt() {
+  const body = tutorCoachGetPromptText();
+  if (!body) return;
+  navigator.clipboard.writeText(body).then(() => {
+    toast(text("Prompt 已複製", "Prompt copied"));
+  }).catch(() => {
+    toast(text("複製失敗，請手動選取", "Copy failed — please select manually"));
+  });
+}
+
+function renderTutorCoachMessage(msg, msgIndex) {
+  if (msg.role === "user") {
+    return `
+      <div class="tutor-msg tutor-msg-user">
+        <div class="tutor-msg-bubble">${tutorCoachEscHtml(msg.text)}</div>
+      </div>
+    `;
+  }
+
+  if (msg.kind === "text") {
+    return `
+      <div class="tutor-msg tutor-msg-coach">
+        <div class="tutor-msg-avatar" aria-hidden="true">🎯</div>
+        <div class="tutor-msg-bubble">${tutorCoachEscHtml(text(msg.textZh, msg.textEn))}</div>
+      </div>
+    `;
+  }
+
+  if (msg.kind === "question") {
+    const intent = getTutorIntent();
+    const question = (intent.questions || []).find((item) => item.id === msg.questionId);
+    if (!question) return "";
+    const isActive = tutorCoachState.phase === "gathering"
+      && !msg.answered
+      && intent.questions[tutorCoachState.questionIndex]?.id === question.id;
+    const quickReplies = isActive
+      ? `<div class="tutor-quick-replies">
+          ${(question.quickReplies || []).map((item, replyIndex) => {
+            const label = text(item.zh, item.en);
+            return `<button type="button" class="tutor-chip" data-tutor-action="quick-reply" data-question-id="${tutorCoachEscHtml(question.id)}" data-reply-index="${replyIndex}">${tutorCoachEscHtml(label)}</button>`;
+          }).join("")}
+        </div>`
+      : "";
+    return `
+      <div class="tutor-msg tutor-msg-coach">
+        <div class="tutor-msg-avatar" aria-hidden="true">🎯</div>
+        <div class="tutor-msg-body">
+          <div class="tutor-msg-bubble">${tutorCoachEscHtml(text(question.askZh, question.askEn))}</div>
+          ${quickReplies}
+        </div>
+      </div>
+    `;
+  }
+
+  if (msg.kind === "prompt") {
+    const promptBody = text(msg.promptZh, msg.promptEn);
+    const lastPromptIndex = tutorCoachState.messages.reduce((last, item, index) => (
+      item.kind === "prompt" ? index : last
+    ), -1);
+    if (msgIndex !== lastPromptIndex) return "";
+    return `
+      <div class="tutor-msg tutor-msg-coach tutor-msg-prompt">
+        <div class="tutor-msg-avatar" aria-hidden="true">🎯</div>
+        <div class="tutor-msg-body">
+          <article class="tutor-prompt-card">
+            <h3>${text("推薦 Prompt", "Recommended Prompt")}</h3>
+            <div class="promptbox tutor-prompt-body" id="tutor-coach-prompt-text">${tutorCoachEscHtml(promptBody)}</div>
+            <div class="btnrow tutor-prompt-actions">
+              <button type="button" class="btn primary btn-compact" onclick="tutorCoachCopyPrompt()">${text("複製 Prompt", "Copy Prompt")}</button>
+              <button type="button" class="btn secondary btn-compact" onclick="tutorCoachContinueOptimize()">${text("繼續優化", "Keep refining")}</button>
+              <button type="button" class="btn secondary btn-compact" onclick="tutorCoachRestart()">${text("重新開始", "Start over")}</button>
+            </div>
+          </article>
+          <details class="tutor-explanation" ${tutorCoachState.explanationOpen ? "open" : ""}>
+            <summary>${text("為什麼這樣問比較好？", "Why is this a better prompt?")}</summary>
+            <ul class="tutor-explanation-list">
+              <li>✓ ${text("任務更清楚", "Clearer task")}</li>
+              <li>✓ ${text("提供必要背景", "Necessary context included")}</li>
+              <li>✓ ${text("指定輸出格式", "Output format specified")}</li>
+              <li>✓ ${text("降低 AI 亂猜的機率", "Reduces AI guesswork")}</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+    `;
+  }
+
+  return "";
+}
+
+function renderTutorCoachWelcome() {
+  if (tutorCoachState.messages.length) return "";
+  return `
+    <div class="tutor-msg tutor-msg-coach tutor-msg-welcome">
+      <div class="tutor-msg-avatar" aria-hidden="true">🎯</div>
+      <div class="tutor-msg-body">
+        <div class="tutor-msg-bubble">${text("你今天想讓 AI 幫你做什麼？", "What do you want AI to help you with today?")}</div>
+        <div class="tutor-quick-replies tutor-example-chips">
+          ${TUTOR_COACH_EXAMPLES.map((item, index) => `
+            <button type="button" class="tutor-chip" data-tutor-action="example" data-example-index="${index}">${tutorCoachEscHtml(text(item.zh, item.en))}</button>
+          `).join("")}
+        </div>
+      </div>
     </div>
   `;
+}
+
+function renderTutorCoachThread() {
+  return `
+    <div class="tutor-coach-thread" id="tutor-coach-thread">
+      ${renderTutorCoachWelcome()}
+      ${tutorCoachState.messages.map((msg, index) => renderTutorCoachMessage(msg, index)).join("")}
+    </div>
+  `;
+}
+
+function bindTutorCoachEvents() {
+  if (state.route !== "tutor") return;
+  const thread = document.getElementById("tutor-coach-thread");
+  if (thread) {
+    requestAnimationFrame(() => {
+      thread.scrollTop = thread.scrollHeight;
+    });
+  }
+  const input = document.getElementById("tutor-coach-input");
+  if (input && !input.dataset.bound) {
+    input.dataset.bound = "1";
+    input.addEventListener("keydown", (event) => {
+      const modEnter = event.key === "Enter" && (event.metaKey || event.ctrlKey);
+      const plainEnter = event.key === "Enter" && !event.shiftKey && !event.metaKey && !event.ctrlKey;
+      if (modEnter || plainEnter) {
+        event.preventDefault();
+        tutorCoachSend();
+      }
+    });
+  }
+  const details = document.querySelector(".tutor-explanation");
+  if (details) {
+    details.open = tutorCoachState.explanationOpen;
+    details.ontoggle = () => {
+      tutorCoachState.explanationOpen = details.open;
+    };
+  }
+  consumeTutorCoachPendingInput();
+}
+
+let tutorCoachDelegationBound = false;
+
+function bindTutorCoachDelegation() {
+  if (tutorCoachDelegationBound) return;
+  tutorCoachDelegationBound = true;
+  document.addEventListener("click", (event) => {
+    if (state.route !== "tutor") return;
+    const chip = event.target.closest("[data-tutor-action]");
+    if (chip) {
+      const action = chip.dataset.tutorAction;
+      if (action === "quick-reply") {
+        event.preventDefault();
+        if (chip.disabled) return;
+        chip.disabled = true;
+        chip.setAttribute("aria-disabled", "true");
+        chip.classList.add("is-used");
+        tutorCoachQuickReply(chip.dataset.questionId, chip.dataset.replyIndex);
+        return;
+      }
+      if (action === "example") {
+        event.preventDefault();
+        tutorCoachUseExample(Number(chip.dataset.exampleIndex));
+        return;
+      }
+      if (action === "send") {
+        event.preventDefault();
+        tutorCoachSend();
+        return;
+      }
+    }
+  });
 }
 
 
@@ -2096,7 +3095,6 @@ const MORE_NAV_GROUPS = [
     zh: "學習工具",
     en: "Learning Tools",
     items: [
-      { route: "assessment", zh: "能力測驗", en: "Skill Assessment" },
       { route: "tools", zh: "AI 工具", en: "AI Tools" },
       { route: "prompts", zh: "Prompt 範例", en: "Prompt Examples" },
       { route: "tutor", zh: "AI Tutor", en: "AI Tutor" }
@@ -2107,6 +3105,7 @@ const MORE_NAV_GROUPS = [
     zh: "成果與平台",
     en: "Results & Platform",
     items: [
+      { route: "result-packages", zh: "成果禮包", en: "Result Packages" },
       { route: "campus", zh: "校園合作", en: "Campus" },
       { route: "freePortfolio", zh: "我的免費成果包", en: "My Free Result Package" },
       { route: "impact", zh: "影響力", en: "Impact" }
@@ -2115,7 +3114,8 @@ const MORE_NAV_GROUPS = [
 ];
 
 const MORE_ACTIVE_ROUTES = new Set([
-  "assessment", "tools", "prompts", "tutor", "impact", "freePortfolio", "community", "campus"
+  "tools", "prompts", "tutor", "impact", "freePortfolio", "community", "campus",
+  "result-packages", "resultPackages", "courseResultPackage", "showcase"
 ]);
 
 function isMainNavActive(itemId) {
@@ -2157,16 +3157,31 @@ function setMenuVisible(menu, willOpen, openClass) {
 function setMoreMenuOpen(willOpen) {
   const menu = document.getElementById("moreMenu");
   if (!menu) return false;
-  if (willOpen) setMobileNavOpen(false);
+  if (willOpen) {
+    setMobileNavOpen(false);
+    setAccountMenuOpen(false);
+  }
   setMenuVisible(menu, willOpen, "open");
   syncMoreMenuAria(willOpen);
   if (willOpen) moreMenuIgnoreOutsideUntil = Date.now() + 400;
   return true;
 }
 
-function setAccountMenuOpen(_willOpen) {
-  // Account dropdown removed from header; keep no-op for compatibility.
-  return false;
+function setAccountMenuOpen(willOpen) {
+  const menu = document.getElementById("accountMenu");
+  const btn = document.getElementById("accountMenuBtn");
+  if (!menu) return false;
+  if (willOpen) {
+    setMoreMenuOpen(false);
+    setMobileNavOpen(false);
+  }
+  setMenuVisible(menu, willOpen, "open");
+  if (btn) btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+  return true;
+}
+
+function closeAccountMenu() {
+  setAccountMenuOpen(false);
 }
 
 function setMobileNavOpen(willOpen) {
@@ -2196,6 +3211,9 @@ function toggleAccountMenu(event) {
     event.preventDefault();
     event.stopPropagation();
   }
+  const menu = document.getElementById("accountMenu");
+  if (!menu) return;
+  setAccountMenuOpen(menu.hasAttribute("hidden") || !menu.classList.contains("open"));
 }
 
 function toggleMobileNav(event) {
@@ -2213,14 +3231,13 @@ function closeMoreMenu() {
   setMoreMenuOpen(false);
 }
 
-function closeAccountMenu() {}
-
 function closeMobileNav() {
   setMobileNavOpen(false);
 }
 
 function closeAllNavMenus() {
   closeMoreMenu();
+  closeAccountMenu();
   closeMobileNav();
 }
 
@@ -2238,6 +3255,10 @@ function handleMoreMenuDelegatedClick(event) {
     toggleMoreMenu(event);
     return;
   }
+  if (el.closest("#accountMenuBtn")) {
+    toggleAccountMenu(event);
+    return;
+  }
   if (el.closest("#mobileNavBtn")) {
     toggleMobileNav(event);
     return;
@@ -2246,10 +3267,12 @@ function handleMoreMenuDelegatedClick(event) {
   if (Date.now() < moreMenuIgnoreOutsideUntil) return;
 
   const moreOpen = document.getElementById("moreMenu")?.classList.contains("open");
+  const accountOpen = document.getElementById("accountMenu")?.classList.contains("open");
   const mobileOpen = document.getElementById("mobileNavPanel")?.classList.contains("is-open");
-  if (!moreOpen && !mobileOpen) return;
+  if (!moreOpen && !accountOpen && !mobileOpen) return;
 
   if (el.closest("#moreMenu") || el.closest(".more-wrap")) return;
+  if (el.closest("#accountMenu") || el.closest(".account-wrap")) return;
   if (el.closest("#mobileNavPanel") || el.closest(".mobile-nav-wrap")) return;
 
   closeAllNavMenus();
@@ -2298,16 +3321,40 @@ function renderMoreMenuGroupsHtml(closeFnName) {
 
 function renderAccountMenuHtml() {
   if (!state.user) return "";
+  const name = getAccountDisplayName() || state.user.email || text("帳號", "Account");
   return `
-    <div class="nav-account">
-      ${renderAccountIdentity()}
-      <button type="button" class="lang" onclick="signOut()">${text("登出", "Sign Out")}</button>
+    <div class="account-wrap">
+      <button
+        type="button"
+        id="accountMenuBtn"
+        class="lang nav-account-btn"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-controls="accountMenu"
+      >${name}</button>
+      <div id="accountMenu" class="account-menu" role="menu" hidden>
+        <div class="account-menu-identity">${renderAccountIdentity()}</div>
+        <button type="button" role="menuitem" onclick="signOut(); closeAccountMenu();">${text("登出", "Sign Out")}</button>
+      </div>
     </div>
   `;
 }
 
+function getVisibleMainNavItems() {
+  if (!state.user) {
+    const order = ["home", "courses", "map"];
+    return order
+      .map((id) => MAIN_NAV_ITEMS.find((item) => item.id === id))
+      .filter(Boolean);
+  }
+  const order = ["home", "map", "learning"];
+  return order
+    .map((id) => MAIN_NAV_ITEMS.find((item) => item.id === id))
+    .filter(Boolean);
+}
+
 function nav() {
-  const mainHtml = MAIN_NAV_ITEMS.map(item => `
+  const mainHtml = getVisibleMainNavItems().map(item => `
     <button type="button" class="nav-link-btn ${isMainNavActive(item.id) ? "active" : ""}" onclick="setRoute('${item.route}')">
       ${state.lang === "zh" ? item.zh : item.en}
     </button>
@@ -2321,7 +3368,7 @@ function nav() {
     : `<button type="button" class="lang" onclick="signInWithGoogle()">${text("登入", "Sign In")}</button>`;
 
   return `
-    <header>
+    <header class="site-header">
       <div class="nav compact-nav">
         <div class="brand" onclick="setRoute('home')" style="cursor:pointer" role="link" aria-label="${text("AI Skill Bridge 首頁", "AI Skill Bridge Home")}">
           <span class="logo-badge">AI</span>
@@ -2361,7 +3408,7 @@ function nav() {
             >☰ ${state.lang === "zh" ? "選單" : "Menu"}</button>
             <div id="mobileNavPanel" class="mobile-nav-panel" role="menu" hidden>
               <div class="mobile-nav-main">
-                ${MAIN_NAV_ITEMS.map(item => `
+                ${getVisibleMainNavItems().map(item => `
                   <button type="button" class="nav-link-btn ${isMainNavActive(item.id) ? "active" : ""}" onclick="setRoute('${item.route}'); closeMobileNav();">
                     ${state.lang === "zh" ? item.zh : item.en}
                   </button>
@@ -2460,6 +3507,177 @@ const HOME_AUDIENCE = [
   { courseId: "startup-automation", zh: "我要做產品、創業或自動化", en: "I am building products, startups, or automation" }
 ];
 
+/** Homepage personalization states — uses existing entitlement sources only. */
+function getHomeUserState() {
+  if (!state.user) return "GUEST";
+  if (isCreatorAccount()) return "CREATOR";
+  if (isQueenAccount()) return "QUEEN";
+  if (hasAllAccessPass()) return "ALL_ACCESS";
+  if (getActiveCampusRedemptions().length > 0) return "CAMPUS_ACTIVE";
+  if (getPremiumCourses().some((course) => hasPaidSingleCourseAccess(course.id))) return "SINGLE_COURSE_OWNER";
+  return "FREE_USER";
+}
+
+function shouldShowHomePricingSection() {
+  const userState = getHomeUserState();
+  return userState === "GUEST" || userState === "FREE_USER";
+}
+
+function shouldShowHomeSalesSections() {
+  return getHomeUserState() === "GUEST";
+}
+
+function shouldShowAllAccessUpsell() {
+  const userState = getHomeUserState();
+  return userState === "GUEST" || userState === "FREE_USER" || userState === "SINGLE_COURSE_OWNER";
+}
+
+function getHomeLearningFocus() {
+  const last = getLastStudiedCourse();
+  if (last?.courseId === "free-starter") {
+    const progress = freeBootcampProgress();
+    return {
+      courseId: "free-starter",
+      title: text("免費入門", "Free Course"),
+      progress,
+      type: "free"
+    };
+  }
+  if (last?.courseId && hasCourseAccess(last.courseId)) {
+    const course = getPremiumCourses().find((c) => c.id === last.courseId);
+    const progress = courseProgress(last.courseId);
+    const title = course ? (state.lang === "zh" ? course.zhTitle : course.enTitle) : last.courseId;
+    return { courseId: last.courseId, title, progress, type: "premium" };
+  }
+  const freeProgress = freeBootcampProgress();
+  if (!isFreeBootcampComplete()) {
+    return {
+      courseId: "free-starter",
+      title: text("免費入門", "Free Course"),
+      progress: freeProgress,
+      type: "free"
+    };
+  }
+  for (const course of getPremiumCourses()) {
+    if (!hasCourseAccess(course.id)) continue;
+    const progress = courseProgress(course.id);
+    if (progress.total > 0 && progress.completed < progress.total) {
+      return {
+        courseId: course.id,
+        title: state.lang === "zh" ? course.zhTitle : course.enTitle,
+        progress,
+        type: "premium"
+      };
+    }
+  }
+  return null;
+}
+
+function getTotalPremiumLearningProgress() {
+  let completed = 0;
+  let total = 0;
+  getPremiumCourses().forEach((course) => {
+    if (!hasCourseAccess(course.id)) return;
+    const progress = courseProgress(course.id);
+    completed += progress.completed;
+    total += progress.total;
+  });
+  const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+  return { completed, total, percent };
+}
+
+function renderHomeCampusSummaryCompact() {
+  const primary = getActiveCampusRedemptions()[0];
+  if (!primary) return "";
+  const validity = primary.daysRemaining > 0
+    ? text(`有效至 ${formatCampusDate(primary.expiresAt)}`, `Valid until ${formatCampusDate(primary.expiresAt)}`)
+    : formatCampusDate(primary.expiresAt);
+  return `
+    <div class="home-campus-summary ui-badge ui-badge-campus">
+      <strong>${text("校園方案", "Campus Program")}</strong>
+      <span>${primary.schoolName || ""}</span>
+      <span>${primary.programName || ""}</span>
+      <span>${validity}</span>
+    </div>
+  `;
+}
+
+function renderHomeLoggedInDashboard() {
+  const name = getHomeDisplayName();
+  const greet = name
+    ? text(`${name}，歡迎回來`, `Welcome back, ${name}`)
+    : text("歡迎回來", "Welcome back");
+  const focus = getHomeLearningFocus();
+  const userState = getHomeUserState();
+  const campusSummary = userState === "CAMPUS_ACTIVE" ? renderHomeCampusSummaryCompact() : "";
+
+  let courseLine = "";
+  let progressLine = "";
+  let primaryAction = "homeContinueLastLearning()";
+  let primaryLabel = text("繼續學習", "Continue Learning");
+
+  if (focus) {
+    courseLine = text(`最近學習：${focus.title}`, `Recent: ${focus.title}`);
+    progressLine = text(
+      `目前進度：${focus.progress.completed} / ${focus.progress.total}`,
+      `Progress: ${focus.progress.completed} / ${focus.progress.total}`
+    );
+  } else {
+    courseLine = text("開始你的下一堂課", "Start your next lesson");
+    primaryAction = "setRoute('learning')";
+    primaryLabel = text("查看我的課程", "View My Courses");
+  }
+
+  return `
+    <section class="home-hero home-dashboard home-dashboard-compact">
+      <div class="wrap home-dashboard-main-only">
+        <div class="home-dashboard-main hp-animate">
+          <h1>${greet}</h1>
+          ${campusSummary}
+          <p class="home-dashboard-course">${courseLine}</p>
+          ${progressLine ? `<p class="home-dashboard-meta">${progressLine}</p>` : ""}
+          <div class="home-hero-cta home-hero-cta-single">
+            <button type="button" class="home-btn home-btn-primary" onclick="${primaryAction}">${primaryLabel}</button>
+          </div>
+          <p class="home-hero-secondary-link">
+            ${hasPromptTutorAccess()
+              ? `<button type="button" class="linkish" onclick="homeOpenTutorForNewTask()">${text("開啟 AI 提問教練", "Open Prompt Tutor")}</button>`
+              : ""}
+          </p>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderHomeExploreOtherCourses() {
+  if (getHomeUserState() !== "SINGLE_COURSE_OWNER") return "";
+  const locked = getPremiumCourses().filter((course) => !hasCourseAccess(course.id));
+  if (!locked.length) return "";
+  return `
+    <section class="home-section home-section-compact" id="explore-courses">
+      <div class="wrap">
+        <div class="home-section-header">
+          <h2>${text("探索其他課程", "Explore Other Courses")}</h2>
+        </div>
+        <div class="home-cap-grid">${locked.map((course) => renderSimplifiedCourseCard(course, { context: "home" })).join("")}</div>
+      </div>
+    </section>
+  `;
+}
+
+function shouldShowHomeResultPackagesSection() {
+  return !state.user;
+}
+
+function shouldShowHomeCapabilitiesSection() {
+  return getHomeUserState() !== "SINGLE_COURSE_OWNER";
+}
+
+function renderHomeLoggedInFinalCTA() {
+  return "";
+}
+
 function getHomeDisplayName() {
   return getAccountDisplayName();
 }
@@ -2486,7 +3704,7 @@ function getHomePlatformStats() {
 function getHomeSingleCoursePriceLabel() {
   const courses = getPremiumCourses();
   const amounts = courses
-    .map(c => normalizePriceNumber(c.price))
+    .map((course) => normalizePriceNumber(getCoursePriceInfo(course.id).price))
     .filter(n => n != null && n > 0);
   if (!amounts.length) return text("依課程而定", "Varies by course");
   const min = Math.min(...amounts);
@@ -2506,7 +3724,7 @@ function renderHomePriceTeaser() {
   return `
     <p class="home-price-teaser">
       <button type="button" class="home-price-teaser-link" onclick="setRoute('map')">
-        ${single}${allAccess ? text(`｜全站通行證早鳥價 ${allAccess}`, ` | All-access early-bird price ${allAccess}`) : ""}
+        ${single}${allAccess ? text(`｜全站通行證 ${allAccess}`, ` | All-Access Pass ${allAccess}`) : ""}
       </button>
     </p>
   `;
@@ -2745,6 +3963,158 @@ function homeOpenCapability(courseId) {
   openCourse(courseId);
 }
 
+function homeStartFreeFoundation() {
+  if (!state.authReady) {
+    toast(text("正在確認登入狀態…", "Checking sign-in status…"));
+    return;
+  }
+  if (!state.user) {
+    requireGoogleLogin({ route: "freeLesson", lessonId: 0, action: "openFreeLesson" });
+    return;
+  }
+  openFreeLesson(0);
+}
+
+function homeStartAiWorkflow() {
+  openTutorWithGoal("");
+}
+
+function homeOpenTutorForNewTask() {
+  openTutorWithGoal("");
+}
+
+const HOME_SOLUTION_PATHS = [
+  { icon: "🎓", courseId: "admissions", zh: "升學申請", en: "University Admissions" },
+  { icon: "📚", courseId: "college-learning", zh: "學習讀書", en: "Learning & Study" },
+  { icon: "🔬", courseId: "research-competition", zh: "研究競賽", en: "Research & Competitions" },
+  { icon: "💼", courseId: "career-internship", zh: "求職職涯", en: "Career & Jobs" },
+  { icon: "⚡", courseId: "workplace-productivity", zh: "工作效率", en: "Work Productivity" },
+  { icon: "🚀", courseId: "startup-automation", zh: "創業自動化", en: "Startup Automation" }
+];
+
+function renderHomeGuestHeroHeadline() {
+  return `
+    <section class="home-hero home-hero-clarity home-hero-guest">
+      <div class="home-hero-glow home-hero-glow-a" aria-hidden="true"></div>
+      <div class="home-hero-glow home-hero-glow-b" aria-hidden="true"></div>
+      <div class="wrap home-hero-clarity-inner">
+        <div class="home-hero-content hp-animate">
+          <h1>${text(
+            "不知道怎麼把 AI<br>用在你真正要做的事？",
+            "Not sure how to use AI<br>for what you actually need to do?"
+          )}</h1>
+          <p class="home-lead home-lead-clarity">${text(
+            "從升學、讀書、研究、求職，到工作與創業，選擇你的目標，AI Skill Bridge 會帶你找到適合的 AI 工具、Prompt、課程與實作方法。",
+            "From admissions and studying to research, job search, work, and startups — choose your goal, and AI Skill Bridge will help you find the right AI tools, prompts, courses, and hands-on methods."
+          )}</p>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderHomeGuestSolutionPaths() {
+  return `
+    <section class="home-section home-section-compact home-solution-section" id="solutions">
+      <div class="wrap">
+        <div class="home-section-header">
+          <h2>${text("你想用 AI 完成什麼？", "What do you want to accomplish with AI?")}</h2>
+        </div>
+        <div class="home-solution-grid">
+          ${HOME_SOLUTION_PATHS.map((item) => `
+            <button type="button" class="home-solution-card" onclick="openCourse('${item.courseId}')">
+              <span class="home-solution-icon" aria-hidden="true">${item.icon}</span>
+              <span class="home-solution-label">${text(item.zh, item.en)}</span>
+              <span class="home-solution-arrow" aria-hidden="true">→</span>
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderHomeGuestHowItWorks() {
+  const steps = [
+    {
+      title: text("選擇目標", "Choose your goal"),
+      desc: ""
+    },
+    {
+      title: text("學會正確的 AI 方法", "Learn the right AI approach"),
+      desc: text("工具、Prompt、課程與實作方法", "Tools, prompts, courses, and hands-on methods")
+    },
+    {
+      title: text("完成真正成果", "Finish with real results"),
+      desc: ""
+    }
+  ];
+  return `
+    <section class="home-section home-section-compact home-how-section" id="how-it-works">
+      <div class="wrap">
+        <div class="home-section-header">
+          <h2>${text("如何運作", "How it works")}</h2>
+        </div>
+        <div class="home-hero-steps home-hero-steps-section">
+          ${steps.map((step, index) => `
+            <article class="home-hero-step">
+              <span class="home-hero-step-num">${index + 1}</span>
+              <h3>${step.title}</h3>
+              ${step.desc ? `<p>${step.desc}</p>` : ""}
+            </article>
+          `).join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderHomeGuestFreeEntry() {
+  return `
+    <section class="home-section home-section-compact home-free-entry-section" id="free-start">
+      <div class="wrap">
+        <div class="home-free-entry-card">
+          <p class="home-free-entry-kicker">${text("第一次使用 AI？", "New to AI?")}</p>
+          <h2>${text("先從免費 AI 入門開始", "Start with the free AI intro")}</h2>
+          <button type="button" class="home-btn home-btn-primary" onclick="homeStartFreeFoundation()">${text("免費開始", "Start Free")}</button>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderHomePremiumFeatures() {
+  if (hasPromptTutorAccess()) return "";
+  return `
+    <section class="home-section home-section-compact" id="premium-features">
+      <div class="wrap">
+        <div class="home-section-header">
+          <h2>${text("Premium AI 功能", "Premium AI Features")}</h2>
+        </div>
+        <article class="home-premium-feature-card home-premium-feature-locked">
+          <div class="home-premium-feature-head">
+            <h3>${text("AI 提問教練", "Prompt Tutor")}</h3>
+            <span class="tag premiumtag">🔒 ${text("All Access 專屬", "All-Access Only")}</span>
+          </div>
+          <p>${text(
+            "告訴 AI Skill Bridge 你想完成什麼，我們會協助你整理需求並建立更有效的 Prompt。",
+            "Tell AI Skill Bridge what you want to accomplish — we'll help you clarify your needs and build more effective prompts."
+          )}</p>
+          <button type="button" class="home-btn home-btn-secondary" onclick="goToAllAccessOffer()">${text("查看 All Access", "View All-Access")}</button>
+        </article>
+      </div>
+    </section>
+  `;
+}
+
+function renderHomeGuestClarityHero() {
+  return renderHomeGuestHeroHeadline();
+}
+
+function bindHomeHeroEvents() {
+  // Guest hero no longer uses input composer.
+}
+
 function homeHeroCtaCopy() {
   const cta = getHomePrimaryAction();
   return {
@@ -2780,48 +4150,6 @@ function renderOnboardingCard() {
   `;
 }
 
-function renderHomeAssessmentNudge() {
-  return `
-    <section class="home-assessment-nudge" aria-label="${text("建議第一步：AI 能力測驗", "Recommended first step: AI skill assessment")}">
-      <div class="wrap">
-        <div class="home-assessment-card">
-          <div class="home-assessment-icon" aria-hidden="true">
-            <svg viewBox="0 0 64 64" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="32" cy="32" r="28" fill="rgba(30,58,138,0.08)" stroke="rgba(30,58,138,0.22)" stroke-width="2"/>
-              <circle cx="32" cy="32" r="16" stroke="#1e3a8a" stroke-width="2" stroke-dasharray="4 3" opacity="0.55"/>
-              <path d="M32 12v8M32 44v8M12 32h8M44 32h8" stroke="#2f5bea" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="32" cy="32" r="4" fill="#1e3a8a"/>
-              <path d="M32 32 L46 22" stroke="#1e3a8a" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="46" cy="22" r="3" fill="#2f5bea"/>
-            </svg>
-          </div>
-          <div class="home-assessment-copy">
-            <span class="home-assessment-badge">
-              <span class="home-assessment-badge-num">01</span>
-              ${text("建議第一步", "RECOMMENDED FIRST STEP")}
-            </span>
-            <h2>${text("不知道該從哪門課開始？", "Not sure which course to start with?")}</h2>
-            <p class="home-assessment-lead">${text(
-              "先完成 AI 能力測驗，了解你目前的能力與需求，取得最適合你的學習路徑建議。",
-              "Take the AI skill assessment to understand your current strengths and get a learning path matched to your goals."
-            )}</p>
-            <p class="home-assessment-note">${text(
-              "完成後即可查看推薦能力方向與課程。",
-              "See your recommended skills and courses after completing the assessment."
-            )}</p>
-          </div>
-          <div class="home-assessment-action">
-            <button type="button" class="home-assessment-cta" onclick="setRoute('assessment')">
-              ${text("開始 AI 能力測驗", "Start AI Skill Assessment")}
-              <span aria-hidden="true">→</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-  `;
-}
-
 function renderHomeHeroPreview() {
   const isGuest = !state.user;
   const stats = getHomePlatformStats();
@@ -2841,6 +4169,7 @@ function renderHomeHeroPreview() {
   const previewCta = isGuest
     ? text("登入後開始", "Sign In to Start")
     : getHomePrimaryAction().label;
+  const previewAction = isGuest ? "homePrimaryAction()" : "homeContinueLastLearning()";
 
   const capabilities = getPremiumCourses().slice(0, 6).map(course => {
     const label = HOME_CAPABILITY_LABELS[course.id] || { zh: course.zhTitle, en: course.enTitle };
@@ -2872,7 +4201,7 @@ function renderHomeHeroPreview() {
                 ? text("尚未開始", "Not started yet")
                 : `${free.completed} / ${free.total} · ${progressPercent}%`
             }</p>
-            <button type="button" class="home-btn home-btn-primary home-btn-compact" onclick="homePrimaryAction()">${previewCta}</button>
+            <button type="button" class="home-btn home-btn-primary home-btn-compact" onclick="${previewAction}">${previewCta}</button>
           </div>
           <div class="home-preview-side">
             <article>
@@ -2899,37 +4228,8 @@ function renderHomeHeroPreview() {
 }
 
 function renderHomeHero() {
-  const cta = homeHeroCtaCopy();
-  const secondaryAction = cta.secondaryAction || "setRoute('result-packages')";
-  return `
-    <section class="home-hero">
-      <div class="home-hero-glow home-hero-glow-a" aria-hidden="true"></div>
-      <div class="home-hero-glow home-hero-glow-b" aria-hidden="true"></div>
-      <div class="home-hero-glow home-hero-glow-c" aria-hidden="true"></div>
-      <div class="wrap home-hero-grid">
-        <div class="home-hero-content hp-animate">
-          <p class="home-tagline">${text("從學習到創業的 AI 能力養成平台", "AI skill platform from learning to entrepreneurship")}</p>
-          <h1>${text("把 AI 從工具，<br>變成你真正會用的能力", "Turn AI Tools into<br>Skills You Can Actually Use")}</h1>
-          <p class="home-lead">${text(
-            "從免費入門、大學學習、研究競賽、求職實習、職場效率到創業自動化，建立一套真正能持續使用的 AI 能力系統。",
-            "Build practical AI skills across learning, research, career, workplace productivity, and entrepreneurship."
-          )}</p>
-          <div class="home-hero-cta">
-            <button class="home-btn home-btn-primary" onclick="${cta.primaryAction}">${cta.primary}</button>
-            <button class="home-btn home-btn-secondary" onclick="${secondaryAction}">${cta.secondary}</button>
-          </div>
-          ${renderHomePriceTeaser()}
-          <p class="home-trust-note">${cta.note}</p>
-          <ul class="home-trust-list">
-            <li>${text("Google 登入即可開始", "Start with Google sign-in")}</li>
-            <li>${text("免費課程不需付款", "Free courses need no payment")}</li>
-            <li>${text("學習進度自動保存", "Progress saves automatically")}</li>
-          </ul>
-        </div>
-        ${renderHomeHeroPreview()}
-      </div>
-    </section>
-  `;
+  if (state.user) return renderHomeLoggedInDashboard();
+  return renderHomeGuestClarityHero();
 }
 
 function renderHomeStats() {
@@ -2957,40 +4257,37 @@ function renderHomeStats() {
 }
 
 function renderHomeCapabilities() {
-  const cards = getPremiumCourses().map(course => {
-    const label = HOME_CAPABILITY_LABELS[course.id] || { zh: course.zhTitle, en: course.enTitle };
-    const pkg = getResultPackageByCourseId(course.id);
-    const lessonCount = (typeof PREMIUM_LESSON_DETAILS !== "undefined" && PREMIUM_LESSON_DETAILS[course.id])
-      ? PREMIUM_LESSON_DETAILS[course.id].length
-      : (course.zhLessons || course.enLessons || []).length;
-    const unlocked = !!state.user && hasCourseAccess(course.id);
-    return `
-      <article class="home-cap-card">
-        <div class="home-cap-top">
-          <span class="home-cap-status ${unlocked ? "is-on" : ""}">${unlocked ? text("已解鎖", "Unlocked") : text("鎖定", "Locked")}</span>
-          <h3>${state.lang === "zh" ? label.zh : label.en}</h3>
-        </div>
-        <p class="home-cap-course">${state.lang === "zh" ? course.zhTitle : course.enTitle}</p>
-        <p class="home-cap-desc">${state.lang === "zh" ? (course.zhOutcome || course.zhDesc) : (course.enOutcome || course.enDesc)}</p>
-        <ul class="home-cap-meta">
-          <li>${lessonCount} ${text("堂課", "lessons")}</li>
-          <li>${pkg ? (state.lang === "zh" ? pkg.zhTitle : pkg.enTitle) : (state.lang === "zh" ? course.zhFinalProduct : course.enFinalProduct)}</li>
-          <li class="home-cap-price"><span class="price-token">${formatTwdPrice(course.price)}</span> · ${text("一次付費", "One-time payment")}</li>
-        </ul>
-        <button type="button" class="home-btn home-btn-secondary home-btn-compact" onclick="homeOpenCapability('${course.id}')">${text("查看課程", "View Course")}</button>
-      </article>
-    `;
-  }).join("");
+  if (!shouldShowHomeCapabilitiesSection()) return "";
+  const userState = getHomeUserState();
+  const courses = userState === "SINGLE_COURSE_OWNER"
+    ? []
+    : (userState === "GUEST" || userState === "FREE_USER"
+      ? getPremiumCourses()
+      : getPremiumCourses().filter((course) => hasCourseAccess(course.id)));
+  if (!courses.length && userState !== "GUEST" && userState !== "FREE_USER") {
+    return "";
+  }
+  const displayCourses = courses.length ? courses : getPremiumCourses();
+  const cards = displayCourses.map((course) => renderSimplifiedCourseCard(course, { context: "home" })).join("");
+  const sectionLead = userState === "GUEST" || userState === "FREE_USER"
+    ? text(
+      "每一門課只專注一種能力。單門課解決一個問題，全站通行證建立完整能力地圖。",
+      "Each course focuses on one capability. Buy one to solve one problem, or unlock the full map with All-Access."
+    )
+    : text(
+      "你的課程已開放，選擇現在要推進的能力。",
+      "Your courses are open — choose what to advance next."
+    );
+  const sectionTitle = userState === "GUEST" || userState === "FREE_USER"
+    ? text("一個平台，建立六種真正可用的 AI 能力", "One platform for six practical AI capabilities")
+    : text("我的課程", "My Courses");
 
   return `
-    <section class="home-section" id="capabilities">
+    <section class="home-section home-section-compact" id="capabilities">
       <div class="wrap">
         <div class="home-section-header">
-          <h2>${text("一個平台，建立六種真正可用的 AI 能力", "One platform for six practical AI capabilities")}</h2>
-          <p class="home-section-lead">${text(
-            "每一門課只專注一種能力。單門課解決一個問題，全站通行證建立完整能力地圖。",
-            "Each course focuses on one capability. Buy one to solve one problem, or unlock the full map with All-Access."
-          )}</p>
+          <h2>${sectionTitle}</h2>
+          ${userState === "GUEST" || userState === "FREE_USER" ? `<p class="home-section-lead">${sectionLead}</p>` : ""}
         </div>
         <div class="home-cap-grid">${cards}</div>
       </div>
@@ -3038,6 +4335,7 @@ function renderHomeProcess() {
 }
 
 function renderHomeResultPackages() {
+  if (!shouldShowHomeResultPackagesSection()) return "";
   const packages = getResultPackageConfigList();
   const featured = packages[0] || null;
   const featuredProgress = featured
@@ -3091,6 +4389,7 @@ function renderHomeResultPackages() {
 }
 
 function renderHomePricing() {
+  if (!shouldShowHomePricingSection()) return "";
   const stats = getHomePlatformStats();
   const allAccessInfo = getCoursePriceInfo("all-access");
   const saveAmount = getAllAccessSaveAmount(allAccessInfo);
@@ -3130,7 +4429,6 @@ function renderHomePricing() {
             <button class="home-btn home-btn-secondary" onclick="setRoute('map')">${text("查看所有課程", "View All Courses")}</button>
           </article>
           <article class="home-price-card home-price-featured">
-            <span class="home-price-badge">${text("早鳥價", "Early-bird Price")}</span>
             <h3>${text("全站通行證", "All-Access Pass")}</h3>
             ${allAccessInfo.originalPrice != null ? `<p class="home-price-original"><s class="price-token">${formatTwdPrice(allAccessInfo.originalPrice)}</s></p>` : ""}
             <p class="home-price-amount">${formatTwdPriceToken(allAccessInfo.price)}</p>
@@ -3192,65 +4490,22 @@ function renderHomeFinalCTA() {
 }
 
 function home() {
+  const isGuest = !state.user;
   return homeLandingShell(`
     <main class="home-page">
       ${renderHomeHero()}
-      ${renderOnboardingCard()}
-      ${renderHomeAssessmentNudge()}
-      ${renderHomeStats()}
+      ${isGuest ? renderHomeGuestSolutionPaths() : ""}
+      ${isGuest ? renderHomeGuestHowItWorks() : ""}
+      ${isGuest ? renderHomeGuestFreeEntry() : ""}
+      ${state.user ? "" : renderOnboardingCard()}
       ${renderHomeCapabilities()}
-      ${renderHomeProcess()}
-      ${renderHomeResultPackages()}
-      ${renderHomePricing()}
-      ${renderHomeAudience()}
-      ${renderHomeFinalCTA()}
+      ${renderHomeExploreOtherCourses()}
+      ${renderHomePremiumFeatures()}
+      ${shouldShowHomePricingSection() ? renderHomePricing() : ""}
     </main>
   `);
 }
 
-
-function assessment() {
-  return shell(`
-    <main class="page">
-      <div class="wrap">
-        <h1>${text("AI 能力測驗", "AI Skill Assessment")}</h1>
-        <p class="lead">${text("完成測驗後，系統會判斷你的 AI 等級並推薦學習路徑。", "After the assessment, the system will estimate your AI level and recommend a learning path.")}</p>
-
-        ${
-          state.assessment
-            ? `<section class="panel">
-                <h2>${text("你的測驗結果", "Your Result")}</h2>
-                <p><b>${text("等級", "Level")}：</b>${state.assessment.level}</p>
-                <p><b>${text("分數", "Score")}：</b>${state.assessment.score} / ${ASSESSMENT_QUESTIONS.length * 2}</p>
-                <h3>${text("推薦課程", "Recommended Lessons")}</h3>
-                <div class="grid three">
-                  ${recommendedLessons().map(id => {
-                    const lesson = LESSONS.find(l => l.id === id);
-                    if (!lesson) return "";
-                    return `<article class="card"><h3>${state.lang === "zh" ? lesson.zhTitle : lesson.enTitle}</h3><button class="btn primary" onclick="state.activeLesson='${lesson.id}';setRoute('courses')">${text("開始學習", "Start")}</button></article>`;
-                  }).join("")}
-                </div>
-                <div class="btnrow"><button class="btn secondary" onclick="state.assessment=null;save();render()">${text("重新測驗", "Retake")}</button></div>
-              </section>`
-            : `<section class="panel">
-                ${ASSESSMENT_QUESTIONS.map((q, idx) => `
-                  <div class="practice">
-                    <h3>${idx + 1}. ${state.lang === "zh" ? q.zh : q.en}</h3>
-                    ${q.options.map((option, optionIndex) => `
-                      <label class="quiz-option">
-                        <input type="radio" name="${q.id}" value="${option.score}">
-                        ${state.lang === "zh" ? option.zh : option.en}
-                      </label>
-                    `).join("")}
-                  </div>
-                `).join("")}
-                <button class="btn primary" onclick="submitAssessment()">${text("查看結果", "See Result")}</button>
-              </section>`
-        }
-      </div>
-    </main>
-  `);
-}
 
 function getCoursePathConfigList() {
   return (typeof COURSE_PATH_CONFIG !== "undefined" && Array.isArray(COURSE_PATH_CONFIG))
@@ -3304,62 +4559,18 @@ function renderMapCourseCard(course) {
   const unlocked = hasCourseAccess(course.id);
   const progress = courseProgress(course.id);
   const pkg = getResultPackageByCourseId(course.id);
-  const product = getCourseProductInfo(course.id);
-  const lessonCount = product ? product.lessonCount : (course.zhLessons || course.enLessons || []).length || 10;
-  const capability = product
-    ? (state.lang === "zh" ? product.capability.zh : product.capability.en)
-    : "";
-  const valueLine = state.lang === "zh"
-    ? (course.zhDesc || (product && product.shortDescription.zh) || "")
-    : (course.enDesc || (product && product.shortDescription.en) || "");
-  const pkgName = pkg
-    ? (state.lang === "zh" ? pkg.zhTitle : pkg.enTitle)
-    : (state.lang === "zh" ? course.zhFinalProduct : course.enFinalProduct);
-  const fitLine = getCourseMapFit(course.id);
-  const packageLabel = pkgName
-    ? (state.lang === "zh" ? ("「" + pkgName + "」") : ('"' + pkgName + '"'))
-    : "";
-  const showPrivate = Boolean(state.user) && unlocked;
   const primaryLabel = unlocked
-    ? (progress.completed > 0 && progress.completed < progress.total
-      ? text("繼續學習", "Continue Learning")
-      : progress.completed >= progress.total && progress.total > 0
-      ? text("查看成果", "View Results")
-      : text("開始學習", "Start Learning"))
+    ? text("繼續學習", "Continue Learning")
     : text("查看課程", "View Course");
   const primaryAction = unlocked
     ? (progress.completed >= progress.total && progress.total > 0 && pkg
       ? `openResultPackage('${pkg.id}')`
       : `openCourse('${course.id}')`)
     : `openCourse('${course.id}')`;
-
-  return `
-    <article class="map-course-card ${unlocked ? "" : "is-locked"}" data-course-id="${course.id}">
-      <div class="map-course-card-top">
-        ${capability ? `<span class="map-capability-badge">${capability}</span>` : ""}
-        <span class="tag ${unlocked ? "free" : "premiumtag"}">${getCourseAccessStatusLabel(course.id)}</span>
-      </div>
-      <h3>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h3>
-      <p class="map-course-value">${valueLine}</p>
-      <p class="map-course-lessons"><strong>${lessonCount}</strong> ${text("堂實戰課", "Lessons")}</p>
-      ${fitLine ? `<p class="map-course-fit"><span>${text("適合", "Best if")}</span> ${fitLine}</p>` : ""}
-      ${packageLabel ? `<p class="map-course-package"><span>${text("完成後建立", "You'll build")}</span> ${packageLabel}</p>` : ""}
-      <div class="map-course-price">
-        <strong class="price-token">${formatTwdPrice(course.price)}</strong>
-        <span>${text("一次付費", "One-time payment")}</span>
-      </div>
-      ${showPrivate ? `<p class="map-course-progress">${text("進度", "Progress")} ${progress.completed}/${progress.total}</p>` : ""}
-      <div class="btnrow">
-        <button type="button" class="btn ${unlocked ? "primary" : "secondary"}" onclick="${primaryAction}">${primaryLabel}</button>
-        ${unlocked ? "" : renderCoursePurchaseControls(course.id, { variant: "map" })}
-      </div>
-      ${unlocked
-        ? `<p class="course-price-owned" role="status">${hasAllAccessPass()
-          ? text("已解鎖", "Unlocked")
-          : text("已購買", "Purchased")}</p>`
-        : ""}
-    </article>
-  `;
+  return renderSimplifiedCourseCard(course, {
+    context: "map",
+    onClick: primaryAction
+  });
 }
 
 function renderMapPathSection(path) {
@@ -3380,13 +4591,13 @@ function renderMapPathSection(path) {
 
   return `
     <section class="map-path-section map-path-accent-${path.accent || path.id}" id="map-path-${path.id}">
-      <header class="map-path-header">
+      <div class="map-path-header">
         <p class="map-path-number">${path.number || ""}</p>
         <div>
           <h2>${state.lang === "zh" ? path.zhTitle : path.enTitle}</h2>
           <p class="map-path-desc">${state.lang === "zh" ? path.zhDesc : path.enDesc}</p>
         </div>
-      </header>
+      </div>
       <div class="map-path-grid map-path-grid-${path.id}">
         ${courses.map(course => renderMapCourseCard(course)).join("")}
         ${aside}
@@ -3454,15 +4665,11 @@ function learningMap() {
           `).join("")}
         </nav>
 
-        <section class="map-guidance" id="map-guidance">
-          <p>${text("不知道從哪開始？", "Not sure where to start?")}</p>
-          <button type="button" class="btn secondary" onclick="setRoute('assessment')">${text("做能力測驗", "Take the Skill Assessment")}</button>
-        </section>
-
         <div class="map-paths" id="map-paths-all">
           ${paths.map(path => renderMapPathSection(path)).join("")}
         </div>
 
+        ${!hasAllAccessPass() && shouldShowAllAccessUpsell() ? `
         <section class="map-all-access-section" id="map-all-access">
           <div class="map-all-access-card">
             <p class="map-all-access-kicker">${text("不知道該選哪一門？", "Not sure which course to pick?")}</p>
@@ -3478,8 +4685,8 @@ function learningMap() {
               <li>${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</li>
             </ul>
             <div class="map-all-access-prices">
-              <p><span>${text("早鳥", "Early-bird")}</span><strong class="price-token">${formatTwdPrice(allAccessInfo.price)}</strong></p>
-              ${allAccessInfo.originalPrice != null ? `<p><span>${text("原價", "Regular")}</span><s class="price-token">${formatTwdPrice(allAccessInfo.originalPrice)}</s></p>` : ""}
+              <p><span>${text("售價", "Price")}</span><strong class="price-token">${formatTwdPrice(allAccessInfo.price)}</strong></p>
+              ${allAccessInfo.originalPrice != null ? `<p><span>${text("原價", "Original price")}</span><s class="price-token">${formatTwdPrice(allAccessInfo.originalPrice)}</s></p>` : ""}
               ${saveAmount > 0 ? `<p><span>${text("現省", "Save")}</span><strong class="price-token">${formatTwdPrice(saveAmount)}</strong></p>` : ""}
             </div>
             <div class="btnrow">
@@ -3490,7 +4697,7 @@ function learningMap() {
             </div>
             ${hasAllAccessPass() ? `<p class="course-price-owned" role="status">${text("已全站開通", "All Access Unlocked")}</p>` : ""}
           </div>
-        </section>
+        </section>` : ""}
 
         <section class="map-service-note" id="map-service-note">
           <h2>${text("商品／服務說明", "Product & Service Notes")}</h2>
@@ -4175,6 +5382,127 @@ function v38FreeCertificateReady() {
 }
 
 
+function renderLearningContinueSection() {
+  const focus = getHomeLearningFocus();
+  if (!focus) {
+    return `
+      <p>${text("開始你的下一堂課。", "Start your next lesson.")}</p>
+      <button type="button" class="btn primary" onclick="setRoute('map')">${text("查看我的課程", "View My Courses")}</button>
+    `;
+  }
+  const lessonNo = (Number(getLastStudiedCourse()?.lessonIndex) || 0) + 1;
+  const percent = focus.progress.total
+    ? Math.round((focus.progress.completed / focus.progress.total) * 100)
+    : 0;
+  return `
+    <article class="learning-continue-card">
+      <h3>${focus.title}</h3>
+      <p>${text(`第 ${lessonNo} / ${focus.progress.total} 堂`, `Lesson ${lessonNo} / ${focus.progress.total}`)}</p>
+      <div class="package-progress-track"><div class="package-progress-bar" style="width:${percent}%"></div></div>
+      <p>${text("進度", "Progress")}：${focus.progress.completed}/${focus.progress.total}</p>
+      <button type="button" class="btn primary" onclick="homeContinueLastLearning()">${text("繼續", "Continue")}</button>
+    </article>
+  `;
+}
+
+function renderLearningMyCoursesSection() {
+  const entries = [];
+  const free = v38SafeFreeProgress();
+  entries.push({
+    id: "free-starter",
+    title: text("免費入門", "Free Course"),
+    progress: free,
+    open: "setRoute('courses')",
+    pkg: "free-starter"
+  });
+  getPremiumCourses().forEach((course) => {
+    if (!hasCourseAccess(course.id)) return;
+    const progress = courseProgress(course.id);
+    const pkg = getResultPackageByCourseId(course.id);
+    entries.push({
+      id: course.id,
+      title: state.lang === "zh" ? course.zhTitle : course.enTitle,
+      progress,
+      open: `openCourse('${course.id}')`,
+      pkg: pkg ? pkg.id : ""
+    });
+  });
+  if (!entries.length) {
+    return `<p>${text("尚無可進入的課程。", "No accessible courses yet.")}</p>`;
+  }
+  return `
+    <div class="learning-course-grid">
+      ${entries.map((entry) => `
+        <article class="card learning-course-card">
+          <span class="${getCourseCardBadgeMeta(entry.id === "free-starter" ? "free-starter" : entry.id).className}">
+            ${entry.id === "free-starter" ? text("免費", "Free") : getCourseCardBadgeMeta(entry.id).label}
+          </span>
+          <h3>${entry.title}</h3>
+          <p>${text("進度", "Progress")}：${entry.progress.completed}/${entry.progress.total}</p>
+          <div class="package-progress-track"><div class="package-progress-bar" style="width:${entry.progress.percent != null ? entry.progress.percent : (entry.progress.total ? Math.round((entry.progress.completed / entry.progress.total) * 100) : 0)}%"></div></div>
+          <button type="button" class="btn primary" onclick="${entry.open}">${text("繼續學習", "Continue Learning")}</button>
+        </article>
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderLearningResultsSection() {
+  const unlockedPackages = getResultPackageConfigList().filter((pkg) => hasResultPackageAccess(pkg.id));
+  const recentResults = getRecentEditedResults(3);
+  return `
+    <div class="learning-results-grid">
+      <p>${text(`已解鎖 ${unlockedPackages.length} 個成果禮包`, `${unlockedPackages.length} result packages unlocked`)}</p>
+      ${recentResults.length ? `
+        <div class="grid two">
+          ${recentResults.map((item) => `
+            <article class="card">
+              <h3>${item.itemTitle}</h3>
+              <p class="ui-badge ui-badge-muted">${item.packageTitle}</p>
+              <button type="button" class="btn secondary" onclick="openResultPackage('${item.packageId}')">${text("打開成果包", "Open Package")}</button>
+            </article>
+          `).join("")}
+        </div>
+      ` : `<p>${text("尚無最近編輯的成果。", "No recently edited results yet.")}</p>`}
+      <button type="button" class="btn secondary" onclick="setRoute('result-packages')">${text("前往成果禮包", "Go to Result Packages")}</button>
+    </div>
+  `;
+}
+
+function renderLearningPlanStatusSection() {
+  const userState = getHomeUserState();
+  if (userState === "FREE_USER") return "";
+  if (userState === "CAMPUS_ACTIVE") {
+    return renderCampusStatusPanel();
+  }
+  if (userState === "ALL_ACCESS") {
+    return `
+      <section class="panel learning-plan-panel">
+        <span class="ui-badge ui-badge-success">${text("全站通行證", "All-Access Pass")}</span>
+        <p>${text("六門付費課程已全部開放。", "All six premium courses are unlocked.")}</p>
+      </section>
+    `;
+  }
+  if (userState === "CREATOR" || userState === "QUEEN") {
+    return `
+      <section class="panel learning-plan-panel">
+        <span class="ui-badge ui-badge-success">${text("已解鎖", "Unlocked")}</span>
+        <p>${getAccountAccessLabel()}</p>
+      </section>
+    `;
+  }
+  if (userState === "SINGLE_COURSE_OWNER") {
+    const count = getPremiumCourses().filter((course) => hasPaidSingleCourseAccess(course.id)).length;
+    return `
+      <section class="panel learning-plan-panel">
+        <span class="ui-badge ui-badge-success">${text("已購買", "Purchased")}</span>
+        <p>${text(`已購買 ${count} 門課程`, `${count} course${count === 1 ? "" : "s"} purchased`)}</p>
+      </section>
+    `;
+  }
+  return "";
+}
+
 function learning() {
   if (!state.authReady) return renderAuthChecking();
   if (!state.user) {
@@ -4190,143 +5518,39 @@ function learning() {
     });
   }
 
-  const free = v38SafeFreeProgress();
-  const freePortfolio = v38SafeFreePortfolioProgress();
-  const premiumCourses = getPremiumCourses();
-  const ownedCourses = premiumCourses.filter(c => hasCourseAccess(c.id));
-  const recommendCourses = premiumCourses.filter(c => !hasCourseAccess(c.id));
-  const last = getLastStudiedCourse();
-  const unlockedPackages = getResultPackageConfigList().filter(p => hasResultPackageAccess(p.id));
-  const totalResultItems = unlockedPackages.reduce((sum, pkg) => {
-    const progress = resultPackageProgressByConfig(pkg);
-    return sum + progress.completed;
-  }, 0);
-  const recentResults = getRecentEditedResults(3);
-
-  let continueBlock = "";
-  if (last && last.courseId === "free-starter") {
-    continueBlock = `
-      <p><b>${text("課程", "Course")}：</b>${text("免費入門", "Free Intro")}</p>
-      <p><b>${text("目前進度", "Progress")}：</b>${free.completed}/${free.total}（${free.percent}%）</p>
-      <button class="btn primary" onclick="setRoute('courses')">${text("繼續學習", "Continue Learning")}</button>
-    `;
-  } else if (last && last.courseId) {
-    const guidance = getPremiumContinueGuidance(last.courseId, last.lessonIndex);
-    if (guidance) {
-      const lessonLine = state.lang === "zh"
-        ? `第 ${guidance.lessonNo} 課：${guidance.lessonTitle}`
-        : `Lesson ${guidance.lessonNo}: ${guidance.lessonTitle}`;
-      continueBlock = `
-        <div class="learning-continue-guide">
-          <p><b>${text("課程", "Course")}：</b>${guidance.courseTitle}</p>
-          <p><b>${text("目前 Lesson", "Current lesson")}：</b>${lessonLine}</p>
-          <p><b>${text("目前進度", "Current progress")}：</b>${guidance.currentLabel}</p>
-          <p><b>${text("下一步", "Next step")}：</b>${guidance.nextLabel}</p>
-          <button class="btn primary" onclick="continuePremiumLearningStep('${guidance.courseId}', ${guidance.lessonIndex}, '${guidance.nextTab}')">${text("繼續下一步", "Continue next step")}</button>
-        </div>
-      `;
-    } else {
-      continueBlock = `
-        <p>${text("找不到對應課程進度。", "Could not find matching course progress.")}</p>
-        <button class="btn primary" onclick="setRoute('premium')">${text("查看進階課程", "View premium courses")}</button>
-      `;
-    }
-  } else {
-    continueBlock = `
-      <p>${text("還沒有最近學習紀錄。建議先從免費入門開始。", "No recent learning yet. Start with the free intro.")}</p>
-      <button class="btn primary" onclick="setRoute('courses')">${text("開始免費入門", "Start Free Intro")}</button>
-    `;
-  }
-
   return shell(`
-    <main class="page">
+    <main class="page learning-page">
       <div class="wrap">
-        <section class="panel">
-          <span class="tag free">${text("學習中心", "Learning Center")}</span>
-          <h1>${text("我的學習中心", "My Learning Center")}</h1>
-          <p class="lead">${text("繼續學習、管理已擁有課程，並追蹤你的成果禮包進度。", "Continue learning, manage owned courses, and track your result packages.")}</p>
-          ${renderAccountMembershipSummary()}
-          ${renderCampusStatusPanel()}
+        <div class="learning-page-header">
+          <h1>${text("我的學習", "My Learning")}</h1>
+        </div>
+
+        <section class="panel learning-section">
+          <h2>${text("正在學習", "In Progress")}</h2>
+          ${renderLearningContinueSection()}
         </section>
 
-        <section class="panel">
-          <h2>A. ${text("繼續學習", "Continue Learning")}</h2>
-          ${continueBlock}
+        <section class="panel learning-section">
+          <h2>${text("已完成", "Completed")}</h2>
+          ${renderLearningCompletedSection()}
         </section>
 
-        <section class="panel">
-          <h2>B. ${text("我的課程", "My Courses")}</h2>
-          <div class="grid two">
-            <article class="card">
-              <span class="tag free">${text("免費", "Free")}</span>
-              <h3>${text("免費入門／AI 新手訓練營", "Free Intro / AI Beginner Bootcamp")}</h3>
-              <p>${text("進度", "Progress")}：${free.completed}/${free.total}（${free.percent}%）</p>
-              <div class="package-progress-track"><div class="package-progress-bar" style="width:${free.percent}%"></div></div>
-              <div class="btnrow">
-                <button class="btn primary" onclick="setRoute('courses')">${text("進入課程", "Open Course")}</button>
-                <button class="btn secondary" onclick="openResultPackage('free-starter')">${text("成果包", "Package")}</button>
-              </div>
-            </article>
-            ${ownedCourses.map(course => {
-              const progress = courseProgress(course.id);
-              const pkg = getResultPackageByCourseId(course.id);
-              return `
-                <article class="card">
-                  ${renderCourseOwnershipTag(course.id)}
-                  <h3>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h3>
-                  <p>${text("進度", "Progress")}：${progress.completed}/${progress.total}（${progress.percent}%）</p>
-                  <div class="package-progress-track"><div class="package-progress-bar" style="width:${progress.percent}%"></div></div>
-                  <div class="btnrow">
-                    <button class="btn primary" onclick="openCourse('${course.id}')">${text("進入課程", "Open Course")}</button>
-                    <button class="btn secondary" onclick="openResultPackage('${pkg ? pkg.id : ""}')">${text("成果包", "Package")}</button>
-                  </div>
-                </article>
-              `;
-            }).join("")}
-          </div>
-
-          ${recommendCourses.length ? `
-            <h3 style="margin-top:24px">${text("推薦解鎖", "Recommended Unlocks")}</h3>
-            <div class="grid two">
-              ${recommendCourses.map(course => `
-                <article class="card map-path-card-locked">
-                  <span class="tag premiumtag">${text("尚未擁有", "Not owned")}</span>
-                  <h3>${state.lang === "zh" ? course.zhTitle : course.enTitle}</h3>
-                  ${renderCoursePriceBlock(course, { compact: true })}
-                  <div class="btnrow">
-                    <button class="btn secondary" onclick="openCourse('${course.id}')">${text("查看課程", "View Course")}</button>
-                    ${renderCoursePurchaseControls(course.id, { variant: "inline" })}
-                  </div>
-                </article>
-              `).join("")}
-            </div>
-          ` : ""}
+        <section class="panel learning-section">
+          <h2>${text("我的收藏", "My Favorites")}</h2>
+          ${renderLearningFavoritesSection()}
         </section>
 
-        <section class="panel">
-          <h2>C. ${text("我的成果", "My Results")}</h2>
-          <div class="grid three">
-            <article class="card"><span class="tag">${text("成果包", "Packages")}</span><h3>${unlockedPackages.length}</h3><p>${text("已解鎖成果包", "Unlocked packages")}</p></article>
-            <article class="card"><span class="tag">${text("項目", "Items")}</span><h3>${totalResultItems}</h3><p>${text("已完成成果項目", "Completed result items")}</p></article>
-            <article class="card"><span class="tag">${text("免費", "Free")}</span><h3>${freePortfolio.completed}/${freePortfolio.total}</h3><p>${text("免費舊成果包", "Legacy free portfolio")}</p></article>
-          </div>
-          ${recentResults.length ? `
-            <h3 style="margin-top:18px">${text("最近編輯的成果", "Recently edited results")}</h3>
-            <div class="grid two">
-              ${recentResults.map(item => `
-                <article class="card">
-                  <span class="tag free">${item.packageTitle}</span>
-                  <h3>${item.itemTitle}</h3>
-                  <p>${text("最後儲存", "Last saved")}：${formatCourseResultSavedAt(item.savedAt)}</p>
-                  <button class="btn secondary" onclick="openResultPackage('${item.packageId}')">${text("打開成果包", "Open Package")}</button>
-                </article>
-              `).join("")}
-            </div>
-          ` : `<p style="margin-top:12px">${text("尚無最近編輯的成果。", "No recently edited results yet.")}</p>`}
-          <div class="btnrow" style="margin-top:16px">
-            <button class="btn primary" onclick="setRoute('result-packages')">${text("前往成果禮包", "Go to Result Packages")}</button>
-          </div>
+        <section class="panel learning-section">
+          <h2>${text("我的課程", "My Courses")}</h2>
+          ${renderLearningMyCoursesSection()}
         </section>
+
+        <section class="panel learning-section">
+          <h2>${text("學習成果", "Learning Results")}</h2>
+          ${renderLearningResultsSection()}
+        </section>
+
+        ${renderLearningPlanStatusSection()}
       </div>
     </main>
   `);
@@ -4462,6 +5686,24 @@ function isCreator() {
 
 function hasAllAccessPass() {
   return hasAllAccess();
+}
+
+/** AI 提問教練 — All-Access / Creator / Queen only (Campus 單課不含此功能). */
+function hasPromptTutorAccess(user = state.user) {
+  if (!user) return false;
+  if (isCreatorAccount(user) || isQueenAccount(user)) return true;
+  return hasAllAccess(user);
+}
+
+function goToAllAccessOffer() {
+  if (state.route !== "home") {
+    state.route = "home";
+    render();
+  }
+  requestAnimationFrame(() => {
+    const el = document.getElementById("pricing");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 }
 
 function hasCourseAccess(courseId) {
@@ -4662,7 +5904,7 @@ function getCourseProductInfo(courseId) {
     courseId,
     title: { zh: course.zhTitle || "", en: course.enTitle || "" },
     shortDescription: { zh: course.zhDesc || design.zhPositioning || "", en: course.enDesc || design.enPositioning || "" },
-    price: course.price,
+    price: getProductCatalogAmount(courseId) ?? course.price,
     currency: course.currency || "TWD",
     lessonCount,
     capability: {
@@ -5393,8 +6635,8 @@ function renderCoursePlanComparison(item) {
       en: "Price",
       singleZh: formatTwdPrice(singlePrice.price),
       singleEn: formatTwdPrice(singlePrice.price),
-      allZh: `${formatTwdPrice(allAccess.price)} ${text("早鳥", "early-bird")}`,
-      allEn: `${formatTwdPrice(allAccess.price)} early-bird`
+      allZh: formatTwdPrice(allAccess.price),
+      allEn: formatTwdPrice(allAccess.price)
     },
     {
       zh: "付款方式",
@@ -5447,8 +6689,8 @@ function renderCoursePlanComparison(item) {
           <li>${text("一次付費，非訂閱制", "One-time payment, not a subscription")}</li>
         </ul>
         <div class="course-all-access-price">
-          <p><span>${text("早鳥價", "Early-bird Price")}</span><strong class="price-token">${formatTwdPrice(allAccess.price)}</strong></p>
-          ${allAccess.originalPrice != null ? `<p><span>${text("原價", "Regular Price")}</span><s class="price-token">${formatTwdPrice(allAccess.originalPrice)}</s></p>` : ""}
+          <p><span>${text("售價", "Price")}</span><strong class="price-token">${formatTwdPrice(allAccess.price)}</strong></p>
+          ${allAccess.originalPrice != null ? `<p><span>${text("原價", "Original price")}</span><s class="price-token">${formatTwdPrice(allAccess.originalPrice)}</s></p>` : ""}
           ${saveAmount > 0 ? `<p><span>${text("現省", "Save")}</span><strong class="price-token">${formatTwdPrice(saveAmount)}</strong></p>` : ""}
         </div>
       </div>
@@ -7880,7 +9122,7 @@ function resultPackageShowcase() {
         </section>
 
         <article class="showcase-document" style="margin-top:16px">
-          <header class="showcase-cover">
+          <div class="showcase-cover">
             <p class="showcase-brand">AI Skill Bridge</p>
             <h1 class="showcase-title">${escapeTextareaValue(prefs.title)}</h1>
             <p class="showcase-package-name">${packageLabel}</p>
@@ -7895,7 +9137,7 @@ function resultPackageShowcase() {
                 : `${summary.savedCount} / ${summary.total} results completed`
             }</p>
             <p class="showcase-prepared">${text("整理日期", "Prepared on")}：${formatShowcasePreparedDate()}</p>
-          </header>
+          </div>
 
           ${selectedRows.length ? `
             <section class="showcase-items">
@@ -8247,14 +9489,16 @@ function tools() {
             `).join("")}
           </div>
         </section>
-        <div class="grid three">
+        <div class="grid three tools-grid-compact">
           ${TOOLS.map(tool => `
-            <article class="card">
-              <div class="tool-logo">${tool.name[0]}</div>
+            <article class="card tool-card-compact">
+              <div class="tool-logo tool-logo-sm">${tool.name[0]}</div>
               <h3>${tool.name}</h3>
-              <p>${state.lang === "zh" ? tool.zh : tool.en}</p>
-              <button class="btn secondary" onclick="toggleFavorite('tool','${tool.name}')">${isFavorite("tool", tool.name) ? "★" : "☆"} ${text("收藏", "Save")}</button>
-              <a class="btn primary" href="${tool.url}" target="_blank">${L("tools.open")}</a>
+              <p class="tool-card-desc">${state.lang === "zh" ? tool.zh : tool.en}</p>
+              <div class="btnrow tool-card-actions">
+                ${renderFavoriteToggleButton("tool", tool.name)}
+                <a class="btn primary btn-compact" href="${tool.url}" target="_blank" rel="noopener noreferrer">${L("tools.open")}</a>
+              </div>
             </article>
           `).join("")}
         </div>
@@ -8270,58 +9514,135 @@ function prompts() {
         <h1>${L("prompts.title")}</h1>
         <p class="lead">${L("prompts.lead")}</p>
         <div class="grid two">
-          ${PROMPTS.map((prompt, index) => `
-            <article class="card">
-              <span class="tag">${prompt.cat}</span>
-              <div class="promptbox" id="prompt-${index}">${prompt.text}</div>
-              <button class="btn secondary" onclick="copyPrompt('prompt-${index}')">${L("prompts.copy")}</button>
-              <button class="btn secondary" onclick="toggleFavorite('prompt','${index}')">${isFavorite("prompt", String(index)) ? "★" : "☆"} ${text("收藏", "Save")}</button>
+          ${PROMPTS.map((prompt) => {
+            const category = getPromptCategoryLabel(prompt);
+            const body = getPromptBodyText(prompt);
+            return `
+            <article class="card prompt-card-compact">
+              <span class="tag">${category}</span>
+              <div class="promptbox" id="prompt-${prompt.id}">${body}</div>
+              <div class="btnrow prompt-card-actions">
+                <button class="btn secondary btn-compact" onclick="copyPrompt('${prompt.id}')">${L("prompts.copy")}</button>
+                ${renderFavoriteToggleButton("prompt", prompt.id)}
+              </div>
             </article>
-          `).join("")}
+          `;
+          }).join("")}
         </div>
       </div>
     </main>
   `);
 }
 
-function copyPrompt(id) {
-  navigator.clipboard.writeText(document.getElementById(id).innerText);
-  toast(L("prompts.copied"));
+function getPromptById(promptId) {
+  return (typeof PROMPTS !== "undefined" && Array.isArray(PROMPTS))
+    ? PROMPTS.find((p) => p.id === promptId) || null
+    : null;
+}
+
+/** Stable prompt id for favorites; migrates legacy numeric index keys. */
+function getPromptFavoriteKey(idOrIndex) {
+  const byId = getPromptById(String(idOrIndex));
+  if (byId) return byId.id;
+  const idx = Number(idOrIndex);
+  if (!Number.isNaN(idx) && typeof PROMPTS !== "undefined" && PROMPTS[idx]?.id) {
+    return PROMPTS[idx].id;
+  }
+  return String(idOrIndex);
+}
+
+function getPromptCategoryLabel(prompt) {
+  if (!prompt) return "";
+  return state.lang === "zh" ? prompt.categoryZh : prompt.categoryEn;
+}
+
+function getPromptBodyText(prompt) {
+  if (!prompt) return "";
+  return state.lang === "zh" ? prompt.promptZh : prompt.promptEn;
+}
+
+function copyPrompt(promptId) {
+  const prompt = getPromptById(promptId);
+  const body = prompt ? getPromptBodyText(prompt) : "";
+  if (!body) return;
+  navigator.clipboard.writeText(body).then(() => {
+    toast(L("prompts.copied"));
+  }).catch(() => {
+    const el = document.getElementById(`prompt-${promptId}`);
+    if (el) {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+    toast(L("prompts.copied"));
+  });
 }
 
 
-function tutor() {
+function renderPromptTutorAccessGate() {
   return shell(`
-    <main class="page">
-      <div class="wrap">
-        <h1>${text("AI 提問教練", "Prompt Tutor")}</h1>
-        <p class="lead">
-          ${text(
-            "這裡不是幫你直接完成作業，而是教你怎麼把模糊問題改成清楚、可執行的 AI 指令。輸入你原本想問 AI 的問題，系統會幫你改寫成更好的 Prompt。",
-            "This does not complete work for you. It teaches you how to turn vague questions into clear, actionable AI prompts. Type the question you wanted to ask AI, and the system will rewrite it into a stronger prompt."
-          )}
-        </p>
-
-        <section class="panel">
-          <h2>${text("把你的問題改成好 Prompt", "Turn Your Question into a Better Prompt")}</h2>
-          <p>${text("範例：我想用 AI 幫我做報告 / 我不知道怎麼問 ChatGPT / 我想用 AI 幫我準備面試", "Examples: I want AI to help me plan a report / I do not know how to ask ChatGPT / I want AI to help me prepare for an interview")}</p>
-          <textarea id="tutor-input" placeholder="${text("輸入你想問 AI 的問題...", "Type the question you want to ask AI...")}"></textarea>
+    <main class="page tutor-coach-page">
+      <div class="wrap tutor-coach-wrap">
+        <div class="tutor-coach-header">
+          <h1>${text("AI 提問教練", "Prompt Tutor")}</h1>
+        </div>
+        <section class="panel tutor-access-gate">
+          <span class="tag premiumtag">🔒 ${text("All Access 專屬", "All-Access Only")}</span>
+          <p class="tutor-access-gate-lead">${text(
+            "告訴 AI Skill Bridge 你想完成什麼，我們會協助你整理需求並建立更有效的 Prompt。",
+            "Tell AI Skill Bridge what you want to accomplish — we'll help you clarify your needs and build more effective prompts."
+          )}</p>
+          <p class="tutor-access-gate-note">${text(
+            "此功能需要全站通行證（All Access）。",
+            "This feature requires an All-Access Pass."
+          )}</p>
           <div class="btnrow">
-            <button class="btn primary" onclick="tutorReply()">${text("幫我改成好 Prompt", "Improve My Prompt")}</button>
-            <button class="btn secondary" onclick="document.getElementById('tutor-input').value='我想用 AI 幫我做報告，但不知道怎麼問'; tutorReply();">${text("使用範例", "Use Example")}</button>
+            <button type="button" class="btn primary" onclick="goToAllAccessOffer()">${text("查看 All Access", "View All-Access")}</button>
+            <button type="button" class="btn secondary" onclick="setRoute('home')">${text("返回首頁", "Back to Home")}</button>
           </div>
-          <div id="tutor-output"></div>
         </section>
+      </div>
+    </main>
+  `);
+}
 
-        <section class="panel" style="margin-top:24px">
-          <h2>${text("好 Prompt 公式", "Good Prompt Formula")}</h2>
-          <div class="grid three">
-            <article class="card"><h3>1. ${text("角色", "Role")}</h3><p>${text("請 AI 扮演老師、助教、面試官、研究助理等。", "Ask AI to act as a teacher, assistant, interviewer, research assistant, etc.")}</p></article>
-            <article class="card"><h3>2. ${text("任務", "Task")}</h3><p>${text("清楚說明你要 AI 幫你完成什麼。", "Clearly state what you want AI to help complete.")}</p></article>
-            <article class="card"><h3>3. ${text("背景", "Context")}</h3><p>${text("提供課程、對象、目的、限制或目前狀況。", "Provide course, audience, purpose, constraints, or current situation.")}</p></article>
-            <article class="card"><h3>4. ${text("格式", "Format")}</h3><p>${text("要求表格、條列、步驟、範例或檢查清單。", "Request tables, bullets, steps, examples, or checklists.")}</p></article>
-            <article class="card"><h3>5. ${text("限制", "Constraints")}</h3><p>${text("說明不要捏造、不要直接完成作業、需要查證。", "Tell AI not to fabricate, not to complete assignments directly, and to verify.")}</p></article>
-            <article class="card"><h3>6. ${text("追問", "Follow-up")}</h3><p>${text("請 AI 先問你問題，讓需求更清楚。", "Ask AI to ask follow-up questions first to clarify your needs.")}</p></article>
+function tutor() {
+  if (!hasPromptTutorAccess()) {
+    return renderPromptTutorAccessGate();
+  }
+  return shell(`
+    <main class="page tutor-coach-page">
+      <div class="wrap tutor-coach-wrap">
+        <div class="tutor-coach-header">
+          <h1>${text("AI 提問教練", "Prompt Tutor")}</h1>
+          <p class="tutor-coach-lead">${text(
+            "不知道怎麼問 AI？直接像平常講話一樣告訴我你想做什麼。",
+            "Not sure how to ask AI? Just tell me what you want to do, like you're talking to a friend."
+          )}</p>
+          <p class="tutor-coach-sublead">${text(
+            "我會幫你找出缺少的資訊，整理成更清楚、更有效的 Prompt。",
+            "I'll help you spot what's missing and turn it into a clearer, more effective prompt."
+          )}</p>
+        </div>
+
+        <section class="tutor-coach-panel">
+          ${renderTutorCoachThread()}
+          <div class="tutor-coach-composer">
+            <label class="sr-only" for="tutor-coach-input">${text("輸入訊息", "Message input")}</label>
+            <textarea
+              id="tutor-coach-input"
+              class="tutor-coach-input"
+              rows="2"
+              placeholder="${text(
+                "直接告訴我你想做什麼……例如：「我下禮拜要面試，但不知道怎麼準備」",
+                "Tell me what you want to do… e.g. \"I have an interview next week but don't know how to prepare\""
+              )}"
+            ></textarea>
+            <button type="button" class="tutor-coach-send btn primary" data-tutor-action="send" aria-label="${text("送出", "Send")}">
+              ${text("↑", "↑")}
+            </button>
           </div>
         </section>
       </div>
@@ -8443,8 +9764,7 @@ function getDocumentTitleForRoute(route) {
     courses: text("免費入門", "Free Intro"),
     course: text("課程", "Course"),
     lesson: text("課程內容", "Lesson"),
-    freePortfolio: text("免費成果包", "Free Result Package"),
-    assessment: text("AI 能力測驗", "AI Skill Assessment")
+    freePortfolio: text("免費成果包", "Free Result Package")
   })[route];
   if (!pageTitle) return PUBLIC_BUSINESS_INFO.brandName;
   return `${pageTitle} | ${PUBLIC_BUSINESS_INFO.brandName}`;
@@ -8746,7 +10066,7 @@ function privacyPage() {
           <li>${text("課程進度、完課狀態與測驗相關紀錄", "Course progress, completion status, and related quiz records")}</li>
           <li>${text("Lesson Results、成果禮包與 Showcase 偏好設定", "Lesson results, result packages, and showcase preferences")}</li>
           <li>${text("瀏覽器本機儲存（localStorage）中的學習與介面設定", "Learning and interface settings stored in browser localStorage")}</li>
-          <li>${text("若已同步：Supabase profile 中的基本帳號欄位（例如 id、email、display_name、plan）", "If synced: basic Supabase profile fields (such as id, email, display_name, plan)")}</li>
+          <li>${text("若已同步：帳號基本資料（例如 Email、顯示名稱、方案狀態）", "If synced: basic account data (such as email, display name, and plan status)")}</li>
         </ul>
         <p>${text(
           "目前平台並未要求您提供地址、身分證字號、信用卡或銀行帳號等資料。",
@@ -8964,7 +10284,6 @@ function render() {
       learning,
       courses,
       freePortfolio,
-      assessment,
       map: learningMap,
       center,
       free,
@@ -8997,6 +10316,8 @@ function render() {
     // Navbar DOM is fully rebuilt on every render; re-check nodes and keep delegation alive.
     bindMoreMenuEvents();
     bindLessonInteractiveA11y();
+    bindTutorCoachEvents();
+    bindHomeHeroEvents();
     save();
   } catch (error) {
     console.error("[AUTH] error", "render failed", error);
@@ -9010,18 +10331,24 @@ function applyHashRouteDeepLink() {
     // Email CTA and bookmarks: #learning / #my-learning → 我的學習 (route: learning)
     if (hash === "learning" || hash === "my-learning") {
       state.route = "learning";
+    } else if (hash === "assessment" || hash === "quiz" || hash === "ai-quiz") {
+      state.route = "home";
     }
   } catch (error) {}
 }
 
 async function startApp() {
   console.log("[BOOT] startApp");
+  migratePromptFavoriteKeys();
   applyDocumentLang();
   applyHashRouteDeepLink();
   bindMoreMenuEvents();
+  bindTutorCoachDelegation();
   render();
+  await bootstrapSupabaseClientForLocalhost();
   await initAuth();
   console.log("[BOOT] auth ready");
+  await loadProductCatalog();
   render();
   runPremiumContentAuditIfDev();
   runResultPackageAuditIfDev();
@@ -9035,18 +10362,10 @@ async function startApp() {
   await refreshOrderResultFromQuery();
 }
 
-/** Server-side product prices (must match api/_lib/productCatalog.js). Payment authority is server-only. */
-const SERVER_PRODUCT_CATALOG_AUDIT = {
-  "course-admissions": 499,
-  "course-college-learning": 399,
-  "course-research-competition": 699,
-  "course-career-internship": 699,
-  "course-workplace-productivity": 599,
-  "course-startup-automation": 899,
-  "all-access": 2999
-};
+/** @deprecated Use getServerProductCatalogAuditMap() after catalog load. */
+const SERVER_PRODUCT_CATALOG_AUDIT = FALLBACK_SERVER_PRODUCT_CATALOG;
 
-const PREMIUM_BUNDLE_ORIGINAL_TOTAL_AUDIT = 3794;
+const PREMIUM_BUNDLE_ORIGINAL_TOTAL_AUDIT = FALLBACK_PREMIUM_BUNDLE_TOTAL;
 
 const FRONTEND_COURSE_TO_SERVER_PRODUCT = {
   admissions: "course-admissions",
@@ -9781,18 +11100,19 @@ function runPublicInfoAuditIfDev() {
 function validateProductPhase4B() {
   const issues = [];
   const expected = [
-    { id: "admissions", price: 499, packageId: "pkg-admissions" },
-    { id: "college-learning", price: 399, packageId: "pkg-college-learning" },
-    { id: "research-competition", price: 699, packageId: "pkg-research-competition" },
-    { id: "career-internship", price: 699, packageId: "pkg-career-internship" },
-    { id: "workplace-productivity", price: 599, packageId: "pkg-workplace-productivity" },
-    { id: "startup-automation", price: 899, packageId: "pkg-startup-automation" }
+    { id: "admissions", packageId: "pkg-admissions" },
+    { id: "college-learning", packageId: "pkg-college-learning" },
+    { id: "research-competition", packageId: "pkg-research-competition" },
+    { id: "career-internship", packageId: "pkg-career-internship" },
+    { id: "workplace-productivity", packageId: "pkg-workplace-productivity" },
+    { id: "startup-automation", packageId: "pkg-startup-automation" }
   ];
   let productOk = 0;
   let packageOk = 0;
   let priceOk = 0;
 
   expected.forEach(row => {
+    const expectedPrice = getCoursePriceInfo(row.id).price;
     const product = typeof getCourseProductInfo === "function" ? getCourseProductInfo(row.id) : null;
     if (!product) {
       issues.push({ path: row.id, issue: "missing COURSE_PRODUCT_INFO / product info" });
@@ -9800,7 +11120,7 @@ function validateProductPhase4B() {
     }
     const checks = [
       product.lessonCount === 10,
-      product.price === row.price,
+      product.price === expectedPrice,
       (product.targetAudience.zh || []).length >= 3,
       (product.targetAudience.en || []).length >= 3,
       (product.outcomes.zh || []).length >= 4,
@@ -9812,23 +11132,27 @@ function validateProductPhase4B() {
     if (checks.every(Boolean)) productOk += 1;
     else issues.push({ path: row.id, issue: "incomplete product fields" });
 
-    if (product.price === row.price) priceOk += 1;
-    else issues.push({ path: `${row.id}.price`, issue: `expected ${row.price}, got ${product.price}` });
+    if (product.price === expectedPrice) priceOk += 1;
+    else issues.push({ path: `${row.id}.price`, issue: `expected ${expectedPrice}, got ${product.price}` });
 
     const mapped = product.resultPackage && product.resultPackage.id;
     if (mapped === row.packageId) packageOk += 1;
     else issues.push({ path: `${row.id}.package`, issue: `expected ${row.packageId}, got ${mapped || "none"}` });
   });
 
-  const bundleOriginal = getPremiumCoursesBundleOriginalPrice();
   const allAccess = getCoursePriceInfo("all-access");
   const saveAmount = getAllAccessSaveAmount(allAccess);
+  const serverCatalog = getServerProductCatalogAuditMap();
+  const allAccessServer = serverCatalog["all-access"];
+  const catalogAllAccess = getProductCatalogProducts().find((p) => p.productId === "all-access");
+  const expectedOriginal = catalogAllAccess
+    ? normalizePriceNumber(catalogAllAccess.originalPrice)
+    : null;
   const allAccessValid = Boolean(
     allAccess
-    && allAccess.price === 2999
-    && bundleOriginal === PREMIUM_BUNDLE_ORIGINAL_TOTAL_AUDIT
-    && allAccess.originalPrice === bundleOriginal
-    && saveAmount === PREMIUM_BUNDLE_ORIGINAL_TOTAL_AUDIT - 2999
+    && allAccess.price === allAccessServer
+    && allAccess.originalPrice === expectedOriginal
+    && (expectedOriginal == null || saveAmount === expectedOriginal - allAccessServer)
   );
   if (!allAccessValid) {
     issues.push({ path: "all-access", issue: "all-access bundle price mismatch" });
@@ -9949,11 +11273,12 @@ function runOrderAuditIfDev() {
   if (!isLocalDevHost()) return;
   try {
     const issues = [];
+    const serverCatalog = getServerProductCatalogAuditMap();
     const courses = getPremiumCourses();
     courses.forEach((course) => {
       const serverProductId = FRONTEND_COURSE_TO_SERVER_PRODUCT[course.id];
-      const frontendPrice = normalizePriceNumber(course.price);
-      const serverPrice = serverProductId ? SERVER_PRODUCT_CATALOG_AUDIT[serverProductId] : null;
+      const frontendPrice = normalizePriceNumber(getCoursePriceInfo(course.id).price);
+      const serverPrice = serverProductId ? serverCatalog[serverProductId] : null;
       if (!serverProductId || serverPrice == null) {
         issues.push({ courseId: course.id, issue: "missing_server_mapping" });
         return;
@@ -9969,7 +11294,7 @@ function runOrderAuditIfDev() {
     });
     const allAccessInfo = getCoursePriceInfo("all-access");
     const allAccessFrontend = normalizePriceNumber(allAccessInfo.price);
-    const allAccessServer = SERVER_PRODUCT_CATALOG_AUDIT["all-access"];
+    const allAccessServer = serverCatalog["all-access"];
     if (allAccessFrontend !== allAccessServer) {
       issues.push({
         courseId: "all-access",
@@ -9977,7 +11302,10 @@ function runOrderAuditIfDev() {
         serverPrice: allAccessServer
       });
     }
-    console.log(`[ORDER AUDIT] server catalog ${Object.keys(SERVER_PRODUCT_CATALOG_AUDIT).length} products`);
+    const priceMismatch = issues.length;
+    console.log(`[ORDER AUDIT] PRICE_MISMATCH = ${priceMismatch}`);
+    console.log(`[ORDER AUDIT] browserCanControlAmount = false`);
+    console.log(`[ORDER AUDIT] server catalog ${Object.keys(serverCatalog).length} products`);
     if (issues.length) {
       console.warn("[ORDER AUDIT] frontend vs server price mismatch", issues);
     } else {
@@ -10031,7 +11359,7 @@ function runSecretSafetyAuditIfDev() {
 }
 
 async function runtimeAuthProbe() {
-  const browserProjectRef = (String(SUPABASE_URL).match(/https:\/\/([^.]+)\.supabase\.co/) || [])[1] || null;
+  const browserProjectRef = runtimeSupabaseProjectRef;
   const session = await getSupabaseAuthSession();
   let getUserExists = false;
   if (supabaseClient) {

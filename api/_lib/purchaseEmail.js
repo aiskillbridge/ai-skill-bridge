@@ -10,7 +10,6 @@
 
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { getProductById } from "./productCatalog.js";
 
 const SUPPORT_EMAIL = "li19840610@gmail.com";
 const DEFAULT_SITE_ORIGIN = "https://ai-skill-bridge-woad.vercel.app";
@@ -212,8 +211,6 @@ function resolveProductName(order) {
   if (order.product_type === "all-access" || order.product_id === "all-access") {
     return "AI Skill Bridge 全站通行證";
   }
-  const product = getProductById(order.product_id);
-  if (product?.name?.zh) return product.name.zh;
   const meta = order.metadata && typeof order.metadata === "object" ? order.metadata : null;
   if (meta?.productName?.zh) return String(meta.productName.zh);
   return order.product_id || "課程商品";
