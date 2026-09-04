@@ -4614,6 +4614,45 @@ function scrollToMapSection(sectionId) {
   });
 }
 
+/** Canonical Free Starter course id (SoT for 免費入門 routing). */
+const CANONICAL_FREE_COURSE_ID = "free-starter";
+
+function isCanonicalFreeCourseId(courseId) {
+  return courseId === CANONICAL_FREE_COURSE_ID || courseId === "free";
+}
+
+/** Resume/open the Free Starter course only — never another paid/last-studied course. */
+function continueFreeStarterCourse() {
+  if (!state.authReady) {
+    toast(text("正在確認登入狀態…", "Checking sign-in status…"));
+    return;
+  }
+  if (!state.user) {
+    requireGoogleLogin({ route: "freeLesson", lessonId: 0, action: "openFreeLesson" });
+    return;
+  }
+  if (typeof FREE_BOOTCAMP === "undefined" || !FREE_BOOTCAMP.length) {
+    openFreeLesson(0);
+    return;
+  }
+  const last = getLastStudiedCourse();
+  if (last && isCanonicalFreeCourseId(last.courseId)) {
+    const idx = Math.max(0, Math.min(Number(last.lessonIndex) || 0, FREE_BOOTCAMP.length - 1));
+    // If that lesson is already complete, advance to the next incomplete free lesson.
+    if (!isFreeLessonComplete(idx)) {
+      openFreeLesson(idx);
+      return;
+    }
+  }
+  for (let i = 0; i < FREE_BOOTCAMP.length; i++) {
+    if (!isFreeLessonComplete(i)) {
+      openFreeLesson(i);
+      return;
+    }
+  }
+  openFreeLesson(0);
+}
+
 function mapStartFreeCourse() {
   if (!state.authReady) {
     toast(text("正在確認登入狀態…", "Checking sign-in status…"));
@@ -4627,11 +4666,11 @@ function mapStartFreeCourse() {
     ? v38SafeFreeProgress()
     : (typeof freeBootcampProgress === "function" ? freeBootcampProgress() : { completed: 0, total: 8 });
   if (progress.completed > 0 && progress.completed < progress.total) {
-    homeContinueLastLearning();
+    continueFreeStarterCourse();
     return;
   }
   if (progress.completed >= progress.total && progress.total > 0) {
-    openResultPackage("free-starter");
+    openResultPackage(CANONICAL_FREE_COURSE_ID);
     return;
   }
   openFreeLesson(0);
@@ -5022,9 +5061,9 @@ function courses() {
   const progress = freeBootcampProgress();
   const startCta = loggedIn
     ? (progress.completed > 0 && progress.completed < progress.total
-      ? `<button class="btn primary" onclick="homeContinueLastLearning()">${text("繼續學習", "Continue Learning")}</button>`
+      ? `<button class="btn primary" onclick="continueFreeStarterCourse()">${text("繼續學習", "Continue Learning")}</button>`
       : progress.completed >= progress.total && progress.total > 0
-      ? `<button class="btn primary" onclick="openResultPackage('free-starter')">${text("查看成果", "View Results")}</button>`
+      ? `<button class="btn primary" onclick="openResultPackage('${CANONICAL_FREE_COURSE_ID}')">${text("查看成果", "View Results")}</button>`
       : `<button class="btn primary" onclick="openFreeLesson(0)">${text("開始學習", "Start Learning")}</button>`)
     : `<button class="btn primary" onclick='requireGoogleLogin({"route":"freeLesson","lessonId":0,"action":"openFreeLesson"})'>${text("登入後開始", "Sign In to Start")}</button>`;
 
@@ -5491,11 +5530,11 @@ function renderLearningMyCoursesSection() {
   const entries = [];
   const free = v38SafeFreeProgress();
   entries.push({
-    id: "free-starter",
+    id: CANONICAL_FREE_COURSE_ID,
     title: text("免費入門", "Free Course"),
     progress: free,
-    open: "setRoute('courses')",
-    pkg: "free-starter"
+    open: "continueFreeStarterCourse()",
+    pkg: CANONICAL_FREE_COURSE_ID
   });
   getPremiumCourses().forEach((course) => {
     if (!hasCourseAccess(course.id)) return;
@@ -6439,19 +6478,44 @@ function findContinueLessonIndex(courseId) {
   return Math.max(total - 1, 0);
 }
 
+function copyPlainTextToClipboard(value) {
+  const textToCopy = String(value ?? "").replace(/\r\n/g, "\n");
+  if (!textToCopy) {
+    return Promise.resolve({ ok: false, reason: "empty" });
+  }
+
+  const tryFallback = () => {
+    const ok = typeof fallbackCopyText === "function" ? fallbackCopyText(textToCopy) : false;
+    return { ok: !!ok, reason: ok ? "fallback" : "failed" };
+  };
+
+  if (navigator.clipboard && window.isSecureContext && typeof navigator.clipboard.writeText === "function") {
+    return navigator.clipboard.writeText(textToCopy)
+      .then(() => ({ ok: true, reason: "clipboard" }))
+      .catch(() => tryFallback());
+  }
+  return Promise.resolve(tryFallback());
+}
+
 function copyTextById(elementId) {
   const el = document.getElementById(elementId);
-  if (!el) return;
-  const value = el.innerText || el.textContent || "";
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(value).then(() => {
-      toast(state.lang === "zh" ? "已複製 Prompt" : "Prompt copied");
-    }).catch(() => {
-      toast(state.lang === "zh" ? "複製失敗" : "Copy failed");
-    });
+  if (!el) {
+    toast(state.lang === "zh" ? "複製失敗" : "Copy failed");
     return;
   }
-  toast(state.lang === "zh" ? "無法複製" : "Copy unavailable");
+  // textContent of HTML-escaped prompt body preserves full multiline source without UI labels.
+  const value = String(el.textContent || "").replace(/\r\n/g, "\n");
+  if (!value.trim()) {
+    toast(state.lang === "zh" ? "沒有可複製的內容" : "Nothing to copy");
+    return;
+  }
+  copyPlainTextToClipboard(value).then((result) => {
+    if (result.ok) {
+      toast(state.lang === "zh" ? "已複製" : "Copied");
+    } else {
+      toast(state.lang === "zh" ? "複製失敗，請手動選取" : "Copy failed — please select manually");
+    }
+  });
 }
 
 function premiumQuizKey(courseId, lessonIndex, qIndex) {
@@ -7759,6 +7823,8 @@ function renderLessonPrompt(detail, courseId, lessonIndex) {
       "Revise the AI-generated content to match your real experience and personal voice. Do not submit it without review."
     );
   const extensions = Array.isArray(pack.extensions) ? pack.extensions : [];
+  const mainBody = pack.body || "";
+  const esc = typeof tutorCoachEscHtml === "function" ? tutorCoachEscHtml : (v) => String(v || "");
   return `
     <section class="lesson-block lesson-pro-prompt">
       <h2>${text("Prompt 工作區", "Prompt Workspace")}</h2>
@@ -7773,31 +7839,32 @@ function renderLessonPrompt(detail, courseId, lessonIndex) {
         </div>
         <details class="lesson-accordion" ontoggle="if(this.open){markLessonPromptOpened('${courseId}', ${lessonIndex})}">
           <summary aria-expanded="false">${text("查看完整 Prompt", "View full prompt")}</summary>
-          <div class="promptbox" id="${promptId}">${pack.body || ""}</div>
+          <div class="promptbox" id="${promptId}">${esc(mainBody)}</div>
         </details>
         ${example ? `
           <details class="lesson-accordion">
             <summary aria-expanded="false">${text("範例輸入", "Example input")}</summary>
-            <p>${example}</p>
+            <p>${esc(example)}</p>
           </details>
         ` : ""}
         ${pack.expected ? `
           <details class="lesson-accordion">
             <summary aria-expanded="false">${text("預期輸出", "Expected output")}</summary>
-            <p>${pack.expected}</p>
+            <p>${esc(pack.expected)}</p>
           </details>
         ` : ""}
         ${extensions.map((ext, extIndex) => {
           const extId = `${promptId}-ext-${extIndex}`;
+          const extBody = ext.body || "";
           return `
             <details class="lesson-accordion">
-              <summary aria-expanded="false">${ext.title || text("延伸 Prompt", "Extension prompt")}</summary>
-              <div class="promptbox" id="${extId}">${ext.body || ""}</div>
+              <summary aria-expanded="false">${esc(ext.title || text("延伸 Prompt", "Extension prompt"))}</summary>
+              <div class="promptbox" id="${extId}">${esc(extBody)}</div>
               <button class="btn secondary" type="button" onclick="copyTextById('${extId}')">${text("複製延伸 Prompt", "Copy extension")}</button>
             </details>
           `;
         }).join("")}
-        <p class="lesson-prompt-reminder">${reminder}</p>
+        <p class="lesson-prompt-reminder">${esc(reminder)}</p>
       </div>
     </section>
   `;
@@ -9646,19 +9713,16 @@ function getPromptBodyText(prompt) {
 function copyPrompt(promptId) {
   const prompt = getPromptById(promptId);
   const body = prompt ? getPromptBodyText(prompt) : "";
-  if (!body) return;
-  navigator.clipboard.writeText(body).then(() => {
-    toast(L("prompts.copied"));
-  }).catch(() => {
-    const el = document.getElementById(`prompt-${promptId}`);
-    if (el) {
-      const range = document.createRange();
-      range.selectNodeContents(el);
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
+  if (!body) {
+    toast(state.lang === "zh" ? "沒有可複製的內容" : "Nothing to copy");
+    return;
+  }
+  copyPlainTextToClipboard(body).then((result) => {
+    if (result.ok) {
+      toast(L("prompts.copied") || (state.lang === "zh" ? "已複製" : "Copied"));
+    } else {
+      toast(state.lang === "zh" ? "複製失敗，請手動選取" : "Copy failed — please select manually");
     }
-    toast(L("prompts.copied"));
   });
 }
 
