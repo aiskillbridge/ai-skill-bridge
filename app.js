@@ -2126,12 +2126,15 @@ function getPromptPreviewText(prompt, maxLen = 140) {
 function renderFavoritePromptCard(prompt) {
   const category = getPromptCategoryLabel(prompt);
   const preview = getPromptPreviewText(prompt);
+  // Outer attribute must use single quotes: JSON.stringify(id) emits double quotes.
+  // Broken form onclick="copyPrompt("id")" parses as onclick="copyPrompt(" → no copy.
+  const promptIdLiteral = JSON.stringify(String(prompt.id));
   return `
-    <article class="card favorite-card favorite-card-prompt">
+    <article class="card favorite-card favorite-card-prompt" data-favorite-prompt-id="${String(prompt.id).replace(/"/g, "&quot;")}">
       <span class="tag">${category}</span>
       <div class="promptbox favorite-prompt-preview">${preview}</div>
       <div class="btnrow favorite-card-actions">
-        <button type="button" class="btn primary btn-compact" onclick="copyPrompt(${JSON.stringify(prompt.id)})">${L("prompts.copy")}</button>
+        <button type="button" class="btn primary btn-compact" onclick='copyFavoritePrompt(${promptIdLiteral})'>${L("prompts.copy")}</button>
         ${renderFavoriteToggleButton("prompt", prompt.id)}
       </div>
     </article>
@@ -9708,6 +9711,26 @@ function getPromptCategoryLabel(prompt) {
 function getPromptBodyText(prompt) {
   if (!prompt) return "";
   return state.lang === "zh" ? prompt.promptZh : prompt.promptEn;
+}
+
+/**
+ * Favorites-page copy — full PROMPTS body by id (not truncated preview DOM).
+ * Button must use single-quoted onclick; JSON.stringify(id) emits double quotes.
+ */
+function copyFavoritePrompt(promptId) {
+  const prompt = getPromptById(String(promptId));
+  const body = String(prompt ? getPromptBodyText(prompt) : "").replace(/\r\n/g, "\n");
+  if (!body.trim()) {
+    toast(state.lang === "zh" ? "沒有可複製的內容" : "Nothing to copy");
+    return;
+  }
+  copyPlainTextToClipboard(body).then((result) => {
+    if (result && result.ok) {
+      toast(L("prompts.copied") || (state.lang === "zh" ? "已複製" : "Copied"));
+    } else {
+      toast(state.lang === "zh" ? "複製失敗，請手動選取" : "Copy failed — please select manually");
+    }
+  });
 }
 
 function copyPrompt(promptId) {
